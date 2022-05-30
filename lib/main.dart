@@ -1,32 +1,27 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'dart:async';
 import 'package:snapedit/app.dart';
-import 'package:snapedit/common/app_config.dart';
+import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/common/logs.dart';
 import 'package:snapedit/env.dart';
 import 'package:snapedit/init_app.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  // printLog('Handling a background message ${message.messageId}');
-}
-
-void main() async {
+void main() {
   runZonedGuarded(() async {
     try {
+      printLog('START APP');
+
       WidgetsFlutterBinding.ensureInitialized();
 
-      AppConfig.setConfig(enviroment);
+      await Cofiguration.setConfig(enviroment);
+
+      FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+        printLog('Handling a background message ${message.messageId}');
+      });
 
       await initApp();
 
-      FirebaseMessaging.onBackgroundMessage(
-          _firebaseMessagingBackgroundHandler);
       runApp(const App());
     } catch (error) {
       printLog(error);

@@ -63,6 +63,10 @@ dependencies:
   intl: ^0.17.0
   share_plus: ^4.0.4
   path_provider: ^2.0.10
+  flutter_local_notifications: ^9.5.3+1
+  notification_permissions: ^0.6.1
+  gms_check: ^1.0.0
+  easy_debounce: ^2.0.2+1
 
 dev_dependencies:
   flutter_test:

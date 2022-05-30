@@ -4,10 +4,9 @@ import 'dart:typed_data';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
-import 'package:flutter/foundation.dart' as foundation;
 import 'package:http/http.dart';
 import 'package:snapedit/common/logs.dart';
-
+import 'package:flutter/foundation.dart' as foundation;
 class ClientApiResponse<T> {
   String? error;
   T? data;
@@ -21,12 +20,12 @@ abstract class ClientApi {
       {Map<String, dynamic>? query, Map<String, String>? headers}) async {
     try {
       printLog('====> API Call: $uri\nHeader: $headers');
-      Response _response = await get(
+      Response response = await get(
         Uri.parse(uri),
         headers: headers,
       ).timeout(const Duration(seconds: timeoutInSeconds));
-      printLog('====> API Response: $_response');
-      return handleResponse(_response, uri);
+      printLog('====> API Response: $response');
+      return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
       return ClientApiResponse(error: e.toString());
@@ -37,13 +36,13 @@ abstract class ClientApi {
     try {
       printLog('====> API Call: $uri\nHeader: $headers');
       printLog('====> API Body: $body');
-      Response _response = await post(
+      Response response = await post(
         Uri.parse(uri),
         body: jsonEncode(body),
         headers: headers,
       ).timeout(const Duration(seconds: timeoutInSeconds));
-      printLog('====> API Response: $_response');
-      return handleResponse(_response, uri);
+      printLog('====> API Response: $response');
+      return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
       return ClientApiResponse(error: e.toString());
@@ -56,34 +55,34 @@ abstract class ClientApi {
     try {
       printLog('====> API Call: $uri\nHeader: $headers');
       printLog('====> API Body: $body');
-      MultipartRequest _request = MultipartRequest('POST', Uri.parse(uri));
+      MultipartRequest request = MultipartRequest('POST', Uri.parse(uri));
       if (headers != null) {
-        _request.headers.addAll(headers);
+        request.headers.addAll(headers);
       }
       for (MultipartBody multipart in multipartBody) {
         if (foundation.kIsWeb) {
-          Uint8List _list = await multipart.file.readAsBytes();
-          MultipartFile _part = MultipartFile(
+          Uint8List list = await multipart.file.readAsBytes();
+          MultipartFile part = MultipartFile(
             multipart.key,
             multipart.file.readAsBytes().asStream(),
-            _list.length,
+            list.length,
             filename: basename(multipart.file.path),
             contentType: MediaType('image', 'jpg'),
           );
-          _request.files.add(_part);
+          request.files.add(part);
         } else {
-          File _file = File(multipart.file.path);
-          _request.files.add(MultipartFile(
+          File file = File(multipart.file.path);
+          request.files.add(MultipartFile(
             multipart.key,
-            _file.readAsBytes().asStream(),
-            _file.lengthSync(),
-            filename: _file.path.split('/').last,
+            file.readAsBytes().asStream(),
+            file.lengthSync(),
+            filename: file.path.split('/').last,
           ));
         }
       }
-      _request.fields.addAll(body);
-      Response _response = await Response.fromStream(await _request.send());
-      return handleResponse(_response, uri);
+      request.fields.addAll(body);
+      Response response = await Response.fromStream(await request.send());
+      return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
       return ClientApiResponse(error: e.toString());
@@ -95,12 +94,12 @@ abstract class ClientApi {
     try {
       printLog('====> API Call: $uri\nHeader: $headers');
       printLog('====> API Body: $body');
-      Response _response = await put(
+      Response response = await put(
         Uri.parse(uri),
         body: jsonEncode(body),
         headers: headers,
       ).timeout(const Duration(seconds: timeoutInSeconds));
-      return handleResponse(_response, uri);
+      return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
       return ClientApiResponse(error: e.toString());
@@ -111,11 +110,11 @@ abstract class ClientApi {
       {Map<String, String>? headers}) async {
     try {
       printLog('====> API Call: $uri\nHeader: $headers');
-      Response _response = await delete(
+      Response response = await delete(
         Uri.parse(uri),
         headers: headers ?? headers,
       ).timeout(const Duration(seconds: timeoutInSeconds));
-      return handleResponse(_response, uri);
+      return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
       return ClientApiResponse(error: e.toString());

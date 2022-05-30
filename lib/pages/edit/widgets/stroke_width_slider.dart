@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_config.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/controllers/edit/edit_controller.dart';
 
@@ -26,8 +25,8 @@ class StrokeWidthSlider extends StatelessWidget {
           child: Slider.adaptive(
             activeColor: AppColors.kDarkBG,
             thumbColor: AppColors.kDarkBG,
-            min: AppConfig.minximumStrokeWidth,
-            max: AppConfig.maximumStrokeWidth,
+            min: 1,
+            max: 100,
             value: controller.strokeWidth,
             label: '${controller.strokeWidth.round()}',
             onChanged: (value) {

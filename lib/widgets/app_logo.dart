@@ -1,5 +1,5 @@
-import 'package:snapedit/common/app_config.dart';
 import 'package:flutter/material.dart';
+import 'package:snapedit/common/configuration.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({Key? key, this.image, this.width, this.height, this.color})
@@ -11,9 +11,8 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _image = image ?? AppConfig.appLogo;
     return Image.asset(
-      _image,
+      image ?? Cofiguration.appLogo,
       width: width,
       height: height,
       color: color,

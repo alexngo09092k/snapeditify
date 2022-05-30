@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:snapedit/common/logs.dart';
 import 'package:snapedit/utils/image_convert.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:snapedit/modules/painter/painter.dart';
 
 class DetectedObject {
   final List<int> box;

@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_config.dart';
 import 'package:snapedit/common/app_routes.dart';
+import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/common/theme.dart';
 
 class App extends StatelessWidget {
@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: AppConfig.appName,
+      title: Cofiguration.appName,
       // home: const FlutterPainterExample(),
       debugShowCheckedModeBanner: false,
       scrollBehavior: const MaterialScrollBehavior().copyWith(

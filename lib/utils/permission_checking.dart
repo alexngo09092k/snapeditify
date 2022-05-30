@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:snapedit/widgets/no_permission_popup.dart';
 
-abstract class PermissionChecking {
+class PermissionChecking {
+  static final PermissionChecking _instance = PermissionChecking._internal();
+
+  PermissionChecking get instance => _instance;
+
+  PermissionChecking._internal();
+
   static requestStorePermission(BuildContext context) async {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.storage,

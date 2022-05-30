@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_config.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/controllers/splash/splash_controller.dart';
 import 'package:snapedit/widgets/static_splash.dart';
@@ -36,7 +35,7 @@ class _SplashPageState extends State<SplashPage> {
     return StaticSplash(
       backgroundcolor: Theme.of(context).backgroundColor,
       onEnd: _controller.goToNextScreen,
-      duration: Duration(milliseconds: AppConfig.splashDuration),
+      duration: const Duration(milliseconds: 1000),
       image: AppImages.imgSplashLogoNormal3x,
     );
   }

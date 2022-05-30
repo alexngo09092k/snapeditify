@@ -7,7 +7,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:snapedit/common/logs.dart';
 
-abstract class ImagePick {
+class ImagePick {
+  static final ImagePick _instance = ImagePick._internal();
+
+  ImagePick get instance => _instance;
+
+  ImagePick._internal();
+
   static final List<String> imageFormats = [
     '.jpeg',
     '.png',

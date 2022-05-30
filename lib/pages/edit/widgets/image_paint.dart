@@ -4,7 +4,7 @@ import 'package:snapedit/common/logs.dart';
 import 'package:snapedit/controllers/edit/edit_controller.dart';
 import 'package:snapedit/pages/edit/widgets/changed_strokewidth.dart';
 import 'package:snapedit/widgets/custom_button.dart';
-import 'package:snapedit/widgets/painter/painter_pure.dart';
+import 'package:snapedit/modules/painter/painter_pure.dart';
 
 class ImagePaint extends StatelessWidget {
   const ImagePaint({Key? key, required this.controller}) : super(key: key);
@@ -13,11 +13,11 @@ class ImagePaint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double _height = MediaQuery.of(context).size.height * 1.8 / 3;
-    final double _width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height * 1.8 / 3;
+    final double width = MediaQuery.of(context).size.width;
     return Container(
       color: AppColors.disable,
-      height: _height,
+      height: height,
       child: Stack(
         children: [
           ValueListenableBuilder(
@@ -51,7 +51,7 @@ class ImagePaint extends StatelessWidget {
           ),
           Positioned(
               left: 10,
-              top: _height - 50,
+              top: height - 50,
               child: IconButton(
                   onPressed: controller.undo,
                   icon: ValueListenableBuilder(
@@ -65,7 +65,7 @@ class ImagePaint extends StatelessWidget {
                   ))),
           Positioned(
               left: 50,
-              top: _height - 50,
+              top: height - 50,
               child: IconButton(
                   onPressed: controller.redo,
                   icon: ValueListenableBuilder(
@@ -78,8 +78,8 @@ class ImagePaint extends StatelessWidget {
                     ),
                   ))),
           Positioned(
-            left: (_width - 110) / 2,
-            top: _height - 45,
+            left: (width - 110) / 2,
+            top: height - 45,
             child: ValueListenableBuilder(
               valueListenable: controller,
               builder: (_, __, ___) => controller.canRemove
@@ -99,7 +99,7 @@ class ImagePaint extends StatelessWidget {
           ),
           Positioned(
             right: 10,
-            top: _height - 50,
+            top: height - 50,
             child: InkWell(
               onTapDown: (_) => controller.compare(),
               onTapUp:(_) => controller.compare(),

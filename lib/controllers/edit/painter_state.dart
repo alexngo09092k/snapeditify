@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
-import 'package:snapedit/common/app_config.dart';
 import 'package:snapedit/common/logs.dart';
 import 'package:snapedit/controllers/edit/painter_actions.dart';
 import 'package:snapedit/models/detected_object.dart';
 import 'package:snapedit/utils/image_convert.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:snapedit/modules/painter/painter.dart';
 
 class PainterState {
   PainterState({
@@ -20,14 +18,16 @@ class PainterState {
     FreeStyleMode mode = FreeStyleMode.draw,
   }) {
 
+    final color = Colors.red.withOpacity(0.4);
+
     _currentState = this;
 
     _currentState._painterStream = StreamController<PainterAction>();
 
     /// create paint shape
     _currentState._shapePaint = Paint()
-      ..strokeWidth = strokeWidth ?? AppConfig.strokeWidth
-      ..color = HexColor(AppConfig.strokeColor).withOpacity(AppConfig.strokeOpacity)
+      ..strokeWidth = strokeWidth ?? 40
+      ..color = Colors.red.withOpacity(0.4)
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
@@ -36,8 +36,8 @@ class PainterState {
       drawables: drawables,
       settings: PainterSettings(
         freeStyle: FreeStyleSettings(
-            color: HexColor(AppConfig.strokeColor).withOpacity(AppConfig.strokeOpacity),
-            strokeWidth: strokeWidth ?? AppConfig.strokeWidth,
+            color: color,
+            strokeWidth: strokeWidth ?? 40,
             mode: mode),
         shape: ShapeSettings(
           paint: _shapePaint,
@@ -333,7 +333,7 @@ class PainterState {
     FreeStyleMode? mode,
     bool canUndo = true,
   }) {
-    final _newState = PainterState(
+    final newState = PainterState(
       image: image ?? _currentState.image,
       originalImageBase64: originalImageBase64 ?? _currentState.originalImageBase64,
       strokeWidth: strokeWidth ?? _currentState.strokeWidth,
@@ -343,10 +343,10 @@ class PainterState {
       .._controller.freeStyleMode = mode ?? _currentState._controller.freeStyleMode
       .._detectedObjects = detectedObjects ?? _currentState.detectedObjects;
 
-    _currentState._nextState = _newState;
-    _newState._prevState = _currentState;
+    _currentState._nextState = newState;
+    newState._prevState = _currentState;
 
-    _currentState = _newState;
+    _currentState = newState;
 
     return _currentState;
   }

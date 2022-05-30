@@ -1,34 +1,65 @@
 Map<String, dynamic> enviroment = {
-  /// YOUR APP NAME
-  'appName': 'SnapEdit',
+  /// enable firebase module
+  /// dir: /modules/firebase/firebase_service.dart
+  "firebaseConfig": {
+    "enable": true,
+    "enableRemoteConfigFirebase": false,
+  },
 
-  /// YOUR APP LOGO
-  /// support url start with 'http' or 'https'
-  /// supoort 'svg', 'png', 'jpg', 'jpeg'
-  'appLogo': 'assets/image/logo.png',
+  "apiConfig": {
+    'url': 'https://be-prod-1.snapedit.app',
+    'eraseEndPoint': '/erase/v4',
+    'aiEndPoint': '/ai_detection/v4',
+  },
 
-  /// APP VERSION
-  'appVersion': 1.0,
+  "appConfig": {
+    "appName": "SnapEdit",
+    'appLogo': 'assets/image/logo.png',
+    'appVersion': '1.0',
+    'appColor': '#9ab065',
+    'appTheme': 'light',
+  },
 
-  /// APP COLOR
-  /// only support hex color
-  'appColor': '#9ab065',
-
-  /// DEFAULT APP THEME
-  /// This is default theme when user open app in the first time
-  /// type should be 'light' or 'dark'
-  'appTheme': 'light',
-
-  /// APP API URL
-  'appApi': 'https://be-prod-1.snapedit.app',
-
-  /// duration unit: 'miliseconds'
-  "splashDuration": 1000, //1s
-
-  /// Painter (default)
-  'strokeWidth': 40.0,
-  'minximumStrokeWidth': 1.0,
-  'maximumStrokeWidth': 100.0,
-  'strokeColor': '#FF0000',
-  'strokeOpacity': 0.2,
+  "adConfig": {
+    "enable": false,
+    "googleTestingId": [],
+    "adMobAppIdIos": "ca-app-pub-7432665165146018~2664444130",
+    "adMobAppIdAndroid": "ca-app-pub-7432665165146018~2664444130",
+    "ads": [
+      {
+        "type": "banner",
+        "provider": "google",
+        "iosId": "	ca-app-pub-3940256099942544/2934735716",
+        "androidId": "ca-app-pub-3940256099942544/6300978111",
+        "showOnScreens": [],
+        "hideOnScreens": [],
+        "waitingTimeToDisplay": 2,
+      },
+      {
+        "type": "banner",
+        "provider": "google",
+        "iosId": "	ca-app-pub-3940256099942544/2934735716",
+        "androidId": "ca-app-pub-3940256099942544/6300978111",
+        "showOnScreens": [],
+        "hideOnScreens": [],
+      },
+      {
+        "type": "interstitial",
+        "provider": "google",
+        "iosId": "ca-app-pub-3940256099942544/4411468910",
+        "androidId": "	ca-app-pub-3940256099942544/1033173712",
+        "showOnScreens": [],
+        "hideOnScreens": [],
+        "waitingTimeToDisplay": 5,
+      },
+      {
+        "type": "reward",
+        "provider": "google",
+        "iosId": "ca-app-pub-3940256099942544/1712485313",
+        "androidId": "	ca-app-pub-3940256099942544/5224354917",
+        "showOnScreens": [],
+        "hideOnScreens": [],
+      },
+    ],
+  }
 };

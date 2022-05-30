@@ -1,5 +1,4 @@
-
-import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/models/ai_detection_body.dart';
 import 'package:snapedit/models/ai_detection_response.dart';
 import 'package:snapedit/models/erase_body.dart';
@@ -21,7 +20,7 @@ class AIRepository {
 
   Future<EraseResponse?> eraseImage(EraseBody data) async {
     ClientApiResponse response = await ClientApi.postData(
-      AppAPI.eraseV4,
+      '${Cofiguration.apiConfig.url}${Cofiguration.apiConfig.eraseEndPoint}',
       data.toMap(),
       headers: _headers,
     );
@@ -33,7 +32,7 @@ class AIRepository {
 
   Future<AIDetectionResponse?> detectionImage(AIDetectionBody data) async {
     ClientApiResponse response = await ClientApi.postData(
-      AppAPI.aiDetection,
+      '${Cofiguration.apiConfig.url}${Cofiguration.apiConfig.aiEndPoint}',
       data.toMap(),
       headers: _headers,
     );

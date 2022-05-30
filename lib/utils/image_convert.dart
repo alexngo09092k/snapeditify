@@ -3,9 +3,15 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:image/image.dart' as imagepkg;
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:snapedit/modules/painter/painter.dart';
 
-abstract class ImageConvert {
+class ImageConvert {
+  static final ImageConvert _instance = ImageConvert._internal();
+
+  ImageConvert get instance => _instance;
+
+  ImageConvert._internal();
+
   static Future<ui.Image> base64ToImage(String imageBase64) async {
     Uint8List imageBytes = base64.decode(imageBase64);
     ui.Codec codec = await ui.instantiateImageCodec(imageBytes);

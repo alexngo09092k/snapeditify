@@ -20,7 +20,7 @@ import 'package:snapedit/utils/image_pick.dart';
 import 'package:snapedit/utils/internet_checking.dart';
 import 'package:snapedit/widgets/loading_popup.dart';
 import 'package:snapedit/widgets/offline_popup.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:snapedit/modules/painter/painter.dart';
 
 class EditValue {
   PainterState state;

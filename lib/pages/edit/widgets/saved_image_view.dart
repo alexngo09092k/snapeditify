@@ -43,7 +43,7 @@ class SavedImageView extends StatelessWidget {
         content: Text("Share result: ${result.status}"),
       ));
     } on PlatformException catch (e) {
-      printLog("Exception while taking screenshot:" + e.toString());
+      printLog("Exception while taking screenshot:$e");
     }
   }
 
@@ -190,7 +190,7 @@ class SavedImageView extends StatelessWidget {
                       title: 'Share',
                       color: AppColors.disable,
                       icon: Image.asset(
-                        AppImages.icShareNormal,
+                        AppImages.icShareNormal3x,
                         width: 20,
                       ),
                       width: MediaQuery.of(context).size.width / 2 - 20,
