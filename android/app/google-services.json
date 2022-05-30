@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "828580723707",
+    "project_id": "snapedit",
+    "storage_bucket": "snapedit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828580723707:android:25d7a1b54d221ac1bb295e",
+        "android_client_info": {
+          "package_name": "com.example.snapedit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828580723707-n7klj521hoiorfnoilccjl0939o5cq9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmDnRKWJyVMnH1KfQqgILaaa2zKMxVCrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828580723707-n7klj521hoiorfnoilccjl0939o5cq9a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "828580723707-l457911nqirs91gmne907ptltn7l5kdc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.snapedit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

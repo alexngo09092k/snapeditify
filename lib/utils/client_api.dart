@@ -1,0 +1,145 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:flutter/foundation.dart' as foundation;
+import 'package:http/http.dart';
+import 'package:snapedit/common/logs.dart';
+
+class ClientApiResponse<T> {
+  String? error;
+  T? data;
+  ClientApiResponse({this.error, this.data});
+}
+
+abstract class ClientApi {
+  static const int timeoutInSeconds = 200;
+
+  static Future<ClientApiResponse> getData(String uri,
+      {Map<String, dynamic>? query, Map<String, String>? headers}) async {
+    try {
+      printLog('====> API Call: $uri\nHeader: $headers');
+      Response _response = await get(
+        Uri.parse(uri),
+        headers: headers,
+      ).timeout(const Duration(seconds: timeoutInSeconds));
+      printLog('====> API Response: $_response');
+      return handleResponse(_response, uri);
+    } catch (e) {
+      printLog(e);
+      return ClientApiResponse(error: e.toString());
+    }
+  }
+
+  static Future<ClientApiResponse> postData(String uri, dynamic body, {Map<String, String>? headers}) async {
+    try {
+      printLog('====> API Call: $uri\nHeader: $headers');
+      printLog('====> API Body: $body');
+      Response _response = await post(
+        Uri.parse(uri),
+        body: jsonEncode(body),
+        headers: headers,
+      ).timeout(const Duration(seconds: timeoutInSeconds));
+      printLog('====> API Response: $_response');
+      return handleResponse(_response, uri);
+    } catch (e) {
+      printLog(e);
+      return ClientApiResponse(error: e.toString());
+    }
+  }
+
+  static Future<ClientApiResponse> postMultipartData(
+      String uri, Map<String, String> body, List<MultipartBody> multipartBody,
+      {Map<String, String>? headers}) async {
+    try {
+      printLog('====> API Call: $uri\nHeader: $headers');
+      printLog('====> API Body: $body');
+      MultipartRequest _request = MultipartRequest('POST', Uri.parse(uri));
+      if (headers != null) {
+        _request.headers.addAll(headers);
+      }
+      for (MultipartBody multipart in multipartBody) {
+        if (foundation.kIsWeb) {
+          Uint8List _list = await multipart.file.readAsBytes();
+          MultipartFile _part = MultipartFile(
+            multipart.key,
+            multipart.file.readAsBytes().asStream(),
+            _list.length,
+            filename: basename(multipart.file.path),
+            contentType: MediaType('image', 'jpg'),
+          );
+          _request.files.add(_part);
+        } else {
+          File _file = File(multipart.file.path);
+          _request.files.add(MultipartFile(
+            multipart.key,
+            _file.readAsBytes().asStream(),
+            _file.lengthSync(),
+            filename: _file.path.split('/').last,
+          ));
+        }
+      }
+      _request.fields.addAll(body);
+      Response _response = await Response.fromStream(await _request.send());
+      return handleResponse(_response, uri);
+    } catch (e) {
+      printLog(e);
+      return ClientApiResponse(error: e.toString());
+    }
+  }
+
+  static Future<ClientApiResponse> putData(String uri, dynamic body,
+      {Map<String, String>? headers}) async {
+    try {
+      printLog('====> API Call: $uri\nHeader: $headers');
+      printLog('====> API Body: $body');
+      Response _response = await put(
+        Uri.parse(uri),
+        body: jsonEncode(body),
+        headers: headers,
+      ).timeout(const Duration(seconds: timeoutInSeconds));
+      return handleResponse(_response, uri);
+    } catch (e) {
+      printLog(e);
+      return ClientApiResponse(error: e.toString());
+    }
+  }
+
+  static Future<ClientApiResponse> deleteData(String uri,
+      {Map<String, String>? headers}) async {
+    try {
+      printLog('====> API Call: $uri\nHeader: $headers');
+      Response _response = await delete(
+        Uri.parse(uri),
+        headers: headers ?? headers,
+      ).timeout(const Duration(seconds: timeoutInSeconds));
+      return handleResponse(_response, uri);
+    } catch (e) {
+      printLog(e);
+      return ClientApiResponse(error: e.toString());
+    }
+  }
+
+  static ClientApiResponse handleResponse(Response response, String uri) {
+    try {
+      printLog('======> status code ${response.statusCode}');
+      final data = jsonDecode(response.body);
+      printLog('======> After json decoded $data');
+      if (data['error'] != null) {
+        throw data['error'];
+      }
+      return ClientApiResponse(error: null, data: data);
+    } catch (e) {
+      return ClientApiResponse(error: e.toString());
+    }
+  }
+}
+
+class MultipartBody {
+  String key;
+  XFile file;
+
+  MultipartBody(this.key, this.file);
+}

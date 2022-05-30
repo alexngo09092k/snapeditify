@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:snapedit/common/constants.dart';
+
+class LoadingPopup extends StatelessWidget {
+  const LoadingPopup({Key? key, required this.message}) : super(key: key);
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      insetPadding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width / 2 - 100),
+      backgroundColor: AppColors.kDarkBG.withOpacity(0.5),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: SizedBox(
+        height: 80,
+        width: 50,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                strokeWidth: 1,
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.kWhite),
+              ),
+            ),
+            const SizedBox(
+              height: AppDimensions.paddingSizeDefault,
+            ),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: AppColors.kWhite),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
