@@ -48,7 +48,8 @@ class AdvertisementConfig {
 
   factory AdvertisementConfig.fromMap(Map<String, dynamic> map) {
     return AdvertisementConfig(
-      ads: List<AdvertisementItem>.from(map['ads']?.map((x) => AdvertisementItem.fromMap(x))),
+      ads: List<AdvertisementItem>.from(
+          map['ads']?.map((x) => AdvertisementItem.fromMap(x))),
       googleTestingId: List<String>.from(map['googleTestingId']),
       enable: map['enable'] ?? false,
       adMobAppIdAndroid: map['adMobAppIdAndroid'] ?? '',

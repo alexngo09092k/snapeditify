@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/controllers/home/home_controller.dart';
-import 'package:snapedit/pages/home/widgets/ads_banner.dart';
 import 'package:snapedit/widgets/app_logo.dart';
 import 'package:snapedit/widgets/custom_button.dart';
 import 'package:snapedit/widgets/custom_card.dart';
+import 'package:snapedit/widgets/custom_overlay_state.dart';
 import 'package:snapedit/widgets/lottie_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends CustomOverlayState<HomePage> {
   late final HomeController _controller;
 
   @override
@@ -98,7 +98,6 @@ class _HomePageState extends State<HomePage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  AdsBanner(controller: _controller),
                   Padding(
                     padding:
                         const EdgeInsets.all(AppDimensions.paddingSizeDefault),
@@ -117,7 +116,8 @@ class _HomePageState extends State<HomePage> {
                             height: 180,
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
+                            padding: const EdgeInsets.all(
+                                AppDimensions.paddingSizeDefault),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
@@ -130,7 +130,9 @@ class _HomePageState extends State<HomePage> {
                                           .headline6!
                                           .copyWith(color: AppColors.kWhite),
                                       children: [
-                                        const TextSpan(text: 'Clean your photo faster & better with'),
+                                        const TextSpan(
+                                            text:
+                                                'Clean your photo faster & better with'),
                                         WidgetSpan(
                                           child: Container(
                                             padding: const EdgeInsets.only(

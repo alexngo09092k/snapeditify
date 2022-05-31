@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-enum AdvertisementType { banner, reward, native, interstitial }
+enum AdvertisementType {openApp, fluid, banner, reward, native, interstitial }
 
 extension AdvertisementTypeExtension on AdvertisementType {
   String get content => describeEnum(this);

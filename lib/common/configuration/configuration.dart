@@ -12,11 +12,12 @@ class Cofiguration {
   static AppConfig _appConfig = DefaultConfig.appConfig;
   static AdvertisementConfig _adConfig = DefaultConfig.adConfig;
 
+  static bool _isPutted = false;
+  static bool get isPutted => _isPutted;
+
   static Future<void> setConfig(Map<String, dynamic> value) async {
-    printLog(value);
     if (value['firebaseConfig'] != null) {
       _firebaseConfig = FirebaseConfig.fromMap(value['firebaseConfig']);
-      printLog(_firebaseConfig);
     }
     if (value['apiConfig'] != null) {
       _apiConfig = ApiConfig.fromMap(value['apiConfig']);
@@ -24,9 +25,11 @@ class Cofiguration {
     if (value['appConfig'] != null) {
       _appConfig = AppConfig.fromMap(value['appConfig']);
     }
-    if(value['adConfig'] != null) {
+    if (value['adConfig'] != null) {
       _adConfig = AdvertisementConfig.fromMap(value['adConfig']);
     }
+
+    _isPutted = true;
   }
 
   static bool get enableFirebase => _firebaseConfig.enableFirebase;
@@ -79,7 +82,7 @@ class Cofiguration {
         break;
       case 'adConfig':
         final data = remoteConfig.getString('adConfig');
-        if(data.isNotEmpty) {
+        if (data.isNotEmpty) {
           _adConfig = AdvertisementConfig.fromJson(data);
         }
         break;

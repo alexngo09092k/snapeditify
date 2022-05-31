@@ -53,7 +53,8 @@ class AppConfig {
 
   String toJson() => json.encode(toMap());
 
-  factory AppConfig.fromJson(String source) => AppConfig.fromMap(json.decode(source));
+  factory AppConfig.fromJson(String source) =>
+      AppConfig.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -63,21 +64,21 @@ class AppConfig {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is AppConfig &&
-      other.appName == appName &&
-      other.appVersion == appVersion &&
-      other.appColor == appColor &&
-      other.appLogo == appLogo &&
-      other.appTheme == appTheme;
+        other.appName == appName &&
+        other.appVersion == appVersion &&
+        other.appColor == appColor &&
+        other.appLogo == appLogo &&
+        other.appTheme == appTheme;
   }
 
   @override
   int get hashCode {
     return appName.hashCode ^
-      appVersion.hashCode ^
-      appColor.hashCode ^
-      appLogo.hashCode ^
-      appTheme.hashCode;
+        appVersion.hashCode ^
+        appColor.hashCode ^
+        appLogo.hashCode ^
+        appTheme.hashCode;
   }
 }
