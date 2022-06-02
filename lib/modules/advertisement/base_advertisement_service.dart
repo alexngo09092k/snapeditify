@@ -1,7 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:snapedit/modules/advertisement/models/advertisement_config.dart';
-class BaseAdvertisementService {
+import 'package:snapedit/modules/advertisement/models/advertisement_view.dart';
 
-  void init(AdvertisementConfig advertisement) {}
+abstract class BaseAdvertisementService {
+  void init(AdvertisementConfig advertisement);
 
-  void handleAd({String? screenName}) {}
+  void handleAd({String? screenName});
+
+  Widget? loadAd({required AdvertisementViewType type, AdSize size = AdSize.banner, Function(dynamic)? onAd});
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:snapedit/controllers/edit/edit_controller.dart';
+import 'package:snapedit/generated/l10n.dart';
+import 'package:snapedit/modules/advertisement/models/advertisement_view.dart';
 import 'package:snapedit/pages/edit/widgets/saved_image_view.dart';
+import 'package:snapedit/services/services.dart';
 
 class SavedImageButton extends StatelessWidget {
   const SavedImageButton({Key? key, required this.controller})
@@ -8,21 +11,26 @@ class SavedImageButton extends StatelessWidget {
   final EditController controller;
 
   Future<void> saveAndShowImage(context) async {
-    await controller.saveImage((savedImagePath) {
-      Scaffold.of(context).showBottomSheet(
-        (BuildContext context) {
-          return SavedImageView(
-            controller: controller,
-            image: savedImagePath,
-          );
-        },
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(20),
-          ),
-        ),
-      );
+    Services().advertisement.loadAd(type: AdvertisementViewType.handle, onAd: (handleAd) {
+      if(handleAd != null) {
+        handleAd.show();
+      }
     });
+    controller.saveImage((savedImagePath) {
+        Scaffold.of(context).showBottomSheet(
+          (BuildContext context) {
+            return SavedImageView(
+              controller: controller,
+              image: savedImagePath,
+            );
+          },
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(20),
+            ),
+          ),
+        );
+      });
   }
 
   @override
@@ -30,17 +38,17 @@ class SavedImageButton extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: controller,
       builder: (_, __, ___) => TextButton(
+        onPressed: controller.state.prevState != null
+            ? () => saveAndShowImage(context)
+            : null,
         child: Text(
-          'Save',
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: controller.state.prevImage != null
-                    ? Theme.of(context).textTheme.bodyLarge!.color
+          S.of(context).save,
+          style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                color: controller.state.prevState != null
+                    ? Theme.of(context).textTheme.bodyText1!.color
                     : Theme.of(context).disabledColor,
               ),
         ),
-        onPressed: controller.state.prevImage != null
-            ? () => saveAndShowImage(context)
-            : null,
       ),
     );
   }

@@ -32,24 +32,26 @@ class _StateLottieView extends State<LottieView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: widget.imageUrl.startsWith('http')
-            ? Lottie.network(
-                widget.imageUrl,
-                errorBuilder: (_, __, ___) {
-                  return const SizedBox();
-                },
-              )
-            : Lottie.asset(
-                widget.imageUrl,
-                height: widget.height,
-                width: widget.width,
-                errorBuilder: (_, __, ___) {
-                  return const SizedBox();
-                },
-              ),
-      ),
+    return Center(
+      child: widget.imageUrl.startsWith('http')
+          ? Lottie.network(
+              widget.imageUrl,
+              fit:BoxFit.fill,
+              height: widget.height,
+              width: widget.width,
+              errorBuilder: (_, __, ___) {
+                return const SizedBox();
+              },
+            )
+          : Lottie.asset(
+              widget.imageUrl,
+              height: widget.height,
+              width: widget.width,
+              fit:BoxFit.fill,
+              errorBuilder: (_, __, ___) {
+                return const SizedBox();
+              },
+            ),
     );
   }
 }

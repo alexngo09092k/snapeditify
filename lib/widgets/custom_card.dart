@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapedit/common/constants.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard(
@@ -27,14 +28,14 @@ class CustomCard extends StatelessWidget {
         gradient: gradient,
         color: color,
         borderRadius: BorderRadius.circular(radius),
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: AppColors.kGrey.withOpacity(0.2),
-        //     spreadRadius: 5,
-        //     blurRadius: 7,
-        //     offset: const Offset(0, 3),
-        //   )
-        // ],
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.kGrey.withOpacity(0.2),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 3),
+          )
+        ],
       ),
       child: child,
     );

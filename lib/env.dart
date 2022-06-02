@@ -16,10 +16,12 @@ Map<String, dynamic> enviroment = {
     "appName": "SnapEdit",
     'appLogo': 'assets/image/logo.png',
     'appVersion': '1.0',
-    'appColor': '#9ab065',
+    'appColor': '#42f578',
     'appTheme': 'light',
   },
-
+  // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+  // https://developers.google.com/admob/android/test-ads
+  // https://developers.google.com/admob/ios/test-ads
   "adConfig": {
     "enable": true,
     "googleTestingId": [],
@@ -31,9 +33,6 @@ Map<String, dynamic> enviroment = {
         "provider": "google",
         "iosId": "ca-app-pub-3940256099942544/5662855259",
         "androidId": "ca-app-pub-3940256099942544/3419835294",
-        "showOnScreens": ['home'],
-        "hideOnScreens": ['edit'],
-        "waitingTimeToDisplay": 5,
       },
       {
         "type": "banner",

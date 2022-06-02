@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/common/logs.dart';
 import 'package:snapedit/controllers/edit/edit_controller.dart';
+import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/pages/edit/widgets/changed_strokewidth.dart';
 import 'package:snapedit/widgets/custom_button.dart';
 import 'package:snapedit/modules/painter/painter_pure.dart';
@@ -16,7 +17,7 @@ class ImagePaint extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height * 1.8 / 3;
     final double width = MediaQuery.of(context).size.width;
     return Container(
-      color: AppColors.disable,
+      color: Theme.of(context).highlightColor,
       height: height,
       child: Stack(
         children: [
@@ -46,9 +47,7 @@ class ImagePaint extends StatelessWidget {
                   )
                 : const SizedBox(),
           ),
-          Center(
-            child: ChangedStrokeWidth(controller: controller),
-          ),
+          Center(child: ChangedStrokeWidth(controller: controller)),
           Positioned(
               left: 10,
               top: height - 50,
@@ -84,8 +83,7 @@ class ImagePaint extends StatelessWidget {
               valueListenable: controller,
               builder: (_, __, ___) => controller.canRemove
                   ? CustomButton(
-                      title: 'Remove',
-                      color: AppColors.blue,
+                      title: S.of(context).remove,
                       icon: Image.asset(
                         AppImages.icCheckmarkNormal3x,
                         width: 20,

@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/controllers/home/home_controller.dart';
+import 'package:snapedit/generated/l10n.dart';
+import 'package:snapedit/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapedit/widgets/ad_view.dart';
 import 'package:snapedit/widgets/app_logo.dart';
 import 'package:snapedit/widgets/custom_button.dart';
 import 'package:snapedit/widgets/custom_card.dart';
@@ -28,43 +31,48 @@ class _HomePageState extends CustomOverlayState<HomePage> {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoTheme(
-        data: const CupertinoThemeData(
-            textTheme: CupertinoTextThemeData(primaryColor: AppColors.blue)),
+        data: CupertinoThemeData(textTheme: CupertinoTextThemeData(primaryColor: Theme.of(context).primaryColor)),
         child: CupertinoActionSheet(
           actions: <CupertinoActionSheetAction>[
             CupertinoActionSheetAction(
               isDefaultAction: true,
               onPressed: _controller.getFromGallery,
               child: Text(
-                'Ảnh',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.blue),
+                S.of(context).photoGallery,
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: Theme.of(context).primaryColor,
+                    ),
               ),
             ),
             CupertinoActionSheetAction(
               onPressed: _controller.getFromCamera,
               child: Text(
-                'Camera',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                S.of(context).camera,
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.normal,
-                    color: AppColors.blue),
+                    color: Theme.of(context).primaryColor),
               ),
             ),
           ],
           cancelButton: GestureDetector(
             onTap: Navigator.of(context).pop,
-            child: SizedBox(
+            child:  Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10))
+              ),
               height: 50,
+              width: MediaQuery.of(context).size.width,
               child: Center(
                 child: Text(
-                  'Huỷ',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.blue),
+                  S.of(context).cancel,
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                      ),
                 ),
               ),
             ),
@@ -81,6 +89,8 @@ class _HomePageState extends CustomOverlayState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final lottieWidth = MediaQuery.of(context).size.width -
+        AppDimensions.paddingSizeDefault * 2;
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 130,
@@ -94,96 +104,88 @@ class _HomePageState extends CustomOverlayState<HomePage> {
       ),
       body: Column(
         children: [
+          AdView(
+            type: AdvertisementViewType.widget,
+            width: lottieWidth,
+            height: lottieWidth * 2 / 3,
+          ),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Padding(
-                    padding:
+                  Container(
+                    width: lottieWidth,
+                    height: lottieWidth * 2 / 3,
+                    margin:
                         const EdgeInsets.all(AppDimensions.paddingSizeDefault),
                     child: Stack(children: [
-                      const CustomCard(
-                        radius: 10,
+                      CustomCard(
+                        radius: AppDimensions.paddingSizeDefault,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(
+                              AppDimensions.paddingSizeDefault,
+                            ),
+                          ),
                           child: LottieView(
-                              imageUrl: AppImages.homeBannerAnimation),
+                            imageUrl: AppImages.homeBannerAnimation,
+                            width: lottieWidth,
+                            height: lottieWidth * 2 / 3,
+                          ),
                         ),
                       ),
-                      Column(
-                        children: [
-                          const SizedBox(
-                            height: 180,
-                          ),
-                          Padding(
+                      Positioned(
+                          bottom: 0,
+                          child: Container(
                             padding: const EdgeInsets.all(
-                                AppDimensions.paddingSizeDefault),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(color: AppColors.kWhite),
-                                      children: [
-                                        const TextSpan(
-                                            text:
-                                                'Clean your photo faster & better with'),
-                                        WidgetSpan(
-                                          child: Container(
-                                            padding: const EdgeInsets.only(
-                                                left: AppDimensions
-                                                    .paddingSizeExtraSmall,
-                                                bottom: 5),
-                                            child: Image.asset(
-                                              AppImages.icAIHomeNormal3x,
-                                              width: 20,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                              AppDimensions.paddingSizeDefault,
+                            ),
+                            width: lottieWidth * 2.5 / 3,
+                            child: RichText(
+                              text: TextSpan(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(color: AppColors.kWhite),
+                                children: [
+                                  TextSpan(
+                                      text: S
+                                          .of(context)
+                                          .cleanYourPhotoFasterBetterWith),
+                                  WidgetSpan(
+                                    child: Container(
+                                      padding: const EdgeInsets.only(
+                                        left: AppDimensions.paddingSizeExtraSmall,
+                                        bottom: 5,
+                                      ),
+                                      child: Image.asset(
+                                        AppImages.icAIHomeNormal3x,
+                                        width: 20,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 80,
-                                ),
-                                Expanded(
-                                    flex: 1,
-                                    child: CustomButton(
-                                      onTap: showMenu,
-                                      title: 'Try it now',
-                                      color: AppColors.kWhite.withOpacity(0.8),
-                                      textColor: Colors.black,
-                                      titleSize: 12,
-                                      height: 30,
-                                      width: 50,
-                                    ))
-                              ],
+                                ],
+                              ),
                             ),
-                          )
-                        ],
-                      ),
+                          ))
                     ]),
                   ),
                 ],
               ),
             ),
           ),
-          CustomButton(
-            title: 'Add Photo',
-            color: AppColors.blue,
-            icon: Image.asset(
-              AppImages.icAddPhotoNormal3x,
-              width: 30,
+          CustomCard(
+            child: CustomButton(
+              title: S.of(context).addPhoto,
+              color: Theme.of(context).primaryColor,
+              icon: Image.asset(
+                AppImages.icAddPhotoNormal3x,
+                width: 30,
+              ),
+              width: MediaQuery.of(context).size.width * 1.5 / 3,
+              height: 50,
+              onTap: showMenu,
             ),
-            width: MediaQuery.of(context).size.width * 1.5 / 3,
-            height: 50,
-            onTap: showMenu,
           ),
           const SizedBox(
             height: AppDimensions.paddingSizeExtraLarge,

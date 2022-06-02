@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/widgets/custom_dialog.dart';
-import 'package:snapedit/common/constants.dart';
 
 class NoPermissonPopup extends StatelessWidget {
   const NoPermissonPopup({Key? key}) : super(key: key);
@@ -10,15 +10,15 @@ class NoPermissonPopup extends StatelessWidget {
      return CustomDialog(
       height: 120,
       message: Text(
-        'All changes will be lost. Are you sure you want to leave wihthout saving?',
+        S.of(context).allChangesWillBeLostAreYouSureYouWant,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.bodyMedium,
+        style: Theme.of(context).textTheme.bodyText2,
       ),
       buttons: [
         CustomDialogButton(
-          title: 'Cancel',
+          title: S.of(context).cancel,
           action: Navigator.of(context).pop,
-          color: Theme.of(context).disabledColor,
+          color: Theme.of(context).highlightColor,
         ),
         CustomDialogButton(
           title: 'OK',
@@ -26,7 +26,7 @@ class NoPermissonPopup extends StatelessWidget {
             Navigator.of(context).pop();
             Navigator.of(context).pop();
           },
-          color: AppColors .blue,
+          color: Theme.of(context).primaryColor,
         ),
       ],
     );

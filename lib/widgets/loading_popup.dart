@@ -14,8 +14,9 @@ class LoadingPopup extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      child: SizedBox(
-        height: 80,
+      child: Container(
+        padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
+        height: 100,
         width: 50,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,15 +30,13 @@ class LoadingPopup extends StatelessWidget {
                 valueColor: AlwaysStoppedAnimation<Color>(AppColors.kWhite),
               ),
             ),
-            const SizedBox(
-              height: AppDimensions.paddingSizeDefault,
-            ),
+            const SizedBox(height: AppDimensions.paddingSizeDefault),
             Text(
               message,
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .bodySmall!
+                  .caption!
                   .copyWith(color: AppColors.kWhite),
             ),
           ],

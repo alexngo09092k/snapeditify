@@ -12,14 +12,17 @@ import 'package:snapedit/modules/advertisement/models/advertisement_config.dart'
 import 'package:snapedit/modules/advertisement/models/advertisement_extension.dart';
 import 'package:snapedit/modules/advertisement/models/advertisement_view.dart';
 
-class AdvertisementService
-    implements BaseAdvertisementService, AppLifeCycleHandler {
+class AdvertisementService implements BaseAdvertisementService, AppLifeCycleHandler {
   AdvertisementConfig? adConfig;
 
-  final _listAdView = <AdvertisementView>[];
-  final _widgetAds = <Widget>[];
+  final Map<AdvertisementViewType, List<AdvertisementView>> _listAdView = {
+    AdvertisementViewType.widget: [],
+    AdvertisementViewType.openApp: [],
+    AdvertisementViewType.handle: [],
+  };
+
+  final _widgetAds = [];
   final _appOpenAds = [];
-  final _handleAds = [];
 
   bool _enableAd = false;
 
@@ -42,7 +45,9 @@ class AdvertisementService
         final adView = AdvertisementView(
           data: ad,
         );
-        _listAdView.add(adView);
+        if (_listAdView[adView.type] != null) {
+          _listAdView[adView.type]!.add(adView);
+        }
       }
       printLog('[AppState] Init Google Mobile Ads');
       MobileAds.instance.initialize().then((InitializationStatus status) {
@@ -59,59 +64,49 @@ class AdvertisementService
 
   @override
   void handleAd({String? screenName}) async {
-    for (final adView in _listAdView) {
-      final ad = adView.data;
-      if (ad == null) {
-        continue;
-      }
+    if (!_enableAd) return;
+    if (_listAdView[AdvertisementViewType.widget] != null) {
+      for (final adView in _listAdView[AdvertisementViewType.widget]!) {
+        final ad = adView.data;
+        if (ad == null) {
+          continue;
+        }
 
-      final adsProvider = getAdsProvider(ad.provider);
-      // Handle show ads
-      if (adsProvider == null || ad.showOnScreens.isEmpty) continue;
+        final adsProvider = getAdsProvider(ad.provider);
+        if (adsProvider == null || ad.showOnScreens.isEmpty) continue;
 
-      // if (ad.showOnScreens.contains(screenName)) {
-      if (!adView.active) {
-        adView.active = true;
-        final ad = adView.data!;
-        switch (adView.type) {
-          case AdvertisementViewType.widget:
-            _widgetAds.add(adsProvider.createAdWidget(adItem: ad));
-            break;
-          case AdvertisementViewType.openApp:
-            adsProvider.loadAd(
-                adItem: ad,
-                onAd: (appOpenAd) {
-                  _appOpenAds.add(appOpenAd);
-                });
-            break;
-          case AdvertisementViewType.handle:
-            adsProvider.showAd(adItem: ad);
-            break;
-          case AdvertisementViewType.none:
-            break;
+        _widgetAds.add(adsProvider.createAdWidget(adItem: ad));
+        if (ad.hideOnScreens.contains(screenName) ||
+            (ad.showOnScreens.isNotEmpty &&
+                !ad.showOnScreens.contains(screenName))) {
+          EasyDebounce.cancel(ad.id);
+          if (adView.active) {
+            adView.active = false;
+            _widgetAds.removeWhere((element) => element.key == ValueKey(ad.id));
+          }
         }
       }
-      // }
+    }
 
-      // Handle hide ads
-      if (ad.hideOnScreens.contains(screenName) ||
-          (ad.showOnScreens.isNotEmpty &&
-              !ad.showOnScreens.contains(screenName))) {
-        EasyDebounce.cancel(ad.id);
-        if (adView.active) {
-          adView.active = false;
-          switch (adView.type) {
-            case AdvertisementViewType.widget:
-              _widgetAds
-                  .removeWhere((element) => element.key == ValueKey(ad.id));
-              break;
-            case AdvertisementViewType.openApp:
-              break;
-            case AdvertisementViewType.handle:
-              adsProvider.hideAd(ad.id);
-              break;
-            default:
-              break;
+    if (_listAdView[AdvertisementViewType.handle] != null) {
+      for (final adView in _listAdView[AdvertisementViewType.handle]!) {
+        final ad = adView.data;
+        if (ad == null) {
+          continue;
+        }
+
+        final adsProvider = getAdsProvider(ad.provider);
+        if (adsProvider == null || ad.showOnScreens.isEmpty) continue;
+
+        adsProvider.showAd(adItem: ad);
+
+        if (ad.hideOnScreens.contains(screenName) ||
+            (ad.showOnScreens.isNotEmpty &&
+                !ad.showOnScreens.contains(screenName))) {
+          EasyDebounce.cancel(ad.id);
+          if (adView.active) {
+            adView.active = false;
+            adsProvider.hideAd(ad.id);
           }
         }
       }
@@ -119,14 +114,49 @@ class AdvertisementService
   }
 
   @override
-  void onBackground() {}
+  void onBackground() {
+    if (!_enableAd) return;
+    if (_listAdView[AdvertisementViewType.openApp] != null) {
+      for (final adView in _listAdView[AdvertisementViewType.openApp]!) {
+        if (adView.data == null) {
+          continue;
+        }
+        final adsProvider = getAdsProvider(adView.data!.provider);
+        if (adsProvider == null) continue;
+        adsProvider.loadAd(
+          adItem: adView.data!,
+          onAd: (appOpenAd) {
+            _appOpenAds.add(appOpenAd);
+          },
+        );
+      }
+    }
+  }
 
   @override
   void onForeground() {
+    if (!_enableAd) return;
     if (_appOpenAds.isNotEmpty) {
       AppOpenAd appOpenAd = _appOpenAds.first;
       appOpenAd.show();
       _appOpenAds.removeAt(0);
     }
+  }
+
+  @override
+  Widget? loadAd({required AdvertisementViewType type, AdSize size = AdSize.banner, Function(dynamic)? onAd}) {
+    if (_listAdView[type] != null && _listAdView[type]!.isNotEmpty) {
+      final viewAd = _listAdView[type]!.first;
+      final adsProvider = getAdsProvider(viewAd.data!.provider);
+      if (adsProvider != null) {
+        if (viewAd.type == AdvertisementViewType.widget) {
+          Widget? widgetAd = adsProvider.createAdWidget(adItem: viewAd.data!, size: size);
+          if(onAd != null) onAd(widgetAd);
+        } else {
+          adsProvider.loadAd(adItem: viewAd.data!, onAd: onAd);
+        }
+      }
+    }
+    return null;
   }
 }

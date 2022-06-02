@@ -25,7 +25,7 @@ abstract class PainterAction<T> {
   int get hashCode => event.hashCode ^ data.hashCode;
 }
 
-enum PainterEvent { undo, redo, other }
+enum PainterEvent { undo, redo, other, newState }
 
 class PainterUndoAction extends PainterAction<PainterState>{
   const PainterUndoAction() : super(event: PainterEvent.undo);
@@ -33,6 +33,10 @@ class PainterUndoAction extends PainterAction<PainterState>{
 
 class PainterRedoAction extends PainterAction<PainterState> {
   const PainterRedoAction() : super(event: PainterEvent.redo);
+}
+
+class PainterNewStateAction extends PainterAction<PainterState> {
+  const PainterNewStateAction() : super(event: PainterEvent.newState);
 }
 
 class PainterOtherAction extends PainterAction<PainterState> {

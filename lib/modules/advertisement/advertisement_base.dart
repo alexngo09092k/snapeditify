@@ -15,5 +15,5 @@ abstract class AdvertisementBase {
 
   void loadAd({required AdvertisementItem adItem, Function(dynamic)? onAd});
 
-  Widget createAdWidget({required AdvertisementItem adItem, AdSize size = AdSize.banner});
+  Widget? createAdWidget({required AdvertisementItem adItem, AdSize size = AdSize.banner});
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/widgets/custom_dialog.dart';
 
 class RevertPopup extends StatelessWidget {
@@ -10,31 +10,32 @@ class RevertPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
-          height: 150,
+          height: 180,
           title: Text(
-            'Discard changes and revert',
+            S.of(context).discardChangesAndRevert,
             style: Theme.of(context)
                 .textTheme
-                .bodyLarge!
+                .bodyText1!
                 .copyWith(fontWeight: FontWeight.w500),
           ),
           message: Text(
-            'All changes will be lost. Your image will be reverted to its original status',
-            style: Theme.of(context).textTheme.bodyMedium,
+            S.of(context).allChangesWillBeLostYourImageWillBeReverted,
+            style: Theme.of(context).textTheme.bodyText2,
           ),
           buttons: [
             CustomDialogButton(
-              title: 'Cancel',
+              title: S.of(context).cancel,
               action: Navigator.of(context).pop,
-              color: Theme.of(context).disabledColor,
+              color: Theme.of(context).highlightColor,
+              titleColor: Theme.of(context).textTheme.bodyText1!.color,
             ),
             CustomDialogButton(
-              title: 'OK',
+              title: S.of(context).ok,
               action: () {
                 onRevert();
                 Navigator.of(context).pop();
               },
-              color: AppColors.blue,
+              color: Theme.of(context).primaryColor,
             ),
           ],
         );

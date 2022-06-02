@@ -70,7 +70,6 @@
 				6EB1B1E9978FFE17C4FC4D0D /* Pods-Runner.release.xcconfig */,
 				CB630473EC81330879CFDD7D /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -497,7 +496,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.snapedit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

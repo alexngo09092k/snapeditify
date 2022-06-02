@@ -65,9 +65,9 @@ class AdvertisementItem {
       provider: AdvertisementProvider.values.firstWhere((element) => describeEnum(element) == map['provider']),
       androidId: map['androidId'] ?? '',
       iosId: map['iosId'] ?? '',
-      showOnScreens: List<String>.from(map['showOnScreens']),
-      hideOnScreens: List<String>.from(map['hideOnScreens']),
-      waitingTimeToDisplay: map['waitingTimeToDisplay']?.toInt() ?? 0,
+      showOnScreens: List<String>.unmodifiable(map['showOnScreens'] ?? <String>[]),
+      hideOnScreens: List<String>.unmodifiable(map['hideOnScreens'] ?? <String>[]),
+      waitingTimeToDisplay:(map['waitingTimeToDisplay'] ?? 0).toInt(),
     );
   }
 

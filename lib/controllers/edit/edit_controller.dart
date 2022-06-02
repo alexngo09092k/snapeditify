@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/logs.dart';
 import 'package:snapedit/controllers/edit/painter_state.dart';
+import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/models/ai_detection_body.dart';
 import 'package:snapedit/models/ai_detection_response.dart';
 import 'package:snapedit/models/detected_object.dart';
@@ -31,11 +32,12 @@ class EditValue {
 }
 
 class EditController extends ValueNotifier<EditValue> {
-  EditController({required this.context, required this.imagePath}): super(EditValue(state: PainterState())) {
+  EditController({required this.context, required this.imagePath})
+      : super(EditValue(state: PainterState())) {
     _initial();
   }
 
-  Future<void> _initial() async{
+  Future<void> _initial() async {
     _internet = InternetChecking.getInstance();
     _internet.initialize('google.com');
 
@@ -73,7 +75,16 @@ class EditController extends ValueNotifier<EditValue> {
   //action
   bool get canUndo => state.canUndo;
   bool get canRedo => state.canRedo;
-  bool get canRemove => canUndo || state.detectedObjects.values.where((detectedObject) => detectedObject.isSelected).length > state.detectedObjects.values.where((detectedObject) => detectedObject.isRemoved).length;
+  bool get canCompare => state.canCompare;
+  bool get canRemove {
+    int setectedLength = state.detectedObjects.values
+        .where((detectedObject) => detectedObject.isSelected)
+        .length;
+    int removedLength = state.detectedObjects.values
+        .where((detectedObject) => detectedObject.isRemoved)
+        .length;
+    return painterController.drawables.isNotEmpty || setectedLength > removedLength;
+  }
 
   void undo() => state.undo();
 
@@ -96,12 +107,15 @@ class EditController extends ValueNotifier<EditValue> {
 
     showDialog<void>(
       context: context,
-      builder: (_) => const LoadingPopup(
-        message: 'Working on your photo. \n Please waiting...',
+      builder: (_) => LoadingPopup(
+        message: S.of(context).workingOnYourPhotoNPleaseWaiting,
       ),
     );
 
-    if (state.detectedObjects.values.where((detectedObject) => !detectedObject.isRemoved).toList().isNotEmpty) {
+    if (state.detectedObjects.values
+        .where((detectedObject) => !detectedObject.isRemoved)
+        .toList()
+        .isNotEmpty) {
       state.toNone();
       return;
     }
@@ -115,10 +129,11 @@ class EditController extends ValueNotifier<EditValue> {
       await state.setDetectedObjects(response.detectedObjects);
       await state.addAllBoxDetectedMask();
     }
-    Navigator.of(context).pop();
+    Navigator.pop(context);
   }
 
-  Future<void> remove({bool Function()? onStart, Function(EraseResponse?)? onEnd}) async {
+  Future<void> remove(
+      {bool Function()? onStart, Function(EraseResponse?)? onEnd}) async {
     if (!_internet.hasConnection) {
       printLog('No internet');
       showDialog(
@@ -133,8 +148,8 @@ class EditController extends ValueNotifier<EditValue> {
     showDialog<void>(
       context: context,
       barrierDismissible: false,
-      builder: (_) => const LoadingPopup(
-        message: 'Removing object',
+      builder: (_) => LoadingPopup(
+        message: S.of(context).removingObject,
       ),
     );
 
@@ -142,24 +157,28 @@ class EditController extends ValueNotifier<EditValue> {
 
     EraseResponse? response = await _aiRepository.eraseImage(
       EraseBody(
-        originalImageBase64: state.originalImageBase64 ?? '', // image will remove
+        originalImageBase64:
+            state.originalImageBase64 ?? '', // image will remove
         maskBase64: await ImageConvert.imageToBase64(mask), // mask image
       ),
     );
 
     if (response != null) {
-      ui.Image newImage = await ImageConvert.base64ToImage(response.newImageBase64);
+      ui.Image newImage =
+          await ImageConvert.base64ToImage(response.newImageBase64);
 
-      Map<int, DetectedObject> updatedDetectedObject = state.detectedObjects.map((maskId, detetedObject) {
+      Map<int, DetectedObject> updatedDetectedObject =
+          state.detectedObjects.map((maskId, detetedObject) {
         if (detetedObject.isSelected) {
           // painterController.removeDrawable(detetedObject.maskDrawable!, saveAction: false);
-          painterController.removeDrawable(detetedObject.boxDrawble!, saveAction: false);
+          painterController.removeDrawable(detetedObject.boxDrawble!,
+              saveAction: false);
           return MapEntry(maskId, detetedObject.copyWith(isRemoved: true));
         }
         return MapEntry(maskId, detetedObject);
       });
 
-      state.withPrevNextState(
+      value.state = state.withPrevNextState(
         image: newImage,
         originalImageBase64: response.newImageBase64,
         mode: state.freeStyleMode,
@@ -177,16 +196,29 @@ class EditController extends ValueNotifier<EditValue> {
 
     await state.addAllBoxDetectedMask();
 
-    Navigator.of(context).pop();
+    Navigator.pop(context);
   }
 
-  void selectedDetectedObjects(int maskId) => state.addDetectedObjectMask(maskId);
+  void selectedDetectedObjects(int maskId) =>
+      state.addDetectedObjectMask(maskId);
 
-  void unSelectedDtectedObjects(int maskId) => state.removeDetectedObjectMask(maskId);
+  void unSelectedDtectedObjects(int maskId) =>
+      state.removeDetectedObjectMask(maskId);
 
   void compare() => state.compare();
 
-  void revert() => state.revert();
+  void revert() async {
+    value.state = PainterState(
+      image: await AssetImage(imagePath).image,
+      originalImageBase64: ImageConvert.imagePathToBase64(imagePath),
+      strokeWidth: state.strokeWidth,
+    );
+    state.addListener((event) {
+      printLog('from edit controller $event');
+      notifyListeners();
+    });
+    notifyListeners();
+  }
 
   Future<bool> saveImage(Function(String) onImagePath) async {
     final result = await ImageGallerySaver.saveImage(
@@ -206,14 +238,14 @@ class EditController extends ValueNotifier<EditValue> {
   }
 
   Future<void> getFromGallery() async {
-    Navigator.of(context).pop();
+    Navigator.pop(context);
     ImagePick.getFromGallery((pickedFile) {
       _onImagePick(pickedFile);
     });
   }
 
   Future<void> getFromCamera() async {
-    Navigator.of(context).pop();
+    Navigator.pop(context);
     ImagePick.getFromCamera((pickedFile) {
       _onImagePick(pickedFile);
     });

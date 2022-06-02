@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/controllers/edit/edit_controller.dart';
+import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/models/detected_object.dart';
 import 'package:snapedit/pages/edit/widgets/detected_object_row.dart';
 
@@ -29,8 +30,10 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
 
   @override
   void initState() {
-    data[DetectedObjectType.people] = widget.controller.state.getDetectedObjectsByType(DetectedObjectType.people);
-    data[DetectedObjectType.other] = widget.controller.state.getDetectedObjectsByType(DetectedObjectType.other);
+    data[DetectedObjectType.people] = widget.controller.state
+        .getDetectedObjectsByType(DetectedObjectType.people);
+    data[DetectedObjectType.other] = widget.controller.state
+        .getDetectedObjectsByType(DetectedObjectType.other);
 
     if ((data[DetectedObjectType.people]!.isEmpty) &&
         data[DetectedObjectType.other]!.isNotEmpty) {
@@ -64,14 +67,16 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
                   ),
                   const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
                   Text(
-                      '${widget.controller.state.detectedObjects.values.length} Objects'),
+                    '${widget.controller.state.detectedObjects.values.length} ${S.of(context).objects}',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
                 ],
               ),
               const Expanded(flex: 1, child: SizedBox()),
               Expanded(
                 flex: 1,
                 child: CupertinoSlidingSegmentedControl<DetectedObjectType>(
-                  backgroundColor: Theme.of(context).disabledColor,
+                  backgroundColor: Theme.of(context).highlightColor,
                   thumbColor: Theme.of(context).backgroundColor,
                   groupValue: type,
                   children: {
@@ -116,7 +121,7 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
                     ),
                     const SizedBox(height: AppDimensions.paddingSizeDefault),
                     Text(
-                      'No potential object has been detected',
+                      S.of(context).noPotentialObjectHasBeenDetected,
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2!

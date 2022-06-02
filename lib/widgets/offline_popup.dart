@@ -34,7 +34,7 @@ class OfflinePopup extends StatelessWidget {
               'You are currently offline!',
               style: Theme.of(context)
                   .textTheme
-                  .bodyLarge!.copyWith(fontWeight: FontWeight.w500)
+                  .bodyText1!.copyWith(fontWeight: FontWeight.w500)
             ),
             const SizedBox(height: AppDimensions.paddingSizeDefault),
             Text(
@@ -42,12 +42,12 @@ class OfflinePopup extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .bodySmall!
+                  .caption!
             ),
             const SizedBox(height: AppDimensions.paddingSizeLarge),
             CustomButton(
               title: 'OK',
-              color: AppColors.blue,
+              color: Theme.of(context).primaryColor,
               width: width * 2,
               height: 30,
               onTap: Navigator.of(context).pop,

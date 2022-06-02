@@ -70,8 +70,7 @@ class PainterState {
   ui.Image? _image;
   ui.Image? get image => _image;
 
-  ui.Image? _prevImage;
-  ui.Image? get prevImage => _prevImage;
+  ui.Image? _compareImage;
 
   ui.Image? _originalImage;
   ui.Image? get originalImage => _currentState._originalImage;
@@ -112,6 +111,7 @@ class PainterState {
 
   bool get canUndo => _currentState._controller.canUndo || _currentState._prevState != null;
   bool get canRedo => _currentState._controller.canRedo || _currentState._nextState != null;
+  bool get canCompare => _currentState._compareImage != null;
 
   Future<void> undo() async {
     if (_currentState._controller.canUndo) {
@@ -156,9 +156,9 @@ class PainterState {
   }
 
   Future<void> compare () async {
-    if(_currentState._prevImage != null) {
+    if(_currentState._compareImage != null) {
       printLog('compare');
-      await setImage(image: _currentState._prevImage!);
+      await setImage(image: _currentState._compareImage!);
     }
   }
 
@@ -294,7 +294,7 @@ class PainterState {
   }
 
   Future<void> setImage({required ui.Image image, String? originalImageBase64}) async {
-    _prevImage = _image;
+    _compareImage = _currentState._image;
     _currentState._image = image;
 
     _currentState._controller.background = image.backgroundDrawable;
@@ -319,6 +319,7 @@ class PainterState {
       originalImageBase64: originalImageBase64 ?? this.originalImageBase64,
       strokeWidth: strokeWidth ?? this.strokeWidth,
     )
+      .._compareImage = _currentState._originalImage
       .._controller.addDrawables(drawables ?? _controller.drawables, saveAction: canUndo)
       .._controller.freeStyleMode = mode ?? _controller.freeStyleMode
       .._detectedObjects = detectedObjects ?? this.detectedObjects;
@@ -338,7 +339,7 @@ class PainterState {
       originalImageBase64: originalImageBase64 ?? _currentState.originalImageBase64,
       strokeWidth: strokeWidth ?? _currentState.strokeWidth,
     )
-      .._prevImage = _currentState.originalImage
+      .._compareImage = _currentState._originalImage
       .._controller.addDrawables(drawables ?? _currentState._controller.drawables, saveAction: canUndo)
       .._controller.freeStyleMode = mode ?? _currentState._controller.freeStyleMode
       .._detectedObjects = detectedObjects ?? _currentState.detectedObjects;
@@ -347,6 +348,13 @@ class PainterState {
     newState._prevState = _currentState;
 
     _currentState = newState;
+
+    // update(const PainterNewStateAction());
+
+    printLog('prev state => ${_currentState._prevState}');
+    printLog('current state => ${_currentState._currentState}');
+    printLog('next state => ${_currentState._nextState}');
+    printLog('compare image current state => ${_currentState._compareImage}');
 
     return _currentState;
   }
@@ -360,8 +368,8 @@ class PainterState {
   }
 
   dispose () {
-    if(_currentState._nextState != null) _currentState._nextState!.dispose();
-    if(_currentState._prevState  != null) _currentState._prevState!.dispose();
+    // if(_currentState._nextState != null) _currentState._nextState!.dispose();
+    // if(_currentState._prevState  != null) _currentState._prevState!.dispose();
     _currentState._controller.dispose();
     _currentState._painterStream.close();
   }

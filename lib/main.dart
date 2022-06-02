@@ -7,6 +7,10 @@ import 'package:snapedit/common/logs.dart';
 import 'package:snapedit/env.dart';
 import 'package:snapedit/init_app.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+   printLog('Handling a background message ${message.messageId}');
+}
+
 void main() {
   runZonedGuarded(() async {
     try {
@@ -16,9 +20,7 @@ void main() {
 
       await Cofiguration.setConfig(enviroment);
 
-      FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-        printLog('Handling a background message ${message.messageId}');
-      });
+      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
       await initApp();
 

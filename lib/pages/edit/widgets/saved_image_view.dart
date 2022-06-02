@@ -3,10 +3,14 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/common/logs.dart';
 import 'package:snapedit/controllers/edit/edit_controller.dart';
+import 'package:snapedit/generated/l10n.dart';
+import 'package:snapedit/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapedit/widgets/ad_view.dart';
 import 'package:snapedit/widgets/custom_button.dart';
 import 'package:snapedit/widgets/ui_image_display.dart';
 
@@ -20,28 +24,26 @@ class SavedImageView extends StatelessWidget {
   final String image;
   static final GlobalKey _globalKey = GlobalKey();
 
+  bool get mounted {
+    return true;
+  }
+
   Future<void> shareScreenshot(BuildContext context) async {
     try {
-      // A builder is used to retrieve the context immediately
-      // surrounding the ElevatedButton.
-      //
-      // The context's `findRenderObject` returns the first
-      // RenderObject in its descendent tree when it's not
-      // a RenderObjectWidget. The ElevatedButton's RenderObject
-      // has its position and size after it's built.
       final box = context.findRenderObject() as RenderBox?;
       final List<String> imagePaths = [image];
-      printLog(image);
       ShareResult result = await Share.shareFilesWithResult(
         imagePaths,
         text: '',
         subject: '',
         sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
       );
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        content: Text("Share result: ${result.status}"),
-      ));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Theme.of(context).backgroundColor,
+          content: Text(S.of(context).yourImageIsShared),
+        ));
+      }
     } on PlatformException catch (e) {
       printLog("Exception while taking screenshot:$e");
     }
@@ -51,30 +53,30 @@ class SavedImageView extends StatelessWidget {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoTheme(
-        data: const CupertinoThemeData(
-            textTheme: CupertinoTextThemeData(primaryColor: AppColors.blue)),
+        data: CupertinoThemeData(textTheme: CupertinoTextThemeData(primaryColor: Theme.of(context).primaryColor)),
         child: CupertinoActionSheet(
           actions: <CupertinoActionSheetAction>[
             CupertinoActionSheetAction(
               isDefaultAction: true,
               onPressed: controller.getFromGallery,
               child: Text(
-                'Photo galery',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                S.of(context).photoGallery,
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
-                      color: AppColors.blue,
+                      color: Theme.of(context).primaryColor,
                     ),
               ),
             ),
             CupertinoActionSheetAction(
               onPressed: controller.getFromCamera,
               child: Text(
-                'Camera',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                S.of(context).camera,
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.normal,
-                    color: AppColors.blue),
+                    color: Theme.of(context).primaryColor,
+                ),
               ),
             ),
           ],
@@ -84,11 +86,12 @@ class SavedImageView extends StatelessWidget {
               height: 50,
               child: Center(
                 child: Text(
-                  'Cancel',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  S.of(context).cancel,
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.blue),
+                      color: Theme.of(context).primaryColor,
+                      ),
                 ),
               ),
             ),
@@ -134,10 +137,10 @@ class SavedImageView extends StatelessWidget {
                             width: AppDimensions.paddingSizeExtraSmall,
                           ),
                           Text(
-                            'Image saved!',
+                            S.of(context).imageSaved,
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyLarge!
+                                .bodyText1!
                                 .copyWith(fontWeight: FontWeight.bold),
                           )
                         ],
@@ -152,55 +155,44 @@ class SavedImageView extends StatelessWidget {
                 ),
                 Expanded(
                     child: Container(
-                  color: AppColors.disable,
+                  color: Theme.of(context).highlightColor,
                   child: ValueListenableBuilder(
                     valueListenable: controller,
-                    builder: (_, __, ___) =>
-                        controller.state.image != null
-                            ? Center(
-                                child: AspectRatio(
-                                  aspectRatio: (controller.state.image!.width / controller.state.image!.height),
-                                  child: UIImageDisplay(
-                                    uiImage: controller.state.image!,
-                                    placeholder: const SizedBox(),
-                                  ),
-                                ),
-                              )
-                            : const SizedBox(),
+                    builder: (_, __, ___) => controller.state.image != null
+                        ? Center(
+                            child: AspectRatio(
+                              aspectRatio: (controller.state.image!.width /
+                                  controller.state.image!.height),
+                              child: UIImageDisplay(
+                                uiImage: controller.state.image!,
+                                placeholder: const SizedBox(),
+                              ),
+                            ),
+                          )
+                        : const SizedBox(),
                   ),
                   // child: ,
                 )),
-                const SizedBox(
-                  height: AppDimensions.paddingSizeDefault,
-                ),
-                Container(
-                  height: 100,
-                  color: AppColors.disable,
-                  child: const Center(
-                    child: Text('Ads banner'),
-                  ),
-                ),
-                const SizedBox(
-                  height: AppDimensions.paddingSizeDefault,
-                ),
+                const SizedBox(height: AppDimensions.paddingSizeDefault),
+                AdView(type: AdvertisementViewType.widget, adSize: AdSize.banner, width: MediaQuery.of(context).size.width),
+                const SizedBox(height: AppDimensions.paddingSizeDefault),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomButton(
-                      title: 'Share',
-                      color: AppColors.disable,
+                      title: S.of(context).share,
+                      color: Theme.of(context).backgroundColor,
                       icon: Image.asset(
                         AppImages.icShareNormal3x,
                         width: 20,
                       ),
                       width: MediaQuery.of(context).size.width / 2 - 20,
                       height: 35,
-                      textColor: Theme.of(context).textTheme.bodyMedium!.color,
+                      textColor: Theme.of(context).textTheme.bodyText2!.color,
                       onTap: () => shareScreenshot(context),
                     ),
                     CustomButton(
-                      title: 'New image',
-                      color: AppColors.blue,
+                      title: S.of(context).newImage,
                       icon: Image.asset(
                         AppImages.icAddPhotoNormal3x,
                         width: 20,
@@ -211,9 +203,7 @@ class SavedImageView extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: AppDimensions.paddingSizeExtraLarge,
-                )
+                const SizedBox(height: AppDimensions.paddingSizeExtraLarge)
               ],
             ),
           ),

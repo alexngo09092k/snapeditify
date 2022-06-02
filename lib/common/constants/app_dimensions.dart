@@ -1,9 +1,9 @@
 part of '../constants.dart';
 
 abstract class AppDimensions {
-  static double fontSizeExtraSmall = 12;
-  static double fontSizeSmall = 14;
-  static double fontSizeDefault = 16;
+  static double fontSizeExtraSmall = 10;
+  static double fontSizeSmall = 12;
+  static double fontSizeDefault = 14;
   static double fontSizeLarge = 16;
   static double fontSizeExtraLarge = 18;
   static double fontSizeOverLarge = 24;

@@ -1,5 +1,4 @@
 import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -7,7 +6,7 @@ class CustomButton extends StatelessWidget {
       {Key? key,
       this.gradient,
       this.textColor,
-      this.titleSize = 16,
+      this.titleSize = 14,
       this.color,
       this.width,
       this.height = 50,
@@ -32,41 +31,37 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: CustomCard(
-        radius: 30,
-        child: Container(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(30),
-            ),
-            gradient: gradient,
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          color: color ?? AppColors.topicColor,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(30),
           ),
-          child: child ??
-              Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    icon ?? const SizedBox(),
-                    icon != null
-                        ? const SizedBox(
-                            width: AppDimensions.paddingSizeExtraSmall,
-                          )
-                        : const SizedBox(),
-                    Text(
-                      title ?? '',
-                      style: TextStyle(
-                        color: textColor ?? AppColors.kWhite,
-                        fontSize: titleSize,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+          gradient: gradient,
         ),
+        child: child ??
+            Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  icon ?? const SizedBox(),
+                  icon != null
+                      ? const SizedBox(
+                          width: AppDimensions.paddingSizeExtraSmall)
+                      : const SizedBox(),
+                  Text(
+                    title ?? '',
+                    style: TextStyle(
+                      color: textColor ?? AppColors.kWhite,
+                      fontSize: titleSize,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+            ),
       ),
     );
   }

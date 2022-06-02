@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/controllers/edit/edit_controller.dart';
+import 'package:snapedit/generated/l10n.dart';
 
 class CountDetectedObject extends StatelessWidget {
   CountDetectedObject({
@@ -26,7 +27,10 @@ class CountDetectedObject extends StatelessWidget {
                   width: 20,
                 ),
                 const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
-                Text('${controller.state.detectedObjects.values.length} objects detected'),
+                Text(
+                  '${controller.state.detectedObjects.values.length} ${S.of(context).objectsDetected}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
               ],
             ),
             const Icon(

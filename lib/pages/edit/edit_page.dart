@@ -29,7 +29,7 @@ class _EditPageState extends CustomOverlayState<EditPage> {
   }
 
   Future<void> showRevertDialog() async {
-    if (_controller.state.prevState != null) {
+    if (_controller.prevPainterState != null) {
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -42,7 +42,7 @@ class _EditPageState extends CustomOverlayState<EditPage> {
   }
 
   Future<void> goBack() async {
-    if (_controller.state.prevImage != null) {
+    if (_controller.prevPainterState != null) {
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -78,7 +78,7 @@ class _EditPageState extends CustomOverlayState<EditPage> {
                 AppImages.icRevertNormal3x,
                 width: 20,
               ),
-              onPressed: _controller.state.prevImage != null ? showRevertDialog : null,
+              onPressed: _controller.prevPainterState != null ? showRevertDialog : null,
             ),
           ),
         ),
