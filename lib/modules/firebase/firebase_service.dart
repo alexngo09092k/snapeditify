@@ -5,10 +5,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:gms_check/gms_check.dart';
-import 'package:snapedit/common/logs.dart';
-import 'package:snapedit/modules/firebase/base_firebase_services.dart';
-import 'package:snapedit/modules/firebase/firebase_analytics_service.dart';
-import 'package:snapedit/modules/firebase/models/firebase_config.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/modules/firebase/base_firebase_services.dart';
+import 'package:snapretouch/modules/firebase/firebase_analytics_service.dart';
+import 'package:snapretouch/modules/firebase/models/firebase_config.dart';
 
 class FirebaseServices extends BaseFirebaseServices {
   static final FirebaseServices _instance = FirebaseServices._internal();

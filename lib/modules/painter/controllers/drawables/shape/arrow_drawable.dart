@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-import 'package:snapedit/common/logs.dart';
+import 'package:snapretouch/common/logs.dart';
 
 import '../object_drawable.dart';
 import 'shape_drawable.dart';

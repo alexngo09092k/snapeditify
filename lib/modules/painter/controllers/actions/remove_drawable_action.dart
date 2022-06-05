@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:snapedit/common/logs.dart';
+import 'package:snapretouch/common/logs.dart';
 
 import '../drawables/drawable.dart';
 

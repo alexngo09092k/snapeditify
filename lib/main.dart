@@ -1,11 +1,11 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:snapedit/app.dart';
-import 'package:snapedit/common/configuration.dart';
-import 'package:snapedit/common/logs.dart';
-import 'package:snapedit/env.dart';
-import 'package:snapedit/init_app.dart';
+import 'package:snapretouch/app.dart';
+import 'package:snapretouch/common/configuration.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/env.dart';
+import 'package:snapretouch/init_app.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
    printLog('Handling a background message ${message.messageId}');

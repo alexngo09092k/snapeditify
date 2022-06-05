@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/controllers/edit/edit_controller.dart';
-import 'package:snapedit/widgets/custom_animation.dart';
-import 'package:snapedit/common/constants.dart';
+import 'package:snapretouch/controllers/edit/edit_controller.dart';
+import 'package:snapretouch/widgets/custom_animation.dart';
+import 'package:snapretouch/common/constants.dart';
 
 class ChangedStrokeWidth extends StatelessWidget {
   const ChangedStrokeWidth({Key? key, required this.controller})

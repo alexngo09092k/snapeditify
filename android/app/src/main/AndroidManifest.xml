@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.snapedit">
+    package="com.example.snapretouch">
    <application
         android:requestLegacyExternalStorage="true"
-        android:label="snapedit"
+        android:label="snapretouch"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data

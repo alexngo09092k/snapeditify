@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart' as mt;
-import 'package:snapedit/common/logs.dart';
+import 'package:snapretouch/common/logs.dart';
 
 import 'background_drawable.dart';
 

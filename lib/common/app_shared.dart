@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:snapedit/common/logs.dart';
+import 'package:snapretouch/common/logs.dart';
 
 abstract class AppShared {
   static SharedPreferences? sharedPreferences;

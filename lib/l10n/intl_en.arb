@@ -4,17 +4,17 @@
   "photoGallery": "Photo Gallery",
   "camera": "Camera",
   "cancel": "Cancel",
-  "addPhoto": "Add Photo",
+  "addPhoto": "ADD PHOTO",
   "save": "Save",
   "allChangesWillBeLostYourImageWillBeReverted": "All changes will be lost. Your image will be reverted to its original status",
   "discardChangesAndRevert": "Discard changes and revert",
   "ok": "OK",
   "auto": "Auto",
   "brush": "Brush",
-  "remove": "Remove",
+  "remove": "REMOVE",
   "objects": "Objects",
   "noPotentialObjectHasBeenDetected": "No potential object has been detected",
-  "objectsDetected": "objects detected",
+  "objectsDetected": "Objects detected",
   "yourImageIsShared": "Your image is shared",
   "share": "Share",
   "newImage": "New image",
@@ -23,5 +23,6 @@
   "accurate": "% accurate",
   "allChangesWillBeLostAreYouSureYouWant": "All changes will be lost. Are you sure you want to leave wihthout saving?",
   "workingOnYourPhotoNPleaseWaiting": "Working on your photo. Please waiting...",
-  "removingObject": "Removing object"
+  "removingObject": "Removing object",
+  "aiPowredPhotoEditor": "AI powred photo editor"
 }

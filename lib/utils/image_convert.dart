@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:image/image.dart' as imagepkg;
-import 'package:snapedit/modules/painter/painter.dart';
+import 'package:snapretouch/modules/painter/painter.dart';
 
 class ImageConvert {
   static final ImageConvert _instance = ImageConvert._internal();

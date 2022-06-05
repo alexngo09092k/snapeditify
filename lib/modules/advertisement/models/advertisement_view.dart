@@ -1,4 +1,4 @@
-import 'package:snapedit/modules/advertisement/models/advertisement_extension.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_extension.dart';
 
 import 'advertisement_item.dart';
 

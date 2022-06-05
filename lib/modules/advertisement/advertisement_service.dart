@@ -3,14 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 // import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
-import 'package:snapedit/common/logs.dart';
-import 'package:snapedit/modules/advertisement/advertisement_base.dart';
-import 'package:snapedit/modules/advertisement/app_lifecycle/app_lifecycle_handler.dart';
-import 'package:snapedit/modules/advertisement/base_advertisement_service.dart';
-import 'package:snapedit/modules/advertisement/google_advertisement.dart';
-import 'package:snapedit/modules/advertisement/models/advertisement_config.dart';
-import 'package:snapedit/modules/advertisement/models/advertisement_extension.dart';
-import 'package:snapedit/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/modules/advertisement/advertisement_base.dart';
+import 'package:snapretouch/modules/advertisement/app_lifecycle/app_lifecycle_handler.dart';
+import 'package:snapretouch/modules/advertisement/base_advertisement_service.dart';
+import 'package:snapretouch/modules/advertisement/google_advertisement.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_config.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_extension.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
 
 class AdvertisementService implements BaseAdvertisementService, AppLifeCycleHandler {
   AdvertisementConfig? adConfig;

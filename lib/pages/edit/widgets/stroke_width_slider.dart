@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/controllers/edit/edit_controller.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/controllers/edit/edit_controller.dart';
 
 class StrokeWidthSlider extends StatelessWidget {
   const StrokeWidthSlider({Key? key, required this.controller})

@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/common/logs.dart';
-import 'package:snapedit/controllers/edit/edit_controller.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/modules/advertisement/models/advertisement_view.dart';
-import 'package:snapedit/widgets/ad_view.dart';
-import 'package:snapedit/widgets/custom_button.dart';
-import 'package:snapedit/widgets/ui_image_display.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/controllers/edit/edit_controller.dart';
+import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/widgets/ad_view.dart';
+import 'package:snapretouch/widgets/custom_button.dart';
+import 'package:snapretouch/widgets/ui_image_display.dart';
 
 class SavedImageView extends StatelessWidget {
   const SavedImageView({

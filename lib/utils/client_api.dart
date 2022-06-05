@@ -7,7 +7,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart';
-import 'package:snapedit/common/logs.dart';
+import 'package:snapretouch/common/logs.dart';
 import 'package:flutter/foundation.dart' as foundation;
 class ClientApiResponse<T> {
   String? error;

@@ -1,6 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:snapedit/common/logs.dart';
+import 'package:snapretouch/common/logs.dart';
 
 import 'background_drawable.dart';
 

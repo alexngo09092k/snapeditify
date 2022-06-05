@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:snapedit/common/logs.dart';
-import 'package:snapedit/pages/edit/edit_page.dart';
-import 'package:snapedit/pages/home/home_page.dart';
-import 'package:snapedit/pages/splash/splash_page.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/pages/edit/edit_page.dart';
+import 'package:snapretouch/pages/home/home_page.dart';
+import 'package:snapretouch/pages/splash/splash_page.dart';
 
 abstract class AppRoutes {
   static const String home = '/';

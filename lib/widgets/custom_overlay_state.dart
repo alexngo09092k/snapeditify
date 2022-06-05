@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/configuration.dart';
-import 'package:snapedit/common/logs.dart';
-import 'package:snapedit/modules/advertisement/app_lifecycle/app_lifecycle_reactor.dart';
-import 'package:snapedit/services/services.dart';
-import 'package:snapedit/widgets/base_screen.dart';
+import 'package:snapretouch/common/configuration.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/modules/advertisement/app_lifecycle/app_lifecycle_reactor.dart';
+import 'package:snapretouch/services/services.dart';
+import 'package:snapretouch/widgets/base_screen.dart';
 
 abstract class CustomOverlayState<T extends StatefulWidget> extends BaseScreen<T> with TickerProviderStateMixin {
   double bottomBarHeight = kBottomNavigationBarHeight - 15;

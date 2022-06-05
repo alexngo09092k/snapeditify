@@ -13,10 +13,10 @@ Map<String, dynamic> enviroment = {
   },
 
   "appConfig": {
-    "appName": "SnapEdit",
+    "appName": "SnapRetouch",
     'appLogo': 'assets/image/logo.png',
     'appVersion': '1.0',
-    'appColor': '#42f578',
+    'appColor': '#6C76F1',
     'appTheme': 'light',
   },
   // Replace the testAdUnitId with an ad unit id from the AdMob dash.

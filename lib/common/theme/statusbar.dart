@@ -19,7 +19,7 @@ SystemUiOverlayStyle getLightStatusBar() => const SystemUiOverlayStyle(
     );
 
 SystemUiOverlayStyle getDarkStatusBar() => const SystemUiOverlayStyle(
-      systemNavigationBarColor: AppColors.kLightBG,
+      systemNavigationBarColor: AppColors.kWhite,
       systemNavigationBarIconBrightness: Brightness.light,
       statusBarColor: Colors.transparent,
       statusBarBrightness: Brightness.light,

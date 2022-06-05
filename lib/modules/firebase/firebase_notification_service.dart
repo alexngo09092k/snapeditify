@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:snapedit/common/logs.dart';
-import 'package:snapedit/modules/firebase/models/notification_message.dart';
-import 'package:snapedit/modules/firebase/notification/notification_service.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/modules/firebase/models/notification_message.dart';
+import 'package:snapretouch/modules/firebase/notification/notification_service.dart';
 
 class FirebaseNotificationService extends NotificationService {
   final _instance = FirebaseMessaging.instance;

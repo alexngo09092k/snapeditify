@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/widgets/custom_dialog.dart';
+import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/widgets/custom_dialog.dart';
 
 class GoBackPopup extends StatelessWidget {
   const GoBackPopup({Key? key}) : super(key: key);

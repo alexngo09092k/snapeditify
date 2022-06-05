@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/configuration.dart';
+import 'package:snapretouch/common/configuration.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({Key? key, this.image, this.width, this.height, this.color})

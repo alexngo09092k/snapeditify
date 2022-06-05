@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -23,13 +24,13 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="snapedit">
+  <meta name="apple-mobile-web-app-title" content="snapretouch">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>snapedit</title>
+  <title>snapretouch</title>
   <link rel="manifest" href="manifest.json">
 
   <script>
@@ -39,17 +40,18 @@
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
+
 <body>
   <script>
-    window.addEventListener('load', function(ev) {
+    window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         }
-      }).then(function(engineInitializer) {
+      }).then(function (engineInitializer) {
         return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
+      }).then(function (appRunner) {
         return appRunner.runApp();
       });
     });
@@ -59,19 +61,20 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
-  
+
     // Your web app's Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyBSNnGhUEztuTK63uJFG0y8y4_BjAFAovo",
-      authDomain: "snapedit.firebaseapp.com",
-      projectId: "snapedit",
-      storageBucket: "snapedit.appspot.com",
-      messagingSenderId: "828580723707",
-      appId: "1:828580723707:web:f6b551e15342798ebb295e"
+      apiKey: "AIzaSyC0PFyQNqvSBjnGe_3Mzdl_dVq7wHsx5eY",
+      authDomain: "snapretouch.firebaseapp.com",
+      projectId: "snapretouch",
+      storageBucket: "snapretouch.appspot.com",
+      messagingSenderId: "270202760919",
+      appId: "1:270202760919:web:98e21c44334ed60ae0ca92"
     };
-  
+
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
   </script>
 </body>
+
 </html>

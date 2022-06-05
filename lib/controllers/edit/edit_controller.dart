@@ -6,22 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/logs.dart';
-import 'package:snapedit/controllers/edit/painter_state.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/models/ai_detection_body.dart';
-import 'package:snapedit/models/ai_detection_response.dart';
-import 'package:snapedit/models/detected_object.dart';
-import 'package:snapedit/models/erase_body.dart';
-import 'package:snapedit/models/erase_response.dart';
-import 'package:snapedit/repositories/ai_repository.dart';
-import 'package:snapedit/utils/image_convert.dart';
-import 'package:snapedit/utils/image_pick.dart';
-import 'package:snapedit/utils/internet_checking.dart';
-import 'package:snapedit/widgets/loading_popup.dart';
-import 'package:snapedit/widgets/offline_popup.dart';
-import 'package:snapedit/modules/painter/painter.dart';
+import 'package:snapretouch/common/app_routes.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/controllers/edit/painter_state.dart';
+import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/models/ai_detection_body.dart';
+import 'package:snapretouch/models/ai_detection_response.dart';
+import 'package:snapretouch/models/detected_object.dart';
+import 'package:snapretouch/models/erase_body.dart';
+import 'package:snapretouch/models/erase_response.dart';
+import 'package:snapretouch/repositories/ai_repository.dart';
+import 'package:snapretouch/utils/image_convert.dart';
+import 'package:snapretouch/utils/image_pick.dart';
+import 'package:snapretouch/utils/internet_checking.dart';
+import 'package:snapretouch/widgets/loading_popup.dart';
+import 'package:snapretouch/widgets/offline_popup.dart';
+import 'package:snapretouch/modules/painter/painter.dart';
 
 class EditValue {
   PainterState state;

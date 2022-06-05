@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/logs.dart';
-import 'package:snapedit/utils/image_convert.dart';
-import 'package:snapedit/modules/painter/painter.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/utils/image_convert.dart';
+import 'package:snapretouch/modules/painter/painter.dart';
 
 class DetectedObject {
   final List<int> box;

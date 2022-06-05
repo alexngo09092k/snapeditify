@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/controllers/edit/edit_controller.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/models/detected_object.dart';
-import 'package:snapedit/pages/edit/widgets/detected_object_row.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/controllers/edit/edit_controller.dart';
+import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/models/detected_object.dart';
+import 'package:snapretouch/pages/edit/widgets/detected_object_tab.dart';
+import 'package:snapretouch/pages/edit/widgets/detected_object_tab_content.dart';
 
 class DetailDetectedObject extends StatefulWidget {
   DetailDetectedObject({
@@ -21,7 +21,12 @@ class DetailDetectedObject extends StatefulWidget {
 }
 
 class _DetailDetectedObjectState extends State<DetailDetectedObject> {
-  DetectedObjectType type = DetectedObjectType.people;
+  int _indexTab = 0;
+
+  DetectedObjectType get type =>
+      _indexTab == 0 ? DetectedObjectType.people : DetectedObjectType.other;
+
+  late final PageController _pageController;
 
   final Map<DetectedObjectType, List<DetectedObject>> data = {
     DetectedObjectType.people: [],
@@ -34,18 +39,18 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
         .getDetectedObjectsByType(DetectedObjectType.people);
     data[DetectedObjectType.other] = widget.controller.state
         .getDetectedObjectsByType(DetectedObjectType.other);
-
     if ((data[DetectedObjectType.people]!.isEmpty) &&
         data[DetectedObjectType.other]!.isNotEmpty) {
-      type = DetectedObjectType.other;
+      _indexTab = 1;
     }
-
+    _pageController = PageController(initialPage: _indexTab);
     super.initState();
   }
 
-  void onChangeType(value) {
-    type = value!;
-    setState(() {});
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -54,8 +59,8 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimensions.paddingSizeSmall)
-              .copyWith(top: AppDimensions.paddingSizeSmall),
+            horizontal: AppDimensions.paddingSizeSmall,
+          ).copyWith(top: AppDimensions.paddingSizeSmall),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -63,72 +68,45 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
                 children: [
                   InkWell(
                     onTap: widget.hideDetailDetectedObjects,
-                    child: Image.asset(AppImages.icDeleteNormal3x, width: 20),
+                    child: Image.asset(AppImages.icDeleteNormal3x, width: 25),
                   ),
                   const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
                   Text(
                     '${widget.controller.state.detectedObjects.values.length} ${S.of(context).objects}',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
                 ],
               ),
               const Expanded(flex: 1, child: SizedBox()),
-              Expanded(
-                flex: 1,
-                child: CupertinoSlidingSegmentedControl<DetectedObjectType>(
-                  backgroundColor: Theme.of(context).highlightColor,
-                  thumbColor: Theme.of(context).backgroundColor,
-                  groupValue: type,
-                  children: {
-                    DetectedObjectType.people: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 0),
-                      child: Text(
-                        DetectedObjectType.people.name,
-                      ),
-                    ),
-                    DetectedObjectType.other: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 0),
-                      child: Text(
-                        DetectedObjectType.other.name,
-                      ),
-                    ),
-                  },
-                  onValueChanged: onChangeType,
-                ),
+              DetectedObjectTab(
+                controller: _pageController,
+                onChangedTab: (i) {
+                  _pageController.animateToPage(
+                    i,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,
+                  );
+                },
               ),
             ],
           ),
         ),
-        const Divider(),
+        const SizedBox(height: AppDimensions.paddingSizeDefault),
         SizedBox(
           height: 160,
-          child: data[type]!.isNotEmpty
-              ? ListView.builder(
-                  itemCount: data[type]!.length,
-                  itemBuilder: (_, index) => DetectedObjectRow(
-                    controller: widget.controller,
-                    maskId: data[type]!.elementAt(index).maskId,
-                  ),
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      AppImages.imgNoObjectsNormal3x,
-                      width: 80,
-                      fit: BoxFit.cover,
-                    ),
-                    const SizedBox(height: AppDimensions.paddingSizeDefault),
-                    Text(
-                      S.of(context).noPotentialObjectHasBeenDetected,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2!
-                          .copyWith(color: Theme.of(context).disabledColor),
-                    )
-                  ],
-                ),
+          child: PageView(
+            controller: _pageController,
+            children: [
+              DetectedObjectTabContent(
+                controller: widget.controller,
+                data: data[DetectedObjectType.people] ?? [],
+              ),
+              DetectedObjectTabContent(
+                controller: widget.controller,
+                data: data[DetectedObjectType.other] ?? [],
+              ),
+            ],
+          ),
         )
       ],
     );

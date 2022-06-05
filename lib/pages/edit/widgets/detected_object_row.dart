@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/controllers/edit/edit_controller.dart';
-import 'package:snapedit/generated/l10n.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/controllers/edit/edit_controller.dart';
+import 'package:snapretouch/generated/l10n.dart';
 
 class DetectedObjectRow extends StatelessWidget {
   const DetectedObjectRow({
@@ -17,36 +17,50 @@ class DetectedObjectRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget title = Text(controller.detectedObjects[maskId]!.objectDescription);
-    late final Widget subTitle = Text('${(controller.detectedObjects[maskId]!.accuracy * 100).toStringAsFixed(2)} ${S.of(context).accurate}');
+    final Widget title = Text(
+      controller.detectedObjects[maskId]!.objectDescription,
+      style: Theme.of(context).textTheme.subtitle1,
+    );
+    late final Widget subTitle = Text(
+      '${(controller.detectedObjects[maskId]!.accuracy * 100).toStringAsFixed(2)} ${S.of(context).accurate}',
+      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+            color: Theme.of(context).disabledColor,
+          ),
+    );
     late final Widget remove = Container(
-      padding: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(AppDimensions.paddingSizeExtraSmall),
       decoration: BoxDecoration(
         color: AppColors.kRedColorHeart.withOpacity(0.1),
-        borderRadius: const BorderRadius.all(Radius.circular(2)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
       child: Text(
         S.of(context).removed,
-        style: const TextStyle(color: AppColors.kRedColorHeart, fontSize: 12),
+        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+              color: AppColors.kRedColorHeart,
+            ),
       ),
     );
 
     return ValueListenableBuilder(
       valueListenable: controller,
       builder: (_, __, image) => Container(
-        color: controller.detectedObjects[maskId]!.isSelected && !controller.detectedObjects[maskId]!.isRemoved
-            ? Theme.of(context).disabledColor.withOpacity(0.1)
+        color: controller.detectedObjects[maskId]!.isSelected &&
+                !controller.detectedObjects[maskId]!.isRemoved
+            ? Theme.of(context).highlightColor.withOpacity(0.1)
             : Colors.transparent,
         child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSizeDefault),
+          contentPadding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.paddingSizeDefault),
           onTap: () {
             if (controller.detectedObjects[maskId]!.isRemoved) {
               return;
             }
             if (controller.detectedObjects[maskId]!.isSelected) {
-              controller.unSelectedDtectedObjects(controller.detectedObjects[maskId]!.maskId);
+              controller.unSelectedDtectedObjects(
+                  controller.detectedObjects[maskId]!.maskId);
             } else {
-              controller.selectedDetectedObjects(controller.detectedObjects[maskId]!.maskId);
+              controller.selectedDetectedObjects(
+                  controller.detectedObjects[maskId]!.maskId);
             }
           },
           leading: image,
@@ -55,17 +69,20 @@ class DetectedObjectRow extends StatelessWidget {
             children: [
               subTitle,
               const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
-              controller.detectedObjects[maskId]!.isRemoved ? remove : const SizedBox()
+              controller.detectedObjects[maskId]!.isRemoved
+                  ? remove
+                  : const SizedBox()
             ],
           ),
           trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                controller.detectedObjects[maskId]!.isSelected || controller.detectedObjects[maskId]!.isRemoved
+                controller.detectedObjects[maskId]!.isSelected ||
+                        controller.detectedObjects[maskId]!.isRemoved
                     ? AppImages.icCheckboxSelectedNormal3x
                     : AppImages.icCheckboxNormalNormal3x,
-                width: 20,
+                width: 30,
               ),
               const SizedBox(height: AppDimensions.paddingSizeExtraSmall)
             ],
@@ -76,14 +93,25 @@ class DetectedObjectRow extends StatelessWidget {
           ? ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
               child: Container(
-                decoration: BoxDecoration(color: Theme.of(context).disabledColor),
-                width: 50,
-                height: 50,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).highlightColor,
+                  image: DecorationImage(
+                    image: Image.memory(
+                      base64.decode(
+                        controller.detectedObjects[maskId]!.image!,
+                      ),
+                    ).image,
+                    fit: BoxFit.fill,
+                    opacity: 0.5,
+                  ),
+                ),
+                width: 60,
+                height: 60,
                 child: Center(
                   child: Image.memory(
-                    base64.decode(controller.detectedObjects[maskId]!.image!),
-                    width: 50,
-                    height: 50,
+                    base64.decode(
+                      controller.detectedObjects[maskId]!.image!,
+                    ),
                   ),
                 ),
               ),

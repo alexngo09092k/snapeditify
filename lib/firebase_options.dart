@@ -35,39 +35,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBSNnGhUEztuTK63uJFG0y8y4_BjAFAovo',
-    appId: '1:828580723707:web:f6b551e15342798ebb295e',
-    messagingSenderId: '828580723707',
-    projectId: 'snapedit',
-    authDomain: 'snapedit.firebaseapp.com',
-    storageBucket: 'snapedit.appspot.com',
+    apiKey: 'AIzaSyC0PFyQNqvSBjnGe_3Mzdl_dVq7wHsx5eY',
+    appId: '1:270202760919:web:98e21c44334ed60ae0ca92',
+    messagingSenderId: '270202760919',
+    projectId: 'snapretouch',
+    authDomain: 'snapretouch.firebaseapp.com',
+    storageBucket: 'snapretouch.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCmDnRKWJyVMnH1KfQqgILaaa2zKMxVCrA',
-    appId: '1:828580723707:android:25d7a1b54d221ac1bb295e',
-    messagingSenderId: '828580723707',
-    projectId: 'snapedit',
-    storageBucket: 'snapedit.appspot.com',
+    apiKey: 'AIzaSyBvyZRSGJcCirMK-2lHM9eY_XnF4ASKCEk',
+    appId: '1:270202760919:android:3b73ffdea3b9e8fbe0ca92',
+    messagingSenderId: '270202760919',
+    projectId: 'snapretouch',
+    storageBucket: 'snapretouch.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBjXHT_pbGR9A4EqBu3drursVnpaQv7xwY',
-    appId: '1:828580723707:ios:634444837a06bbc1bb295e',
-    messagingSenderId: '828580723707',
-    projectId: 'snapedit',
-    storageBucket: 'snapedit.appspot.com',
-    iosClientId: '828580723707-l457911nqirs91gmne907ptltn7l5kdc.apps.googleusercontent.com',
-    iosBundleId: 'com.example.snapedit',
+    apiKey: 'AIzaSyD44d-FNhAZBpmfW7-hVNYMUeOpXlSaEKY',
+    appId: '1:270202760919:ios:687b7ce71cf3194fe0ca92',
+    messagingSenderId: '270202760919',
+    projectId: 'snapretouch',
+    storageBucket: 'snapretouch.appspot.com',
+    iosClientId: '270202760919-0af2baae6b5hjrp0c2lj7n7n731ff9ci.apps.googleusercontent.com',
+    iosBundleId: 'com.example.snapretouch',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBjXHT_pbGR9A4EqBu3drursVnpaQv7xwY',
-    appId: '1:828580723707:ios:634444837a06bbc1bb295e',
-    messagingSenderId: '828580723707',
-    projectId: 'snapedit',
-    storageBucket: 'snapedit.appspot.com',
-    iosClientId: '828580723707-l457911nqirs91gmne907ptltn7l5kdc.apps.googleusercontent.com',
-    iosBundleId: 'com.example.snapedit',
+    apiKey: 'AIzaSyD44d-FNhAZBpmfW7-hVNYMUeOpXlSaEKY',
+    appId: '1:270202760919:ios:687b7ce71cf3194fe0ca92',
+    messagingSenderId: '270202760919',
+    projectId: 'snapretouch',
+    storageBucket: 'snapretouch.appspot.com',
+    iosClientId: '270202760919-0af2baae6b5hjrp0c2lj7n7n731ff9ci.apps.googleusercontent.com',
+    iosBundleId: 'com.example.snapretouch',
   );
 }

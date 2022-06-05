@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/controllers/home/home_controller.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/modules/advertisement/models/advertisement_view.dart';
-import 'package:snapedit/widgets/ad_view.dart';
-import 'package:snapedit/widgets/app_logo.dart';
-import 'package:snapedit/widgets/custom_button.dart';
-import 'package:snapedit/widgets/custom_card.dart';
-import 'package:snapedit/widgets/custom_overlay_state.dart';
-import 'package:snapedit/widgets/lottie_view.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/controllers/home/home_controller.dart';
+import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/widgets/ad_view.dart';
+import 'package:snapretouch/widgets/app_logo.dart';
+import 'package:snapretouch/widgets/custom_button.dart';
+import 'package:snapretouch/widgets/custom_card.dart';
+import 'package:snapretouch/widgets/custom_overlay_state.dart';
+import 'package:snapretouch/widgets/lottie_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,7 +31,9 @@ class _HomePageState extends CustomOverlayState<HomePage> {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoTheme(
-        data: CupertinoThemeData(textTheme: CupertinoTextThemeData(primaryColor: Theme.of(context).primaryColor)),
+        data: CupertinoThemeData(
+            textTheme: CupertinoTextThemeData(
+                primaryColor: Theme.of(context).primaryColor)),
         child: CupertinoActionSheet(
           actions: <CupertinoActionSheetAction>[
             CupertinoActionSheetAction(
@@ -59,10 +61,9 @@ class _HomePageState extends CustomOverlayState<HomePage> {
           ],
           cancelButton: GestureDetector(
             onTap: Navigator.of(context).pop,
-            child:  Container(
+            child: Container(
               decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10))
-              ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: Center(
@@ -104,15 +105,16 @@ class _HomePageState extends CustomOverlayState<HomePage> {
       ),
       body: Column(
         children: [
-          AdView(
-            type: AdvertisementViewType.widget,
-            width: lottieWidth,
-            height: lottieWidth * 2 / 3,
-          ),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  AdView(
+                    type: AdvertisementViewType.widget,
+                    width: lottieWidth,
+                    height: lottieWidth * 2 / 3,
+                  ),
                   Container(
                     width: lottieWidth,
                     height: lottieWidth * 2 / 3,
@@ -155,7 +157,8 @@ class _HomePageState extends CustomOverlayState<HomePage> {
                                   WidgetSpan(
                                     child: Container(
                                       padding: const EdgeInsets.only(
-                                        left: AppDimensions.paddingSizeExtraSmall,
+                                        left:
+                                            AppDimensions.paddingSizeExtraSmall,
                                         bottom: 5,
                                       ),
                                       child: Image.asset(
@@ -177,7 +180,7 @@ class _HomePageState extends CustomOverlayState<HomePage> {
           CustomCard(
             child: CustomButton(
               title: S.of(context).addPhoto,
-              color: Theme.of(context).primaryColor,
+              gradient: AppColors.gradient,
               icon: Image.asset(
                 AppImages.icAddPhotoNormal3x,
                 width: 30,

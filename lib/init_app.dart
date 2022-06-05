@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:gms_check/gms_check.dart';
-import 'package:snapedit/common/configuration.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/firebase_options.dart';
-import 'package:snapedit/services/services.dart';
+import 'package:snapretouch/common/configuration.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/firebase_options.dart';
+import 'package:snapretouch/services/services.dart';
 
 Future<void> initApp() async {
   if (isMobile) {

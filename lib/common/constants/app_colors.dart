@@ -2,9 +2,10 @@ part of '../constants.dart';
 
 abstract class AppColors {
   static Color topicColor = HexColor(Cofiguration.appColor);
-  static const kLightBG = Color(0xffF1F2F3);
   static const kDarkBG = Color(0xff1B1D26);
   static const kDarkBgLight = Color(0xff282D39);
+
+  static const kTeal50 = Color(0xFFE0F2F1);
 
   static const kGrey900 = Color(0xFF263238);
   static const kGrey600 = Color(0xFF546E7A);
@@ -36,8 +37,8 @@ abstract class AppColors {
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
     colors: [
-      topicColor,
-      topicColor.withOpacity(0.5),
+      HexColor('#6C76F1'),
+      HexColor('#72D5BB'),
     ],
   );
 

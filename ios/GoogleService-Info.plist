@@ -13,11 +13,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.snapedit</string>
+	<string>com.example.snapretouch</string>
 	<key>PROJECT_ID</key>
-	<string>snapedit</string>
+	<string>snapretouch</string>
 	<key>STORAGE_BUCKET</key>
-	<string>snapedit.appspot.com</string>
+	<string>snapretouch.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>

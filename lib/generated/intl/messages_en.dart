@@ -23,7 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% accurate"),
-        "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
+        "addPhoto": MessageLookupByLibrary.simpleMessage("ADD PHOTO"),
+        "aiPowredPhotoEditor":
+            MessageLookupByLibrary.simpleMessage("AI powred photo editor"),
         "allChangesWillBeLostAreYouSureYouWant":
             MessageLookupByLibrary.simpleMessage(
                 "All changes will be lost. Are you sure you want to leave wihthout saving?"),
@@ -45,10 +47,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "No potential object has been detected"),
         "objects": MessageLookupByLibrary.simpleMessage("Objects"),
         "objectsDetected":
-            MessageLookupByLibrary.simpleMessage("objects detected"),
+            MessageLookupByLibrary.simpleMessage("Objects detected"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
-        "remove": MessageLookupByLibrary.simpleMessage("Remove"),
+        "remove": MessageLookupByLibrary.simpleMessage("REMOVE"),
         "removed": MessageLookupByLibrary.simpleMessage("Removed"),
         "removingObject":
             MessageLookupByLibrary.simpleMessage("Removing object"),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/controllers/edit/edit_controller.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/pages/edit/widgets/count_detected_object.dart';
-import 'package:snapedit/pages/edit/widgets/detail_detected_object.dart';
-import 'package:snapedit/pages/edit/widgets/stroke_width_slider.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/controllers/edit/edit_controller.dart';
+import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/pages/edit/widgets/count_detected_object.dart';
+import 'package:snapretouch/pages/edit/widgets/detail_detected_object.dart';
+import 'package:snapretouch/pages/edit/widgets/stroke_width_slider.dart';
 
 class PaintControl extends StatefulWidget {
   const PaintControl({

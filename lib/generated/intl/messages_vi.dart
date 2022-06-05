@@ -23,7 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% chính xác"),
-        "addPhoto": MessageLookupByLibrary.simpleMessage("Thêm ảnh"),
+        "addPhoto": MessageLookupByLibrary.simpleMessage("THÊM ẢNH"),
+        "aiPowredPhotoEditor":
+            MessageLookupByLibrary.simpleMessage("AI powred photo editor"),
         "allChangesWillBeLostAreYouSureYouWant":
             MessageLookupByLibrary.simpleMessage(
                 "Các thay đổi sẽ mất. Bạn chắc chắn muốn rời khỏi mà không lưu hình ảnh?"),
@@ -41,13 +43,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "imageSaved": MessageLookupByLibrary.simpleMessage("Đã lưu ảnh"),
         "newImage": MessageLookupByLibrary.simpleMessage("Ảnh mới"),
         "noPotentialObjectHasBeenDetected":
-            MessageLookupByLibrary.simpleMessage("0 đối tượng được nhận dạng"),
-        "objects": MessageLookupByLibrary.simpleMessage("đối tượng"),
+            MessageLookupByLibrary.simpleMessage("0 Đối tượng được nhận dạng"),
+        "objects": MessageLookupByLibrary.simpleMessage("Đối tượng"),
         "objectsDetected":
-            MessageLookupByLibrary.simpleMessage("đối tượng được nhận dạng"),
+            MessageLookupByLibrary.simpleMessage("Đối tượng được nhận dạng"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Ảnh"),
-        "remove": MessageLookupByLibrary.simpleMessage("Xoá"),
+        "remove": MessageLookupByLibrary.simpleMessage("XOÁ"),
         "removed": MessageLookupByLibrary.simpleMessage("Đã xoá"),
         "removingObject":
             MessageLookupByLibrary.simpleMessage("Đang xoá đối tượng"),

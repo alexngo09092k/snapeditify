@@ -1,9 +1,9 @@
-import 'package:snapedit/common/configuration.dart';
-import 'package:snapedit/models/ai_detection_body.dart';
-import 'package:snapedit/models/ai_detection_response.dart';
-import 'package:snapedit/models/erase_body.dart';
-import 'package:snapedit/models/erase_response.dart';
-import 'package:snapedit/utils/client_api.dart';
+import 'package:snapretouch/common/configuration.dart';
+import 'package:snapretouch/models/ai_detection_body.dart';
+import 'package:snapretouch/models/ai_detection_response.dart';
+import 'package:snapretouch/models/erase_body.dart';
+import 'package:snapretouch/models/erase_response.dart';
+import 'package:snapretouch/utils/client_api.dart';
 
 class AIRepository {
   final int timeoutInSeconds = 30;
@@ -14,7 +14,7 @@ class AIRepository {
     'accept': '*/*',
     'content-type': 'application/json',
     'user-agent':
-        'SnapEdit/1.2.3 (com.sfun.snapedit; build:37; iOS 15.1.1) Alamofire/5.5.0',
+        'SnapEdit/1.2.3 (com.sfun.snapretouch; build:37; iOS 15.1.1) Alamofire/5.5.0',
     'accept-language': 'vi-VN;q=1.0',
   };
 

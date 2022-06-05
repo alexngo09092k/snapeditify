@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:snapedit/common/constants.dart';
+import 'package:snapretouch/common/constants.dart';
 
 import 'advertisement_extension.dart';
 

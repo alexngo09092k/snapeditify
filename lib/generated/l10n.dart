@@ -90,10 +90,10 @@ class S {
     );
   }
 
-  /// `Add Photo`
+  /// `ADD PHOTO`
   String get addPhoto {
     return Intl.message(
-      'Add Photo',
+      'ADD PHOTO',
       name: 'addPhoto',
       desc: '',
       args: [],
@@ -160,10 +160,10 @@ class S {
     );
   }
 
-  /// `Remove`
+  /// `REMOVE`
   String get remove {
     return Intl.message(
-      'Remove',
+      'REMOVE',
       name: 'remove',
       desc: '',
       args: [],
@@ -190,10 +190,10 @@ class S {
     );
   }
 
-  /// `objects detected`
+  /// `Objects detected`
   String get objectsDetected {
     return Intl.message(
-      'objects detected',
+      'Objects detected',
       name: 'objectsDetected',
       desc: '',
       args: [],
@@ -285,6 +285,16 @@ class S {
     return Intl.message(
       'Removing object',
       name: 'removingObject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AI powred photo editor`
+  String get aiPowredPhotoEditor {
+    return Intl.message(
+      'AI powred photo editor',
+      name: 'aiPowredPhotoEditor',
       desc: '',
       args: [],
     );

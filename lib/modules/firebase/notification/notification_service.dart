@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_permissions/notification_permissions.dart';
-import 'package:snapedit/modules/firebase/models/notification_message.dart';
+import 'package:snapretouch/modules/firebase/models/notification_message.dart';
 
 abstract class NotificationService {
   bool _isInitialized = false;

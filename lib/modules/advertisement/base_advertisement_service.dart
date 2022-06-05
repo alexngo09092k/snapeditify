@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:snapedit/modules/advertisement/models/advertisement_config.dart';
-import 'package:snapedit/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_config.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
 
 abstract class BaseAdvertisementService {
   void init(AdvertisementConfig advertisement);

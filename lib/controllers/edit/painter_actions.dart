@@ -1,4 +1,4 @@
-import 'package:snapedit/controllers/edit/painter_state.dart';
+import 'package:snapretouch/controllers/edit/painter_state.dart';
 
 abstract class PainterAction<T> {
   final PainterEvent event;

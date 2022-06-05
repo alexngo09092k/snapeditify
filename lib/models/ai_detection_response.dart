@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:snapedit/models/detected_object.dart';
+import 'package:snapretouch/models/detected_object.dart';
 
 class AIDetectionResponse {
   final List<DetectedObject> detectedObjects;

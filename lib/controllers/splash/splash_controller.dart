@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/app_shared.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/controllers/splash/splash_state.dart';
+import 'package:snapretouch/common/app_routes.dart';
+import 'package:snapretouch/common/app_shared.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/controllers/splash/splash_state.dart';
 
 class SplashController extends ValueNotifier<SplashState> {
   SplashController({required this.context}) : super(SplashState());

@@ -45,7 +45,6 @@ abstract class AppImages {
   static const String imgRequestPermissionNormal3x = 'assets/images/img_request_permission_Normal@3x.png';
   static const String imgSplashCopyrightNormal3x = 'assets/images/img_splash_copyright_Normal@3x.png';
   static const String imgSplashLogoNormal3x = 'assets/images/img_splash_logo_Normal@3x.png';
-  static const String imgSplashPromptNormal3x = 'assets/images/img_splash_prompt_Normal@3x.png';
 
   static const String homeBannerAnimation = 'assets/images/home_banner.json';
 }

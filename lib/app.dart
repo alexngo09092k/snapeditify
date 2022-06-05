@@ -1,11 +1,11 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/configuration.dart';
-import 'package:snapedit/common/theme.dart';
+import 'package:snapretouch/common/app_routes.dart';
+import 'package:snapretouch/common/configuration.dart';
+import 'package:snapretouch/common/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:snapedit/generated/l10n.dart';
+import 'package:snapretouch/generated/l10n.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);

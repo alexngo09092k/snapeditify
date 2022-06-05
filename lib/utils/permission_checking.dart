@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:snapedit/widgets/no_permission_popup.dart';
+import 'package:snapretouch/widgets/no_permission_popup.dart';
 
 class PermissionChecking {
   static final PermissionChecking _instance = PermissionChecking._internal();

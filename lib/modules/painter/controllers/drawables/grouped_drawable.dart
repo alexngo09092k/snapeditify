@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:snapedit/common/logs.dart';
+import 'package:snapretouch/common/logs.dart';
 
 import 'drawable.dart';
 

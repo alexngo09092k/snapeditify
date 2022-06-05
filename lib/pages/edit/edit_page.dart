@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/controllers/edit/edit_controller.dart';
-import 'package:snapedit/pages/edit/widgets/image_paint.dart';
-import 'package:snapedit/pages/edit/widgets/paint_control.dart';
-import 'package:snapedit/pages/edit/widgets/revert_popup.dart';
-import 'package:snapedit/pages/edit/widgets/saved_image_button.dart';
-import 'package:snapedit/utils/permission_checking.dart';
-import 'package:snapedit/widgets/custom_overlay_state.dart';
-import 'package:snapedit/widgets/go_back_popup.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/controllers/edit/edit_controller.dart';
+import 'package:snapretouch/pages/edit/widgets/image_paint.dart';
+import 'package:snapretouch/pages/edit/widgets/paint_control.dart';
+import 'package:snapretouch/pages/edit/widgets/revert_popup.dart';
+import 'package:snapretouch/pages/edit/widgets/saved_image_button.dart';
+import 'package:snapretouch/utils/permission_checking.dart';
+import 'package:snapretouch/widgets/custom_overlay_state.dart';
+import 'package:snapretouch/widgets/go_back_popup.dart';
 
 class EditPage extends StatefulWidget {
   const EditPage({Key? key, required this.imagePath}) : super(key: key);
@@ -63,10 +63,11 @@ class _EditPageState extends CustomOverlayState<EditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.kWhite,
         leading: IconButton(
           icon: Image.asset(
             AppImages.icBackNormal3x,
-            width: 30,
+            width: 25,
           ),
           onPressed: goBack,
         ),
@@ -76,7 +77,7 @@ class _EditPageState extends CustomOverlayState<EditPage> {
             builder: (_, __, ___) => IconButton(
               icon: Image.asset(
                 AppImages.icRevertNormal3x,
-                width: 20,
+                width: 25,
               ),
               onPressed: _controller.prevPainterState != null ? showRevertDialog : null,
             ),
