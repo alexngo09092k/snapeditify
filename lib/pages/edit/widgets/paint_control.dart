@@ -51,7 +51,9 @@ class _PaintControlState extends State<PaintControl> {
                             });
                           },
                         )
-                      : StrokeWidthSlider(controller: widget.controller),
+                      : StrokeWidthSlider(
+                        controller: widget.controller,
+                      ),
                 ),
               ),
               Padding(
@@ -88,7 +90,9 @@ class _PaintControlState extends State<PaintControl> {
                                               : Theme.of(context).disabledColor,
                                         ),
                                   ),
-                                  const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
+                                  const SizedBox(
+                                      width:
+                                          AppDimensions.paddingSizeExtraSmall),
                                   Image.asset(
                                     AppImages.icAINormal3x,
                                     width: 15,
@@ -111,7 +115,8 @@ class _PaintControlState extends State<PaintControl> {
                                         ? Theme.of(context).primaryColor
                                         : Theme.of(context).disabledColor,
                                   ),
-                                  const SizedBox(height: AppDimensions.paddingSizeDefault),
+                                  const SizedBox(
+                                      height: AppDimensions.paddingSizeDefault),
                                   Text(
                                     S.of(context).brush,
                                     style: Theme.of(context)

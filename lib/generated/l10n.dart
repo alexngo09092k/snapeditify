@@ -190,16 +190,6 @@ class S {
     );
   }
 
-  /// `Objects detected`
-  String get objectsDetected {
-    return Intl.message(
-      'Objects detected',
-      name: 'objectsDetected',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Your image is shared`
   String get yourImageIsShared {
     return Intl.message(
@@ -295,6 +285,16 @@ class S {
     return Intl.message(
       'AI powred photo editor',
       name: 'aiPowredPhotoEditor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show all objects`
+  String get showAllObjects {
+    return Intl.message(
+      'Show all objects',
+      name: 'showAllObjects',
       desc: '',
       args: [],
     );

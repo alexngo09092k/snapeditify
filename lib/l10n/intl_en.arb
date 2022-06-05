@@ -14,7 +14,6 @@
   "remove": "REMOVE",
   "objects": "Objects",
   "noPotentialObjectHasBeenDetected": "No potential object has been detected",
-  "objectsDetected": "Objects detected",
   "yourImageIsShared": "Your image is shared",
   "share": "Share",
   "newImage": "New image",
@@ -24,5 +23,6 @@
   "allChangesWillBeLostAreYouSureYouWant": "All changes will be lost. Are you sure you want to leave wihthout saving?",
   "workingOnYourPhotoNPleaseWaiting": "Working on your photo. Please waiting...",
   "removingObject": "Removing object",
-  "aiPowredPhotoEditor": "AI powred photo editor"
+  "aiPowredPhotoEditor": "AI powred photo editor",
+  "showAllObjects": "Show all objects"
 }

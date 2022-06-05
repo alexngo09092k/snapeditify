@@ -32,8 +32,9 @@ class _HomePageState extends CustomOverlayState<HomePage> {
       context: context,
       builder: (BuildContext context) => CupertinoTheme(
         data: CupertinoThemeData(
-            textTheme: CupertinoTextThemeData(
-                primaryColor: Theme.of(context).primaryColor)),
+          textTheme: CupertinoTextThemeData(
+              primaryColor: Theme.of(context).primaryColor),
+        ),
         child: CupertinoActionSheet(
           actions: <CupertinoActionSheetAction>[
             CupertinoActionSheetAction(
@@ -63,7 +64,8 @@ class _HomePageState extends CustomOverlayState<HomePage> {
             onTap: Navigator.of(context).pop,
             child: Container(
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: Center(
@@ -94,12 +96,12 @@ class _HomePageState extends CustomOverlayState<HomePage> {
         AppDimensions.paddingSizeDefault * 2;
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 130,
+        leadingWidth: 200,
         leading: const Padding(
           padding: EdgeInsets.only(left: AppDimensions.paddingSizeDefault),
           child: AppLogo(
             image: AppImages.imgLogoHomeNormal3x,
-            width: 130,
+            width: 200,
           ),
         ),
       ),

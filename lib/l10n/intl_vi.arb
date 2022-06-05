@@ -14,7 +14,6 @@
   "remove": "XOÁ",
   "objects": "Đối tượng",
   "noPotentialObjectHasBeenDetected": "0 Đối tượng được nhận dạng",
-  "objectsDetected": "Đối tượng được nhận dạng",
   "yourImageIsShared": "Your image is shared",
   "share": "Chia sẻ",
   "newImage": "Ảnh mới",
@@ -24,5 +23,6 @@
   "allChangesWillBeLostAreYouSureYouWant": "Các thay đổi sẽ mất. Bạn chắc chắn muốn rời khỏi mà không lưu hình ảnh?",
   "workingOnYourPhotoNPleaseWaiting": "Đang làm việc trên hình của bạn. Vui lòng đợi...",
   "removingObject": "Đang xoá đối tượng",
-  "aiPowredPhotoEditor": "AI powred photo editor"
+  "aiPowredPhotoEditor": "AI powred photo editor",
+  "showAllObjects": "Show all objects"
 }

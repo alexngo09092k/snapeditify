@@ -28,14 +28,44 @@ class CountDetectedObject extends StatelessWidget {
                 ),
                 const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
                 Text(
-                  '${controller.state.detectedObjects.values.length} ${S.of(context).objectsDetected}',
-                  style: Theme.of(context).textTheme.subtitle2,
+                  S.of(context).showAllObjects,
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2!
+                      .copyWith(fontWeight: FontWeight.w500),
                 ),
               ],
             ),
-            const Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(
+                    AppDimensions.paddingSizeExtraSmall,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(
+                          AppDimensions.paddingSizeDefault / 2,
+                        ),
+                      ),
+                      gradient: AppColors.gradient),
+                  child: Center(
+                    child: Text(
+                      '${controller.state.detectedObjects.values.length}',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            color: AppColors.kWhite,
+                          ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: AppDimensions.paddingSizeExtraSmall,
+                ),
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                )
+              ],
             )
           ],
         ));

@@ -11,26 +11,28 @@ class SavedImageButton extends StatelessWidget {
   final EditController controller;
 
   Future<void> saveAndShowImage(context) async {
-    Services().advertisement.loadAd(type: AdvertisementViewType.handle, onAd: (handleAd) {
-      if(handleAd != null) {
-        handleAd.show();
-      }
-    });
+    Services().advertisement.loadAd(
+        type: AdvertisementViewType.handle,
+        onAd: (handleAd) {
+          if (handleAd != null) {
+            handleAd.show();
+          }
+        });
     controller.saveImage((savedImagePath) {
-        Scaffold.of(context).showBottomSheet(
-          (BuildContext context) {
-            return SavedImageView(
-              controller: controller,
-              image: savedImagePath,
-            );
-          },
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(20),
-            ),
+      showModalBottomSheet(
+        context: context,
+        builder: (_) => SavedImageView(
+          controller: controller,
+          image: savedImagePath,
+        ),
+        isDismissible: false,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
           ),
-        );
-      });
+        ),
+      );
+    });
   }
 
   @override
@@ -43,9 +45,9 @@ class SavedImageButton extends StatelessWidget {
             : null,
         child: Text(
           S.of(context).save,
-          style: Theme.of(context).textTheme.bodyText2!.copyWith(
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                 color: controller.state.prevState != null
-                    ? Theme.of(context).textTheme.bodyText1!.color
+                    ? Theme.of(context).primaryColor
                     : Theme.of(context).disabledColor,
               ),
         ),

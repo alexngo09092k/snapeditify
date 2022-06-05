@@ -77,7 +77,7 @@ class _EditPageState extends CustomOverlayState<EditPage> {
             builder: (_, __, ___) => IconButton(
               icon: Image.asset(
                 AppImages.icRevertNormal3x,
-                width: 25,
+                width: 20,
               ),
               onPressed: _controller.prevPainterState != null ? showRevertDialog : null,
             ),

@@ -46,8 +46,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "No potential object has been detected"),
         "objects": MessageLookupByLibrary.simpleMessage("Objects"),
-        "objectsDetected":
-            MessageLookupByLibrary.simpleMessage("Objects detected"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
         "remove": MessageLookupByLibrary.simpleMessage("REMOVE"),
@@ -56,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Removing object"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
+        "showAllObjects":
+            MessageLookupByLibrary.simpleMessage("Show all objects"),
         "workingOnYourPhotoNPleaseWaiting":
             MessageLookupByLibrary.simpleMessage(
                 "Working on your photo. Please waiting..."),

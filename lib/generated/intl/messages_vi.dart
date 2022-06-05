@@ -45,8 +45,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "noPotentialObjectHasBeenDetected":
             MessageLookupByLibrary.simpleMessage("0 Đối tượng được nhận dạng"),
         "objects": MessageLookupByLibrary.simpleMessage("Đối tượng"),
-        "objectsDetected":
-            MessageLookupByLibrary.simpleMessage("Đối tượng được nhận dạng"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Ảnh"),
         "remove": MessageLookupByLibrary.simpleMessage("XOÁ"),
@@ -55,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đang xoá đối tượng"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
         "share": MessageLookupByLibrary.simpleMessage("Chia sẻ"),
+        "showAllObjects":
+            MessageLookupByLibrary.simpleMessage("Show all objects"),
         "workingOnYourPhotoNPleaseWaiting":
             MessageLookupByLibrary.simpleMessage(
                 "Đang làm việc trên hình của bạn. Vui lòng đợi..."),

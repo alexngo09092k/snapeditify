@@ -1,37 +1,37 @@
 {
   "project_info": {
-    "project_number": "828580723707",
+    "project_number": "270202760919",
     "project_id": "snapretouch",
     "storage_bucket": "snapretouch.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:828580723707:android:25d7a1b54d221ac1bb295e",
+        "mobilesdk_app_id": "1:270202760919:android:3b73ffdea3b9e8fbe0ca92",
         "android_client_info": {
           "package_name": "com.example.snapretouch"
         }
       },
       "oauth_client": [
         {
-          "client_id": "828580723707-n7klj521hoiorfnoilccjl0939o5cq9a.apps.googleusercontent.com",
+          "client_id": "270202760919-8u1e0uk2kb9jfndbhsc21cd235v3u90i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCmDnRKWJyVMnH1KfQqgILaaa2zKMxVCrA"
+          "current_key": "AIzaSyBvyZRSGJcCirMK-2lHM9eY_XnF4ASKCEk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "828580723707-n7klj521hoiorfnoilccjl0939o5cq9a.apps.googleusercontent.com",
+              "client_id": "270202760919-8u1e0uk2kb9jfndbhsc21cd235v3u90i.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "828580723707-l457911nqirs91gmne907ptltn7l5kdc.apps.googleusercontent.com",
+              "client_id": "270202760919-0af2baae6b5hjrp0c2lj7n7n731ff9ci.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.snapretouch"

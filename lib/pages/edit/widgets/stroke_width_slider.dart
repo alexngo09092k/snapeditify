@@ -22,16 +22,13 @@ class StrokeWidthSlider extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: Slider.adaptive(
-            activeColor: AppColors.kDarkBG,
-            thumbColor: AppColors.kDarkBG,
+          child: Slider(
             min: 1,
             max: 100,
             value: controller.strokeWidth,
             label: '${controller.strokeWidth.round()}',
-            onChanged: (value) {
-              controller.state.strokeWidth = value;
-            },
+            divisions: 100,
+            onChanged: (value)=> controller.state.strokeWidth = value,
           ),
         ),
         IconButton(

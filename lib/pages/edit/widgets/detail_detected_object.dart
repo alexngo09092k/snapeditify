@@ -93,7 +93,7 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
         ),
         const SizedBox(height: AppDimensions.paddingSizeDefault),
         SizedBox(
-          height: 160,
+          height: MediaQuery.of(context).size.height * (0.5) / 3,
           child: PageView(
             controller: _pageController,
             children: [
