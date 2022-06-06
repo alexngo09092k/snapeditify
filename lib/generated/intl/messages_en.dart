@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "objects": MessageLookupByLibrary.simpleMessage("Objects"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
+        "others": MessageLookupByLibrary.simpleMessage("Others"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
         "remove": MessageLookupByLibrary.simpleMessage("REMOVE"),
         "removed": MessageLookupByLibrary.simpleMessage("Removed"),

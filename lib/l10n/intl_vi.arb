@@ -26,5 +26,6 @@
   "aiPowredPhotoEditor": "Trình chỉnh sửa ảnh được hỗ trợ bởi AI",
   "showAllObjects": "Hiển thị tất cả các đối tượng",
   "openSettings": "Mở cài đặt",
-  "allowAppToAccessPhotosAndMediaOnYourDevice": "Cho phép ứng dụng truy cập ảnh và phương tiện trên thiết bị của bạn."
+  "allowAppToAccessPhotosAndMediaOnYourDevice": "Cho phép ứng dụng truy cập ảnh và phương tiện trên thiết bị của bạn.",
+  "others": "Khác"
 }

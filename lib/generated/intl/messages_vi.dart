@@ -50,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "objects": MessageLookupByLibrary.simpleMessage("Đối tượng"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "openSettings": MessageLookupByLibrary.simpleMessage("Mở cài đặt"),
+        "others": MessageLookupByLibrary.simpleMessage("Khác"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Ảnh"),
         "remove": MessageLookupByLibrary.simpleMessage("XOÁ"),
         "removed": MessageLookupByLibrary.simpleMessage("Đã xoá"),

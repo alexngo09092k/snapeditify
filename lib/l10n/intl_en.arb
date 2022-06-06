@@ -26,5 +26,6 @@
   "aiPowredPhotoEditor": "AI powred photo editor",
   "showAllObjects": "Show all objects",
   "openSettings": "Open settings",
-  "allowAppToAccessPhotosAndMediaOnYourDevice": "Allow app to access photos and media on your device"
+  "allowAppToAccessPhotosAndMediaOnYourDevice": "Allow app to access photos and media on your device",
+  "others": "Others"
 }

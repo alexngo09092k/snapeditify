@@ -5,11 +5,32 @@ Map<String, dynamic> enviroment = {
     "enable": true,
     "enableRemoteConfigFirebase": false,
   },
-
   "apiConfig": {
     'url': 'https://be-prod-1.snapedit.app',
-    'eraseEndPoint': '/erase/v4',
-    'aiEndPoint': '/ai_detection/v4',
+    'endPoints': {
+      'erase': '/erase/v4',
+      'ai': '/ai_detection/v4',
+    },
+    'headers': {
+      'ios': {
+        'Host': 'be-prod-1.snapedit.app',
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Cookie': '__cflb=02DiuFkAXusk8L9hm8nWZ2xLNeoGNMZMFM5uzAhM9PFvU',
+        'accept': '*/*',
+        'content-type': 'application/json',
+        'user-agent': 'SnapEdit/1.2.3 (com.sfun.snapretouch; build:37; iOS 15.1.1) Alamofire/5.5.0',
+        'accept-language': 'vi-VN;q=1.0',
+      },
+      'android': {
+        'Host': 'be-prod-1.snapedit.app',
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Cookie': '__cflb=02DiuFkAXusk8L9hm8nWZ2xLNeoGNMZMFM5uzAhM9PFvU',
+        'accept': '*/*',
+        'content-type': 'application/json',
+        'user-agent': 'SnapEdit/1.2.3 (com.sfun.snapretouch; build:37; iOS 15.1.1) Alamofire/5.5.0',
+        'accept-language': 'vi-VN;q=1.0',
+      }
+    }
   },
 
   "appConfig": {

@@ -93,8 +93,6 @@ class Cofiguration {
 abstract class DefaultConfig {
   static ApiConfig apiConfig = ApiConfig(
     url: '',
-    eraseEndPoint: '',
-    aiEndPoint: '',
   );
 
   static AppConfig appConfig = AppConfig(
