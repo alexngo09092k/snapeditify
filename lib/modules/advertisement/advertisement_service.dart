@@ -76,9 +76,7 @@ class AdvertisementService implements BaseAdvertisementService, AppLifeCycleHand
         if (adsProvider == null || ad.showOnScreens.isEmpty) continue;
 
         _widgetAds.add(adsProvider.createAdWidget(adItem: ad));
-        if (ad.hideOnScreens.contains(screenName) ||
-            (ad.showOnScreens.isNotEmpty &&
-                !ad.showOnScreens.contains(screenName))) {
+        if (ad.hideOnScreens.contains(screenName) || (ad.showOnScreens.isNotEmpty && !ad.showOnScreens.contains(screenName))) {
           EasyDebounce.cancel(ad.id);
           if (adView.active) {
             adView.active = false;
@@ -100,9 +98,7 @@ class AdvertisementService implements BaseAdvertisementService, AppLifeCycleHand
 
         adsProvider.showAd(adItem: ad);
 
-        if (ad.hideOnScreens.contains(screenName) ||
-            (ad.showOnScreens.isNotEmpty &&
-                !ad.showOnScreens.contains(screenName))) {
+        if (ad.hideOnScreens.contains(screenName) || (ad.showOnScreens.isNotEmpty && !ad.showOnScreens.contains(screenName))) {
           EasyDebounce.cancel(ad.id);
           if (adView.active) {
             adView.active = false;

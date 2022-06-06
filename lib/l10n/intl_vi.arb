@@ -23,6 +23,8 @@
   "allChangesWillBeLostAreYouSureYouWant": "Các thay đổi sẽ mất. Bạn chắc chắn muốn rời khỏi mà không lưu hình ảnh?",
   "workingOnYourPhotoNPleaseWaiting": "Đang làm việc trên hình của bạn. Vui lòng đợi...",
   "removingObject": "Đang xoá đối tượng",
-  "aiPowredPhotoEditor": "AI powred photo editor",
-  "showAllObjects": "Show all objects"
+  "aiPowredPhotoEditor": "Trình chỉnh sửa ảnh được hỗ trợ bởi AI",
+  "showAllObjects": "Hiển thị tất cả các đối tượng",
+  "openSettings": "Mở cài đặt",
+  "allowAppToAccessPhotosAndMediaOnYourDevice": "Cho phép ứng dụng truy cập ảnh và phương tiện trên thiết bị của bạn."
 }

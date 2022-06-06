@@ -24,14 +24,17 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% chính xác"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("THÊM ẢNH"),
-        "aiPowredPhotoEditor":
-            MessageLookupByLibrary.simpleMessage("AI powred photo editor"),
+        "aiPowredPhotoEditor": MessageLookupByLibrary.simpleMessage(
+            "Trình chỉnh sửa ảnh được hỗ trợ bởi AI"),
         "allChangesWillBeLostAreYouSureYouWant":
             MessageLookupByLibrary.simpleMessage(
                 "Các thay đổi sẽ mất. Bạn chắc chắn muốn rời khỏi mà không lưu hình ảnh?"),
         "allChangesWillBeLostYourImageWillBeReverted":
             MessageLookupByLibrary.simpleMessage(
                 "Tất cả các thay đổi sẽ mất. Hình ảnh của bạn sẽ được khôi phục về trạng thái ban đầu."),
+        "allowAppToAccessPhotosAndMediaOnYourDevice":
+            MessageLookupByLibrary.simpleMessage(
+                "Cho phép ứng dụng truy cập ảnh và phương tiện trên thiết bị của bạn."),
         "auto": MessageLookupByLibrary.simpleMessage("Tự động"),
         "brush": MessageLookupByLibrary.simpleMessage("Cọ"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
@@ -46,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("0 Đối tượng được nhận dạng"),
         "objects": MessageLookupByLibrary.simpleMessage("Đối tượng"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "openSettings": MessageLookupByLibrary.simpleMessage("Mở cài đặt"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Ảnh"),
         "remove": MessageLookupByLibrary.simpleMessage("XOÁ"),
         "removed": MessageLookupByLibrary.simpleMessage("Đã xoá"),
@@ -53,8 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đang xoá đối tượng"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
         "share": MessageLookupByLibrary.simpleMessage("Chia sẻ"),
-        "showAllObjects":
-            MessageLookupByLibrary.simpleMessage("Show all objects"),
+        "showAllObjects": MessageLookupByLibrary.simpleMessage(
+            "Hiển thị tất cả các đối tượng"),
         "workingOnYourPhotoNPleaseWaiting":
             MessageLookupByLibrary.simpleMessage(
                 "Đang làm việc trên hình của bạn. Vui lòng đợi..."),

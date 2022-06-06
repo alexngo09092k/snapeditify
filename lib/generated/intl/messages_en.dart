@@ -32,6 +32,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "allChangesWillBeLostYourImageWillBeReverted":
             MessageLookupByLibrary.simpleMessage(
                 "All changes will be lost. Your image will be reverted to its original status"),
+        "allowAppToAccessPhotosAndMediaOnYourDevice":
+            MessageLookupByLibrary.simpleMessage(
+                "Allow app to access photos and media on your device"),
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
         "brush": MessageLookupByLibrary.simpleMessage("Brush"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
@@ -47,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "No potential object has been detected"),
         "objects": MessageLookupByLibrary.simpleMessage("Objects"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
         "remove": MessageLookupByLibrary.simpleMessage("REMOVE"),
         "removed": MessageLookupByLibrary.simpleMessage("Removed"),

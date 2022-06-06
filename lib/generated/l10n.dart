@@ -299,6 +299,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Open settings`
+  String get openSettings {
+    return Intl.message(
+      'Open settings',
+      name: 'openSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow app to access photos and media on your device`
+  String get allowAppToAccessPhotosAndMediaOnYourDevice {
+    return Intl.message(
+      'Allow app to access photos and media on your device',
+      name: 'allowAppToAccessPhotosAndMediaOnYourDevice',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

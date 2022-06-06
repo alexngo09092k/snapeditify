@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -48,9 +51,27 @@ class EditController extends ValueNotifier<EditValue> {
       notifyListeners();
     });
 
+    Uint8List normalBytes = File(imagePath).readAsBytesSync();
+    printLog('Normal Image bytes => ${normalBytes.lengthInBytes}');
+
+    Uint8List? compressBytes;
+    //150KB
+    if (normalBytes.lengthInBytes / 1024 > 10) {
+      compressBytes = await FlutterImageCompress.compressWithFile(
+        imagePath,
+        quality: 1,
+        format: CompressFormat.jpeg,
+      );
+    }
+    if (compressBytes != null) {
+      printLog('Compress Image byes => ${compressBytes.lengthInBytes}');
+    }
+
     await state.setImage(
-      image: await AssetImage(imagePath).image,
-      originalImageBase64: ImageConvert.imagePathToBase64(imagePath),
+      image: await ImageConvert.imagePathToImage(imagePath),
+      originalImageBase64: compressBytes != null
+          ? ImageConvert.uint8ListToBase64(compressBytes)
+          : ImageConvert.uint8ListToBase64(normalBytes),
     );
   }
 
@@ -83,7 +104,8 @@ class EditController extends ValueNotifier<EditValue> {
     int removedLength = state.detectedObjects.values
         .where((detectedObject) => detectedObject.isRemoved)
         .length;
-    return painterController.drawables.isNotEmpty || setectedLength > removedLength;
+    return painterController.drawables.isNotEmpty ||
+        setectedLength > removedLength;
   }
 
   void undo() => state.undo();
@@ -157,22 +179,22 @@ class EditController extends ValueNotifier<EditValue> {
 
     EraseResponse? response = await _aiRepository.eraseImage(
       EraseBody(
-        originalImageBase64:
-            state.originalImageBase64 ?? '', // image will remove
-        maskBase64: await ImageConvert.imageToBase64(mask), // mask image
+        originalImageBase64: state.originalImageBase64 ?? ImageConvert.imagePathToBase64(imagePath), // image will remove
+        maskBase64: await ImageConvert.imageToBase64(mask),
       ),
     );
 
     if (response != null) {
-      ui.Image newImage =
-          await ImageConvert.base64ToImage(response.newImageBase64);
+      ui.Image newImage = await ImageConvert.base64ToImage(response.newImageBase64);
 
       Map<int, DetectedObject> updatedDetectedObject =
           state.detectedObjects.map((maskId, detetedObject) {
         if (detetedObject.isSelected) {
           // painterController.removeDrawable(detetedObject.maskDrawable!, saveAction: false);
-          painterController.removeDrawable(detetedObject.boxDrawble!,
-              saveAction: false);
+          painterController.removeDrawable(
+            detetedObject.boxDrawble!,
+            saveAction: false,
+          );
           return MapEntry(maskId, detetedObject.copyWith(isRemoved: true));
         }
         return MapEntry(maskId, detetedObject);
@@ -209,7 +231,7 @@ class EditController extends ValueNotifier<EditValue> {
 
   void revert() async {
     value.state = PainterState(
-      image: await AssetImage(imagePath).image,
+      image: await ImageConvert.imagePathToImage(imagePath),
       originalImageBase64: ImageConvert.imagePathToBase64(imagePath),
       strokeWidth: state.strokeWidth,
     );

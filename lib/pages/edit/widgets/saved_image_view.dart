@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,8 +57,7 @@ class SavedImageView extends StatelessWidget {
       context: context,
       builder: (BuildContext context) => CupertinoTheme(
         data: CupertinoThemeData(
-          textTheme: CupertinoTextThemeData(
-              primaryColor: Theme.of(context).primaryColor),
+          textTheme: CupertinoTextThemeData(primaryColor: Theme.of(context).primaryColor),
         ),
         child: CupertinoActionSheet(
           actions: <CupertinoActionSheetAction>[
@@ -114,119 +114,126 @@ class SavedImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height * 2 / 3;
     return RepaintBoundary(
-        key: _globalKey,
-        child: Container(
-          height: height,
-          padding: const EdgeInsets.symmetric(
-            vertical: AppDimensions.paddingSizeExtraLarge,
-            horizontal: AppDimensions.paddingSizeDefault,
+      key: _globalKey,
+      child: Container(
+        height: height,
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.paddingSizeExtraLarge,
+          horizontal: AppDimensions.paddingSizeDefault,
+        ),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            AppImages.icGreenCheckmarkNormal3x,
-                            width: 20,
-                            height: 20,
-                          ),
-                          const SizedBox(
-                            width: AppDimensions.paddingSizeExtraSmall,
-                          ),
-                          Text(
-                            S.of(context).imageSaved,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
+        ),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Center(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset(
+                          AppImages.icGreenCheckmarkNormal3x,
+                          width: 20,
+                          height: 20,
+                        ),
+                        const SizedBox(
+                          width: AppDimensions.paddingSizeExtraSmall,
+                        ),
+                        Text(
+                          S.of(context).imageSaved,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        )
+                      ],
                     ),
-                    InkWell(
-                      onTap: () => Navigator.pop(context),
-                      child: const Icon(
-                        Icons.close,
-                        size: 20,
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: AppDimensions.paddingSizeDefault,
-                ),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).highlightColor,
-                      image: DecorationImage(
-                          image: Image.asset(image).image,
-                          fit: BoxFit.fill,
-                          opacity: 0.3),
-                    ),
-                    child: ValueListenableBuilder(
-                      valueListenable: controller,
-                      builder: (_, __, ___) => controller.state.image != null
-                          ? Center(
-                              child: AspectRatio(
-                                aspectRatio: (controller.state.image!.width /
-                                    controller.state.image!.height),
-                                child: Image.asset(image),
-                              ),
-                            )
-                          : const SizedBox(),
-                    ),
-                    // child: ,
                   ),
-                ),
-                AdView(
-                  type: AdvertisementViewType.widget,
-                  adSize: AdSize.banner,
-                  width: MediaQuery.of(context).size.width,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomButton(
-                      title: S.of(context).share,
-                      color: Theme.of(context).highlightColor,
-                      icon: Image.asset(
-                        AppImages.icShareNormal3x,
-                        width: 20,
-                      ),
-                      width: MediaQuery.of(context).size.width / 2 - 20,
-                      height: 50,
-                      titleColor: Theme.of(context).textTheme.bodyText2!.color,
-                      onTap: () => shareScreenshot(context),
+                  InkWell(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(
+                      Icons.close,
+                      size: 20,
                     ),
-                    CustomButton(
-                      title: S.of(context).newImage,
-                      gradient: AppColors.gradient,
-                      icon: Image.asset(
-                        AppImages.icAddPhotoNormal3x,
-                        width: 20,
-                      ),
-                      width: MediaQuery.of(context).size.width / 2 - 20,
-                      height: 50,
-                      onTap: () => showMenu(context),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: AppDimensions.paddingSizeDefault,
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(AppDimensions.paddingSizeDefault),
                     ),
-                  ],
+                    color: AppColors.kTeal50,
+                    // image: DecorationImage(
+                    //   image: Image.file(File(image)).image,
+                    //   fit: BoxFit.fill,
+                    //   opacity: 0.3,
+                    // ),
+                  ),
+                  child: ValueListenableBuilder(
+                    valueListenable: controller,
+                    builder: (_, __, ___) => controller.state.image != null
+                        ? Center(
+                            child: AspectRatio(
+                              aspectRatio: (controller.state.image!.width /
+                                  controller.state.image!.height),
+                              child: kIsWeb
+                                  ? Image.network(image)
+                                  : Image.file(File(image)),
+                            ),
+                          )
+                        : const SizedBox(),
+                  ),
+                  // child: ,
                 ),
-              ],
-            ),
+              ),
+              AdView(
+                type: AdvertisementViewType.widget,
+                adSize: AdSize.banner,
+                width: MediaQuery.of(context).size.width,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomButton(
+                    title: S.of(context).share,
+                    color: Theme.of(context).highlightColor,
+                    icon: Image.asset(
+                      AppImages.icShareNormal3x,
+                      width: 20,
+                    ),
+                    width: MediaQuery.of(context).size.width / 2 - 20,
+                    height: 50,
+                    titleColor: Theme.of(context).textTheme.bodyText2!.color,
+                    onTap: () => shareScreenshot(context),
+                  ),
+                  CustomButton(
+                    title: S.of(context).newImage,
+                    gradient: AppColors.gradient,
+                    icon: Image.asset(
+                      AppImages.icAddPhotoNormal3x,
+                      width: 20,
+                    ),
+                    width: MediaQuery.of(context).size.width / 2 - 20,
+                    height: 50,
+                    onTap: () => showMenu(context),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:image/image.dart' as imagepkg;
 import 'package:snapretouch/modules/painter/painter.dart';
 
@@ -31,11 +33,14 @@ class ImageConvert {
     return base64.encode(File(imagePath).readAsBytesSync());
   }
 
+  static String uint8ListToBase64(Uint8List bytes) {
+    return base64.encode(bytes);
+  }
+
   static Future<ui.Image> imagePathToImage(String imagePath) async {
-    Uint8List imageBytes = File(imagePath).readAsBytesSync();
-    ui.Codec codec = await ui.instantiateImageCodec(imageBytes);
-    ui.FrameInfo frame = await codec.getNextFrame();
-    return frame.image;
+    return await (kIsWeb
+        ? Image.network(imagePath).image.image
+        : Image.file(File(imagePath)).image.image);
   }
 
   static Future<Uint8List> cropImagePath({

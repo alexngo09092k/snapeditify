@@ -4,6 +4,7 @@ import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/pages/edit/widgets/saved_image_view.dart';
 import 'package:snapretouch/services/services.dart';
+import 'package:snapretouch/utils/permission_checking.dart';
 
 class SavedImageButton extends StatelessWidget {
   const SavedImageButton({Key? key, required this.controller})
@@ -18,21 +19,26 @@ class SavedImageButton extends StatelessWidget {
             handleAd.show();
           }
         });
-    controller.saveImage((savedImagePath) {
-      showModalBottomSheet(
-        context: context,
-        builder: (_) => SavedImageView(
-          controller: controller,
-          image: savedImagePath,
-        ),
-        isDismissible: false,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(20),
-          ),
-        ),
-      );
-    });
+    PermissionChecking.requestStorePermission(
+      context: context,
+      onHasPermisson: () {
+        controller.saveImage((savedImagePath) {
+          showModalBottomSheet(
+            context: context,
+            builder: (_) => SavedImageView(
+              controller: controller,
+              image: savedImagePath,
+            ),
+            isDismissible: false,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
+            ),
+          );
+        });
+      },
+    );
   }
 
   @override

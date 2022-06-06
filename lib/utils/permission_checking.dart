@@ -1,5 +1,8 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/widgets/no_permission_popup.dart';
 
 class PermissionChecking {
@@ -9,14 +12,52 @@ class PermissionChecking {
 
   PermissionChecking._internal();
 
-  static requestStorePermission(BuildContext context) async {
-    Map<Permission, PermissionStatus> statuses = await [
-      Permission.storage,
-    ].request();
+  static requestStorePermission({
+    BuildContext? context,
+    Function? onHasPermisson,
+    Function? onNoPermisson,
+  }) async {
+    requestPermission(
+      permission: [Permission.storage],
+      onNoPermisson: () {
+        if (context != null) {
+          showDialog(
+            context: context,
+            builder: (_) => NoPermissonPopup(
+              message: S.of(context).allowAppToAccessPhotosAndMediaOnYourDevice,
+              manualSetupTitle: S.of(context).openSettings,
+              onManualSetup: (_) {
+                AppSettings.openAppSettings();
+              },
+              onBackApp: () async {
+                requestPermission(
+                  permission: [Permission.storage],
+                  onHasPermisson: Navigator.of(context).pop,
+                );
+              },
+            ),
+          );
+        }
+        if (onNoPermisson != null) {
+          onNoPermisson();
+        }
+      },
+      onHasPermisson: onHasPermisson,
+    );
+  }
+
+  static requestPermission({
+    required List<Permission> permission,
+    Function? onHasPermisson,
+    Function? onNoPermisson,
+  }) async {
+    Map<Permission, PermissionStatus> statuses = await permission.request();
     final PermissionStatus? status = statuses[Permission.storage];
-    checkingStatus(status: status, onNoPermisson: () {
-      showDialog(context: context, builder: (_) => const NoPermissonPopup());
-    });
+    checkingStatus(
+      status: status,
+      onHasPermisson: onHasPermisson,
+      onNoPermisson: onNoPermisson,
+    );
   }
 
   static checkingStatus({
@@ -24,6 +65,7 @@ class PermissionChecking {
     Function? onHasPermisson,
     Function? onNoPermisson,
   }) {
+    printLog('Permission $status');
     switch (status) {
 
       /// The user denied access to the requested feature.

@@ -26,8 +26,6 @@ class ImagePick {
   static const String channelName = 'snap edit image';
   static const String methodSaveImage = 'saveImage';
   static const int imageQuality = 25;
-  static const double maxWidth = 10000;
-  static const double maxHeight = 10000;
 
   static const String pleaseProvidePath = 'Please provide valid file path.';
   static const String fileIsNotImage = 'File on path is not an image.';
@@ -39,8 +37,6 @@ class ImagePick {
       XFile? pickedFile = await picker.pickImage(
         source: ImageSource.gallery,
         imageQuality: imageQuality,
-        maxWidth: maxWidth,
-        maxHeight: maxHeight,
       );
       if (pickedFile != null) {
         onImagePicked(pickedFile);
@@ -69,7 +65,7 @@ class ImagePick {
     try {
       final Uint8List imageBytes = base64.decode(imageBase64);
       final directory = await getApplicationDocumentsDirectory();
-      final File imageFile = File('${directory.path}/testImage.png');
+      final File imageFile = File('${directory.path}/snapretouch_image.png');
       imageFile.writeAsBytesSync(List.from(imageBytes));
       return true;
     } catch (error) {

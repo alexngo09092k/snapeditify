@@ -23,7 +23,7 @@ class _EditPageState extends CustomOverlayState<EditPage> {
 
   @override
   void initState() {
-    PermissionChecking.requestStorePermission(context);
+    PermissionChecking.requestStorePermission(context: context);
     _controller = EditController(imagePath: widget.imagePath, context: context);
     super.initState();
   }
@@ -85,15 +85,17 @@ class _EditPageState extends CustomOverlayState<EditPage> {
         ),
         actions: [SavedImageButton(controller: _controller)],
       ),
-      body: Column(
-        children: [
-          ImagePaint(
-            controller: _controller,
-          ),
-          PaintControl(
-            controller: _controller,
-          ),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            ImagePaint(
+              controller: _controller,
+            ),
+            PaintControl(
+              controller: _controller,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -95,15 +95,15 @@ class DetectedObjectRow extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).highlightColor,
-                  image: DecorationImage(
-                    image: Image.memory(
-                      base64.decode(
-                        controller.detectedObjects[maskId]!.image!,
-                      ),
-                    ).image,
-                    fit: BoxFit.fill,
-                    opacity: 0.5,
-                  ),
+                  // image: DecorationImage(
+                  //   image: Image.memory(
+                  //     base64.decode(
+                  //       controller.detectedObjects[maskId]!.image!,
+                  //     ),
+                  //   ).image,
+                  //   fit: BoxFit.fill,
+                  //   opacity: 0.5,
+                  // ),
                 ),
                 width: 60,
                 height: 60,

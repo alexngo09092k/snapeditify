@@ -296,8 +296,7 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   /// ```
   void addImage(ImageDrawer imageDrawer) {
     // Calculate the center of the painter
-    final renderBox =
-        painterKey.currentContext?.findRenderObject() as RenderBox?;
+    final renderBox = painterKey.currentContext?.findRenderObject() as RenderBox?;
     final position = imageDrawer.position ??
         (renderBox == null
             ? Offset.zero

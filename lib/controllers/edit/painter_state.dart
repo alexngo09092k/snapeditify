@@ -174,8 +174,8 @@ class PainterState {
 
   Future<ui.Image> generateMask() async {
     final backgroundImageSize = Size(
-      _currentState._image!.width.toDouble(),
-      _currentState._image!.height.toDouble(),
+      _currentState._originalImage!.width.toDouble(),
+      _currentState._originalImage!.height.toDouble(),
     );
     final ui.Image image = await _currentState._controller.renderMask(backgroundImageSize);
     return image;
@@ -183,8 +183,8 @@ class PainterState {
 
     Future<ui.Image> generateImageWithMask() async {
     final backgroundImageSize = Size(
-      _currentState._image!.width.toDouble(),
-      _currentState._image!.height.toDouble(),
+      _currentState._originalImage!.width.toDouble(),
+      _currentState._originalImage!.height.toDouble(),
     );
     final ui.Image image = await _currentState._controller.renderImage(backgroundImageSize);
 

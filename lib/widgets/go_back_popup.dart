@@ -9,7 +9,7 @@ class GoBackPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
-      height: 160,
+      height: 175,
       message: Text(
         S.of(context).allChangesWillBeLostAreYouSureYouWant,
         textAlign: TextAlign.center,
@@ -25,8 +25,7 @@ class GoBackPopup extends StatelessWidget {
         CustomDialogButton(
           title: S.of(context).ok,
           action: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
+           Navigator.of(context).popUntil((route) => route.isFirst);
           },
           gradient: AppColors.gradient,
         ),

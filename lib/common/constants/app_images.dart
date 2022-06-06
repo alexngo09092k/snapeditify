@@ -47,4 +47,7 @@ abstract class AppImages {
   static const String imgSplashLogoNormal3x = 'assets/images/img_splash_logo_Normal@3x.png';
 
   static const String homeBannerAnimation = 'assets/images/home_banner.json';
+  static const String homeBefore = 'assets/images/home_before.jpg';
+  static const String homeAfter = 'assets/images/home_after.jpg';
+  static const String beforeAfter = 'assets/images/before_after.png';
 }

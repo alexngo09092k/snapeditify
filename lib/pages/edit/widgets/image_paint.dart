@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/common/logs.dart';
@@ -16,7 +17,8 @@ class ImagePaint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height * 1.7 / 3;
-    final double width = MediaQuery.of(context).size.width - AppDimensions.paddingSizeDefault * 2;
+    final double width = MediaQuery.of(context).size.width -
+        AppDimensions.paddingSizeDefault * 2;
     const double iconSize = 40;
     return SizedBox(
       width: width,
@@ -179,14 +181,16 @@ class BorderBackground extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(1),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.kTeal50,
-            image: DecorationImage(
-              image: Image.asset(controller.imagePath).image,
-              fit: BoxFit.fill,
-              opacity: 0.3,
-            ),
-            borderRadius: const BorderRadius.all(
+            // image: DecorationImage(
+            //   image: kIsWeb
+            //       ? Image.network(controller.imagePath).image
+            //       : Image.file(File(controller.imagePath)).image,
+            //   fit: BoxFit.fill,
+            //   opacity: 0.3,
+            // ),
+            borderRadius: BorderRadius.all(
               Radius.circular(AppDimensions.paddingSizeDefault),
             ),
           ),
