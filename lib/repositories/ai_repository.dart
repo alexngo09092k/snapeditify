@@ -9,7 +9,6 @@ import 'package:snapretouch/utils/client_api.dart';
 class AIRepository {
   final int timeoutInSeconds = 30;
 
-
   Future<EraseResponse?> eraseImage(EraseBody data) async {
     ClientApiResponse response = await ClientApi.postData(
       '${Cofiguration.apiConfig.url}${Cofiguration.apiConfig.endPoints.erase}',
