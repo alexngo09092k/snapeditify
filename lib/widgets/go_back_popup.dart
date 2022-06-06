@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/widgets/custom_dialog.dart';
 
@@ -8,11 +9,11 @@ class GoBackPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
-      height: 140,
+      height: 160,
       message: Text(
         S.of(context).allChangesWillBeLostAreYouSureYouWant,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       buttons: [
         CustomDialogButton(
@@ -27,7 +28,7 @@ class GoBackPopup extends StatelessWidget {
             Navigator.of(context).pop();
             Navigator.of(context).pop();
           },
-          color: Theme.of(context).primaryColor,
+          gradient: AppColors.gradient,
         ),
       ],
     );

@@ -31,7 +31,7 @@ class DetectedObjectTabContent extends StatelessWidget {
             children: [
               Image.asset(
                 AppImages.imgNoObjectsNormal3x,
-                width: 80,
+                width: 70,
                 fit: BoxFit.cover,
               ),
               const SizedBox(height: AppDimensions.paddingSizeDefault),

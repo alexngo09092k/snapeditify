@@ -5,7 +5,7 @@ class CustomButton extends StatelessWidget {
   CustomButton(
       {Key? key,
       this.gradient,
-      this.textColor,
+      this.titleColor,
       this.titleSize = 14,
       this.color,
       this.width,
@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
 
   final Gradient? gradient;
   final String? title;
-  final Color? textColor;
+  final Color? titleColor;
   final Color? color;
   final double? width;
   final double? height;
@@ -54,7 +54,7 @@ class CustomButton extends StatelessWidget {
                   Text(
                     title ?? '',
                     style: TextStyle(
-                      color: textColor ?? AppColors.kWhite,
+                      color: titleColor ?? AppColors.kWhite,
                       fontSize: titleSize,
                       fontWeight: FontWeight.bold,
                     ),

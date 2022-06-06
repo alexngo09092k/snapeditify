@@ -5,15 +5,16 @@ import 'package:snapretouch/widgets/custom_button.dart';
 class CustomDialogButton {
   String title;
   Color? color;
+  LinearGradient? gradient;
   Color? titleColor;
   void Function()? action;
 
-  CustomDialogButton({
-    required this.title,
-    this.color,
-    this.action,
-    this.titleColor
-  });
+  CustomDialogButton(
+      {required this.title,
+      this.color,
+      this.action,
+      this.titleColor,
+      this.gradient});
 }
 
 class CustomDialog extends StatelessWidget {
@@ -36,14 +37,19 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Theme.of(context).backgroundColor,
-      insetPadding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height/3),
+      insetPadding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height / 3),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(AppDimensions.paddingSizeDefault),
+        ),
+      ),
       child: Container(
         width: width,
         height: height,
         padding: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.paddingSizeDefault,
-          vertical: AppDimensions.paddingSizeExtraLarge
-        ),
+            horizontal: AppDimensions.paddingSizeDefault,
+            vertical: AppDimensions.paddingSizeExtraLarge),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -58,15 +64,17 @@ class CustomDialog extends StatelessWidget {
             ),
             if (buttons != null)
               Padding(
-                padding: const EdgeInsets.only(top: AppDimensions.paddingSizeDefault),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingSizeDefault),
                 child: buttons!.length == 1
                     ? Expanded(
                         child: CustomButton(
                         title: buttons!.first.title,
                         onTap: buttons!.first.action,
                         color: buttons!.first.color,
-                        textColor: buttons!.first.titleColor,
-                        height: 30,
+                        gradient: buttons!.first.gradient,
+                        titleColor: buttons!.first.titleColor,
+                        height: 40,
                       ))
                     : Row(
                         children: buttons!
@@ -82,8 +90,9 @@ class CustomDialog extends StatelessWidget {
                                       title: buttons![index].title,
                                       onTap: buttons![index].action,
                                       color: buttons![index].color,
-                                      textColor: buttons![index].titleColor,
-                                      height: 35,
+                                      gradient: buttons![index].gradient,
+                                      titleColor: buttons![index].titleColor,
+                                      height: 40,
                                     ),
                                   ),
                                 ))

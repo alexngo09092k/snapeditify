@@ -6,6 +6,7 @@ import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/modules/painter/painter_pure.dart';
 import 'package:snapretouch/pages/edit/widgets/changed_strokewidth.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
+import 'package:snapretouch/widgets/custom_card.dart';
 
 class ImagePaint extends StatelessWidget {
   const ImagePaint({Key? key, required this.controller}) : super(key: key);
@@ -21,7 +22,7 @@ class ImagePaint extends StatelessWidget {
       width: width,
       height: height + 25,
       child: Stack(
-        alignment: Alignment.center,
+        // alignment: Alignment.center,
         children: [
           BorderBackground(
             height: height,
@@ -29,8 +30,8 @@ class ImagePaint extends StatelessWidget {
             controller: controller,
           ),
           MainImagePaint(
-            height: height - iconSize,
-            width: width - AppDimensions.paddingSizeDefault,
+            height: height,
+            width: width,
             controller: controller,
           ),
           Center(
@@ -38,7 +39,7 @@ class ImagePaint extends StatelessWidget {
           ),
           Positioned(
               left: AppDimensions.paddingSizeExtraSmall,
-              top: height - iconSize,
+              top: height - iconSize - AppDimensions.paddingSizeExtraSmall,
               child: IconButton(
                   onPressed: controller.undo,
                   icon: ValueListenableBuilder(
@@ -52,7 +53,7 @@ class ImagePaint extends StatelessWidget {
                   ))),
           Positioned(
               left: AppDimensions.paddingSizeExtraSmall + iconSize,
-              top: height - iconSize,
+              top: height - iconSize - AppDimensions.paddingSizeExtraSmall,
               child: IconButton(
                   onPressed: controller.redo,
                   icon: ValueListenableBuilder(
@@ -70,19 +71,21 @@ class ImagePaint extends StatelessWidget {
             child: ValueListenableBuilder(
               valueListenable: controller,
               builder: (_, __, ___) => controller.canRemove
-                  ? CustomButton(
-                      title: S.of(context).remove,
-                      gradient: AppColors.gradient,
-                      width: 150,
-                      height: 50,
-                      onTap: controller.remove,
+                  ? CustomCard(
+                      child: CustomButton(
+                        title: S.of(context).remove,
+                        gradient: AppColors.gradient,
+                        width: 150,
+                        height: 50,
+                        onTap: controller.remove,
+                      ),
                     )
                   : const SizedBox(),
             ),
           ),
           Positioned(
             right: AppDimensions.paddingSizeExtraSmall,
-            top: height - iconSize,
+            top: height - iconSize - AppDimensions.paddingSizeExtraSmall,
             child: InkWell(
               onTapDown: (_) => controller.compare(),
               onTapUp: (_) => controller.compare(),

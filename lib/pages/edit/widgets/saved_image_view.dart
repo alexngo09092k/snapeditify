@@ -201,24 +201,25 @@ class SavedImageView extends StatelessWidget {
                   children: [
                     CustomButton(
                       title: S.of(context).share,
-                      color: Theme.of(context).backgroundColor,
+                      color: Theme.of(context).highlightColor,
                       icon: Image.asset(
                         AppImages.icShareNormal3x,
                         width: 20,
                       ),
                       width: MediaQuery.of(context).size.width / 2 - 20,
-                      height: 35,
-                      textColor: Theme.of(context).textTheme.bodyText2!.color,
+                      height: 50,
+                      titleColor: Theme.of(context).textTheme.bodyText2!.color,
                       onTap: () => shareScreenshot(context),
                     ),
                     CustomButton(
                       title: S.of(context).newImage,
+                      gradient: AppColors.gradient,
                       icon: Image.asset(
                         AppImages.icAddPhotoNormal3x,
                         width: 20,
                       ),
                       width: MediaQuery.of(context).size.width / 2 - 20,
-                      height: 35,
+                      height: 50,
                       onTap: () => showMenu(context),
                     ),
                   ],

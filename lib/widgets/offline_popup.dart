@@ -47,9 +47,9 @@ class OfflinePopup extends StatelessWidget {
             const SizedBox(height: AppDimensions.paddingSizeLarge),
             CustomButton(
               title: 'OK',
-              color: Theme.of(context).primaryColor,
+              gradient: AppColors.gradient,
               width: width * 2,
-              height: 30,
+              height: 40,
               onTap: Navigator.of(context).pop,
             ),
           ],

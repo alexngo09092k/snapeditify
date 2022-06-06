@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/widgets/custom_dialog.dart';
 
@@ -16,11 +17,11 @@ class RevertPopup extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .bodyText1!
-                .copyWith(fontWeight: FontWeight.w500),
+                .copyWith(fontWeight: FontWeight.w900),
           ),
           message: Text(
             S.of(context).allChangesWillBeLostYourImageWillBeReverted,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
           buttons: [
             CustomDialogButton(
@@ -35,7 +36,7 @@ class RevertPopup extends StatelessWidget {
                 onRevert();
                 Navigator.of(context).pop();
               },
-              color: Theme.of(context).primaryColor,
+              gradient: AppColors.gradient,
             ),
           ],
         );
