@@ -2,7 +2,6 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-// import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/modules/advertisement/advertisement_base.dart';
 import 'package:snapretouch/modules/advertisement/app_lifecycle/app_lifecycle_handler.dart';

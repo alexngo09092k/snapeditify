@@ -12,11 +12,10 @@ class ChangedStrokeWidth extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ValueListenableBuilder(
         valueListenable: controller,
-        builder: (_, __, ___) => CustomAnimation<double>(
+        builder: (_, __, ___) => controller.state.changedStrokeWidth ? CustomAnimation<double>(
           duration: const Duration(milliseconds: 1000),
           setAnimation: (animationCtr) => TweenSequence<double>([
             TweenSequenceItem(tween: Tween(begin: 0, end: 1), weight: 1),
-            TweenSequenceItem(tween: Tween(begin: 1, end: 0), weight: 1),
           ]).animate(animationCtr),
           builder: (_, __, animation, ___) => Opacity(
             opacity: animation.value,
@@ -31,6 +30,6 @@ class ChangedStrokeWidth extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        ): const SizedBox(),
       );
 }

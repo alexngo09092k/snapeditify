@@ -41,8 +41,7 @@ class ApiConfig {
 
   String toJson() => json.encode(toMap());
 
-  factory ApiConfig.fromJson(String source) =>
-      ApiConfig.fromMap(json.decode(source));
+  factory ApiConfig.fromJson(String source) => ApiConfig.fromMap(json.decode(source));
 
   @override
   String toString() =>

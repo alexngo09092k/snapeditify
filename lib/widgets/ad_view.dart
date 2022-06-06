@@ -43,33 +43,38 @@ class _AdViewState extends State<AdView> {
   Widget build(BuildContext context) {
     switch (widget.type) {
       case AdvertisementViewType.widget:
-        return ClipRRect(
-          borderRadius: const BorderRadius.all(
-              Radius.circular(AppDimensions.paddingSizeDefault)),
-          child: Container(
-            margin: const EdgeInsets.symmetric(
-              vertical: AppDimensions.paddingSizeDefault,
-            ),
-            width: widget.width,
-            height: widget.height,
-            decoration: BoxDecoration(
-              color: Theme.of(context).highlightColor,
-              image: DecorationImage(
-                image: widget.loadingImage ??
-                    Image.asset(AppImages.imgHomeBannerNormal3x).image,
-                fit: BoxFit.fill,
-              ),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(
-                  AppDimensions.paddingSizeDefault,
+        return Container(
+          margin: const EdgeInsets.symmetric(
+            vertical: AppDimensions.paddingSizeDefault,
+          ),
+          decoration: const BoxDecoration(
+            color: AppColors.kTeal50,
+            // border: Border.all(color: AppColors.topicColor.withOpacity(0.2), width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.paddingSizeDefault)),
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.paddingSizeDefault)),
+            child: Container(
+              width: widget.width,
+              height: widget.height,
+              decoration: BoxDecoration(
+                color: AppColors.kTeal50,
+                // image: DecorationImage(
+                //   image: widget.loadingImage ?? Image.asset(AppImages.adPlaceholder).image,
+                //   fit: BoxFit.fill,
+                // ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(
+                    AppDimensions.paddingSizeDefault,
+                  ),
+                ),
+                border: Border.all(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  width: 1,
                 ),
               ),
-              border: Border.all(
-                color: Theme.of(context).secondaryHeaderColor,
-                width: 1,
-              ),
+              child: ad,
             ),
-            child: ad,
           ),
         );
       default:

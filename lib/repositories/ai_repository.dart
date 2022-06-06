@@ -29,11 +29,6 @@ class AIRepository {
     'accept-language': 'vi-VN;q=1.0',
   };
 
-  _buildHeader() {
-    String userAgent = '';
-    return isIos ? _iOSHeaders : _androidHeaders;
-  }
-
   Future<EraseResponse?> eraseImage(EraseBody data) async {
     ClientApiResponse response = await ClientApi.postData(
       '${Cofiguration.apiConfig.url}${Cofiguration.apiConfig.eraseEndPoint}',

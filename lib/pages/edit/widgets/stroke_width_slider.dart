@@ -29,6 +29,8 @@ class StrokeWidthSlider extends StatelessWidget {
             label: '${controller.strokeWidth.round()}',
             divisions: 100,
             onChanged: (value)=> controller.state.strokeWidth = value,
+            onChangeStart: (_) => controller.state.changedStrokeWidth = true,
+            onChangeEnd: (_) => controller.state.changedStrokeWidth = false,
           ),
         ),
         IconButton(

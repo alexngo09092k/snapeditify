@@ -7,7 +7,20 @@ import 'package:snapretouch/modules/advertisement/app_lifecycle/app_lifecycle_re
 import 'package:snapretouch/services/services.dart';
 import 'package:snapretouch/widgets/base_screen.dart';
 
-abstract class CustomOverlayState<T extends StatefulWidget> extends BaseScreen<T> with TickerProviderStateMixin {
+class OverlayControlDelegate {
+  Function(String? nameRoute)? emitRoute;
+  Function(String? nameRoute)? emitTab;
+  static OverlayControlDelegate? _instance;
+
+  factory OverlayControlDelegate() {
+    return _instance ??= OverlayControlDelegate._();
+  }
+
+  OverlayControlDelegate._();
+}
+
+abstract class CustomOverlayState<T extends StatefulWidget>
+    extends BaseScreen<T> with TickerProviderStateMixin {
   double bottomBarHeight = kBottomNavigationBarHeight - 15;
 
   OverlayEntry? _overlayEntry;
@@ -22,15 +35,20 @@ abstract class CustomOverlayState<T extends StatefulWidget> extends BaseScreen<T
   void initState() {
     super.initState();
     _overlayController = StreamController<bool>.broadcast()..add(false);
-    _appLifecycleReactor = AppLifecycleReactor(handler: Services().advertisement);
+    _appLifecycleReactor =
+        AppLifecycleReactor(handler: Services().advertisement);
     _appLifecycleReactor.listenToAppStateChanges();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       printLog('addPostFrameCallback $timeStamp');
       EasyDebounce.debounce(_tag, const Duration(milliseconds: 500), () {
+        OverlayControlDelegate().emitRoute = (String? screenName) {
+          printLog('screenName $screenName');
+          Services().advertisement.handleAd(screenName: screenName);
+          _overlayController.sink.add(true);
+        };
         _overlayEntry = _buildOverlayEntry();
         Overlay.of(context)?.insert(_overlayEntry!);
-        Services().advertisement.handleAd();
         _overlayController.sink.add(true);
       });
     });
@@ -59,9 +77,7 @@ abstract class CustomOverlayState<T extends StatefulWidget> extends BaseScreen<T
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      if(Cofiguration.isPutted)
-                      const SizedBox()
-                      // Services().advertisement.getAdWidget(),
+                      if (Cofiguration.isPutted) const SizedBox(),
                     ],
                   ),
                 ),

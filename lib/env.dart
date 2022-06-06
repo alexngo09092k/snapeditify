@@ -25,8 +25,8 @@ Map<String, dynamic> enviroment = {
   "adConfig": {
     "enable": true,
     "googleTestingId": [],
-    "adMobAppIdIos": "ca-app-pub-7432665165146018~2664444130",
-    "adMobAppIdAndroid": "ca-app-pub-7432665165146018~2664444130",
+    "adMobAppIdIos": "ca-app-pub-9241292359230405~3779043810",
+    "adMobAppIdAndroid": "ca-app-pub-9241292359230405~3319593408",
     "ads": [
       {
         "type": "openApp",

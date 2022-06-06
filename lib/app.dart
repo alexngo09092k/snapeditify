@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:snapretouch/common/app_routes.dart';
@@ -6,6 +5,7 @@ import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/widgets/custom_overlay_state.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -26,7 +26,6 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: Cofiguration.appName,
-      // home: const FlutterPainterExample(),
       debugShowCheckedModeBanner: false,
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch},
@@ -36,8 +35,13 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           : getDarkTheme(context),
       themeMode: themeMode,
       initialRoute: AppRoutes.initialRoute,
-      // routes: AppRoutes.routes,
+      routes: AppRoutes.routes,
       onGenerateRoute: AppRoutes.onGenerateRoute,
+      navigatorObservers: [
+        AppRouteObserver(
+          action: (screenName) => OverlayControlDelegate().emitRoute?.call(screenName),
+        ),
+      ],
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -46,11 +50,13 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale!.languageCode || supportedLocale.countryCode == locale.countryCode) {
+          if (supportedLocale.languageCode == locale!.languageCode ||
+              supportedLocale.countryCode == locale.countryCode) {
             return supportedLocale;
           }
         }
-        return supportedLocales.firstWhere((supportedLocale) => supportedLocale.languageCode == 'en');
+        return supportedLocales.firstWhere(
+            (supportedLocale) => supportedLocale.languageCode == 'en');
       },
       supportedLocales: S.delegate.supportedLocales,
     );

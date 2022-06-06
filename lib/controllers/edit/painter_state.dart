@@ -80,6 +80,14 @@ class PainterState {
 
   late final StreamController<PainterAction> _painterStream;
 
+  bool _changedStrokeWidth = false;
+  bool get changedStrokeWidth => _changedStrokeWidth;
+  set changedStrokeWidth(bool newValue) {
+    _changedStrokeWidth = newValue;
+    update(const PainterOtherAction());
+  }
+
+
   /// DETECTED OBJECTS
   Map<int, DetectedObject> _detectedObjects = {};
   Map<int, DetectedObject> get detectedObjects => _currentState._detectedObjects;

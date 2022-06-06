@@ -173,9 +173,8 @@ class _HomePageState extends CustomOverlayState<HomePage> {
                                     WidgetSpan(
                                       child: Container(
                                         padding: const EdgeInsets.only(
-                                          left: AppDimensions
-                                              .paddingSizeExtraSmall,
-                                          bottom: 5,
+                                          left: AppDimensions.paddingSizeExtraSmall,
+                                          bottom: AppDimensions.paddingSizeExtraSmall - 3
                                         ),
                                         child: Image.asset(
                                           AppImages.icAIHomeNormal3x,

@@ -53,8 +53,7 @@ class AppConfig {
 
   String toJson() => json.encode(toMap());
 
-  factory AppConfig.fromJson(String source) =>
-      AppConfig.fromMap(json.decode(source));
+  factory AppConfig.fromJson(String source) => AppConfig.fromMap(json.decode(source));
 
   @override
   String toString() {
