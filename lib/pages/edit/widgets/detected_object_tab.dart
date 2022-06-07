@@ -24,6 +24,21 @@ class _DetectedObjectTabState extends State<DetectedObjectTab>
         vsync: this, duration: const Duration(milliseconds: 200));
     _x = Tween<double>(begin: 0, end: widget.width / 2).animate(_controller);
 
+    setState(() {
+      if (widget.controller.initialPage == 1) {
+        _controller.forward();
+        setState(() {
+          _indexTab = 1;
+        });
+      }
+      if (widget.controller.initialPage == 0) {
+        _controller.reverse();
+        setState(() {
+          _indexTab = 0;
+        });
+      }
+    });
+
     widget.controller.addListener(() {
       if (widget.controller.page == 1) {
         _controller.forward();
@@ -69,7 +84,7 @@ class _DetectedObjectTabState extends State<DetectedObjectTab>
                   child: Container(
                     height: 40,
                     width: widget.width / 2,
-                    decoration:  BoxDecoration(
+                    decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       gradient: AppColors.gradient,
                     ),

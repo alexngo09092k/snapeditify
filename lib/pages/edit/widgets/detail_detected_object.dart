@@ -23,8 +23,7 @@ class DetailDetectedObject extends StatefulWidget {
 class _DetailDetectedObjectState extends State<DetailDetectedObject> {
   int _indexTab = 0;
 
-  DetectedObjectType get type =>
-      _indexTab == 0 ? DetectedObjectType.people : DetectedObjectType.other;
+  DetectedObjectType get type => _indexTab == 0 ? DetectedObjectType.people : DetectedObjectType.other;
 
   late final PageController _pageController;
 
@@ -58,7 +57,7 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSizeSmall),
+          padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSizeSmall).copyWith(top: AppDimensions.paddingSizeExtraSmall),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
