@@ -3,8 +3,10 @@ Map<String, dynamic> enviroment = {
   /// dir: /modules/firebase/firebase_service.dart
   "firebaseConfig": {
     "enable": true,
-    "enableRemoteConfigFirebase": false,
+    "enableCrashAnalytics": false,
+    "enableRemoteConfigFirebase": true,
   },
+  
   "apiConfig": {
     'url': 'https://be-prod-1.snapedit.app',
     'endPoints': {

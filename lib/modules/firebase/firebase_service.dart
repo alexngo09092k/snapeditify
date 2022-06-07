@@ -26,13 +26,19 @@ class FirebaseServices extends BaseFirebaseServices {
 
   @override
   Future<void> init(FirebaseConfig config,{String? name, FirebaseOptions? options}) async {
-    _isEnabled =  config.enableFirebase;
+    _isEnabled = config.enableFirebase;
     printLog(config);
     var startTime = DateTime.now();
     await Firebase.initializeApp(name: name, options: options);
 
     if (!kIsWeb && config.enableRemoteConfigFirebase) {
       _remoteConfig = FirebaseRemoteConfig.instance;
+      await _remoteConfig!.setConfigSettings(
+        RemoteConfigSettings(
+          fetchTimeout: const Duration(minutes: 1),
+          minimumFetchInterval: const Duration(minutes: 1),
+        ),
+      );
       await _remoteConfig!.fetch();
       await _remoteConfig!.activate();
     }
