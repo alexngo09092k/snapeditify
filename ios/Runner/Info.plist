@@ -53,7 +53,7 @@
 	<false/>
 	<!--TODO: Change your Admob ID here. If your app does not use admob, remove these 2 lines below -->
 	<key>GADApplicationIdentifier</key>
-    <string>ca-app-pub-3940256099942544~3347511713</string>
+    <string>ca-app-pub-9241292359230405~3779043810</string>
 	<!--TODO: Remove these 2 lines below if your app does not use AdMob and FacebookAd -->
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to deliver personalized ads to you. "Ask App Not to track" will limit Advertisement network's ability to deliver relevant ads to you but will not reduce the number of ads you receive.</string>

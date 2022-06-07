@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/pages/edit/widgets/count_detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/detail_detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/stroke_width_slider.dart';
+import 'package:snapretouch/services/services.dart';
 
 class PaintControl extends StatefulWidget {
   const PaintControl({
@@ -20,6 +22,18 @@ class PaintControl extends StatefulWidget {
 
 class _PaintControlState extends State<PaintControl> {
   bool _showDetail = false;
+
+  _toAI() {
+    Services().advertisement.loadAd(
+          type: AdvertisementViewType.handle,
+          onAd: (handleAd) {
+            if (handleAd != null) {
+              handleAd.show();
+            }
+          },
+        );
+    widget.controller.toAI();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +64,8 @@ class _PaintControlState extends State<PaintControl> {
                         },
                       )
                     : StrokeWidthSlider(
-                      controller: widget.controller,
-                    ),
+                        controller: widget.controller,
+                      ),
               ),
             ),
             Padding(
@@ -60,7 +74,7 @@ class _PaintControlState extends State<PaintControl> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   InkWell(
-                    onTap: widget.controller.toAI,
+                    onTap: _toAI,
                     child: ValueListenableBuilder(
                       valueListenable: widget.controller,
                       builder: (_, __, ___) => Column(
@@ -89,8 +103,7 @@ class _PaintControlState extends State<PaintControl> {
                                       ),
                                 ),
                                 const SizedBox(
-                                    width:
-                                        AppDimensions.paddingSizeExtraSmall),
+                                    width: AppDimensions.paddingSizeExtraSmall),
                                 Image.asset(
                                   AppImages.icAINormal3x,
                                   width: 15,

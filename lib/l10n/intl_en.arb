@@ -26,6 +26,8 @@
   "aiPowredPhotoEditor": "AI powred photo editor",
   "showAllObjects": "Show all objects",
   "openSettings": "Open settings",
-  "allowAppToAccessPhotosAndMediaOnYourDevice": "Allow app to access photos and media on your device",
-  "others": "Others"
+  "allowAppToAccessPhotosAndMediaOnYourDevice": "Allow app to access photos and media on your device.",
+  "others": "Others",
+  "aiMessageFailure": "Image size too big.",
+  "removeMessageFailure": "Image size too big."
 }

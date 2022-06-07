@@ -13,12 +13,13 @@ class SavedImageButton extends StatelessWidget {
 
   Future<void> saveAndShowImage(context) async {
     Services().advertisement.loadAd(
-        type: AdvertisementViewType.handle,
-        onAd: (handleAd) {
-          if (handleAd != null) {
-            handleAd.show();
-          }
-        });
+          type: AdvertisementViewType.handle,
+          onAd: (handleAd) {
+            if (handleAd != null) {
+              handleAd.show();
+            }
+          },
+        );
     PermissionChecking.requestStorePermission(
       context: context,
       onHasPermisson: () {

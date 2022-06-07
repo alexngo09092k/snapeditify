@@ -22,6 +22,7 @@ import 'package:snapretouch/repositories/ai_repository.dart';
 import 'package:snapretouch/utils/image_convert.dart';
 import 'package:snapretouch/utils/image_pick.dart';
 import 'package:snapretouch/utils/internet_checking.dart';
+import 'package:snapretouch/widgets/custom_snackbar.dart';
 import 'package:snapretouch/widgets/loading_popup.dart';
 import 'package:snapretouch/widgets/offline_popup.dart';
 import 'package:snapretouch/modules/painter/painter.dart';
@@ -55,11 +56,10 @@ class EditController extends ValueNotifier<EditValue> {
     printLog('Normal Image bytes => ${normalBytes.lengthInBytes}');
 
     Uint8List? compressBytes;
-    //150KB
-    if (normalBytes.lengthInBytes / 1024 > 10) {
+    if (normalBytes.lengthInBytes / 1024 > 500) { //500KB
       compressBytes = await FlutterImageCompress.compressWithFile(
         imagePath,
-        quality: 1,
+        quality: 50,
         format: CompressFormat.jpeg,
       );
     }
@@ -139,6 +139,7 @@ class EditController extends ValueNotifier<EditValue> {
         .toList()
         .isNotEmpty) {
       state.toNone();
+      Navigator.pop(context);
       return;
     }
 
@@ -147,15 +148,19 @@ class EditController extends ValueNotifier<EditValue> {
       AIDetectionBody(originalImageBase64: state.originalImageBase64!),
     );
 
-    if (response != null) {
-      await state.setDetectedObjects(response.detectedObjects);
-      await state.addAllBoxDetectedMask();
+    if(response == null) {
+      Navigator.pop(context);
+      showSnackBar(context, type: SnackBarType.error, message: S.of(context).aiMessageFailure);
+      return;
     }
+
+    await state.setDetectedObjects(response.detectedObjects);
+    await state.addAllBoxDetectedMask();
+    
     Navigator.pop(context);
   }
 
-  Future<void> remove(
-      {bool Function()? onStart, Function(EraseResponse?)? onEnd}) async {
+  Future<void> remove({bool Function()? onStart, Function(EraseResponse?)? onEnd}) async {
     if (!_internet.hasConnection) {
       printLog('No internet');
       showDialog(
@@ -184,48 +189,49 @@ class EditController extends ValueNotifier<EditValue> {
       ),
     );
 
-    if (response != null) {
-      ui.Image newImage = await ImageConvert.base64ToImage(response.newImageBase64);
-
-      Map<int, DetectedObject> updatedDetectedObject =
-          state.detectedObjects.map((maskId, detetedObject) {
-        if (detetedObject.isSelected) {
-          // painterController.removeDrawable(detetedObject.maskDrawable!, saveAction: false);
-          painterController.removeDrawable(
-            detetedObject.boxDrawble!,
-            saveAction: false,
-          );
-          return MapEntry(maskId, detetedObject.copyWith(isRemoved: true));
-        }
-        return MapEntry(maskId, detetedObject);
-      });
-
-      value.state = state.withPrevNextState(
-        image: newImage,
-        originalImageBase64: response.newImageBase64,
-        mode: state.freeStyleMode,
-        drawables: [],
-        canUndo: false,
-      );
-
-      await state.updateDetectedObject(updatedDetectedObject);
-
-      state.addListener((event) {
-        printLog('from edit controller $event');
-        notifyListeners();
-      });
+    if(response == null) {
+      Navigator.pop(context);
+      showSnackBar(context, type: SnackBarType.error, message: S.of(context).removeMessageFailure);
+      return;
     }
+
+    ui.Image newImage = await ImageConvert.base64ToImage(response.newImageBase64);
+
+    Map<int, DetectedObject> updatedDetectedObject = state.detectedObjects.map((maskId, detetedObject) {
+      if (detetedObject.isSelected) {
+        // painterController.removeDrawable(detetedObject.maskDrawable!, saveAction: false);
+        painterController.removeDrawable(
+          detetedObject.boxDrawble!,
+          saveAction: false,
+        );
+        return MapEntry(maskId, detetedObject.copyWith(isRemoved: true));
+      }
+      return MapEntry(maskId, detetedObject);
+    });
+
+    value.state = state.withPrevNextState(
+      image: newImage,
+      originalImageBase64: response.newImageBase64,
+      mode: state.freeStyleMode,
+      drawables: [],
+      canUndo: false,
+    );
+
+    await state.updateDetectedObject(updatedDetectedObject);
+
+    state.addListener((event) {
+      printLog('from edit controller $event');
+      notifyListeners();
+    });
 
     await state.addAllBoxDetectedMask();
 
     Navigator.pop(context);
   }
 
-  void selectedDetectedObjects(int maskId) =>
-      state.addDetectedObjectMask(maskId);
+  void selectedDetectedObjects(int maskId) => state.addDetectedObjectMask(maskId);
 
-  void unSelectedDtectedObjects(int maskId) =>
-      state.removeDetectedObjectMask(maskId);
+  void unSelectedDtectedObjects(int maskId) => state.removeDetectedObjectMask(maskId);
 
   void compare() => state.compare();
 

@@ -58,9 +58,7 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.paddingSizeSmall,
-          ).copyWith(top: AppDimensions.paddingSizeSmall),
+          padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSizeSmall),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -93,7 +91,7 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
         ),
         const SizedBox(height: AppDimensions.paddingSizeDefault),
         SizedBox(
-          height: MediaQuery.of(context).size.height * (0.4) / 3,
+          height: MediaQuery.of(context).size.height * (0.5) / 3,
           child: PageView(
             controller: _pageController,
             children: [

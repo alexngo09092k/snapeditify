@@ -310,10 +310,10 @@ class S {
     );
   }
 
-  /// `Allow app to access photos and media on your device`
+  /// `Allow app to access photos and media on your device.`
   String get allowAppToAccessPhotosAndMediaOnYourDevice {
     return Intl.message(
-      'Allow app to access photos and media on your device',
+      'Allow app to access photos and media on your device.',
       name: 'allowAppToAccessPhotosAndMediaOnYourDevice',
       desc: '',
       args: [],
@@ -325,6 +325,26 @@ class S {
     return Intl.message(
       'Others',
       name: 'others',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image size too big.`
+  String get aiMessageFailure {
+    return Intl.message(
+      'Image size too big.',
+      name: 'aiMessageFailure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image size too big.`
+  String get removeMessageFailure {
+    return Intl.message(
+      'Image size too big.',
+      name: 'removeMessageFailure',
       desc: '',
       args: [],
     );

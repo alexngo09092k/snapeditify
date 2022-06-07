@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% chính xác"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("THÊM ẢNH"),
+        "aiMessageFailure":
+            MessageLookupByLibrary.simpleMessage("Kích thước ảnh quá lớn."),
         "aiPowredPhotoEditor": MessageLookupByLibrary.simpleMessage(
             "Trình chỉnh sửa ảnh được hỗ trợ bởi AI"),
         "allChangesWillBeLostAreYouSureYouWant":
@@ -53,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "others": MessageLookupByLibrary.simpleMessage("Khác"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Ảnh"),
         "remove": MessageLookupByLibrary.simpleMessage("XOÁ"),
+        "removeMessageFailure":
+            MessageLookupByLibrary.simpleMessage("Kích thước ảnh quá lớn."),
         "removed": MessageLookupByLibrary.simpleMessage("Đã xoá"),
         "removingObject":
             MessageLookupByLibrary.simpleMessage("Đang xoá đối tượng"),

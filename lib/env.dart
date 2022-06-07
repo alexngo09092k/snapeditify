@@ -61,8 +61,6 @@ Map<String, dynamic> enviroment = {
         "iosId": "ca-app-pub-9241292359230405/6213635465",
         "androidId": "ca-app-pub-9241292359230405/5562613364",
         "showOnScreens": ['home'],
-        "hideOnScreens": ['edit'],
-        "waitingTimeToDisplay": 5,
       },
       {
         "type": "interstitial",

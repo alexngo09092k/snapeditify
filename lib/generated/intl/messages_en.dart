@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% accurate"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("ADD PHOTO"),
+        "aiMessageFailure":
+            MessageLookupByLibrary.simpleMessage("Image size too big."),
         "aiPowredPhotoEditor":
             MessageLookupByLibrary.simpleMessage("AI powred photo editor"),
         "allChangesWillBeLostAreYouSureYouWant":
@@ -34,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "All changes will be lost. Your image will be reverted to its original status"),
         "allowAppToAccessPhotosAndMediaOnYourDevice":
             MessageLookupByLibrary.simpleMessage(
-                "Allow app to access photos and media on your device"),
+                "Allow app to access photos and media on your device."),
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
         "brush": MessageLookupByLibrary.simpleMessage("Brush"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
@@ -54,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "others": MessageLookupByLibrary.simpleMessage("Others"),
         "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
         "remove": MessageLookupByLibrary.simpleMessage("REMOVE"),
+        "removeMessageFailure":
+            MessageLookupByLibrary.simpleMessage("Image size too big."),
         "removed": MessageLookupByLibrary.simpleMessage("Removed"),
         "removingObject":
             MessageLookupByLibrary.simpleMessage("Removing object"),

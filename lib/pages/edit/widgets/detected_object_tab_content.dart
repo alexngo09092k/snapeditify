@@ -25,24 +25,27 @@ class DetectedObjectTabContent extends StatelessWidget {
               maskId: data.elementAt(index).maskId,
             ),
           )
-        : Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                AppImages.imgNoObjectsNormal3x,
-                width: 70,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(height: AppDimensions.paddingSizeDefault),
-              Text(
-                S.of(context).noPotentialObjectHasBeenDetected,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(color: Theme.of(context).disabledColor),
-              )
-            ],
-          );
+        : SingleChildScrollView(
+          // padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSizeDefault),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  AppImages.imgNoObjectsNormal3x,
+                  width: 70,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(height: AppDimensions.paddingSizeDefault),
+                Text(
+                  S.of(context).noPotentialObjectHasBeenDetected,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2!
+                      .copyWith(color: Theme.of(context).disabledColor),
+                )
+              ],
+            ),
+        );
   }
 }
