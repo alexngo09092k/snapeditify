@@ -9,7 +9,6 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/controllers/edit/painter_state.dart';
 import 'package:snapretouch/generated/l10n.dart';
@@ -36,12 +35,12 @@ class EditValue {
 }
 
 class EditController extends ValueNotifier<EditValue> {
-  EditController({required this.context, required this.imagePath})
-      : super(EditValue(state: PainterState())) {
-    _initial();
+  EditController({required this.context, required String imagePath}) : super(EditValue(state: PainterState())) {
+    _initial(imagePath);
   }
 
-  Future<void> _initial() async {
+  Future<void> _initial(String imagePath) async {
+    _imagePath = imagePath;
     _internet = InternetChecking.getInstance();
     _internet.initialize('google.com');
 
@@ -76,7 +75,8 @@ class EditController extends ValueNotifier<EditValue> {
   }
 
   final BuildContext context;
-  final String imagePath;
+  late String _imagePath;
+  String get imagePath => _imagePath;
 
   late final InternetChecking _internet;
 
@@ -279,13 +279,29 @@ class EditController extends ValueNotifier<EditValue> {
     });
   }
 
-  _onImagePick(XFile pickedFile) {
+  _onImagePick(XFile pickedFile) async {
     printLog('on image picked');
-    Navigator.pushReplacementNamed(
-      context,
-      AppRoutes.edit,
-      arguments: pickedFile,
+
+    _imagePath = pickedFile.path;
+    
+     value.state = PainterState(
+      image: await ImageConvert.imagePathToImage(imagePath),
+      originalImageBase64: ImageConvert.imagePathToBase64(imagePath),
+      strokeWidth: state.strokeWidth,
     );
+
+    state.addListener((event) {
+      printLog('from edit controller $event');
+      notifyListeners();
+    });
+    notifyListeners();
+
+    Navigator.pop(context);
+    // Navigator.pushReplacementNamed(
+    //   context,
+    //   AppRoutes.edit,
+    //   arguments: pickedFile,
+    // );
   }
 
   @override

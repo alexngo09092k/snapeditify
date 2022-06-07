@@ -153,7 +153,6 @@ class _HomePageState extends CustomOverlayState<HomePage> {
                               )),
                         ),
                         Positioned(
-                            bottom: 0,
                             child: Container(
                               padding: const EdgeInsets.all(
                                 AppDimensions.paddingSizeDefault,
