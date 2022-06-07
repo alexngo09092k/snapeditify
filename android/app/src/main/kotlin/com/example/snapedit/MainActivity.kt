@@ -1,4 +1,4 @@
-package com.example.snapretouch
+package app.onlybadidea.snapretouch
 
 import io.flutter.embedding.android.FlutterActivity
 

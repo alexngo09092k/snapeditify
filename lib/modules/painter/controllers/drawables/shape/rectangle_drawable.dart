@@ -106,9 +106,6 @@ class RectangleDrawable extends Sized2DDrawable implements ShapeDrawable {
   @override
   void onTapped() {
     printLog('tapped RectangleDrawable');
-    print(size);
-    print(position);
-    print(onTap);
     if (onTap != null) {
       onTap!(position);
     }

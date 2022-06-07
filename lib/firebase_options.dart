@@ -36,7 +36,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyC0PFyQNqvSBjnGe_3Mzdl_dVq7wHsx5eY',
-    appId: '1:270202760919:web:98e21c44334ed60ae0ca92',
+    appId: '1:270202760919:web:04df7102eb80e537e0ca92',
     messagingSenderId: '270202760919',
     projectId: 'snapretouch',
     authDomain: 'snapretouch.firebaseapp.com',
@@ -45,7 +45,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBvyZRSGJcCirMK-2lHM9eY_XnF4ASKCEk',
-    appId: '1:270202760919:android:3b73ffdea3b9e8fbe0ca92',
+    appId: '1:270202760919:android:8a2e17d2182c8fe8e0ca92',
     messagingSenderId: '270202760919',
     projectId: 'snapretouch',
     storageBucket: 'snapretouch.appspot.com',
@@ -53,21 +53,21 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD44d-FNhAZBpmfW7-hVNYMUeOpXlSaEKY',
-    appId: '1:270202760919:ios:687b7ce71cf3194fe0ca92',
+    appId: '1:270202760919:ios:68c7db8b78fd9956e0ca92',
     messagingSenderId: '270202760919',
     projectId: 'snapretouch',
     storageBucket: 'snapretouch.appspot.com',
-    iosClientId: '270202760919-0af2baae6b5hjrp0c2lj7n7n731ff9ci.apps.googleusercontent.com',
-    iosBundleId: 'com.example.snapretouch',
+    iosClientId: '270202760919-4sanjqlir1brs701bajng0fa095f0aqi.apps.googleusercontent.com',
+    iosBundleId: 'app.onlybadidea.snapretouch',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyD44d-FNhAZBpmfW7-hVNYMUeOpXlSaEKY',
-    appId: '1:270202760919:ios:687b7ce71cf3194fe0ca92',
+    appId: '1:270202760919:ios:68c7db8b78fd9956e0ca92',
     messagingSenderId: '270202760919',
     projectId: 'snapretouch',
     storageBucket: 'snapretouch.appspot.com',
-    iosClientId: '270202760919-0af2baae6b5hjrp0c2lj7n7n731ff9ci.apps.googleusercontent.com',
-    iosBundleId: 'com.example.snapretouch',
+    iosClientId: '270202760919-4sanjqlir1brs701bajng0fa095f0aqi.apps.googleusercontent.com',
+    iosBundleId: 'app.onlybadidea.snapretouch',
   );
 }

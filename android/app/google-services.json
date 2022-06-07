@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:270202760919:android:3b73ffdea3b9e8fbe0ca92",
+        "mobilesdk_app_id": "1:270202760919:android:8a2e17d2182c8fe8e0ca92",
         "android_client_info": {
-          "package_name": "com.example.snapretouch"
+          "package_name": "app.onlybadidea.snapretouch"
         }
       },
       "oauth_client": [
