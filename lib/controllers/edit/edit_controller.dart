@@ -7,7 +7,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:image_picker/image_picker.dart';
 
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/controllers/edit/painter_state.dart';
@@ -267,6 +266,7 @@ class EditController extends ValueNotifier<EditValue> {
 
   Future<void> getFromGallery() async {
     Navigator.pop(context);
+    clearCache();
     ImagePick.getFromGallery((pickedFile) {
       _onImagePick(pickedFile);
     });
@@ -274,12 +274,13 @@ class EditController extends ValueNotifier<EditValue> {
 
   Future<void> getFromCamera() async {
     Navigator.pop(context);
+    clearCache();
     ImagePick.getFromCamera((pickedFile) {
       _onImagePick(pickedFile);
     });
   }
 
-  _onImagePick(XFile pickedFile) async {
+  _onImagePick(File pickedFile) async {
     printLog('on image picked');
 
     _imagePath = pickedFile.path;
@@ -302,6 +303,10 @@ class EditController extends ValueNotifier<EditValue> {
     //   AppRoutes.edit,
     //   arguments: pickedFile,
     // );
+  }
+
+  Future<void> clearCache () async {
+    await ImageConvert.clearCache();
   }
 
   @override

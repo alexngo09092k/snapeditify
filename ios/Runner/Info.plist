@@ -38,8 +38,6 @@
 	<string>This app requires access to take the photo from camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library to support Edit Features.</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to deliver personalized ads to you. "Ask App Not to track" will limit Advertisement network's ability to deliver relevant ads to you but will not reduce the number of ads you receive.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

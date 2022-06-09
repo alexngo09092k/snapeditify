@@ -4,7 +4,9 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image/image.dart' as imagepkg;
+import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/modules/painter/painter.dart';
 
 class ImageConvert {
@@ -13,6 +15,8 @@ class ImageConvert {
   ImageConvert get instance => _instance;
 
   ImageConvert._internal();
+
+  static File? _cacheFile;
 
   static Future<ui.Image> base64ToImage(String imageBase64) async {
     Uint8List imageBytes = base64.decode(imageBase64);
@@ -76,5 +80,31 @@ class ImageConvert {
     );
 
     return base64.encode(imagepkg.encodePng(destImage));
+  }
+
+  static Future<File?> compressImage(File file) async {
+    final filePath = file.absolute.path;
+    final lastIndex = filePath.lastIndexOf(RegExp(r'.jp'));
+    final splitted = filePath.substring(0, (lastIndex));
+    final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
+    _cacheFile = await FlutterImageCompress.compressAndGetFile(
+      filePath,
+      outPath,
+      minWidth: 1000,
+      minHeight: 1000,
+      quality: 70,
+    );
+    return _cacheFile;
+  }
+
+  static Future<FileSystemEntity?> clearCache() async {
+    try {
+      if (_cacheFile != null) {
+        return await _cacheFile!.delete();
+      }
+    } catch (error) {
+      printLog(error);
+    }
+    return null;
   }
 }

@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/controllers/home/home_state.dart';
@@ -27,7 +28,7 @@ class HomeController extends ValueNotifier<HomeState> {
     });
   }
 
-  _onImagePick(XFile pickedFile) {
+  _onImagePick(File pickedFile) {
     printLog('on image picked');
     Navigator.of(context).pushNamed(AppRoutes.edit, arguments: pickedFile);
   }

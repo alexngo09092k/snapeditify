@@ -46,11 +46,15 @@ class _EditPageState extends CustomOverlayState<EditPage> {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (_) => const GoBackPopup(),
+        builder: (_) => GoBackPopup(
+          onBack: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+        ),
       );
       return;
     }
-    Navigator.of(context).pop();
+    Navigator.of(context).popUntil((route) => route.isFirst);
   }
 
   @override
@@ -79,7 +83,9 @@ class _EditPageState extends CustomOverlayState<EditPage> {
                 AppImages.icRevertNormal3x,
                 width: 20,
               ),
-              onPressed: _controller.prevPainterState != null ? showRevertDialog : null,
+              onPressed: _controller.prevPainterState != null
+                  ? showRevertDialog
+                  : null,
             ),
           ),
         ),

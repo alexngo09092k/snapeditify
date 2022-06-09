@@ -4,7 +4,8 @@ import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/widgets/custom_dialog.dart';
 
 class GoBackPopup extends StatelessWidget {
-  const GoBackPopup({Key? key}) : super(key: key);
+  const GoBackPopup({Key? key, this.onBack}) : super(key: key);
+  final Function? onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,9 @@ class GoBackPopup extends StatelessWidget {
         CustomDialogButton(
           title: S.of(context).ok,
           action: () {
-           Navigator.of(context).popUntil((route) => route.isFirst);
+            if (onBack != null) {
+              onBack!();
+            }
           },
           gradient: AppColors.gradient,
         ),

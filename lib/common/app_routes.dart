@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:snapretouch/pages/edit/edit_page.dart';
 import 'package:snapretouch/pages/home/home_page.dart';
 import 'package:snapretouch/pages/splash/splash_page.dart';
@@ -23,7 +24,7 @@ abstract class AppRoutes {
       case home:
         return _buildRoute(const HomePage(), settings);
       case edit:
-        XFile image = settings.arguments as XFile;
+        File image = settings.arguments as File;
         return _buildRoute(EditPage(imagePath: image.path), settings);
       default:
     }

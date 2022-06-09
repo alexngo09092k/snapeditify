@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/utils/image_convert.dart';
 
 class ImagePick {
   static final ImagePick _instance = ImagePick._internal();
@@ -31,7 +32,7 @@ class ImagePick {
   static const String fileIsNotImage = 'File on path is not an image.';
   static const MethodChannel _channel = MethodChannel(channelName);
 
-  static Future<void> getFromGallery(Function(XFile) onImagePicked) async {
+  static Future<void> getFromGallery(Function(File) onImagePicked) async {
     try {
       final ImagePicker picker = ImagePicker();
       XFile? pickedFile = await picker.pickImage(
@@ -39,14 +40,17 @@ class ImagePick {
         imageQuality: imageQuality,
       );
       if (pickedFile != null) {
-        onImagePicked(pickedFile);
+        File? imageFile = await ImageConvert.compressImage(File(pickedFile.path));
+        if (imageFile != null) {
+          onImagePicked(imageFile);
+        }
       }
     } catch (error) {
       printLog(error);
     }
   }
 
-  static Future<void> getFromCamera(Function(XFile) onImagePicked) async {
+  static Future<void> getFromCamera(Function(File) onImagePicked) async {
     try {
       final ImagePicker picker = ImagePicker();
       XFile? pickedFile = await picker.pickImage(
@@ -54,7 +58,10 @@ class ImagePick {
         imageQuality: imageQuality,
       );
       if (pickedFile != null) {
-        onImagePicked(pickedFile);
+        File? imageFile = await ImageConvert.compressImage(File(pickedFile.path));
+        if (imageFile != null) {
+          onImagePicked(imageFile);
+        }
       }
     } catch (error) {
       printLog(error);
