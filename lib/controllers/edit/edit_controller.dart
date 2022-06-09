@@ -7,7 +7,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:intl/intl.dart';
 
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/controllers/edit/painter_state.dart';
@@ -258,7 +257,7 @@ class EditController extends ValueNotifier<EditValue> {
     final result = await ImageGallerySaver.saveImage(
       base64.decode(state.originalImageBase64!),
       quality: 60,
-      name: 'snappretouch_${DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now())}',
+      name: 'snappretouch_${DateTime.now().millisecondsSinceEpoch}',
       isReturnImagePathOfIOS: true,
     );
 
