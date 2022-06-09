@@ -17,10 +17,10 @@ class PaintControl extends StatefulWidget {
   final EditController controller;
 
   @override
-  State<PaintControl> createState() => _PaintControlState();
+  State<PaintControl> createState() => PaintControlState();
 }
 
-class _PaintControlState extends State<PaintControl> {
+class PaintControlState extends State<PaintControl> {
   bool _showDetail = false;
 
   _toAI() {
@@ -35,6 +35,18 @@ class _PaintControlState extends State<PaintControl> {
     widget.controller.toAI();
   }
 
+  hideDetail() {
+    setState(() {
+      _showDetail = false;
+    });
+  }
+
+  showDetail() {
+    setState(() {
+      _showDetail = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -43,11 +55,7 @@ class _PaintControlState extends State<PaintControl> {
           if (_showDetail)
             DetailDetectedObject(
               controller: widget.controller,
-              hideDetailDetectedObjects: () {
-                setState(() {
-                  _showDetail = false;
-                });
-              },
+              hideDetailDetectedObjects: hideDetail,
             ),
           if (!_showDetail) ...[
             Container(
@@ -57,11 +65,7 @@ class _PaintControlState extends State<PaintControl> {
                 builder: (context, _, __) => widget.controller.isAI
                     ? CountDetectedObject(
                         controller: widget.controller,
-                        showDetailDetectedObject: () {
-                          setState(() {
-                            _showDetail = true;
-                          });
-                        },
+                        showDetailDetectedObject: showDetail,
                       )
                     : StrokeWidthSlider(
                         controller: widget.controller,

@@ -16,6 +16,7 @@ import 'package:snapretouch/models/ai_detection_response.dart';
 import 'package:snapretouch/models/detected_object.dart';
 import 'package:snapretouch/models/erase_body.dart';
 import 'package:snapretouch/models/erase_response.dart';
+import 'package:snapretouch/pages/edit/widgets/paint_control.dart';
 import 'package:snapretouch/repositories/ai_repository.dart';
 import 'package:snapretouch/utils/image_convert.dart';
 import 'package:snapretouch/utils/image_pick.dart';
@@ -39,6 +40,7 @@ class EditController extends ValueNotifier<EditValue> {
   }
 
   Future<void> _initial(String imagePath) async {
+    _painterControlKey = GlobalKey<PaintControlState>();
     _imagePath = imagePath;
     _internet = InternetChecking.getInstance();
     _internet.initialize('google.com');
@@ -80,6 +82,10 @@ class EditController extends ValueNotifier<EditValue> {
   late final InternetChecking _internet;
 
   late final AIRepository _aiRepository;
+
+  late final GlobalKey<PaintControlState> _painterControlKey;
+
+  GlobalKey<PaintControlState> get painterControlKey => _painterControlKey;
 
   PainterState get state => value.state;
 
@@ -281,6 +287,11 @@ class EditController extends ValueNotifier<EditValue> {
   }
 
   _onImagePick(File pickedFile) async {
+    if( _painterControlKey.currentState!= null) {
+      _painterControlKey.currentState!.hideDetail();
+      toDraw();
+    }
+
     printLog('on image picked');
 
     _imagePath = pickedFile.path;

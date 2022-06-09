@@ -98,6 +98,7 @@ class _EditPageState extends CustomOverlayState<EditPage> {
               controller: _controller,
             ),
             PaintControl(
+              key: _controller.painterControlKey,
               controller: _controller,
             ),
           ],

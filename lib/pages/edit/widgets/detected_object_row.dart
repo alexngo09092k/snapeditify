@@ -47,7 +47,7 @@ class DetectedObjectRow extends StatelessWidget {
 
     return ValueListenableBuilder(
       valueListenable: controller,
-      builder: (_, __, image) => Container(
+      builder: (_, __, image) => controller.detectedObjects[maskId] != null ? Container(
         color: controller.detectedObjects[maskId]!.isSelected &&
                 !controller.detectedObjects[maskId]!.isRemoved
             ? Theme.of(context).highlightColor.withOpacity(0.1)
@@ -92,8 +92,8 @@ class DetectedObjectRow extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      child: controller.detectedObjects[maskId]!.image != null
+      ): const SizedBox(),
+      child: controller.detectedObjects[maskId] != null && controller.detectedObjects[maskId]!.image != null
           ? ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
               child: Container(
