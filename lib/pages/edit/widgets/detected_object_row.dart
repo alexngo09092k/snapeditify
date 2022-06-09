@@ -17,6 +17,10 @@ class DetectedObjectRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (controller.detectedObjects[maskId] == null) {
+      return const SizedBox();
+    }
+
     final Widget title = Text(
       controller.detectedObjects[maskId]!.objectDescription,
       style: Theme.of(context).textTheme.subtitle1,
