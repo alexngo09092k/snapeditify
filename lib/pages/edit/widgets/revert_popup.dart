@@ -11,7 +11,7 @@ class RevertPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
-          height: 180,
+          height: 205,
           title: Text(
             S.of(context).discardChangesAndRevert,
             style: Theme.of(context)
