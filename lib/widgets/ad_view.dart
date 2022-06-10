@@ -58,8 +58,6 @@ class _AdViewState extends State<AdView> {
             vertical: AppDimensions.paddingSizeDefault,
           ),
           decoration: BoxDecoration(
-            color: AppColors.kTeal50,
-            border: Border.all(color: AppColors.topicColor.withOpacity(0.2), width: 1),
             borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.paddingSizeDefault)),
             image: DecorationImage(
               image: Image.asset(AppImages.adPlaceholder).image,
@@ -72,7 +70,6 @@ class _AdViewState extends State<AdView> {
               width: widget.width,
               height: widget.height,
               decoration: BoxDecoration(
-                color: AppColors.kTeal50,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(
                     AppDimensions.paddingSizeDefault,
