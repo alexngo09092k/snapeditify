@@ -10,7 +10,7 @@ class GoBackPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
-      height: 175,
+      height: 190,
       message: Text(
         S.of(context).allChangesWillBeLostAreYouSureYouWant,
         textAlign: TextAlign.center,
