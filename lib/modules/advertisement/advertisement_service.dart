@@ -139,13 +139,13 @@ class AdvertisementService implements BaseAdvertisementService, AppLifeCycleHand
   }
 
   @override
-  Widget? loadAd({required AdvertisementViewType type, AdSize size = AdSize.banner, Function(dynamic)? onAd}) {
+  Widget? loadAd({required AdvertisementViewType type, AdSize size = AdSize.banner, Function(dynamic)? onAd, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad}) {
     if (_listAdView[type] != null && _listAdView[type]!.isNotEmpty) {
       final viewAd = _listAdView[type]!.first;
       final adsProvider = getAdsProvider(viewAd.data!.provider);
       if (adsProvider != null) {
         if (viewAd.type == AdvertisementViewType.widget) {
-          Widget? widgetAd = adsProvider.createAdWidget(adItem: viewAd.data!, size: size);
+          Widget? widgetAd = adsProvider.createAdWidget(adItem: viewAd.data!, size: size, onLoadedAd: onLoadedAd, onAdFailedToLoad: onAdFailedToLoad);
           if(onAd != null) onAd(widgetAd);
         } else {
           adsProvider.loadAd(adItem: viewAd.data!, onAd: onAd);

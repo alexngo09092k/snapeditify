@@ -349,6 +349,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Automatic`
+  String get automatic {
+    return Intl.message(
+      'Automatic',
+      name: 'automatic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free`
+  String get free {
+    return Intl.message(
+      'Free',
+      name: 'free',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Better quality`
+  String get betterQuality {
+    return Intl.message(
+      'Better quality',
+      name: 'betterQuality',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -11,11 +11,10 @@ class GoogleAdvertisement extends AdvertisementBase {
   AdvertisementProvider get adsProvider => AdvertisementProvider.google;
 
   @override
-  Widget createAdWidget(
-      {required AdvertisementItem adItem, AdSize size = AdSize.banner}) {
+  Widget createAdWidget({required AdvertisementItem adItem, AdSize size = AdSize.banner, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad}) {
     switch (adItem.type) {
       case AdvertisementType.banner:
-        var bannerAd = _loadBannerAd(adItem);
+        var bannerAd = _loadBannerAd(adItem, null, onLoadedAd, onAdFailedToLoad);
         return Container(
           alignment: Alignment.center,
           width: bannerAd.size.width.toDouble(),
@@ -23,13 +22,13 @@ class GoogleAdvertisement extends AdvertisementBase {
           child: AdWidget(ad: bannerAd),
         );
       case AdvertisementType.fluid:
-        var bannerAd = _loadFluidAd(adItem);
+        var bannerAd = _loadFluidAd(adItem, null, onLoadedAd, onAdFailedToLoad);
         return Container(
           alignment: Alignment.center,
           child: AdWidget(ad: bannerAd),
         );
       case AdvertisementType.native:
-        var nativeAd = _loadNativeAd(adItem);
+        var nativeAd = _loadNativeAd(adItem, null, onLoadedAd, onAdFailedToLoad);
         return Container(
           alignment: Alignment.center,
           child: AdWidget(ad: nativeAd),
@@ -40,25 +39,25 @@ class GoogleAdvertisement extends AdvertisementBase {
   }
 
   @override
-  void loadAd({required AdvertisementItem adItem, Function(dynamic)? onAd}) {
+  void loadAd({required AdvertisementItem adItem, Function(dynamic)? onAd, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad}) {
     switch (adItem.type) {
       case AdvertisementType.banner:
-        _loadBannerAd(adItem, onAd);
+        _loadBannerAd(adItem, onAd, onLoadedAd, onAdFailedToLoad);
         break;
       case AdvertisementType.fluid:
-        _loadFluidAd(adItem, onAd);
+        _loadFluidAd(adItem, onAd, onLoadedAd, onAdFailedToLoad);
         break;
       case AdvertisementType.native:
-        _loadNativeAd(adItem, onAd);
+        _loadNativeAd(adItem, onAd, onLoadedAd, onAdFailedToLoad);
         break;
       case AdvertisementType.reward:
-        _loadRewardAd(adItem, onAd);
+        _loadRewardAd(adItem, onAd, onLoadedAd, onAdFailedToLoad);
         break;
       case AdvertisementType.interstitial:
-        _loadInterstitialAd(adItem, onAd);
+        _loadInterstitialAd(adItem, onAd, onLoadedAd, onAdFailedToLoad);
         break;
       case AdvertisementType.openApp:
-        _loadOpenAppAd(adItem, onAd);
+        _loadOpenAppAd(adItem, onAd, onLoadedAd, onAdFailedToLoad);
         break;
       default:
         break;
@@ -89,17 +88,18 @@ class GoogleAdvertisement extends AdvertisementBase {
     );
   }
 
-  FluidAdManagerBannerAd _loadFluidAd(AdvertisementItem adItem,
-      [Function(FluidAdManagerBannerAd)? onAd]) {
+  FluidAdManagerBannerAd _loadFluidAd(AdvertisementItem adItem, [Function(FluidAdManagerBannerAd)? onAd, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad]) {
     var ad = FluidAdManagerBannerAd(
       adUnitId: adItem.id,
       request: const AdManagerAdRequest(nonPersonalizedAds: true),
       listener: AdManagerBannerAdListener(
         onAdLoaded: (Ad ad) {
           printLog('$ad loaded: ${ad.responseInfo}');
+          if(onLoadedAd != null) onLoadedAd(ad);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           printLog('Fuild Ad failedToLoad: $error');
+          if(onAdFailedToLoad != null) onAdFailedToLoad(error);
           ad.dispose();
         },
         onAdOpened: (Ad ad) => printLog('onAdOpened.'),
@@ -112,16 +112,18 @@ class GoogleAdvertisement extends AdvertisementBase {
     return ad;
   }
 
-  NativeAd _loadNativeAd(AdvertisementItem adItem, [Function(NativeAd)? onAd]) {
+  NativeAd _loadNativeAd(AdvertisementItem adItem, [Function(NativeAd)? onAd, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad]) {
     var ad = NativeAd(
       adUnitId: adItem.id,
       factoryId: 'listTile',
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {
           printLog('$ad loaded: ${ad.responseInfo}');
+          if(onLoadedAd != null) onLoadedAd(ad);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           printLog('Native failedToLoad: $error');
+          if(onAdFailedToLoad != null) onAdFailedToLoad(error);
           ad.dispose();
         },
       ),
@@ -133,16 +135,18 @@ class GoogleAdvertisement extends AdvertisementBase {
     return ad;
   }
 
-  BannerAd _loadBannerAd(AdvertisementItem adItem, [Function(BannerAd)? onAd]) {
+  BannerAd _loadBannerAd(AdvertisementItem adItem, [Function(BannerAd)? onAd, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad]) {
     var ad = BannerAd(
       adUnitId: adItem.id,
       size: AdSize.banner,
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           printLog('$ad loaded: ${ad.responseInfo}');
+          if(onLoadedAd != null) onLoadedAd(ad);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           printLog('Banner failedToLoad: $error');
+          if(onAdFailedToLoad != null) onAdFailedToLoad(error);
           ad.dispose();
         },
       ),
@@ -154,7 +158,7 @@ class GoogleAdvertisement extends AdvertisementBase {
     return ad;
   }
 
-  void _loadRewardAd(AdvertisementItem adItem, [Function(RewardedAd)? onAd]) {
+  void _loadRewardAd(AdvertisementItem adItem, [Function(RewardedAd)? onAd, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad]) {
     RewardedAd.load(
       adUnitId: adItem.id,
       request: const AdManagerAdRequest(nonPersonalizedAds: true),
@@ -175,19 +179,18 @@ class GoogleAdvertisement extends AdvertisementBase {
             onAdImpression: (RewardedAd ad) =>
                 printLog('$ad impression occurred.'),
           );
-          if (onAd != null) {
-            onAd(ad);
-          }
+          if(onLoadedAd != null) onLoadedAd(ad);
+          if (onAd != null) onAd(ad);
         },
         onAdFailedToLoad: (LoadAdError error) {
           printLog('RewardedAd failed to load: $error');
+          if(onAdFailedToLoad != null) onAdFailedToLoad(error);
         },
       ),
     );
   }
 
-  void _loadInterstitialAd(AdvertisementItem adItem,
-      [Function(InterstitialAd)? onAd]) {
+  void _loadInterstitialAd(AdvertisementItem adItem, [Function(InterstitialAd)? onAd, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad]) {
     InterstitialAd.load(
       adUnitId: adItem.id,
       request: const AdManagerAdRequest(nonPersonalizedAds: true),
@@ -208,18 +211,18 @@ class GoogleAdvertisement extends AdvertisementBase {
             onAdImpression: (InterstitialAd ad) =>
                 printLog('$ad impression occurred.'),
           );
-          if (onAd != null) {
-            onAd(ad);
-          }
+          if(onLoadedAd != null) onLoadedAd(ad);
+          if (onAd != null) onAd(ad);
         },
         onAdFailedToLoad: (LoadAdError error) {
           printLog('InterstitialAd failed to load: $error');
+          if(onAdFailedToLoad != null) onAdFailedToLoad(error);
         },
       ),
     );
   }
 
-  _loadOpenAppAd(AdvertisementItem adItem, [Function(AppOpenAd)? onAd]) {
+  _loadOpenAppAd(AdvertisementItem adItem, [Function(AppOpenAd)? onAd, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad]) {
     AppOpenAd.load(
       adUnitId: adItem.id,
       request: const AdManagerAdRequest(nonPersonalizedAds: true),
@@ -241,12 +244,14 @@ class GoogleAdvertisement extends AdvertisementBase {
             onAdImpression: (AppOpenAd ad) =>
                 printLog('$ad impression occurred.'),
           );
+          if(onLoadedAd != null) onLoadedAd(ad);
           if (onAd != null) {
             onAd(ad);
           }
         },
         onAdFailedToLoad: (LoadAdError error) {
           printLog('OpenAppAd failed to load: $error');
+          if(onAdFailedToLoad != null) onAdFailedToLoad(error);
         },
       ),
       orientation: AppOpenAd.orientationPortrait,

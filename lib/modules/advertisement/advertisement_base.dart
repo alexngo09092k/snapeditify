@@ -13,7 +13,7 @@ abstract class AdvertisementBase {
     EasyDebounce.cancel(adId);
   }
 
-  void loadAd({required AdvertisementItem adItem, Function(dynamic)? onAd});
+  void loadAd({required AdvertisementItem adItem, Function(dynamic)? onAd, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad});
 
-  Widget? createAdWidget({required AdvertisementItem adItem, AdSize size = AdSize.banner});
+  Widget? createAdWidget({required AdvertisementItem adItem, AdSize size = AdSize.banner, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad});
 }

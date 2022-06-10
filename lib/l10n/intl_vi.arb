@@ -29,5 +29,8 @@
   "allowAppToAccessPhotosAndMediaOnYourDevice": "Cho phép ứng dụng truy cập ảnh và phương tiện trên thiết bị của bạn.",
   "others": "Khác",
   "aiMessageFailure": "Kích thước ảnh quá lớn.",
-  "removeMessageFailure": "Kích thước ảnh quá lớn."
+  "removeMessageFailure": "Kích thước ảnh quá lớn.",
+  "automatic": "Tự động",
+  "free": "Miễn phí",
+  "betterQuality": "Chất lượng"
 }

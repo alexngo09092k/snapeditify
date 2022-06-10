@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Allow app to access photos and media on your device."),
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
+        "automatic": MessageLookupByLibrary.simpleMessage("Automatic"),
+        "betterQuality": MessageLookupByLibrary.simpleMessage("Better quality"),
         "brush": MessageLookupByLibrary.simpleMessage("Brush"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -45,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Clean your photo faster & better with"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("Discard changes and revert"),
+        "free": MessageLookupByLibrary.simpleMessage("Free"),
         "imageSaved": MessageLookupByLibrary.simpleMessage("Image saved!"),
         "newImage": MessageLookupByLibrary.simpleMessage("New image"),
         "noPotentialObjectHasBeenDetected":

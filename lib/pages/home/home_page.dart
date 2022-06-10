@@ -4,6 +4,7 @@ import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/controllers/home/home_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/pages/home/widgets/home_banner.dart';
 import 'package:snapretouch/utils/permission_checking.dart';
 import 'package:snapretouch/widgets/ad_view.dart';
 import 'package:snapretouch/widgets/app_logo.dart';
@@ -13,6 +14,7 @@ import 'package:snapretouch/widgets/custom_card.dart';
 import 'package:snapretouch/widgets/custom_overlay_state.dart';
 import 'package:snapretouch/modules/painter/painter.dart';
 import 'dart:ui' as ui;
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -29,8 +31,8 @@ class _HomePageState extends CustomOverlayState<HomePage> {
   void initState() {
     _controller = HomeController(context: context);
     (() async {
-     _thumbImage = await Image.asset(AppImages.beforeAfter).image.image;
-     setState(() {});
+      _thumbImage = await Image.asset(AppImages.beforeAfter).image.image;
+      setState(() {});
     })();
     super.initState();
   }
@@ -130,11 +132,17 @@ class _HomePageState extends CustomOverlayState<HomePage> {
                       type: AdvertisementViewType.widget,
                       width: lottieWidth,
                       height: lottieWidth * 2 / 3,
+                      loadingWidget: HomeBanner(
+                        width: lottieWidth,
+                        height: lottieWidth * 2 / 3,
+                      ),
                     ),
                     Container(
                       width: lottieWidth,
                       height: lottieWidth * 2 / 3,
-                      margin: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
+                      margin: const EdgeInsets.all(
+                        AppDimensions.paddingSizeDefault,
+                      ),
                       child: Stack(children: [
                         CustomCard(
                           radius: AppDimensions.paddingSizeDefault,
@@ -154,37 +162,41 @@ class _HomePageState extends CustomOverlayState<HomePage> {
                         ),
                         Positioned(
                             child: Container(
-                              padding: const EdgeInsets.all(
-                                AppDimensions.paddingSizeDefault,
-                              ),
-                              width: lottieWidth * 2.5 / 3,
-                              child: RichText(
-                                text: TextSpan(
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6!
-                                      .copyWith(color: AppColors.kWhite),
-                                  children: [
-                                    TextSpan(
-                                        text: S
-                                            .of(context)
-                                            .cleanYourPhotoFasterBetterWith),
-                                    WidgetSpan(
-                                      child: Container(
-                                        padding: const EdgeInsets.only(
-                                          left: AppDimensions.paddingSizeExtraSmall,
-                                          bottom: AppDimensions.paddingSizeExtraSmall - 3
-                                        ),
-                                        child: Image.asset(
-                                          AppImages.icAIHomeNormal3x,
-                                          width: 20,
-                                        ),
-                                      ),
+                          padding: const EdgeInsets.all(
+                            AppDimensions.paddingSizeDefault,
+                          ),
+                          width: lottieWidth * 2.5 / 3,
+                          child: RichText(
+                            text: TextSpan(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(
+                                    color: AppColors.kWhite,
+                                  ),
+                              children: [
+                                TextSpan(
+                                    text: S
+                                        .of(context)
+                                        .cleanYourPhotoFasterBetterWith),
+                                WidgetSpan(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(
+                                        left:
+                                            AppDimensions.paddingSizeExtraSmall,
+                                        bottom: AppDimensions
+                                                .paddingSizeExtraSmall -
+                                            3),
+                                    child: Image.asset(
+                                      AppImages.icAIHomeNormal3x,
+                                      width: 20,
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ))
+                              ],
+                            ),
+                          ),
+                        ))
                       ]),
                     ),
                   ],

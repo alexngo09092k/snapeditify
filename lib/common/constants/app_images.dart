@@ -45,6 +45,7 @@ abstract class AppImages {
   static const String imgSplashCopyrightNormal3x = 'assets/images/img_splash_copyright_Normal@3x.png';
   static const String imgSplashLogoNormal3x = 'assets/images/img_splash_logo_Normal@3x.png';
 
+  static const String homeBanner = 'assets/images/home_banner.png';
   static const String homeBefore = 'assets/images/home_before.jpeg';
   static const String homeAfter = 'assets/images/home_after.jpeg';
   static const String beforeAfter = 'assets/images/before_after.png';

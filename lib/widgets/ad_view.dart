@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/services/services.dart';
 
@@ -11,13 +12,14 @@ class AdView extends StatefulWidget {
       this.width,
       this.height,
       this.adSize = AdSize.banner,
-      this.loadingImage})
+      this.loadingWidget,
+      })
       : super(key: key);
   final AdvertisementViewType type;
   final double? width;
   final double? height;
   final AdSize adSize;
-  final ImageProvider? loadingImage;
+  final Widget? loadingWidget;
 
   @override
   State<AdView> createState() => _AdViewState();
@@ -25,17 +27,25 @@ class AdView extends StatefulWidget {
 
 class _AdViewState extends State<AdView> {
   Widget? ad;
+  bool isLoaded = false;
 
   @override
   void initState() {
     Services().advertisement.loadAd(
         type: widget.type,
         size: widget.adSize,
-        onAd: (adLoaded) {
-          setState(() {
-            ad = adLoaded;
-          });
-        });
+        onAd: (adWidget) => ad = adWidget,
+        onLoadedAd: (ad) {
+          isLoaded = true;
+          printLog('loaded ad from AdView');
+          setState(() {});
+        },
+        onAdFailedToLoad: (error) {
+          isLoaded = false;
+          printLog('load failed ad from AdView');
+          setState(() {});
+        },
+      );
     super.initState();
   }
 
@@ -47,10 +57,14 @@ class _AdViewState extends State<AdView> {
           margin: const EdgeInsets.symmetric(
             vertical: AppDimensions.paddingSizeDefault,
           ),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: AppColors.kTeal50,
-            // border: Border.all(color: AppColors.topicColor.withOpacity(0.2), width: 1),
-            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.paddingSizeDefault)),
+            border: Border.all(color: AppColors.topicColor.withOpacity(0.2), width: 1),
+            borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.paddingSizeDefault)),
+            image: DecorationImage(
+              image: Image.asset(AppImages.adPlaceholder).image,
+              fit: BoxFit.fill,
+            )
           ),
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.paddingSizeDefault)),
@@ -59,10 +73,6 @@ class _AdViewState extends State<AdView> {
               height: widget.height,
               decoration: BoxDecoration(
                 color: AppColors.kTeal50,
-                // image: DecorationImage(
-                //   image: widget.loadingImage ?? Image.asset(AppImages.adPlaceholder).image,
-                //   fit: BoxFit.fill,
-                // ),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(
                     AppDimensions.paddingSizeDefault,
@@ -73,7 +83,7 @@ class _AdViewState extends State<AdView> {
                   width: 1,
                 ),
               ),
-              child: ad,
+              child: isLoaded ? ad : widget.loadingWidget,
             ),
           ),
         );

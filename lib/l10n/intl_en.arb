@@ -29,5 +29,8 @@
   "allowAppToAccessPhotosAndMediaOnYourDevice": "Allow app to access photos and media on your device.",
   "others": "Others",
   "aiMessageFailure": "Image size too big.",
-  "removeMessageFailure": "Image size too big."
+  "removeMessageFailure": "Image size too big.",
+  "automatic": "Automatic",
+  "free": "Free",
+  "betterQuality": "Better quality"
 }

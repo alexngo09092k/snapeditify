@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Cho phép ứng dụng truy cập ảnh và phương tiện trên thiết bị của bạn."),
         "auto": MessageLookupByLibrary.simpleMessage("Tự động"),
+        "automatic": MessageLookupByLibrary.simpleMessage("Tự động"),
+        "betterQuality": MessageLookupByLibrary.simpleMessage("Chất lượng"),
         "brush": MessageLookupByLibrary.simpleMessage("Cọ"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
@@ -45,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Làm sạch ảnh của bạn nhanh hơn và tốt hơn với"),
         "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage(
             "Tất cả các thay đổi và khôi phục ảnh ban đầu?"),
+        "free": MessageLookupByLibrary.simpleMessage("Miễn phí"),
         "imageSaved": MessageLookupByLibrary.simpleMessage("Đã lưu ảnh"),
         "newImage": MessageLookupByLibrary.simpleMessage("Ảnh mới"),
         "noPotentialObjectHasBeenDetected":
