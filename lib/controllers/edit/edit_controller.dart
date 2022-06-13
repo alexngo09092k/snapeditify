@@ -98,6 +98,9 @@ class EditController extends ValueNotifier<EditValue> {
   bool get isErase => state.freeStyleMode == FreeStyleMode.erase;
   bool get isAI => state.freeStyleMode == FreeStyleMode.none;
 
+  bool _savedImage = false;
+  bool get canBack => prevPainterState == null || _savedImage;
+
   //action
   bool get canUndo => state.canUndo;
   bool get canRedo => state.canRedo;
@@ -166,6 +169,7 @@ class EditController extends ValueNotifier<EditValue> {
   }
 
   Future<void> remove({bool Function()? onStart, Function(EraseResponse?)? onEnd}) async {
+    _savedImage = false;
     if (!_internet.hasConnection) {
       printLog('No internet');
       showDialog(
@@ -262,6 +266,7 @@ class EditController extends ValueNotifier<EditValue> {
     );
 
     if (result != null && result['filePath'] != null) {
+      _savedImage = true;
       String imagePath = result['filePath'];
       imagePath = imagePath.substring(7, imagePath.length);
       onImagePath(imagePath);

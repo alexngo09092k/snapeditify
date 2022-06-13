@@ -42,7 +42,7 @@ class _EditPageState extends CustomOverlayState<EditPage> {
   }
 
   Future<void> goBack() async {
-    if (_controller.prevPainterState != null) {
+    if (!_controller.canBack) {
       showDialog(
         context: context,
         barrierDismissible: false,
