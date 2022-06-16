@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:snapretouch/services/services.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -22,6 +23,7 @@ class DefaultFirebaseOptions {
     // ignore: missing_enum_constant_in_switch
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
+        if(Services().advertisement.isHuawei) return androidHuawei;
         return android;
       case TargetPlatform.iOS:
         return ios;
@@ -46,6 +48,14 @@ class DefaultFirebaseOptions {
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBvyZRSGJcCirMK-2lHM9eY_XnF4ASKCEk',
     appId: '1:270202760919:android:8a2e17d2182c8fe8e0ca92',
+    messagingSenderId: '270202760919',
+    projectId: 'snapretouch',
+    storageBucket: 'snapretouch.appspot.com',
+  );
+
+  static const FirebaseOptions androidHuawei = FirebaseOptions(
+    apiKey: 'AIzaSyBvyZRSGJcCirMK-2lHM9eY_XnF4ASKCEk',
+    appId: '1:270202760919:android:a763e1c1569be372e0ca92',
     messagingSenderId: '270202760919',
     projectId: 'snapretouch',
     storageBucket: 'snapretouch.appspot.com',

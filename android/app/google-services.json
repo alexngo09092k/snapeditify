@@ -40,6 +40,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270202760919:android:a763e1c1569be372e0ca92",
+        "android_client_info": {
+          "package_name": "remove.unwanted.object"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270202760919-8u1e0uk2kb9jfndbhsc21cd235v3u90i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvyZRSGJcCirMK-2lHM9eY_XnF4ASKCEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270202760919-8u1e0uk2kb9jfndbhsc21cd235v3u90i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "270202760919-0af2baae6b5hjrp0c2lj7n7n731ff9ci.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.snapretouch"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

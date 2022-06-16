@@ -4,7 +4,7 @@ Map<String, dynamic> enviroment = {
   "firebaseConfig": {
     "enable": true,
     "enableCrashAnalytics": false,
-    "enableRemoteConfigFirebase": false,
+    "enableRemoteConfigFirebase": true,
   },
 
   "appConfig": {
@@ -94,30 +94,21 @@ Map<String, dynamic> enviroment = {
       {
         "type": "splash",
         "provider": "huawei",
-        "iosId": "testq6zq98hecj",
-        "androidId": "testq6zq98hecj",
+        "iosId": "c0cs1vbgjb",
+        "androidId": "c0cs1vbgjb",
       },
       {
         "type": "native",
         "provider": "huawei",
-        "iosId": "testu7m3hc4gvm",
-        "androidId": "testu7m3hc4gvm",
+        "iosId": "q8bosp263n",
+        "androidId": "q8bosp263n",
         "showOnScreens": ['home', 'edit'],
       },
       {
         "type": "interstitial",
         "provider": "huawei",
-        "iosId": "teste9ih9j0rc3",
-        "androidId": "teste9ih9j0rc3",
-        "showOnScreens": ['edit'],
-        "hideOnScreens": ['edit'],
-        "waitingTimeToDisplay": 5,
-      },
-      {
-        "type": "reward",
-        "provider": "huawei",
-        "iosId": "testx9dtjwj8hp",
-        "androidId": "testx9dtjwj8hp",
+        "iosId": "u6jhuouf85",
+        "androidId": "u6jhuouf85",
         "showOnScreens": ['edit'],
         "hideOnScreens": ['edit'],
         "waitingTimeToDisplay": 5,

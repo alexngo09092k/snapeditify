@@ -1,4 +1,4 @@
-package app.onlybadidea.snapretouch
+package remove.unwanted.`object`
 
 import io.flutter.embedding.android.FlutterActivity
 
