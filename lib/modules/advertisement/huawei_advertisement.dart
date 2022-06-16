@@ -102,20 +102,20 @@ class HuaweiAdvertisement extends AdvertisementBase {
           //  case AdEvent.closed:
           //  case AdEvent.leave:
           case AdEvent.failed:
-          if(onAdFailedToLoad != null) onAdFailedToLoad(errorCode);
-          break;
+            if(onAdFailedToLoad != null) onAdFailedToLoad(errorCode);
+            break;
           //  case AdEvent.clicked:
           //  case AdEvent.impression:
           //  case AdEvent.disliked:
           case AdEvent.loaded:
           case AdEvent.opened:
-          break;
+            if(onLoadedAd != null) onLoadedAd(_nativeAd);
+            break;
           default:
          }
         },
       ),
     );
-    if(onLoadedAd != null) onLoadedAd(_nativeAd);
     if (onAd != null) {
       onAd(_nativeAd!);
     }
