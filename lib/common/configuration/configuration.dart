@@ -117,11 +117,14 @@ abstract class DefaultConfig {
 }
 
 extension ConfigurationsFireBaseRemoteConfig on Cofiguration {
-  Future<void> loadRemoteConfig() async {
+  Future<bool> loadRemoteConfig() async {
+    if(!InternetChecking.singleton.hasConnection){
+      return false;
+    }
     if (Cofiguration.enableRemoteConfigFirebase) {
       FirebaseRemoteConfig? remoteConfig = Services().firebase.remoteConfig;
 
-      if(remoteConfig == null) return;
+      if(remoteConfig == null) return false;
 
       PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
       String stringConfig = remoteConfig.getString(packageInfo.packageName.split('.').join());
@@ -131,7 +134,9 @@ extension ConfigurationsFireBaseRemoteConfig on Cofiguration {
       for (var item in _listConfigRemoteKey) {
         _loadConfig(item, config);
       }
+
     }
+    return true;
   }
 }
 

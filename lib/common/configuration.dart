@@ -8,6 +8,7 @@ import 'package:snapretouch/modules/advertisement/models/advertisement_config.da
 import 'package:snapretouch/modules/firebase/models/firebase_config.dart';
 
 import 'package:snapretouch/services/services.dart';
+import 'package:snapretouch/utils/internet_checking.dart';
 
 import 'logs.dart';
 

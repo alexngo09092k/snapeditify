@@ -5,9 +5,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 class InternetChecking {
   String? _lookUpAddress;
   static final InternetChecking _singleton = InternetChecking._internal();
+  static InternetChecking get singleton => _singleton;
   InternetChecking._internal();
-
-  static InternetChecking getInstance() => _singleton;
 
   bool hasConnection = true;
 

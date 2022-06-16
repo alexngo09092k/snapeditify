@@ -45,7 +45,7 @@ class EditController extends ValueNotifier<EditValue> {
   Future<void> _initial(String imagePath) async {
     _painterControlKey = GlobalKey<PaintControlState>();
     _imagePath = imagePath;
-    _internet = InternetChecking.getInstance();
+    _internet = InternetChecking.singleton;
     _internet.initialize('google.com');
 
     _aiRepository = AIRepository();

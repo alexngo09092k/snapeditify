@@ -93,7 +93,7 @@ class _AdViewState extends State<AdView> {
               ),
               child: Stack(
                 children: [
-                  if (ad != null) ad!,
+                  if ((Services().advertisement.isHuawei || isLoaded) && ad != null) ad!,
                   if (!isLoaded)
                     widget.loadingWidget ??
                         AdPlaceHolder(
