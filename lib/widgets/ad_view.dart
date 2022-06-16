@@ -76,7 +76,7 @@ class _AdViewState extends State<AdView> {
             borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.paddingSizeDefault)),
             child: Container(
               width: widget.width,
-              height: widget.height,
+              height: isLoaded ? widget.height : null,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(

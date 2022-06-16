@@ -4,15 +4,13 @@ Map<String, dynamic> enviroment = {
   "firebaseConfig": {
     "enable": true,
     "enableCrashAnalytics": false,
-    "enableRemoteConfigFirebase": true,
+    "enableRemoteConfigFirebase": false,
   },
 
   "appConfig": {
     "name": "SnapRetouch",
     'logo': 'assets/image/logo.png',
-    'appVersion': '1.0',
-    'appColor': '#6C76F1',
-    'appTheme': 'light',
+    'version': '1.0',
     'primaryColor': '#6C76F1',
     'secondaryColor': '#72D5BB',
     'homeLogo': 'assets/images/img_logo_home_Normal@3x.png',
