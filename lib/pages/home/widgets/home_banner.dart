@@ -17,7 +17,11 @@ class HomeBanner extends StatelessWidget {
       padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
       child: Stack(
         children: [
-          CustomImage(image: Cofiguration.appConfig.homeBanner, width: width, height: height), 
+          CustomImage(
+            image: Cofiguration.appConfig.homeBanner,
+            width: width,
+            height: height,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -53,10 +57,15 @@ class _GroupIcon extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset(
-          AppImages.icCheckboxSelectedNormal3x,
-          width: 16,
+        Icon(
+          Icons.check_circle_outline,
+          size: 16,
+          color: AppColors.topicColor,
         ),
+        // Image.asset(
+        //   AppImages.icCheckboxSelectedNormal3x,
+        //   width: 16,
+        // ),
         const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
         Text(
           title,
