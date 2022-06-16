@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:snapretouch/common/app_cache.dart';
+import 'package:snapretouch/common/app_routes.dart';
+import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/controllers/home/home_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
@@ -11,6 +14,7 @@ import 'package:snapretouch/widgets/app_logo.dart';
 import 'package:snapretouch/widgets/before_after/before_after.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
 import 'package:snapretouch/widgets/custom_card.dart';
+import 'package:snapretouch/widgets/custom_image.dart';
 import 'package:snapretouch/widgets/custom_overlay_state.dart';
 import 'package:snapretouch/modules/painter/painter.dart';
 import 'dart:ui' as ui;
@@ -101,6 +105,7 @@ class _HomePageState extends CustomOverlayState<HomePage> {
 
   @override
   void dispose() {
+    AppCache.instance.clean();
     super.dispose();
   }
 
@@ -113,11 +118,11 @@ class _HomePageState extends CustomOverlayState<HomePage> {
         child: Column(
           children: [
             Row(
-              children: const [
+              children: [
                 Padding(
-                  padding: EdgeInsets.all(AppDimensions.paddingSizeDefault),
+                  padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
                   child: AppLogo(
-                    image: AppImages.imgLogoHomeNormal3x,
+                    image: Cofiguration.appConfig.homeLogo,
                     width: 160,
                   ),
                 )
@@ -136,6 +141,7 @@ class _HomePageState extends CustomOverlayState<HomePage> {
                         width: lottieWidth,
                         height: lottieWidth * 2 / 3,
                       ),
+                      screenName: AppRoutes.home,
                     ),
                     Container(
                       width: lottieWidth,
@@ -155,8 +161,8 @@ class _HomePageState extends CustomOverlayState<HomePage> {
                               child: BeforeAfter(
                                 imageWidth: lottieWidth,
                                 imageHeight: lottieWidth * 2 / 3,
-                                beforeImage: Image.asset(AppImages.homeBefore),
-                                afterImage: Image.asset(AppImages.homeAfter),
+                                beforeImage: CustomImage(image: Cofiguration.appConfig.homeRemoveObjects.first),
+                                afterImage:  CustomImage(image: Cofiguration.appConfig.homeRemoveObjects.last),
                                 thumbImage: _thumbImage,
                               )),
                         ),

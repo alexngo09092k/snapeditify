@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_extension.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/services/services.dart';
 
@@ -9,17 +9,21 @@ class AdView extends StatefulWidget {
   const AdView(
       {Key? key,
       required this.type,
+      required this.screenName,
+      this.provider,
       this.width,
       this.height,
-      this.adSize = AdSize.banner,
       this.loadingWidget,
+      this.adType,
       })
       : super(key: key);
   final AdvertisementViewType type;
   final double? width;
   final double? height;
-  final AdSize adSize;
   final Widget? loadingWidget;
+  final String screenName;
+  final AdvertisementProvider? provider;
+  final AdvertisementType? adType;
 
   @override
   State<AdView> createState() => _AdViewState();
@@ -32,8 +36,12 @@ class _AdViewState extends State<AdView> {
   @override
   void initState() {
     Services().advertisement.loadAd(
+        screenName: widget.screenName,
         type: widget.type,
-        size: widget.adSize,
+        width: widget.width,
+        height: widget.height,
+        provider: widget.provider,
+        adType: widget.adType,
         onAd: (adWidget) => ad = adWidget,
         onLoadedAd: (ad) {
           isLoaded = true;
@@ -60,7 +68,7 @@ class _AdViewState extends State<AdView> {
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.paddingSizeDefault)),
             image: DecorationImage(
-              image: Image.asset(AppImages.adPlaceholder).image,
+              image: Image.asset(AppImages.placeholder).image,
               fit: BoxFit.fill,
             )
           ),

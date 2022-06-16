@@ -50,5 +50,5 @@ abstract class AppImages {
   static const String homeAfter = 'assets/images/home_after.jpeg';
   static const String beforeAfter = 'assets/images/before_after.png';
 
-  static const String adPlaceholder = 'assets/images/ad_placeholder.png';
+  static const String placeholder = 'assets/images/placeholder.png';
 }

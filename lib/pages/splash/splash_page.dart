@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/controllers/splash/splash_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/widgets/static_splash.dart';
@@ -37,7 +37,7 @@ class _SplashPageState extends State<SplashPage> {
       backgroundcolor: Theme.of(context).backgroundColor,
       onEnd: _controller.goToNextScreen,
       duration: const Duration(milliseconds: 1000),
-      image: AppImages.imgSplashLogoNormal3x,
+      image: Cofiguration.appConfig.splashLogo,
       message: S.of(context).aiPowredPhotoEditor,
     );
   }

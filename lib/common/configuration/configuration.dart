@@ -38,15 +38,9 @@ class Cofiguration {
 
   static bool get enableRemoteConfigFirebase => _firebaseConfig.enableRemoteConfigFirebase;
 
-  static String get appName => _appConfig.appName;
+  static AppConfig get appConfig => _appConfig;
 
-  static String get appLogo => _appConfig.appLogo;
-
-  static String get appVersion => _appConfig.appVersion;
-
-  static String get appColor => _appConfig.appColor;
-
-  static String get appTheme => _appConfig.appTheme;
+  static isNetworkImage(String image) => _appConfig.imageProtocol.any((protocol) => image.startsWith(protocol));
 
   static FirebaseConfig get firebaseConfig => _firebaseConfig;
 
@@ -55,52 +49,59 @@ class Cofiguration {
   static AdvertisementConfig get adConfig => _adConfig;
 
   final List<String> _listConfigRemoteKey = [
+    'adConfig',
     'apiConfig',
     'appConfig',
     'firebaseConfig',
   ];
 
-  void _loadConfig(String key, FirebaseRemoteConfig remoteConfig) {
-    switch (key) {
-      case 'apiConfig':
-        var data = remoteConfig.getString('apiConfig');
-        if (data.isNotEmpty) {
-          _apiConfig = ApiConfig.fromJson(data);
-        }
-        break;
-      case 'appConfig':
-        final data = remoteConfig.getString('appConfig');
-        if (data.isNotEmpty) {
-          _appConfig = AppConfig.fromJson(data);
-        }
-        break;
-      case 'firebaseConfig':
-        final data = remoteConfig.getString('firebaseConfig');
-        if (data.isNotEmpty) {
-          _firebaseConfig = FirebaseConfig.fromJson(data);
-        }
-        break;
-      case 'adConfig':
-        final data = remoteConfig.getString('adConfig');
-        if (data.isNotEmpty) {
-          _adConfig = AdvertisementConfig.fromJson(data);
-        }
-        break;
+  void _loadConfig(String key, Map<String, dynamic>? config) async {
+    try {
+      if (config == null) return;
+      switch (key) {
+        case 'apiConfig':
+          if (config['apiConfig'] != null) {
+            _apiConfig = ApiConfig.fromMap(config['apiConfig']);
+          }
+          break;
+        case 'appConfig':
+          if (config['appConfig'] != null) {
+            _appConfig = AppConfig.fromMap(config['appConfig']);
+          }
+          break;
+        case 'firebaseConfig':
+          if (config['firebaseConfig'] != null) {
+            _firebaseConfig = FirebaseConfig.fromMap(config['firebaseConfig']);
+          }
+          break;
+        case 'adConfig':
+          if (config['adConfig'] != null) {
+            _adConfig = AdvertisementConfig.fromMap(config['adConfig']);
+          }
+          break;
+      }
+    } catch (error) {
+      printLog(error);
     }
   }
 }
 
 abstract class DefaultConfig {
   static ApiConfig apiConfig = ApiConfig(
-    url: '',
+    url: 'https://be-prod-1.snapedit.app',
   );
 
   static AppConfig appConfig = AppConfig(
-    appName: '',
-    appVersion: '',
-    appColor: '',
-    appLogo: '',
-    appTheme: '',
+    name: 'SnapRetouch',
+    version: '1.0',
+    primaryColor: '#6C76F1',
+    secondaryColor: '#72D5BB',
+    logo: AppImages.imgLogoHomeNormal3x,
+    homeLogo: AppImages.imgLogoHomeNormal3x,
+    splashLogo: AppImages.imgSplashLogoNormal3x,
+    imageProtocol: ['https://', 'http://', 'data://'],
+    homeBanner: AppImages.homeBanner,
+    homeRemoveObjects: [AppImages.homeBefore, AppImages.homeAfter],
   );
 
   static FirebaseConfig firebaseConfig = FirebaseConfig(
@@ -118,12 +119,35 @@ abstract class DefaultConfig {
 extension ConfigurationsFireBaseRemoteConfig on Cofiguration {
   Future<void> loadRemoteConfig() async {
     if (Cofiguration.enableRemoteConfigFirebase) {
-      final remoteConfig = Services().firebase.remoteConfig;
-      if (remoteConfig != null) {
-        for (var item in _listConfigRemoteKey) {
-          _loadConfig(item, remoteConfig);
-        }
+      FirebaseRemoteConfig? remoteConfig = Services().firebase.remoteConfig;
+
+      if(remoteConfig == null) return;
+
+      PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
+      String stringConfig = remoteConfig.getString(packageInfo.packageName.split('.').join());
+
+      Map<String, dynamic> config = json.decode(stringConfig);
+
+      for (var item in _listConfigRemoteKey) {
+        _loadConfig(item, config);
       }
     }
+  }
+}
+
+extension PackageInfoExtesnion on Cofiguration {
+ static Future<PackageInfo> getPackageInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String appName = packageInfo.appName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+    String packageName = packageInfo.packageName;
+
+    printLog('APP ID: $packageName');
+    printLog('APP NAME $appName');
+    printLog('APP VERSION $version');
+    printLog('App VERSION CODE $buildNumber');
+
+    return packageInfo;
   }
 }

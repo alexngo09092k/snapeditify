@@ -7,6 +7,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:snapretouch/common/app_cache.dart';
+import 'package:snapretouch/common/constants.dart';
 
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/controllers/edit/painter_state.dart';
@@ -18,6 +20,7 @@ import 'package:snapretouch/models/erase_body.dart';
 import 'package:snapretouch/models/erase_response.dart';
 import 'package:snapretouch/pages/edit/widgets/paint_control.dart';
 import 'package:snapretouch/repositories/ai_repository.dart';
+import 'package:snapretouch/services/services.dart';
 import 'package:snapretouch/utils/image_convert.dart';
 import 'package:snapretouch/utils/image_pick.dart';
 import 'package:snapretouch/utils/internet_checking.dart';
@@ -257,19 +260,30 @@ class EditController extends ValueNotifier<EditValue> {
     notifyListeners();
   }
 
-  Future<bool> saveImage(Function(String) onImagePath) async {
+  Future<bool> saveImage(Function(String imagePath, String originalImageBase64) onImagePath) async {
     final result = await ImageGallerySaver.saveImage(
       base64.decode(state.originalImageBase64!),
-      quality: 60,
+      quality: 100,
       name: 'snappretouch_${DateTime.now().millisecondsSinceEpoch}',
-      isReturnImagePathOfIOS: true,
+      isReturnImagePathOfIOS: isIos,
     );
+
+    printLog('saveImage $result');
 
     if (result != null && result['filePath'] != null) {
       _savedImage = true;
       String imagePath = result['filePath'];
-      imagePath = imagePath.substring(7, imagePath.length);
-      onImagePath(imagePath);
+      if(!(Services().advertisement.isHuawei)) {
+        imagePath = imagePath.substring(7, imagePath.length);
+      }else {
+        ///CACHE FILE
+        File? imageFile = await AppCache.instance.cacheImage(state.originalImageBase64!);
+        if(imageFile != null) {
+          printLog('image saved path fix for huawei ${imageFile.path}');
+          imagePath = imageFile.path;
+        }
+      }
+      onImagePath(imagePath, state.originalImageBase64!);
     }
 
     return result != null && result['isSuccess'] != null && result['isSuccess'];
@@ -277,7 +291,7 @@ class EditController extends ValueNotifier<EditValue> {
 
   Future<void> getFromGallery() async {
     Navigator.pop(context);
-    clearCache();
+    // cleanCache();
     ImagePick.getFromGallery((pickedFile) {
       _onImagePick(pickedFile);
     });
@@ -285,7 +299,7 @@ class EditController extends ValueNotifier<EditValue> {
 
   Future<void> getFromCamera() async {
     Navigator.pop(context);
-    clearCache();
+    // cleanCache();
     ImagePick.getFromCamera((pickedFile) {
       _onImagePick(pickedFile);
     });
@@ -321,12 +335,13 @@ class EditController extends ValueNotifier<EditValue> {
     // );
   }
 
-  Future<void> clearCache () async {
-    await ImageConvert.clearCache();
-  }
+  // Future<void> cleanCache () async {
+  //   await AppCache.instance.clean();
+  // }
 
   @override
   void dispose() {
+    // cleanCache();
     state.dispose();
     super.dispose();
   }

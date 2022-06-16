@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/widgets/custom_image.dart';
 
 class HomeBanner extends StatelessWidget {
   const HomeBanner({Key? key, this.width, this.height}) : super(key: key);
@@ -13,26 +15,25 @@ class HomeBanner extends StatelessWidget {
       width: width,
       height: height,
       padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: Image.asset(AppImages.homeBanner).image,
-          fit: BoxFit.fill,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+      child: Stack(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          CustomImage(image: Cofiguration.appConfig.homeBanner, width: width, height: height), 
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _GroupIcon(
-                title: S.of(context).automatic,
-              ),
-              _GroupIcon(
-                title: S.of(context).free,
-              ),
-              _GroupIcon(
-                title: S.of(context).betterQuality,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _GroupIcon(
+                    title: S.of(context).automatic,
+                  ),
+                  _GroupIcon(
+                    title: S.of(context).free,
+                  ),
+                  _GroupIcon(
+                    title: S.of(context).betterQuality,
+                  )
+                ],
               )
             ],
           )
@@ -59,10 +60,7 @@ class _GroupIcon extends StatelessWidget {
         const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
         Text(
           title,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1!
-              .copyWith(),
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(),
         ),
       ],
     );

@@ -7,8 +7,26 @@ class ApiConfig {
 
   ApiConfig({
     required this.url,
-    this.endPoints = const _EndPoints(ai: '', erase: ''),
-    this.headers = const _Headers(ios: {}, android: {}),
+    this.endPoints = const _EndPoints(ai: '/ai_detection/v4', erase: '/erase/v4'),
+    this.headers = const _Headers(
+      ios: {
+        'Host': 'be-prod-1.snapedit.app',
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Cookie': '__cflb=02DiuFkAXusk8L9hm8nWZ2xLNeoGNMZMFM5uzAhM9PFvU',
+        'accept': '*/*',
+        'content-type': 'application/json',
+        'user-agent': 'SnapEdit/1.2.3 (com.sfun.snapretouch; build:37; iOS 15.1.1) Alamofire/5.5.0',
+        'accept-language': 'vi-VN;q=1.0',
+      }, android: {
+        'Host': 'be-prod-1.snapedit.app',
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Cookie': '__cflb=02DiuFkAXusk8L9hm8nWZ2xLNeoGNMZMFM5uzAhM9PFvU',
+        'accept': '*/*',
+        'content-type': 'application/json',
+        'user-agent': 'SnapEdit/1.2.3 (com.sfun.snapretouch; build:37; iOS 15.1.1) Alamofire/5.5.0',
+        'accept-language': 'vi-VN;q=1.0',
+      },
+    ),
   });
 
   ApiConfig copyWith({
@@ -41,12 +59,10 @@ class ApiConfig {
 
   String toJson() => json.encode(toMap());
 
-  factory ApiConfig.fromJson(String source) =>
-      ApiConfig.fromMap(json.decode(source));
+  factory ApiConfig.fromJson(String source) => ApiConfig.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'ApiConfig(url: $url, endPoints: $endPoints, headers: $headers)';
+  String toString() => 'ApiConfig(url: $url, endPoints: $endPoints, headers: $headers)';
 
   @override
   bool operator ==(Object other) {
@@ -97,8 +113,7 @@ class _EndPoints {
 
   String toJson() => json.encode(toMap());
 
-  factory _EndPoints.fromJson(String source) =>
-      _EndPoints.fromMap(json.decode(source));
+  factory _EndPoints.fromJson(String source) => _EndPoints.fromMap(json.decode(source));
 
   @override
   String toString() => 'EndPoints(erase: $erase, ai: $ai)';
@@ -155,4 +170,6 @@ class _Headers {
 
   @override
   int get hashCode => ios.hashCode ^ android.hashCode;
+
+
 }

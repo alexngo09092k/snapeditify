@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_config.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
 
@@ -8,5 +7,5 @@ abstract class BaseAdvertisementService {
 
   void handleAd({String? screenName});
 
-  Widget? loadAd({required AdvertisementViewType type, AdSize size = AdSize.banner, Function(dynamic)? onAd});
+  Widget? loadAd({required AdvertisementViewType type, double? width, double? height, Function(dynamic)? onAd});
 }

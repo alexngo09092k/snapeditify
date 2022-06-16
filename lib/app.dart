@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:snapretouch/common/app_cache.dart';
 import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/theme.dart';
@@ -23,9 +24,15 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   }
 
   @override
+  void dispose() {
+    AppCache.instance.clean();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: Cofiguration.appName,
+      title: Cofiguration.appConfig.name,
       debugShowCheckedModeBanner: false,
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch},

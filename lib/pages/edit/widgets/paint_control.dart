@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
@@ -31,6 +32,7 @@ class PaintControlState extends State<PaintControl> {
               handleAd.show();
             }
           },
+          screenName: AppRoutes.edit
         );
     widget.controller.toAI();
   }

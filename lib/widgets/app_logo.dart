@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapretouch/common/configuration.dart';
+import 'package:snapretouch/widgets/custom_image.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({Key? key, this.image, this.width, this.height, this.color})
@@ -11,8 +12,8 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      image ?? Cofiguration.appLogo,
+    return CustomImage(
+      image: image ?? Cofiguration.appConfig.logo,
       width: width,
       height: height,
       color: color,

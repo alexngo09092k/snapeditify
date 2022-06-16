@@ -6,6 +6,7 @@ enum AdvertisementViewType {
   widget,
   handle,
   openApp,
+  splash,
   none,
 }
 
@@ -24,12 +25,16 @@ class AdvertisementView {
       case AdvertisementType.banner:
       case AdvertisementType.native:
       case AdvertisementType.fluid:
+      case AdvertisementType.roll:
         return AdvertisementViewType.widget;
       case AdvertisementType.interstitial:
       case AdvertisementType.reward:
+       case AdvertisementType.huaweiBanner:
         return AdvertisementViewType.handle;
       case AdvertisementType.openApp:
         return AdvertisementViewType.openApp;
+      case AdvertisementType.splash:
+        return AdvertisementViewType.splash;
     }
   }
 }

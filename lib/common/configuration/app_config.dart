@@ -1,53 +1,83 @@
 part of '../configuration.dart';
 
 class AppConfig {
-  final String appName;
-  final String appVersion;
-  final String appColor;
-  final String appLogo;
-  final String appTheme;
+  final String name;
+  final String version;
+  final String primaryColor;
+  final String secondaryColor;
+  final String logo;
+  final String homeLogo;
+  final String splashLogo;
+  final List<String> imageProtocol;
+  final String homeBanner;
+  final List<String> homeRemoveObjects;
 
   AppConfig({
-    required this.appName,
-    required this.appVersion,
-    required this.appColor,
-    required this.appLogo,
-    required this.appTheme,
+    required this.name,
+    required this.version,
+    required this.primaryColor,
+    required this.secondaryColor,
+    required this.logo,
+    required this.homeLogo,
+    required this.splashLogo,
+    required this.imageProtocol,
+    required this.homeBanner,
+    required this.homeRemoveObjects,
   });
 
   AppConfig copyWith({
-    String? appName,
-    String? appVersion,
-    String? appColor,
-    String? appLogo,
-    String? appTheme,
+    String? name,
+    String? version,
+    String? primaryColor,
+    String? secondaryColor,
+    String? logo,
+    String? homeLogo,
+    String? splashLogo,
+    List<String>? imageProtocol,
+    String? homeBanner,
+    List<String>? homeRemoveObjects,
   }) {
     return AppConfig(
-      appName: appName ?? this.appName,
-      appVersion: appVersion ?? this.appVersion,
-      appColor: appColor ?? this.appColor,
-      appLogo: appLogo ?? this.appLogo,
-      appTheme: appTheme ?? this.appTheme,
+      name: name ?? this.name,
+      version: version ?? this.version,
+      primaryColor: primaryColor ?? this.primaryColor,
+      secondaryColor: secondaryColor ?? this.secondaryColor,
+      logo: logo ?? this.logo,
+      homeLogo: homeLogo ?? this.homeLogo,
+      splashLogo: splashLogo ?? this.splashLogo,
+      imageProtocol: imageProtocol ?? this.imageProtocol,
+      homeBanner: homeBanner ?? this.homeBanner,
+      homeRemoveObjects: homeRemoveObjects ?? this.homeRemoveObjects,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'appName': appName,
-      'appVersion': appVersion,
-      'appColor': appColor,
-      'appLogo': appLogo,
-      'appTheme': appTheme,
+      'name': name,
+      'version': version,
+      'primaryColor': primaryColor,
+      'secondaryColor': secondaryColor,
+      'logo': logo,
+      'homeLogo': homeLogo,
+      'splashLogo': splashLogo,
+      'imageProtocol': imageProtocol,
+      'homeBanner': homeBanner,
+      'homeRemoveObjects': homeRemoveObjects,
     };
   }
 
   factory AppConfig.fromMap(Map<String, dynamic> map) {
     return AppConfig(
-      appName: map['appName'] ?? '',
-      appVersion: map['appVersion'] ?? '',
-      appColor: map['appColor'] ?? '',
-      appLogo: map['appLogo'] ?? '',
-      appTheme: map['appTheme'] ?? '',
+      name: map['name'] ?? '',
+      version: map['version'] ?? '',
+      primaryColor: map['primaryColor'] ?? '',
+      secondaryColor: map['secondaryColor'] ?? '',
+      logo: map['logo'] ?? '',
+      homeLogo: map['homeLogo'] ?? '',
+      splashLogo: map['splashLogo'] ?? '',
+      imageProtocol: List<String>.from(map['imageProtocol']),
+      homeBanner: map['homeBanner'] ?? '',
+      homeRemoveObjects: List<String>.from(map['homeRemoveObjects']),
     );
   }
 
@@ -57,27 +87,6 @@ class AppConfig {
 
   @override
   String toString() {
-    return 'AppConfig(appName: $appName, appVersion: $appVersion, appColor: $appColor, appLogo: $appLogo, appTheme: $appTheme)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is AppConfig &&
-        other.appName == appName &&
-        other.appVersion == appVersion &&
-        other.appColor == appColor &&
-        other.appLogo == appLogo &&
-        other.appTheme == appTheme;
-  }
-
-  @override
-  int get hashCode {
-    return appName.hashCode ^
-        appVersion.hashCode ^
-        appColor.hashCode ^
-        appLogo.hashCode ^
-        appTheme.hashCode;
+    return 'AppConfig(name: $name, version: $version, primaryColor: $primaryColor, secondaryColor: $secondaryColor, logo: $logo, homeLogo: $homeLogo, splashLogo: $splashLogo, imageProtocol: $imageProtocol, homeBanner: $homeBanner, homeRemoveObjects: $homeRemoveObjects)';
   }
 }

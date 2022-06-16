@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
@@ -19,16 +20,18 @@ class SavedImageButton extends StatelessWidget {
               handleAd.show();
             }
           },
+          screenName: AppRoutes.edit,
         );
     PermissionChecking.requestStorePermission(
       context: context,
       onHasPermisson: () {
-        controller.saveImage((savedImagePath) {
+        controller.saveImage((savedImagePath, originalImageBase64) {
           showModalBottomSheet(
             context: context,
             builder: (_) => SavedImageView(
               controller: controller,
-              image: savedImagePath,
+              imagePath: savedImagePath,
+              originalImageBase64: originalImageBase64,
             ),
             isDismissible: false,
             shape: const RoundedRectangleBorder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapretouch/common/app_cache.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/pages/edit/widgets/image_paint.dart';
@@ -59,6 +60,7 @@ class _EditPageState extends CustomOverlayState<EditPage> {
 
   @override
   void dispose() {
+    AppCache.instance.clean();
     _controller.dispose();
     super.dispose();
   }

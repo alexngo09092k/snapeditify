@@ -1,6 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_extension.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_item.dart';
@@ -10,26 +11,31 @@ class GoogleAdvertisement extends AdvertisementBase {
   @override
   AdvertisementProvider get adsProvider => AdvertisementProvider.google;
 
+
   @override
-  Widget createAdWidget({required AdvertisementItem adItem, AdSize size = AdSize.banner, Function(Ad)? onLoadedAd, Function(LoadAdError error)?  onAdFailedToLoad}) {
+  Widget createAdWidget({required AdvertisementItem adItem, double? width, double? height, Function(dynamic)? onLoadedAd, Function(dynamic error)?  onAdFailedToLoad}) {
     switch (adItem.type) {
       case AdvertisementType.banner:
         var bannerAd = _loadBannerAd(adItem, null, onLoadedAd, onAdFailedToLoad);
         return Container(
           alignment: Alignment.center,
-          width: bannerAd.size.width.toDouble(),
-          height: bannerAd.size.height.toDouble(),
+          width: width ?? bannerAd.size.width.toDouble(),
+          height: height ?? bannerAd.size.height.toDouble(),
           child: AdWidget(ad: bannerAd),
         );
       case AdvertisementType.fluid:
         var bannerAd = _loadFluidAd(adItem, null, onLoadedAd, onAdFailedToLoad);
         return Container(
+          width: width,
+          height: height,
           alignment: Alignment.center,
           child: AdWidget(ad: bannerAd),
         );
       case AdvertisementType.native:
         var nativeAd = _loadNativeAd(adItem, null, onLoadedAd, onAdFailedToLoad);
         return Container(
+          width: width,
+          height: height,
           alignment: Alignment.center,
           child: AdWidget(ad: nativeAd),
         );
@@ -94,7 +100,7 @@ class GoogleAdvertisement extends AdvertisementBase {
       request: const AdManagerAdRequest(nonPersonalizedAds: true),
       listener: AdManagerBannerAdListener(
         onAdLoaded: (Ad ad) {
-          printLog('$ad loaded: ${ad.responseInfo}');
+          printLog('FluidAd $ad loaded: ${ad.responseInfo}');
           if(onLoadedAd != null) onLoadedAd(ad);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
@@ -118,7 +124,7 @@ class GoogleAdvertisement extends AdvertisementBase {
       factoryId: 'listTile',
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {
-          printLog('$ad loaded: ${ad.responseInfo}');
+          printLog('Native $ad loaded: ${ad.responseInfo}');
           if(onLoadedAd != null) onLoadedAd(ad);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
@@ -141,7 +147,7 @@ class GoogleAdvertisement extends AdvertisementBase {
       size: AdSize.banner,
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
-          printLog('$ad loaded: ${ad.responseInfo}');
+          printLog('Banner $ad loaded: ${ad.responseInfo}');
           if(onLoadedAd != null) onLoadedAd(ad);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
@@ -256,5 +262,10 @@ class GoogleAdvertisement extends AdvertisementBase {
       ),
       orientation: AppOpenAd.orientationPortrait,
     );
+  }
+  
+  @override
+  bool isValid() {
+    return isMobile;
   }
 }

@@ -6,7 +6,22 @@ Map<String, dynamic> enviroment = {
     "enableCrashAnalytics": false,
     "enableRemoteConfigFirebase": true,
   },
-  
+
+  "appConfig": {
+    "name": "SnapRetouch",
+    'logo': 'assets/image/logo.png',
+    'appVersion': '1.0',
+    'appColor': '#6C76F1',
+    'appTheme': 'light',
+    'primaryColor': '#6C76F1',
+    'secondaryColor': '#72D5BB',
+    'homeLogo': 'assets/images/img_logo_home_Normal@3x.png',
+    'splashLogo': 'assets/images/img_splash_logo_Normal@3x.png',
+    'imageProtocol': ['https://', 'http://', 'data://'],
+    'homeBanner': 'assets/images/home_banner.png',
+    'homeRemoveObjects': ['assets/images/home_before.jpeg', 'assets/images/home_after.jpeg'],
+  },
+
   "apiConfig": {
     'url': 'https://be-prod-1.snapedit.app',
     'endPoints': {
@@ -35,13 +50,6 @@ Map<String, dynamic> enviroment = {
     }
   },
 
-  "appConfig": {
-    "appName": "SnapRetouch",
-    'appLogo': 'assets/image/logo.png',
-    'appVersion': '1.0',
-    'appColor': '#6C76F1',
-    'appTheme': 'light',
-  },
   // Replace the testAdUnitId with an ad unit id from the AdMob dash.
   // https://developers.google.com/admob/android/test-ads
   // https://developers.google.com/admob/ios/test-ads
@@ -51,6 +59,7 @@ Map<String, dynamic> enviroment = {
     "adMobAppIdIos": "ca-app-pub-9241292359230405~3779043810",
     "adMobAppIdAndroid": "ca-app-pub-9241292359230405~3319593408",
     "ads": [
+      ///GOOGLE
       {
         "type": "openApp",
         "provider": "google",
@@ -62,7 +71,7 @@ Map<String, dynamic> enviroment = {
         "provider": "google",
         "iosId": "ca-app-pub-9241292359230405/6213635465",
         "androidId": "ca-app-pub-9241292359230405/5562613364",
-        "showOnScreens": ['home'],
+        "showOnScreens": ['home', 'edit'],
       },
       {
         "type": "interstitial",
@@ -78,6 +87,39 @@ Map<String, dynamic> enviroment = {
         "provider": "google",
         "iosId": "ca-app-pub-9241292359230405/8265083730",
         "androidId": "ca-app-pub-9241292359230405/9473938213",
+        "showOnScreens": ['edit'],
+        "hideOnScreens": ['edit'],
+        "waitingTimeToDisplay": 5,
+      },
+
+      ///HUAWEI
+      {
+        "type": "splash",
+        "provider": "huawei",
+        "iosId": "testq6zq98hecj",
+        "androidId": "testq6zq98hecj",
+      },
+      {
+        "type": "native",
+        "provider": "huawei",
+        "iosId": "testu7m3hc4gvm",
+        "androidId": "testu7m3hc4gvm",
+        "showOnScreens": ['home', 'edit'],
+      },
+      {
+        "type": "interstitial",
+        "provider": "huawei",
+        "iosId": "teste9ih9j0rc3",
+        "androidId": "teste9ih9j0rc3",
+        "showOnScreens": ['edit'],
+        "hideOnScreens": ['edit'],
+        "waitingTimeToDisplay": 5,
+      },
+      {
+        "type": "reward",
+        "provider": "huawei",
+        "iosId": "testx9dtjwj8hp",
+        "androidId": "testx9dtjwj8hp",
         "showOnScreens": ['edit'],
         "hideOnScreens": ['edit'],
         "waitingTimeToDisplay": 5,

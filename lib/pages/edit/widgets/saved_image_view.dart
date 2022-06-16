@@ -4,12 +4,13 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/modules/advertisement/models/advertisement_extension.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/widgets/ad_view.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
@@ -18,10 +19,12 @@ class SavedImageView extends StatelessWidget {
   const SavedImageView({
     Key? key,
     required this.controller,
-    required this.image,
+    required this.imagePath,
+    required this.originalImageBase64,
   }) : super(key: key);
   final EditController controller;
-  final String image;
+  final String imagePath;
+  final String originalImageBase64;
   static final GlobalKey _globalKey = GlobalKey();
 
   bool get mounted {
@@ -31,7 +34,7 @@ class SavedImageView extends StatelessWidget {
   Future<void> shareScreenshot(BuildContext context) async {
     try {
       final box = context.findRenderObject() as RenderBox?;
-      final List<String> imagePaths = [image];
+      final List<String> imagePaths = [imagePath];
       ShareResult result = await Share.shareFilesWithResult(
         imagePaths,
         text: '',
@@ -188,8 +191,8 @@ class SavedImageView extends StatelessWidget {
                               aspectRatio: (controller.state.image!.width /
                                   controller.state.image!.height),
                               child: kIsWeb
-                                  ? Image.network(image)
-                                  : Image.file(File(image)),
+                                  ? Image.network(imagePath)
+                                  : Image.file(File(imagePath)),
                             ),
                           )
                         : const SizedBox(),
@@ -199,8 +202,10 @@ class SavedImageView extends StatelessWidget {
               ),
               AdView(
                 type: AdvertisementViewType.widget,
-                adSize: AdSize.banner,
                 width: MediaQuery.of(context).size.width,
+                height: 60,
+                screenName: AppRoutes.edit,
+                adType: AdvertisementType.native,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
