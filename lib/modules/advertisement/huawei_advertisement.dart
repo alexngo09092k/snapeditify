@@ -97,22 +97,22 @@ class HuaweiAdvertisement extends AdvertisementBase {
       controller: NativeAdController(
         adConfiguration: NativeAdConfiguration()..choicesPosition = NativeAdChoicesPosition.bottomRight,
         listener: (AdEvent event, {errorCode}) {
-        printLog('loadNativeAd $event');
-        switch (event) {
-          //  case AdEvent.closed:
-          //  case AdEvent.leave:
-          case AdEvent.failed:
-            if(onAdFailedToLoad != null) onAdFailedToLoad(errorCode);
-            break;
-          //  case AdEvent.clicked:
-          //  case AdEvent.impression:
-          //  case AdEvent.disliked:
-          case AdEvent.loaded:
-          case AdEvent.opened:
-            if(onLoadedAd != null) onLoadedAd(_nativeAd);
-            break;
-          default:
-         }
+          printLog('loadNativeAd $event');
+          switch (event) {
+            //  case AdEvent.closed:
+            //  case AdEvent.leave:
+            case AdEvent.failed:
+              if(onAdFailedToLoad != null) onAdFailedToLoad(errorCode);
+              break;
+            //  case AdEvent.clicked:
+            //  case AdEvent.impression:
+            //  case AdEvent.disliked:
+            case AdEvent.loaded:
+            case AdEvent.opened:
+              if(onLoadedAd != null) onLoadedAd(_nativeAd);
+              break;
+            default:
+          }
         },
       ),
     );
