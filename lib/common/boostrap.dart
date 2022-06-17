@@ -43,9 +43,9 @@ bootstrap(
         Services().firebase.init(
           Cofiguration.firebaseConfig,
           options: DefaultFirebaseOptions.currentPlatform,
-        );
-
-        Cofiguration().loadRemoteConfig();
+        ).then((_) {
+          Cofiguration().loadRemoteConfig();
+        });
 
         Services().advertisement.init(Cofiguration.adConfig);
       }
