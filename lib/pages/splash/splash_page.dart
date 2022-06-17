@@ -37,7 +37,7 @@ class _SplashPageState extends State<SplashPage> {
       backgroundcolor: Theme.of(context).backgroundColor,
       onEnd: _controller.goToNextScreen,
       duration: const Duration(milliseconds: 1000),
-      image: Cofiguration.appConfig.splashLogo,
+      image: Cofiguration.appConfig.logo,
       message: S.of(context).aiPowredPhotoEditor,
     );
   }

@@ -27,25 +27,25 @@ bootstrap(
     try {
       WidgetsFlutterBinding.ensureInitialized();
 
-      await Cofiguration.setConfig(enviroment);
+      Cofiguration.instance.setConfig(enviroment);
 
       FirebaseMessaging.onBackgroundMessage( _firebaseMessagingBackgroundHandler);
 
       DeviceInfo.instance.loadInfomation();
 
       if (isMobile) {
-        await AppCache.instance.initial();
+        AppCache.instance.initial();
 
         await GmsCheck().checkGmsAvailability(enableLog: kDebugMode);
 
         /// Init Firebase settings due to version 0.5.0+ requires to.
         /// Use await to prevent any usage until the initialization is completed.
-        await Services().firebase.init(
-              Cofiguration.firebaseConfig,
-              options: DefaultFirebaseOptions.currentPlatform,
-            );
+        Services().firebase.init(
+          Cofiguration.firebaseConfig,
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
 
-        await Cofiguration().loadRemoteConfig();
+        Cofiguration().loadRemoteConfig();
 
         Services().advertisement.init(Cofiguration.adConfig);
       }

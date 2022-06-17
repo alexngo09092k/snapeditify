@@ -21,11 +21,17 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    Cofiguration.instance.addListener((event) {
+      if (event == CofigurationEvent.loadRemoteConfigSuccessed) {
+        setState(() {});
+      }
+    });
   }
 
   @override
   void dispose() {
     AppCache.instance.clean();
+    Cofiguration.instance.dispose();
     super.dispose();
   }
 
@@ -46,7 +52,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       onGenerateRoute: AppRoutes.onGenerateRoute,
       navigatorObservers: [
         AppRouteObserver(
-          action: (screenName) => OverlayControlDelegate().emitRoute?.call(screenName),
+          action: (screenName) =>
+              OverlayControlDelegate().emitRoute?.call(screenName),
         ),
       ],
       localizationsDelegates: const [

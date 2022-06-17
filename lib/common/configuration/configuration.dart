@@ -1,11 +1,23 @@
 part of '../configuration.dart';
 
+enum CofigurationEvent {
+  loadRemoteConfigSuccessed,
+  loadRemoteConfigFailed,
+  loadLocalConfigSuccessed,
+  loadLocalConfigFailed,
+}
+
 class Cofiguration {
   static final Cofiguration _instance = Cofiguration._internal();
+  static Cofiguration  get instance => _instance;
 
   factory Cofiguration() => _instance;
 
-  Cofiguration._internal();
+  Cofiguration._internal() {
+    _controller = StreamController<CofigurationEvent>();
+  }
+
+  late final StreamController<CofigurationEvent> _controller;
 
   static FirebaseConfig _firebaseConfig = DefaultConfig.firebaseConfig;
   static ApiConfig _apiConfig = DefaultConfig.apiConfig;
@@ -15,7 +27,7 @@ class Cofiguration {
   static bool _isPutted = false;
   static bool get isPutted => _isPutted;
 
-  static Future<void> setConfig(Map<String, dynamic> value) async {
+  void setConfig(Map<String, dynamic> value) {
     if (value['firebaseConfig'] != null) {
       _firebaseConfig = FirebaseConfig.fromMap(value['firebaseConfig']);
     }
@@ -28,6 +40,8 @@ class Cofiguration {
     if (value['adConfig'] != null) {
       _adConfig = AdvertisementConfig.fromMap(value['adConfig']);
     }
+
+    update(CofigurationEvent.loadLocalConfigSuccessed);
 
     _isPutted = true;
   }
@@ -55,7 +69,7 @@ class Cofiguration {
     'firebaseConfig',
   ];
 
-  void _loadConfig(String key, Map<String, dynamic>? config) async {
+  void _loadConfig(String key, Map<String, dynamic>? config) {
     try {
       if (config == null) return;
       switch (key) {
@@ -84,6 +98,18 @@ class Cofiguration {
       printLog(error);
     }
   }
+
+  update(CofigurationEvent event) {
+    _controller.sink.add(event);
+  }
+
+  addListener(Function (CofigurationEvent event) listen) {
+    _controller.stream.listen(listen);
+  }
+
+  dispose() {
+    _controller.close();
+  }
 }
 
 abstract class DefaultConfig {
@@ -96,9 +122,7 @@ abstract class DefaultConfig {
     version: '1.0',
     primaryColor: '#6C76F1',
     secondaryColor: '#72D5BB',
-    logo: AppImages.imgLogoHomeNormal3x,
-    homeLogo: AppImages.imgLogoHomeNormal3x,
-    splashLogo: AppImages.imgSplashLogoNormal3x,
+    logo: AppImages.logo,
     imageProtocol: ['https://', 'http://', 'data://'],
     homeBanner: AppImages.homeBanner,
     homeRemoveObjects: [AppImages.homeBefore, AppImages.homeAfter],
@@ -108,6 +132,8 @@ abstract class DefaultConfig {
     enableFirebase: false,
     enableCrashAnalytics: true,
     enableRemoteConfigFirebase: false,
+    fetchTimeout: 60, // 1 minutes
+    minimumFetchInterval: 60 * 60 * 24 // 1 day
   );
 
   static AdvertisementConfig adConfig = const AdvertisementConfig(
@@ -118,13 +144,13 @@ abstract class DefaultConfig {
 
 extension ConfigurationsFireBaseRemoteConfig on Cofiguration {
   Future<bool> loadRemoteConfig() async {
-    if(!InternetChecking.singleton.hasConnection){
-      return false;
-    }
     if (Cofiguration.enableRemoteConfigFirebase) {
       FirebaseRemoteConfig? remoteConfig = Services().firebase.remoteConfig;
 
-      if(remoteConfig == null) return false;
+      if(remoteConfig == null || !InternetChecking.singleton.hasConnection) {
+        update(CofigurationEvent.loadRemoteConfigFailed);
+        return false;
+      }
 
       PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
       String stringConfig = remoteConfig.getString(packageInfo.packageName.split('.').join());
@@ -134,7 +160,7 @@ extension ConfigurationsFireBaseRemoteConfig on Cofiguration {
       for (var item in _listConfigRemoteKey) {
         _loadConfig(item, config);
       }
-
+      update(CofigurationEvent.loadRemoteConfigSuccessed);
     }
     return true;
   }

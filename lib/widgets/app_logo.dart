@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapretouch/common/configuration.dart';
+import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/widgets/custom_image.dart';
 
 class AppLogo extends StatelessWidget {
@@ -12,11 +13,16 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomImage(
-      image: image ?? Cofiguration.appConfig.logo,
-      width: width,
-      height: height,
-      color: color,
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(AppDimensions.paddingSizeSmall),
+      ),
+      child: CustomImage(
+        image: image ?? Cofiguration.appConfig.logo,
+        width: width,
+        height: height,
+        color: color,
+      ),
     );
   }
 }

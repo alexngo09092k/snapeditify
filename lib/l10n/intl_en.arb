@@ -32,5 +32,6 @@
   "removeMessageFailure": "Image size too big.",
   "automatic": "Automatic",
   "free": "Free",
-  "betterQuality": "Better quality"
+  "betterQuality": "Better quality",
+  "ai": "AI"
 }

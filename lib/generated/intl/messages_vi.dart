@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% chính xác"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("THÊM ẢNH"),
+        "ai": MessageLookupByLibrary.simpleMessage("AI"),
         "aiMessageFailure":
             MessageLookupByLibrary.simpleMessage("Kích thước ảnh quá lớn."),
         "aiPowredPhotoEditor": MessageLookupByLibrary.simpleMessage(

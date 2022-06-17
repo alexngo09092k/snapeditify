@@ -8,9 +8,10 @@ import 'package:snapretouch/controllers/home/home_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/pages/home/widgets/home_banner.dart';
+import 'package:snapretouch/pages/home/widgets/home_logo.dart';
 import 'package:snapretouch/utils/permission_checking.dart';
 import 'package:snapretouch/widgets/ad_view.dart';
-import 'package:snapretouch/widgets/app_logo.dart';
+import 'package:snapretouch/widgets/ai_icon.dart';
 import 'package:snapretouch/widgets/before_after/before_after.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
 import 'package:snapretouch/widgets/custom_card.dart';
@@ -118,13 +119,10 @@ class _HomePageState extends CustomOverlayState<HomePage> {
         child: Column(
           children: [
             Row(
-              children: [
+              children: const [
                 Padding(
-                  padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
-                  child: AppLogo(
-                    image: Cofiguration.appConfig.homeLogo,
-                    width: 160,
-                  ),
+                  padding: EdgeInsets.all(AppDimensions.paddingSizeDefault),
+                  child: HomeLogo(),
                 )
               ],
             ),
@@ -193,10 +191,7 @@ class _HomePageState extends CustomOverlayState<HomePage> {
                                         bottom: AppDimensions
                                                 .paddingSizeExtraSmall -
                                             3),
-                                    child: Image.asset(
-                                      AppImages.icAIHomeNormal3x,
-                                      width: 20,
-                                    ),
+                                    child: const AIIcon(),
                                   ),
                                 ),
                               ],

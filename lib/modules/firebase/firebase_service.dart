@@ -33,12 +33,18 @@ class FirebaseServices extends BaseFirebaseServices {
 
     if (!kIsWeb && config.enableRemoteConfigFirebase) {
       _remoteConfig = FirebaseRemoteConfig.instance;
+      // await _remoteConfig!.setConfigSettings(
+      //   RemoteConfigSettings(
+      //     fetchTimeout: const Duration(minutes: 1),
+      //     minimumFetchInterval: const Duration(minutes: 1),
+      //   ),
+      // );
       await _remoteConfig!.setConfigSettings(
         RemoteConfigSettings(
-          fetchTimeout: const Duration(minutes: 1),
-          minimumFetchInterval: const Duration(minutes: 1),
-        ),
-      );
+          fetchTimeout: Duration(seconds: config.fetchTimeout), 
+          minimumFetchInterval: Duration(seconds: config.minimumFetchInterval)
+          ),
+        );
       await _remoteConfig!.fetch();
       await _remoteConfig!.activate();
     }

@@ -32,5 +32,6 @@
   "removeMessageFailure": "Kích thước ảnh quá lớn.",
   "automatic": "Tự động",
   "free": "Miễn phí",
-  "betterQuality": "Chất lượng"
+  "betterQuality": "Chất lượng",
+  "ai": "AI"
 }

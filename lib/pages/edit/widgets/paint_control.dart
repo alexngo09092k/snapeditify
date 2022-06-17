@@ -8,6 +8,7 @@ import 'package:snapretouch/pages/edit/widgets/count_detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/detail_detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/stroke_width_slider.dart';
 import 'package:snapretouch/services/services.dart';
+import 'package:snapretouch/widgets/ai_icon.dart';
 
 class PaintControl extends StatefulWidget {
   const PaintControl({
@@ -108,12 +109,8 @@ class PaintControlState extends State<PaintControl> {
                                             : Theme.of(context).disabledColor,
                                       ),
                                 ),
-                                const SizedBox(
-                                    width: AppDimensions.paddingSizeExtraSmall),
-                                Image.asset(
-                                  AppImages.icAINormal3x,
-                                  width: 15,
-                                )
+                                const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
+                               const AIIcon()
                               ])
                         ],
                       ),

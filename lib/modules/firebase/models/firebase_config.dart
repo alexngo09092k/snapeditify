@@ -1,25 +1,34 @@
 import 'dart:convert';
 
+
 class FirebaseConfig {
   final bool enableFirebase;
   final bool enableCrashAnalytics;
   final bool enableRemoteConfigFirebase;
-
+  final int fetchTimeout;
+  final int minimumFetchInterval;
+  
   FirebaseConfig({
     required this.enableFirebase,
     required this.enableCrashAnalytics,
     required this.enableRemoteConfigFirebase,
+    required this.fetchTimeout,
+    required this.minimumFetchInterval,
   });
 
   FirebaseConfig copyWith({
     bool? enableFirebase,
     bool? enableCrashAnalytics,
     bool? enableRemoteConfigFirebase,
+    int? fetchTimeout,
+    int? minimumFetchInterval,
   }) {
     return FirebaseConfig(
       enableFirebase: enableFirebase ?? this.enableFirebase,
       enableCrashAnalytics: enableCrashAnalytics ?? this.enableCrashAnalytics,
       enableRemoteConfigFirebase: enableRemoteConfigFirebase ?? this.enableRemoteConfigFirebase,
+      fetchTimeout: fetchTimeout ?? this.fetchTimeout,
+      minimumFetchInterval: minimumFetchInterval ?? this.minimumFetchInterval,
     );
   }
 
@@ -28,6 +37,8 @@ class FirebaseConfig {
       'enableFirebase': enableFirebase,
       'enableCrashAnalytics': enableCrashAnalytics,
       'enableRemoteConfigFirebase': enableRemoteConfigFirebase,
+      'fetchTimeout': fetchTimeout,
+      'minimumFetchInterval': minimumFetchInterval,
     };
   }
 
@@ -36,6 +47,8 @@ class FirebaseConfig {
       enableFirebase: map['enableFirebase'] ?? false,
       enableCrashAnalytics: map['enableCrashAnalytics'] ?? false,
       enableRemoteConfigFirebase: map['enableRemoteConfigFirebase'] ?? false,
+      fetchTimeout: map['fetchTimeout']?.toInt() ?? 0,
+      minimumFetchInterval: map['minimumFetchInterval']?.toInt() ?? 0,
     );
   }
 
@@ -44,7 +57,9 @@ class FirebaseConfig {
   factory FirebaseConfig.fromJson(String source) => FirebaseConfig.fromMap(json.decode(source));
 
   @override
-  String toString() => 'FirebaseConfig(enableFirebase: $enableFirebase, enableCrashAnalytics: $enableCrashAnalytics, enableRemoteConfigFirebase: $enableRemoteConfigFirebase)';
+  String toString() {
+    return 'FirebaseConfig(enableFirebase: $enableFirebase, enableCrashAnalytics: $enableCrashAnalytics, enableRemoteConfigFirebase: $enableRemoteConfigFirebase, fetchTimeout: $fetchTimeout, minimumFetchInterval: $minimumFetchInterval)';
+  }
 
   @override
   bool operator ==(Object other) {
@@ -53,9 +68,17 @@ class FirebaseConfig {
     return other is FirebaseConfig &&
       other.enableFirebase == enableFirebase &&
       other.enableCrashAnalytics == enableCrashAnalytics &&
-      other.enableRemoteConfigFirebase == enableRemoteConfigFirebase;
+      other.enableRemoteConfigFirebase == enableRemoteConfigFirebase &&
+      other.fetchTimeout == fetchTimeout &&
+      other.minimumFetchInterval == minimumFetchInterval;
   }
 
   @override
-  int get hashCode => enableFirebase.hashCode ^ enableCrashAnalytics.hashCode ^ enableRemoteConfigFirebase.hashCode;
+  int get hashCode {
+    return enableFirebase.hashCode ^
+      enableCrashAnalytics.hashCode ^
+      enableRemoteConfigFirebase.hashCode ^
+      fetchTimeout.hashCode ^
+      minimumFetchInterval.hashCode;
+  }
 }
