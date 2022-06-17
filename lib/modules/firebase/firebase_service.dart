@@ -9,6 +9,7 @@ import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/modules/firebase/base_firebase_services.dart';
 import 'package:snapretouch/modules/firebase/firebase_analytics_service.dart';
 import 'package:snapretouch/modules/firebase/models/firebase_config.dart';
+import 'package:snapretouch/utils/internet_checking.dart';
 
 class FirebaseServices extends BaseFirebaseServices {
   static final FirebaseServices _instance = FirebaseServices._internal();
@@ -25,7 +26,8 @@ class FirebaseServices extends BaseFirebaseServices {
   bool get isEnabled => _isEnabled;
 
   @override
-  Future<void> init(FirebaseConfig config,{String? name, FirebaseOptions? options}) async {
+  Future<bool> init(FirebaseConfig config,{String? name, FirebaseOptions? options}) async {
+    if(!InternetChecking.singleton.hasConnection) return false;
     _isEnabled = config.enableFirebase;
     printLog(config);
     var startTime = DateTime.now();
@@ -57,6 +59,8 @@ class FirebaseServices extends BaseFirebaseServices {
     } else {
       printLog('$message (without Google Play Services)', startTime);
     }
+
+    return true;
   }
 
   /// Firebase Remote Config
