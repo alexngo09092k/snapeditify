@@ -40,7 +40,7 @@ bootstrap(
 
         /// Init Firebase settings due to version 0.5.0+ requires to.
         /// Use await to prevent any usage until the initialization is completed.
-        Services().firebase.init(
+        await Services().firebase.init(
           Cofiguration.firebaseConfig,
           options: DefaultFirebaseOptions.currentPlatform,
         ).then((_) {
