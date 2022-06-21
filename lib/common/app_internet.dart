@@ -2,15 +2,19 @@ import 'dart:async';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-class InternetChecking {
+class AppInternet {
   String? _lookUpAddress;
-  static final InternetChecking _singleton = InternetChecking._internal();
-  static InternetChecking get singleton => _singleton;
-  InternetChecking._internal();
+  static final AppInternet _instance = AppInternet._internal();
+  static AppInternet get instance => _instance;
+  
+  AppInternet._internal();
+
+  static AppInternet getInstance() => _instance;
 
   bool hasConnection = true;
 
-  StreamController<bool> connectionChangeController = StreamController.broadcast();
+  StreamController<bool> connectionChangeController =
+      StreamController.broadcast();
 
   final Connectivity _connectivity = Connectivity();
 

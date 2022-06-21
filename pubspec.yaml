@@ -39,9 +39,9 @@ dependencies:
 
   ### FIREBASE
   firebase_core: ^1.17.1
-  firebase_remote_config: ^2.0.8
   firebase_analytics: ^9.1.9
   firebase_messaging: ^11.4.1
+  firebase_remote_config: ^2.0.9
 
   ### ADS
   google_mobile_ads: ^1.2.0

@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions androidHuawei = FirebaseOptions(
     apiKey: 'AIzaSyBvyZRSGJcCirMK-2lHM9eY_XnF4ASKCEk',
-    appId: '1:270202760919:android:a763e1c1569be372e0ca92',
+    appId: '1:270202760919:android:98b1887f43749c62e0ca92',
     messagingSenderId: '270202760919',
     projectId: 'snapretouch',
     storageBucket: 'snapretouch.appspot.com',

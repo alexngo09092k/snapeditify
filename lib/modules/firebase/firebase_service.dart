@@ -5,11 +5,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:gms_check/gms_check.dart';
+import 'package:snapretouch/common/app_internet.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/modules/firebase/base_firebase_services.dart';
 import 'package:snapretouch/modules/firebase/firebase_analytics_service.dart';
 import 'package:snapretouch/modules/firebase/models/firebase_config.dart';
-import 'package:snapretouch/utils/internet_checking.dart';
 
 class FirebaseServices extends BaseFirebaseServices {
   static final FirebaseServices _instance = FirebaseServices._internal();
@@ -27,7 +27,7 @@ class FirebaseServices extends BaseFirebaseServices {
 
   @override
   Future<bool> init(FirebaseConfig config,{String? name, FirebaseOptions? options}) async {
-    if(!InternetChecking.singleton.hasConnection) return false;
+    if(!AppInternet.instance.hasConnection) return false;
     _isEnabled = config.enableFirebase;
     printLog(config);
     var startTime = DateTime.now();

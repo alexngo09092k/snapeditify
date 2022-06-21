@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:snapretouch/common/app_cache.dart';
+import 'package:snapretouch/common/app_internet.dart';
 import 'package:snapretouch/common/constants.dart';
 
 import 'package:snapretouch/common/logs.dart';
@@ -23,7 +24,6 @@ import 'package:snapretouch/repositories/ai_repository.dart';
 import 'package:snapretouch/services/services.dart';
 import 'package:snapretouch/utils/image_convert.dart';
 import 'package:snapretouch/utils/image_pick.dart';
-import 'package:snapretouch/utils/internet_checking.dart';
 import 'package:snapretouch/widgets/custom_snackbar.dart';
 import 'package:snapretouch/widgets/loading_popup.dart';
 import 'package:snapretouch/widgets/offline_popup.dart';
@@ -45,7 +45,7 @@ class EditController extends ValueNotifier<EditValue> {
   Future<void> _initial(String imagePath) async {
     _painterControlKey = GlobalKey<PaintControlState>();
     _imagePath = imagePath;
-    _internet = InternetChecking.singleton;
+    _internet = AppInternet.instance;
     _internet.initialize('google.com');
 
     _aiRepository = AIRepository();
@@ -82,7 +82,7 @@ class EditController extends ValueNotifier<EditValue> {
   late String _imagePath;
   String get imagePath => _imagePath;
 
-  late final InternetChecking _internet;
+  late final AppInternet _internet;
 
   late final AIRepository _aiRepository;
 

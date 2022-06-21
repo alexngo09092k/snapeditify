@@ -3,6 +3,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/modules/advertisement/app_lifecycle/app_lifecycle_handler.dart';
 import 'package:snapretouch/modules/advertisement/app_lifecycle/app_lifecycle_reactor.dart';
 import 'package:snapretouch/services/services.dart';
 import 'package:snapretouch/widgets/base_screen.dart';
@@ -19,8 +20,7 @@ class OverlayControlDelegate {
   OverlayControlDelegate._();
 }
 
-abstract class CustomOverlayState<T extends StatefulWidget>
-    extends BaseScreen<T> with TickerProviderStateMixin {
+abstract class CustomOverlayState<T extends StatefulWidget> extends BaseScreen<T> with TickerProviderStateMixin, AppLifeCycleHandler{
   double bottomBarHeight = kBottomNavigationBarHeight - 15;
 
   OverlayEntry? _overlayEntry;
@@ -36,21 +36,22 @@ abstract class CustomOverlayState<T extends StatefulWidget>
     super.initState();
     _overlayController = StreamController<bool>.broadcast()..add(false);
     _appLifecycleReactor =
-        AppLifecycleReactor(handler: Services().advertisement);
+        AppLifecycleReactor(handler: this);
     _appLifecycleReactor.listenToAppStateChanges();
+  }
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      printLog('addPostFrameCallback $timeStamp');
-      EasyDebounce.debounce(_tag, const Duration(milliseconds: 500), () {
-        OverlayControlDelegate().emitRoute = (String? screenName) {
-          printLog('screenName $screenName');
-          Services().advertisement.handleAd(screenName: screenName);
-          _overlayController.sink.add(true);
-        };
-        _overlayEntry = _buildOverlayEntry();
-        Overlay.of(context)?.insert(_overlayEntry!);
+  @override
+  void afterFirstLayout(BuildContext context) {
+    super.afterFirstLayout(context);
+    EasyDebounce.debounce(_tag, const Duration(milliseconds: 500), () {
+      OverlayControlDelegate().emitRoute = (String? screenName) {
+        printLog('screenName $screenName');
+        Services().advertisement.handleAd(screenName: screenName);
         _overlayController.sink.add(true);
-      });
+      };
+      _overlayEntry = _buildOverlayEntry();
+      Overlay.of(context)?.insert(_overlayEntry!);
+      _overlayController.sink.add(true);
     });
   }
 

@@ -13,9 +13,7 @@ class SplashController extends ValueNotifier<SplashState> {
   bool _wentNext = false;
 
   void setNextScreen() async {
-    final String? image = AppShared.sharedPreferences != null
-        ? AppShared.sharedPreferences!.getString(AppSharedKey.image)
-        : null;
+    final String? image = AppShared.instance.getString(AppSharedKey.image);
     if (image != null) {
       _nextScreen = AppRoutes.edit;
     }

@@ -7,7 +7,6 @@ import 'package:snapretouch/pages/edit/widgets/paint_control.dart';
 import 'package:snapretouch/pages/edit/widgets/revert_popup.dart';
 import 'package:snapretouch/pages/edit/widgets/saved_image_button.dart';
 import 'package:snapretouch/utils/permission_checking.dart';
-import 'package:snapretouch/widgets/custom_overlay_state.dart';
 import 'package:snapretouch/widgets/go_back_popup.dart';
 
 class EditPage extends StatefulWidget {
@@ -19,7 +18,7 @@ class EditPage extends StatefulWidget {
   State<EditPage> createState() => _EditPageState();
 }
 
-class _EditPageState extends CustomOverlayState<EditPage> {
+class _EditPageState extends State<EditPage> {
   late EditController _controller;
 
   @override

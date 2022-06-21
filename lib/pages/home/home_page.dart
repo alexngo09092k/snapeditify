@@ -16,7 +16,6 @@ import 'package:snapretouch/widgets/before_after/before_after.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
 import 'package:snapretouch/widgets/custom_card.dart';
 import 'package:snapretouch/widgets/custom_image.dart';
-import 'package:snapretouch/widgets/custom_overlay_state.dart';
 import 'package:snapretouch/modules/painter/painter.dart';
 import 'dart:ui' as ui;
 
@@ -27,7 +26,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends CustomOverlayState<HomePage> {
+class _HomePageState extends State<HomePage> {
   late final HomeController _controller;
 
   ui.Image? _thumbImage;

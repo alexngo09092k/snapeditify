@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/app_cache.dart';
+import 'package:snapretouch/common/app_lifecycle.dart';
 import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/services/services.dart';
 import 'package:snapretouch/widgets/custom_overlay_state.dart';
 
 class App extends StatefulWidget {
@@ -15,7 +16,7 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> with WidgetsBindingObserver {
+class _AppState extends CustomOverlayState<App> with WidgetsBindingObserver {
   ThemeMode themeMode = ThemeMode.light;
 
   @override
@@ -30,8 +31,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    AppCache.instance.clean();
-    Cofiguration.instance.dispose();
+    closeApp();
     super.dispose();
   }
 
@@ -74,5 +74,16 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       },
       supportedLocales: S.delegate.supportedLocales,
     );
+  }
+  
+  @override
+  void onBackground() {
+    Services().advertisement.onBackground();
+  }
+  
+  @override
+  void onForeground() {
+    Services().advertisement.onForeground();
+
   }
 }

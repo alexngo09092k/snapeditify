@@ -3,8 +3,10 @@ part of '../configuration.dart';
 enum CofigurationEvent {
   loadRemoteConfigSuccessed,
   loadRemoteConfigFailed,
-  loadLocalConfigSuccessed,
-  loadLocalConfigFailed,
+  loadLocalRemoteConfigSuccessed,
+  loadLocalRemoteConfigFailed,
+  loadDefaultConfigSuccessed,
+  loadDefaultConfigFailed,
 }
 
 class Cofiguration {
@@ -27,7 +29,8 @@ class Cofiguration {
   static bool _isPutted = false;
   static bool get isPutted => _isPutted;
 
-  void setConfig(Map<String, dynamic> value) {
+  void setDefaultConfig(Map<String, dynamic> value) {
+    printLog('====== SET DEFAULT CONFIG ======');
     if (value['firebaseConfig'] != null) {
       _firebaseConfig = FirebaseConfig.fromMap(value['firebaseConfig']);
     }
@@ -41,7 +44,7 @@ class Cofiguration {
       _adConfig = AdvertisementConfig.fromMap(value['adConfig']);
     }
 
-    update(CofigurationEvent.loadLocalConfigSuccessed);
+    update(CofigurationEvent.loadDefaultConfigSuccessed);
 
     _isPutted = true;
   }
@@ -143,26 +146,80 @@ abstract class DefaultConfig {
 }
 
 extension ConfigurationsFireBaseRemoteConfig on Cofiguration {
-  Future<bool> loadRemoteConfig() async {
-    if (Cofiguration.enableRemoteConfigFirebase) {
+   Future<bool> loadRemoteConfig({Function? before}) async {
+    bool isExpried = isExpriedRemoteConfig();
+
+    /// if expried, get new remote config
+    printLog('remote config expried $isExpried');
+
+    if (isExpried) {
+      printLog('====== SET REMOTE CONFIG ======');
+      if(before != null) await before();
+
       FirebaseRemoteConfig? remoteConfig = Services().firebase.remoteConfig;
 
-      if(remoteConfig == null || !InternetChecking.singleton.hasConnection) {
+      if(remoteConfig == null || !AppInternet.instance.hasConnection) {
         update(CofigurationEvent.loadRemoteConfigFailed);
         return false;
       }
 
       PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
       String stringConfig = remoteConfig.getString(packageInfo.packageName.split('.').join());
+      
+      if(stringConfig.isEmpty) {
+        update(CofigurationEvent.loadRemoteConfigFailed);
+        return false;
+      }
+
+      /// setConfig in store
+      AppShared.instance.setString(AppSharedKey.remoteConfig, stringConfig);
 
       Map<String, dynamic> config = json.decode(stringConfig);
 
       for (var item in _listConfigRemoteKey) {
         _loadConfig(item, config);
       }
+
+      /// miliseconds
+      AppShared.instance.setInt(
+        AppSharedKey.remoteConfigExpriedDate, 
+        (Cofiguration.firebaseConfig.minimumFetchInterval * 1000 + DateTime.now().millisecondsSinceEpoch),
+      );
+
       update(CofigurationEvent.loadRemoteConfigSuccessed);
+      return true;
     }
+
+    return loadRemoteConfigFromLocalStore();
+  }
+
+  bool loadRemoteConfigFromLocalStore () {
+    String? stringConfig = AppShared.instance.getString(AppSharedKey.remoteConfig);
+    if(stringConfig == null) {
+      update(CofigurationEvent.loadLocalRemoteConfigFailed);
+      return false;
+    }
+
+    /// enable remote config
+    if(!Cofiguration.enableRemoteConfigFirebase) {
+      update(CofigurationEvent.loadLocalRemoteConfigFailed);
+      return false;
+    }
+
+    printLog('====== SET REMOTE CONFIG FROM LOCAL ======');
+    Map<String, dynamic> config = json.decode(stringConfig);
+    for (var item in _listConfigRemoteKey) {
+      _loadConfig(item, config);
+    }
+    update(CofigurationEvent.loadLocalRemoteConfigSuccessed);
     return true;
+  }
+
+  bool isExpriedRemoteConfig () {
+    int? timestampExpriedDate = AppShared.instance.getInt(AppSharedKey.remoteConfigExpriedDate);
+    int timestampNow = DateTime.now().millisecondsSinceEpoch;
+    if(timestampExpriedDate == null || (timestampNow > timestampExpriedDate)) return true;
+    return false;
   }
 }
 
