@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:snapretouch/modules/advertisement/advertisement_service.dart';
-import 'package:snapretouch/modules/firebase/firebase_notification_service.dart';
-import 'package:snapretouch/modules/firebase/firebase_service.dart';
-import 'package:snapretouch/modules/firebase/notification/notification_service.dart';
-import 'package:snapretouch/modules/firebase/notification/notification_service_impl.dart';
+import 'package:snapretouch/services/advertisement/advertisement_service.dart';
+import 'package:snapretouch/services/firebase/firebase_notification_service.dart';
+import 'package:snapretouch/services/firebase/firebase_service.dart';
+import 'package:snapretouch/services/firebase/notification/notification_service.dart';
+import 'package:snapretouch/services/firebase/notification/notification_service_impl.dart';
 
 class Services {
   static final Services _instance = Services._internal();

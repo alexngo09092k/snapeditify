@@ -27,7 +27,7 @@ import 'package:snapretouch/utils/image_pick.dart';
 import 'package:snapretouch/widgets/custom_snackbar.dart';
 import 'package:snapretouch/widgets/loading_popup.dart';
 import 'package:snapretouch/widgets/offline_popup.dart';
-import 'package:snapretouch/modules/painter/painter.dart';
+import 'package:snapretouch/services/painter/painter.dart';
 
 class EditValue {
   PainterState state;
@@ -45,9 +45,6 @@ class EditController extends ValueNotifier<EditValue> {
   Future<void> _initial(String imagePath) async {
     _painterControlKey = GlobalKey<PaintControlState>();
     _imagePath = imagePath;
-    _internet = AppInternet.instance;
-    _internet.initialize('google.com');
-
     _aiRepository = AIRepository();
 
     state.addListener((event) {
@@ -81,8 +78,6 @@ class EditController extends ValueNotifier<EditValue> {
   final BuildContext context;
   late String _imagePath;
   String get imagePath => _imagePath;
-
-  late final AppInternet _internet;
 
   late final AIRepository _aiRepository;
 
@@ -128,7 +123,7 @@ class EditController extends ValueNotifier<EditValue> {
   void toErase() => state.toErase();
 
   void toAI() async {
-    if (!_internet.hasConnection) {
+    if (!AppInternet.instance.hasConnection) {
       printLog('No internet');
       showDialog(
         context: context,
@@ -173,7 +168,7 @@ class EditController extends ValueNotifier<EditValue> {
 
   Future<void> remove({bool Function()? onStart, Function(EraseResponse?)? onEnd}) async {
     _savedImage = false;
-    if (!_internet.hasConnection) {
+    if (!AppInternet.instance.hasConnection) {
       printLog('No internet');
       showDialog(
         context: context,

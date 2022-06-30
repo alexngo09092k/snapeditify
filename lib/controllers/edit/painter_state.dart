@@ -7,7 +7,7 @@ import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/controllers/edit/painter_actions.dart';
 import 'package:snapretouch/models/detected_object.dart';
 import 'package:snapretouch/utils/image_convert.dart';
-import 'package:snapretouch/modules/painter/painter.dart';
+import 'package:snapretouch/services/painter/painter.dart';
 
 class PainterState {
   PainterState({

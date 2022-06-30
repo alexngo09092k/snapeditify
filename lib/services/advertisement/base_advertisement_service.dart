@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_config.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_config.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_view.dart';
 
 abstract class BaseAdvertisementService {
   void init(AdvertisementConfig advertisement);

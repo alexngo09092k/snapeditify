@@ -35,7 +35,7 @@ class StaticSplash extends StatelessWidget {
             onEnd: onEnd,
             setAnimation: (controller) => TweenSequence<double>([
               TweenSequenceItem(tween: Tween<double>(begin: 0, end: 1), weight: 2),
-              TweenSequenceItem(tween: Tween<double>(begin: 1, end: 0), weight: 1),
+              // TweenSequenceItem(tween: Tween<double>(begin: 1, end: 0), weight: 1),
             ]).animate(controller),
             builder: (_, __, animation, ___) {
               return Row(

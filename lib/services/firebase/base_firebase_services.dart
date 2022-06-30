@@ -1,4 +1,4 @@
-import 'package:snapretouch/modules/firebase/models/firebase_config.dart';
+import 'package:snapretouch/services/firebase/models/firebase_config.dart';
 
 abstract class BaseFirebaseServices {
   /// check if the Firebase is enable or not

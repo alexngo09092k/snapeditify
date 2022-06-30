@@ -19,7 +19,7 @@ class DeviceInfo {
   WebBrowserInfo? web;
   Map<String, dynamic>? info;
 
-  Future<void> loadInfomation() async {
+  Future<void> initial() async {
     if (isIos) {
       ios = await deviceInfoPlugin.iosInfo;
       printLog('device info ios $ios');

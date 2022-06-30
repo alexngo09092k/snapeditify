@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image/image.dart' as imagepkg;
 import 'package:snapretouch/common/app_cache.dart';
-import 'package:snapretouch/modules/painter/painter.dart';
+import 'package:snapretouch/services/painter/painter.dart';
 
 class ImageConvert {
   static final ImageConvert _instance = ImageConvert._internal();

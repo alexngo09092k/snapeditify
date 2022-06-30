@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:huawei_ads/hms_ads_lib.dart';
 import 'package:snapretouch/common/device_info.dart';
 import 'package:snapretouch/common/logs.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_extension.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_item.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_extension.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_item.dart';
 import 'advertisement_base.dart';
 
 class HuaweiAdvertisement extends AdvertisementBase {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/common/logs.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_extension.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_extension.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/services/services.dart';
 import 'package:snapretouch/widgets/ad_placeholder.dart';
 

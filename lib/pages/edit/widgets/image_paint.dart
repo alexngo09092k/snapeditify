@@ -4,7 +4,7 @@ import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/modules/painter/painter_pure.dart';
+import 'package:snapretouch/services/painter/painter_pure.dart';
 import 'package:snapretouch/pages/edit/widgets/changed_strokewidth.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
 import 'package:snapretouch/widgets/custom_card.dart';

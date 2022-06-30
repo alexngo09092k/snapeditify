@@ -17,7 +17,10 @@ Map<String, dynamic> enviroment = {
     'secondaryColor': '#72D5BB',
     'imageProtocol': ['https://', 'http://', 'data://'],
     'homeBanner': 'assets/images/home_banner.png',
-    'homeRemoveObjects': ['assets/images/home_before.jpeg', 'assets/images/home_after.jpeg'],
+    'homeRemoveObjects': [
+      'assets/images/home_before.jpeg',
+      'assets/images/home_after.jpeg'
+    ],
   },
 
   "apiConfig": {
@@ -57,7 +60,40 @@ Map<String, dynamic> enviroment = {
     "adMobAppIdIos": "ca-app-pub-9241292359230405~3779043810",
     "adMobAppIdAndroid": "ca-app-pub-9241292359230405~3319593408",
     "ads": [
-      ///HUAWEI
+      /// GOOGLE
+      {
+        "type": "openApp",
+        "provider": "google",
+        "iosId": "ca-app-pub-9241292359230405/6760430376",
+        "androidId": "ca-app-pub-9241292359230405/8949811147",
+      },
+      {
+        "type": "banner",
+        "provider": "google",
+        "iosId": "ca-app-pub-9241292359230405/6213635465",
+        "androidId": "ca-app-pub-9241292359230405/5562613364",
+        "showOnScreens": ['home', 'edit'],
+      },
+      {
+        "type": "interstitial",
+        "provider": "google",
+        "iosId": "ca-app-pub-9241292359230405/8456655423",
+        "androidId": "ca-app-pub-9241292359230405/8735571613",
+        "showOnScreens": ['edit'],
+        "hideOnScreens": ['edit'],
+        "waitingTimeToDisplay": 5,
+      },
+      {
+        "type": "reward",
+        "provider": "google",
+        "iosId": "ca-app-pub-9241292359230405/8265083730",
+        "androidId": "ca-app-pub-9241292359230405/9473938213",
+        "showOnScreens": ['edit'],
+        "hideOnScreens": ['edit'],
+        "waitingTimeToDisplay": 5,
+      },
+
+      /// HUAWEI
       {
         "type": "splash",
         "provider": "huawei",

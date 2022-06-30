@@ -9,16 +9,16 @@ import 'package:path/path.dart';
 import 'package:http/http.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:flutter/foundation.dart' as foundation;
-class ClientApiResponse<T> {
+class AppClientResponse<T> {
   String? error;
   T? data;
-  ClientApiResponse({this.error, this.data});
+  AppClientResponse({this.error, this.data});
 }
 
-abstract class ClientApi {
+abstract class AppClient {
   static const int timeoutInSeconds = 200;
 
-  static Future<ClientApiResponse> getData(String uri,
+  static Future<AppClientResponse> getData(String uri,
       {Map<String, dynamic>? query, Map<String, String>? headers}) async {
     try {
       printLog('====> API Call: $uri\nHeader: $headers');
@@ -30,11 +30,11 @@ abstract class ClientApi {
       return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
-      return ClientApiResponse(error: e.toString());
+      return AppClientResponse(error: e.toString());
     }
   }
 
-  static Future<ClientApiResponse> postData(String uri, dynamic body, {Map<String, String>? headers}) async {
+  static Future<AppClientResponse> postData(String uri, dynamic body, {Map<String, String>? headers}) async {
     try {
       printLog('====> API Call: $uri\nHeader: $headers');
       printLog('====> API Body: $body');
@@ -47,11 +47,11 @@ abstract class ClientApi {
       return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
-      return ClientApiResponse(error: e.toString());
+      return AppClientResponse(error: e.toString());
     }
   }
 
-  static Future<ClientApiResponse> postMultipartData(
+  static Future<AppClientResponse> postMultipartData(
       String uri, Map<String, String> body, List<MultipartBody> multipartBody,
       {Map<String, String>? headers}) async {
     try {
@@ -87,11 +87,11 @@ abstract class ClientApi {
       return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
-      return ClientApiResponse(error: e.toString());
+      return AppClientResponse(error: e.toString());
     }
   }
 
-  static Future<ClientApiResponse> putData(String uri, dynamic body,
+  static Future<AppClientResponse> putData(String uri, dynamic body,
       {Map<String, String>? headers}) async {
     try {
       printLog('====> API Call: $uri\nHeader: $headers');
@@ -104,11 +104,11 @@ abstract class ClientApi {
       return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
-      return ClientApiResponse(error: e.toString());
+      return AppClientResponse(error: e.toString());
     }
   }
 
-  static Future<ClientApiResponse> deleteData(String uri,
+  static Future<AppClientResponse> deleteData(String uri,
       {Map<String, String>? headers}) async {
     try {
       printLog('====> API Call: $uri\nHeader: $headers');
@@ -119,11 +119,11 @@ abstract class ClientApi {
       return handleResponse(response, uri);
     } catch (e) {
       printLog(e);
-      return ClientApiResponse(error: e.toString());
+      return AppClientResponse(error: e.toString());
     }
   }
 
-  static ClientApiResponse handleResponse(Response response, String uri) {
+  static AppClientResponse handleResponse(Response response, String uri) {
     try {
       printLog('======> status code ${response.statusCode}');
       final data = jsonDecode(response.body);
@@ -131,9 +131,9 @@ abstract class ClientApi {
       if (data['error'] != null) {
         throw data['error'];
       }
-      return ClientApiResponse(error: null, data: data);
+      return AppClientResponse(error: null, data: data);
     } catch (e) {
-      return ClientApiResponse(error: e.toString());
+      return AppClientResponse(error: e.toString());
     }
   }
 }

@@ -3,7 +3,7 @@ import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/pages/edit/widgets/count_detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/detail_detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/stroke_width_slider.dart';

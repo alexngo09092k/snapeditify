@@ -10,8 +10,8 @@ import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_extension.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_extension.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/widgets/ad_view.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
 
@@ -60,7 +60,10 @@ class SavedImageView extends StatelessWidget {
       context: context,
       builder: (BuildContext context) => CupertinoTheme(
         data: CupertinoThemeData(
-          textTheme: CupertinoTextThemeData(primaryColor: Theme.of(context).primaryColor),
+          brightness: Brightness.light,
+          textTheme: CupertinoTextThemeData(
+            primaryColor: Theme.of(context).primaryColor,
+          ),
         ),
         child: CupertinoActionSheet(
           actions: <CupertinoActionSheetAction>[

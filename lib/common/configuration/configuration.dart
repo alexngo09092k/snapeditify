@@ -152,13 +152,13 @@ extension ConfigurationsFireBaseRemoteConfig on Cofiguration {
     /// if expried, get new remote config
     printLog('remote config expried $isExpried');
 
-    if (isExpried) {
+    if (isExpried && AppInternet.instance.hasConnection) {
       printLog('====== SET REMOTE CONFIG ======');
       if(before != null) await before();
 
       FirebaseRemoteConfig? remoteConfig = Services().firebase.remoteConfig;
 
-      if(remoteConfig == null || !AppInternet.instance.hasConnection) {
+      if(remoteConfig == null) {
         update(CofigurationEvent.loadRemoteConfigFailed);
         return false;
       }

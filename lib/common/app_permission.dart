@@ -2,51 +2,17 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:snapretouch/common/logs.dart';
-import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/widgets/no_permission_popup.dart';
 
-class PermissionChecking {
-  static final PermissionChecking _instance = PermissionChecking._internal();
+class AppPermission {
+  static final AppPermission _instance = AppPermission._internal();
+  static AppPermission get instance => _instance;
 
-  PermissionChecking get instance => _instance;
+  factory AppPermission() => _instance;
 
-  PermissionChecking._internal();
+  AppPermission._internal();
 
-  static requestStorePermission({
-    BuildContext? context,
-    Function? onHasPermisson,
-    Function? onNoPermisson,
-  }) async {
-    requestPermission(
-      permission: [Permission.storage],
-      onNoPermisson: () {
-        if (context != null) {
-          showDialog(
-            context: context,
-            builder: (_) => NoPermissonPopup(
-              message: S.of(context).allowAppToAccessPhotosAndMediaOnYourDevice,
-              manualSetupTitle: S.of(context).openSettings,
-              onManualSetup: (_) {
-                AppSettings.openAppSettings();
-              },
-              onBackApp: () async {
-                requestPermission(
-                  permission: [Permission.storage],
-                  onHasPermisson: Navigator.of(context).pop,
-                );
-              },
-            ),
-          );
-        }
-        if (onNoPermisson != null) {
-          onNoPermisson();
-        }
-      },
-      onHasPermisson: onHasPermisson,
-    );
-  }
-
-  static requestPermission({
+  requestPermission({
     required List<Permission> permission,
     Function? onHasPermisson,
     Function? onNoPermisson,
@@ -60,7 +26,7 @@ class PermissionChecking {
     );
   }
 
-  static checkingStatus({
+  checkingStatus({
     PermissionStatus? status,
     Function? onHasPermisson,
     Function? onNoPermisson,
@@ -95,5 +61,41 @@ class PermissionChecking {
       default:
         break;
     }
+  }
+}
+
+extension AppPermissionStore on AppPermission {
+  requestStorePermission({
+    BuildContext? context,
+    Function? onHasPermisson,
+    Function? onNoPermisson,
+  }) async {
+    requestPermission(
+      permission: [Permission.storage],
+      onNoPermisson: () {
+        if (context != null) {
+          showDialog(
+            context: context,
+            builder: (_) => NoPermissonPopup(
+              message: 'Allow app to access photos and media on your device.',
+              manualSetupTitle: 'Open settings',
+              onManualSetup: (_) {
+                AppSettings.openAppSettings();
+              },
+              onBackApp: () async {
+                requestPermission(
+                  permission: [Permission.storage],
+                  onHasPermisson: Navigator.of(context).pop,
+                );
+              },
+            ),
+          );
+        }
+        if (onNoPermisson != null) {
+          onNoPermisson();
+        }
+      },
+      onHasPermisson: onHasPermisson,
+    );
   }
 }

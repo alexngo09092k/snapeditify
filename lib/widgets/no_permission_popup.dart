@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/modules/advertisement/app_lifecycle/app_lifecycle_handler.dart';
-import 'package:snapretouch/modules/advertisement/app_lifecycle/app_lifecycle_reactor.dart';
+import 'package:snapretouch/services/advertisement/app_lifecycle/app_lifecycle_handler.dart';
+import 'package:snapretouch/services/advertisement/app_lifecycle/app_lifecycle_reactor.dart';
 import 'package:snapretouch/widgets/custom_dialog.dart';
 
 class NoPermissonPopup extends StatefulWidget {

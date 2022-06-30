@@ -19,12 +19,6 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     _controller = SplashController(context: context);
-    _controller.setNextScreen();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override

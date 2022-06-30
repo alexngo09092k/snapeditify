@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:snapretouch/common/app_cache.dart';
+import 'package:snapretouch/common/app_permission.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/pages/edit/widgets/image_paint.dart';
 import 'package:snapretouch/pages/edit/widgets/paint_control.dart';
 import 'package:snapretouch/pages/edit/widgets/revert_popup.dart';
 import 'package:snapretouch/pages/edit/widgets/saved_image_button.dart';
-import 'package:snapretouch/utils/permission_checking.dart';
 import 'package:snapretouch/widgets/go_back_popup.dart';
 
 class EditPage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _EditPageState extends State<EditPage> {
 
   @override
   void initState() {
-    PermissionChecking.requestStorePermission(context: context);
+    AppPermission.instance.requestStorePermission(context: context);
     _controller = EditController(imagePath: widget.imagePath, context: context);
     super.initState();
   }

@@ -3,12 +3,17 @@ import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gms_check/gms_check.dart';
 import 'package:snapretouch/common/app_cache.dart';
-import 'package:snapretouch/common/app_lifecycle.dart';
+import 'package:snapretouch/common/app_internet.dart';
+import 'package:snapretouch/common/app_shared.dart';
 import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/common/device_info.dart';
 import 'package:snapretouch/common/logs.dart';
+import 'package:snapretouch/env.dart';
+import 'package:snapretouch/firebase_options.dart';
 import 'package:snapretouch/services/services.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -28,24 +33,38 @@ bootstrap(
         _firebaseMessagingBackgroundHandler,
       );
 
-      openApp();
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: AppColors.kWhite,
+      ));
 
-      if (isMobile) {
-        AppCache.instance.initial();
+      /// create instance of ref prefences (local storage)
+      await AppShared.instance.initial();
 
-        await GmsCheck().checkGmsAvailability(enableLog: kDebugMode);
+      /// get device info
+      await DeviceInfo.instance.initial();
 
-        /// Init Firebase settings due to version 0.5.0+ requires to.
-        /// Use await to prevent any usage until the initialization is completed.
-        await Services().firebase.init(
-              Cofiguration.firebaseConfig,
-              // options: DefaultFirebaseOptions.currentPlatform,
-            );
+      /// create instance of app cache ( data only exits when open app)
+      await AppCache.instance.initial();
 
-        await Cofiguration.instance.loadRemoteConfig();
+      await GmsCheck().checkGmsAvailability(enableLog: kDebugMode);
 
-        Services().advertisement.init(Cofiguration.adConfig);
-      }
+      /// set default config
+      Cofiguration.instance.setDefaultConfig(enviroment);
+
+      /// create instace to checking internet
+      await AppInternet.instance.initialize('google.com');
+
+      /// Init Firebase settings due to version 0.5.0+ requires to.
+      /// Use await to prevent any usage until the initialization is completed.
+      await Services().firebase.init(
+            Cofiguration.firebaseConfig,
+            options: DefaultFirebaseOptions.currentPlatform,
+          );
+
+      await Cofiguration.instance.loadRemoteConfig();
+
+      Services().advertisement.init(Cofiguration.adConfig);
 
       if (onRun != null) await onRun();
 

@@ -18,10 +18,10 @@ class AppInternet {
 
   final Connectivity _connectivity = Connectivity();
 
-  void initialize(String lookUpAddress) {
+  Future<bool> initialize(String lookUpAddress) async {
     _lookUpAddress = lookUpAddress;
     _connectivity.onConnectivityChanged.listen(_connectionChange);
-    checkConnection();
+    return await checkConnection();
   }
 
   Stream<bool> get connectionChange => connectionChangeController.stream;

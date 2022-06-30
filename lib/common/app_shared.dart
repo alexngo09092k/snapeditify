@@ -15,7 +15,7 @@ class AppShared {
 
   AppShared._internal() {
     _streamController = StreamController<AppSharedEvent>();
-    initialStore();
+    initial();
   }
 
   bool get canStored => _sharedPreferences != null;
@@ -85,7 +85,7 @@ class AppShared {
     return value;
   }
 
-  initialStore() async {
+  initial() async {
     try {
       _sharedPreferences ??= await SharedPreferences.getInstance();
     } catch (error) {

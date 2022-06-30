@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snapretouch/common/app_cache.dart';
+import 'package:snapretouch/common/app_permission.dart';
 import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/controllers/home/home_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/pages/home/widgets/home_banner.dart';
 import 'package:snapretouch/pages/home/widgets/home_logo.dart';
-import 'package:snapretouch/utils/permission_checking.dart';
 import 'package:snapretouch/widgets/ad_view.dart';
 import 'package:snapretouch/widgets/ai_icon.dart';
 import 'package:snapretouch/widgets/before_after/before_after.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
 import 'package:snapretouch/widgets/custom_card.dart';
 import 'package:snapretouch/widgets/custom_image.dart';
-import 'package:snapretouch/modules/painter/painter.dart';
+import 'package:snapretouch/services/painter/painter.dart';
 import 'dart:ui' as ui;
 
 class HomePage extends StatefulWidget {
@@ -42,15 +42,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   void showMenu() {
-    PermissionChecking.requestStorePermission(
+    AppPermission.instance.requestStorePermission(
         context: context,
         onHasPermisson: () {
           showCupertinoModalPopup<void>(
             context: context,
             builder: (BuildContext context) => CupertinoTheme(
               data: CupertinoThemeData(
+                brightness: Brightness.light,
                 textTheme: CupertinoTextThemeData(
-                    primaryColor: Theme.of(context).primaryColor),
+                  primaryColor: Theme.of(context).primaryColor,
+                ),
               ),
               child: CupertinoActionSheet(
                 actions: <CupertinoActionSheetAction>[

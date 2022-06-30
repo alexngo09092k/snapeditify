@@ -7,8 +7,8 @@ import 'package:snapretouch/common/app_internet.dart';
 import 'package:snapretouch/common/app_shared.dart';
 import 'package:snapretouch/common/constants.dart';
 import 'package:snapretouch/common/logs.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_config.dart';
-import 'package:snapretouch/modules/firebase/models/firebase_config.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_config.dart';
+import 'package:snapretouch/services/firebase/models/firebase_config.dart';
 
 import 'package:snapretouch/services/services.dart';
 

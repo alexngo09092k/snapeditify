@@ -1,7 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_extension.dart';
-import 'package:snapretouch/modules/advertisement/models/advertisement_item.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_extension.dart';
+import 'package:snapretouch/services/advertisement/models/advertisement_item.dart';
 
 abstract class AdvertisementBase {
   AdvertisementProvider get adsProvider;
