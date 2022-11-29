@@ -1,45 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/controllers/edit/edit_controller.dart';
+import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
 
 class StrokeWidthSlider extends StatelessWidget {
-  const StrokeWidthSlider({Key? key, required this.controller})
-      : super(key: key);
-
-  final EditController controller;
+  const StrokeWidthSlider({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(
-          onPressed: controller.toDraw,
-          icon: Image.asset(
-            controller.isDraw
-                ? AppImages.icFingerbrushSelectedNormal3x
-                : AppImages.icFingerbrushUnselectedNormal3x,
-            width: 40,
+        PropConsumer<EditProvider, bool>(
+          select: (p) => p.isDraw,
+          builder: (_, __, p, ___) => IconButton(
+            onPressed: p.toDraw,
+            icon: Image.asset(
+              p.isDraw ? AppImages.instance.icFingerbrushSelectedNormal3x : AppImages.instance.icFingerbrushUnselectedNormal3x,
+              width: 40,
+            ),
           ),
         ),
         Expanded(
-          child: Slider(
-            min: 1,
-            max: 100,
-            value: controller.strokeWidth,
-            label: '${controller.strokeWidth.round()}',
-            divisions: 100,
-            onChanged: (value)=> controller.state.strokeWidth = value,
-            onChangeStart: (_) => controller.state.changedStrokeWidth = true,
-            onChangeEnd: (_) => controller.state.changedStrokeWidth = false,
+          child: PropConsumer<EditProvider, double>(
+            select: (p) => p.strokeWidth,
+            builder: (_, __, p, ___) => Slider(
+              min: 1,
+              max: 100,
+              value: p.strokeWidth,
+              label: '${p.strokeWidth.round()}',
+              divisions: 100,
+              onChanged: (value) => p.state.strokeWidth = value,
+              onChangeStart: (_) => p.state.changedStrokeWidth = true,
+              onChangeEnd: (_) => p.state.changedStrokeWidth = false,
+            ),
           ),
         ),
-        IconButton(
-          onPressed: controller.toErase,
-          icon: Image.asset(
-            controller.isErase
-                ? AppImages.icEraserSelectedNormal3x
-                : AppImages.icEraserUnselectedNormal3x,
-            width: 40,
+        PropConsumer<EditProvider, bool>(
+          select: (p) => p.isErase,
+          builder: (_, __, p, ___) => IconButton(
+            onPressed: p.toErase,
+            icon: Image.asset(
+              p.isErase ? AppImages.instance.icEraserSelectedNormal3x : AppImages.instance.icEraserUnselectedNormal3x,
+              width: 40,
+            ),
           ),
         ),
       ],

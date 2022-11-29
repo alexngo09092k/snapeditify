@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/logs.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:snapretouch/utils/image_convert.dart';
-import 'package:snapretouch/services/painter/painter.dart';
+import 'package:snapretouch/widgets/painter/painter.dart';
 
 class DetectedObject {
   final List<int> box;
@@ -88,21 +88,19 @@ class DetectedObject {
     Function(ui.Offset)? onTap,
   }) async {
     ui.Offset realBoxPosition = ui.Offset(box[0].toDouble(), box[1].toDouble());
-    ui.Size realBoxSize =
-        ui.Size((box[2] - box[0]).toDouble(), (box[3] - box[1]).toDouble());
+    ui.Size realBoxSize = ui.Size((box[2] - box[0]).toDouble(), (box[3] - box[1]).toDouble());
 
     double ratioX = viewSize.width / realSize.width;
     double ratioY = viewSize.height / realSize.height;
 
-    ui.Size size =
-        ui.Size(realBoxSize.width * ratioX, realBoxSize.height * ratioY);
+    ui.Size size = ui.Size(realBoxSize.width * ratioX, realBoxSize.height * ratioY);
     ui.Offset position = ui.Offset(
       realBoxPosition.dx * ratioX + size.width / 2,
       realBoxPosition.dy * ratioX + size.height / 2,
     );
 
-    printLog('paintParse $position');
-    printLog('paintParse $size');
+    Debug.log('paintParse $position');
+    Debug.log('paintParse $size');
 
     if (box.length > 3) {
       var paint = Paint()
@@ -117,6 +115,7 @@ class DetectedObject {
         image: await ImageConvert.base64ToImage(mask),
         locked: true,
         onTap: onTap,
+        opacity: 0.2
       );
 
       boxDrawble = RectangleDrawable(
@@ -136,8 +135,7 @@ class DetectedObject {
 
   String toJson() => json.encode(toMap());
 
-  factory DetectedObject.fromJson(String source) =>
-      DetectedObject.fromMap(json.decode(source));
+  factory DetectedObject.fromJson(String source) => DetectedObject.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -159,12 +157,7 @@ class DetectedObject {
 
   @override
   int get hashCode {
-    return box.hashCode ^
-        objectType.hashCode ^
-        mask.hashCode ^
-        accuracy.hashCode ^
-        objectDescription.hashCode ^
-        maskId.hashCode;
+    return box.hashCode ^ objectType.hashCode ^ mask.hashCode ^ accuracy.hashCode ^ objectDescription.hashCode ^ maskId.hashCode;
   }
 }
 

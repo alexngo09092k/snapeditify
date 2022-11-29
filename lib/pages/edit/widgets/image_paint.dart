@@ -1,25 +1,22 @@
-
 import 'package:flutter/material.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/common/logs.dart';
-import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/services/painter/painter_pure.dart';
+import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
+import 'package:snapretouch/widgets/painter/painter_pure.dart';
 import 'package:snapretouch/pages/edit/widgets/changed_strokewidth.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
 import 'package:snapretouch/widgets/custom_card.dart';
 
 class ImagePaint extends StatelessWidget {
-  const ImagePaint({Key? key, required this.controller}) : super(key: key);
-
-  final EditController controller;
+  const ImagePaint({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height * 1.7 / 3;
-    final double width = MediaQuery.of(context).size.width -
-        AppDimensions.paddingSizeDefault * 2;
+    final double width = MediaQuery.of(context).size.width - AppDimensions.instance.paddingSizeDefault * 2;
     const double iconSize = 40;
+    final p = ManagerProvider.of<EditProvider>();
     return SizedBox(
       width: width,
       height: height + 25,
@@ -29,73 +26,71 @@ class ImagePaint extends StatelessWidget {
           BorderBackground(
             height: height,
             width: width,
-            controller: controller,
           ),
           MainImagePaint(
             height: height,
             width: width,
-            controller: controller,
           ),
-          Center(
-            child: ChangedStrokeWidth(controller: controller),
+          const Center(
+            child: ChangedStrokeWidth(),
           ),
           Positioned(
-              left: AppDimensions.paddingSizeExtraSmall,
-              top: height - iconSize - AppDimensions.paddingSizeExtraSmall,
-              child: IconButton(
-                  onPressed: controller.undo,
-                  icon: ValueListenableBuilder(
-                    valueListenable: controller,
-                    builder: (_, __, ___) => Image.asset(
-                      controller.canUndo
-                          ? AppImages.icUndoNormalNormal3x
-                          : AppImages.icUndoDisabledNormal3x,
-                      width: iconSize,
-                    ),
-                  ))),
+            left: AppDimensions.instance.paddingSizeExtraSmall,
+            top: height - iconSize - AppDimensions.instance.paddingSizeExtraSmall,
+            child: IconButton(
+              onPressed: p.undo,
+              icon: PropConsumer<EditProvider, bool>(
+                select: (p) => p.canUndo,
+                builder: (_, __, p, ___) => Image.asset(
+                  p.canUndo ? AppImages.instance.icUndoNormalNormal3x : AppImages.instance.icUndoDisabledNormal3x,
+                  width: iconSize,
+                ),
+              ),
+            ),
+          ),
           Positioned(
-              left: AppDimensions.paddingSizeExtraSmall + iconSize,
-              top: height - iconSize - AppDimensions.paddingSizeExtraSmall,
-              child: IconButton(
-                  onPressed: controller.redo,
-                  icon: ValueListenableBuilder(
-                    valueListenable: controller,
-                    builder: (_, __, ___) => Image.asset(
-                      controller.canRedo
-                          ? AppImages.icRedoNormalNormal3x
-                          : AppImages.icRedoDisabledNormal3x,
-                      width: iconSize,
-                    ),
-                  ))),
+            left: AppDimensions.instance.paddingSizeExtraSmall + iconSize,
+            top: height - iconSize - AppDimensions.instance.paddingSizeExtraSmall,
+            child: IconButton(
+              onPressed: p.redo,
+              icon: PropConsumer<EditProvider, bool>(
+                select: (p) => p.canRedo,
+                builder: (_, __, p, ___) => Image.asset(
+                  p.canRedo ? AppImages.instance.icRedoNormalNormal3x : AppImages.instance.icRedoDisabledNormal3x,
+                  width: iconSize,
+                ),
+              ),
+            ),
+          ),
           Positioned(
             left: (width - 150) / 2,
             top: height - 25,
-            child: ValueListenableBuilder(
-              valueListenable: controller,
-              builder: (_, __, ___) => controller.canRemove
+            child: PropConsumer<EditProvider, bool>(
+              select: (p) => p.canRemove,
+              builder: (_, __, p, ___) => p.canRemove
                   ? CustomCard(
                       child: CustomButton(
                         title: S.of(context).remove,
-                        gradient: AppColors.gradient,
+                        gradient: AppColors.instance.gradient,
                         width: 150,
                         height: 50,
-                        onTap: controller.remove,
+                        onTap: () => p.remove(context),
                       ),
                     )
                   : const SizedBox(),
             ),
           ),
           Positioned(
-            right: AppDimensions.paddingSizeExtraSmall,
-            top: height - iconSize - AppDimensions.paddingSizeExtraSmall,
+            right: AppDimensions.instance.paddingSizeExtraSmall,
+            top: height - iconSize - AppDimensions.instance.paddingSizeExtraSmall,
             child: InkWell(
-              onTapDown: (_) => controller.compare(),
-              onTapUp: (_) => controller.compare(),
+              onTapDown: (_) => p.compare(),
+              onTapUp: (_) => p.compare(),
               child: Container(
                 width: iconSize,
                 padding: const EdgeInsets.all(4),
                 child: Image.asset(
-                  AppImages.icCompareNormal3x,
+                  AppImages.instance.icCompareNormal3x,
                   width: iconSize,
                 ),
               ),
@@ -112,39 +107,34 @@ class MainImagePaint extends StatelessWidget {
     Key? key,
     required this.height,
     required this.width,
-    required this.controller,
   }) : super(key: key);
 
   final double height;
   final double width;
-  final EditController controller;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
       width: width,
-      child: ValueListenableBuilder(
-        valueListenable: controller,
-        builder: (_, __, ___) => controller.state.image != null
+      child: Consumer<EditProvider>(
+        builder: (_, __, p) => p.state.image != null
             ? Center(
                 child: AspectRatio(
-                  aspectRatio: (controller.state.image!.width /
-                      controller.state.image!.height),
+                  aspectRatio: (p.state.image!.width / p.state.image!.height),
                   child: FlutterPainter(
-                    controller: controller.painterController,
+                    controller: p.painterController,
                     onDrawableCreated: (drawable) {
-                      printLog('onDrawableCreated $drawable');
+                      Debug.log('onDrawableCreated $drawable');
                     },
                     onDrawableDeleted: (drawable) {
-                      printLog('onDrawableDeleted $drawable');
+                      Debug.log('onDrawableDeleted $drawable');
                     },
                     onPainterSettingsChanged: (settings) {
-                      printLog('onPainterSettingsChanged $settings');
+                      Debug.log('onPainterSettingsChanged $settings');
                     },
                     onSelectedObjectDrawableChanged: (objectDrawable) {
-                      printLog(
-                          'onSelectedObjectDrawableChanged $objectDrawable');
+                      Debug.log('onSelectedObjectDrawableChanged $objectDrawable');
                     },
                   ),
                 ),
@@ -160,12 +150,10 @@ class BorderBackground extends StatelessWidget {
     Key? key,
     required this.height,
     required this.width,
-    required this.controller,
   }) : super(key: key);
 
   final double height;
   final double width;
-  final EditController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -174,15 +162,15 @@ class BorderBackground extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          gradient: AppColors.gradient,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimensions.paddingSizeDefault),
+          gradient: AppColors.instance.gradient,
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppDimensions.instance.paddingSizeDefault),
           ),
         ),
         padding: const EdgeInsets.all(1),
         child: Container(
-          decoration: const BoxDecoration(
-            color: AppColors.kTeal50,
+          decoration: BoxDecoration(
+            color: AppColors.instance.lightActive,
             // image: DecorationImage(
             //   image: kIsWeb
             //       ? Image.network(controller.imagePath).image
@@ -191,7 +179,7 @@ class BorderBackground extends StatelessWidget {
             //   opacity: 0.3,
             // ),
             borderRadius: BorderRadius.all(
-              Radius.circular(AppDimensions.paddingSizeDefault),
+              Radius.circular(AppDimensions.instance.paddingSizeDefault),
             ),
           ),
         ),

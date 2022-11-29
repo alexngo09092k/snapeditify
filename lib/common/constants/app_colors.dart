@@ -1,47 +1,80 @@
 part of '../constants.dart';
 
-abstract class AppColors {
-  static Color topicColor = HexColor(Cofiguration.appConfig.primaryColor);
-  static const kDarkBG = Color(0xff1B1D26);
-  static const kDarkBgLight = Color(0xff282D39);
+class AppColors {
+  static final AppColors _instance = AppColors._internal();
+  static AppColors get instance => _instance;
 
-  static const kTeal50 = Color(0xFFE0F2F1);
+  factory AppColors() => _instance;
 
-  static const kGrey900 = Color(0xFF263238);
-  static const kGrey600 = Color(0xFF546E7A);
-  static const kGrey200 = Color(0xFFEEEEEE);
-  static const kGrey400 = Color(0xFF90a4ae);
+  AppColors._internal();
 
-  static const kErrorRed = Color(0xFFe74c3c);
-  static const kColorRed = Color(0xFFF3090B);
-  static const kWhite = Colors.white;
-  static const kGrey = Colors.grey;
-  static const kSurfaceWhite = Color(0xFFFFFBFA);
-  static const kRedColorHeart = Color(0xFFf22742);
+  final Color kWhite = const Color.fromRGBO(255, 255, 255, 1);
+  final Color kBlack = const Color.fromRGBO(0, 0, 0, 1);
 
-  static ColorScheme kColorScheme = ColorScheme(
-    primary: topicColor,
-    secondary: topicColor.withOpacity(0.5),
-    surface: kSurfaceWhite,
-    background: kWhite,
-    error: kErrorRed,
-    onPrimary: kDarkBG,
-    onSecondary: kGrey900,
-    onSurface: kGrey900,
-    onBackground: kGrey900,
-    onError: kSurfaceWhite,
-    brightness: Brightness.light,
-  );
+  final Color kBlue = const Color.fromRGBO(200, 238, 68, 1);
 
-  static LinearGradient gradient = LinearGradient(
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
-    colors: [
-      HexColor(Cofiguration.appConfig.primaryColor),
-      HexColor(Cofiguration.appConfig.secondaryColor),
-    ],
-  );
+  final Color kBlue2 = const Color.fromRGBO(118, 158, 5, 1);
 
-  static get inputColor => HexColor('#F5F5F5');
-  static get helperMessageIconColor => HexColor('#525BAA');
+  final Color kBlue3 = const Color.fromRGBO(41, 160, 115, 1);
+
+  final Color kOrange = const Color.fromRGBO(242, 153, 74, 1);
+
+  final Color kFacebook = const Color.fromRGBO(87, 122, 191, 1);
+  final Color kGoogle = const Color.fromRGBO(245, 245, 245, 1);
+  final Color kApple = const Color.fromRGBO(240, 240, 240, 1);
+
+  /// warning
+  final Color kRed = const Color.fromRGBO(200, 0, 0, 1);
+
+  /// DARK COLORS
+  final Color darkIcon = const Color.fromRGBO(255, 255, 255, 1);
+  final Color darkIconBg = const Color.fromRGBO(63, 63, 63, 1);
+  final Color darkInputBg = const Color.fromRGBO(61, 61, 61, 1);
+  final Color darkInputHintText = const Color.fromRGBO(136, 136, 136, 1);
+  final Color darkSubTitle = const Color.fromRGBO(255, 255, 255, 1);
+  final Color darkSubSubTitle = const Color.fromRGBO(136, 136, 136, 1);
+  final Color darkIconTabName = const Color.fromRGBO(136, 136, 136, 1);
+  final Color darkTabName = const Color.fromRGBO(255, 255, 255, 0.5);
+  final Color darkScreenName = const Color.fromRGBO(255, 255, 255, 1);
+  final Color darkTitle = const Color.fromRGBO(190, 190, 190, 1);
+  final Color darkActive = const Color.fromRGBO(200, 238, 68, 1);
+  final Color darkCard = const Color.fromRGBO(47, 51, 56, 1);
+  final Color darkDivider = const Color.fromRGBO(61, 61, 61, 1);
+  final Color darkBottomAppBar = const Color.fromRGBO(41, 45, 50, 1);
+  final Color darkBg = const Color.fromRGBO(41, 45, 50, 1);
+  final Color darkDisable = const Color.fromRGBO(61, 61, 61, 1);
+  final Color darkError = const Color.fromRGBO(200, 0, 0, 1);
+  final Color darkIconBgActive = const Color.fromRGBO(224, 236, 185, 1);
+
+  /// LIGHT COLORS
+  final Color lightIcon = const Color.fromRGBO(136, 136, 136, 1);
+  final Color lightIconBg = const Color.fromRGBO(239, 239, 239, 1);
+  final Color lightInputBg = const Color.fromRGBO(245, 245, 245, 1);
+  final Color lightInputHintText = const Color.fromRGBO(136, 136, 136, 1);
+  final Color lightSubTitle = const Color.fromRGBO(136, 136, 136, 1);
+  final Color lightSubSubTitle = const Color.fromRGBO(136, 136, 136, 1);
+  final Color lightIconTabName = const Color.fromRGBO(61, 61, 61, 1);
+  final Color lightTabName = const Color.fromRGBO(0, 0, 0, 1);
+  final Color lightScreenName = const Color.fromRGBO(0, 0, 0, 1);
+  final Color lightTitle = const Color.fromRGBO(136, 136, 136, 1);
+  final Color lightActive = const Color.fromRGBO(118, 158, 4, 1);
+  final Color lightActiveBg = const Color.fromRGBO(224, 236, 185, 1);
+  final Color lightCard = const Color.fromRGBO(250, 250, 250, 1);
+  final Color lightDivider = const Color.fromRGBO(230, 230, 230, 1);
+  final Color lightBottomAppBar = const Color.fromRGBO(255, 255, 255, 1);
+  final Color lightBg = const Color.fromRGBO(255, 255, 255, 1);
+  final Color lightDisable = const Color.fromRGBO(245, 245, 245, 1);
+  final Color lightError = const Color.fromRGBO(200, 0, 0, 1);
+  final Color lightIconBgActive = const Color.fromRGBO(224, 236, 185, 1);
+
+  Color get randomColor => Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(0.8);
+
+  LinearGradient get gradient => LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          darkActive,
+          lightActive,
+        ],
+      );
 }

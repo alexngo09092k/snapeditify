@@ -3,29 +3,34 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:snapretouch/pages/edit/edit_page.dart';
 import 'package:snapretouch/pages/home/home_page.dart';
+import 'package:snapretouch/pages/maintenance/maintenance_page.dart';
 import 'package:snapretouch/pages/splash/splash_page.dart';
 
 abstract class AppRoutes {
-  static const String home = 'home';
-  static const String edit = 'edit';
-  static const String splash = 'splash';
+  static const String homePage = 'home_page';
+  static const String editPage = 'edit_page';
+  static const String splashPage = 'splash_page';
+  static const String maintenancePage = 'maintenance_page';
 
-  static String get initialRoute => splash;
+  static String get initialRoute => splashPage;
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    splash: (context) => const SplashPage(),
-    home: (context) => const HomePage(),
+    splashPage: (context) => const SplashPage(),
+    homePage: (context) => const HomePage(),
+    maintenancePage: (context) => const HomePage(),
   };
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case splash:
+      case splashPage:
         return _buildRoute(const SplashPage(), settings);
-      case home:
+      case homePage:
         return _buildRoute(const HomePage(), settings);
-      case edit:
+      case editPage:
         File image = settings.arguments as File;
         return _buildRoute(EditPage(imagePath: image.path), settings);
+      case maintenancePage:
+        return _buildRoute(const MaintenancePage(), settings);
       default:
     }
     return null;

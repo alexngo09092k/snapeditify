@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/models/detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/detected_object_tab.dart';
 import 'package:snapretouch/pages/edit/widgets/detected_object_tab_content.dart';
+import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
 
 class DetailDetectedObject extends StatefulWidget {
   DetailDetectedObject({
     Key? key,
-    required this.controller,
     required this.hideDetailDetectedObjects,
   }) : super(key: key);
 
-  final EditController controller;
   void Function() hideDetailDetectedObjects;
 
   @override
   State<DetailDetectedObject> createState() => _DetailDetectedObjectState();
 }
 
-class _DetailDetectedObjectState extends State<DetailDetectedObject> {
+class _DetailDetectedObjectState extends ProviderState<DetailDetectedObject, EditProvider> {
   int _indexTab = 0;
 
   DetectedObjectType get type => _indexTab == 0 ? DetectedObjectType.people : DetectedObjectType.other;
@@ -34,16 +33,14 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
 
   @override
   void initState() {
-    data[DetectedObjectType.people] = widget.controller.state
-        .getDetectedObjectsByType(DetectedObjectType.people);
-    data[DetectedObjectType.other] = widget.controller.state
-        .getDetectedObjectsByType(DetectedObjectType.other);
-    if ((data[DetectedObjectType.people]!.isEmpty) &&
-        data[DetectedObjectType.other]!.isNotEmpty) {
+    super.initState();
+
+    data[DetectedObjectType.people] = provider.state.getDetectedObjectsByType(DetectedObjectType.people);
+    data[DetectedObjectType.other] = provider.state.getDetectedObjectsByType(DetectedObjectType.other);
+    if ((data[DetectedObjectType.people]!.isEmpty) && data[DetectedObjectType.other]!.isNotEmpty) {
       _indexTab = 1;
     }
     _pageController = PageController(initialPage: _indexTab);
-    super.initState();
   }
 
   @override
@@ -57,7 +54,8 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSizeSmall).copyWith(top: AppDimensions.paddingSizeExtraSmall),
+          padding:
+              EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingSizeSmall).copyWith(top: AppDimensions.instance.paddingSizeExtraSmall),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -65,12 +63,15 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
                 children: [
                   InkWell(
                     onTap: widget.hideDetailDetectedObjects,
-                    child: Image.asset(AppImages.icDeleteNormal3x, width: 25),
+                    child: Image.asset(AppImages.instance.icDeleteNormal3x, width: 25),
                   ),
-                  const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
-                  Text(
-                    '${widget.controller.state.detectedObjects.values.length} ${S.of(context).objects}',
-                    style: Theme.of(context).textTheme.subtitle2,
+                  SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall),
+                  PropConsumer<EditProvider, int>(
+                    select: (p) => p.state.detectedObjects.values.length,
+                    builder: (_, __, p, ___) => Text(
+                      '${p.state.detectedObjects.values.length} ${S.of(context).objects}',
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
                   ),
                 ],
               ),
@@ -88,18 +89,16 @@ class _DetailDetectedObjectState extends State<DetailDetectedObject> {
             ],
           ),
         ),
-        const SizedBox(height: AppDimensions.paddingSizeDefault),
+        SizedBox(height: AppDimensions.instance.paddingSizeDefault),
         SizedBox(
           height: MediaQuery.of(context).size.height * (0.5) / 3,
           child: PageView(
             controller: _pageController,
             children: [
               DetectedObjectTabContent(
-                controller: widget.controller,
                 data: data[DetectedObjectType.people] ?? [],
               ),
               DetectedObjectTabContent(
-                controller: widget.controller,
                 data: data[DetectedObjectType.other] ?? [],
               ),
             ],

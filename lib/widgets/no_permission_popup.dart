@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/common/logs.dart';
-import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/services/advertisement/app_lifecycle/app_lifecycle_handler.dart';
-import 'package:snapretouch/services/advertisement/app_lifecycle/app_lifecycle_reactor.dart';
-import 'package:snapretouch/widgets/custom_dialog.dart';
+import 'package:fluttering/widgets/alert.dart';
 
-class NoPermissonPopup extends StatefulWidget {
-  const NoPermissonPopup({
+class NoPermissionPopup extends StatefulWidget {
+  const NoPermissionPopup({
     Key? key,
     required this.message,
     required this.manualSetupTitle,
@@ -18,63 +13,50 @@ class NoPermissonPopup extends StatefulWidget {
   final String message;
   final String manualSetupTitle;
   final Function(BuildContext) onManualSetup;
-  final Function()? onBackApp;
+  final Function(BuildContext)? onBackApp;
 
   @override
-  State<NoPermissonPopup> createState() => _NoPermissonPopupState();
+  State<NoPermissionPopup> createState() => _NoPermissionPopupState();
 }
 
-class _NoPermissonPopupState extends State<NoPermissonPopup>
-    implements AppLifeCycleHandler {
-  late final AppLifecycleReactor _appLifecycleReactor;
-
+class _NoPermissionPopupState extends State<NoPermissionPopup> with WidgetsBindingObserver {
   @override
   void initState() {
-    _appLifecycleReactor = AppLifecycleReactor(handler: this);
-    _appLifecycleReactor.listenToAppStateChanges();
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      if (widget.onBackApp != null) widget.onBackApp!(context);
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return CustomDialog(
-      height: 140,
-      message: Text(
-        widget.message,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.bodyText1,
-      ),
+    return AwesomeAlert(
       buttons: [
-        CustomDialogButton(
-          title: S.of(context).cancel,
+        AwesomeAlertButton(
+          name: "Cancel",
           action: Navigator.of(context).pop,
-          color: Theme.of(context).highlightColor,
-          titleColor: Theme.of(context).textTheme.bodyText1!.color,
+          color: Theme.of(context).primaryColor,
         ),
-        CustomDialogButton(
-          title: widget.manualSetupTitle,
-          action: () => widget.onManualSetup(context),
-          gradient: AppColors.gradient,
+        AwesomeAlertButton(
+          name: widget.manualSetupTitle,
+          action: widget.onManualSetup,
+          color: Theme.of(context).primaryColor,
         ),
       ],
+      title: 'No permission',
+      content: const Text('Make sure you are connected internet to Wifi or your cellcular network'),
     );
   }
 
   @override
-  void onBackground() {
-    printLog('NoPermissonPopup => background');
-  }
-
-  @override
-  void onForeground() {
-    printLog('NoPermissonPopup => foreground');
-    if (widget.onBackApp != null) {
-      widget.onBackApp!();
-    }
-  }
-
-  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 }

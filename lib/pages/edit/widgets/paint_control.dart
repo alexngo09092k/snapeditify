@@ -1,41 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/app_routes.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/services/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/pages/edit/widgets/count_detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/detail_detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/stroke_width_slider.dart';
-import 'package:snapretouch/services/services.dart';
+import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
 import 'package:snapretouch/widgets/ai_icon.dart';
 
 class PaintControl extends StatefulWidget {
   const PaintControl({
     Key? key,
-    required this.controller,
   }) : super(key: key);
-
-  final EditController controller;
 
   @override
   State<PaintControl> createState() => PaintControlState();
 }
 
-class PaintControlState extends State<PaintControl> {
+class PaintControlState extends ProviderState<PaintControl, EditProvider> {
   bool _showDetail = false;
 
   _toAI() {
-    Services().advertisement.loadAd(
-          type: AdvertisementViewType.handle,
-          onAd: (handleAd) {
-            if (handleAd != null) {
-              handleAd.show();
-            }
-          },
-          screenName: AppRoutes.edit
-        );
-    widget.controller.toAI();
+    ManagerProvider.of<AwesomeAdvertisement>().showAd();
+    provider.toAI(context);
   }
 
   hideDetail() {
@@ -57,89 +45,67 @@ class PaintControlState extends State<PaintControl> {
         children: [
           if (_showDetail)
             DetailDetectedObject(
-              controller: widget.controller,
               hideDetailDetectedObjects: hideDetail,
             ),
           if (!_showDetail) ...[
             Container(
-              padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
-              child: ValueListenableBuilder(
-                valueListenable: widget.controller,
-                builder: (context, _, __) => widget.controller.isAI
+              padding: EdgeInsets.all(AppDimensions.instance.paddingSizeDefault),
+              child: PropConsumer<EditProvider, bool>(
+                select: (p) => p.isAI,
+                builder: (_, __, p, ___) => p.isAI
                     ? CountDetectedObject(
-                        controller: widget.controller,
                         showDetailDetectedObject: showDetail,
                       )
-                    : StrokeWidthSlider(
-                        controller: widget.controller,
-                      ),
+                    : const StrokeWidthSlider(),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
+              padding: EdgeInsets.all(AppDimensions.instance.paddingSizeDefault),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   InkWell(
                     onTap: _toAI,
-                    child: ValueListenableBuilder(
-                      valueListenable: widget.controller,
-                      builder: (_, __, ___) => Column(
+                    child: PropConsumer<EditProvider, bool>(
+                      select: (p) => p.isAI,
+                      builder: (_, __, p, ___) => Column(
                         children: [
                           Image.asset(
-                            AppImages.icFaceIdNormalNormal3x,
+                            AppImages.instance.icFaceIdNormalNormal3x,
                             width: 30,
-                            color: widget.controller.isAI
-                                ? Theme.of(context).primaryColor
-                                : Theme.of(context).disabledColor,
+                            color: p.isAI ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                           ),
-                          const SizedBox(
-                              height: AppDimensions.paddingSizeDefault),
-                          Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  S.of(context).auto,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                        color: widget.controller.isAI
-                                            ? Theme.of(context).primaryColor
-                                            : Theme.of(context).disabledColor,
-                                      ),
-                                ),
-                                const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
-                               const AIIcon()
-                              ])
+                          SizedBox(height: AppDimensions.instance.paddingSizeDefault),
+                          Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                            Text(
+                              S.of(context).auto,
+                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: p.isAI ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+                                  ),
+                            ),
+                            SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall),
+                            const AIIcon()
+                          ])
                         ],
                       ),
                     ),
                   ),
                   InkWell(
-                    onTap: widget.controller.toDraw,
-                    child: ValueListenableBuilder(
-                        valueListenable: widget.controller,
-                        builder: (_, __, ___) => Column(
+                    onTap: provider.toDraw,
+                    child: PropConsumer<EditProvider, bool>(
+                        select: (p) => p.isDraw,
+                        builder: (_, __, p, ___) => Column(
                               children: [
                                 Image.asset(
-                                  AppImages.icBrushNormalNormal3x,
+                                  AppImages.instance.icBrushNormalNormal3x,
                                   width: 30,
-                                  color: widget.controller.isDraw
-                                      ? Theme.of(context).primaryColor
-                                      : Theme.of(context).disabledColor,
+                                  color: p.isDraw ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                                 ),
-                                const SizedBox(
-                                    height: AppDimensions.paddingSizeDefault),
+                                SizedBox(height: AppDimensions.instance.paddingSizeDefault),
                                 Text(
                                   S.of(context).brush,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                        color: widget.controller.isDraw
-                                            ? Theme.of(context).primaryColor
-                                            : Theme.of(context).disabledColor,
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                        color: p.isDraw ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                                       ),
                                 )
                               ],

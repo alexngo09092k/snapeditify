@@ -1,38 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/configuration.dart';
-import 'package:snapretouch/controllers/splash/splash_controller.dart';
-import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/widgets/static_splash.dart';
+import 'package:snapretouch/common/constants.dart';
+import 'package:snapretouch/models/config/app_config.dart';
+import 'package:snapretouch/widgets/app_logo.dart';
+import 'package:snapretouch/widgets/widget.utils.dart';
+import 'package:snapretouch/common/extensions.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
-  _SplashPageState createState() => _SplashPageState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
-  final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
-  late final SplashController _controller;
+class _SplashPageState extends AwesomeSplashState<SplashPage> {
+  bool _goToApp = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = SplashController(context: context);
+  }
+
+  @override
+  void onSplash(bool resultOnWillSplash) async {
+    if (resultOnWillSplash && await ClientHttp.instance.shouldSendRequest()) {
+      _goTo();
+    } else {
+      showNoInternetPopup(
+        context,
+        (_) {
+          if (AwesomeApp.instance != null) {
+            AwesomeApp.instance!.restart().then((value) {
+              onSplash(true);
+            });
+          }
+        },
+      );
+    }
+  }
+
+  _goTo() {
+    if (!_goToApp) {
+      _goToApp = true;
+      _mode();
+    }
+  }
+
+  _mode() {
+    switch (Configuration.instance.appConfig.appMode) {
+      case AppMode.debug:
+      case AppMode.production:
+        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.homePage, (_) => false);
+        break;
+      case AppMode.maintenance:
+        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.homePage, (_) => false);
+        break;
+      default:
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(key: _globalKey, body: _buildSplash(context));
-  }
-
-  Widget _buildSplash(BuildContext context) {
-    return StaticSplash(
-      backgroundcolor: Theme.of(context).backgroundColor,
-      onEnd: _controller.goToNextScreen,
-      duration: const Duration(milliseconds: 1000),
-      image: Cofiguration.appConfig.logo,
-      message: S.of(context).aiPowredPhotoEditor,
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AwesomeAnimation<double>.tweenSequence(
+            duration: const Duration(milliseconds: 1000),
+            items: [
+              TweenSequenceItem(tween: Tween<double>(begin: 0, end: 1), weight: 10),
+              TweenSequenceItem(tween: Tween<double>(begin: 1, end: 0), weight: 1),
+            ],
+            builder: (_, __, animation, ___) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Opacity(
+                    opacity: animation.value,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AppLogo(
+                          width: MediaQuery.of(context).size.width * 0.8 / 2,
+                          image: Configuration.instance.appConfig.appLogo,
+                        ),
+                        SizedBox(height: AppDimensions.instance.paddingSizeDefault),
+                      ],
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

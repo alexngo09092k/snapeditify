@@ -1,15 +1,10 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:snapretouch/common/app_cache.dart';
-import 'package:snapretouch/common/app_internet.dart';
 import 'package:snapretouch/common/app_routes.dart';
-import 'package:snapretouch/common/app_shared.dart';
-import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/theme.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/services/services.dart';
-import 'package:snapretouch/widgets/custom_overlay_state.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -18,71 +13,58 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends CustomOverlayState<App>{
+class _AppState extends AwesomeAppState<App> {
+  late IThemeProvider _themeProvider;
+
   @override
   void initState() {
+    /// lock android phone in portrait
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    _themeProvider = ManagerProvider.of<IThemeProvider>();
+    _themeProvider.onChangePlatformBrightness();
+
     super.initState();
-    Cofiguration.instance.addListener((event) {
-      if (event == CofigurationEvent.loadRemoteConfigSuccessed) {
-        setState(() {});
-      }
-    });
   }
 
   @override
-  void dispose() {
-    AppCache.instance.clean();
-    AppInternet.instance.dispose();
-    AppShared.instance.dispose();
-    super.dispose();
+  void didChangePlatformBrightness() {
+    _themeProvider.onChangePlatformBrightness();
+    super.didChangePlatformBrightness();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: Cofiguration.appConfig.name,
-      debugShowCheckedModeBanner: false,
-      scrollBehavior: const MaterialScrollBehavior().copyWith(
-        dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch},
-      ),
-      theme: getLightTheme(context),
-      themeMode: ThemeMode.light,
-      initialRoute: AppRoutes.initialRoute,
-      routes: AppRoutes.routes,
-      onGenerateRoute: AppRoutes.onGenerateRoute,
-      navigatorObservers: [
-        AppRouteObserver(
-          action: (screenName) =>
-              OverlayControlDelegate().emitRoute?.call(screenName),
-        ),
-      ],
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      localeResolutionCallback: (locale, supportedLocales) {
-        for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale!.languageCode ||
-              supportedLocale.countryCode == locale.countryCode) {
-            return supportedLocale;
-          }
-        }
-        return supportedLocales.firstWhere(
-            (supportedLocale) => supportedLocale.languageCode == 'en');
+    double scale = AwesomeAppState.screen.width < 270 ? 0.65 : (AwesomeAppState.screen.width < 361 ? 0.85 : 1);
+    Debug.log("============= SCALE $scale =============");
+
+    return Consumer<IThemeProvider>(
+      builder: (_, __, ___) {
+        Debug.log("===== START APP =====");
+        Debug.log("===== THEME MODE: ${_themeProvider.themeMode} =====");
+        return MaterialApp(
+          navigatorKey: AwesomeAppState.navigatorKey,
+          theme: getLightTheme(context, scale: scale),
+          darkTheme: getDarkTheme(context, scale: scale),
+          themeMode: _themeProvider.themeMode,
+          initialRoute: AppRoutes.initialRoute,
+          onGenerateRoute: AppRoutes.onGenerateRoute,
+          navigatorObservers: [AppRouteObserver(action: (name) => Debug.log("==== SCREEN $name ===="))],
+          routes: AppRoutes.routes,
+          // locale: _appProvider.currentLocale,
+          localeResolutionCallback: _themeProvider.onChangeLocale,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+        );
       },
-      supportedLocales: S.delegate.supportedLocales,
     );
-  }
-
-  @override
-  void onBackground() {
-    Services().advertisement.onBackground();
-  }
-
-  @override
-  void onForeground() {
-    Services().advertisement.onForeground();
   }
 }

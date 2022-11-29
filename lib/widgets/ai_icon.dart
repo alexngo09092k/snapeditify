@@ -14,7 +14,7 @@ class AIIcon extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        gradient: AppColors.gradient,
+        gradient: AppColors.instance.gradient,
         borderRadius: const BorderRadius.all(
           Radius.circular(2),
         ),
@@ -24,7 +24,7 @@ class AIIcon extends StatelessWidget {
         style: Theme.of(context)
             .textTheme
             .bodyText2!
-            .copyWith(color: AppColors.kWhite),
+            .copyWith(color: AppColors.instance.kWhite),
       ),
     );
   }

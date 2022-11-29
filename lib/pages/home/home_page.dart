@@ -1,23 +1,21 @@
+import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/app_cache.dart';
-import 'package:snapretouch/common/app_permission.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:snapretouch/common/app_routes.dart';
-import 'package:snapretouch/common/configuration.dart';
 import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/controllers/home/home_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/services/advertisement/models/advertisement_view.dart';
 import 'package:snapretouch/pages/home/widgets/home_banner.dart';
 import 'package:snapretouch/pages/home/widgets/home_logo.dart';
+import 'package:snapretouch/providers/home_provider.dart';
 import 'package:snapretouch/widgets/ad_view.dart';
 import 'package:snapretouch/widgets/ai_icon.dart';
 import 'package:snapretouch/widgets/before_after/before_after.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
 import 'package:snapretouch/widgets/custom_card.dart';
 import 'package:snapretouch/widgets/custom_image.dart';
-import 'package:snapretouch/services/painter/painter.dart';
-import 'dart:ui' as ui;
+import 'package:snapretouch/widgets/painter/painter.dart';
+import 'package:snapretouch/common/extensions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,23 +24,20 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  late final HomeController _controller;
-
+class _HomePageState extends ProviderState<HomePage, HomeProvider> {
   ui.Image? _thumbImage;
 
   @override
   void initState() {
-    _controller = HomeController(context: context);
     (() async {
-      _thumbImage = await Image.asset(AppImages.beforeAfter).image.image;
+      _thumbImage = await Image.asset(AppImages.instance.beforeAfter).image.image;
       setState(() {});
     })();
     super.initState();
   }
 
   void showMenu() {
-    AppPermission.instance.requestStorePermission(
+    UserPermission.instance.requestStoragePermission(
         context: context,
         onHasPermisson: () {
           showCupertinoModalPopup<void>(
@@ -58,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 actions: <CupertinoActionSheetAction>[
                   CupertinoActionSheetAction(
                     isDefaultAction: true,
-                    onPressed: _controller.getFromGallery,
+                    onPressed: () => provider.getFromGallery(context),
                     child: Text(
                       S.of(context).photoGallery,
                       style: Theme.of(context).textTheme.bodyText2!.copyWith(
@@ -69,13 +64,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   CupertinoActionSheetAction(
-                    onPressed: _controller.getFromCamera,
+                    onPressed: () => provider.getFromCamera(context),
                     child: Text(
                       S.of(context).camera,
-                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: Theme.of(context).primaryColor),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2!
+                          .copyWith(fontSize: 16, fontWeight: FontWeight.normal, color: Theme.of(context).primaryColor),
                     ),
                   ),
                 ],
@@ -106,24 +101,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void dispose() {
-    AppCache.instance.clean();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final lottieWidth = MediaQuery.of(context).size.width -
-        AppDimensions.paddingSizeDefault * 2;
+    final lottieWidth = MediaQuery.of(context).size.width - AppDimensions.instance.paddingSizeDefault * 2;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             Row(
-              children: const [
+              children: [
                 Padding(
-                  padding: EdgeInsets.all(AppDimensions.paddingSizeDefault),
-                  child: HomeLogo(),
+                  padding: EdgeInsets.all(AppDimensions.instance.paddingSizeDefault),
+                  child: const HomeLogo(),
                 )
               ],
             ),
@@ -133,65 +121,55 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AdView(
-                      type: AdvertisementViewType.widget,
-                      width: lottieWidth,
-                      height: lottieWidth * 2 / 3,
+                      size: Size(lottieWidth, lottieWidth * 2 / 3),
                       loadingWidget: HomeBanner(
                         width: lottieWidth,
                         height: lottieWidth * 2 / 3,
                       ),
-                      screenName: AppRoutes.home,
+                      screenName: AppRoutes.homePage,
                     ),
                     Container(
                       width: lottieWidth,
                       height: lottieWidth * 2 / 3,
-                      margin: const EdgeInsets.all(
-                        AppDimensions.paddingSizeDefault,
+                      margin: EdgeInsets.all(
+                        AppDimensions.instance.paddingSizeDefault,
                       ),
                       child: Stack(children: [
                         CustomCard(
-                          radius: AppDimensions.paddingSizeDefault,
+                          radius: AppDimensions.instance.paddingSizeDefault,
                           child: ClipRRect(
-                              borderRadius: const BorderRadius.all(
+                              borderRadius: BorderRadius.all(
                                 Radius.circular(
-                                  AppDimensions.paddingSizeDefault,
+                                  AppDimensions.instance.paddingSizeDefault,
                                 ),
                               ),
                               child: BeforeAfter(
                                 imageWidth: lottieWidth,
                                 imageHeight: lottieWidth * 2 / 3,
-                                beforeImage: CustomImage(image: Cofiguration.appConfig.homeRemoveObjects.first),
-                                afterImage:  CustomImage(image: Cofiguration.appConfig.homeRemoveObjects.last),
+                                beforeImage: CustomImage(image: AppImages.instance.homeBefore),
+                                afterImage: CustomImage(image: AppImages.instance.homeAfter),
                                 thumbImage: _thumbImage,
                               )),
                         ),
                         Positioned(
                             child: Container(
-                          padding: const EdgeInsets.all(
-                            AppDimensions.paddingSizeDefault,
+                          padding: EdgeInsets.all(
+                            AppDimensions.instance.paddingSizeDefault,
                           ),
                           width: lottieWidth * 2.5 / 3,
                           child: RichText(
                             text: TextSpan(
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(
-                                    color: AppColors.kWhite,
+                              style: Theme.of(context).textTheme.headline6!.copyWith(
+                                    color: AppColors.instance.kWhite,
                                   ),
                               children: [
-                                TextSpan(
-                                    text: S
-                                        .of(context)
-                                        .cleanYourPhotoFasterBetterWith),
+                                TextSpan(text: S.of(context).cleanYourPhotoFasterBetterWith),
                                 WidgetSpan(
                                   child: Container(
-                                    padding: const EdgeInsets.only(
-                                        left:
-                                            AppDimensions.paddingSizeExtraSmall,
-                                        bottom: AppDimensions
-                                                .paddingSizeExtraSmall -
-                                            3),
+                                    padding: EdgeInsets.only(
+                                      left: AppDimensions.instance.paddingSizeExtraSmall,
+                                      bottom: AppDimensions.instance.paddingSizeExtraSmall - 3,
+                                    ),
                                     child: const AIIcon(),
                                   ),
                                 ),
@@ -208,9 +186,9 @@ class _HomePageState extends State<HomePage> {
             CustomCard(
               child: CustomButton(
                 title: S.of(context).addPhoto,
-                gradient: AppColors.gradient,
+                gradient: AppColors.instance.gradient,
                 icon: Image.asset(
-                  AppImages.icAddPhotoNormal3x,
+                  AppImages.instance.icAddPhotoNormal3x,
                   width: 30,
                 ),
                 width: MediaQuery.of(context).size.width * 1.5 / 3,
@@ -218,8 +196,8 @@ class _HomePageState extends State<HomePage> {
                 onTap: showMenu,
               ),
             ),
-            const SizedBox(
-              height: AppDimensions.paddingSizeExtraLarge,
+            SizedBox(
+              height: AppDimensions.instance.paddingSizeExtraLarge,
             ),
           ],
         ),

@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:image/image.dart' as imagepkg;
-import 'package:snapretouch/common/app_cache.dart';
-import 'package:snapretouch/services/painter/painter.dart';
+import 'package:snapretouch/widgets/painter/painter.dart';
 
 class ImageConvert {
   static final ImageConvert _instance = ImageConvert._internal();
@@ -40,9 +39,7 @@ class ImageConvert {
   }
 
   static Future<ui.Image> imagePathToImage(String imagePath) async {
-    return await (kIsWeb
-        ? Image.network(imagePath).image.image
-        : Image.file(File(imagePath)).image.image);
+    return await (kIsWeb ? Image.network(imagePath).image.image : Image.file(File(imagePath)).image.image);
   }
 
   static Future<Uint8List> cropImagePath({
@@ -92,7 +89,7 @@ class ImageConvert {
       minHeight: 1000,
       quality: 95,
     );
-    AppCache.instance.addFile(cacheFile);
+    ManagerCache.instance.addFile(cacheFile);
     return cacheFile;
   }
 }

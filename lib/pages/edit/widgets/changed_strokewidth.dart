@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/controllers/edit/edit_controller.dart';
-import 'package:snapretouch/widgets/custom_animation.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
 import 'package:snapretouch/common/constants.dart';
 
 class ChangedStrokeWidth extends StatelessWidget {
-  const ChangedStrokeWidth({Key? key, required this.controller})
-      : super(key: key);
-
-  final EditController controller;
+  const ChangedStrokeWidth({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ValueListenableBuilder(
-        valueListenable: controller,
-        builder: (_, __, ___) => controller.state.changedStrokeWidth ? CustomAnimation<double>(
-          duration: const Duration(milliseconds: 1000),
-          setAnimation: (animationCtr) => TweenSequence<double>([
-            TweenSequenceItem(tween: Tween(begin: 0, end: 1), weight: 1),
-          ]).animate(animationCtr),
-          builder: (_, __, animation, ___) => Opacity(
-            opacity: animation.value,
-            child: Container(
-              width: controller.strokeWidth,
-              height: controller.strokeWidth,
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.kWhite, width: 1),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(controller.strokeWidth / 2),
+  Widget build(BuildContext context) => PropConsumer<EditProvider, bool>(
+        select: (p) => p.state.changedStrokeWidth,
+        builder: (_, __, p, ___) => p.state.changedStrokeWidth
+            ? AwesomeAnimation<double>.tweenSequence(
+                duration: const Duration(milliseconds: 1000),
+                items: [TweenSequenceItem(tween: Tween(begin: 0, end: 1), weight: 1)],
+                builder: (_, __, animation, ___) => Opacity(
+                  opacity: animation.value,
+                  child: PropConsumer<EditProvider, double>(
+                    select: (p) => p.strokeWidth,
+                    builder: (_, __, ___, ____) => Container(
+                      width: p.strokeWidth,
+                      height: p.strokeWidth,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.instance.kWhite, width: 1),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(p.strokeWidth / 2),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ): const SizedBox(),
+              )
+            : const SizedBox(),
       );
 }

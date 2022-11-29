@@ -19,7 +19,7 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Cofiguration.isNetworkImage(image)
+    return Configuration.instance.isNetwork(image)
         ? CustomNetworkImage(
             image: image,
             width: width,

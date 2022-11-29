@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          color: color ?? AppColors.topicColor,
+          color: color ?? AppColors.instance.lightActive,
           borderRadius: const BorderRadius.all(
             Radius.circular(30),
           ),
@@ -47,14 +47,11 @@ class CustomButton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   icon ?? const SizedBox(),
-                  icon != null
-                      ? const SizedBox(
-                          width: AppDimensions.paddingSizeExtraSmall)
-                      : const SizedBox(),
+                  icon != null ? SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall) : const SizedBox(),
                   Text(
                     title ?? '',
                     style: TextStyle(
-                      color: titleColor ?? AppColors.kWhite,
+                      color: titleColor ?? AppColors.instance.kWhite,
                       fontSize: titleSize,
                       fontWeight: FontWeight.bold,
                     ),

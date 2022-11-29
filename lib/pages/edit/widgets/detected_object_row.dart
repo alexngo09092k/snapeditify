@@ -1,99 +1,95 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapretouch/models/detected_object.dart';
+import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
 
 class DetectedObjectRow extends StatelessWidget {
   const DetectedObjectRow({
     Key? key,
     required this.maskId,
-    required this.controller,
   }) : super(key: key);
 
   final int maskId;
-  final EditController controller;
 
   @override
   Widget build(BuildContext context) {
-    if (controller.detectedObjects[maskId] == null) {
+    EditProvider p = ManagerProvider.of<EditProvider>();
+    if (p.detectedObjects[maskId] == null) {
       return const SizedBox();
     }
 
     final Widget title = Text(
-      controller.detectedObjects[maskId]!.objectDescription,
+      p.detectedObjects[maskId]!.objectDescription,
       style: Theme.of(context).textTheme.subtitle1,
     );
     late final Widget subTitle = Text(
-      '${(controller.detectedObjects[maskId]!.accuracy * 100).toStringAsFixed(2)} ${S.of(context).accurate}',
+      '${(p.detectedObjects[maskId]!.accuracy * 100).toStringAsFixed(2)} ${S.of(context).accurate}',
       style: Theme.of(context).textTheme.bodyText2!.copyWith(
             color: Theme.of(context).disabledColor,
           ),
     );
     late final Widget remove = Container(
-      padding: const EdgeInsets.all(AppDimensions.paddingSizeExtraSmall),
+      padding: EdgeInsets.all(AppDimensions.instance.paddingSizeExtraSmall),
       decoration: BoxDecoration(
-        color: AppColors.kRedColorHeart.withOpacity(0.1),
+        color: AppColors.instance.kRed.withOpacity(0.1),
         borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
       child: Text(
         S.of(context).removed,
         style: Theme.of(context).textTheme.bodyText2!.copyWith(
-              color: AppColors.kRedColorHeart,
+              color: AppColors.instance.kRed,
             ),
       ),
     );
 
-    return ValueListenableBuilder(
-      valueListenable: controller,
-      builder: (_, __, image) => controller.detectedObjects[maskId] != null ? Container(
-        color: controller.detectedObjects[maskId]!.isSelected &&
-                !controller.detectedObjects[maskId]!.isRemoved
-            ? Theme.of(context).highlightColor.withOpacity(0.1)
-            : Colors.transparent,
-        child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(
-              horizontal: AppDimensions.paddingSizeDefault),
-          onTap: () {
-            if (controller.detectedObjects[maskId]!.isRemoved) {
-              return;
-            }
-            if (controller.detectedObjects[maskId]!.isSelected) {
-              controller.unSelectedDtectedObjects(
-                  controller.detectedObjects[maskId]!.maskId);
-            } else {
-              controller.selectedDetectedObjects(
-                  controller.detectedObjects[maskId]!.maskId);
-            }
-          },
-          leading: image,
-          title: title,
-          subtitle: Row(
-            children: [
-              subTitle,
-              const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
-              controller.detectedObjects[maskId]!.isRemoved
-                  ? remove
-                  : const SizedBox()
-            ],
-          ),
-          trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                controller.detectedObjects[maskId]!.isSelected ||
-                        controller.detectedObjects[maskId]!.isRemoved
-                    ? AppImages.icCheckboxSelectedNormal3x
-                    : AppImages.icCheckboxNormalNormal3x,
-                width: 30,
+    var detectedObject = p.detectedObjects[maskId];
+
+    return PropConsumer<EditProvider, DetectedObject?>(
+      select: (p) => p.detectedObjects[maskId],
+      builder: (_, child, ___, object) => detectedObject != null
+          ? Container(
+              color: detectedObject.isSelected && detectedObject.isRemoved ? Theme.of(context).highlightColor.withOpacity(0.1) : Colors.transparent,
+              child: ListTile(
+                contentPadding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingSizeDefault),
+                onTap: () {
+                  if (detectedObject.isRemoved) {
+                    return;
+                  }
+                  if (detectedObject.isSelected) {
+                    p.unSelectedDtectedObjects(detectedObject.maskId);
+                  } else {
+                    p.selectedDetectedObjects(detectedObject.maskId);
+                  }
+                },
+                leading: child,
+                title: title,
+                subtitle: Row(
+                  children: [
+                    subTitle,
+                    SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall),
+                    detectedObject.isRemoved ? remove : const SizedBox()
+                  ],
+                ),
+                trailing: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      detectedObject.isSelected || detectedObject.isRemoved
+                          ? AppImages.instance.icCheckboxSelectedNormal3x
+                          : AppImages.instance.icCheckboxNormalNormal3x,
+                      width: 30,
+                    ),
+                    SizedBox(height: AppDimensions.instance.paddingSizeExtraSmall)
+                  ],
+                ),
               ),
-              const SizedBox(height: AppDimensions.paddingSizeExtraSmall)
-            ],
-          ),
-        ),
-      ): const SizedBox(),
-      child: controller.detectedObjects[maskId] != null && controller.detectedObjects[maskId]!.image != null
+            )
+          : const SizedBox(),
+      child: detectedObject != null && detectedObject.image != null
           ? ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
               child: Container(
@@ -114,7 +110,7 @@ class DetectedObjectRow extends StatelessWidget {
                 child: Center(
                   child: Image.memory(
                     base64.decode(
-                      controller.detectedObjects[maskId]!.image!,
+                      detectedObject.image!,
                     ),
                   ),
                 ),

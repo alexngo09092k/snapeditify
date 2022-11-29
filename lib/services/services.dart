@@ -1,33 +1,22 @@
-import 'package:flutter/foundation.dart';
-import 'package:snapretouch/services/advertisement/advertisement_service.dart';
-import 'package:snapretouch/services/firebase/firebase_notification_service.dart';
-import 'package:snapretouch/services/firebase/firebase_service.dart';
-import 'package:snapretouch/services/firebase/notification/notification_service.dart';
-import 'package:snapretouch/services/firebase/notification/notification_service_impl.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:snapretouch/services/I_services.dart';
+import 'package:snapretouch/services/snap_edit/snap_edit.dart';
 
-class Services {
-  static final Services _instance = Services._internal();
+export 'package:snapretouch/services/snap_edit/snap_edit.dart';
 
-  factory Services() => _instance;
+class Services extends IServices {
+  static final IServices _instance = Services._internal();
+  static IServices get instance => _instance;
+
+  factory Services() => _instance as Services;
 
   Services._internal();
 
   /// using BaseFirebaseServices when disable the Firebase
   // final firebase = BaseFirebaseServices();
-  final firebase = FirebaseServices();
+  @override
+  final IFirebaseService firebase = FirebaseService();
 
-  /// using AdvertisementService when disable the Advertisement
-  // final AdvertisementService advertisement = AdvertisementService();
-  final AdvertisementService advertisement = AdvertisementService();
-
-  /// Get notification Service
-  static NotificationService getNotificationService() {
-    NotificationService notificationService = NotificationServiceImpl();
-    if (!kIsWeb) {
-      if (_instance.firebase.isEnabled) {
-        notificationService = FirebaseNotificationService();
-      }
-    }
-    return notificationService;
-  }
+  @override
+  final SnapEdit snapEdit = SnapEdit();
 }

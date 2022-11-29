@@ -7,14 +7,14 @@ class CustomNetworkImage extends StatelessWidget {
   final double? height;
   final double? width;
   final BoxFit fit;
-  final String placeholder;
+  final String? placeholder;
   final Color? color;
   const CustomNetworkImage({
     required this.image,
     this.height,
     this.width,
     this.fit = BoxFit.cover,
-    this.placeholder = AppImages.placeholder,
+    this.placeholder,
     this.color,
   });
 
@@ -27,13 +27,13 @@ class CustomNetworkImage extends StatelessWidget {
       width: width,
       fit: fit,
       placeholder: (context, url) => Image.asset(
-        AppImages.placeholder,
+        AppImages.instance.placeholder,
         height: height,
         width: width,
         fit: BoxFit.cover,
       ),
       errorWidget: (context, url, error) => Image.asset(
-        placeholder,
+        placeholder ?? AppImages.instance.placeholder,
         height: height,
         width: width,
         fit: BoxFit.cover,

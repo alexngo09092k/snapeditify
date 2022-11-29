@@ -86,7 +86,7 @@ class _DetectedObjectTabState extends State<DetectedObjectTab>
                     width: widget.width / 2,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      gradient: AppColors.gradient,
+                      gradient: AppColors.instance.gradient,
                     ),
                   ),
                 ),
@@ -111,7 +111,7 @@ class _DetectedObjectTabState extends State<DetectedObjectTab>
                               'People',
                               style: TextStyle(
                                 color: _indexTab == 0
-                                    ? AppColors.kWhite
+                                    ? AppColors.instance.kWhite
                                     : Colors.black,
                               ),
                             )
@@ -137,7 +137,7 @@ class _DetectedObjectTabState extends State<DetectedObjectTab>
                               'Others',
                               style: TextStyle(
                                 color: _indexTab == 1
-                                    ? AppColors.kWhite
+                                    ? AppColors.instance.kWhite
                                     : Colors.black,
                               ),
                             )

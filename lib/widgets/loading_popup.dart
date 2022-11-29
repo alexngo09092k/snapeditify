@@ -10,34 +10,34 @@ class LoadingPopup extends StatelessWidget {
     return Dialog(
       insetPadding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width / 2 - 100),
-      backgroundColor: AppColors.kDarkBG.withOpacity(0.5),
+      backgroundColor: AppColors.instance.darkBg.withOpacity(0.5),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Container(
-        padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
+        padding: EdgeInsets.all(AppDimensions.instance.paddingSizeDefault),
         height: 100,
         width: 50,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(
+            SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
                 strokeWidth: 1,
-                valueColor: AlwaysStoppedAnimation<Color>(AppColors.kWhite),
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.instance.kWhite),
               ),
             ),
-            const SizedBox(height: AppDimensions.paddingSizeDefault),
+            SizedBox(height: AppDimensions.instance.paddingSizeDefault),
             Text(
               message,
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
                   .caption!
-                  .copyWith(color: AppColors.kWhite),
+                  .copyWith(color: AppColors.instance.kWhite),
             ),
           ],
         ),

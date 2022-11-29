@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:fluttering/fluttering.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:snapretouch/common/logs.dart';
 import 'package:snapretouch/utils/image_convert.dart';
 
 class ImagePick {
@@ -41,7 +41,7 @@ class ImagePick {
         }
       }
     } catch (error) {
-      printLog(error);
+      Debug.log(error);
     }
   }
 
@@ -59,7 +59,7 @@ class ImagePick {
         }
       }
     } catch (error) {
-      printLog(error);
+      Debug.log(error);
     }
   }
 }

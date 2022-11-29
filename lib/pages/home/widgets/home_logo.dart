@@ -13,16 +13,15 @@ class HomeLogo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         AppLogo(
-          image: Cofiguration.appConfig.logo,
+          image: Configuration.instance.appConfig.appLogo,
           height: 40,
         ),
-        const SizedBox(width: AppDimensions.paddingSizeDefault,),
+        SizedBox(
+          width: AppDimensions.instance.paddingSizeDefault,
+        ),
         Text(
-          Cofiguration.appConfig.name,
-          style: Theme.of(context)
-              .textTheme
-              .headline6!
-              .copyWith(fontWeight: FontWeight.bold),
+          Configuration.instance.appConfig.appName,
+          style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.bold),
         ),
       ],
     );

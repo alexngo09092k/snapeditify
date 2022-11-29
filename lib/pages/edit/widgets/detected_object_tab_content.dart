@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
 import 'package:snapretouch/models/detected_object.dart';
 import 'package:snapretouch/pages/edit/widgets/detected_object_row.dart';
@@ -8,11 +7,9 @@ import 'package:snapretouch/pages/edit/widgets/detected_object_row.dart';
 class DetectedObjectTabContent extends StatelessWidget {
   const DetectedObjectTabContent({
     Key? key,
-    required this.controller,
     required this.data,
   }) : super(key: key);
 
-  final EditController controller;
   final List<DetectedObject> data;
 
   @override
@@ -21,31 +18,27 @@ class DetectedObjectTabContent extends StatelessWidget {
         ? ListView.builder(
             itemCount: data.length,
             itemBuilder: (_, index) => DetectedObjectRow(
-              controller: controller,
               maskId: data.elementAt(index).maskId,
             ),
           )
         : SingleChildScrollView(
-          // padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSizeDefault),
-          child: Column(
+            // padding: const EdgeInsets.symmetric(vertical: AppDimensions.instance.paddingSizeDefault),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  AppImages.imgNoObjectsNormal3x,
+                  AppImages.instance.imgNoObjectsNormal3x,
                   width: 70,
                   fit: BoxFit.cover,
                 ),
-                const SizedBox(height: AppDimensions.paddingSizeDefault),
+                SizedBox(height: AppDimensions.instance.paddingSizeDefault),
                 Text(
                   S.of(context).noPotentialObjectHasBeenDetected,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2!
-                      .copyWith(color: Theme.of(context).disabledColor),
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).disabledColor),
                 )
               ],
             ),
-        );
+          );
   }
 }

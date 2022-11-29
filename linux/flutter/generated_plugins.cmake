@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  fluttering_ads
   url_launcher_linux
 )
 

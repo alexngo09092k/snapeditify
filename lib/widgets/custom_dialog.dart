@@ -39,17 +39,17 @@ class CustomDialog extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       insetPadding: EdgeInsets.symmetric(
           vertical: MediaQuery.of(context).size.height / 3),
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(AppDimensions.paddingSizeDefault),
+          Radius.circular(AppDimensions.instance.paddingSizeDefault),
         ),
       ),
       child: Container(
         width: width,
         height: height,
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.paddingSizeDefault,
-            vertical: AppDimensions.paddingSizeExtraLarge),
+        padding: EdgeInsets.symmetric(
+            horizontal: AppDimensions.instance.paddingSizeDefault,
+            vertical: AppDimensions.instance.paddingSizeExtraLarge),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -58,14 +58,14 @@ class CustomDialog extends StatelessWidget {
               children: [
                 if (title != null) title!,
                 if (title != null)
-                  const SizedBox(height: AppDimensions.paddingSizeDefault),
+                 SizedBox(height: AppDimensions.instance.paddingSizeDefault),
                 if (message != null) message!,
               ],
             ),
             if (buttons != null)
               Padding(
-                padding: const EdgeInsets.only(
-                    top: AppDimensions.paddingSizeDefault),
+                padding: EdgeInsets.only(
+                    top: AppDimensions.instance.paddingSizeDefault),
                 child: buttons!.length == 1
                     ? Expanded(
                         child: CustomButton(

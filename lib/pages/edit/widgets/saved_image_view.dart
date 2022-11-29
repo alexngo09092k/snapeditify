@@ -1,28 +1,27 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:snapretouch/common/app_routes.dart';
 import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/common/logs.dart';
-import 'package:snapretouch/controllers/edit/edit_controller.dart';
 import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/services/advertisement/models/advertisement_extension.dart';
-import 'package:snapretouch/services/advertisement/models/advertisement_view.dart';
+import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
 import 'package:snapretouch/widgets/ad_view.dart';
 import 'package:snapretouch/widgets/custom_button.dart';
+import 'dart:ui' as ui;
 
 class SavedImageView extends StatelessWidget {
   const SavedImageView({
     Key? key,
-    required this.controller,
     required this.imagePath,
     required this.originalImageBase64,
   }) : super(key: key);
-  final EditController controller;
   final String imagePath;
   final String originalImageBase64;
   static final GlobalKey _globalKey = GlobalKey();
@@ -51,11 +50,12 @@ class SavedImageView extends StatelessWidget {
         ));
       }
     } on PlatformException catch (e) {
-      printLog("Exception while taking screenshot:$e");
+      Debug.log("Exception while taking screenshot:$e");
     }
   }
 
   void showMenu(context) {
+    EditProvider p = ManagerProvider.of<EditProvider>();
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoTheme(
@@ -69,7 +69,7 @@ class SavedImageView extends StatelessWidget {
           actions: <CupertinoActionSheetAction>[
             CupertinoActionSheetAction(
               isDefaultAction: true,
-              onPressed: controller.getFromGallery,
+              onPressed: () => p.getFromGallery(context),
               child: Text(
                 S.of(context).photoGallery,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
@@ -80,7 +80,7 @@ class SavedImageView extends StatelessWidget {
               ),
             ),
             CupertinoActionSheetAction(
-              onPressed: controller.getFromCamera,
+              onPressed: () => p.getFromCamera(context),
               child: Text(
                 S.of(context).camera,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
@@ -123,9 +123,9 @@ class SavedImageView extends StatelessWidget {
       key: _globalKey,
       child: Container(
         height: height,
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingSizeExtraLarge,
-          horizontal: AppDimensions.paddingSizeDefault,
+        padding: EdgeInsets.symmetric(
+          vertical: AppDimensions.instance.paddingSizeExtraLarge,
+          horizontal: AppDimensions.instance.paddingSizeDefault,
         ),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -144,19 +144,16 @@ class SavedImageView extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(
-                          AppImages.icGreenCheckmarkNormal3x,
+                          AppImages.instance.icGreenCheckmarkNormal3x,
                           width: 20,
                           height: 20,
                         ),
-                        const SizedBox(
-                          width: AppDimensions.paddingSizeExtraSmall,
+                        SizedBox(
+                          width: AppDimensions.instance.paddingSizeExtraSmall,
                         ),
                         Text(
                           S.of(context).imageSaved,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
@@ -170,32 +167,29 @@ class SavedImageView extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(
-                height: AppDimensions.paddingSizeDefault,
+              SizedBox(
+                height: AppDimensions.instance.paddingSizeDefault,
               ),
               Expanded(
                 child: Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(
-                      Radius.circular(AppDimensions.paddingSizeDefault),
+                      Radius.circular(AppDimensions.instance.paddingSizeDefault),
                     ),
-                    color: AppColors.kTeal50,
+                    color: AppColors.instance.lightActive,
                     // image: DecorationImage(
                     //   image: Image.file(File(image)).image,
                     //   fit: BoxFit.fill,
                     //   opacity: 0.3,
                     // ),
                   ),
-                  child: ValueListenableBuilder(
-                    valueListenable: controller,
-                    builder: (_, __, ___) => controller.state.image != null
+                  child: PropConsumer<EditProvider, ui.Image?>(
+                    select: (p) => p.state.image,
+                    builder: (_, __, p, ___) => p.state.image != null
                         ? Center(
                             child: AspectRatio(
-                              aspectRatio: (controller.state.image!.width /
-                                  controller.state.image!.height),
-                              child: kIsWeb
-                                  ? Image.network(imagePath)
-                                  : Image.file(File(imagePath)),
+                              aspectRatio: (p.state.image!.width / p.state.image!.height),
+                              child: CurrentPlatform.instance.kIsWeb ? Image.network(imagePath) : Image.file(File(imagePath)),
                             ),
                           )
                         : const SizedBox(),
@@ -204,11 +198,8 @@ class SavedImageView extends StatelessWidget {
                 ),
               ),
               AdView(
-                type: AdvertisementViewType.widget,
-                width: MediaQuery.of(context).size.width,
-                height: 60,
-                screenName: AppRoutes.edit,
-                adType: AdvertisementType.native,
+                size: Size(MediaQuery.of(context).size.width, 60),
+                screenName: AppRoutes.editPage,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -217,7 +208,7 @@ class SavedImageView extends StatelessWidget {
                     title: S.of(context).share,
                     color: Theme.of(context).highlightColor,
                     icon: Image.asset(
-                      AppImages.icShareNormal3x,
+                      AppImages.instance.icShareNormal3x,
                       width: 20,
                     ),
                     width: MediaQuery.of(context).size.width / 2 - 20,
@@ -227,9 +218,9 @@ class SavedImageView extends StatelessWidget {
                   ),
                   CustomButton(
                     title: S.of(context).newImage,
-                    gradient: AppColors.gradient,
+                    gradient: AppColors.instance.gradient,
                     icon: Image.asset(
-                      AppImages.icAddPhotoNormal3x,
+                      AppImages.instance.icAddPhotoNormal3x,
                       width: 20,
                     ),
                     width: MediaQuery.of(context).size.width / 2 - 20,

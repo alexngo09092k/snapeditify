@@ -13,17 +13,17 @@ class AdPlaceHolder extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      padding: const EdgeInsets.all(AppDimensions.paddingSizeDefault),
+      padding: EdgeInsets.all(AppDimensions.instance.paddingSizeDefault),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: Image.asset(AppImages.placeholder).image,
+          image: Image.asset(AppImages.instance.placeholder).image,
           fit: BoxFit.fill,
         ),
       ),
       child: Stack(
         children: [
           CustomImage(
-            image: AppImages.placeholder,
+            image: AppImages.instance.placeholder,
             width: width,
             height: height,
           ),
@@ -65,13 +65,13 @@ class _GroupIcon extends StatelessWidget {
         Icon(
           Icons.check_circle_outline,
           size: 16,
-          color: AppColors.topicColor,
+          color: AppColors.instance.lightActive,
         ),
         // Image.asset(
-        //   AppImages.icCheckboxSelectedNormal3x,
+        //   AppImages.instance.icCheckboxSelectedNormal3x,
         //   width: 16,
         // ),
-        const SizedBox(width: AppDimensions.paddingSizeExtraSmall),
+        SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall),
         Text(
           title,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(),

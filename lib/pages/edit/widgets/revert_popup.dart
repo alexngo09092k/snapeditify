@@ -36,7 +36,7 @@ class RevertPopup extends StatelessWidget {
                 onRevert();
                 Navigator.of(context).pop();
               },
-              gradient: AppColors.gradient,
+              gradient: AppColors.instance.gradient,
             ),
           ],
         );

@@ -14,11 +14,11 @@ class AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(AppDimensions.paddingSizeSmall),
+      borderRadius: BorderRadius.all(
+        Radius.circular(AppDimensions.instance.paddingSizeSmall),
       ),
       child: CustomImage(
-        image: image ?? Cofiguration.appConfig.logo,
+        image: image ?? Configuration.instance.appConfig.appLogo,
         width: width,
         height: height,
         color: color,
