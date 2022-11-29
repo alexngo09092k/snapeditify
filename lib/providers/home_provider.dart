@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/common/app_routes.dart';
-import 'package:snapretouch/utils/image_pick.dart';
+import 'package:snapedit/common/app_routes.dart';
+import 'package:snapedit/utils/image_pick.dart';
 
 abstract class IHomeProvider extends Provider {
   Future<void> getFromGallery(BuildContext context);

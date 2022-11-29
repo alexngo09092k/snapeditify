@@ -1,6 +1,6 @@
 {
-    "name": "snapretouch",
-    "short_name": "snapretouch",
+    "name": "snapedit",
+    "short_name": "snapedit",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

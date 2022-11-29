@@ -38,44 +38,44 @@ class DefaultFirebaseOptions {
     apiKey: 'AIzaSyC0PFyQNqvSBjnGe_3Mzdl_dVq7wHsx5eY',
     appId: '1:270202760919:web:04df7102eb80e537e0ca92',
     messagingSenderId: '270202760919',
-    projectId: 'snapretouch',
-    authDomain: 'snapretouch.firebaseapp.com',
-    storageBucket: 'snapretouch.appspot.com',
+    projectId: 'snapedit',
+    authDomain: 'snapedit.firebaseapp.com',
+    storageBucket: 'snapedit.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBvyZRSGJcCirMK-2lHM9eY_XnF4ASKCEk',
     appId: '1:270202760919:android:8a2e17d2182c8fe8e0ca92',
     messagingSenderId: '270202760919',
-    projectId: 'snapretouch',
-    storageBucket: 'snapretouch.appspot.com',
+    projectId: 'snapedit',
+    storageBucket: 'snapedit.appspot.com',
   );
 
   static const FirebaseOptions androidHuawei = FirebaseOptions(
     apiKey: 'AIzaSyBvyZRSGJcCirMK-2lHM9eY_XnF4ASKCEk',
     appId: '1:270202760919:android:98b1887f43749c62e0ca92',
     messagingSenderId: '270202760919',
-    projectId: 'snapretouch',
-    storageBucket: 'snapretouch.appspot.com',
+    projectId: 'snapedit',
+    storageBucket: 'snapedit.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD44d-FNhAZBpmfW7-hVNYMUeOpXlSaEKY',
     appId: '1:270202760919:ios:68c7db8b78fd9956e0ca92',
     messagingSenderId: '270202760919',
-    projectId: 'snapretouch',
-    storageBucket: 'snapretouch.appspot.com',
+    projectId: 'snapedit',
+    storageBucket: 'snapedit.appspot.com',
     iosClientId: '270202760919-4sanjqlir1brs701bajng0fa095f0aqi.apps.googleusercontent.com',
-    iosBundleId: 'app.onlybadidea.snapretouch',
+    iosBundleId: 'app.onlybadidea.snapedit',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyD44d-FNhAZBpmfW7-hVNYMUeOpXlSaEKY',
     appId: '1:270202760919:ios:68c7db8b78fd9956e0ca92',
     messagingSenderId: '270202760919',
-    projectId: 'snapretouch',
-    storageBucket: 'snapretouch.appspot.com',
+    projectId: 'snapedit',
+    storageBucket: 'snapedit.appspot.com',
     iosClientId: '270202760919-4sanjqlir1brs701bajng0fa095f0aqi.apps.googleusercontent.com',
-    iosBundleId: 'app.onlybadidea.snapretouch',
+    iosBundleId: 'app.onlybadidea.snapedit',
   );
 }

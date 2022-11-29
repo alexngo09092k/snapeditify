@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:snapretouch/common/app_routes.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
-import 'package:snapretouch/widgets/ad_view.dart';
-import 'package:snapretouch/widgets/custom_button.dart';
+import 'package:snapedit/common/app_routes.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/generated/l10n.dart';
+import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/widgets/ad_view.dart';
+import 'package:snapedit/widgets/custom_button.dart';
 import 'dart:ui' as ui;
 
 class SavedImageView extends StatelessWidget {

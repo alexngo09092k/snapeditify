@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/widgets/custom_dialog.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/generated/l10n.dart';
+import 'package:snapedit/widgets/custom_dialog.dart';
 
 class RevertPopup extends StatelessWidget {
   RevertPopup({Key? key, required this.onRevert}) : super(key: key);

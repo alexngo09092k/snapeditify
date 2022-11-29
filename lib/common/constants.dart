@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/configuration.dart';
+import 'package:snapedit/common/configuration.dart';
 
 part 'constants/app_images.dart';
 

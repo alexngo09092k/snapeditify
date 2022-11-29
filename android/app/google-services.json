@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "270202760919",
-    "project_id": "snapretouch",
-    "storage_bucket": "snapretouch.appspot.com"
+    "project_id": "snapedit",
+    "storage_bucket": "snapedit.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:270202760919:android:8a2e17d2182c8fe8e0ca92",
         "android_client_info": {
-          "package_name": "app.onlybadidea.snapretouch"
+          "package_name": "app.onlybadidea.snapedit"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "270202760919-0af2baae6b5hjrp0c2lj7n7n731ff9ci.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.snapretouch"
+                "bundle_id": "com.example.snapedit"
               }
             }
           ]
@@ -70,7 +70,7 @@
               "client_id": "270202760919-0af2baae6b5hjrp0c2lj7n7n731ff9ci.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.snapretouch"
+                "bundle_id": "com.example.snapedit"
               }
             }
           ]

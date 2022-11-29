@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:snapretouch/pages/edit/edit_page.dart';
-import 'package:snapretouch/pages/home/home_page.dart';
-import 'package:snapretouch/pages/maintenance/maintenance_page.dart';
-import 'package:snapretouch/pages/splash/splash_page.dart';
+import 'package:snapedit/pages/edit/edit_page.dart';
+import 'package:snapedit/pages/home/home_page.dart';
+import 'package:snapedit/pages/maintenance/maintenance_page.dart';
+import 'package:snapedit/pages/splash/splash_page.dart';
 
 abstract class AppRoutes {
   static const String homePage = 'home_page';

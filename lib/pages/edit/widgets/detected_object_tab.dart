@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/constants.dart';
+import 'package:snapedit/common/constants.dart';
 
 class DetectedObjectTab extends StatefulWidget {
   DetectedObjectTab({Key? key, this.width = 150, this.onChangedTab, required this.controller})

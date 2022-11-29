@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:snapretouch/common/constants.dart';
+import 'package:snapedit/common/constants.dart';
 
 class CustomNetworkImage extends StatelessWidget {
   final String image;

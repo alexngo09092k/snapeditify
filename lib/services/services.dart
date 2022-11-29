@@ -1,8 +1,8 @@
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/services/I_services.dart';
-import 'package:snapretouch/services/snap_edit/snap_edit.dart';
+import 'package:snapedit/services/I_services.dart';
+import 'package:snapedit/services/snap_edit/snap_edit.dart';
 
-export 'package:snapretouch/services/snap_edit/snap_edit.dart';
+export 'package:snapedit/services/snap_edit/snap_edit.dart';
 
 class Services extends IServices {
   static final IServices _instance = Services._internal();

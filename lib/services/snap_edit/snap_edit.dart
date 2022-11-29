@@ -1,6 +1,6 @@
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/services/snap_edit/models/snapedit_api_config.dart';
-import 'package:snapretouch/services/snap_edit/models/snapedit_response.dart';
+import 'package:snapedit/services/snap_edit/models/snapedit_api_config.dart';
+import 'package:snapedit/services/snap_edit/models/snapedit_response.dart';
 
 export './extensions/detected_image.dart';
 export './extensions/erase_image.dart';

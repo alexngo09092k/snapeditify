@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/generated/l10n.dart';
 
 class AIIcon extends StatelessWidget {
   const AIIcon({Key? key, this.size = 20}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/constants.dart';
+import 'package:snapedit/common/constants.dart';
 
 class LoadingPopup extends StatelessWidget {
   const LoadingPopup({Key? key, required this.message}) : super(key: key);

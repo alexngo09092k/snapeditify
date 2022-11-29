@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:fluttering/fluttering.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:snapretouch/utils/image_convert.dart';
+import 'package:snapedit/utils/image_convert.dart';
 
 class ImagePick {
   static final ImagePick _instance = ImagePick._internal();

@@ -1,8 +1,8 @@
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/services/services.dart';
-import 'package:snapretouch/services/snap_edit/models/ai_detection_body.dart';
-import 'package:snapretouch/services/snap_edit/models/ai_detection_response.dart';
-import 'package:snapretouch/services/snap_edit/models/snapedit_response.dart';
+import 'package:snapedit/services/services.dart';
+import 'package:snapedit/services/snap_edit/models/ai_detection_body.dart';
+import 'package:snapedit/services/snap_edit/models/ai_detection_response.dart';
+import 'package:snapedit/services/snap_edit/models/snapedit_response.dart';
 
 extension DetectedImage on SnapEdit {
   Future<SnapEditResponse<AIDetectionResponse?>> detectionImage(AIDetectionBody data) async {

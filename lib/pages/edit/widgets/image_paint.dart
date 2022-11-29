@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
-import 'package:snapretouch/widgets/painter/painter_pure.dart';
-import 'package:snapretouch/pages/edit/widgets/changed_strokewidth.dart';
-import 'package:snapretouch/widgets/custom_button.dart';
-import 'package:snapretouch/widgets/custom_card.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/generated/l10n.dart';
+import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/widgets/painter/painter_pure.dart';
+import 'package:snapedit/pages/edit/widgets/changed_strokewidth.dart';
+import 'package:snapedit/widgets/custom_button.dart';
+import 'package:snapedit/widgets/custom_card.dart';
 
 class ImagePaint extends StatelessWidget {
   const ImagePaint({Key? key}) : super(key: key);

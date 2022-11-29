@@ -1,8 +1,8 @@
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/services/services.dart';
-import 'package:snapretouch/services/snap_edit/models/snapedit_response.dart';
-import 'package:snapretouch/services/snap_edit/models/erase_body.dart';
-import 'package:snapretouch/services/snap_edit/models/erase_response.dart';
+import 'package:snapedit/services/services.dart';
+import 'package:snapedit/services/snap_edit/models/snapedit_response.dart';
+import 'package:snapedit/services/snap_edit/models/erase_body.dart';
+import 'package:snapedit/services/snap_edit/models/erase_response.dart';
 
 extension EraseImage on SnapEdit {
   Future<SnapEditResponse<EraseResponse?>> eraseImage(EraseBody data) async {

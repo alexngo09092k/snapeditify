@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/constants.dart';
+import 'package:snapedit/common/constants.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard(

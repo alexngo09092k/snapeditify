@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/configuration.dart';
-import 'package:snapretouch/widgets/custom_network_image.dart';
+import 'package:snapedit/common/configuration.dart';
+import 'package:snapedit/widgets/custom_network_image.dart';
 
 class CustomImage extends StatelessWidget {
   const CustomImage({

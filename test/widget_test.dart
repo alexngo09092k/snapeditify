@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:snapretouch/app.dart';
+import 'package:snapedit/app.dart';
 
 
 void main() {

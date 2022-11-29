@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:snapretouch/models/config/app_config.dart';
-import 'package:snapretouch/common/constants.dart';
+import 'package:snapedit/models/config/app_config.dart';
+import 'package:snapedit/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
-import 'package:snapretouch/services/services.dart';
+import 'package:snapedit/services/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:snapretouch/common/extensions.dart';
-import 'package:snapretouch/services/snap_edit/models/snapedit_api_config.dart';
+import 'package:snapedit/common/extensions.dart';
+import 'package:snapedit/services/snap_edit/models/snapedit_api_config.dart';
 
 class Configuration {
   static final Configuration _instance = Configuration._internal();

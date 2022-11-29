@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/widgets/before_after/rect_clipper.dart';
+import 'package:snapedit/widgets/before_after/rect_clipper.dart';
 import 'dart:ui' as ui;
 
 class BeforeAfter extends StatefulWidget {

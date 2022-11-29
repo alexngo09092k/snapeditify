@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
-import 'package:snapretouch/app.dart';
-import 'package:snapretouch/common/configuration.dart';
-import 'package:snapretouch/env.dart';
-import 'package:snapretouch/firebase_options.dart';
-import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
-import 'package:snapretouch/providers/home_provider.dart';
-import 'package:snapretouch/services/services.dart';
-import 'package:snapretouch/models/config/app_config.dart';
+import 'package:snapedit/app.dart';
+import 'package:snapedit/common/configuration.dart';
+import 'package:snapedit/env.dart';
+import 'package:snapedit/firebase_options.dart';
+import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/home_provider.dart';
+import 'package:snapedit/services/services.dart';
+import 'package:snapedit/models/config/app_config.dart';
 
 void main() {
   AwesomeApp(

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/generated/l10n.dart';
+import 'package:snapedit/providers/edit_provider/edit_provider.dart';
 
 class CountDetectedObject extends StatelessWidget {
   CountDetectedObject({

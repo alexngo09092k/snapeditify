@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
-import 'package:snapretouch/common/constants.dart';
+import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/common/constants.dart';
 
 class ChangedStrokeWidth extends StatelessWidget {
   const ChangedStrokeWidth({Key? key}) : super(key: key);

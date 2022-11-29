@@ -4,10 +4,10 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 
-import 'package:snapretouch/providers/edit_provider/painter_actions.dart';
-import 'package:snapretouch/models/detected_object.dart';
-import 'package:snapretouch/utils/image_convert.dart';
-import 'package:snapretouch/widgets/painter/painter.dart';
+import 'package:snapedit/providers/edit_provider/painter_actions.dart';
+import 'package:snapedit/models/detected_object.dart';
+import 'package:snapedit/utils/image_convert.dart';
+import 'package:snapedit/widgets/painter/painter.dart';
 
 class PainterState {
   PainterState({

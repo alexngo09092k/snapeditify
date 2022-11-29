@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
-import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/pages/edit/widgets/saved_image_view.dart';
-import 'package:snapretouch/common/extensions.dart';
-import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
-import 'package:snapretouch/providers/edit_provider/painter_state.dart';
+import 'package:snapedit/generated/l10n.dart';
+import 'package:snapedit/pages/edit/widgets/saved_image_view.dart';
+import 'package:snapedit/common/extensions.dart';
+import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/edit_provider/painter_state.dart';
 
 class SavedImageButton extends StatelessWidget {
   const SavedImageButton({Key? key}) : super(key: key);

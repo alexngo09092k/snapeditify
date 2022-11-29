@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/configuration.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/widgets/app_logo.dart';
+import 'package:snapedit/common/configuration.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/widgets/app_logo.dart';
 
 class HomeLogo extends StatelessWidget {
   const HomeLogo({Key? key}) : super(key: key);

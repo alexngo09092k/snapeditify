@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/pages/edit/widgets/image_paint.dart';
-import 'package:snapretouch/pages/edit/widgets/paint_control.dart';
-import 'package:snapretouch/pages/edit/widgets/revert_popup.dart';
-import 'package:snapretouch/pages/edit/widgets/saved_image_button.dart';
-import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
-import 'package:snapretouch/common/extensions.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/pages/edit/widgets/image_paint.dart';
+import 'package:snapedit/pages/edit/widgets/paint_control.dart';
+import 'package:snapedit/pages/edit/widgets/revert_popup.dart';
+import 'package:snapedit/pages/edit/widgets/saved_image_button.dart';
+import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/common/extensions.dart';
 
 class EditPage extends StatefulWidget {
   const EditPage({Key? key, required this.imagePath}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/widgets/custom_button.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/widgets/custom_button.dart';
 
 class CustomDialogButton {
   String title;

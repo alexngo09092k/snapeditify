@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/providers/edit_provider/edit_provider.dart';
 
 class StrokeWidthSlider extends StatelessWidget {
   const StrokeWidthSlider({Key? key}) : super(key: key);

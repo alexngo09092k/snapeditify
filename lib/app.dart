@@ -1,6 +1,6 @@
-import 'package:snapretouch/common/app_routes.dart';
-import 'package:snapretouch/common/theme.dart';
-import 'package:snapretouch/generated/l10n.dart';
+import 'package:snapedit/common/app_routes.dart';
+import 'package:snapedit/common/theme.dart';
+import 'package:snapedit/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

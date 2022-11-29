@@ -1,4 +1,4 @@
-import 'package:snapretouch/common/constants.dart';
+import 'package:snapedit/common/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {

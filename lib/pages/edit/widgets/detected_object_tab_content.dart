@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/generated/l10n.dart';
-import 'package:snapretouch/models/detected_object.dart';
-import 'package:snapretouch/pages/edit/widgets/detected_object_row.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/generated/l10n.dart';
+import 'package:snapedit/models/detected_object.dart';
+import 'package:snapedit/pages/edit/widgets/detected_object_row.dart';
 
 class DetectedObjectTabContent extends StatelessWidget {
   const DetectedObjectTabContent({

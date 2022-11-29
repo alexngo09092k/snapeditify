@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapretouch/common/app_routes.dart';
-import 'package:snapretouch/common/configuration.dart';
-import 'package:snapretouch/common/constants.dart';
-import 'package:snapretouch/models/config/app_config.dart';
-import 'package:snapretouch/widgets/app_logo.dart';
-import 'package:snapretouch/widgets/widget.utils.dart';
-import 'package:snapretouch/common/extensions.dart';
+import 'package:snapedit/common/app_routes.dart';
+import 'package:snapedit/common/configuration.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/models/config/app_config.dart';
+import 'package:snapedit/widgets/app_logo.dart';
+import 'package:snapedit/widgets/widget.utils.dart';
+import 'package:snapedit/common/extensions.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

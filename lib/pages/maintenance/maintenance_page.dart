@@ -1,5 +1,5 @@
-import 'package:snapretouch/common/configuration.dart';
-import 'package:snapretouch/common/constants.dart';
+import 'package:snapedit/common/configuration.dart';
+import 'package:snapedit/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 
