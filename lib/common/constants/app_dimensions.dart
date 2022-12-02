@@ -9,6 +9,10 @@ class AppDimensions {
   AppDimensions._internal();
 
   /// FONT SIZE
+  final double fontsize = 14;
+
+  double fontsizeX(double x) => fontsize * x;
+
   final double fontSizeExtraSmall = 10;
   final double fontSizeSmall = 12;
   final double fontSizeDefault = 14;
@@ -17,20 +21,29 @@ class AppDimensions {
   final double fontSizeOverLarge = 24;
 
   /// PADDING
+  final double padding = 16;
+
+  double paddingX(double x) => padding * x;
+
   final double paddingSizeExtraSmall = 4.0;
   final double paddingSizeSmall = 10.0;
-  final double paddingSizeDefault = 16;
   final double paddingSizeLarge = 20.0;
   final double paddingSizeExtraLarge = 25.0;
 
   /// RADIUS
+
+  final double radius = 10;
+  double radiusX(double x) => radius * x;
+
   final double radiusExtraSmall = 4;
   final double radiusSmall = 8;
-  final double radiusDefault = 10;
   final double radiusLarge = 20.0;
   final double radiusExtraLarge = 40.0;
 
   /// ICON
+  final double icon = 25;
+  double iconX(double x) => icon * x;
+
   final double iconSizeExtraSmall = 16;
   final double iconSizeSmall = 20;
   final double iconSizeDefault = 24;

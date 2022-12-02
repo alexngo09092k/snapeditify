@@ -31,6 +31,6 @@ class HomeProvider extends IHomeProvider {
 
   _onImagePick(BuildContext context, File pickedFile) {
     Debug.log('on image picked');
-    Navigator.of(context).pushNamed(AppRoutes.editPage, arguments: pickedFile);
+    Navigator.of(context).pushNamed(AppRoutes.removeObjectPage, arguments: pickedFile);
   }
 }

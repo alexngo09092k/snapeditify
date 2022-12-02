@@ -18,7 +18,7 @@ import 'package:snapedit/services/snap_edit/models/ai_detection_response.dart';
 import 'package:snapedit/models/detected_object.dart';
 import 'package:snapedit/services/snap_edit/models/erase_body.dart';
 import 'package:snapedit/services/snap_edit/models/erase_response.dart';
-import 'package:snapedit/pages/edit/widgets/paint_control.dart';
+import 'package:snapedit/pages/remove_object/widgets/paint_control.dart';
 import 'package:snapedit/services/snap_edit/models/snapedit_response.dart';
 import 'package:snapedit/utils/image_convert.dart';
 import 'package:snapedit/utils/image_pick.dart';

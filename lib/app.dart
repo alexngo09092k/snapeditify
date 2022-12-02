@@ -1,9 +1,7 @@
 import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/theme.dart';
 import 'package:snapedit/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatefulWidget {
@@ -13,26 +11,16 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends AwesomeAppState<App> {
-  late IThemeProvider _themeProvider;
-
+class _AppState extends AwesomeAppState<App, ThemeProvider> {
   @override
   void initState() {
-    /// lock android phone in portrait
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-
-    _themeProvider = ManagerProvider.of<IThemeProvider>();
-    _themeProvider.onChangePlatformBrightness();
-
     super.initState();
+    provider.onChangePlatformBrightness();
   }
 
   @override
   void didChangePlatformBrightness() {
-    _themeProvider.onChangePlatformBrightness();
+    provider.onChangePlatformBrightness();
     super.didChangePlatformBrightness();
   }
 
@@ -44,18 +32,18 @@ class _AppState extends AwesomeAppState<App> {
     return Consumer<IThemeProvider>(
       builder: (_, __, ___) {
         Debug.log("===== START APP =====");
-        Debug.log("===== THEME MODE: ${_themeProvider.themeMode} =====");
+        Debug.log("===== THEME MODE: ${provider.themeMode} =====");
         return MaterialApp(
           navigatorKey: AwesomeAppState.navigatorKey,
-          theme: getLightTheme(context, scale: scale),
-          darkTheme: getDarkTheme(context, scale: scale),
-          themeMode: _themeProvider.themeMode,
-          initialRoute: AppRoutes.initialRoute,
-          onGenerateRoute: AppRoutes.onGenerateRoute,
+          // theme: getLightTheme(context, scale: scale),
+          // darkTheme: getDarkTheme(context, scale: scale),
+          themeMode: provider.themeMode,
+          initialRoute: AppRoutes.instance.initialRoute,
+          onGenerateRoute: AppRoutes.instance.onGenerateRoute,
           navigatorObservers: [AppRouteObserver(action: (name) => Debug.log("==== SCREEN $name ===="))],
-          routes: AppRoutes.routes,
+          routes: AppRoutes.instance.routes,
           // locale: _appProvider.currentLocale,
-          localeResolutionCallback: _themeProvider.onChangeLocale,
+          localeResolutionCallback: provider.onChangeLocale,
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,

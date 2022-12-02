@@ -77,4 +77,14 @@ class AppColors {
           lightActive,
         ],
       );
+
+  /// SnapEdit Colors
+  final String blue = "#007aff";
+  final String blue100 = "#edf1f9";
+  final String blue200 = "#d2e6ff";
+  final String blue500 = "#0051ee";
+  final String blue600 = "#0d1fbd";
+  final String blueAdscta = "#004de3";
+  final String bluTooltip = "#0850fd";
+  final String borderColor = "#f0f0f1";
 }

@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:snapedit/common/app_routes.dart';
+import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/models/all_photos_param.dart';
+import 'package:snapedit/common/extensions.dart';
+
+class HomeOptions extends StatelessWidget {
+  const HomeOptions({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final lottieWidth = screenWidth - AppDimensions.instance.padding * 2;
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.padding)),
+      child: Container(
+        padding: EdgeInsets.all(AppDimensions.instance.padding),
+        width: lottieWidth,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            /// DELETE
+            _Option(
+              title: 'Remover',
+              icon: AppAssets.instance.icRemoveObject,
+              onTap: (_) => AppRoutes.instance.goAllPhotos(context, AllPhotosParam(action: AllPhotosAction.removeObject)),
+            ),
+            _Option(
+              title: 'Enhance',
+              icon: AppAssets.instance.icEnhence,
+              onTap: (_) => AppRoutes.instance.goAllPhotos(context, AllPhotosParam(action: AllPhotosAction.enhanceImage)),
+            ),
+            _Option(
+              title: 'Art Effect',
+              icon: AppAssets.instance.icArtEffect,
+              onTap: (_) => AppRoutes.instance.goAllPhotos(context, AllPhotosParam(action: AllPhotosAction.applyArtEffect)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Option extends StatelessWidget {
+  const _Option({Key? key, required this.icon, required this.title, required this.onTap}) : super(key: key);
+
+  final String title;
+  final String icon;
+  final Function(BuildContext) onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap(context),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(icon, width: AppDimensions.instance.iconSizeLarge),
+          SizedBox(height: AppDimensions.instance.paddingSizeExtraSmall),
+          Text(title, style: Theme.of(context).textTheme.bodyText1)
+        ],
+      ),
+    );
+  }
+}

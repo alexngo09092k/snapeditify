@@ -86,7 +86,7 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
                           width: MediaQuery.of(context).size.width * 0.8 / 2,
                           image: Configuration.instance.appConfig.appLogo,
                         ),
-                        SizedBox(height: AppDimensions.instance.paddingSizeDefault),
+                        SizedBox(height: AppDimensions.instance.padding),
                       ],
                     ),
                   )

@@ -13,17 +13,17 @@ class AdPlaceHolder extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      padding: EdgeInsets.all(AppDimensions.instance.paddingSizeDefault),
+      padding: EdgeInsets.all(AppDimensions.instance.padding),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: Image.asset(AppImages.instance.placeholder).image,
+          image: Image.asset(AppAssets.instance.placeholder).image,
           fit: BoxFit.fill,
         ),
       ),
       child: Stack(
         children: [
           CustomImage(
-            image: AppImages.instance.placeholder,
+            image: AppAssets.instance.placeholder,
             width: width,
             height: height,
           ),
@@ -68,7 +68,7 @@ class _GroupIcon extends StatelessWidget {
           color: AppColors.instance.lightActive,
         ),
         // Image.asset(
-        //   AppImages.instance.icCheckboxSelectedNormal3x,
+        //   AppAssets.instance.icCheckboxSelectedNormal3x,
         //   width: 16,
         // ),
         SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall),

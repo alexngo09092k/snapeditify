@@ -32,26 +32,26 @@ class _AdViewState extends State<AdView> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-        vertical: AppDimensions.instance.paddingSizeDefault,
+        vertical: AppDimensions.instance.padding,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
-          Radius.circular(AppDimensions.instance.paddingSizeDefault),
+          Radius.circular(AppDimensions.instance.padding),
         ),
         image: DecorationImage(
-          image: Image.asset(AppImages.instance.placeholder).image,
+          image: Image.asset(AppAssets.instance.placeholder).image,
           fit: BoxFit.fill,
         ),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.paddingSizeDefault)),
+        borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.padding)),
         child: Container(
           width: widget.size.width,
           height: ad != null ? widget.size.height : null,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(
               Radius.circular(
-                AppDimensions.instance.paddingSizeDefault,
+                AppDimensions.instance.padding,
               ),
             ),
             border: Border.all(

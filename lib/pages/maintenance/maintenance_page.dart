@@ -10,7 +10,7 @@ class MaintenancePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(AppDimensions.instance.paddingSizeDefault),
+        padding: EdgeInsets.all(AppDimensions.instance.padding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +26,7 @@ class MaintenancePage extends StatelessWidget {
                     ),
                   ),
             ),
-            SizedBox(width: AppDimensions.instance.paddingSizeDefault),
+            SizedBox(width: AppDimensions.instance.padding),
             Text(
               Configuration.instance.appConfig.maintenanceMode.message,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(

@@ -1,42 +1,79 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:snapedit/pages/edit/edit_page.dart';
+import 'package:snapedit/pages/active_pro/active_pro.dart';
+import 'package:snapedit/pages/all_photos/all_photos.dart';
+import 'package:snapedit/pages/apply_art_effect/apply_art_effect.dart';
+import 'package:snapedit/pages/enhance_image/enhance_image.dart';
+import 'package:snapedit/pages/remove_object/remove_object.dart';
 import 'package:snapedit/pages/home/home_page.dart';
 import 'package:snapedit/pages/maintenance/maintenance_page.dart';
+import 'package:snapedit/pages/setting/setting.dart';
 import 'package:snapedit/pages/splash/splash_page.dart';
 
-abstract class AppRoutes {
-  static const String homePage = 'home_page';
-  static const String editPage = 'edit_page';
+abstract class IAppRoutes {
+  String get initialRoute;
+
+  Map<String, Widget Function(BuildContext)> get routes;
+
+  Route<dynamic>? onGenerateRoute(RouteSettings settings);
+
+  Route<dynamic>? buildRoute(Widget page, RouteSettings settings);
+}
+
+class AppRoutes extends IAppRoutes {
+  static final IAppRoutes _instance = AppRoutes._internal();
+  static IAppRoutes get instance => _instance;
+
+  factory AppRoutes() => _instance as AppRoutes;
+  AppRoutes._internal();
+
   static const String splashPage = 'splash_page';
   static const String maintenancePage = 'maintenance_page';
+  static const String homePage = 'home_page';
+  static const String removeObjectPage = 'remove_object_page';
+  static const String enhanceImagePage = 'enahnce_image_page';
+  static const String settingPage = 'setting_page';
+  static const String activeProPage = 'active_pro_page';
+  static const String applyArtEffectPage = 'apply_art_effect_page';
+  static const String allPhotosPage = 'all_photos_page';
 
-  static String get initialRoute => splashPage;
+  @override
+  String get initialRoute => splashPage;
 
-  static Map<String, Widget Function(BuildContext)> routes = {
+  @override
+  Map<String, Widget Function(BuildContext)> routes = {
     splashPage: (context) => const SplashPage(),
     homePage: (context) => const HomePage(),
     maintenancePage: (context) => const HomePage(),
   };
 
-  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+  @override
+  Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splashPage:
-        return _buildRoute(const SplashPage(), settings);
-      case homePage:
-        return _buildRoute(const HomePage(), settings);
-      case editPage:
-        File image = settings.arguments as File;
-        return _buildRoute(EditPage(imagePath: image.path), settings);
+        return buildRoute(const SplashPage(), settings);
       case maintenancePage:
-        return _buildRoute(const MaintenancePage(), settings);
+        return buildRoute(const MaintenancePage(), settings);
+      case homePage:
+        return buildRoute(const HomePage(), settings);
+      case removeObjectPage:
+        return buildRoute(const RemoveObjectPage(), settings);
+      case enhanceImagePage:
+        return buildRoute(const EnhanceImagePage(), settings);
+      case settingPage:
+        return buildRoute(const SettingPage(), settings);
+      case activeProPage:
+        return buildRoute(const ActiveProPage(), settings);
+      case applyArtEffectPage:
+        return buildRoute(const ApplyArtEffectPage(), settings);
+      case allPhotosPage:
+        return buildRoute(const AllPhotosPage(), settings);
       default:
+        throw ErrorDescription("Not found page");
     }
-    return null;
   }
 
-  static _buildRoute(Widget page, RouteSettings settings) {
+  @override
+  buildRoute(Widget page, RouteSettings settings) {
     return MaterialPageRoute(builder: (content) => page, settings: settings);
   }
 }

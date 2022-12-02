@@ -27,13 +27,13 @@ class CustomNetworkImage extends StatelessWidget {
       width: width,
       fit: fit,
       placeholder: (context, url) => Image.asset(
-        AppImages.instance.placeholder,
+        AppAssets.instance.placeholder,
         height: height,
         width: width,
         fit: BoxFit.cover,
       ),
       errorWidget: (context, url, error) => Image.asset(
-        placeholder ?? AppImages.instance.placeholder,
+        placeholder ?? AppAssets.instance.placeholder,
         height: height,
         width: width,
         fit: BoxFit.cover,

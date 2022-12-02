@@ -56,8 +56,8 @@ Future<T?> showModalBottom<T>(BuildContext context, Widget modal) {
     context: context,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(AppDimensions.instance.radiusDefault),
-        topRight: Radius.circular(AppDimensions.instance.radiusDefault),
+        topLeft: Radius.circular(AppDimensions.instance.radius),
+        topRight: Radius.circular(AppDimensions.instance.radius),
       ),
     ),
     builder: (_) => Padding(

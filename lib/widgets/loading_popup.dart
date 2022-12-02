@@ -15,7 +15,7 @@ class LoadingPopup extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Container(
-        padding: EdgeInsets.all(AppDimensions.instance.paddingSizeDefault),
+        padding: EdgeInsets.all(AppDimensions.instance.padding),
         height: 100,
         width: 50,
         child: Column(
@@ -30,7 +30,7 @@ class LoadingPopup extends StatelessWidget {
                 valueColor: AlwaysStoppedAnimation<Color>(AppColors.instance.kWhite),
               ),
             ),
-            SizedBox(height: AppDimensions.instance.paddingSizeDefault),
+            SizedBox(height: AppDimensions.instance.padding),
             Text(
               message,
               textAlign: TextAlign.center,

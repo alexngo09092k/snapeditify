@@ -72,10 +72,10 @@ abstract class DefaultConfig {
 
   /// DEFAULT APP CONFIGURATIONS
   static AppConfig appConfig = AppConfig(
-    appName: "BlockScan",
-    appLogo: AppImages.instance.logo,
+    appName: "SnapEdit",
+    appLogo: AppAssets.instance.logo,
     protocols: ['https://', 'http://', 'data:'],
-    sharedKeyPrefix: "bsc_scan.",
+    sharedKeyPrefix: "snapedit.",
     contact: "brennanngo992k@gmail.com",
     shareApp: ShareApp(link: 'https://t.me/+9UBuQxKY7N80YTc1', message: "BlockScan"),
     telegram: 'https://t.me/+9UBuQxKY7N80YTc1',
@@ -157,34 +157,6 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
     int? timestampExpriedDate = AsyncStorage.instance.getInt(AppSharedKey.instance.remoteConfigExpriedDate);
     int timestampNow = DateTime.now().millisecondsSinceEpoch;
     if (timestampExpriedDate == null || (timestampNow > timestampExpriedDate)) return true;
-    return false;
-  }
-}
-
-extension PackageInfoExtesnion on Configuration {
-  static Future<PackageInfo> getPackageInfo() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String appName = packageInfo.appName;
-    String version = packageInfo.version;
-    String buildNumber = packageInfo.buildNumber;
-    String packageName = packageInfo.packageName;
-
-    Debug.log('APP ID: $packageName');
-    Debug.log('APP NAME $appName');
-    Debug.log('APP VERSION $version');
-    Debug.log('App VERSION CODE $buildNumber');
-
-    return packageInfo;
-  }
-}
-
-extension NetworkExtension on Configuration {
-  bool isNetwork(String url) {
-    for (var protocol in appConfig.protocols) {
-      if (url.startsWith(protocol)) {
-        return true;
-      }
-    }
     return false;
   }
 }

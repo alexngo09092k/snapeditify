@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Unwanted Object Remover</string>
+    <string name="app_name">SnapEdit</string>
     <string name="default_notification_channel_id">default_notification_channel_id</string>
     <!-- TODO 1.3 - Update Google AdsMod (optional) 🧩 -->
     <string name="admob_api">ca-app-pub-9241292359230405~3319593408</string>

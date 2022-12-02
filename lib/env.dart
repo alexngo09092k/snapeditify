@@ -23,7 +23,7 @@ Map<String, dynamic> enviroment = {
     },
 
     ///Display name is used in app
-    'appName': 'BlockScan',
+    'appName': 'SnapEdit',
 
     ///Logo is used in splash screen and app ui
     'appLogo': 'assets/images/logo.png',
