@@ -5,10 +5,10 @@ import 'package:snapedit/models/config/app_config.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
-import 'package:snapedit/services/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:snapedit/common/extensions.dart';
-import 'package:snapedit/services/snap_edit/models/snapedit_api_config.dart';
+import 'package:snapedit/services/services.dart';
+import 'package:snapedit/services/snap_edit/snap_edit.dart';
 
 class Configuration {
   static final Configuration _instance = Configuration._internal();
@@ -66,26 +66,10 @@ abstract class DefaultConfig {
   );
 
   /// DEFAULT API CONFIGURATIONS
-  static SnapEditConfig snapEditConfig = SnapEditConfig(
-    baseUrl: 'https://be-prod-1.snapedit.app',
-  );
+  static SnapEditConfig snapEditConfig = SnapEditConfig.defaultValue();
 
   /// DEFAULT APP CONFIGURATIONS
-  static AppConfig appConfig = AppConfig(
-    appName: "SnapEdit",
-    appLogo: AppAssets.instance.logo,
-    protocols: ['https://', 'http://', 'data:'],
-    sharedKeyPrefix: "snapedit.",
-    contact: "brennanngo992k@gmail.com",
-    shareApp: ShareApp(link: 'https://t.me/+9UBuQxKY7N80YTc1', message: "BlockScan"),
-    telegram: 'https://t.me/+9UBuQxKY7N80YTc1',
-    maintenanceMode: const MaintenanceMode(
-      title: "We'll be back soon",
-      link: 'https://t.me/+9UBuQxKY7N80YTc1',
-      message: "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
-    ),
-    appMode: AppMode.production,
-  );
+  static AppConfig appConfig = AppConfig.defaultValue();
 
   /// DEFAULT ADS CONFIGURATIONS
   static AdvertisementConfig advertisementConfig = const AdvertisementConfig(

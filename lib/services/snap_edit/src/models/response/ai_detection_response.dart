@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:snapedit/models/detected_object.dart';
+import 'package:snapedit/services/snap_edit/src/models/response/detected_object.dart';
 
 class AIDetectionResponse {
   final List<DetectedObject> detectedObjects;
@@ -13,7 +13,6 @@ class AIDetectionResponse {
     required this.eventId,
     required this.sessionId,
   });
-  
 
   AIDetectionResponse copyWith({
     List<DetectedObject>? detectedObjects,
@@ -53,11 +52,11 @@ class AIDetectionResponse {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is AIDetectionResponse &&
-      listEquals(other.detectedObjects, detectedObjects) &&
-      other.eventId == eventId &&
-      other.sessionId == sessionId;
+        listEquals(other.detectedObjects, detectedObjects) &&
+        other.eventId == eventId &&
+        other.sessionId == sessionId;
   }
 
   @override

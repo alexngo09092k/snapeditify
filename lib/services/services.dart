@@ -1,8 +1,11 @@
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/services/I_services.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
 
-export 'package:snapedit/services/snap_edit/snap_edit.dart';
+abstract class IServices {
+  IFirebaseService get firebase;
+
+  SnapEdit get snapEdit;
+}
 
 class Services extends IServices {
   static final IServices _instance = Services._internal();

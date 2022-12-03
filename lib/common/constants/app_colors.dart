@@ -79,12 +79,17 @@ class AppColors {
       );
 
   /// SnapEdit Colors
-  final String blue = "#007aff";
-  final String blue100 = "#edf1f9";
-  final String blue200 = "#d2e6ff";
-  final String blue500 = "#0051ee";
-  final String blue600 = "#0d1fbd";
-  final String blueAdscta = "#004de3";
-  final String bluTooltip = "#0850fd";
-  final String borderColor = "#f0f0f1";
+  final Color blue = const Color.fromRGBO(0, 122, 255, 1);
+  final Color blue100 = const Color.fromRGBO(237, 241, 249, 1);
+  final Color blue200 = const Color.fromRGBO(210, 230, 255, 1);
+  final Color blue500 = const Color.fromRGBO(0, 81, 238, 1);
+  final Color blue600 = const Color.fromRGBO(13, 31, 189, 1);
+  final Color blueAdscta = const Color.fromRGBO(0, 77, 227, 1);
+  final Color bluTooltip = const Color.fromRGBO(8, 80, 253, 1);
+  final Color borderColor = const Color.fromRGBO(240, 240, 241, 1);
+  final Color bgEnhanceResult = const Color.fromRGBO(37, 38, 56, 1);
+  final Color bgImgResultOutput = const Color.fromRGBO(102, 37, 38, 1);
+  final Color black = const Color.fromRGBO(37, 38, 56, 1);
+  final Color black500 = const Color.fromRGBO(37, 38, 56, 1);
+  final Color brand = const Color.fromRGBO(37, 38, 56, 1);
 }

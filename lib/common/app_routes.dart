@@ -42,8 +42,14 @@ class AppRoutes extends IAppRoutes {
   @override
   Map<String, Widget Function(BuildContext)> routes = {
     splashPage: (context) => const SplashPage(),
-    homePage: (context) => const HomePage(),
     maintenancePage: (context) => const HomePage(),
+    homePage: (context) => const HomePage(),
+    removeObjectPage: (context) => const RemoveObjectPage(),
+    enhanceImagePage: (context) => const EnhanceImagePage(),
+    settingPage: (context) => const SettingPage(),
+    activeProPage: (context) => const ActiveProPage(),
+    applyArtEffectPage: (context) => const ApplyArtEffectPage(),
+    allPhotosPage: (context) => const AllPhotosPage(),
   };
 
   @override

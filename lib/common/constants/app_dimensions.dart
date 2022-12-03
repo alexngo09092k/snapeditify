@@ -21,7 +21,7 @@ class AppDimensions {
   final double fontSizeOverLarge = 24;
 
   /// PADDING
-  final double padding = 16;
+  final double padding = 14;
 
   double paddingX(double x) => padding * x;
 
@@ -41,11 +41,15 @@ class AppDimensions {
   final double radiusExtraLarge = 40.0;
 
   /// ICON
-  final double icon = 25;
+  final double icon = 32;
   double iconX(double x) => icon * x;
 
   final double iconSizeExtraSmall = 16;
   final double iconSizeSmall = 20;
   final double iconSizeDefault = 24;
   final double iconSizeLarge = 40;
+
+  /// POPUP
+  final double popup = 300;
+  double popupX(double x) => popup * x;
 }

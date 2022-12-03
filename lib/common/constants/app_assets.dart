@@ -22,7 +22,9 @@ class AppAssets {
 
   /// Images
   static const String imagePath = 'assets/images';
+
   final String bgProBanner = "$imagePath/bg_pro_banner.webp";
+  final String bgShareImage = "$imagePath/bg_share_image.webp";
 
   /// Icons
   static const String iconPath = 'assets/images/icons';
@@ -42,6 +44,14 @@ class AppAssets {
   final String icFAQ = "$iconPath/ic_faq.png";
   final String icFeedback = "$iconPath/ic_feedback.png";
   final String icProText = "$iconPath/ic_pro_text.png";
+  final String icBack = "$iconPath/ic_back.png";
+  final String icArrowRight = "$iconPath/ic_arrow_right.png";
+  final String icStarNormal = "$iconPath/ic_star_normal.png";
+  final String icStarHighlight = "$iconPath/ic_star_highlight.png";
+  final String icClose = "$iconPath/ic_close.png";
+  final String icArrowRating = "$iconPath/ic_arrow_rating.png";
+  final String icBling = "$iconPath/ic_bling.png";
+  final String icStar = "$iconPath/ic_star.png";
 
   final String icAddPhotoNormal3x = '$iconPath/ic_add_photo_Normal@3x.png';
   final String icArrowRightNormal3x = '$iconPath/ic_arrow_right_Normal@3x.png';

@@ -53,8 +53,7 @@ class EraseResponse {
 
   String toJson() => json.encode(toMap());
 
-  factory EraseResponse.fromJson(String source) =>
-      EraseResponse.fromMap(json.decode(source));
+  factory EraseResponse.fromJson(String source) => EraseResponse.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -75,10 +74,6 @@ class EraseResponse {
 
   @override
   int get hashCode {
-    return newImageBase64.hashCode ^
-        sessionId.hashCode ^
-        newImageId.hashCode ^
-        oldImageId.hashCode ^
-        eventId.hashCode;
+    return newImageBase64.hashCode ^ sessionId.hashCode ^ newImageId.hashCode ^ oldImageId.hashCode ^ eventId.hashCode;
   }
 }

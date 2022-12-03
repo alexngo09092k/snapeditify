@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 
 import 'package:snapedit/providers/edit_provider/painter_actions.dart';
-import 'package:snapedit/models/detected_object.dart';
+import 'package:snapedit/services/snap_edit/src/models/response/detected_object.dart';
 import 'package:snapedit/utils/image_convert.dart';
 import 'package:snapedit/widgets/painter/painter.dart';
 

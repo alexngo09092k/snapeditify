@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:snapedit/common/constants.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class AppConfig {
@@ -25,6 +26,27 @@ class AppConfig {
     required this.appMode,
     required this.telegram,
   });
+
+  factory AppConfig.defaultValue() {
+    return AppConfig(
+      appName: "SnapEdit",
+      appLogo: AppAssets.instance.logo,
+      protocols: ['https://', 'http://', 'data:'],
+      sharedKeyPrefix: "snapedit.",
+      contact: "brennanngo992k@gmail.com",
+      shareApp: ShareApp(
+        link: '',
+        message: "SnapEdit",
+      ),
+      telegram: '',
+      maintenanceMode: const MaintenanceMode(
+        title: "We'll be back soon",
+        link: '',
+        message: "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
+      ),
+      appMode: AppMode.production,
+    );
+  }
 
   AppConfig copyWith({
     String? appName,

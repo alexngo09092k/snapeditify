@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/common/extensions.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({Key? key}) : super(key: key);
-
-  void _pro(BuildContext context) => Navigator.pushNamed(context, "");
-  void _setting(BuildContext context) => Navigator.pushNamed(context, "");
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +21,24 @@ class HomeHeader extends StatelessWidget {
           Row(
             children: [
               GestureDetector(
-                onTap: () => _pro(context),
+                onTap: () => AppRoutes.instance.goActivePro(context),
                 child: Container(
-                  padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.2)),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppDimensions.instance.paddingX(0.5), //// padding small
+                    vertical: AppDimensions.instance.paddingX(0.2), //// padding extra small
+                  ),
                   decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(2))),
+                    color: AppColors.instance.black,
+                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(2))), //// radius large
                   ),
                   child: Row(
                     children: [
-                      Image.asset(AppAssets.instance.icPro, width: AppDimensions.instance.iconX(1.2)),
-                      SizedBox(width: AppDimensions.instance.paddingX(0.2)),
-                      Text(
-                        "PRO",
-                        style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+                      Image.asset(AppAssets.instance.icPro, width: AppDimensions.instance.iconX(0.6)), //// icon small
+                      SizedBox(width: AppDimensions.instance.paddingX(0.5)), //// padding small
+                      Image.asset(
+                        AppAssets.instance.icProText,
+                        width: AppDimensions.instance.iconX(0.8), //// icon small
+                        color: Colors.white,
                       ),
                     ],
                   ),
@@ -43,8 +46,8 @@ class HomeHeader extends StatelessWidget {
               ),
               SizedBox(width: AppDimensions.instance.padding),
               GestureDetector(
-                onTap: () => _setting(context),
-                child: Image.asset(AppAssets.instance.icMenu, width: AppDimensions.instance.iconX(2)),
+                onTap: () => AppRoutes.instance.goSetting(context),
+                child: Image.asset(AppAssets.instance.icMenu, width: AppDimensions.instance.iconX(1)),
               )
             ],
           ),

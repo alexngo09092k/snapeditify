@@ -20,4 +20,8 @@ extension AppRoutesUtils on IAppRoutes {
   goActivePro(BuildContext context) {
     Navigator.of(context).pushNamed(AppRoutes.activeProPage);
   }
+
+  goSetting(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.settingPage);
+  }
 }

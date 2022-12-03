@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/models/detected_object.dart';
+import 'package:snapedit/services/snap_edit/src/models/response/detected_object.dart';
 import 'package:snapedit/pages/remove_object/widgets/detected_object_tab.dart';
 import 'package:snapedit/pages/remove_object/widgets/detected_object_tab_content.dart';
 import 'package:snapedit/providers/edit_provider/edit_provider.dart';

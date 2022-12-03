@@ -1,4 +1,5 @@
 import 'package:snapedit/common/app_routes.dart';
+import 'package:snapedit/common/theme.dart';
 import 'package:snapedit/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +36,8 @@ class _AppState extends AwesomeAppState<App, ThemeProvider> {
         Debug.log("===== THEME MODE: ${provider.themeMode} =====");
         return MaterialApp(
           navigatorKey: AwesomeAppState.navigatorKey,
-          // theme: getLightTheme(context, scale: scale),
-          // darkTheme: getDarkTheme(context, scale: scale),
+          theme: getLightTheme(context, scale: scale),
+          darkTheme: getLightTheme(context, scale: scale),
           themeMode: provider.themeMode,
           initialRoute: AppRoutes.instance.initialRoute,
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,
