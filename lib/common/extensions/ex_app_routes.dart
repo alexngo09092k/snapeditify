@@ -15,7 +15,7 @@ extension AppRoutesUtils on IAppRoutes {
 
   goAllPhotos(BuildContext context, PhotosFor photosFor) {
     ManagerProvider.of<PhotoProvider>().photosFor = photosFor;
-    Navigator.of(context).pushNamed(AppRoutes.allPhotosPage);
+    Navigator.of(context).pushNamed(AppRoutes.photoGalleryPage);
   }
 
   goActivePro(BuildContext context) {

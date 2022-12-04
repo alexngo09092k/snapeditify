@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:snapedit/pages/active_pro/active_pro.dart';
-import 'package:snapedit/pages/all_photos/all_photos.dart';
 import 'package:snapedit/pages/apply_art_effect/apply_art_effect.dart';
 import 'package:snapedit/pages/enhance_image/enhance_image.dart';
+import 'package:snapedit/pages/photo_gallery/photo_gallery.dart';
 import 'package:snapedit/pages/remove_object/remove_object.dart';
 import 'package:snapedit/pages/home/home_page.dart';
 import 'package:snapedit/pages/maintenance/maintenance_page.dart';
@@ -34,7 +34,7 @@ class AppRoutes extends IAppRoutes {
   static const String settingPage = 'setting_page';
   static const String activeProPage = 'active_pro_page';
   static const String applyArtEffectPage = 'apply_art_effect_page';
-  static const String allPhotosPage = 'all_photos_page';
+  static const String photoGalleryPage = 'all_photos_page';
 
   @override
   String get initialRoute => splashPage;
@@ -49,7 +49,7 @@ class AppRoutes extends IAppRoutes {
     settingPage: (context) => const SettingPage(),
     activeProPage: (context) => const ActiveProPage(),
     applyArtEffectPage: (context) => const ApplyArtEffectPage(),
-    allPhotosPage: (context) => const AllPhotosPage(),
+    photoGalleryPage: (context) => const PhotoGalleryPage(),
   };
 
   @override
@@ -71,8 +71,8 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const ActiveProPage(), settings);
       case applyArtEffectPage:
         return buildRoute(const ApplyArtEffectPage(), settings);
-      case allPhotosPage:
-        return buildRoute(const AllPhotosPage(), settings);
+      case photoGalleryPage:
+        return buildRoute(const PhotoGalleryPage(), settings);
       default:
         throw ErrorDescription("Not found page");
     }
