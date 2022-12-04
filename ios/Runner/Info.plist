@@ -32,10 +32,12 @@
 	<string>ca-app-pub-9241292359230405~3779043810</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Requesting local network for debugging processes</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You must agree with the photo album to see your pictures</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to take the photo from camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library to support Edit Features.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
