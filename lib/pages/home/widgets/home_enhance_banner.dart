@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/models/all_photos_param.dart';
+import 'package:snapedit/providers/photo_provider.dart';
 import 'package:snapedit/widgets/lottie_viewer.dart';
 import 'package:snapedit/common/extensions.dart';
 
@@ -36,7 +36,7 @@ class HomeEnhanceBanner extends StatelessWidget {
                       ),
                 ),
                 GestureDetector(
-                  onTap: () => AppRoutes.instance.goAllPhotos(context, AllPhotosParam(action: AllPhotosAction.enhanceImage)),
+                  onTap: () => AppRoutes.instance.goAllPhotos(context, PhotosFor.enhanceImage),
                   child: Container(
                     padding: EdgeInsets.all(AppDimensions.instance.padding),
                     decoration: BoxDecoration(

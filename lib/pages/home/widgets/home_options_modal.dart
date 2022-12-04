@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/common/extensions.dart';
-import 'package:snapedit/models/all_photos_param.dart';
+import 'package:snapedit/providers/photo_provider.dart';
 
 class HomeOptionsModal extends StatelessWidget {
   const HomeOptionsModal({super.key});
@@ -21,7 +21,7 @@ class HomeOptionsModal extends StatelessWidget {
                   title: "Remove\nObject",
                   icon: AppAssets.instance.icRemoveObject,
                   color: Colors.red,
-                  onTap: (_) => AppRoutes.instance.goAllPhotos(context, AllPhotosParam(action: AllPhotosAction.removeObject)),
+                  onTap: (_) => AppRoutes.instance.goAllPhotos(context, PhotosFor.removeObject),
                 ),
               ),
               SizedBox(width: AppDimensions.instance.padding),
@@ -30,7 +30,7 @@ class HomeOptionsModal extends StatelessWidget {
                   title: "Remove\nObject",
                   icon: AppAssets.instance.icEnhence,
                   color: Colors.red,
-                  onTap: (_) => AppRoutes.instance.goAllPhotos(context, AllPhotosParam(action: AllPhotosAction.enhanceImage)),
+                  onTap: (_) => AppRoutes.instance.goAllPhotos(context, PhotosFor.enhanceImage),
                 ),
               ),
               SizedBox(width: AppDimensions.instance.padding),
@@ -39,7 +39,7 @@ class HomeOptionsModal extends StatelessWidget {
                   title: "Remove\nObject",
                   icon: AppAssets.instance.icArtEffect,
                   color: Colors.red,
-                  onTap: (_) => AppRoutes.instance.goAllPhotos(context, AllPhotosParam(action: AllPhotosAction.applyArtEffect)),
+                  onTap: (_) => AppRoutes.instance.goAllPhotos(context, PhotosFor.applyArtEffect),
                 ),
               ),
             ],

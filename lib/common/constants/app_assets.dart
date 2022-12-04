@@ -26,6 +26,18 @@ class AppAssets {
   final String bgProBanner = "$imagePath/bg_pro_banner.webp";
   final String bgShareImage = "$imagePath/bg_share_image.webp";
 
+  final String snapEditDemo1 = "$imagePath/snapedit_demo_1.jpg";
+  final String snapEditDemo2 = "$imagePath/snapedit_demo_2.jpeg";
+  final String snapEditDemo3 = "$imagePath/snapedit_demo_3.jpg";
+
+  final String snapEditEnhanceDemo1 = "$imagePath/snapedit_enhance_demo_1.jpeg";
+  final String snapEditEnhanceDemo2 = "$imagePath/snapedit_enhance_demo_2.jpeg";
+  final String snapEditEnhanceDemo3 = "$imagePath/snapedit_enhance_demo_3.jpeg";
+
+  final String restyleDemo1 = "$imagePath/restyle_demo_1.jpeg";
+  final String restyleDemo2 = "$imagePath/restyle_demo_2.jpeg";
+  final String restyleDemo3 = "$imagePath/restyle_demo_3.jpeg";
+
   /// Icons
   static const String iconPath = 'assets/images/icons';
 

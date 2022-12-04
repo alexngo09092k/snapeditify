@@ -13,8 +13,9 @@ extension AppRoutesUtils on IAppRoutes {
     Navigator.of(context).pushNamed(AppRoutes.applyArtEffectPage);
   }
 
-  goAllPhotos(BuildContext context, AllPhotosParam param) {
-    Navigator.of(context).pushNamed(AppRoutes.allPhotosPage, arguments: param);
+  goAllPhotos(BuildContext context, PhotosFor photosFor) {
+    ManagerProvider.of<PhotoProvider>().photosFor = photosFor;
+    Navigator.of(context).pushNamed(AppRoutes.allPhotosPage);
   }
 
   goActivePro(BuildContext context) {
