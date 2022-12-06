@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -7,8 +5,6 @@ import 'package:snapedit/pages/gallery/widgets/album_photo.dart';
 import 'package:snapedit/pages/gallery/widgets/album_title.dart';
 import 'package:snapedit/pages/gallery/widgets/try_suggested_images.dart';
 import 'package:snapedit/providers/gallery_provider.dart';
-import 'package:snapedit/services/services.dart';
-import 'package:snapedit/utils/image_convert.dart';
 import 'package:snapedit/widgets/app_layout.dart';
 import 'package:snapedit/widgets/load_more/multiple_sliver_load_more.dart';
 import 'package:snapedit/widgets/load_more/source_list.dart';
@@ -29,12 +25,9 @@ class _GalleryPageState extends ProviderState<GalleryPage, GalleryProvider> {
     initial().then((value) => setState(() {}));
   }
 
-  onPhoto(String? photo, PhotosType type) {
+  onPhoto(String? photo, PhotosType type) async {
     if (photo != null) {
       Debug.log(photo);
-      // AppRoutes.instance.goEditPhotoPage(context, type: type, photo: photo);
-
-      Services.instance.snapEdit.enhance(EnhanceBody(inputImage: ImageConvert.pngToJpeg(File(photo)), zoomFactor: "2"));
     }
   }
 

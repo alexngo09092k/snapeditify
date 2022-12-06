@@ -9,7 +9,7 @@ class EraseBody {
   final File? maskBrush;
   final File? maskBase;
 
-  final Map? maskObjects; // json
+  final String? maskObjects; // json
 
   EraseBody({
     this.originalPreviewImage,

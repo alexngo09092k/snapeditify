@@ -2,7 +2,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
 
 extension DetectedImage on SnapEdit {
-  Future<SnapEditResponse<AIDetectionResponse?>> detectionImage(AIDetectionBody body) async {
+  Future<SnapEditResponse<AIDetectionResponse?>> detection(AIDetectionBody body) async {
     final List<MultipartBody> files = [];
     final Map<String, dynamic> data = {};
 
@@ -23,7 +23,7 @@ extension DetectedImage on SnapEdit {
     return handleResponse<AIDetectionResponse>(response, (p0) => AIDetectionResponse.fromMap(p0));
   }
 
-  Future<SnapEditResponse<EraseResponse?>> eraseImage(EraseBody body) async {
+  Future<SnapEditResponse<EraseResponse?>> erase(EraseBody body) async {
     final List<MultipartBody> files = [];
     final Map<String, dynamic> data = {};
 

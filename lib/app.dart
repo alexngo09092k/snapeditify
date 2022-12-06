@@ -27,7 +27,6 @@ class _AppState extends AwesomeAppState<App, ThemeProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox();
     double scale = AwesomeAppState.screen.width < 270 ? 0.65 : (AwesomeAppState.screen.width < 361 ? 0.85 : 1);
     Debug.log("============= SCALE $scale =============");
 
