@@ -1,79 +1,131 @@
 import 'dart:convert';
 
 class EraseResponse {
-  final String newImageBase64;
-  final String sessionId;
-  final String newImageId;
-  final String oldImageId;
-  final String eventId;
+  EditedImage editedImage;
+  String eventId;
+  String sessionId;
 
   EraseResponse({
-    required this.newImageBase64,
-    required this.sessionId,
-    required this.newImageId,
-    required this.oldImageId,
+    required this.editedImage,
     required this.eventId,
+    required this.sessionId,
   });
 
+  factory EraseResponse.defaultValue() {
+    return EraseResponse(
+      editedImage: EditedImage.defaultValue(),
+      eventId: '',
+      sessionId: '',
+    );
+  }
+
   EraseResponse copyWith({
-    String? newImageBase64,
-    String? sessionId,
-    String? newImageId,
-    String? oldImageId,
+    EditedImage? editedImage,
     String? eventId,
+    String? sessionId,
   }) {
     return EraseResponse(
-      newImageBase64: newImageBase64 ?? this.newImageBase64,
-      sessionId: sessionId ?? this.sessionId,
-      newImageId: newImageId ?? this.newImageId,
-      oldImageId: oldImageId ?? this.oldImageId,
+      editedImage: editedImage ?? this.editedImage,
       eventId: eventId ?? this.eventId,
+      sessionId: sessionId ?? this.sessionId,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'new_image_base64': newImageBase64,
-      'session_id': sessionId,
-      'new_image_id': newImageId,
-      'old_image_id': oldImageId,
+    return <String, dynamic>{
+      'edited_image': editedImage.toMap(),
       'event_id': eventId,
+      'session_id': sessionId,
     };
   }
 
   factory EraseResponse.fromMap(Map<String, dynamic> map) {
     return EraseResponse(
-      newImageBase64: map['new_image_base64'] ?? '',
-      sessionId: map['session_id'] ?? '',
-      newImageId: map['new_image_id'] ?? '',
-      oldImageId: map['old_image_id'] ?? '',
-      eventId: map['event_id'] ?? '',
+      editedImage: EditedImage.fromMap(map['edited_image'] as Map<String, dynamic>),
+      eventId: map['event_id'] as String,
+      sessionId: map['session_id'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory EraseResponse.fromJson(String source) => EraseResponse.fromMap(json.decode(source));
+  factory EraseResponse.fromJson(String source) => EraseResponse.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'EraseResponse(newImageBase64: $newImageBase64, sessionId: $sessionId, newImageId: $newImageId, oldImageId: $oldImageId, eventId: $eventId)';
-  }
+  String toString() => 'EraseResponse(editedImage: $editedImage, eventId: $eventId, sessionId: $sessionId)';
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(covariant EraseResponse other) {
     if (identical(this, other)) return true;
 
-    return other is EraseResponse &&
-        other.newImageBase64 == newImageBase64 &&
-        other.sessionId == sessionId &&
-        other.newImageId == newImageId &&
-        other.oldImageId == oldImageId &&
-        other.eventId == eventId;
+    return other.editedImage == editedImage && other.eventId == eventId && other.sessionId == sessionId;
   }
 
   @override
-  int get hashCode {
-    return newImageBase64.hashCode ^ sessionId.hashCode ^ newImageId.hashCode ^ oldImageId.hashCode ^ eventId.hashCode;
+  int get hashCode => editedImage.hashCode ^ eventId.hashCode ^ sessionId.hashCode;
+}
+
+class EditedImage {
+  String image;
+  String imageId;
+  String mask;
+
+  EditedImage({
+    required this.image,
+    required this.imageId,
+    required this.mask,
+  });
+
+  factory EditedImage.defaultValue() {
+    return EditedImage(
+      image: '',
+      imageId: '',
+      mask: '',
+    );
   }
+
+  EditedImage copyWith({
+    String? image,
+    String? imageId,
+    String? mask,
+  }) {
+    return EditedImage(
+      image: image ?? this.image,
+      imageId: imageId ?? this.imageId,
+      mask: mask ?? this.mask,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'image': image,
+      'image_id': imageId,
+      'mask': mask,
+    };
+  }
+
+  factory EditedImage.fromMap(Map<String, dynamic> map) {
+    return EditedImage.defaultValue().copyWith(
+      image: map['image'],
+      imageId: map['image_id'],
+      mask: map['mask'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory EditedImage.fromJson(String source) => EditedImage.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() => 'EditedImage(image: $image, imageId: $imageId, mask: $mask)';
+
+  @override
+  bool operator ==(covariant EditedImage other) {
+    if (identical(this, other)) return true;
+
+    return other.image == image && other.imageId == imageId && other.mask == mask;
+  }
+
+  @override
+  int get hashCode => image.hashCode ^ imageId.hashCode ^ mask.hashCode;
 }

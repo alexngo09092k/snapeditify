@@ -38,36 +38,10 @@ class SnapEditConfig {
       baseUrl: "https://be-prod-1.snapedit.app/",
       apiKey: "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
       version: "",
-      endPoints: EndPoints(
-        erase: "api/v6/erase",
-        erasePro: "api/v6/erase",
-        ai: "api/v6/ai_detection",
-        aiPro: "api/v6/ai_detection",
-        enhance: "api/v2/enhance",
-        enhancePro: "api/v2/pro/enhance",
-        restyle: "api/v1/restyle",
-        restylePro: "api/v1/restyle",
-        styles: "api/v1/restyle/styles",
-        stylesPro: "api/v1/restyle/styles",
-      ),
-      enhance: EnhanceConfig(
-        maxSupportedImageSize: 3000,
-        premiumMaxSupportedImageSize: 3000,
-        premiumUploadImageSize: 1200,
-        standardMaxSupportedImageSize: 1200,
-        standardUploadImageSize: 1200,
-        upscaleMaxImageSize: 1000,
-      ),
-      restyle: RestyleConfig(
-        freeDimension: 1920,
-        premiumDimension: 3000,
-      ),
-      removeObject: RemoveObjectConfig(
-        highDimension: 1920,
-        proDimension: 3000,
-        saveImageLocal: false,
-        standardDimension: 1200,
-      ),
+      endPoints: EndPoints.defaultValue(),
+      enhance: EnhanceConfig.defaultValue(),
+      restyle: RestyleConfig.defaultValue(),
+      removeObject: RemoveObjectConfig.defaultValue(),
     );
   }
 
@@ -103,14 +77,14 @@ class SnapEditConfig {
   }
 
   factory SnapEditConfig.fromMap(Map<String, dynamic> map) {
-    return SnapEditConfig(
-      baseUrl: map['baseUrl'] as String,
-      apiKey: map['apiKey'] as String,
-      version: map['version'] as String,
-      endPoints: EndPoints.fromMap((map['endPoints'] ?? {}) as Map<String, dynamic>),
-      enhance: EnhanceConfig.fromMap((map['enhance'] ?? {}) as Map<String, dynamic>),
-      restyle: RestyleConfig.fromMap((map['restyle'] ?? {}) as Map<String, dynamic>),
-      removeObject: RemoveObjectConfig.fromMap((map['removeObject'] ?? {}) as Map<String, dynamic>),
+    return SnapEditConfig.defaultValue().copyWith(
+      baseUrl: map['baseUrl'],
+      apiKey: map['apiKey'],
+      version: map['version'],
+      endPoints: EndPoints.fromMap(map['endPoints'] ?? {}),
+      enhance: EnhanceConfig.fromMap(map['enhance'] ?? {}),
+      restyle: RestyleConfig.fromMap(map['restyle'] ?? {}),
+      removeObject: RemoveObjectConfig.fromMap(map['removeObject'] ?? {}),
     );
   }
 
@@ -153,6 +127,6 @@ extension JWTBuilders on SnapEditConfig {
   String get jwt => _buildJWT();
 
   String _buildJWT() {
-    return "";
+    return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoiMy4xLjAiLCJleHAiOjE3Njk2MjI0MDEsInN1YiI6Imlnbm9yZSIsInBsYXRmb3JtIjoiYW5kcm9pZCJ9.OufJuEzKvN2RVCw-Ofy1oY6d9oRuOnM_Vxmt6aqLWAk";
   }
 }

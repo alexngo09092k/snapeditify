@@ -21,6 +21,15 @@ class RemoveObjectConfig {
     required this.standardDimension,
   });
 
+  factory RemoveObjectConfig.defaultValue() {
+    return RemoveObjectConfig(
+      highDimension: 1920,
+      proDimension: 3000,
+      saveImageLocal: false,
+      standardDimension: 1200,
+    );
+  }
+
   RemoveObjectConfig copyWith({
     int? highDimension,
     int? proDimension,
@@ -45,11 +54,11 @@ class RemoveObjectConfig {
   }
 
   factory RemoveObjectConfig.fromMap(Map<String, dynamic> map) {
-    return RemoveObjectConfig(
-      highDimension: map['highDimension'] as int,
-      proDimension: map['proDimension'] as int,
-      saveImageLocal: map['saveImageLocal'] as bool,
-      standardDimension: map['standardDimension'] as int,
+    return RemoveObjectConfig.defaultValue().copyWith(
+      highDimension: map['highDimension'],
+      proDimension: map['proDimension'],
+      saveImageLocal: map['saveImageLocal'],
+      standardDimension: map['standardDimension'],
     );
   }
 

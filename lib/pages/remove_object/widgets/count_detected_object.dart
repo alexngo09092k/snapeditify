@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
 
 class CountDetectedObject extends StatelessWidget {
   CountDetectedObject({
@@ -49,7 +49,7 @@ class CountDetectedObject extends StatelessWidget {
                     gradient: AppColors.instance.gradient,
                   ),
                   child: Center(
-                    child: PropConsumer<EditProvider, int>(
+                    child: PropConsumer<RemoveObjectProvider, int>(
                       select: (p) => p.state.detectedObjects.values.length,
                       builder: (_, __, p, ___) => Text(
                         '${p.state.detectedObjects.values.length}',

@@ -7,6 +7,7 @@ class AppLayout extends StatelessWidget {
     this.screen,
     this.children = const [],
     this.leading,
+    this.center,
     this.action,
     this.back = false,
     this.appBar = false,
@@ -22,6 +23,7 @@ class AppLayout extends StatelessWidget {
   final bool appBar;
   final List<Widget> children;
   final Widget? leading;
+  final Widget? center;
   final Widget? action;
   final Widget? end;
   final bool back;
@@ -45,7 +47,11 @@ class AppLayout extends StatelessWidget {
             if (appBar || back)
               _AppBar(
                 back: back,
-                screen: screen,
+                center: center ??
+                    Text(
+                      screen ?? "",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
                 action: action,
                 leading: leading,
                 onBack: onBack,
@@ -69,11 +75,11 @@ class AppLayout extends StatelessWidget {
 }
 
 class _AppBar extends StatelessWidget {
-  const _AppBar({this.back = false, this.screen, this.action, this.leading, this.onBack});
+  const _AppBar({this.back = false, this.center, this.action, this.leading, this.onBack});
   final bool back;
   final Widget? leading;
   final Widget? action;
-  final String? screen;
+  final Widget? center;
   final void Function()? onBack;
 
   void _canBack(BuildContext context) {
@@ -92,6 +98,7 @@ class _AppBar extends StatelessWidget {
         children: [
           Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 back
                     ? GestureDetector(
@@ -114,18 +121,14 @@ class _AppBar extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: screen != null
-                ? Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      screen!,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600),
-                    ),
-                  )
-                : const SizedBox(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [center != null ? center! : const SizedBox()],
+            ),
           ),
           Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [action ?? const SizedBox()],
             ),
           )

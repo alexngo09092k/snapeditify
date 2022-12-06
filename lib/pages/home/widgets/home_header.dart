@@ -21,7 +21,7 @@ class HomeHeader extends StatelessWidget {
           Row(
             children: [
               GestureDetector(
-                onTap: () => AppRoutes.instance.goActivePro(context),
+                onTap: () => AppRoutes.instance.goPremiumProPage(context),
                 child: Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: AppDimensions.instance.paddingX(0.5), //// padding small
@@ -46,7 +46,7 @@ class HomeHeader extends StatelessWidget {
               ),
               SizedBox(width: AppDimensions.instance.padding),
               GestureDetector(
-                onTap: () => AppRoutes.instance.goSetting(context),
+                onTap: () => AppRoutes.instance.goSettingPage(context),
                 child: Image.asset(AppAssets.instance.icMenu, width: AppDimensions.instance.iconX(1)),
               )
             ],

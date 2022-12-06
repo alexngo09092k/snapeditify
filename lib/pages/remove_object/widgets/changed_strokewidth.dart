@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
 import 'package:snapedit/common/constants.dart';
 
 class ChangedStrokeWidth extends StatelessWidget {
   const ChangedStrokeWidth({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => PropConsumer<EditProvider, bool>(
+  Widget build(BuildContext context) => PropConsumer<RemoveObjectProvider, bool>(
         select: (p) => p.state.changedStrokeWidth,
         builder: (_, __, p, ___) => p.state.changedStrokeWidth
             ? AwesomeAnimation<double>.tweenSequence(
@@ -15,7 +15,7 @@ class ChangedStrokeWidth extends StatelessWidget {
                 items: [TweenSequenceItem(tween: Tween(begin: 0, end: 1), weight: 1)],
                 builder: (_, __, animation, ___) => Opacity(
                   opacity: animation.value,
-                  child: PropConsumer<EditProvider, double>(
+                  child: PropConsumer<RemoveObjectProvider, double>(
                     select: (p) => p.strokeWidth,
                     builder: (_, __, ___, ____) => Container(
                       width: p.strokeWidth,

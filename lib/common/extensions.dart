@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'dart:ui' as ui;
 import 'package:snapedit/models/config/app_config.dart';
-import 'package:snapedit/providers/photo_provider.dart';
+import 'package:snapedit/providers/gallery_provider.dart';
 import 'package:snapedit/widgets/widget.utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-part 'extensions/ex_image.dart';
+part 'extensions/ex_ui_image.dart';
 part 'extensions/ex_list.dart';
 part 'extensions/ex_permission.dart';
 part 'extensions/ex_http.dart';

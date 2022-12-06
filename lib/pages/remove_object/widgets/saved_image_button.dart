@@ -4,8 +4,8 @@ import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/pages/remove_object/widgets/saved_image_view.dart';
 import 'package:snapedit/common/extensions.dart';
-import 'package:snapedit/providers/edit_provider/edit_provider.dart';
-import 'package:snapedit/providers/edit_provider/painter_state.dart';
+import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
+import 'package:snapedit/providers/remove_object_provider/painter_state.dart';
 
 class SavedImageButton extends StatelessWidget {
   const SavedImageButton({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class SavedImageButton extends StatelessWidget {
     UserPermission.instance.requestStoragePermission(
       context: context,
       onHasPermisson: () {
-        EditProvider p = ManagerProvider.of<EditProvider>();
+        RemoveObjectProvider p = ManagerProvider.of<RemoveObjectProvider>();
         p.saveImage((savedImagePath, originalImageBase64) {
           showModalBottomSheet(
             context: context,
@@ -37,7 +37,7 @@ class SavedImageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PropConsumer<EditProvider, PainterState?>(
+    return PropConsumer<RemoveObjectProvider, PainterState?>(
       select: (p) => p.state.prevState,
       builder: (_, __, p, ___) => TextButton(
         onPressed: p.state.prevState != null ? () => saveAndShowImage(context) : null,

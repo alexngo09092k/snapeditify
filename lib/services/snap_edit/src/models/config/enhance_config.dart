@@ -29,6 +29,17 @@ class EnhanceConfig {
     required this.upscaleMaxImageSize,
   });
 
+  factory EnhanceConfig.defaultValue() {
+    return EnhanceConfig(
+      maxSupportedImageSize: 3000,
+      premiumMaxSupportedImageSize: 3000,
+      premiumUploadImageSize: 1200,
+      standardMaxSupportedImageSize: 1200,
+      standardUploadImageSize: 1200,
+      upscaleMaxImageSize: 1000,
+    );
+  }
+
   EnhanceConfig copyWith({
     int? maxSupportedImageSize,
     int? premiumMaxSupportedImageSize,
@@ -59,13 +70,13 @@ class EnhanceConfig {
   }
 
   factory EnhanceConfig.fromMap(Map<String, dynamic> map) {
-    return EnhanceConfig(
-      maxSupportedImageSize: map['maxSupportedImageSize'] as int,
-      premiumMaxSupportedImageSize: map['premiumMaxSupportedImageSize'] as int,
-      premiumUploadImageSize: map['premiumUploadImageSize'] as int,
-      standardMaxSupportedImageSize: map['standardMaxSupportedImageSize'] as int,
-      standardUploadImageSize: map['standardUploadImageSize'] as int,
-      upscaleMaxImageSize: map['upscaleMaxImageSize'] as int,
+    return EnhanceConfig.defaultValue().copyWith(
+      maxSupportedImageSize: map['maxSupportedImageSize'],
+      premiumMaxSupportedImageSize: map['premiumMaxSupportedImageSize'],
+      premiumUploadImageSize: map['premiumUploadImageSize'],
+      standardMaxSupportedImageSize: map['standardMaxSupportedImageSize'],
+      standardUploadImageSize: map['standardUploadImageSize'],
+      upscaleMaxImageSize: map['upscaleMaxImageSize'],
     );
   }
 

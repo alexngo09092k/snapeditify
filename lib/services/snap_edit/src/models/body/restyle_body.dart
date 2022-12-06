@@ -2,11 +2,13 @@
 import 'dart:io';
 
 class RestyleBody {
-  File inputImage;
+  File? inputImage;
+  String? imageId;
   String styleId;
 
   RestyleBody({
-    required this.inputImage,
+    this.imageId,
+    this.inputImage,
     required this.styleId,
   });
 }

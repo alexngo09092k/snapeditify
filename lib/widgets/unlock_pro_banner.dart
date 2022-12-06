@@ -9,7 +9,7 @@ class UnlockProBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => AppRoutes.instance.goActivePro(context),
+      onTap: () => AppRoutes.instance.goPremiumProPage(context),
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [

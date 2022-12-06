@@ -11,7 +11,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
 import 'package:snapedit/widgets/ad_view.dart';
 import 'package:snapedit/widgets/custom_button.dart';
 import 'dart:ui' as ui;
@@ -55,7 +55,7 @@ class SavedImageView extends StatelessWidget {
   }
 
   void showMenu(context) {
-    EditProvider p = ManagerProvider.of<EditProvider>();
+    RemoveObjectProvider p = ManagerProvider.of<RemoveObjectProvider>();
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoTheme(
@@ -183,7 +183,7 @@ class SavedImageView extends StatelessWidget {
                     //   opacity: 0.3,
                     // ),
                   ),
-                  child: PropConsumer<EditProvider, ui.Image?>(
+                  child: PropConsumer<RemoveObjectProvider, ui.Image?>(
                     select: (p) => p.state.image,
                     builder: (_, __, p, ___) => p.state.image != null
                         ? Center(

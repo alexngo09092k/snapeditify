@@ -1,4 +1,3 @@
-export 'detected_image.dart';
-export 'enhance_image.dart';
-export 'erase_image.dart';
+export 'remove_object.dart';
+export 'enhance.dart';
 export 'restyle.dart';

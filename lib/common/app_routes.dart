@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:snapedit/pages/active_pro/active_pro.dart';
 import 'package:snapedit/pages/apply_art_effect/apply_art_effect.dart';
-import 'package:snapedit/pages/enhance_image/enhance_image.dart';
-import 'package:snapedit/pages/photo_gallery/photo_gallery.dart';
+import 'package:snapedit/pages/enhance/enhance.dart';
+import 'package:snapedit/pages/gallery/gallery.dart';
 import 'package:snapedit/pages/remove_object/remove_object.dart';
 import 'package:snapedit/pages/home/home_page.dart';
 import 'package:snapedit/pages/maintenance/maintenance_page.dart';
@@ -30,11 +30,11 @@ class AppRoutes extends IAppRoutes {
   static const String maintenancePage = 'maintenance_page';
   static const String homePage = 'home_page';
   static const String removeObjectPage = 'remove_object_page';
-  static const String enhanceImagePage = 'enahnce_image_page';
+  static const String enhanceImagePage = 'enahnce_page';
   static const String settingPage = 'setting_page';
   static const String activeProPage = 'active_pro_page';
   static const String applyArtEffectPage = 'apply_art_effect_page';
-  static const String photoGalleryPage = 'all_photos_page';
+  static const String galleryPage = 'gallery_page';
 
   @override
   String get initialRoute => splashPage;
@@ -45,11 +45,11 @@ class AppRoutes extends IAppRoutes {
     maintenancePage: (context) => const HomePage(),
     homePage: (context) => const HomePage(),
     removeObjectPage: (context) => const RemoveObjectPage(),
-    enhanceImagePage: (context) => const EnhanceImagePage(),
+    enhanceImagePage: (context) => const EnhancePage(),
     settingPage: (context) => const SettingPage(),
     activeProPage: (context) => const ActiveProPage(),
     applyArtEffectPage: (context) => const ApplyArtEffectPage(),
-    photoGalleryPage: (context) => const PhotoGalleryPage(),
+    galleryPage: (context) => const GalleryPage(),
   };
 
   @override
@@ -64,15 +64,15 @@ class AppRoutes extends IAppRoutes {
       case removeObjectPage:
         return buildRoute(const RemoveObjectPage(), settings);
       case enhanceImagePage:
-        return buildRoute(const EnhanceImagePage(), settings);
+        return buildRoute(const EnhancePage(), settings);
       case settingPage:
         return buildRoute(const SettingPage(), settings);
       case activeProPage:
         return buildRoute(const ActiveProPage(), settings);
       case applyArtEffectPage:
         return buildRoute(const ApplyArtEffectPage(), settings);
-      case photoGalleryPage:
-        return buildRoute(const PhotoGalleryPage(), settings);
+      case galleryPage:
+        return buildRoute(const GalleryPage(), settings);
       default:
         throw ErrorDescription("Not found page");
     }

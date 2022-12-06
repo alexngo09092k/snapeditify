@@ -35,6 +35,21 @@ class EndPoints {
     required this.stylesPro,
   });
 
+  factory EndPoints.defaultValue() {
+    return EndPoints(
+      erase: "api/v6/erase",
+      erasePro: "api/v6/erase",
+      ai: "api/v6/ai_detection",
+      aiPro: "api/v6/ai_detection",
+      enhance: "api/v2/enhance",
+      enhancePro: "api/v2/pro/enhance",
+      restyle: "api/v1/restyle",
+      restylePro: "api/v1/restyle",
+      styles: "api/v1/restyle/styles",
+      stylesPro: "api/v1/restyle/styles",
+    );
+  }
+
   EndPoints copyWith({
     String? erase,
     String? erasePro,
@@ -77,17 +92,17 @@ class EndPoints {
   }
 
   factory EndPoints.fromMap(Map<String, dynamic> map) {
-    return EndPoints(
-      erase: map['erase'] as String,
-      erasePro: map['erasePro'] as String,
-      ai: map['ai'] as String,
-      aiPro: map['aiPro'] as String,
-      enhance: map['enhance'] as String,
-      enhancePro: map['enhancePro'] as String,
-      restyle: map['restyle'] as String,
-      restylePro: map['restylePro'] as String,
-      styles: map['styles'] as String,
-      stylesPro: map['stylesPro'] as String,
+    return EndPoints.defaultValue().copyWith(
+      erase: map['erase'],
+      erasePro: map['erasePro'],
+      ai: map['ai'],
+      aiPro: map['aiPro'],
+      enhance: map['enhance'],
+      enhancePro: map['enhancePro'],
+      restyle: map['restyle'],
+      restylePro: map['restylePro'],
+      styles: map['styles'],
+      stylesPro: map['stylesPro'],
     );
   }
 

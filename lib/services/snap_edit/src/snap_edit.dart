@@ -16,15 +16,21 @@ class SnapEdit {
 }
 
 extension SnapEditResponseEx on SnapEdit {
-  SnapEditResponse<T> handleResponse<T>(ClientResponse response, T Function(Map<String, dynamic>) fromData) {
+  SnapEditResponse<T> handleResponse<T>(ClientResponse response, T Function(dynamic) fromData) {
+    Debug.log("======= HANDLE RESPONSE DATA ${response.data} =======");
     if (response.error != null || response.data == null) {
+      Debug.log("======= HANDLE RESPONSE ERROR ${response.error} =======");
       return SnapEditResponse(error: response.error);
     }
+    // {"msg":"Bad Authorization header. Expected 'Authorization: Bearer <JWT>'"}
+    if (response.data['msg'] != null) {
+      Debug.log("======= HANDLE RESPONSE ERROR ${response.data['msg']} =======");
+      return SnapEditResponse(error: response.data['msg']);
+    }
+    // {"error":"Exception: Image shape (1520, 720, 3) too large for free users"}
     if (response.data['error'] != null) {
-      return SnapEditResponse(
-        error: response.data['error'],
-        message: response.data['message'],
-      );
+      Debug.log("======= HANDLE RESPONSE ERROR ${response.data['error']} =======");
+      return SnapEditResponse(error: response.data['error']);
     }
     return SnapEditResponse(data: fromData(response.data));
   }

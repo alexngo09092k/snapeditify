@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
 
 class StrokeWidthSlider extends StatelessWidget {
   const StrokeWidthSlider({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class StrokeWidthSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        PropConsumer<EditProvider, bool>(
+        PropConsumer<RemoveObjectProvider, bool>(
           select: (p) => p.isDraw,
           builder: (_, __, p, ___) => IconButton(
             onPressed: p.toDraw,
@@ -21,7 +21,7 @@ class StrokeWidthSlider extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: PropConsumer<EditProvider, double>(
+          child: PropConsumer<RemoveObjectProvider, double>(
             select: (p) => p.strokeWidth,
             builder: (_, __, p, ___) => Slider(
               min: 1,
@@ -35,7 +35,7 @@ class StrokeWidthSlider extends StatelessWidget {
             ),
           ),
         ),
-        PropConsumer<EditProvider, bool>(
+        PropConsumer<RemoveObjectProvider, bool>(
           select: (p) => p.isErase,
           builder: (_, __, p, ___) => IconButton(
             onPressed: p.toErase,

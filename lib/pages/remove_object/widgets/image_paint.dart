@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
 import 'package:snapedit/widgets/painter/painter_pure.dart';
 import 'package:snapedit/pages/remove_object/widgets/changed_strokewidth.dart';
 import 'package:snapedit/widgets/custom_button.dart';
@@ -16,7 +16,7 @@ class ImagePaint extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height * 1.7 / 3;
     final double width = MediaQuery.of(context).size.width - AppDimensions.instance.padding * 2;
     const double iconSize = 40;
-    final p = ManagerProvider.of<EditProvider>();
+    final p = ManagerProvider.of<RemoveObjectProvider>();
     return SizedBox(
       width: width,
       height: height + 25,
@@ -39,7 +39,7 @@ class ImagePaint extends StatelessWidget {
             top: height - iconSize - AppDimensions.instance.paddingSizeExtraSmall,
             child: IconButton(
               onPressed: p.undo,
-              icon: PropConsumer<EditProvider, bool>(
+              icon: PropConsumer<RemoveObjectProvider, bool>(
                 select: (p) => p.canUndo,
                 builder: (_, __, p, ___) => Image.asset(
                   p.canUndo ? AppAssets.instance.icUndoNormalNormal3x : AppAssets.instance.icUndoDisabledNormal3x,
@@ -53,7 +53,7 @@ class ImagePaint extends StatelessWidget {
             top: height - iconSize - AppDimensions.instance.paddingSizeExtraSmall,
             child: IconButton(
               onPressed: p.redo,
-              icon: PropConsumer<EditProvider, bool>(
+              icon: PropConsumer<RemoveObjectProvider, bool>(
                 select: (p) => p.canRedo,
                 builder: (_, __, p, ___) => Image.asset(
                   p.canRedo ? AppAssets.instance.icRedoNormalNormal3x : AppAssets.instance.icRedoDisabledNormal3x,
@@ -65,7 +65,7 @@ class ImagePaint extends StatelessWidget {
           Positioned(
             left: (width - 150) / 2,
             top: height - 25,
-            child: PropConsumer<EditProvider, bool>(
+            child: PropConsumer<RemoveObjectProvider, bool>(
               select: (p) => p.canRemove,
               builder: (_, __, p, ___) => p.canRemove
                   ? CustomCard(
@@ -117,7 +117,7 @@ class MainImagePaint extends StatelessWidget {
     return SizedBox(
       height: height,
       width: width,
-      child: Consumer<EditProvider>(
+      child: Consumer<RemoveObjectProvider>(
         builder: (_, __, p) => p.state.image != null
             ? Center(
                 child: AspectRatio(

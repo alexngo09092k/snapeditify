@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/common/extensions.dart';
-import 'package:snapedit/providers/photo_provider.dart';
+import 'package:snapedit/providers/gallery_provider.dart';
 
 class HomeOptions extends StatelessWidget {
   const HomeOptions({super.key});
@@ -23,17 +23,17 @@ class HomeOptions extends StatelessWidget {
             _Option(
               title: 'Remover',
               icon: AppAssets.instance.icRemoveObject,
-              onTap: (_) => AppRoutes.instance.goAllPhotos(context, PhotosFor.removeObject),
+              onTap: (_) => AppRoutes.instance.goGalleryPage(context, PhotosFor.removeObject),
             ),
             _Option(
               title: 'Enhance',
               icon: AppAssets.instance.icEnhence,
-              onTap: (_) => AppRoutes.instance.goAllPhotos(context, PhotosFor.enhanceImage),
+              onTap: (_) => AppRoutes.instance.goGalleryPage(context, PhotosFor.enhanceImage),
             ),
             _Option(
               title: 'Art Effect',
               icon: AppAssets.instance.icArtEffect,
-              onTap: (_) => AppRoutes.instance.goAllPhotos(context, PhotosFor.applyArtEffect),
+              onTap: (_) => AppRoutes.instance.goGalleryPage(context, PhotosFor.applyArtEffect),
             ),
           ],
         ),

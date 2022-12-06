@@ -62,9 +62,9 @@ class GalleryConfig {
       needTitle: false,
       startTime: DateTime(2005), // Default Before 8 years
       endTime: DateTime.now(),
-      containsLivePhotos: false,
+      containsLivePhotos: true,
       containsPathModified: false,
-      onlyLivePhotos: true,
+      onlyLivePhotos: false,
     );
   }
 

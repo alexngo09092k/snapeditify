@@ -383,10 +383,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "73979abf01a5a7f879ebee125538dda4df6d381e"
+      resolved-ref: "4842ce61e86e37ae650d7c6bd1b20a1e7d6af2ba"
       url: "git@github.com:brennan992k/fluttering.git"
     source: git
-    version: "1.0.1"
+    version: "1.0.2"
   fluttering_ads:
     dependency: "direct main"
     description:
@@ -592,6 +592,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  mime_type:
+    dependency: transitive
+    description:
+      name: mime_type
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   native_flutter_proxy:
     dependency: transitive
     description:
@@ -862,7 +869,7 @@ packages:
       name: sqflite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.1"
+    version: "2.2.2"
   sqflite_common:
     dependency: transitive
     description:

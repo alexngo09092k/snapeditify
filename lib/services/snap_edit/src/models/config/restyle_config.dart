@@ -13,6 +13,13 @@ class RestyleConfig {
     required this.premiumDimension,
   });
 
+  factory RestyleConfig.defaultValue() {
+    return RestyleConfig(
+      freeDimension: 1920,
+      premiumDimension: 3000,
+    );
+  }
+
   RestyleConfig copyWith({
     int? freeDimension,
     int? premiumDimension,
@@ -31,9 +38,9 @@ class RestyleConfig {
   }
 
   factory RestyleConfig.fromMap(Map<String, dynamic> map) {
-    return RestyleConfig(
-      freeDimension: map['freeDimension'] as int,
-      premiumDimension: map['premiumDimension'] as int,
+    return RestyleConfig.defaultValue().copyWith(
+      freeDimension: map['freeDimension'],
+      premiumDimension: map['premiumDimension'],
     );
   }
 

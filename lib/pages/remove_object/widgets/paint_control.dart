@@ -6,7 +6,7 @@ import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/pages/remove_object/widgets/count_detected_object.dart';
 import 'package:snapedit/pages/remove_object/widgets/detail_detected_object.dart';
 import 'package:snapedit/pages/remove_object/widgets/stroke_width_slider.dart';
-import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
 import 'package:snapedit/widgets/ai_icon.dart';
 
 class PaintControl extends StatefulWidget {
@@ -18,7 +18,7 @@ class PaintControl extends StatefulWidget {
   State<PaintControl> createState() => PaintControlState();
 }
 
-class PaintControlState extends ProviderState<PaintControl, EditProvider> {
+class PaintControlState extends ProviderState<PaintControl, RemoveObjectProvider> {
   bool _showDetail = false;
 
   _toAI() {
@@ -50,7 +50,7 @@ class PaintControlState extends ProviderState<PaintControl, EditProvider> {
           if (!_showDetail) ...[
             Container(
               padding: EdgeInsets.all(AppDimensions.instance.padding),
-              child: PropConsumer<EditProvider, bool>(
+              child: PropConsumer<RemoveObjectProvider, bool>(
                 select: (p) => p.isAI,
                 builder: (_, __, p, ___) => p.isAI
                     ? CountDetectedObject(
@@ -66,7 +66,7 @@ class PaintControlState extends ProviderState<PaintControl, EditProvider> {
                 children: [
                   InkWell(
                     onTap: _toAI,
-                    child: PropConsumer<EditProvider, bool>(
+                    child: PropConsumer<RemoveObjectProvider, bool>(
                       select: (p) => p.isAI,
                       builder: (_, __, p, ___) => Column(
                         children: [
@@ -92,7 +92,7 @@ class PaintControlState extends ProviderState<PaintControl, EditProvider> {
                   ),
                   InkWell(
                     onTap: provider.toDraw,
-                    child: PropConsumer<EditProvider, bool>(
+                    child: PropConsumer<RemoveObjectProvider, bool>(
                         select: (p) => p.isDraw,
                         builder: (_, __, p, ___) => Column(
                               children: [

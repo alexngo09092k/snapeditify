@@ -10,18 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:snapedit/providers/edit_provider/painter_state.dart';
+import 'package:snapedit/providers/remove_object_provider/painter_state.dart';
 import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/services/services.dart';
 import 'package:snapedit/pages/remove_object/widgets/paint_control.dart';
-import 'package:snapedit/services/snap_edit/snap_edit.dart';
 import 'package:snapedit/utils/image_convert.dart';
 import 'package:snapedit/utils/image_pick.dart';
 import 'package:snapedit/widgets/loading_popup.dart';
 import 'package:snapedit/widgets/painter/painter.dart';
 import 'package:snapedit/widgets/widget.utils.dart';
 
-abstract class IEditProvider extends Provider {
+abstract class IRemoveObjectProvider extends Provider {
   Future<void> setImage(String imagePath);
   String get imagePath;
   GlobalKey<PaintControlState> get painterControlKey;
@@ -72,8 +71,8 @@ abstract class IEditProvider extends Provider {
   refresh();
 }
 
-class EditProvider extends IEditProvider {
-  EditProvider() {
+class RemoveObjectProvider extends IRemoveObjectProvider {
+  RemoveObjectProvider() {
     _painterControlKey = GlobalKey<PaintControlState>();
     _state.addListener((event) {
       Debug.log('from edit controller $event');
@@ -127,7 +126,8 @@ class EditProvider extends IEditProvider {
   @override
   double get strokeWidth => _state.strokeWidth;
   @override
-  Map<int, DetectedObject> get detectedObjects => _state.detectedObjects;
+  Map<int, DetectedObject> get detectedObjects => {};
+  //  _state.detectedObjects
 
   @override
   bool get isDraw => _state.freeStyleMode == FreeStyleMode.draw;
@@ -187,18 +187,18 @@ class EditProvider extends IEditProvider {
     }
 
     _state.toNone();
-    SnapEditResponse<AIDetectionResponse?> response = await Services.instance.snapEdit.detectionImage(
-      AIDetectionBody(originalImageBase64: _state.originalImageBase64!),
-    );
+    // SnapEditResponse<AIDetectionResponse?> response = await Services.instance.snapEdit.detectionImage(
+    //   AIDetectionBody(originalImageBase64: _state.originalImageBase64!),
+    // );
 
-    if (response.data == null) {
-      Navigator.pop(context);
-      // showSnackBar(context, type: SnackBarType.error, message: S.of(context).aiMessageFailure);
-      return;
-    }
+    // if (response.data == null) {
+    //   Navigator.pop(context);
+    //   // showSnackBar(context, type: SnackBarType.error, message: S.of(context).aiMessageFailure);
+    //   return;
+    // }
 
-    await _state.setDetectedObjects(response.data!.detectedObjects);
-    await _state.addAllBoxDetectedMask();
+    // await _state.setDetectedObjects(response.data!.detectedObjects);
+    // await _state.addAllBoxDetectedMask();
 
     Navigator.pop(context);
   }
@@ -222,51 +222,51 @@ class EditProvider extends IEditProvider {
 
     ui.Image mask = await _state.generateMask();
 
-    SnapEditResponse<EraseResponse?> response = await Services.instance.snapEdit.eraseImage(
-      EraseBody(
-        originalImageBase64: _state.originalImageBase64 ?? ImageConvert.imagePathToBase64(imagePath), // image will remove
-        maskBase64: await ImageConvert.imageToBase64(mask),
-      ),
-    );
+    // SnapEditResponse<EraseResponse?> response = await Services.instance.snapEdit.eraseImage(
+    //   EraseBody(
+    //     originalImageBase64: _state.originalImageBase64 ?? ImageConvert.imagePathToBase64(imagePath), // image will remove
+    //     maskBase64: await ImageConvert.imageToBase64(mask),
+    //   ),
+    // );
 
-    if (response.data == null) {
-      Navigator.pop(context);
-      // showSnackBar(context, type: SnackBarType.error, message: S.of(context).removeMessageFailure);
-      return;
-    }
+    // if (response.data == null) {
+    //   Navigator.pop(context);
+    //   // showSnackBar(context, type: SnackBarType.error, message: S.of(context).removeMessageFailure);
+    //   return;
+    // }
 
-    ui.Image newImage = await ImageConvert.base64ToImage(response.data!.newImageBase64);
+    // ui.Image newImage = await ImageConvert.base64ToImage(response.data!.newImageBase64);
 
-    Map<int, DetectedObject> updatedDetectedObject = _state.detectedObjects.map((maskId, detetedObject) {
-      if (detetedObject.isSelected) {
-        // painterController.removeDrawable(detetedObject.maskDrawable!, saveAction: false);
-        painterController.removeDrawable(
-          detetedObject.boxDrawble!,
-          saveAction: false,
-        );
-        return MapEntry(maskId, detetedObject.copyWith(isRemoved: true));
-      }
-      return MapEntry(maskId, detetedObject);
-    });
+    // Map<int, DetectedObject> updatedDetectedObject = _state.detectedObjects.map((maskId, detetedObject) {
+    //   if (detetedObject.isSelected) {
+    //     // painterController.removeDrawable(detetedObject.maskDrawable!, saveAction: false);
+    //     painterController.removeDrawable(
+    //       detetedObject.boxDrawble!,
+    //       saveAction: false,
+    //     );
+    //     return MapEntry(maskId, detetedObject.copyWith(isRemoved: true));
+    //   }
+    //   return MapEntry(maskId, detetedObject);
+    // });
 
-    _state = _state.withPrevNextState(
-      image: newImage,
-      originalImageBase64: response.data!.newImageBase64,
-      mode: _state.freeStyleMode,
-      drawables: [],
-      canUndo: false,
-    );
+    // _state = _state.withPrevNextState(
+    //   image: newImage,
+    //   originalImageBase64: response.data!.newImageBase64,
+    //   mode: _state.freeStyleMode,
+    //   drawables: [],
+    //   canUndo: false,
+    // );
 
-    await _state.updateDetectedObject(updatedDetectedObject);
+    // await _state.updateDetectedObject(updatedDetectedObject);
 
-    _state.addListener((event) {
-      Debug.log('from edit controller $event');
-      notifyListeners();
-    });
+    // _state.addListener((event) {
+    //   Debug.log('from edit controller $event');
+    //   notifyListeners();
+    // });
 
-    await _state.addAllBoxDetectedMask();
+    // await _state.addAllBoxDetectedMask();
 
-    Navigator.pop(context);
+    // Navigator.pop(context);
   }
 
   @override

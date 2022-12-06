@@ -5,7 +5,7 @@ import 'package:snapedit/pages/remove_object/widgets/image_paint.dart';
 import 'package:snapedit/pages/remove_object/widgets/paint_control.dart';
 import 'package:snapedit/pages/remove_object/widgets/revert_popup.dart';
 import 'package:snapedit/pages/remove_object/widgets/saved_image_button.dart';
-import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
 import 'package:snapedit/common/extensions.dart';
 
 class RemoveObjectPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class RemoveObjectPage extends StatefulWidget {
   State<RemoveObjectPage> createState() => _RemoveObjectPageState();
 }
 
-class _RemoveObjectPageState extends ProviderState<RemoveObjectPage, EditProvider> {
+class _RemoveObjectPageState extends ProviderState<RemoveObjectPage, RemoveObjectProvider> {
   @override
   void initState() {
     super.initState();
@@ -85,7 +85,7 @@ class _RemoveObjectPageState extends ProviderState<RemoveObjectPage, EditProvide
           onPressed: goBack,
         ),
         title: Center(
-          child: PropConsumer<EditProvider, bool>(
+          child: PropConsumer<RemoveObjectProvider, bool>(
             select: (p) => p.prevPainterState != null,
             builder: (_, __, p, ___) => IconButton(
               icon: Image.asset(

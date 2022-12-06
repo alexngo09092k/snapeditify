@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EnhanceImagePage extends StatelessWidget {
-  const EnhanceImagePage({super.key});
+class EnhancePage extends StatelessWidget {
+  const EnhancePage({super.key});
 
   @override
   Widget build(BuildContext context) {

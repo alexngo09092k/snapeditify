@@ -5,7 +5,7 @@ import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/services/snap_edit/src/models/response/detected_object.dart';
 import 'package:snapedit/pages/remove_object/widgets/detected_object_tab.dart';
 import 'package:snapedit/pages/remove_object/widgets/detected_object_tab_content.dart';
-import 'package:snapedit/providers/edit_provider/edit_provider.dart';
+import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
 
 class DetailDetectedObject extends StatefulWidget {
   DetailDetectedObject({
@@ -19,7 +19,7 @@ class DetailDetectedObject extends StatefulWidget {
   State<DetailDetectedObject> createState() => _DetailDetectedObjectState();
 }
 
-class _DetailDetectedObjectState extends ProviderState<DetailDetectedObject, EditProvider> {
+class _DetailDetectedObjectState extends ProviderState<DetailDetectedObject, RemoveObjectProvider> {
   int _indexTab = 0;
 
   DetectedObjectType get type => _indexTab == 0 ? DetectedObjectType.people : DetectedObjectType.other;
@@ -66,7 +66,7 @@ class _DetailDetectedObjectState extends ProviderState<DetailDetectedObject, Edi
                     child: Image.asset(AppAssets.instance.icDeleteNormal3x, width: 25),
                   ),
                   SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall),
-                  PropConsumer<EditProvider, int>(
+                  PropConsumer<RemoveObjectProvider, int>(
                     select: (p) => p.state.detectedObjects.values.length,
                     builder: (_, __, p, ___) => Text(
                       '${p.state.detectedObjects.values.length} ${S.of(context).objects}',

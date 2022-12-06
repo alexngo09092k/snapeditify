@@ -64,6 +64,7 @@ class AppAssets {
   final String icArrowRating = "$iconPath/ic_arrow_rating.png";
   final String icBling = "$iconPath/ic_bling.png";
   final String icStar = "$iconPath/ic_star.png";
+  final String icExpandMore = "$iconPath/ic_expand_more.png";
 
   final String icAddPhotoNormal3x = '$iconPath/ic_add_photo_Normal@3x.png';
   final String icArrowRightNormal3x = '$iconPath/ic_arrow_right_Normal@3x.png';

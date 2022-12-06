@@ -92,4 +92,11 @@ class ImageConvert {
     ManagerCache.instance.addFile(cacheFile);
     return cacheFile;
   }
+
+  static File pngToJpeg(File file) {
+    final name = file.path.split('.').first;
+    final image = imagepkg.decodeImage(file.readAsBytesSync())!;
+
+    return File('$name.jpeg')..writeAsBytesSync(imagepkg.encodeJpg(image));
+  }
 }

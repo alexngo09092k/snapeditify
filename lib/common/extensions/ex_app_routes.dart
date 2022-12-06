@@ -5,7 +5,7 @@ extension AppRoutesUtils on IAppRoutes {
     Navigator.of(context).pushNamed(AppRoutes.removeObjectPage);
   }
 
-  goEnhanceImagePage(BuildContext context) {
+  goEnhancePage(BuildContext context) {
     Navigator.of(context).pushNamed(AppRoutes.enhanceImagePage);
   }
 
@@ -13,16 +13,33 @@ extension AppRoutesUtils on IAppRoutes {
     Navigator.of(context).pushNamed(AppRoutes.applyArtEffectPage);
   }
 
-  goAllPhotos(BuildContext context, PhotosFor photosFor) {
-    ManagerProvider.of<PhotoProvider>().photosFor = photosFor;
-    Navigator.of(context).pushNamed(AppRoutes.photoGalleryPage);
+  goGalleryPage(BuildContext context, PhotosFor photosFor) {
+    ManagerProvider.of<GalleryProvider>().photosFor = photosFor;
+    Navigator.of(context).pushNamed(AppRoutes.galleryPage);
   }
 
-  goActivePro(BuildContext context) {
+  goPremiumProPage(BuildContext context) {
     Navigator.of(context).pushNamed(AppRoutes.activeProPage);
   }
 
-  goSetting(BuildContext context) {
+  goSettingPage(BuildContext context) {
     Navigator.of(context).pushNamed(AppRoutes.settingPage);
+  }
+
+  goEditPhotoPage(BuildContext context, {required PhotosType type, required String photo}) {
+    final PhotosFor photosFor = ManagerProvider.of<GalleryProvider>().photosFor;
+    switch (photosFor) {
+      case PhotosFor.applyArtEffect:
+        goArtEffectPage(context);
+        break;
+      case PhotosFor.enhanceImage:
+        goEnhancePage(context);
+        break;
+      case PhotosFor.removeObject:
+        goRemoveObjectPage(context);
+        break;
+      default:
+        throw ErrorDescription("Not support action");
+    }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:snapedit/providers/edit_provider/painter_state.dart';
+import 'package:snapedit/providers/remove_object_provider/painter_state.dart';
 
 abstract class PainterAction<T> {
   final PainterEvent event;

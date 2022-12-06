@@ -16,6 +16,15 @@ class EnhanceResponse {
     required this.outputImages,
   });
 
+  factory EnhanceResponse.defaultValue() {
+    return EnhanceResponse(
+      faces: [],
+      numFaceModels: 0,
+      numTotalFaces: 0,
+      outputImages: [],
+    );
+  }
+
   EnhanceResponse copyWith({
     List<Face>? faces,
     int? numFaceModels,
@@ -32,19 +41,19 @@ class EnhanceResponse {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'faces': faces.map((face) => face.toMap()),
-      'numFaceModels': numFaceModels,
-      'numTotalFaces': numTotalFaces,
-      'outputImages': outputImages,
+      'faces': faces.map((face) => face.toMap()).toList(),
+      'num_face_models': numFaceModels,
+      'num_total_faces': numTotalFaces,
+      'output_images': outputImages,
     };
   }
 
   factory EnhanceResponse.fromMap(Map<String, dynamic> map) {
-    return EnhanceResponse(
-      faces: (map['faces'] ?? []).map((x) => Face.fromMap(x as Map<String, dynamic>)),
-      numFaceModels: map['numFaceModels'] as int,
-      numTotalFaces: map['numTotalFaces'] as int,
-      outputImages: List<String>.from(((map['outputImages'] ?? []) as List<String>)),
+    return EnhanceResponse.defaultValue().copyWith(
+      faces: List<Face>.from((map['faces'] ?? []).map<Face>((e) => Face.fromMap(e))),
+      numFaceModels: map['num_face_models'],
+      numTotalFaces: map['num_total_faces'],
+      outputImages: List<String>.from((map['output_images'] ?? []).map<String>((e) => e.toString())),
     );
   }
 
@@ -84,6 +93,14 @@ class Face {
     required this.png,
   });
 
+  factory Face.defaultValue() {
+    return Face(
+      box: [],
+      faceId: 0,
+      png: [],
+    );
+  }
+
   Face copyWith({
     List<int>? box,
     int? faceId,
@@ -105,10 +122,10 @@ class Face {
   }
 
   factory Face.fromMap(Map<String, dynamic> map) {
-    return Face(
-      box: List<int>.from(((map['box'] ?? []) as List<int>)),
-      faceId: map['faceId'] as int,
-      png: List<String>.from(((map['png'] ?? []) as List<String>)),
+    return Face.defaultValue().copyWith(
+      box: List<int>.from(((map['box'] ?? []).map<int>((e) => e as int))),
+      faceId: map['faceId'],
+      png: List<String>.from(((map['png'] ?? []).map<String>((e) => e.toString()))),
     );
   }
 
