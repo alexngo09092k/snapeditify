@@ -11,7 +11,6 @@ class AppSharedKey {
 
   String get remoteConfig => '${Configuration.instance.appConfig.sharedKeyPrefix}remoteConfig';
   String get remoteConfigExpriedDate => '${Configuration.instance.appConfig.sharedKeyPrefix}remoteConfigExpriedDate';
-  String get image => '${Configuration.instance.appConfig.sharedKeyPrefix}IMAGE';
-  String get freestyleStrokeWidth => '${Configuration.instance.appConfig.sharedKeyPrefix}FREE_STYLE_STROKE_WIDTH';
   String get themeMode => '${Configuration.instance.appConfig.sharedKeyPrefix}themeMode';
+  String get styles => '${Configuration.instance.appConfig.sharedKeyPrefix}styles';
 }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:snapedit/common/constants.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class AppConfig {
@@ -30,7 +29,7 @@ class AppConfig {
   factory AppConfig.defaultValue() {
     return AppConfig(
       appName: "SnapEdit",
-      appLogo: AppAssets.instance.logo,
+      appLogo: "",
       protocols: ['https://', 'http://', 'data:'],
       sharedKeyPrefix: "snapedit.",
       contact: "brennanngo992k@gmail.com",

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/provider/widgets/autopplistener.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/pages/gallery/widgets/album_photo.dart';
-import 'package:snapedit/providers/gallery_provider.dart';
+import 'package:snapedit/providers/gallery/gallery_provider.dart';
 
 class TrySuggestedImages extends StatelessWidget {
   const TrySuggestedImages({super.key, required this.gridDelegate, required this.size, this.onPhoto});
   final SliverGridDelegateWithFixedCrossAxisCount gridDelegate;
   final Size size;
-  final Function(String, PhotosType)? onPhoto;
+  final Function(String, ImageSource)? onPhoto;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class TrySuggestedImages extends StatelessWidget {
             ],
           ),
         ),
-        PropConsumer<GalleryProvider, PhotosFor>(
+        PropConsumer<GalleryProvider, EditImageType>(
           select: (_) => _.photosFor,
           builder: (_, __, p, ___) => Wrap(
             spacing: gridDelegate.mainAxisSpacing,

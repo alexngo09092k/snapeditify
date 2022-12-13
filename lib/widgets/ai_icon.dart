@@ -14,18 +14,12 @@ class AIIcon extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        gradient: AppColors.instance.gradient,
+        color: AppColors.instance.blue,
         borderRadius: const BorderRadius.all(
           Radius.circular(2),
         ),
       ),
-      child: Text(
-        S.of(context).ai,
-        style: Theme.of(context)
-            .textTheme
-            .bodyText2!
-            .copyWith(color: AppColors.instance.kWhite),
-      ),
+      child: Text(S.of(context).ai, style: Theme.of(context).textTheme.bodyText2!),
     );
   }
 }

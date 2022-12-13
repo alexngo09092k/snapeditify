@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/widgets/custom_image.dart';
 
 class AdPlaceHolder extends StatelessWidget {
   const AdPlaceHolder({Key? key, this.width, this.height}) : super(key: key);
@@ -14,19 +13,19 @@ class AdPlaceHolder extends StatelessWidget {
       width: width,
       height: height,
       padding: EdgeInsets.all(AppDimensions.instance.padding),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: Image.asset(AppAssets.instance.placeholder).image,
-          fit: BoxFit.fill,
-        ),
+      decoration: const BoxDecoration(
+        // image: DecorationImage(
+        //   image: Image.asset(AppAssets.instance.placeholder).image,
+        //   fit: BoxFit.fill,
+        // ),
       ),
       child: Stack(
         children: [
-          CustomImage(
-            image: AppAssets.instance.placeholder,
-            width: width,
-            height: height,
-          ),
+          // CustomImage(
+          //   image: AppAssets.instance.placeholder,
+          //   width: width,
+          //   height: height,
+          // ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -65,7 +64,7 @@ class _GroupIcon extends StatelessWidget {
         Icon(
           Icons.check_circle_outline,
           size: 16,
-          color: AppColors.instance.lightActive,
+          color: AppColors.instance.blue,
         ),
         // Image.asset(
         //   AppAssets.instance.icCheckboxSelectedNormal3x,

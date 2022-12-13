@@ -40,7 +40,7 @@ class StylesResponse {
 
   String toJson() => json.encode(toMap());
 
-  factory StylesResponse.fromJson(String source) => StylesResponse.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory StylesResponse.fromJson(String source) => StylesResponse.fromMap(json.decode(source));
 
   @override
   String toString() => 'StylesResponse(styles: $styles)';

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/gallery_provider.dart';
+import 'package:snapedit/providers/gallery/gallery_provider.dart';
 import 'package:snapedit/widgets/lottie_viewer.dart';
-import 'package:snapedit/common/extensions.dart';
 
 class HomeArtEffectBanner extends StatelessWidget {
   const HomeArtEffectBanner({super.key});
@@ -36,7 +35,7 @@ class HomeArtEffectBanner extends StatelessWidget {
                       ),
                 ),
                 GestureDetector(
-                  onTap: () => AppRoutes.instance.goGalleryPage(context, PhotosFor.applyArtEffect),
+                  onTap: () => AppRoutes.instance.goGalleryPage(context, EditImageType.applyArtEffect),
                   child: Container(
                     padding: EdgeInsets.all(AppDimensions.instance.padding),
                     decoration: BoxDecoration(

@@ -8,9 +8,7 @@ class LoadingPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width / 2 - 100),
-      backgroundColor: AppColors.instance.darkBg.withOpacity(0.5),
+      insetPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 2 - 100),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
@@ -27,17 +25,14 @@ class LoadingPopup extends StatelessWidget {
               height: 20,
               child: CircularProgressIndicator(
                 strokeWidth: 1,
-                valueColor: AlwaysStoppedAnimation<Color>(AppColors.instance.kWhite),
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.instance.blue),
               ),
             ),
             SizedBox(height: AppDimensions.instance.padding),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .caption!
-                  .copyWith(color: AppColors.instance.kWhite),
+              style: Theme.of(context).textTheme.caption!.copyWith(color: AppColors.instance.blue),
             ),
           ],
         ),

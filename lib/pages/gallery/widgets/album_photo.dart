@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:snapedit/providers/gallery_provider.dart';
+import 'package:snapedit/providers/gallery/gallery_provider.dart';
 
 class AlbumPhoto extends StatelessWidget {
   const AlbumPhoto({super.key, this.size, this.onPhoto, this.child});
@@ -12,11 +12,11 @@ class AlbumPhoto extends StatelessWidget {
   final Size? size;
   final Widget? child;
 
-  factory AlbumPhoto.withAssetEntity(AssetEntity photo, {Size? size, Function(String? photo, PhotosType type)? onPhoto}) {
+  factory AlbumPhoto.withAssetEntity(AssetEntity photo, {Size? size, Function(String? photo, ImageSource type)? onPhoto}) {
     return AlbumPhoto(
         size: size,
         onPhoto: () async {
-          if (onPhoto != null) onPhoto((await photo.file)?.path, PhotosType.inAlbum);
+          if (onPhoto != null) onPhoto((await photo.file)?.path, ImageSource.inAlbum);
         },
         child: SizedBox(
           width: size?.width,
@@ -26,7 +26,6 @@ class AlbumPhoto extends StatelessWidget {
               Positioned.fill(
                 child: AssetEntityImage(
                   photo,
-                  isOriginal: false,
                   thumbnailSize: size != null ? ThumbnailSize(size.width.toInt(), size.height.toInt()) : null,
                   fit: BoxFit.cover,
                 ),
@@ -36,11 +35,11 @@ class AlbumPhoto extends StatelessWidget {
         ));
   }
 
-  factory AlbumPhoto.withAsset(String photo, {Size? size, Function(String path, PhotosType type)? onPhoto}) {
+  factory AlbumPhoto.withAsset(String photo, {Size? size, Function(String path, ImageSource type)? onPhoto}) {
     return AlbumPhoto(
       size: size,
       onPhoto: () async {
-        if (onPhoto != null) onPhoto(photo, PhotosType.inSuggesstedPhotos);
+        if (onPhoto != null) onPhoto(photo, ImageSource.inSuggesstedPhotos);
       },
       child: SizedBox(
         width: size?.width,

@@ -51,6 +51,6 @@ abstract class PathDrawable extends Drawable {
     });
 
     // Draw the path on the canvas
-    canvas.drawPath(path, paint..color = Colors.white.withOpacity(0.5));
+    canvas.drawPath(path, paint);
   }
 }

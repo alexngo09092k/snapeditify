@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:flutter/material.dart' as material;
 
 import 'object_drawable.dart';
 
@@ -105,7 +104,7 @@ class ImageDrawable extends ObjectDrawable {
 
     // Draw the image onto the canvas.
     canvas.drawImageRect(image, Rect.fromPoints(Offset.zero, Offset(image.width.toDouble(), image.height.toDouble())),
-        Rect.fromPoints(position - scaledSize / 2, position + scaledSize / 2), Paint()..color = material.Colors.white.withOpacity(opacity));
+        Rect.fromPoints(position - scaledSize / 2, position + scaledSize / 2), Paint());
   }
 
   /// Calculates the size of the rendered object.

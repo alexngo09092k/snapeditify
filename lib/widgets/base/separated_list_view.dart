@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:snapedit/common/constants.dart';
 
 class SeparatedListView extends StatelessWidget {
   const SeparatedListView({super.key, required this.itemBuilder, required this.separatorBuilder, required this.itemCount});

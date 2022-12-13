@@ -11,110 +11,77 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
   );
 
   return base.copyWith(
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
 
     textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.darkTitle,
+      bodyColor: AppColors.instance.black,
     ),
 
-    primaryTextTheme: buildTextTheme(base.primaryTextTheme, scale: scale),
+    primaryTextTheme: buildTextTheme(base.primaryTextTheme, scale: scale).apply(
+      bodyColor: AppColors.instance.black,
+    ),
 
-    primaryColor: AppColors.instance.darkActive,
+    primaryColor: base.primaryColor,
 
     secondaryHeaderColor: base.secondaryHeaderColor,
 
-    /// ======================== CARD =========================
-    cardColor: AppColors.instance.darkCard,
+    /// ================== CARD =====================
+    cardColor: base.cardColor,
 
     textButtonTheme: base.textButtonTheme,
 
     listTileTheme: base.listTileTheme,
 
-    errorColor: AppColors.instance.darkError,
-
-    /// ====================== COLOR SCHEME ======================
-    colorScheme: base.colorScheme.copyWith(
-      primary: AppColors.instance.kBlue,
-      background: AppColors.instance.darkBg,
-      error: AppColors.instance.kRed,
-      brightness: Brightness.light,
-    ),
-
-    /// ====================== SNACKBAR ======================
-    snackBarTheme: base.snackBarTheme.copyWith(
-      backgroundColor: AppColors.instance.darkCard,
-      contentTextStyle: TextStyle(
-        color: AppColors.instance.darkSubTitle,
-        fontSize: AppDimensions.instance.fontSizeDefault,
-      ),
-    ),
-
-    /// ====================== INDICATOR ======================
-    indicatorColor: AppColors.instance.darkIcon,
-
-    progressIndicatorTheme: base.progressIndicatorTheme.copyWith(
-      color: AppColors.instance.darkActive,
-    ),
-
-    canvasColor: AppColors.instance.darkBg,
-
-    /// ====================== ACTIVE COLOR ======================
-    primaryColorLight: AppColors.instance.darkActive,
-
-    /// ====================== BACKGROUND AND DIALOG ======================
-    splashColor: AppColors.instance.darkBg,
-    backgroundColor: AppColors.instance.darkBg,
-    dialogBackgroundColor: AppColors.instance.darkBg,
-    scaffoldBackgroundColor: AppColors.instance.darkBg,
+    /// =================== COLOR SCHEME ====================
+    colorScheme: base.colorScheme,
 
     /// ====================== TEXT SELECTION THEME ======================
-    textSelectionTheme: base.textSelectionTheme.copyWith(
-      cursorColor: AppColors.instance.darkIcon,
-    ),
+    textSelectionTheme: base.textSelectionTheme,
+
+    /// ====================== SNACKBAR ======================
+    snackBarTheme: base.snackBarTheme,
+
+    /// ====================== INDICATOR ======================
+    indicatorColor: base.indicatorColor,
+
+    progressIndicatorTheme: base.progressIndicatorTheme,
+
+    canvasColor: base.canvasColor,
+
+    /// ====================== ACTIVE COLOR ======================
+    primaryColorLight: base.primaryColorLight,
+
+    /// ====================== BACKGROUND AND DIALOG ======================
+    splashColor: base.splashColor,
+    backgroundColor: base.backgroundColor,
+    dialogBackgroundColor: base.dialogBackgroundColor,
+    scaffoldBackgroundColor: base.scaffoldBackgroundColor,
 
     /// ====================== STATUS BAR ======================
-    appBarTheme: base.appBarTheme.copyWith(
-      color: AppColors.instance.darkBg,
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
-    ),
+    appBarTheme: base.appBarTheme,
 
     buttonTheme: base.buttonTheme,
 
     tabBarTheme: base.tabBarTheme,
 
     /// ====================== BOTTOM APP BAR ====================
-    bottomAppBarColor: AppColors.instance.darkBottomAppBar,
+    bottomAppBarColor: base.bottomAppBarColor,
 
     /// ====================== DISABLED ====================
-    disabledColor: AppColors.instance.darkDisable,
+    disabledColor: base.disabledColor,
 
     /// ======================= CARD =======================
-    cardTheme: base.cardTheme.copyWith(
-      color: AppColors.instance.darkCard,
-    ),
+    cardTheme: base.cardTheme,
 
     /// ======================== ICON =======================
-    iconTheme: base.iconTheme.copyWith(
-      color: AppColors.instance.darkIcon,
-      size: AppDimensions.instance.iconSizeDefault,
-    ),
+    iconTheme: base.iconTheme,
 
-    primaryIconTheme: base.primaryIconTheme.copyWith(
-      color: AppColors.instance.darkActive,
-      size: AppDimensions.instance.iconSizeDefault,
-    ),
+    primaryIconTheme: base.primaryIconTheme,
 
     /// ========================= INPUT ========================
-    inputDecorationTheme: base.inputDecorationTheme.copyWith(
-      fillColor: AppColors.instance.darkInputBg,
-      filled: true,
-      hintStyle: TextStyle(
-        color: AppColors.instance.darkInputHintText,
-        fontSize: AppDimensions.instance.fontSizeDefault,
-      ),
-    ),
+    inputDecorationTheme: base.inputDecorationTheme,
 
     /// ========================= DIVIDER ========================
-    dividerColor: AppColors.instance.darkDivider,
+    dividerColor: base.dividerColor,
   );
 }

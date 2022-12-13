@@ -1,13 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/pages/gallery/widgets/album_photo.dart';
 import 'package:snapedit/pages/gallery/widgets/album_title.dart';
 import 'package:snapedit/pages/gallery/widgets/try_suggested_images.dart';
-import 'package:snapedit/providers/gallery_provider.dart';
+import 'package:snapedit/providers/gallery/gallery_provider.dart';
 import 'package:snapedit/widgets/app_layout.dart';
-import 'package:snapedit/widgets/load_more/multiple_sliver_load_more.dart';
-import 'package:snapedit/widgets/load_more/source_list.dart';
+import 'package:snapedit/widgets/base/load_more/multiple_sliver_load_more.dart';
+import 'package:snapedit/widgets/base/load_more/source_list.dart';
 
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});
@@ -22,12 +26,22 @@ class _GalleryPageState extends ProviderState<GalleryPage, GalleryProvider> {
   @override
   void initState() {
     super.initState();
+    UserPermission.instance.requestPermission(permission: [Permission.storage]);
     initial().then((value) => setState(() {}));
   }
 
-  onPhoto(String? photo, PhotosType type) async {
+  Future<File> getImageFileFromAssets(String path) async {
+    final byteData = await rootBundle.load(path);
+
+    final file = File('${(await getTemporaryDirectory()).path}/$path');
+    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+    return file;
+  }
+
+  onPhoto(String? photo, ImageSource type) async {
     if (photo != null) {
-      Debug.log(photo);
+      AppRoutes.instance.goEditPhotoPage(context, type: type, photo: photo);
     }
   }
 

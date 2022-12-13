@@ -2,8 +2,8 @@ part of '../theme.dart';
 
 TextTheme buildTextTheme(
   TextTheme base, {
-  String fontFamily = 'Open Sans',
-  String fontHeader = 'Open Sans',
+  String fontFamily = 'Inter',
+  String fontHeader = 'Inter',
   double scale = 1,
 }) {
   return base.copyWith(

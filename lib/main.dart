@@ -5,12 +5,11 @@ import 'package:snapedit/app.dart';
 import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/env.dart';
 import 'package:snapedit/firebase_options.dart';
-import 'package:snapedit/providers/art_effect_provider.dart';
-import 'package:snapedit/providers/enhance_provider.dart';
-import 'package:snapedit/providers/remove_object_provider/remove_object_provider.dart';
-import 'package:snapedit/providers/gallery_provider.dart';
-import 'package:snapedit/providers/home_provider.dart';
+import 'package:snapedit/providers/enhance/enhance_provider.dart';
+import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
+import 'package:snapedit/providers/gallery/gallery_provider.dart';
 import 'package:snapedit/models/config/app_config.dart';
+import 'package:snapedit/providers/restyle/restyle_provider.dart';
 import 'package:snapedit/services/services.dart';
 
 void main() {
@@ -19,11 +18,10 @@ void main() {
     debugMode: kDebugMode,
     providers: [AwesomeAdvertisement.instance],
     lazyProviders: [
-      () => HomeProvider(),
-      () => GalleryProvider(),
-      () => RemoveObjectProvider(),
-      () => EnhanceProvider(),
-      () => ArtEffectProvider(),
+      () => GalleryProvider.instance,
+      () => RemoveObjectProvider.instance,
+      () => EnhanceProvider.instance,
+      () => RestyleProvider.instance,
     ],
     onWillInitialize: () async {
       return Configuration.instance.fromEnviroment(enviroment);

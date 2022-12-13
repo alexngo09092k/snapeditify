@@ -4,7 +4,6 @@ import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/models/config/app_config.dart';
-import 'package:snapedit/widgets/app_logo.dart';
 import 'package:snapedit/widgets/widget.utils.dart';
 import 'package:snapedit/common/extensions.dart';
 
@@ -64,37 +63,59 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AwesomeAnimation<double>.tweenSequence(
-            duration: const Duration(milliseconds: 1000),
-            items: [
-              TweenSequenceItem(tween: Tween<double>(begin: 0, end: 1), weight: 10),
-              TweenSequenceItem(tween: Tween<double>(begin: 1, end: 0), weight: 1),
-            ],
-            builder: (_, __, animation, ___) {
-              return Row(
+      body: SafeArea(
+        top: false,
+        child: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                AwesomeAnimation<double>.tweenSequence(
+                  duration: const Duration(milliseconds: 200),
+                  items: [
+                    TweenSequenceItem(tween: Tween<double>(begin: 0, end: 1), weight: 10),
+                  ],
+                  builder: (_, __, animation, ___) => Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Opacity(
+                        opacity: animation.value,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              AppAssets.instance.snapEditLogoFull,
+                              width: AwesomeAppState.screen.width * 1.6 / 3,
+                            ),
+                            SizedBox(height: AppDimensions.instance.padding),
+                            Image.asset(
+                              AppAssets.instance.splashTitle,
+                              width: AwesomeAppState.screen.width * 1.5 / 3,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: AppDimensions.instance.padding,
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Opacity(
-                    opacity: animation.value,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        AppLogo(
-                          width: MediaQuery.of(context).size.width * 0.8 / 2,
-                          image: Configuration.instance.appConfig.appLogo,
-                        ),
-                        SizedBox(height: AppDimensions.instance.padding),
-                      ],
-                    ),
-                  )
+                  Image.asset(
+                    AppAssets.instance.snapEditCopyRightTitle,
+                    width: 100,
+                  ),
                 ],
-              );
-            },
-          ),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

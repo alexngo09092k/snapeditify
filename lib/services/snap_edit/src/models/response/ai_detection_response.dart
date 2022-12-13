@@ -78,7 +78,7 @@ class DetectedObject {
   String mask;
   int maskId;
   String objectDescription;
-  String objectType;
+  DetectedObjectType objectType;
 
   DetectedObject({
     required this.accuracy,
@@ -96,7 +96,7 @@ class DetectedObject {
       mask: '',
       maskId: 0,
       objectDescription: '',
-      objectType: '',
+      objectType: DetectedObjectType.other,
     );
   }
 
@@ -106,7 +106,7 @@ class DetectedObject {
     String? mask,
     int? maskId,
     String? objectDescription,
-    String? objectType,
+    DetectedObjectType? objectType,
   }) {
     return DetectedObject(
       accuracy: accuracy ?? this.accuracy,
@@ -125,7 +125,7 @@ class DetectedObject {
       'mask': mask,
       'mask_id': maskId,
       'object_description': objectDescription,
-      'object_type': objectType,
+      'object_type': objectType.name,
     };
   }
 
@@ -136,7 +136,7 @@ class DetectedObject {
       mask: map['mask'],
       maskId: map['mask_id'],
       objectDescription: map['object_description'],
-      objectType: map['object_type'],
+      objectType: DetectedObjectType.values.firstWhere((element) => element.name == map['object_type']),
     );
   }
 
@@ -165,4 +165,9 @@ class DetectedObject {
   int get hashCode {
     return accuracy.hashCode ^ box.hashCode ^ mask.hashCode ^ maskId.hashCode ^ objectDescription.hashCode ^ objectType.hashCode;
   }
+}
+
+enum DetectedObjectType {
+  other,
+  person,
 }

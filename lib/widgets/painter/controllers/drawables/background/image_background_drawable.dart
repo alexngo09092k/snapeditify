@@ -22,7 +22,7 @@ class ImageBackgroundDrawable extends BackgroundDrawable {
         Rect.fromPoints(Offset.zero,
             Offset(image.width.toDouble(), image.height.toDouble())),
         Rect.fromPoints(Offset.zero, Offset(size.width, size.height)),
-        Paint()..color = mt.Colors.white.withOpacity(opactiy));
+        Paint());
   }
   
   @override

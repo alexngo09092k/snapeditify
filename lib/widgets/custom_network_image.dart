@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:snapedit/common/constants.dart';
 
 class CustomNetworkImage extends StatelessWidget {
   final String image;
@@ -26,18 +25,18 @@ class CustomNetworkImage extends StatelessWidget {
       height: height,
       width: width,
       fit: fit,
-      placeholder: (context, url) => Image.asset(
-        AppAssets.instance.placeholder,
-        height: height,
-        width: width,
-        fit: BoxFit.cover,
-      ),
-      errorWidget: (context, url, error) => Image.asset(
-        placeholder ?? AppAssets.instance.placeholder,
-        height: height,
-        width: width,
-        fit: BoxFit.cover,
-      ),
+      // placeholder: (context, url) => Image.asset(
+      //   AppAssets.instance.placeholder,
+      //   height: height,
+      //   width: width,
+      //   fit: BoxFit.cover,
+      // ),
+      // errorWidget: (context, url, error) => Image.asset(
+      //   placeholder ?? AppAssets.instance.placeholder,
+      //   height: height,
+      //   width: width,
+      //   fit: BoxFit.cover,
+      // ),
     );
   }
 }

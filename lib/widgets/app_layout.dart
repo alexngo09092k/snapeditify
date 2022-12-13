@@ -84,8 +84,11 @@ class _AppBar extends StatelessWidget {
 
   void _canBack(BuildContext context) {
     if (Navigator.of(context).canPop()) {
-      Navigator.pop(context);
-      if (onBack != null) onBack!();
+      if (onBack != null) {
+        onBack!();
+      } else {
+        Navigator.pop(context);
+      }
     }
   }
 

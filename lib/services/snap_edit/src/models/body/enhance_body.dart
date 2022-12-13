@@ -8,7 +8,7 @@ class EnhanceBody {
   String? imageId;
 
   EnhanceBody({
-    required this.zoomFactor,
+    this.zoomFactor = '2',
     this.inputImage,
     this.imageId,
   }) ;

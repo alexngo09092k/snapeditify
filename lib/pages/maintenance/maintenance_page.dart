@@ -1,6 +1,5 @@
 import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/common/constants.dart';
-import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 
 class MaintenancePage extends StatelessWidget {
@@ -18,23 +17,12 @@ class MaintenancePage extends StatelessWidget {
             SizedBox(width: AppDimensions.instance.paddingSizeLarge),
             Text(
               Configuration.instance.appConfig.maintenanceMode.title,
-              style: Theme.of(context).textTheme.headline5!.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: ThemeProvider.colorByTheme(
-                      light: AppColors.instance.kBlack,
-                      dark: AppColors.instance.kWhite,
-                    ),
-                  ),
+              style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.w600),
             ),
             SizedBox(width: AppDimensions.instance.padding),
             Text(
               Configuration.instance.appConfig.maintenanceMode.message,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: ThemeProvider.colorByTheme(
-                      light: AppColors.instance.kBlack,
-                      dark: AppColors.instance.kWhite,
-                    ),
-                  ),
+              style: Theme.of(context).textTheme.bodyText1!,
             ),
             SizedBox(width: AppDimensions.instance.paddingSizeLarge),
           ],

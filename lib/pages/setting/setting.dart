@@ -4,7 +4,7 @@ import 'package:snapedit/pages/setting/widgets/rate_popup.dart';
 import 'package:snapedit/pages/setting/widgets/share_popup.dart';
 import 'package:snapedit/widgets/app_layout.dart';
 import 'package:snapedit/widgets/base/block.dart';
-import 'package:snapedit/widgets/base/custom_list_tile.dart';
+import 'package:snapedit/widgets/base/tile_row.dart';
 import 'package:snapedit/widgets/base/separated_list_view.dart';
 import 'package:snapedit/widgets/unlock_pro_banner.dart';
 import 'package:snapedit/widgets/widget.utils.dart';
@@ -41,13 +41,13 @@ class SettingPage extends StatelessWidget {
               child: const Divider(height: 0),
             ),
             list: [
-              CustomListTile.defaultStyle(
+              TileRow.defaultStyle(
                 context,
                 title: 'Rate us on App Store',
                 image: AppAssets.instance.icRate,
                 onTap: _showRatePopup,
               ),
-              CustomListTile.defaultStyle(
+              TileRow.defaultStyle(
                 context,
                 title: 'Share SnapEdit app',
                 image: AppAssets.instance.icShare,
@@ -64,19 +64,19 @@ class SettingPage extends StatelessWidget {
               child: const Divider(height: 0),
             ),
             list: [
-              CustomListTile.defaultStyle(
+              TileRow.defaultStyle(
                 context,
                 title: 'Terms of service',
                 image: AppAssets.instance.icTerm,
                 onTap: (_) {},
               ),
-              CustomListTile.defaultStyle(
+              TileRow.defaultStyle(
                 context,
                 title: 'FAQ',
                 image: AppAssets.instance.icFAQ,
                 onTap: (_) {},
               ),
-              CustomListTile.defaultStyle(
+              TileRow.defaultStyle(
                 context,
                 title: 'Feedback',
                 image: AppAssets.instance.icFeedback,

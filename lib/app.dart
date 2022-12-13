@@ -12,7 +12,7 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends AwesomeAppState<App, ThemeProvider> {
+class _AppState extends AwesomeAppState<App> {
   @override
   void initState() {
     super.initState();
@@ -35,9 +35,10 @@ class _AppState extends AwesomeAppState<App, ThemeProvider> {
         Debug.log("===== START APP =====");
         Debug.log("===== THEME MODE: ${provider.themeMode} =====");
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           navigatorKey: AwesomeAppState.navigatorKey,
           theme: getLightTheme(context, scale: scale),
-          darkTheme: getLightTheme(context, scale: scale),
+          darkTheme: getDarkTheme(context, scale: scale),
           themeMode: provider.themeMode,
           initialRoute: AppRoutes.instance.initialRoute,
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,

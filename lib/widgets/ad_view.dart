@@ -38,10 +38,10 @@ class _AdViewState extends State<AdView> {
         borderRadius: BorderRadius.all(
           Radius.circular(AppDimensions.instance.padding),
         ),
-        image: DecorationImage(
-          image: Image.asset(AppAssets.instance.placeholder).image,
-          fit: BoxFit.fill,
-        ),
+        // image: DecorationImage(
+        //   image: Image.asset(AppAssets.instance.placeholder).image,
+        //   fit: BoxFit.fill,
+        // ),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.padding)),
