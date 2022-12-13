@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SettingPopup extends StatelessWidget {
-  const SettingPopup({super.key});
+class StyleItem extends StatelessWidget {
+  const StyleItem({super.key});
 
   @override
   Widget build(BuildContext context) {

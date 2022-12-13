@@ -8,16 +8,27 @@ import 'package:snapedit/providers/restyle/restyle_state.dart';
 import 'package:snapedit/providers/storage_provider.dart';
 import 'package:snapedit/services/services.dart';
 import 'package:snapedit/services/snap_edit/src/models/response/styles_response.dart';
+import 'package:snapedit/widgets/painter/painter.dart';
 
 abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
-  Future<bool> restyleImage(String styleId);
-
   bool get isLoading;
 
   List<Style> get styles;
 
   @override
   RestyleState get state;
+
+  bool get canSave;
+  bool get canRevert;
+  bool get canCompare;
+
+  Future<bool> restyleImage(String styleId);
+
+  Future<bool> revert();
+
+  bool compare();
+
+  bool saveImage(BuildContext context);
 }
 
 class RestyleProvider extends IRestyleProvider with ProviderDelegate {
@@ -48,6 +59,42 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   final String DEFAULT_IMAGE = 'DEFAULT_IMAGE';
 
   @override
+  bool get canCompare => _states.length > 1;
+
+  bool _compared = false;
+  @override
+  bool compare() {
+    if (canCompare) {
+      Debug.log("===== COMPARE ====");
+      if (!_compared) {
+        Debug.log("===== COMPARE ORIGINAL BACKGROUND====");
+        _state.paint.background = imageUI.backgroundDrawable;
+        _compared = true;
+      } else {
+        Debug.log("===== COMPARE CURRENT BACKGROUND====");
+        _state.paint.background = _state.imageUI.backgroundDrawable;
+        _compared = false;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  @override
+  bool get canSave => _states.length > 1;
+
+  @override
+  bool get canRevert => _states.length > 1;
+
+  @override
+  Future<bool> revert() async {
+    Debug.log("===== REVERT ====");
+    _state = _states[DEFAULT_IMAGE]!;
+    notifyListeners();
+    return true;
+  }
+
+  @override
   Future<bool> restyleImage(String styleId) async {
     if (_states.containsKey(styleId)) {
       _state = _states[styleId]!;
@@ -76,6 +123,11 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
     /// HIDE LOADING POPUP
     return false;
+  }
+
+  @override
+  bool saveImage(BuildContext context) {
+    throw UnimplementedError();
   }
 
   @override
