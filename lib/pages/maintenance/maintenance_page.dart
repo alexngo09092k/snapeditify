@@ -14,7 +14,7 @@ class MaintenancePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(width: AppDimensions.instance.paddingSizeLarge),
+            SizedBox(width: AppDimensions.instance.paddingX(1)),
             Text(
               Configuration.instance.appConfig.maintenanceMode.title,
               style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.w600),
@@ -24,7 +24,7 @@ class MaintenancePage extends StatelessWidget {
               Configuration.instance.appConfig.maintenanceMode.message,
               style: Theme.of(context).textTheme.bodyText1!,
             ),
-            SizedBox(width: AppDimensions.instance.paddingSizeLarge),
+            SizedBox(width: AppDimensions.instance.paddingX(1)),
           ],
         ),
       ),

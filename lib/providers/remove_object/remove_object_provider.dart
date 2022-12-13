@@ -89,9 +89,11 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
     if (canCompare) {
       Debug.log("===== COMPARE ====");
       if (_compared) {
+        Debug.log("===== COMPARE ORIGINAL BACKGROUND====");
         _state.paint.background = imageUI.backgroundDrawable;
         _compared = true;
       } else {
+        Debug.log("===== COMPARE CURRENT BACKGROUND====");
         _state.paint.background = _state.imageUI.backgroundDrawable;
         _compared = false;
       }

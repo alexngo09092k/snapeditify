@@ -50,8 +50,7 @@ class ImageEditor extends StatelessWidget {
                             width: p.state.strokeWidth,
                             height: p.state.strokeWidth,
                             decoration: BoxDecoration(
-                              border: Border.all(color: p.state.strokeColor, width: 1),
-                              color: p.state.strokeColor,
+                              border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.all(Radius.circular(p.state.strokeWidth / 2)),
                             ),
                           ),

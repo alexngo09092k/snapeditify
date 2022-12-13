@@ -22,9 +22,7 @@ class Block extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: borderRadius ??
             BorderRadius.all(
-              Radius.circular(
-                AppDimensions.instance.radiusLarge,
-              ),
+              Radius.circular(AppDimensions.instance.radiusX(1)),
             ),
         color: Theme.of(context).cardColor,
       ),

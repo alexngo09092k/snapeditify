@@ -47,7 +47,7 @@ class CustomButton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   icon ?? const SizedBox(),
-                  icon != null ? SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall) : const SizedBox(),
+                  icon != null ? SizedBox(width: AppDimensions.instance.paddingX(0.5)) : const SizedBox(),
                   Text(
                     title ?? '',
                     style: TextStyle(

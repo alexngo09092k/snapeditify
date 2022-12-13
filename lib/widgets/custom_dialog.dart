@@ -9,12 +9,7 @@ class CustomDialogButton {
   Color? titleColor;
   void Function()? action;
 
-  CustomDialogButton(
-      {required this.title,
-      this.color,
-      this.action,
-      this.titleColor,
-      this.gradient});
+  CustomDialogButton({required this.title, this.color, this.action, this.titleColor, this.gradient});
 }
 
 class CustomDialog extends StatelessWidget {
@@ -37,8 +32,7 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Theme.of(context).backgroundColor,
-      insetPadding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height / 3),
+      insetPadding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height / 3),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(AppDimensions.instance.padding),
@@ -47,9 +41,7 @@ class CustomDialog extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        padding: EdgeInsets.symmetric(
-            horizontal: AppDimensions.instance.padding,
-            vertical: AppDimensions.instance.paddingSizeExtraLarge),
+        padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding, vertical: AppDimensions.instance.paddingX(2)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -57,15 +49,13 @@ class CustomDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (title != null) title!,
-                if (title != null)
-                 SizedBox(height: AppDimensions.instance.padding),
+                if (title != null) SizedBox(height: AppDimensions.instance.padding),
                 if (message != null) message!,
               ],
             ),
             if (buttons != null)
               Padding(
-                padding: EdgeInsets.only(
-                    top: AppDimensions.instance.padding),
+                padding: EdgeInsets.only(top: AppDimensions.instance.padding),
                 child: buttons!.length == 1
                     ? Expanded(
                         child: CustomButton(
@@ -82,10 +72,7 @@ class CustomDialog extends StatelessWidget {
                             .keys
                             .map((index) => Expanded(
                                   child: Padding(
-                                    padding: EdgeInsets.only(
-                                        right: index == buttons!.length - 1
-                                            ? 0
-                                            : 10),
+                                    padding: EdgeInsets.only(right: index == buttons!.length - 1 ? 0 : 10),
                                     child: CustomButton(
                                       title: buttons![index].title,
                                       onTap: buttons![index].action,

@@ -47,7 +47,7 @@ class ImageEditorSetting extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(S.of(context).auto),
-                              SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall),
+                              SizedBox(width: AppDimensions.instance.paddingX(1)),
                               const AIIcon(),
                             ],
                           )

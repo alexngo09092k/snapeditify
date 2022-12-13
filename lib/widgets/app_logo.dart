@@ -4,8 +4,7 @@ import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/widgets/custom_image.dart';
 
 class AppLogo extends StatelessWidget {
-  const AppLogo({Key? key, this.image, this.width, this.height, this.color})
-      : super(key: key);
+  const AppLogo({Key? key, this.image, this.width, this.height, this.color}) : super(key: key);
   final String? image;
   final double? width;
   final double? height;
@@ -15,7 +14,7 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.all(
-        Radius.circular(AppDimensions.instance.paddingSizeSmall),
+        Radius.circular(AppDimensions.instance.paddingX(0.5)),
       ),
       child: CustomImage(
         image: image ?? Configuration.instance.appConfig.appLogo,

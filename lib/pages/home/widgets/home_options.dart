@@ -56,8 +56,8 @@ class _Option extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(icon, width: AppDimensions.instance.iconSizeLarge),
-          SizedBox(height: AppDimensions.instance.paddingSizeExtraSmall),
+          Image.asset(icon, width: AppDimensions.instance.iconX(1)),
+          SizedBox(height: AppDimensions.instance.paddingX(1)),
           Text(title, style: Theme.of(context).textTheme.bodyText1)
         ],
       ),

@@ -57,7 +57,7 @@ class _AIModeSettingState extends ProviderState<AIModeSetting, RemoveObjectProvi
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingSizeSmall),
+          padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(1)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -67,7 +67,7 @@ class _AIModeSettingState extends ProviderState<AIModeSetting, RemoveObjectProvi
                     onTap: () => provider.toBrush(context),
                     child: Image.asset(AppAssets.instance.icAdd, width: 25),
                   ),
-                  SizedBox(width: AppDimensions.instance.paddingSizeExtraSmall),
+                  SizedBox(width: AppDimensions.instance.paddingX(1)),
                   BasePropConsumer<RemoveObjectProvider, int>(
                     listenable: provider,
                     select: (p) => p.state.detectedObjects.values.length,
@@ -193,7 +193,7 @@ class _DetectedObjectRow extends StatelessWidget {
       style: Theme.of(context).textTheme.subtitle1,
     );
     final removeText = Container(
-      padding: EdgeInsets.all(AppDimensions.instance.paddingSizeExtraSmall),
+      padding: EdgeInsets.all(AppDimensions.instance.paddingX(1)),
       decoration: BoxDecoration(
         color: Colors.red.withOpacity(0.1),
         borderRadius: const BorderRadius.all(Radius.circular(5)),
