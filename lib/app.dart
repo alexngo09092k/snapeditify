@@ -1,3 +1,4 @@
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/theme.dart';
 import 'package:snapedit/generated/l10n.dart';
@@ -53,6 +54,10 @@ class _AppState extends AwesomeAppState<App> {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
+          builder: FlutterSmartDialog.init(
+            toastBuilder: (String msg) => Text(msg),
+            loadingBuilder: (String msg) => Text(msg),
+          ),
         );
       },
     );

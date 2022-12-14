@@ -6,8 +6,8 @@ import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 import 'package:snapedit/widgets/painter/painter_pure.dart';
 import 'package:snapedit/widgets/custom_button.dart';
 
-class ImageEditor extends StatelessWidget {
-  const ImageEditor({Key? key, required this.provider}) : super(key: key);
+class RemoveObjectImage extends StatelessWidget {
+  const RemoveObjectImage({Key? key, required this.provider}) : super(key: key);
   final RemoveObjectProvider provider;
 
   @override

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/pages/remove_object/widgets/ai_mode_setting.dart';
-import 'package:snapedit/pages/remove_object/widgets/brush_mode_setting.dart';
+import 'package:snapedit/pages/remove_object/widgets/ai_mode_result.dart';
+import 'package:snapedit/pages/remove_object/widgets/brush_mode.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 import 'package:snapedit/providers/remove_object/remove_object_state.dart';
 import 'package:snapedit/widgets/ai_icon.dart';
 
-class ImageEditorSetting extends StatelessWidget {
-  const ImageEditorSetting({super.key, required this.provider});
+class RemoveObjectControl extends StatelessWidget {
+  const RemoveObjectControl({super.key, required this.provider});
   final RemoveObjectProvider provider;
 
   @override
@@ -24,7 +24,7 @@ class ImageEditorSetting extends StatelessWidget {
             if (p.state.mode != RemoveObjectMode.ai) BrushModeSetting(provider: provider),
 
             /// DETECTED OBJECT LIST
-            if (p.state.mode == RemoveObjectMode.ai) AIModeSetting(provider: provider),
+            if (p.state.mode == RemoveObjectMode.ai) AIModeResult(provider: provider),
 
             /// MODE BUTTONS
             if (p.state.mode != RemoveObjectMode.ai)

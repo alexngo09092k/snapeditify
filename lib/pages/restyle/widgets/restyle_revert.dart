@@ -3,8 +3,8 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/restyle/restyle_provider.dart';
 
-class RevertButton extends StatelessWidget {
-  const RevertButton({super.key, required this.provider});
+class RestyleRevert extends StatelessWidget {
+  const RestyleRevert({super.key, required this.provider});
   final RestyleProvider provider;
 
   _revert() {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/pages/restyle/widgets/image_editor.dart';
-import 'package:snapedit/pages/restyle/widgets/image_editor_setting.dart';
+import 'package:snapedit/pages/restyle/widgets/restyle_image.dart';
+import 'package:snapedit/pages/restyle/widgets/style_list.dart';
 import 'package:snapedit/providers/restyle/restyle_provider.dart';
 import 'package:snapedit/widgets/app_layout.dart';
 
@@ -20,8 +20,8 @@ class _RestylePageState extends ProviderState<RestylePage, RestyleProvider> {
       scroll: false,
       screen: 'Art effect',
       children: [
-        ImageEditor(provider: provider),
-        ImageEditorSetting(provider: provider),
+        RestyleImage(provider: provider),
+        StyleList(provider: provider),
       ],
     );
   }

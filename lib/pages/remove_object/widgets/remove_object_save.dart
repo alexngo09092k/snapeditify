@@ -4,8 +4,8 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 
-class SaveButton extends StatelessWidget {
-  const SaveButton({super.key, required this.provider});
+class RemoveObjectSave extends StatelessWidget {
+  const RemoveObjectSave({super.key, required this.provider});
   final RemoveObjectProvider provider;
 
   Future<void> saveAndShowImage(context) async {

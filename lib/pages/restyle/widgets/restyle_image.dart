@@ -4,8 +4,8 @@ import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/restyle/restyle_provider.dart';
 import 'package:snapedit/widgets/painter/painter_pure.dart';
 
-class ImageEditor extends StatelessWidget {
-  const ImageEditor({Key? key, required this.provider}) : super(key: key);
+class RestyleImage extends StatelessWidget {
+  const RestyleImage({Key? key, required this.provider}) : super(key: key);
   final RestyleProvider provider;
 
   @override

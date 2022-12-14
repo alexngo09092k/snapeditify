@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/pages/remove_object/widgets/image_editor.dart';
-import 'package:snapedit/pages/remove_object/widgets/image_editor_setting.dart';
-import 'package:snapedit/pages/remove_object/widgets/revert_button.dart';
-import 'package:snapedit/pages/remove_object/widgets/save_button.dart';
+import 'package:snapedit/pages/remove_object/widgets/remove_object_image.dart';
+import 'package:snapedit/pages/remove_object/widgets/remove_object_control.dart';
+import 'package:snapedit/pages/remove_object/widgets/remove_object_revert.dart';
+import 'package:snapedit/pages/remove_object/widgets/remove_object_save.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 import 'package:snapedit/widgets/app_layout.dart';
 
@@ -29,12 +29,12 @@ class _RemoveObjectPageState extends ProviderState<RemoveObjectPage, RemoveObjec
     return AppLayout(
       back: true,
       onBack: goBack,
-      center: RevertButton(provider: provider),
-      action: SaveButton(provider: provider),
+      center: RemoveObjectRevert(provider: provider),
+      action: RemoveObjectSave(provider: provider),
       scroll: false,
       children: [
-        ImageEditor(provider: provider),
-        ImageEditorSetting(provider: provider),
+        RemoveObjectImage(provider: provider),
+        RemoveObjectControl(provider: provider),
       ],
     );
   }

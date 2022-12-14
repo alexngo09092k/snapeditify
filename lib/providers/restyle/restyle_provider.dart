@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
@@ -103,7 +104,9 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
+    SmartDialog.showLoading();
 
+    /// CALL API
     RestyleBody body = RestyleBody(styleId: styleId, inputImage: imageFile, imageId: _state.imageId);
     SnapEditResponse<RestyleResponse?> res = await Services.instance.snapEdit.restyle(body);
 
@@ -114,14 +117,17 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
+      SmartDialog.dismiss();
       return true;
     }
 
     if (res.error != null) {
+      SmartDialog.showToast(res.error!);
       Debug.log('====== RESTYLE IMAGE ${res.error} ======');
     }
 
     /// HIDE LOADING POPUP
+    SmartDialog.dismiss();
     return false;
   }
 

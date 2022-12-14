@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/models/ai_detection_handler.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
@@ -175,6 +176,9 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
     if (_state.imageFile == null && _state.sessionId == null) return false;
 
     ///SHOW LOADING POPUP
+    SmartDialog.showLoading();
+
+    /// CALL API
     AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.imageFile, sessionId: _state.sessionId);
     SnapEditResponse<AIDetectionResponse?> res = await Services.instance.snapEdit.detection(body);
 
@@ -190,14 +194,17 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
       _state.mode = RemoveObjectMode.ai;
 
       /// HIDE LOADING POPUP
+      SmartDialog.dismiss();
       return true;
     }
 
     if (res.error != null) {
+      SmartDialog.showToast(res.error!);
       Debug.log("===== TO AI DETECTED OBJECTS ${res.error} =====");
     }
 
     /// HIDE LOADING POPUP
+    SmartDialog.dismiss();
     return false;
   }
 
@@ -238,10 +245,14 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
     if (_state.imageFile == null && _state.sessionId == null) return false;
 
     /// SHOW LOADING POPUP
+    SmartDialog.showLoading();
+
+    /// CALL API
     ui.Image mask = await _state.paint.renderMask(Size(imageUI.width.toDouble(), imageUI.height.toDouble()));
     String? maskBase64 = await ImageUtils.instance.imageUIToBase64(mask);
     if (maskBase64 == null) {
       /// HIDE LOADING POPUP
+      SmartDialog.dismiss();
       return false;
     }
 
@@ -249,6 +260,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
     File? maskFile = await ManagerCache.instance.cacheImageBase64(maskBase64);
     if (maskFile == null) {
       /// HIDE LOADING POPUP
+      SmartDialog.dismiss();
       return false;
     }
 
@@ -274,14 +286,17 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
       notifyListeners();
 
       /// HIDE LOADING POPUP
+      SmartDialog.dismiss();
       return true;
     }
 
     if (res.error != null) {
+      SmartDialog.showToast(res.error!);
       Debug.log("===== REMOVE OBJECTS ${res.error} =====");
     }
 
     /// HIDE LOADING POPUP
+    SmartDialog.dismiss();
     return false;
   }
 

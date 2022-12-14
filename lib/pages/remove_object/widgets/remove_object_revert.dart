@@ -3,8 +3,8 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 
-class RevertButton extends StatelessWidget {
-  const RevertButton({super.key, required this.provider});
+class RemoveObjectRevert extends StatelessWidget {
+  const RemoveObjectRevert({super.key, required this.provider});
   final RemoveObjectProvider provider;
 
   _revert() {
