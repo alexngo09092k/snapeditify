@@ -8,7 +8,10 @@ import 'package:snapedit/providers/edit_image_state.dart';
 import 'package:snapedit/utils/image.dart';
 
 abstract class EditImageProvider extends Provider {
-  Future<bool> setImage(File file) async {
+  Future<bool> setImage(BuildContext context, {required File file, bool refesh = true}) async {
+    /// RENEW STATE
+    if (refesh) await refresh(context);
+
     /// CREATE IMAGE JPEG FILE
     _imageFile = file;
 
@@ -23,6 +26,10 @@ abstract class EditImageProvider extends Provider {
     /// SET IMAGE FOR STATE
     return state.setImage(imageBase64, provider: this, createImageFile: true);
   }
+
+  Future<bool> refresh(BuildContext context);
+
+  Future<bool> saveImage(BuildContext context);
 
   EditImageState get state;
 

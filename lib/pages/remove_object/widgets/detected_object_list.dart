@@ -15,37 +15,38 @@ class DetectedObjectList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePropConsumer<RemoveObjectProvider, int>(
-        listenable: provider,
-        select: (p) => p.state.detectedObjects.values.where((detectedObject) => detectedObject.objectType == type).length,
-        builder: (_, __, p, ___) {
-          final data = p.state.detectedObjects.values.where((detectedObject) => detectedObject.objectType == type);
-          return data.isNotEmpty
-              ? ListView.builder(
-                  itemCount: data.length,
-                  itemBuilder: (_, index) => DetectedObjectItem(
-                    key: Key('$index'),
-                    detectedObject: data.elementAt(index),
-                    provider: provider,
-                  ),
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppAssets.instance.icAdd,
-                        width: 70,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(height: AppDimensions.instance.padding),
-                      Text(
-                        S.of(context).noPotentialObjectHasBeenDetected,
-                        style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).disabledColor),
-                      )
-                    ],
-                  ),
-                );
-        });
+      listenable: provider,
+      select: (p) => p.state.detectedObjects.values.where((detectedObject) => detectedObject.objectType == type).length,
+      builder: (_, __, p, ___) {
+        final data = p.state.detectedObjects.values.where((detectedObject) => detectedObject.objectType == type);
+        return data.isNotEmpty
+            ? ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (_, index) => DetectedObjectItem(
+                  key: Key('$index'),
+                  detectedObject: data.elementAt(index),
+                  provider: provider,
+                ),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      AppAssets.instance.icAdd,
+                      width: 70,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(height: AppDimensions.instance.padding),
+                    Text(
+                      S.of(context).noPotentialObjectHasBeenDetected,
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).disabledColor),
+                    )
+                  ],
+                ),
+              );
+      },
+    );
   }
 }

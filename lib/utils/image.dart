@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'dart:convert';
@@ -119,6 +119,15 @@ class ImageUtils {
     final image = imagepkg.decodeImage(file.readAsBytesSync())!;
     final jpegFile = File('$name.jpeg')..writeAsBytesSync(imagepkg.encodeJpg(image));
     return jpegFile;
+  }
+
+  Future<File> getImageFileFromAssets(String path) async {
+    final byteData = await rootBundle.load('assets/$path');
+
+    final file = File('${(await getTemporaryDirectory()).path}/$path');
+    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+    return file;
   }
 }
 

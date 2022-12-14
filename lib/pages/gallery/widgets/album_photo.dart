@@ -1,8 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:snapedit/providers/gallery/gallery_provider.dart';
+import 'package:snapedit/utils/image.dart';
 
 class AlbumPhoto extends StatelessWidget {
   const AlbumPhoto({super.key, this.size, this.onPhoto, this.child});
@@ -39,7 +42,8 @@ class AlbumPhoto extends StatelessWidget {
     return AlbumPhoto(
       size: size,
       onPhoto: () async {
-        if (onPhoto != null) onPhoto(photo, ImageSource.inSuggesstedPhotos);
+        File file = await ImageUtils.instance.getImageFileFromAssets(photo);
+        if (onPhoto != null) onPhoto(file.path, ImageSource.inSuggesstedPhotos);
       },
       child: SizedBox(
         width: size?.width,

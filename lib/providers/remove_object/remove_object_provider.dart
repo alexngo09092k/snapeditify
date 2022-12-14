@@ -12,8 +12,6 @@ import 'package:snapedit/utils/image.dart';
 import 'package:snapedit/widgets/painter/painter.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider {
-  bool get isLoading;
-
   bool get canRemove;
   bool get canSave;
   bool get canUndo;
@@ -46,8 +44,6 @@ abstract class IRemoveObjectProvider extends EditImageProvider {
   bool changeStrokeWidth(BuildContext context, double strokeWidth);
 
   bool changeStrokeColor(BuildContext context, Color strokeColor);
-
-  bool saveImage(BuildContext context);
 }
 
 class RemoveObjectProvider extends IRemoveObjectProvider {
@@ -63,10 +59,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
   late RemoveObjectState _state;
   @override
   RemoveObjectState get state => _state;
-
-  final bool _isLoading = true;
-  @override
-  bool get isLoading => _isLoading;
 
   @override
   bool get canUndo => _state.prev != null || _state.paint.canUndo;
@@ -329,8 +321,17 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
   }
 
   @override
-  bool saveImage(BuildContext context) {
+  Future<bool> saveImage(BuildContext context) {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> refresh(BuildContext context) async {
+    _state.removeListener(notifyListeners);
+    _state.dispose();
+    _state = RemoveObjectState();
+    _state.addListener(notifyListeners);
+    return true;
   }
 
   @override

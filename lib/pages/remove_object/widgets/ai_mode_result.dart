@@ -52,54 +52,55 @@ class _AIModeResultState extends State<AIModeResult> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(1)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  InkWell(
-                    onTap: () => widget.provider.toBrush(context),
-                    child: Image.asset(AppAssets.instance.icAdd, width: 25),
-                  ),
-                  SizedBox(width: AppDimensions.instance.paddingX(1)),
-                  BasePropConsumer<RemoveObjectProvider, int>(
-                    listenable: widget.provider,
-                    select: (p) => p.state.detectedObjects.values.length,
-                    builder: (_, __, p, ___) => Text(
-                      '${p.state.detectedObjects.values.length} ${S.of(context).objects}',
-                      style: Theme.of(context).textTheme.subtitle2,
+    return Expanded(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(1)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () => widget.provider.toBrush(context),
+                      child: Image.asset(AppAssets.instance.icAdd, width: 25),
                     ),
-                  ),
-                ],
-              ),
-              const Expanded(flex: 1, child: SizedBox()),
-              SlidingControl<DetectedObjectType>.defaultStyle(
-                context,
-                value: DetectedObjectType.person,
-                data: DetectedObjectType.values.asMap().map((_, type) => MapEntry(type, type.label)),
-                onValueChanged: _onChangedTab,
-              ),
-            ],
+                    SizedBox(width: AppDimensions.instance.paddingX(1)),
+                    BasePropConsumer<RemoveObjectProvider, int>(
+                      listenable: widget.provider,
+                      select: (p) => p.state.detectedObjects.values.length,
+                      builder: (_, __, p, ___) => Text(
+                        '${p.state.detectedObjects.values.length} ${S.of(context).objects}',
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
+                    ),
+                  ],
+                ),
+                const Expanded(flex: 1, child: SizedBox()),
+                SlidingControl<DetectedObjectType>.defaultStyle(
+                  context,
+                  value: DetectedObjectType.person,
+                  data: DetectedObjectType.values.asMap().map((_, type) => MapEntry(type, type.label)),
+                  onValueChanged: _onChangedTab,
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(height: AppDimensions.instance.padding),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * (0.5) / 3,
-          child: PageView(
-            controller: _controller,
-            children: DetectedObjectType.values
-                .map<Widget>((type) => DetectedObjectList(
-                      type: type,
-                      provider: widget.provider,
-                    ))
-                .toList(),
-          ),
-        )
-      ],
+          SizedBox(height: AppDimensions.instance.padding),
+          Expanded(
+            child: PageView(
+              controller: _controller,
+              children: DetectedObjectType.values
+                  .map<Widget>((type) => DetectedObjectList(
+                        type: type,
+                        provider: widget.provider,
+                      ))
+                  .toList(),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

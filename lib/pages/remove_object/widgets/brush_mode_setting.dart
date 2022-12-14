@@ -8,10 +8,6 @@ class BrushModeSetting extends StatelessWidget {
   const BrushModeSetting({Key? key, required this.provider}) : super(key: key);
   final RemoveObjectProvider provider;
 
-  _showColorPopup(BuildContext context) {
-    provider.changeStrokeColor(context, Colors.black.withOpacity(0.5));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -23,36 +19,12 @@ class BrushModeSetting extends StatelessWidget {
             listenable: provider,
             select: (p) => p.state.mode == RemoveObjectMode.brush,
             builder: (_, __, p, ___) => Image.asset(
-              AppAssets.instance.icAdd,
+              AppAssets.instance.icFingerBrushUnselected,
               color: p.state.mode == RemoveObjectMode.brush ? AppColors.instance.blue : AppColors.instance.black,
               width: AppDimensions.instance.icon,
             ),
           ),
         ),
-        SizedBox(width: AppDimensions.instance.paddingX(1)),
-
-        /// COLOR BUTTON
-        GestureDetector(
-          onTap: () => _showColorPopup(context),
-          child: BasePropConsumer<RemoveObjectProvider, Color>(
-            listenable: provider,
-            select: (p) => p.state.strokeColor,
-            builder: (_, __, p, ___) => Container(
-              width: AppDimensions.instance.icon,
-              height: AppDimensions.instance.icon,
-              decoration: BoxDecoration(
-                color: p.state.strokeColor,
-                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-              ),
-              child: Image.asset(
-                AppAssets.instance.icAdd,
-                color: p.state.mode == RemoveObjectMode.brush ? AppColors.instance.blue : AppColors.instance.black,
-                width: AppDimensions.instance.icon,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(width: AppDimensions.instance.paddingX(1)),
 
         /// STROKE WIDTH SLIDER
         Expanded(
@@ -71,7 +43,6 @@ class BrushModeSetting extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: AppDimensions.instance.paddingX(1)),
 
         /// ERASE BUTTON
         GestureDetector(
@@ -80,7 +51,7 @@ class BrushModeSetting extends StatelessWidget {
             listenable: provider,
             select: (p) => p.state.mode == RemoveObjectMode.erase,
             builder: (_, __, p, ___) => Image.asset(
-              AppAssets.instance.icAdd,
+              AppAssets.instance.icEraserUnselected,
               color: p.state.mode == RemoveObjectMode.erase ? AppColors.instance.blue : AppColors.instance.black,
               width: AppDimensions.instance.icon,
             ),

@@ -3,7 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/pages/remove_object/widgets/ai_mode_result.dart';
-import 'package:snapedit/pages/remove_object/widgets/brush_mode.dart';
+import 'package:snapedit/pages/remove_object/widgets/brush_mode_setting.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 import 'package:snapedit/providers/remove_object/remove_object_state.dart';
 import 'package:snapedit/widgets/ai_icon.dart';
@@ -20,6 +20,8 @@ class RemoveObjectControl extends StatelessWidget {
         select: (p) => p.state.mode,
         builder: (_, __, p, ___) => Column(
           children: [
+            SizedBox(height: AppDimensions.instance.padding),
+
             /// BRUSH SETTING
             if (p.state.mode != RemoveObjectMode.ai) BrushModeSetting(provider: provider),
 
@@ -39,7 +41,7 @@ class RemoveObjectControl extends StatelessWidget {
                       child: Column(
                         children: [
                           Image.asset(
-                            AppAssets.instance.icAdd,
+                            AppAssets.instance.icFaceId,
                             width: AppDimensions.instance.icon,
                           ),
                           SizedBox(height: AppDimensions.instance.padding),
@@ -61,7 +63,7 @@ class RemoveObjectControl extends StatelessWidget {
                       child: Column(
                         children: [
                           Image.asset(
-                            AppAssets.instance.icArrowRating,
+                            AppAssets.instance.icBrush,
                             width: AppDimensions.instance.icon,
                             color: p.state.mode == RemoveObjectMode.brush ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                           ),

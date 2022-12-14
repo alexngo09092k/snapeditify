@@ -21,8 +21,9 @@ class RemoveObjectRevert extends StatelessWidget {
           listenable: provider,
           select: (p) => p.canRevert,
           builder: (_, __, p, ___) => Image.asset(
-            AppAssets.instance.icAdd,
-            width: 20,
+            AppAssets.instance.icRevert,
+            color: p.canRevert ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+            width: AppDimensions.instance.icon,
           ),
         ),
       ),

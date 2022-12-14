@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/models/enhance_handler.dart';
@@ -14,8 +15,6 @@ abstract class IEnhanceProvider extends EditImageProvider {
   bool onChangeResult(String imageBase64);
 
   bool onChangeFace(String faceId);
-
-  bool get isLoading;
 }
 
 class EnhanceProvider extends IEnhanceProvider {
@@ -28,17 +27,13 @@ class EnhanceProvider extends IEnhanceProvider {
     _state.addListener(notifyListeners);
   }
 
-  final bool _isLoading = true;
-  @override
-  bool get isLoading => _isLoading;
-
   late EnhanceState _state;
   @override
   EnhanceState get state => _state;
 
   @override
-  Future<bool> setImage(File file) async {
-    bool result = await super.setImage(file);
+  Future<bool> setImage(BuildContext context, {required File file, bool refesh = true}) async {
+    bool result = await super.setImage(context, file: file, refesh: refesh);
     if (result) enhanceImage();
     return result;
   }
@@ -84,5 +79,19 @@ class EnhanceProvider extends IEnhanceProvider {
     /// HIDE LOADING POPUP
     SmartDialog.dismiss();
     return false;
+  }
+
+  @override
+  Future<bool> refresh(BuildContext context) async {
+    _state.removeListener(notifyListeners);
+    _state.dispose();
+    _state = EnhanceState();
+    _state.addListener(notifyListeners);
+    return true;
+  }
+
+  @override
+  Future<bool> saveImage(BuildContext context) async {
+    return true;
   }
 }

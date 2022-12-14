@@ -16,7 +16,9 @@ class RemoveObjectPage extends StatefulWidget {
 
 class _RemoveObjectPageState extends ProviderState<RemoveObjectPage, RemoveObjectProvider> {
   void goBack() async {
-    if (provider.canSave) {}
+    if (provider.canSave) {
+      /// SHOW POPUP
+    }
   }
 
   @override
@@ -27,11 +29,9 @@ class _RemoveObjectPageState extends ProviderState<RemoveObjectPage, RemoveObjec
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      back: true,
       onBack: goBack,
       center: RemoveObjectRevert(provider: provider),
       action: RemoveObjectSave(provider: provider),
-      scroll: false,
       children: [
         RemoveObjectImage(provider: provider),
         RemoveObjectControl(provider: provider),

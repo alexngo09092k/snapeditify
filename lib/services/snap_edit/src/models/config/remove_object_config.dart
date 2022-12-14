@@ -1,64 +1,44 @@
 import 'dart:convert';
+import 'dimension.dart';
+import 'stroke_width.dart';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class RemoveObjectConfig {
-  /// high demension
-  final int highDimension;
+  final Dimension dimension;
+  final StrokeWidth strokeWidth;
 
-  /// pro dimension
-  final int proDimension;
-
-  /// save image local
-  final bool saveImageLocal;
-
-  /// standard demension
-  final int standardDimension;
-
-  RemoveObjectConfig({
-    required this.highDimension,
-    required this.proDimension,
-    required this.saveImageLocal,
-    required this.standardDimension,
+  const RemoveObjectConfig({
+    required this.dimension,
+    required this.strokeWidth,
   });
 
   factory RemoveObjectConfig.defaultValue() {
     return RemoveObjectConfig(
-      highDimension: 1920,
-      proDimension: 3000,
-      saveImageLocal: false,
-      standardDimension: 1200,
+      dimension: Dimension.defaultValue(),
+      strokeWidth: StrokeWidth.defaultValue(),
     );
   }
 
   RemoveObjectConfig copyWith({
-    int? highDimension,
-    int? proDimension,
-    bool? saveImageLocal,
-    int? standardDimension,
+    Dimension? dimension,
+    StrokeWidth? strokeWidth,
   }) {
     return RemoveObjectConfig(
-      highDimension: highDimension ?? this.highDimension,
-      proDimension: proDimension ?? this.proDimension,
-      saveImageLocal: saveImageLocal ?? this.saveImageLocal,
-      standardDimension: standardDimension ?? this.standardDimension,
+      dimension: dimension ?? this.dimension,
+      strokeWidth: strokeWidth ?? this.strokeWidth,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'highDimension': highDimension,
-      'proDimension': proDimension,
-      'saveImageLocal': saveImageLocal,
-      'standardDimension': standardDimension,
+      'dimension': dimension.toMap(),
+      'strokeWidth': strokeWidth.toMap(),
     };
   }
 
   factory RemoveObjectConfig.fromMap(Map<String, dynamic> map) {
     return RemoveObjectConfig.defaultValue().copyWith(
-      highDimension: map['highDimension'],
-      proDimension: map['proDimension'],
-      saveImageLocal: map['saveImageLocal'],
-      standardDimension: map['standardDimension'],
+      dimension: Dimension.fromMap(map['dimension']),
+      strokeWidth: StrokeWidth.fromMap(map['strokeWidth']),
     );
   }
 
@@ -67,22 +47,15 @@ class RemoveObjectConfig {
   factory RemoveObjectConfig.fromJson(String source) => RemoveObjectConfig.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'RemoveObjectConfig(highDimension: $highDimension, proDimension: $proDimension, saveImageLocal: $saveImageLocal, standardDimension: $standardDimension)';
-  }
+  String toString() => 'RemoveObjectConfig(dimension: $dimension, strokeWidth: $strokeWidth)';
 
   @override
   bool operator ==(covariant RemoveObjectConfig other) {
     if (identical(this, other)) return true;
 
-    return other.highDimension == highDimension &&
-        other.proDimension == proDimension &&
-        other.saveImageLocal == saveImageLocal &&
-        other.standardDimension == standardDimension;
+    return other.dimension == dimension && other.strokeWidth == strokeWidth;
   }
 
   @override
-  int get hashCode {
-    return highDimension.hashCode ^ proDimension.hashCode ^ saveImageLocal.hashCode ^ standardDimension.hashCode;
-  }
+  int get hashCode => dimension.hashCode ^ strokeWidth.hashCode;
 }

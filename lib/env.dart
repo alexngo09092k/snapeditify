@@ -46,33 +46,47 @@ Map<String, dynamic> enviroment = {
     },
   },
 
-  // "snapEditConfig": {
-  //   'baseUrl': 'https://be-prod-1.snapedit.app',
-  //   'endPoints': {
-  //     'erase': '/erase/v4',
-  //     'ai': '/ai_detection/v4',
-  //   },
-  //   'headers': {
-  //     'ios': {
-  //       'Host': 'be-prod-1.snapedit.app',
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Cookie': '__cflb=02DiuFkAXusk8L9hm8nWZ2xLNeoGNMZMFM5uzAhM9PFvU',
-  //       'accept': '*/*',
-  //       'content-type': 'application/json',
-  //       'user-agent': 'SnapEdit/1.2.3 (com.sfun.snapedit; build:37; iOS 15.1.1) Alamofire/5.5.0',
-  //       'accept-language': 'vi-VN;q=1.0',
-  //     },
-  //     'android': {
-  //       'Host': 'be-prod-1.snapedit.app',
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Cookie': '__cflb=02DiuFkAXusk8L9hm8nWZ2xLNeoGNMZMFM5uzAhM9PFvU',
-  //       'accept': '*/*',
-  //       'content-type': 'application/json',
-  //       'user-agent': 'SnapEdit/1.2.3 (com.sfun.snapedit; build:37; iOS 15.1.1) Alamofire/5.5.0',
-  //       'accept-language': 'vi-VN;q=1.0',
-  //     }
-  //   }
-  // },
+  /// SnapEdit Config
+  'snapEditConfig': {
+    'baseUrl': "https://be-prod-1.snapedit.app/",
+    'apiKey': "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
+    'version': "v6",
+    'endPoints': {
+      'erase': 'api/v6/erase',
+      'erasePro': 'api/v6/erase',
+      'ai': 'api/v6/ai_detection',
+      'aiPro': 'api/v6/ai_detection',
+      'enhance': 'api/v2/enhance',
+      'enhancePro': 'api/v2/pro/enhance',
+      'restyle': 'api/v1/restyle',
+      'restylePro': 'api/v1/restyle',
+      'styles': 'api/v1/restyle/styles',
+      'stylesPro': 'api/v1/restyle/styles',
+    },
+    'enhance': {
+      'suportedImageSize': {
+        'high': 1920,
+        'standard': 1920,
+        'pro': 3000,
+      },
+      'uploadImageSize': {
+        'high': 1920,
+        'standard': 1920,
+        'pro': 3000,
+      },
+      'upscaleMaxImageSize': 1000,
+    },
+    'restyle': {
+      'dimension': {
+        'high': 1920,
+        'standard': 1920,
+        'pro': 3000,
+      },
+    },
+    'removeObject': {},
+    'waterMark': false,
+    'maxFreeDownloadCount': 100,
+  },
 
   // Replace the testAdUnitId with an ad unit id from the AdMob dash.
   // https://developers.google.com/admob/android/test-ads
@@ -80,61 +94,23 @@ Map<String, dynamic> enviroment = {
   "advertisementConfig": {
     "enable": true,
     "googleTestingId": [],
-    "adMobAppIdIos": "ca-app-pub-9241292359230405~3779043810",
-    "adMobAppIdAndroid": "ca-app-pub-9241292359230405~3319593408",
+    "adMobAppIdIos": "",
+    "adMobAppIdAndroid": "",
     "ads": [
       /// GOOGLE
       {
         "type": "openApp",
         "provider": "google",
-        "iosId": "ca-app-pub-9241292359230405/6760430376",
-        "androidId": "ca-app-pub-9241292359230405/8949811147",
-      },
-      {
-        "type": "banner",
-        "provider": "google",
-        "iosId": "ca-app-pub-9241292359230405/6213635465",
-        "androidId": "ca-app-pub-9241292359230405/5562613364",
-        "showOnScreens": ['home', 'edit'],
-      },
-      {
-        "type": "interstitial",
-        "provider": "google",
-        "iosId": "ca-app-pub-9241292359230405/8456655423",
-        "androidId": "ca-app-pub-9241292359230405/8735571613",
-        "showOnScreens": ['edit'],
-        "hideOnScreens": ['edit'],
-        "waitingTimeToDisplay": 5,
-      },
-      {
-        "type": "reward",
-        "provider": "google",
-        "iosId": "ca-app-pub-9241292359230405/8265083730",
-        "androidId": "ca-app-pub-9241292359230405/9473938213",
-        "showOnScreens": ['edit'],
-        "hideOnScreens": ['edit'],
-        "waitingTimeToDisplay": 5,
+        "iosId": "",
+        "androidId": "",
       },
 
       /// HUAWEI
       {
-        "type": "splash",
-        "provider": "huawei",
-        "iosId": "c0cs1vbgjb",
-        "androidId": "c0cs1vbgjb",
-      },
-      {
-        "type": "native",
-        "provider": "huawei",
-        "iosId": "q8bosp263n",
-        "androidId": "q8bosp263n",
-        "showOnScreens": ['home', 'edit'],
-      },
-      {
         "type": "interstitial",
         "provider": "huawei",
-        "iosId": "u6jhuouf85",
-        "androidId": "u6jhuouf85",
+        "iosId": "",
+        "androidId": "",
         "showOnScreens": ['edit'],
         "hideOnScreens": ['edit'],
         "waitingTimeToDisplay": 5,

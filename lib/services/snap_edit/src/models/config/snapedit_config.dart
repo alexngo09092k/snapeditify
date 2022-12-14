@@ -23,6 +23,10 @@ class SnapEditConfig {
 
   final RemoveObjectConfig removeObject;
 
+  final bool waterMark;
+
+  final int maxFreeDownloadCount;
+
   SnapEditConfig({
     required this.baseUrl,
     required this.apiKey,
@@ -31,6 +35,8 @@ class SnapEditConfig {
     required this.enhance,
     required this.restyle,
     required this.removeObject,
+    required this.waterMark,
+    required this.maxFreeDownloadCount,
   });
 
   factory SnapEditConfig.defaultValue() {
@@ -38,6 +44,8 @@ class SnapEditConfig {
       baseUrl: "https://be-prod-1.snapedit.app/",
       apiKey: "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
       version: "",
+      waterMark: false,
+      maxFreeDownloadCount: 100,
       endPoints: EndPoints.defaultValue(),
       enhance: EnhanceConfig.defaultValue(),
       restyle: RestyleConfig.defaultValue(),
@@ -53,6 +61,8 @@ class SnapEditConfig {
     EnhanceConfig? enhance,
     RestyleConfig? restyle,
     RemoveObjectConfig? removeObject,
+    bool? waterMark,
+    int? maxFreeDownloadCount,
   }) {
     return SnapEditConfig(
       baseUrl: baseUrl ?? this.baseUrl,
@@ -62,6 +72,8 @@ class SnapEditConfig {
       enhance: enhance ?? this.enhance,
       restyle: restyle ?? this.restyle,
       removeObject: removeObject ?? this.removeObject,
+      waterMark: waterMark ?? this.waterMark,
+      maxFreeDownloadCount: maxFreeDownloadCount ?? this.maxFreeDownloadCount,
     );
   }
 
@@ -69,22 +81,27 @@ class SnapEditConfig {
     return <String, dynamic>{
       'baseUrl': baseUrl,
       'apiKey': apiKey,
+      'version': version,
       'endPoints': endPoints.toMap(),
       'enhance': enhance.toMap(),
       'restyle': restyle.toMap(),
       'removeObject': removeObject.toMap(),
+      'waterMark': waterMark,
+      'maxFreeDownloadCount': maxFreeDownloadCount,
     };
   }
 
   factory SnapEditConfig.fromMap(Map<String, dynamic> map) {
-    return SnapEditConfig.defaultValue().copyWith(
-      baseUrl: map['baseUrl'],
-      apiKey: map['apiKey'],
-      version: map['version'],
-      endPoints: EndPoints.fromMap(map['endPoints'] ?? {}),
-      enhance: EnhanceConfig.fromMap(map['enhance'] ?? {}),
-      restyle: RestyleConfig.fromMap(map['restyle'] ?? {}),
-      removeObject: RemoveObjectConfig.fromMap(map['removeObject'] ?? {}),
+    return SnapEditConfig(
+      baseUrl: map['baseUrl'] as String,
+      apiKey: map['apiKey'] as String,
+      version: map['version'] as String,
+      endPoints: EndPoints.fromMap(map['endPoints'] as Map<String, dynamic>),
+      enhance: EnhanceConfig.fromMap(map['enhance'] as Map<String, dynamic>),
+      restyle: RestyleConfig.fromMap(map['restyle'] as Map<String, dynamic>),
+      removeObject: RemoveObjectConfig.fromMap(map['removeObject'] as Map<String, dynamic>),
+      waterMark: map['waterMark'] as bool,
+      maxFreeDownloadCount: map['maxFreeDownloadCount'] as int,
     );
   }
 
@@ -94,7 +111,7 @@ class SnapEditConfig {
 
   @override
   String toString() {
-    return 'SnapEditConfig(baseUrl: $baseUrl, apiKey: $apiKey, version: $version, endPoints: $endPoints, enhance: $enhance, restyle: $restyle, removeObject: $removeObject)';
+    return 'SnapEditConfig(baseUrl: $baseUrl, apiKey: $apiKey, version: $version, endPoints: $endPoints, enhance: $enhance, restyle: $restyle, removeObject: $removeObject, waterMark: $waterMark, maxFreeDownloadCount: $maxFreeDownloadCount)';
   }
 
   @override
@@ -107,12 +124,22 @@ class SnapEditConfig {
         other.endPoints == endPoints &&
         other.enhance == enhance &&
         other.restyle == restyle &&
-        other.removeObject == removeObject;
+        other.removeObject == removeObject &&
+        other.waterMark == waterMark &&
+        other.maxFreeDownloadCount == maxFreeDownloadCount;
   }
 
   @override
   int get hashCode {
-    return baseUrl.hashCode ^ apiKey.hashCode ^ version.hashCode ^ endPoints.hashCode ^ enhance.hashCode ^ restyle.hashCode ^ removeObject.hashCode;
+    return baseUrl.hashCode ^
+        apiKey.hashCode ^
+        version.hashCode ^
+        endPoints.hashCode ^
+        enhance.hashCode ^
+        restyle.hashCode ^
+        removeObject.hashCode ^
+        waterMark.hashCode ^
+        maxFreeDownloadCount.hashCode;
   }
 }
 

@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/extensions.dart';
 import 'package:snapedit/pages/active_pro/active_pro.dart';
@@ -114,33 +115,33 @@ extension AppRoutesUtils on IAppRoutes {
     UserPermission.instance.requestStoragePermission(
       onHasPermisson: () async {
         final EditImageType photosFor = ManagerProvider.of<GalleryProvider>().photosFor;
+        late final bool res;
+        late final String target;
+
+        SmartDialog.showLoading();
+
         switch (photosFor) {
           case EditImageType.applyArtEffect:
-            Debug.log("wating...");
-            final res = await ManagerProvider.of<RestyleProvider>().setImage(File(photo));
-            Debug.log("done!");
-            if (res) {
-              Navigator.of(context).pushNamed(AppRoutes.applyArtEffectPage);
-            }
+            res = await ManagerProvider.of<RestyleProvider>().setImage(context, file: File(photo));
+            target = AppRoutes.applyArtEffectPage;
             break;
           case EditImageType.enhanceImage:
-            Debug.log("wating...");
-            final res = await ManagerProvider.of<EnhanceProvider>().setImage(File(photo));
-            Debug.log("done!");
-            if (res) {
-              Navigator.of(context).pushNamed(AppRoutes.enhanceImagePage);
-            }
+            res = await ManagerProvider.of<EnhanceProvider>().setImage(context, file: File(photo));
+            target = AppRoutes.enhanceImagePage;
             break;
           case EditImageType.removeObject:
-            Debug.log("wating...");
-            final res = await ManagerProvider.of<RemoveObjectProvider>().setImage(File(photo));
-            Debug.log("done!");
-            if (res) {
-              Navigator.of(context).pushNamed(AppRoutes.removeObjectPage);
-            }
+            res = await ManagerProvider.of<RemoveObjectProvider>().setImage(context, file: File(photo));
+            target = AppRoutes.removeObjectPage;
             break;
           default:
             throw ErrorDescription("Not support action");
+        }
+        SmartDialog.dismiss();
+
+        if (res) {
+          Navigator.of(context).pushNamed(target);
+        } else {
+          SmartDialog.showToast('Something wrong');
         }
       },
       onNoPermisson: openAppSettings,

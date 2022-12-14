@@ -1,81 +1,50 @@
 import 'dart:convert';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:snapedit/services/snap_edit/src/models/config/dimension.dart';
+
 class EnhanceConfig {
-  /// max supported image size
-  final int maxSupportedImageSize;
-
-  /// premium max supported image size
-  final int premiumMaxSupportedImageSize;
-
-  /// premium upload image size
-  final int premiumUploadImageSize;
-
-  /// standard max supported image size
-  final int standardMaxSupportedImageSize;
-
-  /// standard upload image size
-  final int standardUploadImageSize;
-
-  /// up scale max image size
+  final Dimension suportedImageSize;
+  final Dimension uploadImageSize;
   final int upscaleMaxImageSize;
 
-  EnhanceConfig({
-    required this.maxSupportedImageSize,
-    required this.premiumMaxSupportedImageSize,
-    required this.premiumUploadImageSize,
-    required this.standardMaxSupportedImageSize,
-    required this.standardUploadImageSize,
+  const EnhanceConfig({
+    required this.suportedImageSize,
+    required this.uploadImageSize,
     required this.upscaleMaxImageSize,
   });
 
   factory EnhanceConfig.defaultValue() {
     return EnhanceConfig(
-      maxSupportedImageSize: 3000,
-      premiumMaxSupportedImageSize: 3000,
-      premiumUploadImageSize: 1200,
-      standardMaxSupportedImageSize: 1200,
-      standardUploadImageSize: 1200,
+      suportedImageSize: Dimension.defaultValue(),
+      uploadImageSize: Dimension.defaultValue(),
       upscaleMaxImageSize: 1000,
     );
   }
 
   EnhanceConfig copyWith({
-    int? maxSupportedImageSize,
-    int? premiumMaxSupportedImageSize,
-    int? premiumUploadImageSize,
-    int? standardMaxSupportedImageSize,
-    int? standardUploadImageSize,
+    Dimension? suportedImageSize,
+    Dimension? uploadImageSize,
     int? upscaleMaxImageSize,
   }) {
     return EnhanceConfig(
-      maxSupportedImageSize: maxSupportedImageSize ?? this.maxSupportedImageSize,
-      premiumMaxSupportedImageSize: premiumMaxSupportedImageSize ?? this.premiumMaxSupportedImageSize,
-      premiumUploadImageSize: premiumUploadImageSize ?? this.premiumUploadImageSize,
-      standardMaxSupportedImageSize: standardMaxSupportedImageSize ?? this.standardMaxSupportedImageSize,
-      standardUploadImageSize: standardUploadImageSize ?? this.standardUploadImageSize,
+      suportedImageSize: suportedImageSize ?? this.suportedImageSize,
+      uploadImageSize: uploadImageSize ?? this.uploadImageSize,
       upscaleMaxImageSize: upscaleMaxImageSize ?? this.upscaleMaxImageSize,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'maxSupportedImageSize': maxSupportedImageSize,
-      'premiumMaxSupportedImageSize': premiumMaxSupportedImageSize,
-      'premiumUploadImageSize': premiumUploadImageSize,
-      'standardMaxSupportedImageSize': standardMaxSupportedImageSize,
-      'standardUploadImageSize': standardUploadImageSize,
+      'suportedImageSize': suportedImageSize.toMap(),
+      'uploadImageSize': uploadImageSize.toMap(),
       'upscaleMaxImageSize': upscaleMaxImageSize,
     };
   }
 
   factory EnhanceConfig.fromMap(Map<String, dynamic> map) {
     return EnhanceConfig.defaultValue().copyWith(
-      maxSupportedImageSize: map['maxSupportedImageSize'],
-      premiumMaxSupportedImageSize: map['premiumMaxSupportedImageSize'],
-      premiumUploadImageSize: map['premiumUploadImageSize'],
-      standardMaxSupportedImageSize: map['standardMaxSupportedImageSize'],
-      standardUploadImageSize: map['standardUploadImageSize'],
+      suportedImageSize: Dimension.fromMap(map['suportedImageSize']),
+      uploadImageSize: Dimension.fromMap(map['uploadImageSize']),
       upscaleMaxImageSize: map['upscaleMaxImageSize'],
     );
   }
@@ -85,29 +54,18 @@ class EnhanceConfig {
   factory EnhanceConfig.fromJson(String source) => EnhanceConfig.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'EnhanceConfig(maxSupportedImageSize: $maxSupportedImageSize, premiumMaxSupportedImageSize: $premiumMaxSupportedImageSize, premiumUploadImageSize: $premiumUploadImageSize, standardMaxSupportedImageSize: $standardMaxSupportedImageSize, standardUploadImageSize: $standardUploadImageSize, upscaleMaxImageSize: $upscaleMaxImageSize)';
-  }
+  String toString() =>
+      'EnhanceConfig(suportedImageSize: $suportedImageSize, uploadImageSize: $uploadImageSize, upscaleMaxImageSize: $upscaleMaxImageSize)';
 
   @override
   bool operator ==(covariant EnhanceConfig other) {
     if (identical(this, other)) return true;
 
-    return other.maxSupportedImageSize == maxSupportedImageSize &&
-        other.premiumMaxSupportedImageSize == premiumMaxSupportedImageSize &&
-        other.premiumUploadImageSize == premiumUploadImageSize &&
-        other.standardMaxSupportedImageSize == standardMaxSupportedImageSize &&
-        other.standardUploadImageSize == standardUploadImageSize &&
+    return other.suportedImageSize == suportedImageSize &&
+        other.uploadImageSize == uploadImageSize &&
         other.upscaleMaxImageSize == upscaleMaxImageSize;
   }
 
   @override
-  int get hashCode {
-    return maxSupportedImageSize.hashCode ^
-        premiumMaxSupportedImageSize.hashCode ^
-        premiumUploadImageSize.hashCode ^
-        standardMaxSupportedImageSize.hashCode ^
-        standardUploadImageSize.hashCode ^
-        upscaleMaxImageSize.hashCode;
-  }
+  int get hashCode => suportedImageSize.hashCode ^ uploadImageSize.hashCode ^ upscaleMaxImageSize.hashCode;
 }

@@ -1,7 +1,6 @@
-import 'dart:io';
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:snapedit/common/app_routes.dart';
@@ -30,18 +29,16 @@ class _GalleryPageState extends ProviderState<GalleryPage, GalleryProvider> {
     initial().then((value) => setState(() {}));
   }
 
-  Future<File> getImageFileFromAssets(String path) async {
-    final byteData = await rootBundle.load(path);
-
-    final file = File('${(await getTemporaryDirectory()).path}/$path');
-    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-
-    return file;
-  }
-
   onPhoto(String? photo, ImageSource type) async {
-    if (photo != null) {
-      AppRoutes.instance.goEditPhotoPage(context, type: type, photo: photo);
+    if (photo == null) return;
+    switch (type) {
+      case ImageSource.inSuggesstedPhotos:
+        AppRoutes.instance.goEditPhotoPage(context, type: type, photo: photo);
+        break;
+      case ImageSource.inAlbum:
+        AppRoutes.instance.goEditPhotoPage(context, type: type, photo: photo);
+        break;
+      default:
     }
   }
 

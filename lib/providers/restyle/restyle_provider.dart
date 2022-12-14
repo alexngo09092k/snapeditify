@@ -28,8 +28,6 @@ abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
   Future<bool> revert();
 
   bool compare();
-
-  bool saveImage(BuildContext context);
 }
 
 class RestyleProvider extends IRestyleProvider with ProviderDelegate {
@@ -132,7 +130,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   }
 
   @override
-  bool saveImage(BuildContext context) {
+  Future<bool> saveImage(BuildContext context) {
     throw UnimplementedError();
   }
 
@@ -186,5 +184,15 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
       _styles.clear();
       _styles.addAll(data.styles);
     }
+  }
+
+  @override
+  Future<bool> refresh(BuildContext context) async {
+    _state.removeListener(notifyListeners);
+    _state.dispose();
+    _state = RestyleState();
+    _state.addListener(notifyListeners);
+    _states.clear();
+    return true;
   }
 }
