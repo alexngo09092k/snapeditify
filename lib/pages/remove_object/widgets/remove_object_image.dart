@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/generated/l10n.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
-import 'package:snapedit/providers/remove_object/remove_object_state.dart';
+import 'package:snapedit/widgets/base/block.dart';
 import 'package:snapedit/widgets/base/custom_icon.dart';
 import 'package:snapedit/widgets/painter/painter_pure.dart';
 import 'package:snapedit/widgets/custom_button.dart';
@@ -13,14 +15,34 @@ class RemoveObjectImage extends StatelessWidget {
   final RemoveObjectProvider provider;
 
   _showColorPopup(BuildContext context) {
-    provider.changeStrokeColor(context, Colors.black.withOpacity(0.5));
+    SmartDialog.show(builder: (_) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(AppDimensions.instance.paddingX(3)),
+            child: Block(
+              padding: EdgeInsets.all(AppDimensions.instance.padding),
+              child: ColorPicker(
+                pickerColor: provider.state.strokeColor,
+                paletteType: PaletteType.hueWheel,
+                onColorChanged: (Color color) {
+                  provider.state.strokeColor = color;
+                },
+              ),
+            ),
+          ),
+        ],
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height * 2 / 3;
     final double width = MediaQuery.of(context).size.width;
-    return SizedBox(
+    return Container(
+      color: AppColors.instance.blue100,
       width: width,
       height: height,
       child: Stack(
@@ -85,7 +107,7 @@ class RemoveObjectImage extends StatelessWidget {
                           builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                             context,
                             icon: AppAssets.instance.icUndo,
-                            color: p.canUndo ? AppColors.instance.blue : AppColors.instance.black,
+                            color: p.canUndo ? AppColors.instance.blue : AppColors.instance.blue100,
                           ),
                         ),
                       ),
@@ -99,7 +121,7 @@ class RemoveObjectImage extends StatelessWidget {
                           builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                             context,
                             icon: AppAssets.instance.icRedo,
-                            color: p.canRedo ? AppColors.instance.blue : AppColors.instance.black,
+                            color: p.canRedo ? AppColors.instance.blue : AppColors.instance.blue100,
                           ),
                         ),
                       ),
@@ -125,25 +147,17 @@ class RemoveObjectImage extends StatelessWidget {
                       /// COLOR BUTTON
                       GestureDetector(
                         onTap: () => _showColorPopup(context),
-                        child: BasePropConsumer<RemoveObjectProvider, Color>(
-                          listenable: provider,
-                          select: (p) => p.state.strokeColor,
-                          builder: (_, __, p, ___) => Container(
-                            width: AppDimensions.instance.icon,
-                            height: AppDimensions.instance.icon,
-                            decoration: BoxDecoration(
-                              color: p.state.strokeColor,
-                              borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                            ),
-                            child: CustomIcon.defaultStyle(
-                              context,
-                              icon: AppAssets.instance.icAdd,
-                              color: p.state.mode == RemoveObjectMode.brush ? AppColors.instance.blue : AppColors.instance.black,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            CustomIcon(
+                              AppAssets.instance.icColor,
                               size: AppDimensions.instance.icon,
                             ),
-                          ),
+                          ],
                         ),
                       ),
+
                       SizedBox(width: AppDimensions.instance.padding),
 
                       /// COMPARE BUTTON
@@ -153,9 +167,10 @@ class RemoveObjectImage extends StatelessWidget {
                         child: BasePropConsumer<RemoveObjectProvider, bool>(
                           listenable: provider,
                           select: (p) => p.canCompare,
-                          builder: (_, __, p, ___) => Image.asset(
-                            AppAssets.instance.icCompare,
-                            color: p.canCompare ? AppColors.instance.blue : AppColors.instance.black,
+                          builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+                            context,
+                            icon: AppAssets.instance.icCompare,
+                            color: p.canCompare ? AppColors.instance.blue : AppColors.instance.blue100,
                           ),
                         ),
                       ),

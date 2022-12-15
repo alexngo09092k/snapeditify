@@ -168,6 +168,6 @@ class DetectedObject {
 }
 
 enum DetectedObjectType {
-  other,
   person,
+  other,
 }

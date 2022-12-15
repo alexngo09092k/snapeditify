@@ -52,6 +52,9 @@ class DetectedObjectHandler extends DetectedObject {
   bool isRemoved = false;
   bool isSelected = false;
 
+  Function()? onMaskTap;
+  Function()? onBoxTap;
+
   factory DetectedObjectHandler.fromDetectedObject(DetectedObject detectedObject) {
     return DetectedObjectHandler(
       accuracy: detectedObject.accuracy,
@@ -97,7 +100,8 @@ class DetectedObjectHandler extends DetectedObject {
     required ui.Size realSize,
     required ui.Size viewSize,
     required String originalImageBase64,
-    Function(ui.Offset)? onTap,
+    Function()? onMaskTap,
+    Function()? onBoxTap,
   }) async {
     if (box.length > 3) {
       ui.Offset realBoxPosition = ui.Offset(box[0].toDouble(), box[1].toDouble());
@@ -121,20 +125,23 @@ class DetectedObjectHandler extends DetectedObject {
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round;
 
+      this.onMaskTap = onMaskTap;
       maskDrawable = ImageDrawable.fittedToSize(
         position: position,
         size: size,
         image: await ImageUtils.instance.base64ToImageUI(mask),
         locked: true,
-        onTap: onTap,
+        onTap: (_) => this.onMaskTap!(),
         opacity: 0.2,
       );
 
+      this.onBoxTap = onBoxTap;
       boxDrawble = RectangleDrawable(
         paint: paint,
         position: position,
         size: size,
         locked: true,
+        onTap: (_) => this.onBoxTap!(),
       );
 
       image = await ImageUtils.instance.cropImageBase64(

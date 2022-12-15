@@ -13,6 +13,14 @@ class DetectedObjectItem extends StatelessWidget {
   final DetectedObjectHandler detectedObject;
   final RemoveObjectProvider provider;
 
+  _onTap(_) {
+    if (provider.state.detectedObjects[detectedObject.maskId] == null) return;
+    DetectedObjectHandler object = provider.state.detectedObjects[detectedObject.maskId]!;
+    if (object.isRemoved) return;
+    if (object.isSelected && object.onMaskTap != null) return object.onMaskTap!();
+    if (!object.isSelected && object.onBoxTap != null) return object.onBoxTap!();
+  }
+
   @override
   Widget build(BuildContext context) {
     final imageWidget = ClipRRect(
@@ -21,11 +29,7 @@ class DetectedObjectItem extends StatelessWidget {
         width: 60,
         height: 60,
         child: Center(
-          child: detectedObject.image != null
-              ? Image.memory(
-                  base64.decode(detectedObject.image!),
-                )
-              : const SizedBox(),
+          child: detectedObject.image != null ? Image.memory(base64.decode(detectedObject.image!)) : const SizedBox(),
         ),
       ),
     );
@@ -58,15 +62,14 @@ class DetectedObjectItem extends StatelessWidget {
       ),
       child: Text(
         S.of(context).removed,
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(
-              color: Colors.red,
-            ),
+        style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.red),
       ),
     );
     return BasePropConsumer<RemoveObjectProvider, bool>(
       listenable: provider,
       select: (p) => p.state.detectedObjects[detectedObject.maskId]?.isRemoved ?? false,
       builder: (_, __, p, ___) => TileRow(
+        onTap: _onTap,
         leading: imageWidget,
         main: Column(
           children: [

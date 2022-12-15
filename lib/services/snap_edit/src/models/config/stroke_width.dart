@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class StrokeWidth {
-  final double min;
-  final double max;
-  final double init;
+  final int min;
+  final int max;
+  final int init;
   final Color color;
 
   const StrokeWidth({
@@ -24,9 +24,9 @@ class StrokeWidth {
   }
 
   StrokeWidth copyWith({
-    double? min,
-    double? max,
-    double? init,
+    int? min,
+    int? max,
+    int? init,
     Color? color,
   }) {
     return StrokeWidth(
@@ -51,7 +51,12 @@ class StrokeWidth {
       min: map['min'],
       max: map['max'],
       init: map['init'],
-      color: Color.fromRGBO((map['color'][0] ?? 255), (map['color'][1] ?? 255), (map['color'][2] ?? 255), (map['color'][3] ?? 0.5)),
+      color: Color.fromRGBO(
+        (map['color'][0] ?? 255).toInt(),
+        (map['color'][1] ?? 255).toInt(),
+        (map['color'][2] ?? 255).toInt(),
+        (map['color'][3] ?? 0.5),
+      ),
     );
   }
 

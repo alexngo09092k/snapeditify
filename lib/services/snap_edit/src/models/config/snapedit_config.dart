@@ -92,16 +92,16 @@ class SnapEditConfig {
   }
 
   factory SnapEditConfig.fromMap(Map<String, dynamic> map) {
-    return SnapEditConfig(
-      baseUrl: map['baseUrl'] as String,
-      apiKey: map['apiKey'] as String,
-      version: map['version'] as String,
-      endPoints: EndPoints.fromMap(map['endPoints'] as Map<String, dynamic>),
-      enhance: EnhanceConfig.fromMap(map['enhance'] as Map<String, dynamic>),
-      restyle: RestyleConfig.fromMap(map['restyle'] as Map<String, dynamic>),
-      removeObject: RemoveObjectConfig.fromMap(map['removeObject'] as Map<String, dynamic>),
-      waterMark: map['waterMark'] as bool,
-      maxFreeDownloadCount: map['maxFreeDownloadCount'] as int,
+    return SnapEditConfig.defaultValue().copyWith(
+      baseUrl: map['baseUrl'],
+      apiKey: map['apiKey'],
+      version: map['version'],
+      endPoints: EndPoints.fromMap(map['endPoints']),
+      enhance: EnhanceConfig.fromMap(map['enhance']),
+      restyle: RestyleConfig.fromMap(map['restyle']),
+      removeObject: RemoveObjectConfig.fromMap(map['removeObject']),
+      waterMark: map['waterMark'],
+      maxFreeDownloadCount: map['maxFreeDownloadCount'],
     );
   }
 

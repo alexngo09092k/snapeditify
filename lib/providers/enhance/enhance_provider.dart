@@ -91,7 +91,12 @@ class EnhanceProvider extends IEnhanceProvider {
   }
 
   @override
-  Future<bool> saveImage(BuildContext context) async {
-    return true;
+  Future<bool> saveImage(BuildContext context) {
+    return checkoutSaveImage(context, () async {
+      /// SAVE IMAGE
+      return true;
+    }, () {
+      /// MAX COUNT DOWNLOAD IMAGE
+    });
   }
 }

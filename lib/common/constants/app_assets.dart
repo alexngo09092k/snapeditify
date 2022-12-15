@@ -38,6 +38,7 @@ class AppAssets {
   final String snapEditLogoFull = "$imagePath/snapedit_logo_full.png";
   final String snapEditLogoText = "$imagePath/snapedit_logo_text.png";
   final String splashTitle = "$imagePath/splash_title.png";
+  final String noObject = "$imagePath/no_object.webp";
 
   /// Icons
   static const String iconPath = 'assets/images/icons';
@@ -58,6 +59,7 @@ class AppAssets {
   final String icFeedback = "$iconPath/ic_feedback.png";
   final String icProText = "$iconPath/ic_pro_text.png";
   final String icBack = "$iconPath/ic_back.png";
+  final String icArrowLeft = "$iconPath/ic_arrow_left.png";
   final String icArrowRight = "$iconPath/ic_arrow_right.png";
   final String icStarNormal = "$iconPath/ic_star_normal.png";
   final String icStarHighlight = "$iconPath/ic_star_highlight.png";
@@ -66,35 +68,30 @@ class AppAssets {
   final String icBling = "$iconPath/ic_bling.png";
   final String icStar = "$iconPath/ic_star.png";
   final String icExpandMore = "$iconPath/ic_expand_more.png";
-
-  final String icBirthday = "$iconPath/ic_birthday.png";
-  final String icBrushHighLight = "$iconPath/ic_brush_hightlight";
-  final String icBrushSize = "$iconPath/ic_brush_size.png";
+  final String icHand = "$iconPath/ic_hand.png";
+  final String icRedo = "$iconPath/ic_redo.png";
+  final String icUndo = "$iconPath/ic_undo.png";
+  final String icCompare = "$iconPath/ic_compare.png";
+  final String icEraser = "$iconPath/ic_eraser.png";
+  final String icColor = "$iconPath/ic_color.png";
   final String icBrush = "$iconPath/ic_brush.png";
+  final String icAI = "$iconPath/ic_ai.png";
+
+  final String icBrushHighLight = "$iconPath/ic_brush_hightlight";
   final String icCheckboxReload = "$iconPath/ic_checkbox_reload.png";
   final String icCheckboxSelected = "$iconPath/ic_checkbox_selected.png";
   final String icCheckbox = "$iconPath/ic_checkbox.png";
   final String icCheckmarkCirlce = "$iconPath/ic_checkmark_cirlce.png";
   final String icCheckmark = "$iconPath/ic_checkmark.png";
-  final String icCompare = "$iconPath/ic_compare.png";
   final String icCrown = "$iconPath/ic_crown.png";
   final String icDelete = "$iconPath/ic_delete.png";
-  final String icEraserSelected = "$iconPath/ic_eraser_selected.png";
-  final String icEraserUnselected = "$iconPath/ic_eraser_unselected.png";
-  final String icFaceIdHighLight = "$iconPath/ic_face_id_hightlight.png";
-  final String icFaceId = "$iconPath/ic_face_id.png";
-  final String icFingerBrushSelected = "$iconPath/ic_finger_brush_selected.png";
-  final String icFingerBrushUnselected = "$iconPath/ic_finger_brush_unselected.png";
+
   final String icGrayLoading = "$iconPath/ic_gray_loading.png";
   final String icGreenCheckmark = "$iconPath/ic_green_checkmark.png";
   final String icGroups = "$iconPath/ic_groups.png";
   final String icInfo = "$iconPath/ic_info.png";
   final String icLoading = "$iconPath/ic_loading.png";
-  final String icRedoDisabled = "$iconPath/ic_redo_disbaled.png";
-  final String icRedo = "$iconPath/ic_redo.png";
   final String icRevert = "$iconPath/ic_revert.png";
   final String icThumbSlider = "$iconPath/ic_thumb_slider.png";
-  final String icUndoDisabled = "$iconPath/ic_undo_disabled.png";
-  final String icUndo = "$iconPath/ic_undo.png";
   final String icWhiteX = "$iconPath/ic_white_x.png";
 }

@@ -66,7 +66,9 @@ class RemoveObjectState extends EditImageState {
       .._sessionId = sessionId ?? this.sessionId
       .._detectedObjects.addAll(detectedObjects ?? this.detectedObjects)
       .._prev = prev ?? this.prev
-      .._next = next ?? this.next;
+      .._next = next ?? this.next
+      .._paintParseAfterDetected()
+      ..notifyListeners();
   }
 
   @override
@@ -185,9 +187,13 @@ extension AIDetectedObjectHandler on RemoveObjectState {
         realSize: ui.Size(imageUI.width.toDouble(), imageUI.height.toDouble()),
         viewSize: renderBox!.size,
         originalImageBase64: imageBase64,
-        onTap: (_) {
+        onMaskTap: () {
           detectedObject.isSelected = false;
           paint.removeDrawable(detectedObject.maskDrawable!, saveAction: false);
+        },
+        onBoxTap: () {
+          detectedObject.isSelected = true;
+          _paint.addDrawables([detectedObject.maskDrawable!], saveAction: false);
         },
       );
     }
@@ -201,12 +207,6 @@ extension DetectedObjectEx on RemoveObjectState {
     for (var detectedObject in _detectedObjects.values) {
       /// IF DETECTED OBJECT IS NOT REMOVED, PAINT SELECTED BOX
       if (!detectedObject.isRemoved) {
-        detectedObject.boxDrawble = detectedObject.boxDrawble!.copyWith(
-          onTap: (_) {
-            detectedObject.isSelected = true;
-            _paint.addDrawables([detectedObject.maskDrawable!], saveAction: false);
-          },
-        );
         drawables.add(detectedObject.boxDrawble!);
       }
     }

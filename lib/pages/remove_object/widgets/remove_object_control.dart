@@ -6,7 +6,7 @@ import 'package:snapedit/pages/remove_object/widgets/ai_mode_result.dart';
 import 'package:snapedit/pages/remove_object/widgets/brush_mode_setting.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 import 'package:snapedit/providers/remove_object/remove_object_state.dart';
-import 'package:snapedit/widgets/ai_icon.dart';
+import 'package:snapedit/widgets/base/custom_icon.dart';
 
 class RemoveObjectControl extends StatelessWidget {
   const RemoveObjectControl({super.key, required this.provider});
@@ -40,19 +40,9 @@ class RemoveObjectControl extends StatelessWidget {
                       onTap: () => provider.toAI(context),
                       child: Column(
                         children: [
-                          Image.asset(
-                            AppAssets.instance.icFaceId,
-                            width: AppDimensions.instance.icon,
-                          ),
-                          SizedBox(height: AppDimensions.instance.padding),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(S.of(context).auto),
-                              SizedBox(width: AppDimensions.instance.paddingX(1)),
-                              const AIIcon(),
-                            ],
-                          )
+                          CustomIcon(AppAssets.instance.icAI),
+                          SizedBox(height: AppDimensions.instance.paddingX(0.5)),
+                          Text(S.of(context).auto),
                         ],
                       ),
                     ),
@@ -62,12 +52,11 @@ class RemoveObjectControl extends StatelessWidget {
                       onTap: () => provider.toBrush(context),
                       child: Column(
                         children: [
-                          Image.asset(
+                          CustomIcon(
                             AppAssets.instance.icBrush,
-                            width: AppDimensions.instance.icon,
                             color: p.state.mode == RemoveObjectMode.brush ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                           ),
-                          SizedBox(height: AppDimensions.instance.padding),
+                          SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                           Text(
                             S.of(context).brush,
                             style: Theme.of(context).textTheme.bodyText1!.copyWith(

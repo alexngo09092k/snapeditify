@@ -12,12 +12,7 @@ import 'package:snapedit/services/snap_edit/src/models/response/styles_response.
 import 'package:snapedit/widgets/painter/painter.dart';
 
 abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
-  bool get isLoading;
-
   List<Style> get styles;
-
-  @override
-  RestyleState get state;
 
   bool get canSave;
   bool get canRevert;
@@ -44,10 +39,6 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   final List<Style> _styles = [];
   @override
   List<Style> get styles => _styles;
-
-  bool _isLoading = true;
-  @override
-  bool get isLoading => _isLoading;
 
   late RestyleState _state;
   @override
@@ -131,7 +122,13 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   Future<bool> saveImage(BuildContext context) {
-    throw UnimplementedError();
+    return checkoutSaveImage(context, () async {
+      /// SAVE IMAGE
+      return true;
+    }, () {
+      /// MAX COUNT DOWNLOAD IMAGE
+      SmartDialog.showToast('');
+    });
   }
 
   @override
@@ -142,7 +139,6 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   void clean([bool notify = false]) {
-    _isLoading = true;
     _states.clear();
     _styles.clear();
     _state = _states[DEFAULT_IMAGE]!;
@@ -184,6 +180,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
       _styles.clear();
       _styles.addAll(data.styles);
     }
+    if (notify) notifyListeners();
   }
 
   @override

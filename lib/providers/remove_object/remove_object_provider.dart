@@ -4,14 +4,16 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/models/ai_detection_handler.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
 import 'package:snapedit/providers/remove_object/remove_object_state.dart';
+import 'package:snapedit/providers/storage_provider.dart';
 import 'package:snapedit/services/services.dart';
 import 'package:snapedit/utils/image.dart';
 import 'package:snapedit/widgets/painter/painter.dart';
 
-abstract class IRemoveObjectProvider extends EditImageProvider {
+abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
   bool get canRemove;
   bool get canSave;
   bool get canUndo;
@@ -19,9 +21,6 @@ abstract class IRemoveObjectProvider extends EditImageProvider {
   bool get canCompare;
   bool get canRevert;
   bool get strokeWidthIsChanged;
-
-  @override
-  RemoveObjectState get state;
 
   bool undo();
 
@@ -46,13 +45,13 @@ abstract class IRemoveObjectProvider extends EditImageProvider {
   bool changeStrokeColor(BuildContext context, Color strokeColor);
 }
 
-class RemoveObjectProvider extends IRemoveObjectProvider {
+class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   static final IRemoveObjectProvider _instance = RemoveObjectProvider.internal();
 
   static IRemoveObjectProvider get instance => _instance;
 
   RemoveObjectProvider.internal() {
-    _state = RemoveObjectState();
+    _state = RemoveObjectState(strokeWidth: config.removeObject.strokeWidth.init.toDouble(), strokeColor: config.removeObject.strokeWidth.color);
     _state.addListener(notifyListeners);
   }
 
@@ -310,6 +309,9 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
   bool changeStrokeWidth(BuildContext context, double strokeWidth) {
     _strokeChanged = true;
     _state.strokeWidth = strokeWidth;
+
+    /// CACHE LOCAL STORAGE
+    AsyncStorage.instance.setDouble(AppSharedKey.instance.strokeWidth, _state.strokeWidth);
     return true;
   }
 
@@ -317,16 +319,26 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
   bool changeStrokeColor(BuildContext context, Color strokeColor) {
     _strokeChanged = true;
     _state.strokeColor = strokeColor;
+
+    /// CACHE LOCAL STORAGE
+    AsyncStorage.instance.setInt(AppSharedKey.instance.strokeColor, _state.strokeColor.value);
     return true;
   }
 
   @override
   Future<bool> saveImage(BuildContext context) {
-    throw UnimplementedError();
+    return checkoutSaveImage(context, () async {
+      /// SAVE IMAGE
+      return true;
+    }, () {
+      /// MAX COUNT DOWNLOAD IMAGE
+    });
   }
 
   @override
   Future<bool> refresh(BuildContext context) async {
+    _compared = false;
+    _strokeChanged = false;
     _state.removeListener(notifyListeners);
     _state.dispose();
     _state = RemoveObjectState();
@@ -338,5 +350,49 @@ class RemoveObjectProvider extends IRemoveObjectProvider {
   void dispose() {
     _state.dispose();
     super.dispose();
+  }
+
+  @override
+  Future<bool> registered() {
+    syncFromStorage();
+    return super.registered();
+  }
+
+  @override
+  void clean([bool notify = false]) {
+    _compared = false;
+    _strokeChanged = false;
+    _state = RemoveObjectState();
+    _state.strokeColor = config.removeObject.strokeWidth.color;
+    _state.strokeWidth = config.removeObject.strokeWidth.init.toDouble();
+    if (notify) notifyListeners();
+  }
+
+  @override
+  Future<bool> cleanToStorage([bool notify = false]) async {
+    clean(notify);
+    AsyncStorage.instance.remove(AppSharedKey.instance.strokeColor);
+    AsyncStorage.instance.remove(AppSharedKey.instance.strokeWidth);
+    return true;
+  }
+
+  @override
+  Future<void> syncFromServer([bool notify = false]) async {
+    return;
+  }
+
+  @override
+  void syncFromStorage([bool notify = false]) {
+    int? strokeColor = AsyncStorage.instance.getInt(AppSharedKey.instance.strokeColor);
+    if (strokeColor != null) {
+      _state.strokeColor = Color(strokeColor);
+    }
+
+    double? strokeWidth = AsyncStorage.instance.getDouble(AppSharedKey.instance.strokeWidth);
+    if (strokeWidth != null) {
+      _state.strokeWidth = strokeWidth;
+    }
+
+    if (notify) notifyListeners();
   }
 }

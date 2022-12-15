@@ -3,6 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 import 'package:snapedit/providers/remove_object/remove_object_state.dart';
+import 'package:snapedit/widgets/base/custom_icon.dart';
 
 class BrushModeSetting extends StatelessWidget {
   const BrushModeSetting({Key? key, required this.provider}) : super(key: key);
@@ -12,16 +13,18 @@ class BrushModeSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        SizedBox(width: AppDimensions.instance.padding),
+
         /// BRUSH BUTTON
         GestureDetector(
           onTap: () => provider.toBrush(context),
           child: BasePropConsumer<RemoveObjectProvider, bool>(
             listenable: provider,
             select: (p) => p.state.mode == RemoveObjectMode.brush,
-            builder: (_, __, p, ___) => Image.asset(
-              AppAssets.instance.icFingerBrushUnselected,
+            builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+              context,
+              icon: AppAssets.instance.icHand,
               color: p.state.mode == RemoveObjectMode.brush ? AppColors.instance.blue : AppColors.instance.black,
-              width: AppDimensions.instance.icon,
             ),
           ),
         ),
@@ -32,8 +35,8 @@ class BrushModeSetting extends StatelessWidget {
             listenable: provider,
             select: (p) => p.state.strokeWidth,
             builder: (_, __, p, ___) => Slider(
-              min: 1,
-              max: 100,
+              min: p.config.removeObject.strokeWidth.min.toDouble(),
+              max: p.config.removeObject.strokeWidth.max.toDouble(),
               value: p.state.strokeWidth,
               label: '${p.state.strokeWidth.round()}',
               divisions: 100,
@@ -50,13 +53,14 @@ class BrushModeSetting extends StatelessWidget {
           child: BasePropConsumer<RemoveObjectProvider, bool>(
             listenable: provider,
             select: (p) => p.state.mode == RemoveObjectMode.erase,
-            builder: (_, __, p, ___) => Image.asset(
-              AppAssets.instance.icEraserUnselected,
+            builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+              context,
+              icon: AppAssets.instance.icEraser,
               color: p.state.mode == RemoveObjectMode.erase ? AppColors.instance.blue : AppColors.instance.black,
-              width: AppDimensions.instance.icon,
             ),
           ),
         ),
+        SizedBox(width: AppDimensions.instance.padding),
       ],
     );
   }

@@ -13,5 +13,8 @@ class AppSharedKey {
   String get remoteConfigExpriedDate => '${Configuration.instance.appConfig.sharedKeyPrefix}remoteConfigExpriedDate';
   String get themeMode => '${Configuration.instance.appConfig.sharedKeyPrefix}themeMode';
   String get styles => '${Configuration.instance.appConfig.sharedKeyPrefix}styles';
-  String get maxDownloadCount => '${Configuration.instance.appConfig.sharedKeyPrefix}maxDownloadCount';
+
+  String get downloadCount => '${Configuration.instance.appConfig.sharedKeyPrefix}downloadCount';
+  String get strokeWidth => '${Configuration.instance.appConfig.sharedKeyPrefix}strokeWidth';
+  String get strokeColor => '${Configuration.instance.appConfig.sharedKeyPrefix}strokeColor';
 }

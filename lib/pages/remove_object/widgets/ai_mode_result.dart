@@ -6,6 +6,7 @@ import 'package:snapedit/models/ai_detection_handler.dart';
 import 'package:snapedit/pages/remove_object/widgets/detected_object_list.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
+import 'package:snapedit/widgets/base/custom_icon.dart';
 import 'package:snapedit/widgets/base/sliding_control.dart';
 
 class AIModeResult extends StatefulWidget {
@@ -17,29 +18,36 @@ class AIModeResult extends StatefulWidget {
 }
 
 class _AIModeResultState extends State<AIModeResult> {
-  int _indexTab = 0;
+  final ValueNotifier<int> _indexTab = ValueNotifier(0);
 
   late final PageController _controller;
 
   @override
   void initState() {
-    _controller = PageController(initialPage: _indexTab);
+    _controller = PageController(initialPage: _indexTab.value);
+    _controller.addListener(() {
+      if (_controller.page == null) return;
+      if (_indexTab.value != _controller.page!.round()) {
+        _indexTab.value = _controller.page!.round();
+      }
+    });
     super.initState();
   }
 
-  _onChangedTab(DetectedObjectType type) {
+  void _onChangedTab(DetectedObjectType? type) {
+    if (type == null) return;
     switch (type) {
       case DetectedObjectType.person:
-        _indexTab = 0;
+        _indexTab.value = 0;
         break;
       case DetectedObjectType.other:
-        _indexTab = 1;
+        _indexTab.value = 1;
         break;
       default:
     }
     _controller.animateToPage(
-      _indexTab,
-      duration: const Duration(),
+      _indexTab.value,
+      duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOut,
     );
   }
@@ -64,9 +72,12 @@ class _AIModeResultState extends State<AIModeResult> {
                   children: [
                     InkWell(
                       onTap: () => widget.provider.toBrush(context),
-                      child: Image.asset(AppAssets.instance.icAdd, width: 25),
+                      child: CustomIcon(
+                        AppAssets.instance.icArrowLeft,
+                        size: AppDimensions.instance.iconX(0.5),
+                      ),
                     ),
-                    SizedBox(width: AppDimensions.instance.paddingX(1)),
+                    SizedBox(width: AppDimensions.instance.paddingX(0.5)),
                     BasePropConsumer<RemoveObjectProvider, int>(
                       listenable: widget.provider,
                       select: (p) => p.state.detectedObjects.values.length,
@@ -78,11 +89,14 @@ class _AIModeResultState extends State<AIModeResult> {
                   ],
                 ),
                 const Expanded(flex: 1, child: SizedBox()),
-                SlidingControl<DetectedObjectType>.defaultStyle(
-                  context,
-                  value: DetectedObjectType.person,
-                  data: DetectedObjectType.values.asMap().map((_, type) => MapEntry(type, type.label)),
-                  onValueChanged: _onChangedTab,
+                AnimatedBuilder(
+                  animation: _indexTab,
+                  builder: (_, __) => SlidingControl<DetectedObjectType>.defaultStyle(
+                    context,
+                    value: DetectedObjectType.values.elementAt(_indexTab.value),
+                    data: DetectedObjectType.values.asMap().map((_, type) => MapEntry(type, type.label)),
+                    onValueChanged: _onChangedTab,
+                  ),
                 ),
               ],
             ),

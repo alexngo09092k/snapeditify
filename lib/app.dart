@@ -5,6 +5,8 @@ import 'package:snapedit/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:snapedit/widgets/base/loading.dart';
+import 'package:snapedit/widgets/base/toast.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -43,7 +45,10 @@ class _AppState extends AwesomeAppState<App> {
           themeMode: provider.themeMode,
           initialRoute: AppRoutes.instance.initialRoute,
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,
-          navigatorObservers: [AppRouteObserver(action: (name) => Debug.log("==== SCREEN $name ===="))],
+          navigatorObservers: [
+            AppRouteObserver(action: (name) => Debug.log("==== SCREEN $name ====")),
+            FlutterSmartDialog.observer,
+          ],
           routes: AppRoutes.instance.routes,
           // locale: _appProvider.currentLocale,
           localeResolutionCallback: provider.onChangeLocale,
@@ -55,8 +60,8 @@ class _AppState extends AwesomeAppState<App> {
           ],
           supportedLocales: S.delegate.supportedLocales,
           builder: FlutterSmartDialog.init(
-            toastBuilder: (String msg) => Text(msg),
-            loadingBuilder: (String msg) => Text(msg),
+            toastBuilder: (String msg) => Toast(message: msg),
+            loadingBuilder: (String msg) => Loading(message: msg),
           ),
         );
       },

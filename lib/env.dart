@@ -83,7 +83,19 @@ Map<String, dynamic> enviroment = {
         'pro': 3000,
       },
     },
-    'removeObject': {},
+    'removeObject': {
+      'dimension': {
+        'high': 1920,
+        'standard': 1920,
+        'pro': 3000,
+      },
+      'strokeWidth': {
+        'min': 1,
+        'max': 100,
+        'init': 30,
+        'color': [255, 255, 255, 0.5],
+      }
+    },
     'waterMark': false,
     'maxFreeDownloadCount': 100,
   },

@@ -19,7 +19,7 @@ class _EnhanceResultState extends State<EnhanceResult> {
     super.initState();
   }
 
-  void _onChangedResult(String image) {
+  void _onChangedResult(String? image) {
     Debug.log(widget.provider.state.enhancedImageUIList[image]);
   }
 

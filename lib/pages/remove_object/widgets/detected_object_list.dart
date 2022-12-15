@@ -34,8 +34,8 @@ class DetectedObjectList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      AppAssets.instance.icAdd,
-                      width: 70,
+                      AppAssets.instance.noObject,
+                      width: AppDimensions.instance.iconX(2),
                       fit: BoxFit.cover,
                     ),
                     SizedBox(height: AppDimensions.instance.padding),
