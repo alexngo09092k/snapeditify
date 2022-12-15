@@ -1,7 +1,6 @@
 import 'dart:async';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:snapedit/models/ai_detection_handler.dart';
+import 'package:snapedit/view_models/detected_object_vm.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
 import 'package:snapedit/providers/edit_image_state.dart';
 import 'package:snapedit/widgets/painter/painter.dart';
@@ -53,22 +52,31 @@ class RemoveObjectState extends EditImageState {
     double? strokeWidth,
     List<Drawable>? drawables,
     String? sessionId,
-    Map<int, DetectedObjectHandler>? detectedObjects,
+    List<DetectedObjectVM>? detectedObjects,
     RemoveObjectState? prev,
     RemoveObjectState? next,
   }) {
-    return RemoveObjectState(
+    final other = RemoveObjectState(
       mode: mode ?? this.mode,
       strokeWidth: strokeWidth ?? this.strokeWidth,
       strokeColor: strokeColor ?? this.strokeColor,
       drawables: drawables ?? paint.drawables,
     )
       .._sessionId = sessionId ?? this.sessionId
-      .._detectedObjects.addAll(detectedObjects ?? this.detectedObjects)
       .._prev = prev ?? this.prev
-      .._next = next ?? this.next
-      .._paintParseAfterDetected()
-      ..notifyListeners();
+      .._next = next ?? this.next;
+
+    other._detectedObjects.addAll((detectedObjects ?? this.detectedObjects).map((detectedObject) {
+      return detectedObject.copyWith(state: other, isRemoved: detectedObject.isSelected);
+    }));
+
+    if (other.mode == RemoveObjectMode.ai) {
+      other._addAllBoxMask();
+    } else {
+      other._removeAllBoxMask();
+    }
+
+    return other;
   }
 
   @override
@@ -79,12 +87,12 @@ class RemoveObjectState extends EditImageState {
   }
 
   /// AI DETECTED OBJECT
-  final Map<int, DetectedObjectHandler> _detectedObjects = {};
-  Map<int, DetectedObjectHandler> get detectedObjects => _detectedObjects;
-  set detectedObjects(Map<int, DetectedObjectHandler> value) {
+  final List<DetectedObjectVM> _detectedObjects = [];
+  List<DetectedObjectVM> get detectedObjects => _detectedObjects;
+  set detectedObjects(List<DetectedObjectVM> value) {
     _detectedObjects.clear();
     _detectedObjects.addAll(value);
-    _paintParseAfterDetected();
+    _addAllBoxMask();
     notifyListeners();
   }
 
@@ -176,35 +184,10 @@ class RemoveObjectState extends EditImageState {
 }
 
 /// AI DETECTED OBECTS HANDLER
-
-extension AIDetectedObjectHandler on RemoveObjectState {
-  _paintParseAfterDetected() async {
-    for (var detectedObject in _detectedObjects.values) {
-      final renderBox = _paint.painterKey.currentContext?.findRenderObject() as RenderBox?;
-
-      /// PAINT PARSE DATA TO USE
-      await detectedObject.paintParse(
-        realSize: ui.Size(imageUI.width.toDouble(), imageUI.height.toDouble()),
-        viewSize: renderBox!.size,
-        originalImageBase64: imageBase64,
-        onMaskTap: () {
-          detectedObject.isSelected = false;
-          paint.removeDrawable(detectedObject.maskDrawable!, saveAction: false);
-        },
-        onBoxTap: () {
-          detectedObject.isSelected = true;
-          _paint.addDrawables([detectedObject.maskDrawable!], saveAction: false);
-        },
-      );
-    }
-    _addAllBoxMask();
-  }
-}
-
 extension DetectedObjectEx on RemoveObjectState {
   _addAllBoxMask() {
     List<RectangleDrawable> drawables = [];
-    for (var detectedObject in _detectedObjects.values) {
+    for (var detectedObject in _detectedObjects) {
       /// IF DETECTED OBJECT IS NOT REMOVED, PAINT SELECTED BOX
       if (!detectedObject.isRemoved) {
         drawables.add(detectedObject.boxDrawble!);
@@ -223,7 +206,7 @@ extension DetectedObjectEx on RemoveObjectState {
   }
 
   _removeAllBoxMask() {
-    for (var detectedObject in _detectedObjects.values) {
+    for (var detectedObject in _detectedObjects) {
       _paint.removeDrawable(detectedObject.boxDrawble!, saveAction: false);
     }
   }

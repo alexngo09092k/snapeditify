@@ -150,9 +150,9 @@ class RemoveObjectImage extends StatelessWidget {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            CustomIcon(
-                              AppAssets.instance.icColor,
-                              size: AppDimensions.instance.icon,
+                            CustomIcon.defaultStyle(
+                              context,
+                              icon: AppAssets.instance.icColor,
                             ),
                           ],
                         ),

@@ -54,13 +54,13 @@ class RemoveObjectControl extends StatelessWidget {
                         children: [
                           CustomIcon(
                             AppAssets.instance.icBrush,
-                            color: p.state.mode == RemoveObjectMode.brush ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+                            color: p.state.mode != RemoveObjectMode.ai ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                           ),
                           SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                           Text(
                             S.of(context).brush,
                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                  color: p.state.mode == RemoveObjectMode.brush ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+                                  color: p.state.mode != RemoveObjectMode.ai ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                                 ),
                           )
                         ],

@@ -4,8 +4,8 @@ import 'dart:ui' as ui;
 
 import 'package:snapedit/utils/image.dart';
 
-class EnhanceHandler extends EnhanceResponse {
-  EnhanceHandler({
+class EnhanceVM extends EnhanceResponse {
+  EnhanceVM({
     required super.faces,
     required super.numFaceModels,
     required super.numTotalFaces,
@@ -14,8 +14,8 @@ class EnhanceHandler extends EnhanceResponse {
     _initial();
   }
 
-  factory EnhanceHandler.defaultValue() {
-    return EnhanceHandler(
+  factory EnhanceVM.defaultValue() {
+    return EnhanceVM(
       faces: [],
       numFaceModels: 0,
       numTotalFaces: 0,
@@ -23,8 +23,8 @@ class EnhanceHandler extends EnhanceResponse {
     );
   }
 
-  factory EnhanceHandler.fromEnhanceResponse(EnhanceResponse response) {
-    return EnhanceHandler(
+  factory EnhanceVM.fromEnhanceResponse(EnhanceResponse response) {
+    return EnhanceVM(
       faces: response.faces,
       numFaceModels: response.numFaceModels,
       numTotalFaces: response.numTotalFaces,
@@ -32,19 +32,19 @@ class EnhanceHandler extends EnhanceResponse {
     );
   }
 
-  late final List<FaceHandler> _facesHandler;
-  List<FaceHandler> get facesHandler => _facesHandler;
+  late final List<FaceVM> _facesHandler;
+  List<FaceVM> get facesHandler => _facesHandler;
 
   Future<void> _initial() async {
-    _facesHandler = faces.map((e) => FaceHandler.fromFace(e)).toList();
+    _facesHandler = faces.map((e) => FaceVM.fromFace(e)).toList();
   }
 }
 
-class FaceHandler extends Face {
-  FaceHandler({required super.box, required super.faceId, required super.png});
+class FaceVM extends Face {
+  FaceVM({required super.box, required super.faceId, required super.png});
 
-  factory FaceHandler.fromFace(Face face) {
-    return FaceHandler(box: face.box, faceId: face.faceId, png: face.png);
+  factory FaceVM.fromFace(Face face) {
+    return FaceVM(box: face.box, faceId: face.faceId, png: face.png);
   }
 
   ui.Image? image;
@@ -56,7 +56,7 @@ class FaceHandler extends Face {
   bool isSelected = false;
 
   @override
-  FaceHandler copyWith({
+  FaceVM copyWith({
     List<int>? box,
     int? faceId,
     List<String>? png,
@@ -64,7 +64,7 @@ class FaceHandler extends Face {
     ui.Image? image,
     Map<String, ui.Image>? enhancedImageList,
   }) {
-    return FaceHandler(
+    return FaceVM(
       box: box ?? this.box,
       faceId: faceId ?? this.faceId,
       png: png ?? this.png,

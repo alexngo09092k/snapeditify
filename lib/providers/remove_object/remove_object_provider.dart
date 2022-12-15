@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/models/ai_detection_handler.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
 import 'package:snapedit/providers/remove_object/remove_object_state.dart';
 import 'package:snapedit/providers/storage_provider.dart';
 import 'package:snapedit/services/services.dart';
 import 'package:snapedit/utils/image.dart';
+import 'package:snapedit/view_models/detected_object_vm.dart';
 import 'package:snapedit/widgets/painter/painter.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
@@ -37,8 +37,6 @@ abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvi
   Future<bool> removeObjects(BuildContext context);
 
   Future<bool> toAI(BuildContext context);
-
-  bool toggleDetectedObject(BuildContext context, int maskId);
 
   bool changeStrokeWidth(BuildContext context, double strokeWidth);
 
@@ -67,8 +65,8 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
   @override
   bool get canRemove {
-    int setectedLength = _state.detectedObjects.values.where((detectedObject) => detectedObject.isSelected).length;
-    int removedLength = _state.detectedObjects.values.where((detectedObject) => detectedObject.isRemoved).length;
+    int setectedLength = _state.detectedObjects.where((detectedObject) => detectedObject.isSelected).length;
+    int removedLength = _state.detectedObjects.where((detectedObject) => detectedObject.isRemoved).length;
     return _state.paint.drawables.isNotEmpty || setectedLength > removedLength;
   }
 
@@ -151,13 +149,12 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   @override
   Future<bool> revert() {
     Debug.log("===== REVERT ====");
-    _state = _state.copyWith(
-      detectedObjects: {},
-      mode: RemoveObjectMode.brush,
-      drawables: [],
+    _state.removeListener(notifyListeners);
+    _state = RemoveObjectState(
+      strokeColor: _state.strokeColor,
+      strokeWidth: _state.strokeWidth,
     );
-    _state.prev = null;
-    _state.next = null;
+    _state.addListener(notifyListeners);
     return _state.setImage(imageBase64);
   }
 
@@ -174,11 +171,17 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     SnapEditResponse<AIDetectionResponse?> res = await Services.instance.snapEdit.detection(body);
 
     if (res.data != null) {
-      List<DetectedObjectHandler> detectedObjects = AIDetectionHandler.fromAIDetectionResponse(res.data!).detectedObjectsHandler;
-      _state.detectedObjects = detectedObjects.asMap().map<int, DetectedObjectHandler>(((_, e) => MapEntry(e.maskId, e)));
+      /// DETECTED OBJECT VM
+      List<DetectedObjectVM> detectedObjectVMs = [];
+      for (var detectedObject in res.data!.detectedObjects) {
+        final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
+        await vm.paintParse();
+        detectedObjectVMs.add(vm);
+      }
+      _state.detectedObjects = detectedObjectVMs;
 
       /// SET NEW SESSION ID
-      _state.sessionId = res.data!.sessionId;
+      // _state.sessionId = res.data!.sessionId;
 
       /// AI MODE
       Debug.log("===== TO AI MODE ====");
@@ -204,9 +207,9 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (_state.mode == RemoveObjectMode.brush) return true;
 
     /// CLEAR AI DETECTED OBJECTS
-    _state.detectedObjects.forEach((_, detectedObject) {
+    for (var detectedObject in _state.detectedObjects) {
       _state.paint.removeDrawable(detectedObject.boxDrawble!);
-    });
+    }
 
     /// BACK TO BRUSH MODE
     _state.mode = RemoveObjectMode.brush;
@@ -219,9 +222,9 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (_state.mode == RemoveObjectMode.erase) return true;
 
     /// CLEAR AI DETECTED OBJECTS
-    _state.detectedObjects.forEach((_, detectedObject) {
+    for (var detectedObject in _state.detectedObjects) {
       _state.paint.removeDrawable(detectedObject.boxDrawble!);
-    });
+    }
 
     /// BACK TO ERASE MODE
     _state.mode = RemoveObjectMode.erase;
@@ -288,20 +291,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
     /// HIDE LOADING POPUP
     SmartDialog.dismiss();
-    return false;
-  }
-
-  @override
-  bool toggleDetectedObject(BuildContext context, int maskId) {
-    if (_state.detectedObjects[maskId] == null) return false;
-    if (_state.detectedObjects[maskId]!.isRemoved) return false;
-    if (_state.detectedObjects[maskId]!.isSelected) {
-      _state.detectedObjects[maskId]!.isSelected = true;
-      _state.paint.addDrawables([_state.detectedObjects[maskId]!.maskDrawable!], saveAction: false);
-      return true;
-    }
-    _state.detectedObjects[maskId]!.isSelected = false;
-    _state.paint.removeDrawable(_state.detectedObjects[maskId]!.maskDrawable!, saveAction: false);
     return false;
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/models/ai_detection_handler.dart';
+import 'package:snapedit/view_models/detected_object_vm.dart';
 import 'package:snapedit/pages/remove_object/widgets/detected_object_list.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
@@ -80,9 +80,9 @@ class _AIModeResultState extends State<AIModeResult> {
                     SizedBox(width: AppDimensions.instance.paddingX(0.5)),
                     BasePropConsumer<RemoveObjectProvider, int>(
                       listenable: widget.provider,
-                      select: (p) => p.state.detectedObjects.values.length,
+                      select: (p) => p.state.detectedObjects.length,
                       builder: (_, __, p, ___) => Text(
-                        '${p.state.detectedObjects.values.length} ${S.of(context).objects}',
+                        '${p.state.detectedObjects.length} ${S.of(context).objects}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),

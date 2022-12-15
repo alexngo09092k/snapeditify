@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:snapedit/models/enhance_handler.dart';
+import 'package:snapedit/view_models/enhance_vm.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
 import 'package:snapedit/providers/edit_image_state.dart';
 import 'package:snapedit/utils/image.dart';
@@ -64,9 +64,9 @@ class EnhanceState extends EditImageState {
     return true;
   }
 
-  final Map<int, FaceHandler> _faces = {};
-  Map<int, FaceHandler> get faces => _faces;
-  set faces(Map<int, FaceHandler> value) {
+  final Map<int, FaceVM> _faces = {};
+  Map<int, FaceVM> get faces => _faces;
+  set faces(Map<int, FaceVM> value) {
     _faces.clear();
     _faces.addAll(value);
     _paintParseAfterEnahance();

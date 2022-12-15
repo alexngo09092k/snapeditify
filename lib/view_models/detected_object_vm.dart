@@ -1,73 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapedit/providers/remove_object/remove_object_state.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
 import 'package:snapedit/utils/image.dart';
 import 'package:snapedit/widgets/painter/painter_pure.dart';
 import 'package:snapedit/widgets/painter/painter.dart';
 import 'dart:ui' as ui;
 
-class AIDetectionHandler extends AIDetectionResponse {
-  AIDetectionHandler({
-    required super.detectedObjects,
-    required super.eventId,
-    required super.sessionId,
-  }) {
-    _initial();
-  }
-
-  factory AIDetectionHandler.defaultValue() {
-    return AIDetectionHandler(detectedObjects: [], eventId: '', sessionId: '');
-  }
-
-  factory AIDetectionHandler.fromAIDetectionResponse(AIDetectionResponse response) {
-    return AIDetectionHandler(
-      detectedObjects: response.detectedObjects,
-      eventId: response.eventId,
-      sessionId: response.sessionId,
-    );
-  }
-
-  late final List<DetectedObjectHandler> _detectedObjectsHandler;
-  List<DetectedObjectHandler> get detectedObjectsHandler => _detectedObjectsHandler;
-
-  Future<void> _initial() async {
-    _detectedObjectsHandler = detectedObjects.map((e) => DetectedObjectHandler.fromDetectedObject(e)).toList();
-  }
-}
-
-class DetectedObjectHandler extends DetectedObject {
-  DetectedObjectHandler({
+class DetectedObjectVM extends DetectedObject with Provider {
+  DetectedObjectVM({
     required super.accuracy,
     required super.box,
     required super.mask,
     required super.maskId,
     required super.objectDescription,
     required super.objectType,
+    required this.state,
   });
 
   ImageDrawable? maskDrawable;
   RectangleDrawable? boxDrawble;
   String? image;
 
-  bool isRemoved = false;
-  bool isSelected = false;
+  bool _isRemoved = false;
+  bool get isRemoved => _isRemoved;
+  set isRemoved(bool value) {
+    if (_isRemoved != value) {
+      _isRemoved = value;
+      notifyListeners();
+    }
+  }
 
-  Function()? onMaskTap;
-  Function()? onBoxTap;
+  bool _isSelected = false;
+  bool get isSelected => _isSelected;
+  set isSelected(bool value) {
+    if (_isSelected != value) {
+      _isSelected = value;
+      notifyListeners();
+    }
+  }
 
-  factory DetectedObjectHandler.fromDetectedObject(DetectedObject detectedObject) {
-    return DetectedObjectHandler(
+  RemoveObjectState state;
+
+  factory DetectedObjectVM.fromDetectedObject(DetectedObject detectedObject, RemoveObjectState state) {
+    return DetectedObjectVM(
       accuracy: detectedObject.accuracy,
       box: detectedObject.box,
       mask: detectedObject.mask,
       maskId: detectedObject.maskId,
       objectDescription: detectedObject.objectDescription,
       objectType: detectedObject.objectType,
+      state: state,
     );
   }
 
   @override
-  DetectedObjectHandler copyWith({
+  DetectedObjectVM copyWith({
     List<int>? box,
     DetectedObjectType? objectType,
     String? mask,
@@ -80,29 +68,57 @@ class DetectedObjectHandler extends DetectedObject {
     String? image,
     bool? isRemoved,
     bool? isSelected,
+    RemoveObjectState? state,
   }) {
-    return DetectedObjectHandler(
+    final other = DetectedObjectVM(
       box: box ?? this.box,
       objectType: objectType ?? this.objectType,
       mask: mask ?? this.mask,
       accuracy: accuracy ?? this.accuracy,
       objectDescription: objectDescription ?? this.objectDescription,
       maskId: maskId ?? this.maskId,
+      state: state ?? this.state,
     )
-      ..maskDrawable = maskDrawable ?? this.maskDrawable
-      ..boxDrawble = boxDrawble ?? this.boxDrawble
       ..image = image ?? this.image
       ..isRemoved = isRemoved ?? this.isRemoved
       ..isSelected = isSelected ?? this.isSelected;
+
+    other.maskDrawable = maskDrawable ?? this.maskDrawable?.copyWith(onTap: (_) => other._removeMask());
+    other.boxDrawble = boxDrawble ?? this.boxDrawble?.copyWith(onTap: (_) => other._addMask());
+
+    return other;
   }
 
-  Future<void> paintParse({
-    required ui.Size realSize,
-    required ui.Size viewSize,
-    required String originalImageBase64,
-    Function()? onMaskTap,
-    Function()? onBoxTap,
-  }) async {
+  _removeMask() {
+    if (maskDrawable != null) {
+      state.paint.removeDrawable(maskDrawable!, saveAction: false);
+      isSelected = false;
+    }
+  }
+
+  _addMask() {
+    if (maskDrawable != null) {
+      state.paint.addDrawables([maskDrawable!], saveAction: false);
+      isSelected = true;
+    }
+  }
+
+  toggleSelection() {
+    if (isRemoved) return;
+    if (isSelected) {
+      _removeMask();
+    } else {
+      _addMask();
+    }
+  }
+
+  Future<void> paintParse() async {
+    final renderBox = state.paint.painterKey.currentContext?.findRenderObject() as RenderBox?;
+    if (renderBox == null) return;
+    ui.Size realSize = ui.Size(state.imageUI.width.toDouble(), state.imageUI.height.toDouble());
+    ui.Size viewSize = renderBox.size;
+    String originalImageBase64 = state.imageBase64;
+
     if (box.length > 3) {
       ui.Offset realBoxPosition = ui.Offset(box[0].toDouble(), box[1].toDouble());
       ui.Size realBoxSize = ui.Size((box[2] - box[0]).toDouble(), (box[3] - box[1]).toDouble());
@@ -125,23 +141,21 @@ class DetectedObjectHandler extends DetectedObject {
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round;
 
-      this.onMaskTap = onMaskTap;
       maskDrawable = ImageDrawable.fittedToSize(
         position: position,
         size: size,
         image: await ImageUtils.instance.base64ToImageUI(mask),
         locked: true,
-        onTap: (_) => this.onMaskTap!(),
+        onTap: (_) => _removeMask(),
         opacity: 0.2,
       );
 
-      this.onBoxTap = onBoxTap;
       boxDrawble = RectangleDrawable(
         paint: paint,
         position: position,
         size: size,
         locked: true,
-        onTap: (_) => this.onBoxTap!(),
+        onTap: (_) => _addMask(),
       );
 
       image = await ImageUtils.instance.cropImageBase64(

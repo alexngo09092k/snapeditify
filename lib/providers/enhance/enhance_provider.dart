@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/models/enhance_handler.dart';
+import 'package:snapedit/view_models/enhance_vm.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
 import 'package:snapedit/providers/enhance/enhance_state.dart';
 import 'package:snapedit/services/services.dart';
@@ -41,7 +41,7 @@ class EnhanceProvider extends IEnhanceProvider {
   @override
   bool onChangeFace(String faceId) {
     if (_state.faces[faceId] != null) {
-      FaceHandler face = _state.faces[faceId]!;
+      FaceVM face = _state.faces[faceId]!;
       _state.paintBefore.background = face.image!.backgroundDrawable;
       // _state.paintAfter.background = face.enhancedImageList[]
     }

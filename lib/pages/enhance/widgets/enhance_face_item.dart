@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/models/enhance_handler.dart';
+import 'package:snapedit/view_models/enhance_vm.dart';
 import 'package:snapedit/providers/enhance/enhance_provider.dart';
 
 class EnhanceFaceItem extends StatelessWidget {
   const EnhanceFaceItem({super.key, required this.provider, required this.face});
   final EnhanceProvider provider;
-  final FaceHandler face;
+  final FaceVM face;
 
   @override
   Widget build(BuildContext context) {

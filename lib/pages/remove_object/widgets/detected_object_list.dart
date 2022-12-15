@@ -16,9 +16,9 @@ class DetectedObjectList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasePropConsumer<RemoveObjectProvider, int>(
       listenable: provider,
-      select: (p) => p.state.detectedObjects.values.where((detectedObject) => detectedObject.objectType == type).length,
+      select: (p) => p.state.detectedObjects.where((detectedObject) => detectedObject.objectType == type).length,
       builder: (_, __, p, ___) {
-        final data = p.state.detectedObjects.values.where((detectedObject) => detectedObject.objectType == type);
+        final data = p.state.detectedObjects.where((detectedObject) => detectedObject.objectType == type);
         return data.isNotEmpty
             ? ListView.builder(
                 itemCount: data.length,
