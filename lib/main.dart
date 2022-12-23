@@ -35,6 +35,9 @@ void main() {
 
       await Configuration.instance.loadRemoteConfig();
 
+      AwesomeAdvertisement.instance.initial(Configuration.instance.advertisementConfig);
+      AwesomeIAP.instance.initial(Configuration.instance.iapConfig);
+
       Services.instance.snapEdit.init(Configuration.instance.snapEditConfig);
 
       Debug.debugMode = Configuration.instance.appConfig.appMode == AppMode.debug;
