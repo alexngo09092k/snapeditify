@@ -1,9 +1,7 @@
-import 'dart:ui' as ui;
-import 'package:flutter/material.dart';
-import 'package:snapedit/view_models/enhance_vm.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
+import 'package:snapedit/view_models/enhanced_vm.dart';
 import 'package:snapedit/providers/edit_image_state.dart';
-import 'package:snapedit/utils/image.dart';
+import 'package:snapedit/view_models/face_vm.dart';
 import 'package:snapedit/widgets/painter/painter.dart';
 
 class EnhanceState extends EditImageState {
@@ -13,6 +11,16 @@ class EnhanceState extends EditImageState {
 
     _paintAfter = PainterController();
     _paintAfter.addListener(notifyListeners);
+  }
+
+  @override
+  Future<bool> setImage(String imageBase64, {EditImageProvider? provider, bool createImageFile = true}) async {
+    final bool result = await super.setImage(imageBase64, provider: provider, createImageFile: createImageFile);
+    if (result) {
+      _paintBefore.background = imageUI.backgroundDrawable;
+      _paintAfter.background = imageUI.backgroundDrawable;
+    }
+    return result;
   }
 
   /// PAINT
@@ -29,47 +37,26 @@ class EnhanceState extends EditImageState {
     notifyListeners();
   }
 
-  final Map<String, ui.Image> _enhancedImageUIList = {};
-
-  Map<String, ui.Image> get enhancedImageUIList => _enhancedImageUIList;
-
-  final List<String> _enhancedImageBase64List = [];
-
-  List<String> get enhancedImageBase64List => _enhancedImageBase64List;
-
-  @override
-  Future<bool> setImage(
-    String imageBase64, {
-    List<String>? enhancedImageBase64List,
-    EditImageProvider? provider,
-    bool createImageFile = false,
-  }) async {
-    super.setImage(imageBase64, provider: provider, createImageFile: createImageFile);
-
-    if (enhancedImageBase64List != null) {
-      _enhancedImageBase64List.addAll(enhancedImageBase64List);
-      for (var enhancedImageBase64 in _enhancedImageBase64List) {
-        _enhancedImageUIList[enhancedImageBase64] = (await ImageUtils.instance.base64ToImageUI(enhancedImageBase64));
-      }
-    }
-
-    _paintBefore.background = imageUI.backgroundDrawable;
-
-    if (_enhancedImageUIList.isNotEmpty) {
-      _paintAfter.background = _enhancedImageUIList.values.first.backgroundDrawable;
-    } else {
-      _paintAfter.background = imageUI.backgroundDrawable;
-    }
-
-    return true;
+  int _enhancedImageIndex = 0;
+  int get enhancedImageIndex => _enhancedImageIndex;
+  set enhancedImageIndex(int value) {
+    _enhancedImageIndex = value;
+    notifyListeners();
   }
 
-  final Map<int, FaceVM> _faces = {};
-  Map<int, FaceVM> get faces => _faces;
-  set faces(Map<int, FaceVM> value) {
+  final List<EnhancedVM> _enhancedImages = [];
+  List<EnhancedVM> get enhancedImages => _enhancedImages;
+  set enhancedImages(List<EnhancedVM> value) {
+    _enhancedImages.clear();
+    _enhancedImages.addAll(value);
+    notifyListeners();
+  }
+
+  final List<FaceVM> _faces = [];
+  List<FaceVM> get faces => _faces;
+  set faces(List<FaceVM> value) {
     _faces.clear();
     _faces.addAll(value);
-    _paintParseAfterEnahance();
     notifyListeners();
   }
 
@@ -78,21 +65,5 @@ class EnhanceState extends EditImageState {
     _paintBefore.dispose();
     _paintAfter.dispose();
     super.dispose();
-  }
-}
-
-extension EnhanceImageHandler on EnhanceState {
-  _paintParseAfterEnahance() async {
-    for (var detectedObject in _faces.values) {
-      final renderBox = _paintAfter.painterKey.currentContext?.findRenderObject() as RenderBox?;
-
-      /// PAINT PARSE DATA TO USE
-      await detectedObject.paintParse(
-        realSize: ui.Size(imageUI.width.toDouble(), imageUI.height.toDouble()),
-        viewSize: renderBox!.size,
-        originalImageBase64: imageBase64,
-        enhancedImageBase64List: enhancedImageBase64List,
-      );
-    }
   }
 }

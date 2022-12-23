@@ -176,8 +176,6 @@ class RemoveObjectState extends EditImageState {
 
   @override
   void dispose() {
-    _prev?.dispose();
-    _next?.dispose();
     _paint.dispose();
     super.dispose();
   }

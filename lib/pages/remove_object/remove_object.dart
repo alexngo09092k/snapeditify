@@ -30,7 +30,6 @@ class _RemoveObjectPageState extends ProviderState<RemoveObjectPage, RemoveObjec
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      onWillPop: () async => false,
       goBack: goBack,
       center: RemoveObjectRevert(provider: provider),
       action: RemoveObjectSave(provider: provider),

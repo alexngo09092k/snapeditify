@@ -19,9 +19,7 @@ class _EnhanceResultState extends State<EnhanceResult> {
     super.initState();
   }
 
-  void _onChangedResult(String? image) {
-    Debug.log(widget.provider.state.enhancedImageUIList[image]);
-  }
+  void _onChangedResult(String? image) {}
 
   @override
   void dispose() {
@@ -41,16 +39,18 @@ class _EnhanceResultState extends State<EnhanceResult> {
               const Expanded(flex: 1, child: SizedBox()),
               BasePropConsumer<EnhanceProvider, int>(
                 listenable: widget.provider,
-                select: (p) => p.state.enhancedImageBase64List.length,
-                builder: (_, __, p, ___) => p.state.enhancedImageBase64List.isNotEmpty
-                    ? SlidingControl<String>.defaultStyle(
+                select: (p) => p.state.enhancedImages.length,
+                builder: (_, __, p, ___) => p.state.enhancedImages.isNotEmpty
+                    ? SlidingControl<int>.defaultStyle(
                         context,
-                        value: p.state.enhancedImageBase64List.first,
-                        data: {
-                          ...p.state.enhancedImageBase64List.asMap().map((_, value) => MapEntry(value, 'Result $_')),
-                          '': 'Result 2',
+                        value: 0,
+                        data: const {
+                          1: 'Result 1',
+                          2: 'Result 2',
+                          3: 'Result 3',
                         },
-                        onValueChanged: _onChangedResult,
+                        onValueChanged: (_) {
+                        },
                       )
                     : const SizedBox(),
               ),

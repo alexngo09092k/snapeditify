@@ -31,6 +31,7 @@ class AlbumPhoto extends StatelessWidget {
                   photo,
                   thumbnailSize: size != null ? ThumbnailSize(size.width.toInt(), size.height.toInt()) : null,
                   fit: BoxFit.cover,
+                  isOriginal: false,
                 ),
               ),
             ],

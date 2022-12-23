@@ -1,20 +1,14 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/view_models/enhance_vm.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
 import 'package:snapedit/providers/enhance/enhance_state.dart';
 import 'package:snapedit/services/services.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:snapedit/view_models/enhanced_vm.dart';
+import 'package:snapedit/view_models/face_vm.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   Future<bool> enhanceImage();
-
-  bool onChangeResult(String imageBase64);
-
-  bool onChangeFace(String faceId);
 }
 
 class EnhanceProvider extends IEnhanceProvider {
@@ -32,32 +26,6 @@ class EnhanceProvider extends IEnhanceProvider {
   EnhanceState get state => _state;
 
   @override
-  Future<bool> setImage(BuildContext context, {required File file, bool refesh = true}) async {
-    bool result = await super.setImage(context, file: file, refesh: refesh);
-    if (result) enhanceImage();
-    return result;
-  }
-
-  @override
-  bool onChangeFace(String faceId) {
-    if (_state.faces[faceId] != null) {
-      FaceVM face = _state.faces[faceId]!;
-      _state.paintBefore.background = face.image!.backgroundDrawable;
-      // _state.paintAfter.background = face.enhancedImageList[]
-    }
-    return false;
-  }
-
-  @override
-  bool onChangeResult(String imageBase64) {
-    if (_state.enhancedImageUIList[imageBase64] != null) {
-      _state.paintAfter.background = _state.enhancedImageUIList[imageBase64]!.backgroundDrawable;
-      return true;
-    }
-    return false;
-  }
-
-  @override
   Future<bool> enhanceImage() async {
     /// SHOW LOADING POPUP
     SmartDialog.showLoading();
@@ -66,11 +34,28 @@ class EnhanceProvider extends IEnhanceProvider {
     EnhanceBody body = EnhanceBody(inputImage: _state.imageFile, imageId: _state.imageId);
     final SnapEditResponse<EnhanceResponse?> res = await Services.instance.snapEdit.enhance(body);
     if (res.data != null) {
+      /// ENHANCED IMAGES
+      List<EnhancedVM> enhancedImages = [];
+      for (int index = 0; index < res.data!.outputImages.length; index++) {
+        final vm = EnhancedVM(index: index, imageBase64: imageBase64, state: state);
+        enhancedImages.add(vm);
+      }
+      _state.enhancedImages = enhancedImages;
+
+      /// FACES
+      List<FaceVM> faces = [];
+      for (var e in res.data!.faces) {
+        final vm = FaceVM.fromFace(e, state);
+        await vm.paintParse();
+        faces.add(vm);
+      }
+      _state.faces = faces;
+
       /// HIDE LOADING POPUP
       SmartDialog.dismiss();
-      _state.setImage(imageBase64, enhancedImageBase64List: res.data!.outputImages, provider: this);
       return true;
     }
+
     if (res.error != null) {
       SmartDialog.showToast(res.error!);
       Debug.log('===== ENAHNCE IMAGE ${res.error} =====');

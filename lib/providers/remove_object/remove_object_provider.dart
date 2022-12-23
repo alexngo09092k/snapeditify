@@ -329,16 +329,9 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     _compared = false;
     _strokeChanged = false;
     _state.removeListener(notifyListeners);
-    _state.dispose();
     _state = RemoveObjectState();
     _state.addListener(notifyListeners);
     return true;
-  }
-
-  @override
-  void dispose() {
-    _state.dispose();
-    super.dispose();
   }
 
   @override

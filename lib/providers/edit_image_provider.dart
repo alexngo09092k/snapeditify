@@ -11,6 +11,19 @@ import 'package:snapedit/services/services.dart';
 import 'package:snapedit/utils/image.dart';
 
 abstract class EditImageProvider extends Provider {
+  EditImageState get state;
+
+  late File _imageFile;
+  File get imageFile => _imageFile;
+
+  late ui.Image _imageUI;
+  ui.Image get imageUI => _imageUI;
+
+  late String _imageBase64;
+  String get imageBase64 => _imageBase64;
+
+  SnapEditConfig get config => Configuration.instance.snapEditConfig;
+
   Future<bool> setImage(BuildContext context, {required File file, bool refesh = true}) async {
     /// RENEW STATE
     if (refesh) await refresh(context);
@@ -50,16 +63,10 @@ abstract class EditImageProvider extends Provider {
 
   Future<bool> saveImage(BuildContext context);
 
-  EditImageState get state;
-
-  late File _imageFile;
-  File get imageFile => _imageFile;
-
-  late ui.Image _imageUI;
-  ui.Image get imageUI => _imageUI;
-
-  late String _imageBase64;
-  String get imageBase64 => _imageBase64;
-
-  SnapEditConfig get config => Configuration.instance.snapEditConfig;
+  @override
+  void dispose() {
+    ManagerCache.instance.removeFile(imageFile);
+    state.dispose();
+    super.dispose();
+  }
 }

@@ -11,7 +11,7 @@ class EnhanceBefore extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: AspectRatio(
-        aspectRatio: (provider.imageUI.width / provider.imageUI.height),
+        aspectRatio: (provider.state.imageUI.width / provider.state.imageUI.height),
         child: BasePropConsumer<EnhanceProvider, PainterController>(
           listenable: provider,
           select: (p) => p.state.paintBefore,

@@ -76,22 +76,8 @@ class AppAssets {
   final String icColor = "$iconPath/ic_color.png";
   final String icBrush = "$iconPath/ic_brush.png";
   final String icAI = "$iconPath/ic_ai.png";
-
-  final String icBrushHighLight = "$iconPath/ic_brush_hightlight";
+  final String icRevert = "$iconPath/ic_revert.png";
   final String icCheckboxReload = "$iconPath/ic_checkbox_reload.png";
   final String icCheckboxSelected = "$iconPath/ic_checkbox_selected.png";
   final String icCheckbox = "$iconPath/ic_checkbox.png";
-  final String icCheckmarkCirlce = "$iconPath/ic_checkmark_cirlce.png";
-  final String icCheckmark = "$iconPath/ic_checkmark.png";
-  final String icCrown = "$iconPath/ic_crown.png";
-  final String icDelete = "$iconPath/ic_delete.png";
-
-  final String icGrayLoading = "$iconPath/ic_gray_loading.png";
-  final String icGreenCheckmark = "$iconPath/ic_green_checkmark.png";
-  final String icGroups = "$iconPath/ic_groups.png";
-  final String icInfo = "$iconPath/ic_info.png";
-  final String icLoading = "$iconPath/ic_loading.png";
-  final String icRevert = "$iconPath/ic_revert.png";
-  final String icThumbSlider = "$iconPath/ic_thumb_slider.png";
-  final String icWhiteX = "$iconPath/ic_white_x.png";
 }

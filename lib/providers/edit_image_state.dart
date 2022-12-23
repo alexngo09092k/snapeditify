@@ -16,6 +16,7 @@ abstract class EditImageState extends ChangeNotifier {
     /// CREATE FILE
     if (createImageFile) {
       _imageFile = await ManagerCache.instance.cacheImageBase64(imageBase64);
+      // _imageFile = ImageUtils.instance.pngToJpeg(_imageFile!);
     }
 
     Debug.log("====== STATE SET IMAGE DONE ======");
