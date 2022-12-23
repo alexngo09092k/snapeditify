@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapedit/models/config/app_config.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
@@ -23,6 +24,10 @@ class Configuration {
   /// APP CONFIGUARATIONS
   AppConfig _appConfig = DefaultConfig.appConfig;
   AppConfig get appConfig => _appConfig;
+
+  /// IAP CONFIGURATIONS
+  IAPConfig _iapConfig = DefaultConfig.iapConfig;
+  IAPConfig get iapConfig => _iapConfig;
 
   /// ADS CONFIGURATIONS
   AdvertisementConfig _advertisementConfig = DefaultConfig.advertisementConfig;
@@ -49,6 +54,10 @@ class Configuration {
       _snapEditConfig = SnapEditConfig.fromMap(enviroment['snapEditConfig']);
     }
 
+    if (enviroment['iapConfig'] != null) {
+      _iapConfig = IAPConfig.fromMap(enviroment['iapConfig']);
+    }
+
     return true;
   }
 }
@@ -71,8 +80,15 @@ abstract class DefaultConfig {
 
   /// DEFAULT ADS CONFIGURATIONS
   static AdvertisementConfig advertisementConfig = const AdvertisementConfig(
-    enable: false,
     ads: [],
+    enable: true,
+  );
+
+  /// DEFAULT IAP CONFIG
+  static IAPConfig iapConfig = const IAPConfig(
+    products: [],
+    enable: true,
+    provider: IAPProvider.google,
   );
 }
 

@@ -1,6 +1,6 @@
+//! NOTE: UNIT TIME: SECONDS
 Map<String, dynamic> enviroment = {
-  /// enable firebase module
-  /// remote config
+  /// FIREBASE
   "firebaseConfig": {
     "enableFirebase": true,
     "enableCrashAnalytics": true,
@@ -9,7 +9,7 @@ Map<String, dynamic> enviroment = {
     'minimumFetchInterval': 60,
   },
 
-  /// Business config
+  /// APP
   "appConfig": {
     /// App mode
     /// production, debug, maintenance
@@ -46,7 +46,7 @@ Map<String, dynamic> enviroment = {
     },
   },
 
-  /// SnapEdit Config
+  /// SNAPEDIT
   'snapEditConfig': {
     'baseUrl': "https://be-prod-1.snapedit.app/",
     'apiKey': "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
@@ -100,7 +100,7 @@ Map<String, dynamic> enviroment = {
     'maxFreeDownloadCount': 100,
   },
 
-  // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+  // ADVERTISEMENT
   // https://developers.google.com/admob/android/test-ads
   // https://developers.google.com/admob/ios/test-ads
   "advertisementConfig": {
@@ -128,5 +128,24 @@ Map<String, dynamic> enviroment = {
         "waitingTimeToDisplay": 5,
       },
     ],
+  },
+  //IN APP PURCHASE
+  "iapConfig": {
+    "products": [
+      {
+        "type": "",
+        "provider": "google",
+        "id": "123456789",
+        "info": {
+          "name": "",
+          "description": "",
+          "price": "\$1000",
+          "rawPrice": 1000,
+          "currency": "USD",
+        }
+      }
+    ],
+    "provider": "google",
+    "enable": true,
   }
 };

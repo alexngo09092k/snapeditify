@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
+import 'package:fluttering_iap/iap/iap.dart';
 import 'package:snapedit/app.dart';
 import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/env.dart';
@@ -16,7 +17,7 @@ void main() {
   AwesomeApp(
     app: const App(),
     debugMode: kDebugMode,
-    providers: [AwesomeAdvertisement.instance],
+    providers: [AwesomeAdvertisement.instance, AwesomeIAP.instance],
     lazyProviders: [
       () => GalleryProvider.instance,
       () => RemoveObjectProvider.instance,
