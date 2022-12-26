@@ -415,7 +415,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "365ef05e04c1b720350db02742ef21a0ef0be6f2"
+      resolved-ref: "5da5214715490bcc8b69d2fb84ce073582e10d9f"
       url: "git@github.com:brennan992k/fluttering_iap.git"
     source: git
     version: "0.0.1"
@@ -544,7 +544,7 @@ packages:
       name: image_picker_ios
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.6+3"
+    version: "0.8.6+4"
   image_picker_platform_interface:
     dependency: transitive
     description:
