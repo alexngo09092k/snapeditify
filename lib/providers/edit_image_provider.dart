@@ -8,7 +8,7 @@ import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/edit_image_state.dart';
 import 'package:snapedit/services/services.dart';
-import 'package:snapedit/utils/image.dart';
+import 'package:snapedit/widgets/painter/extensions/extensions.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;

@@ -9,12 +9,14 @@ class EnhanceFaceList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Debug.log(provider.state.faces);
     return SizedBox(
-      height: 150,
+      height: 60,
       child: BasePropConsumer<EnhanceProvider, int>(
         listenable: provider,
         select: (p) => p.state.faces.length,
         builder: (_, __, p, ___) => ListView.builder(
+          scrollDirection: Axis.horizontal,
           itemBuilder: (_, index) => EnhanceFaceItem(
             provider: provider,
             face: p.state.faces.elementAt(index),

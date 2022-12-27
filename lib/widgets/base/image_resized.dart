@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 import 'package:snapedit/widgets/base/ui_image_display.dart';
+import 'package:snapedit/widgets/painter/extensions/extensions.dart';
 
 class ImageResized extends StatelessWidget {
   const ImageResized({super.key, required this.image, this.width, this.height, this.placeholder});
@@ -66,23 +67,5 @@ extension StringUiImageGetter on String {
     ui.Codec codec = await ui.instantiateImageCodec(imageBytes);
     ui.FrameInfo frame = await codec.getNextFrame();
     return frame.image;
-  }
-}
-
-extension ImageProviderUiImageGetter on ImageProvider {
-  /// Returns an [ui.Image] object containing the image data from `this` object.
-  Future<ui.Image> get image async {
-    // Used to convert listener callback to future
-    final completer = Completer<ui.Image>();
-
-    // Resolve the image as an [ImageStream] and listen to the stream
-    resolve(ImageConfiguration.empty).addListener(ImageStreamListener((info, _) {
-      // Assign the [ui.Image] from the image information streamed as the completer value
-      // When the image from the stream arrives, the completer is completed
-      completer.complete(info.image);
-    }));
-
-    // Wait for the image data from the completer to arrive from the callback
-    return await completer.future;
   }
 }

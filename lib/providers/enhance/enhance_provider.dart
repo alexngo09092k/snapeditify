@@ -37,7 +37,7 @@ class EnhanceProvider extends IEnhanceProvider {
       /// ENHANCED IMAGES
       List<EnhancedVM> enhancedImages = [];
       for (int index = 0; index < res.data!.outputImages.length; index++) {
-        final vm = EnhancedVM(index: index, imageBase64: imageBase64, state: state);
+        final vm = EnhancedVM(index: index, imageBase64: res.data!.outputImages[index], state: state);
         enhancedImages.add(vm);
       }
       _state.enhancedImages = enhancedImages;

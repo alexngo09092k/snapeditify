@@ -119,6 +119,7 @@ class DetectedObjectVM extends DetectedObject with Provider {
     ui.Size viewSize = renderBox.size;
     String originalImageBase64 = state.imageBase64;
 
+    /// BOX [left, top , right, bottom]
     if (box.length > 3) {
       ui.Offset realBoxPosition = ui.Offset(box[0].toDouble(), box[1].toDouble());
       ui.Size realBoxSize = ui.Size((box[2] - box[0]).toDouble(), (box[3] - box[1]).toDouble());

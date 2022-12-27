@@ -14,30 +14,27 @@ class EnhanceFaceItem extends StatelessWidget {
       listenable: provider,
       select: (p) => p.state.enhancedImageIndex,
       builder: (_, __, p, ___) => ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
         child: SizedBox(
-          width: 60,
-          height: 60,
-          child: Center(
-            child: Image.network(face.png[p.state.enhancedImageIndex]),
+          child: Image.network(
+            face.png[p.state.enhancedImageIndex],
+            width: 60,
+            height: 60,
           ),
         ),
       ),
     );
-    return
-        //  BasePropConsumer<EnhanceProvider, bool>(
-        //   listenable: provider,
-        //   select: (p) => p.state.faces[face.faceId].isSelected,
-        //   builder: (_, __, p, ___) =>
-        GestureDetector(
-      onTap: face.onSelect,
-      child: Container(
-        width: 60,
-        height: 60,
-        color: Colors.red,
-        child: imageWidget,
+    return BasePropConsumer<EnhanceProvider, bool>(
+      listenable: provider,
+      select: (p) => p.state.faces[face.faceId].isSelected,
+      builder: (_, __, p, ___) => GestureDetector(
+        onTap: face.onSelect,
+        child: SizedBox(
+          width: 60,
+          height: 60,
+          child: imageWidget,
+        ),
       ),
-      // ),
     );
   }
 }

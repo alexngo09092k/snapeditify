@@ -133,14 +133,14 @@ Map<String, dynamic> enviroment = {
   "iapConfig": {
     "products": [
       {
-        "type": "",
+        "type": "consumables",
         "provider": "google",
         "id": "123456789",
         "info": {
           "name": "",
           "description": "",
           "price": "\$1000",
-          "rawPrice": 1000,
+          "rawPrice": 1000.0,
           "currency": "USD",
         }
       }
