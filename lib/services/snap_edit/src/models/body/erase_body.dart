@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'dart:io';
+import 'package:flutter/services.dart';
 
 class EraseBody {
-  final File? originalPreviewImage;
+  final Uint8List? originalPreviewImage;
   final String? sessionId;
 
-  final File? maskBrush;
-  final File? maskBase;
+  final Uint8List? maskBrush;
+  final Uint8List? maskBase;
 
   final String? maskObjects; // json
 

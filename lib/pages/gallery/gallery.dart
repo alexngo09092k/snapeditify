@@ -1,10 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/pages/gallery/widgets/album_photo.dart';
+import 'package:snapedit/pages/gallery/widgets/album_image.dart';
 import 'package:snapedit/pages/gallery/widgets/album_title.dart';
 import 'package:snapedit/pages/gallery/widgets/try_suggested_images.dart';
 import 'package:snapedit/providers/gallery/gallery_provider.dart';
@@ -29,17 +30,8 @@ class _GalleryPageState extends ProviderState<GalleryPage, GalleryProvider> {
     initial().then((value) => setState(() {}));
   }
 
-  onPhoto(String? photo, ImageSource type) async {
-    if (photo == null) return;
-    switch (type) {
-      case ImageSource.inSuggesstedPhotos:
-        AppRoutes.instance.goEditPhotoPage(context, type: type, photo: photo);
-        break;
-      case ImageSource.inAlbum:
-        AppRoutes.instance.goEditPhotoPage(context, type: type, photo: photo);
-        break;
-      default:
-    }
+  onImage(Uint8List bytes, ImageSource type) async {
+    AppRoutes.instance.goEditImagePage(context, type: type, bytes: bytes);
   }
 
   Future<void> initial() async {
@@ -56,7 +48,7 @@ class _GalleryPageState extends ProviderState<GalleryPage, GalleryProvider> {
     albums.add(MultipleSliverSourceList<AssetEntity>(
       headerBuilder: (_, __) => SliverToBoxAdapter(
         key: const ValueKey("try_suggested_images"),
-        child: TrySuggestedImages(gridDelegate: gridDelegate, size: size, onPhoto: onPhoto),
+        child: TrySuggestedImages(gridDelegate: gridDelegate, size: size, onImage: onImage),
       ),
     ));
     albums.addAll(
@@ -70,7 +62,7 @@ class _GalleryPageState extends ProviderState<GalleryPage, GalleryProvider> {
                 ),
                 onRefresh: (SourceList current) async {},
               ),
-              itemBuilder: (_, photo, ___) => AlbumPhoto.withAssetEntity(photo, size: size, onPhoto: onPhoto),
+              itemBuilder: (_, photo, ___) => AlbumImage.withAssetEntity(photo, size: size, onImage: onImage),
               headerBuilder: (_, __) => SliverToBoxAdapter(
                 key: ValueKey("${e.name}_title"),
                 child: AlbumTitle(album: e, total: provider.albumList[e] ?? 0),

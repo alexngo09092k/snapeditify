@@ -11,7 +11,7 @@ extension DetectedImage on SnapEdit {
     }
 
     if (body.sessionId != null) data['session_id'] = body.sessionId;
-    if (body.originalPreviewImage != null) files.add(MultipartBody('original_preview_image', body.originalPreviewImage!));
+    if (body.originalPreviewImage != null) files.add(MultipartBody(key: 'original_preview_image', data: body.originalPreviewImage!));
 
     ClientResponse response = await ClientHttp.instance.postMultipart<Map<String, dynamic>>(
       '${config.baseUrl}${config.endPoints.ai}',
@@ -32,10 +32,10 @@ extension DetectedImage on SnapEdit {
     }
 
     if (body.sessionId != null) data['session_id'] = body.sessionId;
-    if (body.originalPreviewImage != null) files.add(MultipartBody('original_preview_image', body.originalPreviewImage!));
+    if (body.originalPreviewImage != null) files.add(MultipartBody(key: 'original_preview_image', data: body.originalPreviewImage!));
 
-    if (body.maskBrush != null) files.add(MultipartBody('mask_brush', body.maskBrush!));
-    if (body.maskBase != null) files.add(MultipartBody('mask_base', body.maskBase!));
+    if (body.maskBrush != null) files.add(MultipartBody(key: 'mask_brush', data: body.maskBrush!));
+    if (body.maskBase != null) files.add(MultipartBody(key: 'mask_base', data: body.maskBase!));
     if (body.maskObjects != null) data['mask_objects'] = body.maskObjects;
 
     ClientResponse response = await ClientHttp.instance.postMultipart<Map<String, dynamic>>(

@@ -31,13 +31,14 @@ class EnhanceProvider extends IEnhanceProvider {
     SmartDialog.showLoading();
 
     /// CALL API
-    EnhanceBody body = EnhanceBody(inputImage: _state.imageFile, imageId: _state.imageId);
+    EnhanceBody body = EnhanceBody(inputImage: _state.imageBytes, imageId: _state.imageId);
     final SnapEditResponse<EnhanceResponse?> res = await Services.instance.snapEdit.enhance(body);
     if (res.data != null) {
       /// ENHANCED IMAGES
       List<EnhancedVM> enhancedImages = [];
       for (int index = 0; index < res.data!.outputImages.length; index++) {
         final vm = EnhancedVM(index: index, imageBase64: res.data!.outputImages[index], state: state);
+        await vm.paintParse();
         enhancedImages.add(vm);
       }
       _state.enhancedImages = enhancedImages;

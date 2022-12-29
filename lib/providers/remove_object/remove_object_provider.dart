@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -161,13 +161,12 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   @override
   Future<bool> toAI(BuildContext context) async {
     if (_state.mode == RemoveObjectMode.ai) return true;
-    if (_state.imageFile == null && _state.sessionId == null) return false;
 
     ///SHOW LOADING POPUP
     SmartDialog.showLoading();
 
     /// CALL API
-    AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.imageFile, sessionId: _state.sessionId);
+    AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.imageBytes, sessionId: _state.sessionId);
     SnapEditResponse<AIDetectionResponse?> res = await Services.instance.snapEdit.detection(body);
 
     if (res.data != null) {
@@ -236,7 +235,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   @override
   Future<bool> removeObjects(BuildContext context) async {
     if (!canRemove) return false;
-    if (_state.imageFile == null && _state.sessionId == null) return false;
 
     /// SHOW LOADING POPUP
     SmartDialog.showLoading();
@@ -250,19 +248,8 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       return false;
     }
 
-    /// CREATE MASK IMAGE FILE
-    File? maskFile = await ManagerCache.instance.cacheImageBase64(maskBase64);
-    if (maskFile == null) {
-      /// HIDE LOADING POPUP
-      SmartDialog.dismiss();
-      return false;
-    }
-
-    EraseBody body = EraseBody(originalPreviewImage: _state.imageFile, maskBase: maskFile, sessionId: _state.sessionId);
+    EraseBody body = EraseBody(originalPreviewImage: _state.imageBytes, maskBase: base64.decode(maskBase64), sessionId: _state.sessionId);
     SnapEditResponse<EraseResponse?> res = await Services.instance.snapEdit.erase(body);
-
-    /// DELETE MASK IMAGE FILE
-    ManagerCache.instance.removeFile(maskFile);
 
     if (res.data != null) {
       Debug.log("===== REMOVE OBJECTS ${res.data} =====");

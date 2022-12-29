@@ -1,20 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:ui' as ui;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/edit_image_state.dart';
 import 'package:snapedit/services/services.dart';
-import 'package:snapedit/widgets/painter/extensions/extensions.dart';
+import 'package:snapedit/utils/image.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;
-
-  late File _imageFile;
-  File get imageFile => _imageFile;
 
   late ui.Image _imageUI;
   ui.Image get imageUI => _imageUI;
@@ -22,20 +19,20 @@ abstract class EditImageProvider extends Provider {
   late String _imageBase64;
   String get imageBase64 => _imageBase64;
 
+  late Uint8List _imageBytes;
+  Uint8List get imageBytes => _imageBytes;
+
   SnapEditConfig get config => Configuration.instance.snapEditConfig;
 
-  Future<bool> setImage(BuildContext context, {required File file, bool refesh = true}) async {
+  Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
     /// RENEW STATE
     if (refesh) await refresh(context);
 
-    /// CREATE IMAGE JPEG FILE
-    _imageFile = file;
-
-    /// ENCODE BASE 64 IMAGE
-    _imageBase64 = base64.encode(file.readAsBytesSync());
+    _imageBytes = bytes;
+    _imageBase64 = base64.encode(bytes);
 
     /// CREATE IMAGE UI
-    _imageUI = await Image.file(file).image.image;
+    _imageUI = await ImageUtils.instance.base64ToImageUI(imageBase64);
 
     Debug.log("====== PROVIDER SET IMAGE DONE ======");
 
@@ -65,7 +62,6 @@ abstract class EditImageProvider extends Provider {
 
   @override
   void dispose() {
-    ManagerCache.instance.removeFile(imageFile);
     state.dispose();
     super.dispose();
   }

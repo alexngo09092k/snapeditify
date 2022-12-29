@@ -381,7 +381,7 @@ packages:
       name: flutter_smart_dialog
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.7.3"
+    version: "4.8.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -397,7 +397,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5d90a3b2d0feecdc8fdbfa54ad504f1a44eadd3f"
+      resolved-ref: "8807385bd0bbacea84b803df9acb60b2bcfd1e9e"
       url: "git@github.com:brennan992k/fluttering.git"
     source: git
     version: "1.0.2"
@@ -483,7 +483,7 @@ packages:
     source: hosted
     version: "0.13.5"
   http_parser:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http_parser
       url: "https://pub.dartlang.org"

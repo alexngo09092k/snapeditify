@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'dart:convert';
 import 'dart:ui' as ui;
@@ -46,37 +45,12 @@ class ImageUtils {
     return frame.image;
   }
 
-  Future<ui.Image> imageFileToImageUI(File file) async {
-    return Image.file(file).image.image;
-  }
-
   Future<String?> imageUIToBase64(ui.Image image) async {
     Uint8List? imageBytes = await image.pngBytes;
     if (imageBytes != null) {
       return base64.encode(imageBytes);
     }
     return null;
-  }
-
-  String imageFileToBase64(File file) {
-    return base64.encode(file.readAsBytesSync());
-  }
-
-  String uint8ListToBase64(Uint8List bytes) {
-    return base64.encode(bytes);
-  }
-
-  Future<Uint8List> cropImageFile(File file, {required ui.Size size, required ui.Offset position}) async {
-    var bytes = await file.readAsBytes();
-    imagepkg.Image? src = imagepkg.decodeImage(bytes);
-    imagepkg.Image destImage = imagepkg.copyCrop(
-      src!,
-      position.dx.toInt(),
-      position.dy.toInt(),
-      size.width.toInt(),
-      size.height.toInt(),
-    );
-    return destImage.getBytes();
   }
 
   Future<String> cropImageBase64(String imageBase64, {required ui.Size size, required ui.Offset position}) async {
@@ -122,12 +96,22 @@ class ImageUtils {
     return jpegFile;
   }
 
-  Future<File> getImageFileFromAssets(String path) async {
-    final byteData = await rootBundle.load(path);
+  Future<Uint8List> getImageBytesFromAssets(String path) async {
+    return (await rootBundle.load(path)).buffer.asUint8List();
+  }
 
-    final file = File('${(await getTemporaryDirectory()).path}/$path');
-    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-
-    return file;
+  Future<File?> cacheImageBase64(String imageBase64) async {
+    try {
+      final Uint8List imageBytes = base64.decode(imageBase64);
+      final File imageFile = File('/${DateTime.now().millisecondsSinceEpoch}.jpg');
+      imageFile.writeAsBytesSync(List.from(imageBytes));
+      if (await imageFile.exists()) {
+        return imageFile;
+      }
+    } catch (error) {
+      Debug.log(error);
+      return null;
+    }
+    return null;
   }
 }

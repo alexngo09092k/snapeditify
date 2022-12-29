@@ -1,7 +1,8 @@
-import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 
 class RestyleBody {
-  File? inputImage;
+  Uint8List? inputImage;
   String? imageId;
   String styleId;
 

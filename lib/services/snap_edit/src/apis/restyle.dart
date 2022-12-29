@@ -20,7 +20,7 @@ extension Restyle on SnapEdit {
       return SnapEditResponse<RestyleResponse?>(data: null, error: 'Input image and image id, the both are null');
     }
 
-    if (body.inputImage != null) files.add(MultipartBody('input_image', body.inputImage!));
+    if (body.inputImage != null) files.add(MultipartBody(key: 'input_image', data: body.inputImage!));
     if (body.imageId != null) data['image_id'] = body.imageId!;
 
     ClientResponse response = await ClientHttp.instance.postMultipart(

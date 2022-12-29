@@ -96,7 +96,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     SmartDialog.showLoading();
 
     /// CALL API
-    RestyleBody body = RestyleBody(styleId: styleId, inputImage: imageFile, imageId: _state.imageId);
+    RestyleBody body = RestyleBody(styleId: styleId, inputImage: imageBytes, imageId: _state.imageId);
     SnapEditResponse<RestyleResponse?> res = await Services.instance.snapEdit.restyle(body);
 
     if (res.data != null) {

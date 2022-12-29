@@ -1,8 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/extensions.dart';
@@ -111,7 +110,7 @@ extension AppRoutesUtils on IAppRoutes {
     Navigator.of(context).pushNamed(AppRoutes.settingPage);
   }
 
-  goEditPhotoPage(BuildContext context, {required ImageSource type, required String photo}) {
+  goEditImagePage(BuildContext context, {required ImageSource type, required Uint8List bytes}) {
     UserPermission.instance.requestStoragePermission(
       onHasPermisson: () async {
         final EditImageType photosFor = ManagerProvider.of<GalleryProvider>().photosFor;
@@ -122,15 +121,15 @@ extension AppRoutesUtils on IAppRoutes {
 
         switch (photosFor) {
           case EditImageType.applyArtEffect:
-            res = await ManagerProvider.of<RestyleProvider>().setImage(context, file: File(photo));
+            res = await ManagerProvider.of<RestyleProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.applyArtEffectPage;
             break;
           case EditImageType.enhanceImage:
-            res = await ManagerProvider.of<EnhanceProvider>().setImage(context, file: File(photo));
+            res = await ManagerProvider.of<EnhanceProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.enhanceImagePage;
             break;
           case EditImageType.removeObject:
-            res = await ManagerProvider.of<RemoveObjectProvider>().setImage(context, file: File(photo));
+            res = await ManagerProvider.of<RemoveObjectProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.removeObjectPage;
             break;
           default:
