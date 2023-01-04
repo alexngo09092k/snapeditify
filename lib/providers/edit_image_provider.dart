@@ -37,7 +37,7 @@ abstract class EditImageProvider extends Provider {
     Debug.log("====== PROVIDER SET IMAGE DONE ======");
 
     /// SET IMAGE FOR STATE
-    return state.setImage(imageBase64, provider: this, createImageFile: true);
+    return state.setImage(imageBase64, provider: this);
   }
 
   Future<bool> refresh(BuildContext context);

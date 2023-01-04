@@ -8,7 +8,7 @@ import 'package:snapedit/providers/edit_image_provider.dart';
 import 'package:snapedit/utils/image.dart';
 
 abstract class EditImageState extends ChangeNotifier {
-  Future<bool> setImage(String imageBase64, {EditImageProvider? provider, bool createImageFile = true}) async {
+  Future<bool> setImage(String imageBase64, {EditImageProvider? provider}) async {
     _imageBase64 = imageBase64;
 
     /// CREATE IMAGE UI
