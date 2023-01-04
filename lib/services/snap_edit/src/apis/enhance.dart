@@ -6,7 +6,7 @@ import 'package:snapedit/services/snap_edit/src/models/response/enhance_response
 import 'package:snapedit/services/snap_edit/src/models/response/snapedit_response.dart';
 import 'package:snapedit/services/snap_edit/src/snap_edit.dart';
 import 'package:snapedit/services/snap_edit/src/models/config/snapedit_config.dart';
-import 'package:snapedit/utils/image.dart';
+import 'package:snapedit/services/snap_edit/src/utils.dart';
 
 extension Enhance on SnapEdit {
   Future<SnapEditResponse<EnhanceResponse?>> enhance(EnhanceBody body) async {
@@ -21,7 +21,7 @@ extension Enhance on SnapEdit {
 
     File? file;
     if (body.inputImage != null) {
-      file = await ImageUtils.instance.uint8ListToFile(body.inputImage!);
+      file = await uint8ListToFile(body.inputImage!);
       if (file == null) return SnapEditResponse<EnhanceResponse?>(data: null, error: 'Input image is not valid.');
       parts.add(MultipartBody<File>(
         key: 'input_image',

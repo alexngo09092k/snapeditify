@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
-import 'package:snapedit/utils/image.dart';
+import 'package:snapedit/services/snap_edit/src/utils.dart';
 
 extension DetectedImage on SnapEdit {
   Future<SnapEditResponse<AIDetectionResponse?>> detection(AIDetectionBody body) async {
@@ -17,7 +17,7 @@ extension DetectedImage on SnapEdit {
 
     File? file;
     if (body.originalPreviewImage != null) {
-      file = await ImageUtils.instance.uint8ListToFile(body.originalPreviewImage!);
+      file = await uint8ListToFile(body.originalPreviewImage!);
       if (file == null) return SnapEditResponse<AIDetectionResponse?>(data: null, error: 'Input image is not valid.');
 
       files.add(MultipartBody<File>(
@@ -50,21 +50,21 @@ extension DetectedImage on SnapEdit {
 
     File? file1;
     if (body.originalPreviewImage != null) {
-      file1 = await ImageUtils.instance.uint8ListToFile(body.originalPreviewImage!);
+      file1 = await uint8ListToFile(body.originalPreviewImage!);
       if (file1 == null) return SnapEditResponse<EraseResponse?>(data: null, error: 'Original Preview Image is not valid.');
       parts.add(MultipartBody<File>(key: 'original_preview_image', data: file1));
     }
 
     File? file2;
     if (body.maskBrush != null) {
-      file2 = await ImageUtils.instance.uint8ListToFile(body.maskBrush!);
+      file2 = await uint8ListToFile(body.maskBrush!);
       if (file2 == null) return SnapEditResponse<EraseResponse?>(data: null, error: 'Mask Brush Image is not valid.');
       parts.add(MultipartBody<File>(key: 'mask_brush', data: file2));
     }
 
     File? file3;
     if (body.maskBase != null) {
-      file3 = await ImageUtils.instance.uint8ListToFile(body.maskBase!);
+      file3 = await uint8ListToFile(body.maskBase!);
       if (file3 == null) return SnapEditResponse<EraseResponse?>(data: null, error: 'Mask Base Image is not valid.');
       parts.add(MultipartBody<File>(key: 'mask_base', data: file3));
     }

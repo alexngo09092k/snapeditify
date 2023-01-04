@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:snapedit/providers/gallery/gallery_provider.dart';
-import 'package:snapedit/utils/image.dart';
 
 class AlbumImage extends StatelessWidget {
   const AlbumImage({super.key, this.size, this.onPhoto, this.child});
@@ -45,7 +44,7 @@ class AlbumImage extends StatelessWidget {
     return AlbumImage(
       size: size,
       onPhoto: () async {
-        Uint8List bytes = await ImageUtils.instance.getImageBytesFromAssets(photo);
+        Uint8List bytes = (await rootBundle.load(photo)).buffer.asUint8List();
         if (onImage != null) onImage(bytes, ImageSource.inSuggesstedPhotos);
       },
       child: SizedBox(

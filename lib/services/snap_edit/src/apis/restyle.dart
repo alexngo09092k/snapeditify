@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
 import 'package:snapedit/services/snap_edit/src/models/response/styles_response.dart';
-import 'package:snapedit/utils/image.dart';
+import 'package:snapedit/services/snap_edit/src/utils.dart';
 
 extension Restyle on SnapEdit {
   Future<SnapEditResponse<StylesResponse?>> getStyles([String lang = 'en']) async {
@@ -27,7 +27,7 @@ extension Restyle on SnapEdit {
 
     File? file;
     if (body.inputImage != null) {
-      file = await ImageUtils.instance.uint8ListToFile(body.inputImage!);
+      file = await uint8ListToFile(body.inputImage!);
       if (file == null) return SnapEditResponse<RestyleResponse?>(data: null, error: 'Input image is not valid.');
       parts.add(MultipartBody<File>(key: 'input_image', data: file));
     }
