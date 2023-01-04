@@ -100,11 +100,13 @@ class ImageUtils {
     return (await rootBundle.load(path)).buffer.asUint8List();
   }
 
-  Future<File?> cacheImageBase64(String imageBase64) async {
+  Future<File?> uint8ListToFile(Uint8List imageBytes) async {
     try {
-      final Uint8List imageBytes = base64.decode(imageBase64);
       final File imageFile = File('/${DateTime.now().millisecondsSinceEpoch}.jpg');
       imageFile.writeAsBytesSync(List.from(imageBytes));
+      final Directory tempDir = await getTemporaryDirectory();
+      File file = await File('${tempDir.path}/image.png').create();
+      file.writeAsBytesSync(imageBytes);
       if (await imageFile.exists()) {
         return imageFile;
       }

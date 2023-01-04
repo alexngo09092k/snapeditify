@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
 import 'package:snapedit/services/snap_edit/src/models/response/styles_response.dart';
+import 'package:snapedit/utils/image.dart';
 
 extension Restyle on SnapEdit {
   Future<SnapEditResponse<StylesResponse?>> getStyles([String lang = 'en']) async {
@@ -13,22 +16,30 @@ extension Restyle on SnapEdit {
   }
 
   Future<SnapEditResponse<RestyleResponse?>> restyle(RestyleBody body) async {
-    final List<MultipartBody> files = [];
+    final List<MultipartBody> parts = [];
     final Map<String, dynamic> data = {'style_id': body.styleId};
 
     if (body.imageId == null && body.inputImage == null) {
-      return SnapEditResponse<RestyleResponse?>(data: null, error: 'Input image and image id, the both are null');
+      return SnapEditResponse<RestyleResponse?>(data: null, error: 'Input image and image id, the both are null.');
     }
 
-    if (body.inputImage != null) files.add(MultipartBody(key: 'input_image', data: body.inputImage!));
     if (body.imageId != null) data['image_id'] = body.imageId!;
+
+    File? file;
+    if (body.inputImage != null) {
+      file = await ImageUtils.instance.uint8ListToFile(body.inputImage!);
+      if (file == null) return SnapEditResponse<RestyleResponse?>(data: null, error: 'Input image is not valid.');
+      parts.add(MultipartBody<File>(key: 'input_image', data: file));
+    }
 
     ClientResponse response = await ClientHttp.instance.postMultipart(
       '${config.baseUrl}${config.endPoints.restyle}',
       data,
-      files,
+      parts,
       headers: config.headers,
     );
+
+    if (file != null) file.delete();
 
     return handleResponse<RestyleResponse>(response, (p0) => RestyleResponse.fromMap(p0));
   }

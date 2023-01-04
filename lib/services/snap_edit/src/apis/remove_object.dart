@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
+import 'package:snapedit/utils/image.dart';
 
 extension DetectedImage on SnapEdit {
   Future<SnapEditResponse<AIDetectionResponse?>> detection(AIDetectionBody body) async {
@@ -11,7 +14,17 @@ extension DetectedImage on SnapEdit {
     }
 
     if (body.sessionId != null) data['session_id'] = body.sessionId;
-    if (body.originalPreviewImage != null) files.add(MultipartBody(key: 'original_preview_image', data: body.originalPreviewImage!));
+
+    File? file;
+    if (body.originalPreviewImage != null) {
+      file = await ImageUtils.instance.uint8ListToFile(body.originalPreviewImage!);
+      if (file == null) return SnapEditResponse<AIDetectionResponse?>(data: null, error: 'Input image is not valid.');
+
+      files.add(MultipartBody<File>(
+        key: 'original_preview_image',
+        data: file,
+      ));
+    }
 
     ClientResponse response = await ClientHttp.instance.postMultipart<Map<String, dynamic>>(
       '${config.baseUrl}${config.endPoints.ai}',
@@ -20,30 +33,53 @@ extension DetectedImage on SnapEdit {
       headers: config.headers,
     );
 
+    if (file != null) file.delete();
+
     return handleResponse<AIDetectionResponse>(response, (p0) => AIDetectionResponse.fromMap(p0));
   }
 
   Future<SnapEditResponse<EraseResponse?>> erase(EraseBody body) async {
-    final List<MultipartBody> files = [];
+    final List<MultipartBody> parts = [];
     final Map<String, dynamic> data = {};
 
     if (body.sessionId == null && body.originalPreviewImage == null) {
-      return SnapEditResponse<EraseResponse?>(data: null, error: 'Original Preview Image and Session Id, the both are null');
+      return SnapEditResponse<EraseResponse?>(data: null, error: 'Original Preview Image and Session Id, the both are null.');
     }
 
     if (body.sessionId != null) data['session_id'] = body.sessionId;
-    if (body.originalPreviewImage != null) files.add(MultipartBody(key: 'original_preview_image', data: body.originalPreviewImage!));
 
-    if (body.maskBrush != null) files.add(MultipartBody(key: 'mask_brush', data: body.maskBrush!));
-    if (body.maskBase != null) files.add(MultipartBody(key: 'mask_base', data: body.maskBase!));
+    File? file1;
+    if (body.originalPreviewImage != null) {
+      file1 = await ImageUtils.instance.uint8ListToFile(body.originalPreviewImage!);
+      if (file1 == null) return SnapEditResponse<EraseResponse?>(data: null, error: 'Original Preview Image is not valid.');
+      parts.add(MultipartBody<File>(key: 'original_preview_image', data: file1));
+    }
+
+    File? file2;
+    if (body.maskBrush != null) {
+      file2 = await ImageUtils.instance.uint8ListToFile(body.maskBrush!);
+      if (file2 == null) return SnapEditResponse<EraseResponse?>(data: null, error: 'Mask Brush Image is not valid.');
+      parts.add(MultipartBody<File>(key: 'mask_brush', data: file2));
+    }
+
+    File? file3;
+    if (body.maskBase != null) {
+      file3 = await ImageUtils.instance.uint8ListToFile(body.maskBase!);
+      if (file3 == null) return SnapEditResponse<EraseResponse?>(data: null, error: 'Mask Base Image is not valid.');
+      parts.add(MultipartBody<File>(key: 'mask_base', data: file3));
+    }
     if (body.maskObjects != null) data['mask_objects'] = body.maskObjects;
 
     ClientResponse response = await ClientHttp.instance.postMultipart<Map<String, dynamic>>(
       '${config.baseUrl}${config.endPoints.erase}',
       data,
-      files,
+      parts,
       headers: config.headers,
     );
+
+    if (file1 != null) file1.delete();
+    if (file2 != null) file2.delete();
+    if (file3 != null) file3.delete();
 
     return handleResponse<EraseResponse>(response, (p0) => EraseResponse.fromMap(p0));
   }
