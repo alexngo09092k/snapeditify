@@ -15,7 +15,7 @@ abstract class EditImageState extends ChangeNotifier {
     _imageUI = provider != null ? provider.imageUI : await ImageUtils.instance.base64ToImageUI(imageBase64);
 
     /// DECODE IMAGE BASE64
-    _imageBytes = base64.decode(imageBase64);
+    _imageBytes = provider != null ? provider.imageBytes : base64.decode(imageBase64);
 
     Debug.log("====== STATE SET IMAGE DONE ======");
 
