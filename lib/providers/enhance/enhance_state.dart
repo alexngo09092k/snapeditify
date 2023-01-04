@@ -15,7 +15,7 @@ class EnhanceState extends EditImageState {
 
   @override
   Future<bool> setImage(String imageBase64, {EditImageProvider? provider, bool createImageFile = true}) async {
-    final bool result = await super.setImage(imageBase64, provider: provider, createImageFile: createImageFile);
+    final bool result = await super.setImage(imageBase64, provider: provider);
     if (result) {
       _paintBefore.background = imageUI.backgroundDrawable;
       _paintAfter.background = imageUI.backgroundDrawable;
