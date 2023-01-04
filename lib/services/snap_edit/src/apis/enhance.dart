@@ -36,7 +36,7 @@ extension Enhance on SnapEdit {
       headers: config.headers,
     );
 
-    if (file != null) file.delete();
+    if (file != null && await file.exists()) file.delete();
 
     return handleResponse<EnhanceResponse>(response, (p0) => EnhanceResponse.fromMap(p0));
   }

@@ -39,7 +39,7 @@ extension Restyle on SnapEdit {
       headers: config.headers,
     );
 
-    if (file != null) file.delete();
+    if (file != null && await file.exists()) file.delete();
 
     return handleResponse<RestyleResponse>(response, (p0) => RestyleResponse.fromMap(p0));
   }

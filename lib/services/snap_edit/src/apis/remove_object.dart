@@ -77,9 +77,9 @@ extension DetectedImage on SnapEdit {
       headers: config.headers,
     );
 
-    if (file1 != null) file1.delete();
-    if (file2 != null) file2.delete();
-    if (file3 != null) file3.delete();
+    if (file1 != null && await file1.exists()) file1.delete();
+    if (file2 != null && await file2.exists()) file2.delete();
+    if (file3 != null && await file3.exists()) file3.delete();
 
     return handleResponse<EraseResponse>(response, (p0) => EraseResponse.fromMap(p0));
   }

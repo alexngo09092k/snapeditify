@@ -6,13 +6,11 @@ import 'package:fluttering/fluttering.dart';
 
 Future<File?> uint8ListToFile(Uint8List imageBytes) async {
   try {
-    final File imageFile = File('/${DateTime.now().millisecondsSinceEpoch}.jpg');
-    imageFile.writeAsBytesSync(List.from(imageBytes));
     final Directory tempDir = await getTemporaryDirectory();
     File file = await File('${tempDir.path}/image.png').create();
     file.writeAsBytesSync(imageBytes);
-    if (await imageFile.exists()) {
-      return imageFile;
+    if (await file.exists()) {
+      return file;
     }
   } catch (error) {
     Debug.log(error);
