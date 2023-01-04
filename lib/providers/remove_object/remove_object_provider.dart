@@ -258,7 +258,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       _state.next = _state.copyWith(prev: _state, drawables: []);
 
       /// MUST CALL SET IMAGE BEFORE SET FOR CURRENT STATE
-      await _state.next!.setImage(res.data!.editedImage.image, createImageFile: _state.sessionId == null);
+      await _state.next!.setImage(res.data!.editedImage.image);
 
       /// AFTER NEXT STATE SETTED IMAGE
       _state.removeListener(notifyListeners);

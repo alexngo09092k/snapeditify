@@ -101,7 +101,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
     if (res.data != null) {
       _state = _state.copyWith(imageId: res.data!.imageId);
-      await _state.setImage(res.data!.outputImage, createImageFile: _state.imageId == null);
+      await _state.setImage(res.data!.outputImage);
       _states[styleId] = _state;
       notifyListeners();
 

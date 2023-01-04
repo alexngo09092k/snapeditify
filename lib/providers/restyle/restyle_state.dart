@@ -20,7 +20,7 @@ class RestyleState extends EditImageState {
   }
 
   @override
-  Future<bool> setImage(String imageBase64, {EditImageProvider? provider, bool createImageFile = true}) async {
+  Future<bool> setImage(String imageBase64, {EditImageProvider? provider}) async {
     await super.setImage(imageBase64, provider: provider);
     _paint.background = imageUI.backgroundDrawable;
     return true;
