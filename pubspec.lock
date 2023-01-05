@@ -489,6 +489,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.4.0+301"
+  image:
+    dependency: "direct main"
+    description:
+      name: image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.6"
   image_gallery_saver:
     dependency: "direct main"
     description:

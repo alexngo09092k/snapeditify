@@ -57,10 +57,10 @@ class ImageUtils {
     imagepkg.Image? src = imagepkg.decodeImage(imageBytes);
     imagepkg.Image destImage = imagepkg.copyCrop(
       src!,
-      position.dx.toInt(),
-      position.dy.toInt(),
-      size.width.toInt(),
-      size.height.toInt(),
+      x: position.dx.toInt(),
+      y: position.dy.toInt(),
+      width: size.width.toInt(),
+      height: size.height.toInt(),
     );
 
     return base64.encode(imagepkg.encodePng(destImage));
