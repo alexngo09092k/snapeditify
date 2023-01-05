@@ -3,13 +3,35 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:image/image.dart' as imagepkg;
 
-Future<File?> uint8ListToFile(Uint8List imageBytes) async {
+Future<File?> uint8ListToFile(
+  Uint8List imageBytes, {
+  int minWidth = 1000,
+  int minHeight = 1000,
+  int quality = 95,
+  CompressFormat format = CompressFormat.jpeg,
+}) async {
   try {
+    final image = imagepkg.decodeImage(imageBytes)!;
     final Directory tempDir = await getTemporaryDirectory();
-    File file = await File('${tempDir.path}/image.png').create();
-    file.writeAsBytesSync(imageBytes);
+    File file = File('${tempDir.path}/${(DateTime.now()).millisecond}.jpeg');
+    await file.writeAsBytes(imagepkg.encodeJpg(image));
     if (await file.exists()) {
+      // final filePath = file.absolute.path;
+      // final lastIndex = filePath.lastIndexOf(RegExp(r'.jp'));
+      // final splitted = filePath.substring(0, (lastIndex));
+      // final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
+      // File? compressedFile = await FlutterImageCompress.compressAndGetFile(
+      //   filePath,
+      //   outPath,
+      //   minWidth: minWidth,
+      //   minHeight: minHeight,
+      //   quality: quality,
+      //   format: format,
+      // );
+      // if (compressedFile != null && await compressedFile.exists()) return compressedFile;
+      // file.delete();
       return file;
     }
   } catch (error) {
@@ -17,26 +39,4 @@ Future<File?> uint8ListToFile(Uint8List imageBytes) async {
     return null;
   }
   return null;
-}
-
-Future<File?> compressImageFile(
-  File file, {
-  int minWidth = 1000,
-  int minHeight = 1000,
-  int quality = 95,
-  CompressFormat format = CompressFormat.jpeg,
-}) async {
-  final filePath = file.absolute.path;
-  final lastIndex = filePath.lastIndexOf(RegExp(r'.jp'));
-  final splitted = filePath.substring(0, (lastIndex));
-  final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
-  File? compressedFile = await FlutterImageCompress.compressAndGetFile(
-    filePath,
-    outPath,
-    minWidth: minWidth,
-    minHeight: minHeight,
-    quality: quality,
-    format: format,
-  );
-  return compressedFile;
 }
