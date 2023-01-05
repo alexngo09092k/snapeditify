@@ -248,7 +248,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       return false;
     }
 
-    EraseBody body = EraseBody(originalPreviewImage: _state.imageBytes, maskBase: base64.decode(maskBase64), sessionId: _state.sessionId);
+    EraseBody body = EraseBody(originalPreviewImage: _state.imageBytes, maskBrush: base64.decode(maskBase64), sessionId: _state.sessionId);
     SnapEditResponse<EraseResponse?> res = await Services.instance.snapEdit.erase(body);
 
     if (res.data != null) {

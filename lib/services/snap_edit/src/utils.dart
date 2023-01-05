@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:image/image.dart' as imagepkg;
 
 Future<File?> uint8ListToFile(
   Uint8List imageBytes, {
@@ -13,10 +12,9 @@ Future<File?> uint8ListToFile(
   CompressFormat format = CompressFormat.jpeg,
 }) async {
   try {
-    final image = imagepkg.decodeImage(imageBytes)!;
     final Directory tempDir = await getTemporaryDirectory();
     File file = File('${tempDir.path}/${(DateTime.now()).millisecond}.jpeg');
-    await file.writeAsBytes(imagepkg.encodeJpg(image));
+    await file.writeAsBytes(imageBytes);
     if (await file.exists()) {
       // final filePath = file.absolute.path;
       // final lastIndex = filePath.lastIndexOf(RegExp(r'.jp'));
