@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/providers/enhance/enhance_state.dart';
@@ -27,11 +25,12 @@ class FaceVM extends Face with Provider {
 
   EnhanceState state;
 
-  Future<String>? faceImage;
+  final List<ui.Image> _faceImages = [];
+  List<ui.Image> get faceImages => _faceImages;
 
-  final List<Future<String>> _faceEnhancedImages = [];
+  final List<ui.Image> _faceEnhancedImages = [];
 
-  List<Future<String>> get faceEnhancedImages => _faceEnhancedImages;
+  List<ui.Image> get faceEnhancedImages => _faceEnhancedImages;
 
   bool _isSelected = false;
   bool get isSelected => _isSelected;
@@ -48,8 +47,8 @@ class FaceVM extends Face with Provider {
     int? faceId,
     List<String>? png,
     bool? isSelected,
-    Future<String>? faceImage,
-    List<Future<String>>? faceEnhancedImages,
+    List<ui.Image>? faceImages,
+    List<ui.Image>? faceEnhancedImages,
     EnhanceState? state,
   }) {
     return FaceVM(
@@ -58,44 +57,16 @@ class FaceVM extends Face with Provider {
       png: png ?? this.png,
       state: state ?? this.state,
     )
-      ..faceImage = faceImage ?? this.faceImage
+      ..faceImages.addAll(faceImages ?? this.faceImages)
       ..faceEnhancedImages.addAll(faceEnhancedImages ?? this.faceEnhancedImages)
       ..isSelected = isSelected ?? this.isSelected;
   }
 
   Future<void> paintParse() async {
-    final renderBox = state.paintAfter.painterKey.currentContext?.findRenderObject() as RenderBox?;
-    if (renderBox == null) return;
-    ui.Size realSize = ui.Size(state.imageUI.width.toDouble(), state.imageUI.height.toDouble());
-    ui.Size viewSize = renderBox.size;
-    String originalImageBase64 = state.imageBase64;
-    
-
     /// BOX [x, y, width, height]
     if (box.length > 3) {
       ui.Offset realBoxPosition = ui.Offset(box[0].toDouble(), box[1].toDouble());
       ui.Size realBoxSize = ui.Size((box[2]).toDouble(), (box[3]).toDouble());
-
-      double ratioX = viewSize.width / realSize.width;
-      double ratioY = viewSize.height / realSize.height;
-
-      Debug.log(ratioX);
-      Debug.log(ratioY);
-
-      ui.Size size = ui.Size(realBoxSize.width * ratioX, realBoxSize.height * ratioY);
-      ui.Offset position = ui.Offset(
-        realBoxPosition.dx * ratioX + size.width / 2,
-        realBoxPosition.dy * ratioX + size.height / 2,
-      );
-
-      Debug.log('paintParse $position');
-      Debug.log('paintParse $size');
-
-      faceImage = ImageUtils.instance.cropImageBase64(
-        originalImageBase64,
-        size: realBoxSize,
-        position: realBoxPosition,
-      );
 
       for (var enhancedImageBase64 in state.enhancedImages) {
         final faceEnhancedImage = ImageUtils.instance.cropImageBase64(
@@ -103,16 +74,30 @@ class FaceVM extends Face with Provider {
           size: realBoxSize,
           position: realBoxPosition,
         );
-        _faceEnhancedImages.add(faceEnhancedImage);
+        final faceEnhancedImageUI = await ImageUtils.instance.base64ToImageUI(await faceEnhancedImage);
+        _faceEnhancedImages.add(faceEnhancedImageUI);
+
+        double ratioX = state.imageUI.width / enhancedImageBase64.imageUI!.width;
+        double ratioY = state.imageUI.height / enhancedImageBase64.imageUI!.height;
+
+        Debug.log(ratioX);
+        Debug.log(ratioY);
+
+        final faceImage = ImageUtils.instance.cropImageBase64(
+          state.imageBase64,
+          size: Size(realBoxSize.width * ratioX, realBoxSize.height * ratioY),
+          position: Offset(realBoxPosition.dx * ratioX, realBoxPosition.dy * ratioY),
+        );
+        final faceImageUI = await ImageUtils.instance.base64ToImageUI(await faceImage);
+        _faceImages.add(faceImageUI);
       }
     }
   }
 
   onSelect() async {
     if (!isSelected) {
-      state.paintAfter.background = (await (Image.memory(base64.decode(await faceImage!)).image).image).backgroundDrawable;
-      state.paintBefore.background =
-          (await (Image.memory(base64.decode(await _faceEnhancedImages[state.enhancedImageIndex])).image).image).backgroundDrawable;
+      state.paintBefore.background = _faceImages[state.enhancedImageIndex].backgroundDrawable;
+      state.paintAfter.background = _faceEnhancedImages[state.enhancedImageIndex].backgroundDrawable;
       isSelected = true;
     }
   }
