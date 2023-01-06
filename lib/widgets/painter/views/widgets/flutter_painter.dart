@@ -16,7 +16,6 @@ import '../../controllers/drawables/path/path_drawables.dart';
 import '../../controllers/settings/settings.dart';
 import '../painters/painter.dart';
 import '../../controllers/painter_controller.dart';
-import '../../controllers/helpers/border_box_shadow.dart';
 import '../../extensions/painter_controller_helper_extension.dart';
 import 'painter_controller_widget.dart';
 import 'dart:math' as math;
@@ -31,8 +30,7 @@ typedef DrawableCreatedCallback = Function(Drawable drawable);
 typedef DrawableDeletedCallback = Function(Drawable drawable);
 
 /// Defines the builder used with [FlutterPainter.builder] constructor.
-typedef FlutterPainterBuilderCallback = Widget Function(
-    BuildContext context, Widget painter);
+typedef FlutterPainterBuilderCallback = Widget Function(BuildContext context, Widget painter);
 
 /// Widget that allows user to draw on it
 class FlutterPainter extends StatelessWidget {
@@ -51,6 +49,12 @@ class FlutterPainter extends StatelessWidget {
   /// Callback when the [PainterSettings] of [PainterController] are updated internally.
   final ValueChanged<PainterSettings>? onPainterSettingsChanged;
 
+  final void Function(Offset)? onHorizontalDragDown;
+
+  final void Function(Offset)? onHorizontalDragUpdate;
+
+  final void Function()? onHorizontalDragUp;
+
   /// The builder used to build this widget.
   ///
   /// Using the default constructor, it will default to returning the [_FlutterPainterWidget].
@@ -60,29 +64,35 @@ class FlutterPainter extends StatelessWidget {
   final FlutterPainterBuilderCallback _builder;
 
   /// Creates a [FlutterPainter] with the given [controller] and optional callbacks.
-  const FlutterPainter(
-      {Key? key,
-      required this.controller,
-      this.onDrawableCreated,
-      this.onDrawableDeleted,
-      this.onSelectedObjectDrawableChanged,
-      this.onPainterSettingsChanged})
-      : _builder = _defaultBuilder,
+  const FlutterPainter({
+    Key? key,
+    required this.controller,
+    this.onDrawableCreated,
+    this.onDrawableDeleted,
+    this.onSelectedObjectDrawableChanged,
+    this.onPainterSettingsChanged,
+    this.onHorizontalDragDown,
+    this.onHorizontalDragUp,
+    this.onHorizontalDragUpdate,
+  })  : _builder = _defaultBuilder,
         super(key: key);
 
   /// Creates a [FlutterPainter] with the given [controller], [builder] and optional callbacks.
   ///
   /// Using this constructor, the [builder] will be called any time the [controller] updates.
   /// It is useful if you want to build UI that automatically rebuilds on updates from [controller].
-  const FlutterPainter.builder(
-      {Key? key,
-      required this.controller,
-      required FlutterPainterBuilderCallback builder,
-      this.onDrawableCreated,
-      this.onDrawableDeleted,
-      this.onSelectedObjectDrawableChanged,
-      this.onPainterSettingsChanged})
-      : _builder = builder,
+  const FlutterPainter.builder({
+    Key? key,
+    required this.controller,
+    required FlutterPainterBuilderCallback builder,
+    this.onDrawableCreated,
+    this.onDrawableDeleted,
+    this.onSelectedObjectDrawableChanged,
+    this.onPainterSettingsChanged,
+    this.onHorizontalDragDown,
+    this.onHorizontalDragUp,
+    this.onHorizontalDragUpdate,
+  })  : _builder = builder,
         super(key: key);
 
   @override
@@ -100,8 +110,10 @@ class FlutterPainter extends StatelessWidget {
                   onDrawableCreated: onDrawableCreated,
                   onDrawableDeleted: onDrawableDeleted,
                   onPainterSettingsChanged: onPainterSettingsChanged,
-                  onSelectedObjectDrawableChanged:
-                      onSelectedObjectDrawableChanged,
+                  onSelectedObjectDrawableChanged: onSelectedObjectDrawableChanged,
+                  onHorizontalDragDown: onHorizontalDragDown,
+                  onHorizontalDragUp: onHorizontalDragUp,
+                  onHorizontalDragUpdate: onHorizontalDragUpdate,
                 ));
           }),
     );
@@ -130,15 +142,24 @@ class _FlutterPainterWidget extends StatelessWidget {
   /// Callback when the [PainterSettings] of [PainterController] are updated internally.
   final ValueChanged<PainterSettings>? onPainterSettingsChanged;
 
+  final void Function(Offset)? onHorizontalDragDown;
+
+  final void Function(Offset)? onHorizontalDragUpdate;
+
+  final void Function()? onHorizontalDragUp;
+
   /// Creates a [_FlutterPainterWidget] with the given [controller] and optional callbacks.
-  const _FlutterPainterWidget(
-      {Key? key,
-      required this.controller,
-      this.onDrawableCreated,
-      this.onDrawableDeleted,
-      this.onSelectedObjectDrawableChanged,
-      this.onPainterSettingsChanged})
-      : super(key: key);
+  const _FlutterPainterWidget({
+    Key? key,
+    required this.controller,
+    this.onDrawableCreated,
+    this.onDrawableDeleted,
+    this.onSelectedObjectDrawableChanged,
+    this.onPainterSettingsChanged,
+    this.onHorizontalDragDown,
+    this.onHorizontalDragUp,
+    this.onHorizontalDragUpdate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -152,33 +173,31 @@ class _FlutterPainterWidget extends StatelessWidget {
                 onNotification: onNotification,
                 child: InteractiveViewer(
                   transformationController: controller.transformationController,
-                  minScale: controller.settings.scale.enabled
-                      ? controller.settings.scale.minScale
-                      : 1,
-                  maxScale: controller.settings.scale.enabled
-                      ? controller.settings.scale.maxScale
-                      : 1,
-                  panEnabled: controller.settings.scale.enabled &&
-                      (controller.freeStyleSettings.mode == FreeStyleMode.none),
+                  minScale: controller.settings.scale.enabled ? controller.settings.scale.minScale : 1,
+                  maxScale: controller.settings.scale.enabled ? controller.settings.scale.maxScale : 1,
+                  panEnabled: controller.settings.scale.enabled && (controller.freeStyleSettings.mode == FreeStyleMode.none),
                   scaleEnabled: controller.settings.scale.enabled,
                   child: _FreeStyleWidget(
+                      onHorizontalDragDown: onHorizontalDragDown,
+                      onHorizontalDragUp: onHorizontalDragUp,
+                      onHorizontalDragUpdate: onHorizontalDragUpdate,
                       // controller: controller,
                       child: _TextWidget(
-                    // controller: controller,
-                    child: _ShapeWidget(
-                      // controller: controller,
-                      child: _ObjectWidget(
                         // controller: controller,
-                        interactionEnabled: true,
-                        child: CustomPaint(
-                          painter: Painter(
-                            drawables: controller.value.drawables,
-                            background: controller.value.background,
+                        child: _ShapeWidget(
+                          // controller: controller,
+                          child: _ObjectWidget(
+                            // controller: controller,
+                            interactionEnabled: true,
+                            child: CustomPaint(
+                              painter: Painter(
+                                drawables: controller.value.drawables,
+                                background: controller.value.background,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  )),
+                      )),
                 ),
               );
             }));

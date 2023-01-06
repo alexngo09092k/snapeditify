@@ -11,8 +11,10 @@ import 'package:snapedit/widgets/painter/painter_pure.dart';
 import 'package:snapedit/widgets/custom_button.dart';
 
 class RemoveObjectImage extends StatelessWidget {
-  const RemoveObjectImage({Key? key, required this.provider}) : super(key: key);
+  const RemoveObjectImage({Key? key, required this.provider, this.onStartDraw, this.onEndDraw}) : super(key: key);
   final RemoveObjectProvider provider;
+  final Function()? onStartDraw;
+  final Function()? onEndDraw;
 
   _showColorPopup(BuildContext context) {
     SmartDialog.show(builder: (_) {
@@ -54,7 +56,15 @@ class RemoveObjectImage extends StatelessWidget {
               child: BasePropConsumer<RemoveObjectProvider, PainterController>(
                 listenable: provider,
                 select: (p) => p.state.paint,
-                builder: (_, __, p, ___) => FlutterPainter(controller: p.state.paint),
+                builder: (_, __, p, ___) => FlutterPainter(
+                  controller: p.state.paint,
+                  onHorizontalDragDown: (_) {
+                    if (onStartDraw != null) onStartDraw!();
+                  },
+                  onHorizontalDragUp: () {
+                    if (onEndDraw != null) onEndDraw!();
+                  },
+                ),
               ),
             ),
           ),
