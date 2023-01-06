@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:snapedit/providers/edit_image_provider.dart';
 import 'package:snapedit/view_models/enhanced_vm.dart';
 import 'package:snapedit/providers/edit_image_state.dart';
@@ -11,6 +12,8 @@ class EnhanceState extends EditImageState {
 
     _paintAfter = PainterController();
     _paintAfter.addListener(notifyListeners);
+
+    _paintSize = Size.zero;
   }
 
   @override
@@ -19,6 +22,7 @@ class EnhanceState extends EditImageState {
     if (result) {
       _paintBefore.background = imageUI.backgroundDrawable;
       _paintAfter.background = imageUI.backgroundDrawable;
+      _paintSize = Size(imageUI.width.toDouble(), imageUI.height.toDouble());
     }
     return result;
   }
@@ -29,6 +33,15 @@ class EnhanceState extends EditImageState {
 
   late PainterController _paintAfter;
   PainterController get paintAfter => _paintAfter;
+
+  late Size _paintSize;
+  Size get paintSize => _paintSize;
+  set paintSize(Size size) {
+    if (_paintSize != size) {
+      _paintSize = size;
+      notifyListeners();
+    }
+  }
 
   String? _imageId;
   String? get imageId => _imageId;

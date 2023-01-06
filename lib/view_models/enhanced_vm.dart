@@ -28,6 +28,8 @@ class EnhancedVM {
       if (imageUI == null) return;
       state.paintBefore.background = state.imageUI.backgroundDrawable;
       state.paintAfter.background = _imageUI!.backgroundDrawable;
+      state.enhancedImageIndex = index;
+      state.paintSize = ui.Size(state.imageUI.width.toDouble(), state.imageUI.height.toDouble());
     }
   }
 }

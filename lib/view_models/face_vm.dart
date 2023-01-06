@@ -98,6 +98,7 @@ class FaceVM extends Face with Provider {
     if (!isSelected) {
       state.paintBefore.background = _faceImages[state.enhancedImageIndex].backgroundDrawable;
       state.paintAfter.background = _faceEnhancedImages[state.enhancedImageIndex].backgroundDrawable;
+      state.paintSize = ui.Size(_faceImages[state.enhancedImageIndex].width.toDouble(), _faceImages[state.enhancedImageIndex].height.toDouble());
       isSelected = true;
     }
   }
