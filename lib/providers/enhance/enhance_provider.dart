@@ -6,6 +6,7 @@ import 'package:snapedit/providers/enhance/enhance_state.dart';
 import 'package:snapedit/services/services.dart';
 import 'package:snapedit/view_models/enhanced_vm.dart';
 import 'package:snapedit/view_models/face_vm.dart';
+import 'package:snapedit/widgets/painter/painter.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   Future<bool> enhanceImage();
@@ -42,6 +43,8 @@ class EnhanceProvider extends IEnhanceProvider {
         enhancedImages.add(vm);
       }
       _state.enhancedImages = enhancedImages;
+      _state.enhancedImageIndex = 0;
+      _state.paintAfter.background = enhancedImages[state.enhancedImageIndex].imageUI!.backgroundDrawable;
 
       /// FACES
       List<FaceVM> faces = [];
