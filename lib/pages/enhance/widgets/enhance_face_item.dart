@@ -29,11 +29,7 @@ class EnhanceFaceItem extends StatelessWidget {
       select: (p) => p.state.faces[face.faceId].isSelected,
       builder: (_, __, p, ___) => GestureDetector(
         onTap: face.onSelect,
-        child: SizedBox(
-          width: 60,
-          height: 60,
-          child: imageWidget,
-        ),
+        child: imageWidget,
       ),
     );
   }

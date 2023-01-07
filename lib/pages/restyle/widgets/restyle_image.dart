@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/restyle/restyle_provider.dart';
+import 'package:snapedit/widgets/base_image_editor.dart';
 import 'package:snapedit/widgets/painter/painter_pure.dart';
 
 class RestyleImage extends StatelessWidget {
@@ -10,13 +11,8 @@ class RestyleImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height * 1.7 / 3;
-    final double width = MediaQuery.of(context).size.width - AppDimensions.instance.padding * 2;
-    final double iconSize = AppDimensions.instance.icon;
-    return SizedBox(
-      width: width,
-      height: height,
-      child: Stack(
+    return BaseImageEditor(
+      builder: (width, height) => Stack(
         children: [
           /// PAINT
           Center(
@@ -43,7 +39,7 @@ class RestyleImage extends StatelessWidget {
                 builder: (_, __, p, ___) => Image.asset(
                   AppAssets.instance.icAdd,
                   color: p.canCompare ? AppColors.instance.blue : AppColors.instance.black,
-                  width: iconSize,
+                  width: AppDimensions.instance.icon,
                 ),
               ),
             ),

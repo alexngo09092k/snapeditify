@@ -37,6 +37,7 @@ class SnapEditConfig {
     required this.removeObject,
     required this.waterMark,
     required this.maxFreeDownloadCount,
+    
   });
 
   factory SnapEditConfig.defaultValue() {
