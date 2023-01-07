@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class EndPoints {
@@ -22,6 +23,18 @@ class EndPoints {
   final String styles;
   final String stylesPro;
 
+  /// Anime Styles Image List
+  final String animeStyles;
+  final String animeStylesPro;
+
+  /// Anime AI Image
+  final String animeImageAI;
+  final String animeImageAIPro;
+
+  /// Anime AI Image
+  final String animeVideoAI;
+  final String animeVideoAIPro;
+
   EndPoints({
     required this.erase,
     required this.erasePro,
@@ -33,6 +46,12 @@ class EndPoints {
     required this.restylePro,
     required this.styles,
     required this.stylesPro,
+    required this.animeStyles,
+    required this.animeStylesPro,
+    required this.animeImageAI,
+    required this.animeImageAIPro,
+    required this.animeVideoAI,
+    required this.animeVideoAIPro,
   });
 
   factory EndPoints.defaultValue() {
@@ -47,6 +66,12 @@ class EndPoints {
       restylePro: "api/v1/restyle",
       styles: "api/v1/restyle/styles",
       stylesPro: "api/v1/restyle/styles",
+      animeStyles: "api/imagen/v1/styles",
+      animeStylesPro: "api/imagen/v1/styles",
+      animeImageAI: "api/imagen/v1",
+      animeImageAIPro: "api/imagen/v1",
+      animeVideoAI: "api/imagen/v1/video",
+      animeVideoAIPro: "api/imagen/v1/video",
     );
   }
 
@@ -61,6 +86,12 @@ class EndPoints {
     String? restylePro,
     String? styles,
     String? stylesPro,
+    String? animeStyles,
+    String? animeStylesPro,
+    String? animeImageAI,
+    String? animeImageAIPro,
+    String? animeVideoAI,
+    String? animeVideoAIPro,
   }) {
     return EndPoints(
       erase: erase ?? this.erase,
@@ -73,6 +104,12 @@ class EndPoints {
       restylePro: restylePro ?? this.restylePro,
       styles: styles ?? this.styles,
       stylesPro: stylesPro ?? this.stylesPro,
+      animeStyles: animeStyles ?? this.animeStyles,
+      animeStylesPro: animeStylesPro ?? this.animeStylesPro,
+      animeImageAI: animeImageAI ?? this.animeImageAI,
+      animeImageAIPro: animeImageAIPro ?? this.animeImageAIPro,
+      animeVideoAI: animeVideoAI ?? this.animeVideoAI,
+      animeVideoAIPro: animeVideoAIPro ?? this.animeVideoAIPro,
     );
   }
 
@@ -88,21 +125,33 @@ class EndPoints {
       'restylePro': restylePro,
       'styles': styles,
       'stylesPro': stylesPro,
+      'animeStyles': animeStyles,
+      'animeStylesPro': animeStylesPro,
+      'animeImageAI': animeImageAI,
+      'animeImageAIPro': animeImageAIPro,
+      'animeVideoAI': animeVideoAI,
+      'animeVideoAIPro': animeVideoAIPro,
     };
   }
 
   factory EndPoints.fromMap(Map<String, dynamic> map) {
-    return EndPoints.defaultValue().copyWith(
-      erase: map['erase'],
-      erasePro: map['erasePro'],
-      ai: map['ai'],
-      aiPro: map['aiPro'],
-      enhance: map['enhance'],
-      enhancePro: map['enhancePro'],
-      restyle: map['restyle'],
-      restylePro: map['restylePro'],
-      styles: map['styles'],
-      stylesPro: map['stylesPro'],
+    return EndPoints(
+      erase: map['erase'] as String,
+      erasePro: map['erasePro'] as String,
+      ai: map['ai'] as String,
+      aiPro: map['aiPro'] as String,
+      enhance: map['enhance'] as String,
+      enhancePro: map['enhancePro'] as String,
+      restyle: map['restyle'] as String,
+      restylePro: map['restylePro'] as String,
+      styles: map['styles'] as String,
+      stylesPro: map['stylesPro'] as String,
+      animeStyles: map['animeStyles'] as String,
+      animeStylesPro: map['animeStylesPro'] as String,
+      animeImageAI: map['animeImageAI'] as String,
+      animeImageAIPro: map['animeImageAIPro'] as String,
+      animeVideoAI: map['animeVideoAI'] as String,
+      animeVideoAIPro: map['animeVideoAIPro'] as String,
     );
   }
 
@@ -112,7 +161,7 @@ class EndPoints {
 
   @override
   String toString() {
-    return 'EndPoints(erase: $erase, erasePro: $erasePro, ai: $ai, aiPro: $aiPro, enhance: $enhance, enhancePro: $enhancePro, restyle: $restyle, restylePro: $restylePro, styles: $styles, stylesPro: $stylesPro)';
+    return 'EndPoints(erase: $erase, erasePro: $erasePro, ai: $ai, aiPro: $aiPro, enhance: $enhance, enhancePro: $enhancePro, restyle: $restyle, restylePro: $restylePro, styles: $styles, stylesPro: $stylesPro, animeStyles: $animeStyles, animeStylesPro: $animeStylesPro, animeImageAI: $animeImageAI, animeImageAIPro: $animeImageAIPro, animeVideoAI: $animeVideoAI, animeVideoAIPro: $animeVideoAIPro)';
   }
 
   @override
@@ -128,7 +177,13 @@ class EndPoints {
         other.restyle == restyle &&
         other.restylePro == restylePro &&
         other.styles == styles &&
-        other.stylesPro == stylesPro;
+        other.stylesPro == stylesPro &&
+        other.animeStyles == animeStyles &&
+        other.animeStylesPro == animeStylesPro &&
+        other.animeImageAI == animeImageAI &&
+        other.animeImageAIPro == animeImageAIPro &&
+        other.animeVideoAI == animeVideoAI &&
+        other.animeVideoAIPro == animeVideoAIPro;
   }
 
   @override
@@ -142,6 +197,12 @@ class EndPoints {
         restyle.hashCode ^
         restylePro.hashCode ^
         styles.hashCode ^
-        stylesPro.hashCode;
+        stylesPro.hashCode ^
+        animeStyles.hashCode ^
+        animeStylesPro.hashCode ^
+        animeImageAI.hashCode ^
+        animeImageAIPro.hashCode ^
+        animeVideoAI.hashCode ^
+        animeVideoAIPro.hashCode;
   }
 }

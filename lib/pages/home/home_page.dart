@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:snapedit/common/app_routes.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/pages/home/widgets/home_ad.dart';
-import 'package:snapedit/pages/home/widgets/home_art_effect_banner.dart';
+import 'package:snapedit/pages/home/widgets/home_base_banner.dart';
 import 'package:snapedit/pages/home/widgets/home_header.dart';
 import 'package:snapedit/pages/home/widgets/home_options.dart';
-import 'package:snapedit/pages/home/widgets/home_enhance_banner.dart';
-import 'package:snapedit/pages/home/widgets/home_remove_object_banner.dart';
-import 'package:snapedit/widgets/unlock_pro_banner.dart';
+import 'package:snapedit/providers/gallery/gallery_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,17 +25,38 @@ class HomePage extends StatelessWidget {
                   children: [
                     const HomeOptions(),
                     SizedBox(height: AppDimensions.instance.padding),
-                    const HomeRemoveObjectBanner(),
+                    HomeBaseBanner(
+                      banner: AppAssets.instance.homeRemoveObjectBanner,
+                      title: 'Turn your\nphotos\ninto Art',
+                      buttonTitle: 'Try it now',
+                      action: () => AppRoutes.instance.goGalleryPage(context, EditImageType.removeObject),
+                    ),
                     SizedBox(height: AppDimensions.instance.padding),
                     const HomeAd(),
                     SizedBox(height: AppDimensions.instance.padding),
-                    const HomeEnhanceBanner(),
+                    HomeBaseBanner(
+                      banner: AppAssets.instance.homeEnhanceBanner,
+                      title: 'Turn your\nphotos\ninto Art',
+                      buttonTitle: 'Try it now',
+                      action: () => AppRoutes.instance.goGalleryPage(context, EditImageType.enhanceImage),
+                    ),
                     SizedBox(height: AppDimensions.instance.padding),
-                    const UnlockProBanner(),
+                    HomeBaseBanner(
+                      banner: AppAssets.instance.homeArtEffectBanner,
+                      title: 'Turn your\nphotos\ninto Art',
+                      buttonTitle: 'Try it now',
+                      action: () => AppRoutes.instance.goGalleryPage(context, EditImageType.applyArtEffect),
+                    ),
                     SizedBox(height: AppDimensions.instance.padding),
-                    const HomeArtEffectBanner(),
+                    const HomeAd(),
+                    SizedBox(height: AppDimensions.instance.padding),
+                    HomeBaseBanner(
+                      banner: AppAssets.instance.homeAnimeAIBanner,
+                      title: 'Turn your\nphotos\ninto Art',
+                      buttonTitle: 'Try it now',
+                      action: () => AppRoutes.instance.goGalleryPage(context, EditImageType.animeAI),
+                    ),
                     SizedBox(height: bottomPadding),
-                    const HomeAd(),
                   ],
                 ),
               ),

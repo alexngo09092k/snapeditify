@@ -34,6 +34,11 @@ class HomeOptions extends StatelessWidget {
               icon: AppAssets.instance.icArtEffect,
               onTap: (_) => AppRoutes.instance.goGalleryPage(context, EditImageType.applyArtEffect),
             ),
+            _Option(
+              title: 'Anime AI',
+              icon: AppAssets.instance.icArtEffect,
+              onTap: (_) => AppRoutes.instance.goGalleryPage(context, EditImageType.animeAI),
+            ),
           ],
         ),
       ),

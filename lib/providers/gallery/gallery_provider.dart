@@ -7,6 +7,7 @@ enum EditImageType {
   removeObject,
   enhanceImage,
   applyArtEffect,
+  animeAI,
 }
 
 enum ImageSource {
@@ -75,6 +76,11 @@ class GalleryProvider extends IGalleryProvider {
       AppAssets.instance.snapEditDemo2,
       AppAssets.instance.snapEditDemo3,
     ],
+    EditImageType.animeAI: [
+      AppAssets.instance.animeDemo1,
+      AppAssets.instance.animeDemo2,
+      AppAssets.instance.animeDemo3,
+    ],
   };
 
   @override
@@ -89,7 +95,7 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Future<bool> refreshGalleryList() async {
     final PermissionState ps = await PhotoManager.requestPermissionExtend();
-    if(!ps.hasAccess) {
+    if (!ps.hasAccess) {
       Debug.log("Hello");
     }
 

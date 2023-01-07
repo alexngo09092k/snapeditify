@@ -6,6 +6,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/extensions.dart';
 import 'package:snapedit/pages/active_pro/active_pro.dart';
+import 'package:snapedit/pages/anime_ai/anime_ai.dart';
 import 'package:snapedit/pages/restyle/restyle.dart';
 import 'package:snapedit/pages/enhance/enhance.dart';
 import 'package:snapedit/pages/gallery/gallery.dart';
@@ -14,6 +15,7 @@ import 'package:snapedit/pages/home/home_page.dart';
 import 'package:snapedit/pages/maintenance/maintenance_page.dart';
 import 'package:snapedit/pages/setting/setting.dart';
 import 'package:snapedit/pages/splash/splash_page.dart';
+import 'package:snapedit/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapedit/providers/enhance/enhance_provider.dart';
 import 'package:snapedit/providers/gallery/gallery_provider.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
@@ -41,6 +43,7 @@ class AppRoutes extends IAppRoutes {
   static const String homePage = 'home_page';
   static const String maintenancePage = 'maintenance_page';
   static const String removeObjectPage = 'remove_object_page';
+  static const String animeAIPage = 'anime_ai_page';
   static const String settingPage = 'setting_page';
   static const String splashPage = 'splash_page';
 
@@ -88,6 +91,8 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const RestylePage(), settings);
       case galleryPage:
         return buildRoute(const GalleryPage(), settings);
+      case animeAIPage:
+        return buildRoute(const AnimeAIPage(), settings);
       default:
         throw ErrorDescription("Not found page");
     }
@@ -131,6 +136,10 @@ extension AppRoutesUtils on IAppRoutes {
           case EditImageType.removeObject:
             res = await ManagerProvider.of<RemoveObjectProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.removeObjectPage;
+            break;
+          case EditImageType.animeAI:
+            res = await ManagerProvider.of<AnimeAIProvider>().setImage(context, bytes: bytes);
+            target = AppRoutes.animeAIPage;
             break;
           default:
             throw ErrorDescription("Not support action");

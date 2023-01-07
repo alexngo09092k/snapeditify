@@ -19,6 +19,7 @@ class AppAssets {
   final String homeArtEffectBanner = '$lottiePath/home_art_effect_banner.json';
   final String homeEnhanceBanner = '$lottiePath/home_enhance_banner.json';
   final String homeRemoveObjectBanner = '$lottiePath/home_remove_object_banner.json';
+  final String homeAnimeAIBanner = '$lottiePath/home_anime_ai_banner.json';
 
   /// Images
   static const String imagePath = 'assets/images';
@@ -34,6 +35,9 @@ class AppAssets {
   final String restyleDemo1 = "$imagePath/restyle_demo_1.jpeg";
   final String restyleDemo2 = "$imagePath/restyle_demo_2.jpeg";
   final String restyleDemo3 = "$imagePath/restyle_demo_3.jpeg";
+  final String animeDemo1 = "$imagePath/anime_demo_1.jpg";
+  final String animeDemo2 = "$imagePath/anime_demo_2.jpeg";
+  final String animeDemo3 = "$imagePath/anime_demo_3.jpg";
   final String snapEditCopyRightTitle = "$imagePath/snapedit_copy_right_title.png";
   final String snapEditLogoFull = "$imagePath/snapedit_logo_full.png";
   final String snapEditLogoText = "$imagePath/snapedit_logo_text.png";

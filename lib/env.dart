@@ -62,6 +62,12 @@ Map<String, dynamic> enviroment = {
       'restylePro': 'api/v1/restyle',
       'styles': 'api/v1/restyle/styles',
       'stylesPro': 'api/v1/restyle/styles',
+      'animeStyles': "api/imagen/v1/styles",
+      'animeStylesPro': "api/imagen/v1/styles",
+      'animeImageAI': "api/imagen/v1",
+      'animeImageAIPro': "api/imagen/v1",
+      'animeVideoAI': "api/imagen/v1/video",
+      'animeVideoAIPro': "api/imagen/v1/video",
     },
     'enhance': {
       'suportedImageSize': {

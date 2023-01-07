@@ -1,11 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_routes.dart';
+
 import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/gallery/gallery_provider.dart';
 import 'package:snapedit/widgets/lottie_viewer.dart';
 
-class HomeRemoveObjectBanner extends StatelessWidget {
-  const HomeRemoveObjectBanner({super.key});
+class HomeBaseBanner extends StatelessWidget {
+  const HomeBaseBanner({
+    Key? key,
+    required this.banner,
+    required this.title,
+    required this.buttonTitle,
+    required this.action,
+  }) : super(key: key);
+
+  final String banner;
+  final String title;
+  final String buttonTitle;
+  final Function() action;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +25,8 @@ class HomeRemoveObjectBanner extends StatelessWidget {
     return Stack(
       children: [
         LottieViewer(
-          lottie: AppAssets.instance.homeRemoveObjectBanner,
+          lottie: banner,
           width: lottieWidth,
-          height: lottieWidth * 1.75 / 3,
           borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
         ),
         Positioned(
@@ -29,14 +39,14 @@ class HomeRemoveObjectBanner extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Turn your\nphotos\ninto Art',
+                  title,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
                 ),
                 GestureDetector(
-                  onTap: () => AppRoutes.instance.goGalleryPage(context, EditImageType.removeObject),
+                  onTap: action,
                   child: Container(
                     padding: EdgeInsets.all(AppDimensions.instance.padding),
                     decoration: BoxDecoration(
@@ -44,7 +54,7 @@ class HomeRemoveObjectBanner extends StatelessWidget {
                       borderRadius: BorderRadius.circular(AppDimensions.instance.padding),
                     ),
                     child: Text(
-                      'Try it now',
+                      buttonTitle,
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                             color: Colors.white,
                           ),
