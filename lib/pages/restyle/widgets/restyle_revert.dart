@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/restyle/restyle_provider.dart';
+import 'package:snapedit/widgets/base/custom_icon.dart';
 
 class RestyleRevert extends StatelessWidget {
   const RestyleRevert({super.key, required this.provider});
@@ -20,9 +21,9 @@ class RestyleRevert extends StatelessWidget {
         child: BasePropConsumer<RestyleProvider, bool>(
           listenable: provider,
           select: (p) => p.canRevert,
-          builder: (_, __, p, ___) => Image.asset(
-            AppAssets.instance.icAdd,
-            width: 20,
+          builder: (_, __, p, ___) => CustomIcon(
+            AppAssets.instance.icRevert,
+            color: p.canRevert ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
           ),
         ),
       ),

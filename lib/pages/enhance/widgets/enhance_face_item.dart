@@ -1,35 +1,40 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/view_models/face_vm.dart';
 import 'package:snapedit/providers/enhance/enhance_provider.dart';
 
 class EnhanceFaceItem extends StatelessWidget {
-  const EnhanceFaceItem({super.key, required this.provider, required this.face});
+  const EnhanceFaceItem({super.key, required this.provider, required this.face, required this.onFace});
   final EnhanceProvider provider;
   final FaceVM face;
+  final Function(FaceVM) onFace;
 
   @override
   Widget build(BuildContext context) {
-    final imageWidget = BasePropConsumer<EnhanceProvider, int>(
-      listenable: provider,
-      select: (p) => p.state.enhancedImageIndex,
-      builder: (_, __, p, ___) => ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(30)),
-        child: SizedBox(
-          child: Image.network(
-            face.png[p.state.enhancedImageIndex],
-            width: 60,
-            height: 60,
-          ),
+    return GestureDetector(
+      onTap: () => onFace(face),
+      child: Container(
+        child: Column(
+          children: [
+            BasePropConsumer<EnhanceProvider, int>(
+              listenable: provider,
+              select: (p) => p.state.enhancedImageIndex,
+              builder: (_, __, p, ___) => ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+                child: Container(
+                  child: Image.network(
+                    face.png[p.state.enhancedImageIndex],
+                    width: 80,
+                    height: 80,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
-    );
-    return BasePropConsumer<EnhanceProvider, bool>(
-      listenable: provider,
-      select: (p) => p.state.faces[face.faceId].isSelected,
-      builder: (_, __, p, ___) => GestureDetector(
-        onTap: face.onSelect,
-        child: imageWidget,
       ),
     );
   }

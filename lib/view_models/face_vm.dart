@@ -32,35 +32,6 @@ class FaceVM extends Face with Provider {
 
   List<ui.Image> get faceEnhancedImages => _faceEnhancedImages;
 
-  bool _isSelected = false;
-  bool get isSelected => _isSelected;
-  set isSelected(bool value) {
-    if (_isSelected != value) {
-      _isSelected = value;
-      notifyListeners();
-    }
-  }
-
-  @override
-  FaceVM copyWith({
-    List<int>? box,
-    int? faceId,
-    List<String>? png,
-    bool? isSelected,
-    List<ui.Image>? faceImages,
-    List<ui.Image>? faceEnhancedImages,
-    EnhanceState? state,
-  }) {
-    return FaceVM(
-      box: box ?? this.box,
-      faceId: faceId ?? this.faceId,
-      png: png ?? this.png,
-      state: state ?? this.state,
-    )
-      ..faceImages.addAll(faceImages ?? this.faceImages)
-      ..faceEnhancedImages.addAll(faceEnhancedImages ?? this.faceEnhancedImages)
-      ..isSelected = isSelected ?? this.isSelected;
-  }
 
   Future<void> paintParse() async {
     /// BOX [x, y, width, height]
@@ -95,11 +66,8 @@ class FaceVM extends Face with Provider {
   }
 
   onSelect() async {
-    if (!isSelected) {
-      state.paintBefore.background = _faceImages[state.enhancedImageIndex].backgroundDrawable;
-      state.paintAfter.background = _faceEnhancedImages[state.enhancedImageIndex].backgroundDrawable;
-      state.paintSize = ui.Size(_faceImages[state.enhancedImageIndex].width.toDouble(), _faceImages[state.enhancedImageIndex].height.toDouble());
-      isSelected = true;
-    }
+    state.paintBefore.background = _faceImages[state.enhancedImageIndex].backgroundDrawable;
+    state.paintAfter.background = _faceEnhancedImages[state.enhancedImageIndex].backgroundDrawable;
+    state.paintSize = ui.Size(_faceImages[state.enhancedImageIndex].width.toDouble(), _faceImages[state.enhancedImageIndex].height.toDouble());
   }
 }

@@ -14,8 +14,7 @@ class StyleList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 150,
+    return Expanded(
       child: BasePropConsumer<RestyleProvider, int>(
         listenable: provider,
         select: (_) => _.styles.length,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/restyle/restyle_provider.dart';
+import 'package:snapedit/widgets/base/custom_icon.dart';
 import 'package:snapedit/widgets/base_image_editor.dart';
 import 'package:snapedit/widgets/painter/painter_pure.dart';
 
@@ -36,10 +37,10 @@ class RestyleImage extends StatelessWidget {
               child: BasePropConsumer<RestyleProvider, bool>(
                 listenable: provider,
                 select: (p) => p.canCompare,
-                builder: (_, __, p, ___) => Image.asset(
-                  AppAssets.instance.icAdd,
-                  color: p.canCompare ? AppColors.instance.blue : AppColors.instance.black,
-                  width: AppDimensions.instance.icon,
+                builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+                  context,
+                  icon: AppAssets.instance.icCompare,
+                  color: p.canCompare ? AppColors.instance.blue : AppColors.instance.blue100,
                 ),
               ),
             ),

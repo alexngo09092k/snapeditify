@@ -14,25 +14,34 @@ class RestyleState extends EditImageState {
 
   String? _imageId;
   String? get imageId => _imageId;
-  set(String? imageId) {
+  set imageId(String? imageId) {
     _imageId = imageId;
     notifyListeners();
   }
 
-  @override
-  Future<bool> setImage(String imageBase64, {EditImageProvider? provider}) async {
-    await super.setImage(imageBase64, provider: provider);
-    _paint.background = imageUI.backgroundDrawable;
-    return true;
+  String? _styleId;
+  String? get styleId => _styleId;
+
+  final Map<String, String> _styledImages = {};
+  Map<String, String> get styledImages => _styledImages;
+  set styledImages(Map<String, String> styledImages) {
+    _styledImages.clear();
+    _styledImages.addAll(styledImages);
+    notifyListeners();
   }
 
-  RestyleState copyWith({String? imageId}) {
-    return RestyleState().._imageId = imageId ?? this.imageId;
+  @override
+  Future<bool> setImage(String imageBase64, {EditImageProvider? provider, String? styleId}) async {
+    await super.setImage(imageBase64, provider: provider);
+    _styleId = styleId;
+    _paint.background = imageUI.backgroundDrawable;
+    return true;
   }
 
   @override
   void dispose() {
     _paint.dispose();
+    _styledImages.clear();
     super.dispose();
   }
 }

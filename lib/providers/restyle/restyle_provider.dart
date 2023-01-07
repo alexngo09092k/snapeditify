@@ -33,7 +33,6 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   RestyleProvider.internal() {
     _state = RestyleState();
     _state.addListener(notifyListeners);
-    _states[DEFAULT_IMAGE] = _state;
   }
 
   final List<Style> _styles = [];
@@ -44,12 +43,8 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   @override
   RestyleState get state => _state;
 
-  final Map<String, RestyleState> _states = {};
-
-  final String DEFAULT_IMAGE = 'DEFAULT_IMAGE';
-
   @override
-  bool get canCompare => _states.length > 1;
+  bool get canCompare => _state.styledImages.isNotEmpty;
 
   bool _compared = false;
   @override
@@ -71,23 +66,21 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   }
 
   @override
-  bool get canSave => _states.length > 1;
+  bool get canSave => _state.styledImages.isNotEmpty;
 
   @override
-  bool get canRevert => _states.length > 1;
+  bool get canRevert => _state.styledImages.isNotEmpty;
 
   @override
   Future<bool> revert() async {
     Debug.log("===== REVERT ====");
-    _state = _states[DEFAULT_IMAGE]!;
-    notifyListeners();
-    return true;
+    return _state.setImage(imageBase64, styleId: null);
   }
 
   @override
   Future<bool> restyleImage(String styleId) async {
-    if (_states.containsKey(styleId)) {
-      _state = _states[styleId]!;
+    if (_state.styledImages.containsKey(styleId)) {
+      _state.setImage(_state.styledImages[styleId]!, styleId: styleId);
       notifyListeners();
       return true;
     }
@@ -100,9 +93,8 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     SnapEditResponse<RestyleResponse?> res = await Services.instance.snapEdit.restyle(body);
 
     if (res.data != null) {
-      _state = _state.copyWith(imageId: res.data!.imageId);
-      await _state.setImage(res.data!.outputImage);
-      _states[styleId] = _state;
+      await _state.setImage(res.data!.outputImage, styleId: styleId);
+      _state.styledImages[styleId] = res.data!.outputImage;
       notifyListeners();
 
       /// HIDE LOADING POPUP
@@ -139,9 +131,9 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   void clean([bool notify = false]) {
-    _states.clear();
     _styles.clear();
-    _state = _states[DEFAULT_IMAGE]!;
+    _state.styledImages.clear();
+    _state.setImage(imageBase64, styleId: null);
     if (notify) notifyListeners();
   }
 
@@ -189,7 +181,6 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     _state.dispose();
     _state = RestyleState();
     _state.addListener(notifyListeners);
-    _states.clear();
     return true;
   }
 }

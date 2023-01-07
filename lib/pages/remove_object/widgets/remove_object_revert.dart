@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/common/constants.dart';
 import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
+import 'package:snapedit/widgets/base/custom_icon.dart';
 
 class RemoveObjectRevert extends StatelessWidget {
   const RemoveObjectRevert({super.key, required this.provider});
@@ -20,10 +21,9 @@ class RemoveObjectRevert extends StatelessWidget {
         child: BasePropConsumer<RemoveObjectProvider, bool>(
           listenable: provider,
           select: (p) => p.canRevert,
-          builder: (_, __, p, ___) => Image.asset(
+          builder: (_, __, p, ___) => CustomIcon(
             AppAssets.instance.icRevert,
             color: p.canRevert ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
-            width: AppDimensions.instance.icon,
           ),
         ),
       ),

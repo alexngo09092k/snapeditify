@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/pages/enhance/widgets/enhance_image.dart';
-import 'package:snapedit/pages/enhance/widgets/enhance_result.dart';
+import 'package:snapedit/pages/enhance/widgets/enhance_save.dart';
 import 'package:snapedit/providers/enhance/enhance_provider.dart';
 import 'package:snapedit/widgets/app_layout.dart';
 
@@ -24,10 +24,9 @@ class _EnhancePageState extends ProviderState<EnhancePage, EnhanceProvider> {
     return AppLayout(
       back: true,
       screen: 'Enhance',
-      scroll: false,
+      action: EnhanceSave(provider: provider),
       children: [
         EnhanceImage(provider: provider),
-        EnhanceResult(provider: provider),
       ],
     );
   }
