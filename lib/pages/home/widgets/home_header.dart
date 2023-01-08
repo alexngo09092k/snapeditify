@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/configuration.dart';
 import 'package:snapedit/common/constants.dart';
+import 'package:snapedit/pages/home/widgets/home_logo.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({Key? key}) : super(key: key);
@@ -13,10 +13,7 @@ class HomeHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            Configuration.instance.appConfig.appName,
-            style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.bold),
-          ),
+          const HomeLogo(),
           Row(
             children: [
               GestureDetector(
