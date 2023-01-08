@@ -22,8 +22,8 @@ class Configuration {
   FirebaseConfig get firebaseConfig => _firebaseConfig;
 
   /// APP CONFIGUARATIONS
-  AppConfig _appConfig = DefaultConfig.appConfig;
-  AppConfig get appConfig => _appConfig;
+  BusinessConfig _businessConfig = DefaultConfig.businessConfig;
+  BusinessConfig get businessConfig => _businessConfig;
 
   /// IAP CONFIGURATIONS
   IAPConfig _iapConfig = DefaultConfig.iapConfig;
@@ -38,8 +38,8 @@ class Configuration {
   SnapEditConfig get snapEditConfig => _snapEditConfig;
 
   bool fromEnviroment(Map<String, dynamic> enviroment) {
-    if (enviroment['appConfig'] != null) {
-      _appConfig = AppConfig.fromMap(enviroment['appConfig']);
+    if (enviroment['businessConfig'] != null) {
+      _businessConfig = BusinessConfig.fromMap(enviroment['businessConfig']);
     }
 
     if (enviroment['firebaseConfig'] != null) {
@@ -68,15 +68,15 @@ abstract class DefaultConfig {
     enableFirebase: false,
     enableCrashAnalytics: true,
     enableRemoteConfigFirebase: false,
-    fetchTimeout: const Duration(seconds: 60), // 1 minutes
-    minimumFetchInterval: const Duration(days: 1), // 1 day
+    fetchTimeout: const Duration(milliseconds: 60 * 1000), // 1 minutes
+    minimumFetchInterval: const Duration(milliseconds: 24 * 60 * 1000), // 1 day
   );
 
   /// DEFAULT API CONFIGURATIONS
   static SnapEditConfig snapEditConfig = SnapEditConfig.defaultValue();
 
   /// DEFAULT APP CONFIGURATIONS
-  static AppConfig appConfig = AppConfig.defaultValue();
+  static BusinessConfig businessConfig = BusinessConfig.defaultValue();
 
   /// DEFAULT ADS CONFIGURATIONS
   static AdvertisementConfig advertisementConfig = const AdvertisementConfig(
@@ -178,7 +178,7 @@ extension PackageInfoExtesnion on Configuration {
 
 extension NetworkExtension on Configuration {
   bool isNetwork(String url) {
-    for (var protocol in appConfig.protocols) {
+    for (var protocol in businessConfig.protocols) {
       if (url.startsWith(protocol)) {
         return true;
       }

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class AppConfig {
+class BusinessConfig {
   final String appName;
   final String appLogo;
   final List<String> protocols;
@@ -14,7 +14,7 @@ class AppConfig {
   final MaintenanceMode maintenanceMode;
   final AppMode appMode;
 
-  AppConfig({
+  BusinessConfig({
     required this.appName,
     required this.appLogo,
     required this.protocols,
@@ -26,8 +26,8 @@ class AppConfig {
     required this.telegram,
   });
 
-  factory AppConfig.defaultValue() {
-    return AppConfig(
+  factory BusinessConfig.defaultValue() {
+    return BusinessConfig(
       appName: "SnapEdit",
       appLogo: "",
       protocols: ['https://', 'http://', 'data:'],
@@ -47,7 +47,7 @@ class AppConfig {
     );
   }
 
-  AppConfig copyWith({
+  BusinessConfig copyWith({
     String? appName,
     String? appLogo,
     List<String>? protocols,
@@ -58,7 +58,7 @@ class AppConfig {
     AppMode? appMode,
     String? telegram,
   }) {
-    return AppConfig(
+    return BusinessConfig(
       appName: appName ?? this.appName,
       appLogo: appLogo ?? this.appLogo,
       protocols: protocols ?? this.protocols,
@@ -85,8 +85,8 @@ class AppConfig {
     };
   }
 
-  factory AppConfig.fromMap(Map<String, dynamic> map) {
-    return AppConfig(
+  factory BusinessConfig.fromMap(Map<String, dynamic> map) {
+    return BusinessConfig(
       appName: map['appName'] as String,
       appLogo: map['appLogo'] as String,
       protocols: (map['protocols'] as List).map((e) => e.toString()).toList(),
@@ -101,15 +101,15 @@ class AppConfig {
 
   String toJson() => json.encode(toMap());
 
-  factory AppConfig.fromJson(String source) => AppConfig.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory BusinessConfig.fromJson(String source) => BusinessConfig.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'AppConfig(appName: $appName, appLogo: $appLogo, protocols: $protocols, sharedKeyPrefix: $sharedKeyPrefix, shareApp: $shareApp, appMode: $appMode, maintenanceMode: $maintenanceMode, telegram: $telegram)';
+    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, protocols: $protocols, sharedKeyPrefix: $sharedKeyPrefix, shareApp: $shareApp, appMode: $appMode, maintenanceMode: $maintenanceMode, telegram: $telegram)';
   }
 
   @override
-  bool operator ==(covariant AppConfig other) {
+  bool operator ==(covariant BusinessConfig other) {
     if (identical(this, other)) return true;
 
     return other.appName == appName &&

@@ -58,7 +58,7 @@ class GalleryConfig {
       maxHeight: 100000,
       ignoreSize: true,
       minDuration: Duration.zero,
-      maxDuration: const Duration(hours: 1),
+      maxDuration: const Duration(milliseconds: 60 * 60 * 1000),
       needTitle: false,
       startTime: DateTime(2005), // Default Before 8 years
       endTime: DateTime.now(),

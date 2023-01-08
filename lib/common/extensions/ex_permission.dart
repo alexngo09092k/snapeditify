@@ -13,7 +13,7 @@ extension MPermissionStore on UserPermission {
           Navigator.pop(context);
           showNoPermissionPopup(
             context,
-            message: 'Allow ${Configuration.instance.appConfig.appName} to access photos on your device.',
+            message: 'Allow ${Configuration.instance.businessConfig.appName} to access photos on your device.',
             onBackApp: (_) {
               requestPermission(
                 permission: [Permission.storage],
@@ -45,7 +45,7 @@ extension MPermissionStore on UserPermission {
                 showNoPermissionPopup(
                   context,
                   message:
-                      'Allow ${Configuration.instance.appConfig.appName} to collect location data to enable fitness tracking even when the app is closed or not in use.',
+                      'Allow ${Configuration.instance.businessConfig.appName} to collect location data to enable fitness tracking even when the app is closed or not in use.',
                   onBackApp: (_) {
                     requestPermission(
                       permission: [Permission.location],

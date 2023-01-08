@@ -17,7 +17,7 @@ class AppLogo extends StatelessWidget {
         Radius.circular(AppDimensions.instance.paddingX(0.5)),
       ),
       child: CustomImage(
-        image: image ?? Configuration.instance.appConfig.appLogo,
+        image: image ?? Configuration.instance.businessConfig.appLogo,
         width: width,
         height: height,
         color: color,

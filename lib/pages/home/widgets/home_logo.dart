@@ -10,7 +10,7 @@ class HomeLogo extends StatelessWidget {
     return AnimatedTextKit(
       animatedTexts: [
         ColorizeAnimatedText(
-          Configuration.instance.appConfig.appName,
+          Configuration.instance.businessConfig.appName,
           textStyle: Theme.of(context).textTheme.headline5!,
           colors: [const Color.fromRGBO(108, 118, 241, 1), const Color.fromRGBO(114, 213, 187, 1)],
         ),
