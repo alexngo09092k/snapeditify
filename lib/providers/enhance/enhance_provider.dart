@@ -71,15 +71,6 @@ class EnhanceProvider extends IEnhanceProvider {
   }
 
   @override
-  Future<bool> refresh(BuildContext context) async {
-    _state.removeListener(notifyListeners);
-    _state.dispose();
-    _state = EnhanceState();
-    _state.addListener(notifyListeners);
-    return true;
-  }
-
-  @override
   Future<bool> saveImage(BuildContext context) {
     return checkoutSaveImage(context, () async {
       /// SAVE IMAGE
@@ -87,5 +78,14 @@ class EnhanceProvider extends IEnhanceProvider {
     }, () {
       /// MAX COUNT DOWNLOAD IMAGE
     });
+  }
+
+  @override
+  Future<bool> refresh(BuildContext context) async {
+    _state.removeListener(notifyListeners);
+    _state.dispose();
+    _state = EnhanceState();
+    _state.addListener(notifyListeners);
+    return true;
   }
 }

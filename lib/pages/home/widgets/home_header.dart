@@ -36,7 +36,7 @@ class HomeHeader extends StatelessWidget {
                       SizedBox(width: AppDimensions.instance.paddingX(0.5)), //// padding small
                       Image.asset(
                         AppAssets.instance.icProText,
-                        width: AppDimensions.instance.iconX(0.8), //// icon small
+                        width: AppDimensions.instance.iconX(0.8), //// icon sm
                         color: Colors.white,
                       ),
                     ],

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:fluttering/fluttering.dart';
 import 'package:snapedit/services/snap_edit/snap_edit.dart';
+import 'package:snapedit/services/snap_edit/src/models/body/anime_ai_image_body.dart';
+import 'package:snapedit/services/snap_edit/src/models/body/anime_ai_video_body.dart';
 import 'package:snapedit/services/snap_edit/src/models/response/anime_image_response.dart';
 import 'package:snapedit/services/snap_edit/src/models/response/anime_styles_response.dart';
 import 'package:snapedit/services/snap_edit/src/models/response/anime_video_response.dart';
@@ -17,9 +19,9 @@ extension EnimeAI on SnapEdit {
     return handleResponse<AnimeStylesResponse>(response, (p0) => AnimeStylesResponse.fromMap(p0));
   }
 
-  Future<SnapEditResponse<AnimeImageResponse?>> animeImageAI(RestyleBody body) async {
+  Future<SnapEditResponse<AnimeImageResponse?>> animeRestyle(AnimeAIImageBody body) async {
     final List<MultipartBody> parts = [];
-    final Map<String, dynamic> data = {'style_id': body.styleId};
+    final Map<String, dynamic> data = {'style': body.style};
 
     if (body.imageId == null && body.inputImage == null) {
       return SnapEditResponse<AnimeImageResponse?>(data: null, error: 'Input image and image id, the both are null.');
@@ -46,31 +48,19 @@ extension EnimeAI on SnapEdit {
     return handleResponse<AnimeImageResponse>(response, (p0) => AnimeImageResponse.fromMap(p0));
   }
 
-  Future<SnapEditResponse<AnimeVideoResponse?>> animeVideoAI(RestyleBody body) async {
+  Future<SnapEditResponse<AnimeVideoResponse?>> animeVideoEffect(AnimeAIVideoBody body) async {
     final List<MultipartBody> parts = [];
-    final Map<String, dynamic> data = {'style_id': body.styleId};
+    final Map<String, dynamic> data = {'style': body.style};
 
-    if (body.imageId == null && body.inputImage == null) {
-      return SnapEditResponse<AnimeVideoResponse?>(data: null, error: 'Input image and image id, the both are null.');
-    }
-
-    if (body.imageId != null) data['image_id'] = body.imageId!;
-
-    File? file;
-    if (body.inputImage != null) {
-      file = await uint8ListToFile(body.inputImage!);
-      if (file == null) return SnapEditResponse<AnimeVideoResponse?>(data: null, error: 'Input image is not valid.');
-      parts.add(MultipartBody<File>(key: 'input_image', data: file));
-    }
+    data['image_id'] = body.imageId;
+    data['output_image_id'] = body.outputImageId;
 
     ClientResponse response = await ClientHttp.instance.postMultipart(
-      '${config.baseUrl}${config.endPoints.animeImageAI}',
+      '${config.baseUrl}${config.endPoints.animeVideoAIPro}',
       data,
       parts,
       headers: config.headers,
     );
-
-    if (file != null && await file.exists()) file.delete();
 
     return handleResponse<AnimeVideoResponse>(response, (p0) => AnimeVideoResponse.fromMap(p0));
   }

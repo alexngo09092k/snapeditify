@@ -33,7 +33,7 @@ class AnimeImageResponse {
       imageId: map['image_id'] as String,
       outputImages: (map['output_images']).map<AnimeImage>(
         (x) => AnimeImage.fromMap(x as Map<String, dynamic>),
-      ),
+      ).toList(),
     );
   }
 
@@ -77,14 +77,14 @@ class AnimeImage {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'image': image,
-      'imageId': imageId,
+      'image_id': imageId,
     };
   }
 
   factory AnimeImage.fromMap(Map<String, dynamic> map) {
     return AnimeImage(
       image: map['image'] as String,
-      imageId: map['imageId'] as String,
+      imageId: map['image_id'] as String,
     );
   }
 

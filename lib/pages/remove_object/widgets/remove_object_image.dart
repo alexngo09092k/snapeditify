@@ -141,7 +141,8 @@ class RemoveObjectImage extends StatelessWidget {
                               ? CustomButton(
                                   onTap: () => provider.removeObjects(context),
                                   title: S.of(context).remove,
-                                  color: AppColors.instance.blue,
+                                  titleColor: Colors.white,
+                                  gradient: const LinearGradient(colors: [Color.fromRGBO(108, 118, 241, 1), Color.fromRGBO(114, 213, 187, 1)]),
                                   width: 150,
                                   height: 50,
                                 )

@@ -44,6 +44,12 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   RestyleState get state => _state;
 
   @override
+  bool get canSave => _state.styledImages.isNotEmpty;
+
+  @override
+  bool get canRevert => _state.styledImages.isNotEmpty;
+
+  @override
   bool get canCompare => _state.styledImages.isNotEmpty;
 
   bool _compared = false;
@@ -64,12 +70,6 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     }
     return false;
   }
-
-  @override
-  bool get canSave => _state.styledImages.isNotEmpty;
-
-  @override
-  bool get canRevert => _state.styledImages.isNotEmpty;
 
   @override
   Future<bool> revert() async {

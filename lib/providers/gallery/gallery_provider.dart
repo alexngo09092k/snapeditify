@@ -10,6 +10,36 @@ enum EditImageType {
   animeAI,
 }
 
+extension EditImageTypeEX on EditImageType {
+  get icon {
+    switch (this) {
+      case EditImageType.animeAI:
+        return AppAssets.instance.icAI;
+      case EditImageType.removeObject:
+        return AppAssets.instance.icRemoveObject;
+      case EditImageType.applyArtEffect:
+        return AppAssets.instance.icArtEffect;
+      case EditImageType.enhanceImage:
+        return AppAssets.instance.icEnhence;
+      default:
+    }
+  }
+
+  get title {
+    switch (this) {
+      case EditImageType.animeAI:
+        return 'Anime AI';
+      case EditImageType.removeObject:
+        return 'Remove';
+      case EditImageType.applyArtEffect:
+        return 'Art Effect';
+      case EditImageType.enhanceImage:
+        return 'Enhance';
+      default:
+    }
+  }
+}
+
 enum ImageSource {
   inSuggesstedPhotos,
   inAlbum,

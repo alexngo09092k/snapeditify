@@ -14,7 +14,8 @@ class StyleList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: AwesomeAppState.screen.height * 1 / 5,
       child: BasePropConsumer<RestyleProvider, int>(
         listenable: provider,
         select: (_) => _.styles.length,

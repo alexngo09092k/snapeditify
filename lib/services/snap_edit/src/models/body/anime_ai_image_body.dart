@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 
-class AnimeBody {
+class AnimeAIImageBody {
   Uint8List? inputImage;
   String? imageId;
-  String styleId;
+  String style;
 
-  AnimeBody({
+  AnimeAIImageBody({
     this.imageId,
     this.inputImage,
-    required this.styleId,
+    required this.style,
   });
 }
