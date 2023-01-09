@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/pages/home/widgets/home_logo.dart';
+import 'package:phosart/common/app_routes.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/pages/home/widgets/home_logo.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({Key? key}) : super(key: key);

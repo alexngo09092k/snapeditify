@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
+import 'package:phosart/common/constants.dart';
 
 class CustomIcon extends StatelessWidget {
   const CustomIcon(this.icon, {super.key, this.size, this.color, this.background, this.spacing, this.radius});

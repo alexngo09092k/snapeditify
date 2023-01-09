@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/widgets/app_layout.dart';
+import 'package:phosart/widgets/app_layout.dart';
 
 class ActiveProPage extends StatelessWidget {
   const ActiveProPage({super.key});

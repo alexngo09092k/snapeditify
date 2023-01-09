@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:snapedit/common/configuration.dart';
-import 'package:snapedit/common/extensions.dart';
+import 'package:phosart/common/configuration.dart';
 
 class LottieViewer extends StatelessWidget {
   const LottieViewer({

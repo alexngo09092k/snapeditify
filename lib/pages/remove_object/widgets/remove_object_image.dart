@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
-import 'package:snapedit/widgets/base/block.dart';
-import 'package:snapedit/widgets/base/custom_icon.dart';
-import 'package:snapedit/widgets/base_image_editor.dart';
-import 'package:snapedit/widgets/painter/painter_pure.dart';
-import 'package:snapedit/widgets/custom_button.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/generated/l10n.dart';
+import 'package:phosart/providers/remove_object/remove_object_provider.dart';
+import 'package:phosart/widgets/base/block.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:phosart/widgets/base_image_editor.dart';
+import 'package:phosart/widgets/painter/painter_pure.dart';
+import 'package:phosart/widgets/custom_button.dart';
 
 class RemoveObjectImage extends StatelessWidget {
   const RemoveObjectImage({Key? key, required this.provider, this.onStartDraw, this.onEndDraw}) : super(key: key);

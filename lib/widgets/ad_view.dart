@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/provider/manager_provider.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/widgets/ad_placeholder.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/ad_placeholder.dart';
 
 class AdView extends StatefulWidget {
   const AdView({

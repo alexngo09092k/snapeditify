@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:loading_more_list/loading_more_list.dart';
-import 'package:snapedit/widgets/base/load_more/source_list.dart';
+import 'package:phosart/widgets/base/load_more/source_list.dart';
 
 class SliverListLoadMore<T> extends StatefulWidget {
   const SliverListLoadMore({

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/providers/edit_image_provider.dart';
-import 'package:snapedit/view_models/enhanced_vm.dart';
-import 'package:snapedit/providers/edit_image_state.dart';
-import 'package:snapedit/view_models/face_vm.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:phosart/providers/edit_image_provider.dart';
+import 'package:phosart/view_models/enhanced_vm.dart';
+import 'package:phosart/providers/edit_image_state.dart';
+import 'package:phosart/view_models/face_vm.dart';
+import 'package:phosart/widgets/painter/painter.dart';
 
 class EnhanceState extends EditImageState {
   EnhanceState() {

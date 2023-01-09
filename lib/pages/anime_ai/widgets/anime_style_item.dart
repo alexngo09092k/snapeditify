@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/anime_ai/anime_ai_provider.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/anime_styles_response.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
+import 'package:phosart/services/snap_edit/src/models/response/anime_styles_response.dart';
 
 class AnimeStyleItem extends StatelessWidget {
   const AnimeStyleItem({super.key, required this.provider, required this.style, required this.onStyle});

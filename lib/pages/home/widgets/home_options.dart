@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/gallery/gallery_provider.dart';
+import 'package:phosart/common/app_routes.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/providers/gallery/gallery_provider.dart';
 
 class HomeOptions extends StatelessWidget {
   const HomeOptions({super.key});

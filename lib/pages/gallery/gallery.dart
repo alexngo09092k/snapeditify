@@ -4,14 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/pages/gallery/widgets/album_image.dart';
-import 'package:snapedit/pages/gallery/widgets/album_title.dart';
-import 'package:snapedit/pages/gallery/widgets/try_suggested_images.dart';
-import 'package:snapedit/providers/gallery/gallery_provider.dart';
-import 'package:snapedit/widgets/app_layout.dart';
-import 'package:snapedit/widgets/base/load_more/multiple_sliver_load_more.dart';
-import 'package:snapedit/widgets/base/load_more/source_list.dart';
+import 'package:phosart/common/app_routes.dart';
+import 'package:phosart/pages/gallery/widgets/album_image.dart';
+import 'package:phosart/pages/gallery/widgets/album_title.dart';
+import 'package:phosart/pages/gallery/widgets/try_suggested_images.dart';
+import 'package:phosart/providers/gallery/gallery_provider.dart';
+import 'package:phosart/widgets/app_layout.dart';
+import 'package:phosart/widgets/base/load_more/multiple_sliver_load_more.dart';
+import 'package:phosart/widgets/base/load_more/source_list.dart';
 
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});

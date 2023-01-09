@@ -1,10 +1,10 @@
 import 'package:app_settings/app_settings.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/widgets/loading_popup.dart';
-import 'package:snapedit/widgets/no_internet_popup.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/loading_popup.dart';
+import 'package:phosart/widgets/no_internet_popup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snapedit/widgets/no_permission_popup.dart';
+import 'package:phosart/widgets/no_permission_popup.dart';
 
 Future<T?> showPopup<T>(BuildContext context, Widget popup, {bool barrierDismissible = true}) {
   return showCupertinoModalPopup<T>(

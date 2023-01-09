@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/pages/setting/widgets/rate_popup.dart';
-import 'package:snapedit/pages/setting/widgets/share_popup.dart';
-import 'package:snapedit/widgets/app_layout.dart';
-import 'package:snapedit/widgets/base/block.dart';
-import 'package:snapedit/widgets/base/tile_row.dart';
-import 'package:snapedit/widgets/base/separated_list_view.dart';
-import 'package:snapedit/widgets/unlock_pro_banner.dart';
-import 'package:snapedit/widgets/widget.utils.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/pages/setting/widgets/rate_popup.dart';
+import 'package:phosart/pages/setting/widgets/share_popup.dart';
+import 'package:phosart/widgets/app_layout.dart';
+import 'package:phosart/widgets/base/block.dart';
+import 'package:phosart/widgets/base/tile_row.dart';
+import 'package:phosart/widgets/base/separated_list_view.dart';
+import 'package:phosart/widgets/unlock_pro_banner.dart';
+import 'package:phosart/widgets/widget.utils.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

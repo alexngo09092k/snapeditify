@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/restyle/restyle_provider.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/styles_response.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/providers/restyle/restyle_provider.dart';
+import 'package:phosart/services/snap_edit/src/models/response/styles_response.dart';
 
 class StyleItem extends StatelessWidget {
   const StyleItem({super.key, required this.provider, required this.style, required this.onStyle});

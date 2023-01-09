@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/restyle/restyle_provider.dart';
-import 'package:snapedit/widgets/base/custom_icon.dart';
-import 'package:snapedit/widgets/base_image_editor.dart';
-import 'package:snapedit/widgets/painter/painter_pure.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/providers/restyle/restyle_provider.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:phosart/widgets/base_image_editor.dart';
+import 'package:phosart/widgets/painter/painter_pure.dart';
 
 class RestyleImage extends StatelessWidget {
   const RestyleImage({Key? key, required this.provider}) : super(key: key);

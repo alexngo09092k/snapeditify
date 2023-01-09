@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:snapedit/services/snap_edit/src/models/config/dimension.dart';
+import 'package:phosart/services/snap_edit/src/models/config/dimension.dart';
 
 class EnhanceConfig {
   final Dimension suportedImageSize;

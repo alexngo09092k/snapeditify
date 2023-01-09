@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/anime_ai/anime_ai_state.dart';
-import 'package:snapedit/providers/edit_image_provider.dart';
-import 'package:snapedit/providers/storage_provider.dart';
-import 'package:snapedit/services/services.dart';
-import 'package:snapedit/services/snap_edit/src/models/body/anime_ai_image_body.dart';
-import 'package:snapedit/services/snap_edit/src/models/body/anime_ai_video_body.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/anime_image_response.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/anime_styles_response.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/anime_video_response.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/providers/anime_ai/anime_ai_state.dart';
+import 'package:phosart/providers/edit_image_provider.dart';
+import 'package:phosart/providers/storage_provider.dart';
+import 'package:phosart/services/services.dart';
+import 'package:phosart/services/snap_edit/src/models/body/anime_ai_image_body.dart';
+import 'package:phosart/services/snap_edit/src/models/body/anime_ai_video_body.dart';
+import 'package:phosart/services/snap_edit/src/models/response/anime_image_response.dart';
+import 'package:phosart/services/snap_edit/src/models/response/anime_styles_response.dart';
+import 'package:phosart/services/snap_edit/src/models/response/anime_video_response.dart';
+import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IAnimeAIProvider extends EditImageProvider with StorageProvider {
   List<AnimeStyle> get styles;

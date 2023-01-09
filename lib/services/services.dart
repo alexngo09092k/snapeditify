@@ -1,5 +1,5 @@
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/services/snap_edit/snap_edit.dart';
+import 'package:phosart/services/snap_edit/snap_edit.dart';
 
 export './snap_edit/snap_edit.dart';
 

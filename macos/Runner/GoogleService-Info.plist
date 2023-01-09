@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>268730434934-odi60oiu0380k2o2n5egnafdoasp6pa3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.268730434934-odi60oiu0380k2o2n5egnafdoasp6pa3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDxbPpf-nPTUDLkia1l4nvQTtOmN1qZssc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>268730434934</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.phosart</string>
+	<key>PROJECT_ID</key>
+	<string>phosart-5d64f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>phosart-5d64f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:268730434934:ios:c0a0e1f3c3cf76c9d2e657</string>
+	<key>DATABASE_URL</key>
+	<string>https://phosart-5d64f-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

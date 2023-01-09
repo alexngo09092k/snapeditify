@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/providers/edit_image_provider.dart';
-import 'package:snapedit/providers/enhance/enhance_state.dart';
-import 'package:snapedit/services/services.dart';
-import 'package:snapedit/view_models/enhanced_vm.dart';
-import 'package:snapedit/view_models/face_vm.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:phosart/providers/edit_image_provider.dart';
+import 'package:phosart/providers/enhance/enhance_state.dart';
+import 'package:phosart/services/services.dart';
+import 'package:phosart/view_models/enhanced_vm.dart';
+import 'package:phosart/view_models/face_vm.dart';
+import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   Future<bool> enhanceImage();

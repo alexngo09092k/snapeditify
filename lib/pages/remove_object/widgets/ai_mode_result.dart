@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/view_models/detected_object_vm.dart';
-import 'package:snapedit/pages/remove_object/widgets/detected_object_list.dart';
-import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
-import 'package:snapedit/services/snap_edit/snap_edit.dart';
-import 'package:snapedit/widgets/base/custom_icon.dart';
-import 'package:snapedit/widgets/base/sliding_control.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/generated/l10n.dart';
+import 'package:phosart/view_models/detected_object_vm.dart';
+import 'package:phosart/pages/remove_object/widgets/detected_object_list.dart';
+import 'package:phosart/providers/remove_object/remove_object_provider.dart';
+import 'package:phosart/services/snap_edit/snap_edit.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:phosart/widgets/base/sliding_control.dart';
 
 class AIModeResult extends StatefulWidget {
   const AIModeResult({Key? key, required this.provider}) : super(key: key);

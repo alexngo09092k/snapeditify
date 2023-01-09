@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/pages/remove_object/widgets/detected_object_item.dart';
-import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
-import 'package:snapedit/services/snap_edit/snap_edit.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/generated/l10n.dart';
+import 'package:phosart/pages/remove_object/widgets/detected_object_item.dart';
+import 'package:phosart/providers/remove_object/remove_object_provider.dart';
+import 'package:phosart/services/snap_edit/snap_edit.dart';
 
 class DetectedObjectList extends StatelessWidget {
   const DetectedObjectList({Key? key, required this.type, required this.provider}) : super(key: key);

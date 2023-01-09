@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "268730434934",
+    "firebase_url": "https://phosart-5d64f-default-rtdb.firebaseio.com",
+    "project_id": "phosart-5d64f",
+    "storage_bucket": "phosart-5d64f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268730434934:android:bbe3a430bd82b9ccd2e657",
+        "android_client_info": {
+          "package_name": "app.phosart.studio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268730434934-aaspifrl3f5a4088c5abqa6findpvdnq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-7cmPDlnPRHFu5Lk4a8rMR33moa8B_ao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268730434934-aaspifrl3f5a4088c5abqa6findpvdnq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "268730434934-odi60oiu0380k2o2n5egnafdoasp6pa3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.phosart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

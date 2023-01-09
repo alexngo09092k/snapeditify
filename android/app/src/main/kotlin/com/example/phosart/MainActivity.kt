@@ -1,4 +1,4 @@
-package remove.unwanted.`object`
+package com.example.phosart
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/provider/widgets/autopplistener.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/pages/gallery/widgets/album_image.dart';
-import 'package:snapedit/providers/gallery/gallery_provider.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/pages/gallery/widgets/album_image.dart';
+import 'package:phosart/providers/gallery/gallery_provider.dart';
 
 class TrySuggestedImages extends StatelessWidget {
   const TrySuggestedImages({super.key, required this.gridDelegate, required this.size, this.onImage});

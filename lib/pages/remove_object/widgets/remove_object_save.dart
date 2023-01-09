@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/generated/l10n.dart';
+import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 
 class RemoveObjectSave extends StatelessWidget {
   const RemoveObjectSave({super.key, required this.provider});

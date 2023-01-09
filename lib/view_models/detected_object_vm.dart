@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/providers/remove_object/remove_object_state.dart';
-import 'package:snapedit/services/snap_edit/snap_edit.dart';
-import 'package:snapedit/utils/image.dart';
-import 'package:snapedit/widgets/painter/painter_pure.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:phosart/providers/remove_object/remove_object_state.dart';
+import 'package:phosart/services/snap_edit/snap_edit.dart';
+import 'package:phosart/utils/image.dart';
+import 'package:phosart/widgets/painter/painter_pure.dart';
+import 'package:phosart/widgets/painter/painter.dart';
 import 'dart:ui' as ui;
 
 class DetectedObjectVM extends DetectedObject with Provider {

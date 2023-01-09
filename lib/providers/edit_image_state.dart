@@ -4,8 +4,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/providers/edit_image_provider.dart';
-import 'package:snapedit/utils/image.dart';
+import 'package:phosart/providers/edit_image_provider.dart';
+import 'package:phosart/utils/image.dart';
 
 abstract class EditImageState extends ChangeNotifier {
   Future<bool> setImage(String imageBase64, {EditImageProvider? provider}) async {

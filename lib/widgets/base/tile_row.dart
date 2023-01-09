@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
+import 'package:phosart/common/constants.dart';
 
 class TileRow extends StatelessWidget {
   const TileRow({super.key, this.leading, required this.main, this.action, this.onTap, this.padding});

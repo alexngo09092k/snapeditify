@@ -1,4 +1,4 @@
-# snapedit
+# phosart
 
 A new Flutter project.
 

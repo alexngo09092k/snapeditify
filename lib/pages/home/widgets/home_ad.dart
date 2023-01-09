@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
+import 'package:phosart/common/constants.dart';
 
 class HomeAd extends StatelessWidget {
   const HomeAd({super.key});

@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/services/snap_edit/snap_edit.dart';
-import 'package:snapedit/services/snap_edit/src/models/body/anime_ai_image_body.dart';
-import 'package:snapedit/services/snap_edit/src/models/body/anime_ai_video_body.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/anime_image_response.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/anime_styles_response.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/anime_video_response.dart';
-import 'package:snapedit/services/snap_edit/src/utils.dart';
+import 'package:phosart/services/snap_edit/snap_edit.dart';
+import 'package:phosart/services/snap_edit/src/models/body/anime_ai_image_body.dart';
+import 'package:phosart/services/snap_edit/src/models/body/anime_ai_video_body.dart';
+import 'package:phosart/services/snap_edit/src/models/response/anime_image_response.dart';
+import 'package:phosart/services/snap_edit/src/models/response/anime_styles_response.dart';
+import 'package:phosart/services/snap_edit/src/models/response/anime_video_response.dart';
+import 'package:phosart/services/snap_edit/src/utils.dart';
 
 extension EnimeAI on SnapEdit {
   Future<SnapEditResponse<AnimeStylesResponse?>> getAnimeStyles([String lang = 'en']) async {

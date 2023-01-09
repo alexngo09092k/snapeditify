@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
-import 'package:snapedit/widgets/base/ui_image_display.dart';
-import 'package:snapedit/widgets/painter/extensions/extensions.dart';
+import 'package:phosart/widgets/base/ui_image_display.dart';
+import 'package:phosart/widgets/painter/extensions/extensions.dart';
 
 class ImageResized extends StatelessWidget {
   const ImageResized({super.key, required this.image, this.width, this.height, this.placeholder});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:snapedit/common/constants.dart';
+import 'package:phosart/common/constants.dart';
 
 class AlbumTitle extends StatelessWidget {
   const AlbumTitle({super.key, required this.album, required this.total});

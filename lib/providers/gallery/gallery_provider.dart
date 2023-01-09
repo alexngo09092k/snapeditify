@@ -1,7 +1,7 @@
 import 'package:fluttering/fluttering.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/models/config/gallery_config.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/models/config/gallery_config.dart';
 
 enum EditImageType {
   removeObject,

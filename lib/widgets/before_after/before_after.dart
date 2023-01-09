@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:snapedit/widgets/before_after/rect_clipper.dart';
+import 'package:phosart/widgets/before_after/rect_clipper.dart';
 import 'dart:ui' as ui;
 
 class BeforeAfter extends StatefulWidget {

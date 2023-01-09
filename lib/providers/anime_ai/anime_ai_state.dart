@@ -1,7 +1,7 @@
-import 'package:snapedit/providers/edit_image_provider.dart';
-import 'package:snapedit/providers/edit_image_state.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/anime_image_response.dart';
-import 'package:snapedit/widgets/painter/painter_pure.dart';
+import 'package:phosart/providers/edit_image_provider.dart';
+import 'package:phosart/providers/edit_image_state.dart';
+import 'package:phosart/services/snap_edit/src/models/response/anime_image_response.dart';
+import 'package:phosart/widgets/painter/painter_pure.dart';
 
 class AnimeAIState extends EditImageState {
   AnimeAIState() {

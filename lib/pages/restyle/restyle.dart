@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/pages/restyle/widgets/restyle_image.dart';
-import 'package:snapedit/pages/restyle/widgets/restyle_revert.dart';
-import 'package:snapedit/pages/restyle/widgets/restyle_save.dart';
-import 'package:snapedit/pages/restyle/widgets/style_list.dart';
-import 'package:snapedit/providers/restyle/restyle_provider.dart';
-import 'package:snapedit/widgets/app_layout.dart';
+import 'package:phosart/pages/restyle/widgets/restyle_image.dart';
+import 'package:phosart/pages/restyle/widgets/restyle_revert.dart';
+import 'package:phosart/pages/restyle/widgets/restyle_save.dart';
+import 'package:phosart/pages/restyle/widgets/style_list.dart';
+import 'package:phosart/providers/restyle/restyle_provider.dart';
+import 'package:phosart/widgets/app_layout.dart';
 
 class RestylePage extends StatefulWidget {
   const RestylePage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/configuration.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/widgets/custom_image.dart';
+import 'package:phosart/common/configuration.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/custom_image.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({Key? key, this.image, this.width, this.height, this.color}) : super(key: key);

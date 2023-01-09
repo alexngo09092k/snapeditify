@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:fluttering_iap/fluttering_iap.dart';
-import 'package:snapedit/models/config/app_config.dart';
-import 'package:snapedit/common/constants.dart';
+import 'package:phosart/models/config/app_config.dart';
+import 'package:phosart/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:snapedit/services/services.dart';
+import 'package:phosart/services/services.dart';
 
 class Configuration {
   static final Configuration _instance = Configuration._internal();

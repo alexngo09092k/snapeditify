@@ -3,10 +3,10 @@
 
 import 'dart:convert';
 
-import 'package:snapedit/services/snap_edit/src/models/config/end_points.dart';
-import 'package:snapedit/services/snap_edit/src/models/config/enhance_config.dart';
-import 'package:snapedit/services/snap_edit/src/models/config/remove_object_config.dart';
-import 'package:snapedit/services/snap_edit/src/models/config/restyle_config.dart';
+import 'package:phosart/services/snap_edit/src/models/config/end_points.dart';
+import 'package:phosart/services/snap_edit/src/models/config/enhance_config.dart';
+import 'package:phosart/services/snap_edit/src/models/config/remove_object_config.dart';
+import 'package:phosart/services/snap_edit/src/models/config/restyle_config.dart';
 
 class SnapEditConfig {
   final String baseUrl;

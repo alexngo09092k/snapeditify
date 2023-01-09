@@ -1,12 +1,12 @@
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/theme.dart';
-import 'package:snapedit/generated/l10n.dart';
+import 'package:phosart/common/app_routes.dart';
+import 'package:phosart/common/theme.dart';
+import 'package:phosart/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:snapedit/widgets/base/loading.dart';
-import 'package:snapedit/widgets/base/toast.dart';
+import 'package:phosart/widgets/base/loading.dart';
+import 'package:phosart/widgets/base/toast.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);

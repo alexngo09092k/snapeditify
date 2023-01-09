@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/pages/home/widgets/home_ad.dart';
-import 'package:snapedit/pages/home/widgets/home_base_banner.dart';
-import 'package:snapedit/pages/home/widgets/home_header.dart';
-import 'package:snapedit/pages/home/widgets/home_options.dart';
-import 'package:snapedit/providers/gallery/gallery_provider.dart';
+import 'package:phosart/common/app_routes.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/pages/home/widgets/home_ad.dart';
+import 'package:phosart/pages/home/widgets/home_base_banner.dart';
+import 'package:phosart/pages/home/widgets/home_header.dart';
+import 'package:phosart/pages/home/widgets/home_options.dart';
+import 'package:phosart/providers/gallery/gallery_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

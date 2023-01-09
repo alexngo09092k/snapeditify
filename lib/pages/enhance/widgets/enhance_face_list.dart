@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/pages/enhance/widgets/enhance_face_item.dart';
-import 'package:snapedit/providers/enhance/enhance_provider.dart';
-import 'package:snapedit/view_models/face_vm.dart';
+import 'package:phosart/pages/enhance/widgets/enhance_face_item.dart';
+import 'package:phosart/providers/enhance/enhance_provider.dart';
+import 'package:phosart/view_models/face_vm.dart';
 
 class EnhanceFaceList extends StatelessWidget {
   const EnhanceFaceList({super.key, required this.provider});

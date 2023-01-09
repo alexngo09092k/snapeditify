@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/services/snap_edit/snap_edit.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/styles_response.dart';
-import 'package:snapedit/services/snap_edit/src/utils.dart';
+import 'package:phosart/services/snap_edit/snap_edit.dart';
+import 'package:phosart/services/snap_edit/src/models/response/styles_response.dart';
+import 'package:phosart/services/snap_edit/src/utils.dart';
 
 extension Restyle on SnapEdit {
   Future<SnapEditResponse<StylesResponse?>> getStyles([String lang = 'en']) async {

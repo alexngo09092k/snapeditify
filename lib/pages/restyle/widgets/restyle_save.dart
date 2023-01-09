@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/generated/l10n.dart';
-import 'package:snapedit/providers/restyle/restyle_provider.dart';
+import 'package:phosart/generated/l10n.dart';
+import 'package:phosart/providers/restyle/restyle_provider.dart';
 
 class RestyleSave extends StatelessWidget {
   const RestyleSave({super.key, required this.provider});

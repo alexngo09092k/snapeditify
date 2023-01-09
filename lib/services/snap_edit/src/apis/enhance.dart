@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/services/snap_edit/src/models/body/enhance_body.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/enhance_response.dart';
-import 'package:snapedit/services/snap_edit/src/models/response/snapedit_response.dart';
-import 'package:snapedit/services/snap_edit/src/snap_edit.dart';
-import 'package:snapedit/services/snap_edit/src/models/config/snapedit_config.dart';
-import 'package:snapedit/services/snap_edit/src/utils.dart';
+import 'package:phosart/services/snap_edit/src/models/body/enhance_body.dart';
+import 'package:phosart/services/snap_edit/src/models/response/enhance_response.dart';
+import 'package:phosart/services/snap_edit/src/models/response/snapedit_response.dart';
+import 'package:phosart/services/snap_edit/src/snap_edit.dart';
+import 'package:phosart/services/snap_edit/src/models/config/snapedit_config.dart';
+import 'package:phosart/services/snap_edit/src/utils.dart';
 
 extension Enhance on SnapEdit {
   Future<SnapEditResponse<EnhanceResponse?>> enhance(EnhanceBody body) async {

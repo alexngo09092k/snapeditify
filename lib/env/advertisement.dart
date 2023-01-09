@@ -11,8 +11,8 @@ const advertisementConfig = {
     {
       "type": "openApp",
       "provider": "google",
-      "iosId": "",
-      "androidId": "",
+      "iosId": "ca-app-pub-3940256099942544/3419835294",
+      "androidId": "ca-app-pub-3940256099942544/3419835294",
     },
 
     /// HUAWEI

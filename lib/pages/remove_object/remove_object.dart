@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/pages/remove_object/widgets/remove_object_image.dart';
-import 'package:snapedit/pages/remove_object/widgets/remove_object_control.dart';
-import 'package:snapedit/pages/remove_object/widgets/remove_object_revert.dart';
-import 'package:snapedit/pages/remove_object/widgets/remove_object_save.dart';
-import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
-import 'package:snapedit/widgets/app_layout.dart';
+import 'package:phosart/pages/remove_object/widgets/remove_object_image.dart';
+import 'package:phosart/pages/remove_object/widgets/remove_object_control.dart';
+import 'package:phosart/pages/remove_object/widgets/remove_object_revert.dart';
+import 'package:phosart/pages/remove_object/widgets/remove_object_save.dart';
+import 'package:phosart/providers/remove_object/remove_object_provider.dart';
+import 'package:phosart/widgets/app_layout.dart';
 
 class RemoveObjectPage extends StatefulWidget {
   const RemoveObjectPage({Key? key}) : super(key: key);

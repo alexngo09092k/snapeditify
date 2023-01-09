@@ -11,7 +11,7 @@ const businessConfig = {
   },
 
   ///Display name is used in app
-  'appName': 'SnapEdit',
+  'appName': 'Phosart',
 
   ///Logo is used in splash screen and app ui
   'appLogo': 'assets/images/logo.png',
@@ -20,16 +20,16 @@ const businessConfig = {
   'protocols': ['https://', 'http://', 'data:'],
 
   ///Prefix stored key
-  'sharedKeyPrefix': 'block_scan.',
+  'sharedKeyPrefix': 'app.phosart.studio.',
 
   ///Contact
-  'contact': 'support@bscscan.app',
+  'contact': 'support@phosart.app',
 
   'telegram': 'https://t.me/+9UBuQxKY7N80YTc1',
 
   ///Share app
   'shareApp': {
-    'message': 'BlockScan',
+    'message': 'Phosart AI Photo Editor Pro',
     'link': 'https://t.me/+9UBuQxKY7N80YTc1',
   },
 };

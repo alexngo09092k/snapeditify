@@ -4,11 +4,11 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/configuration.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/edit_image_state.dart';
-import 'package:snapedit/services/services.dart';
-import 'package:snapedit/utils/image.dart';
+import 'package:phosart/common/configuration.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/providers/edit_image_state.dart';
+import 'package:phosart/services/services.dart';
+import 'package:phosart/utils/image.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;

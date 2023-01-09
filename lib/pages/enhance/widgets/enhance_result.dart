@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/pages/enhance/widgets/enhance_face_list.dart';
-import 'package:snapedit/providers/enhance/enhance_provider.dart';
+import 'package:phosart/pages/enhance/widgets/enhance_face_list.dart';
+import 'package:phosart/providers/enhance/enhance_provider.dart';
 
 class EnhanceResult extends StatefulWidget {
   const EnhanceResult({super.key, required this.provider});

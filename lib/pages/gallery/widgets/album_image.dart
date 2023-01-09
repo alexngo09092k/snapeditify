@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:snapedit/providers/gallery/gallery_provider.dart';
+import 'package:phosart/providers/gallery/gallery_provider.dart';
 
 class AlbumImage extends StatelessWidget {
   const AlbumImage({super.key, this.size, this.onPhoto, this.child});

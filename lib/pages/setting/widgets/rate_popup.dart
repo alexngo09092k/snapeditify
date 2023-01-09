@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/widgets/lottie_viewer.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/lottie_viewer.dart';
 
 class RatePopup extends StatelessWidget {
   const RatePopup({super.key});

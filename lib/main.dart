@@ -2,16 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:fluttering_iap/iap/iap.dart';
-import 'package:snapedit/app.dart';
-import 'package:snapedit/common/configuration.dart';
-import 'package:snapedit/env.dart';
-import 'package:snapedit/firebase_options.dart';
-import 'package:snapedit/providers/enhance/enhance_provider.dart';
-import 'package:snapedit/providers/remove_object/remove_object_provider.dart';
-import 'package:snapedit/providers/gallery/gallery_provider.dart';
-import 'package:snapedit/models/config/app_config.dart';
-import 'package:snapedit/providers/restyle/restyle_provider.dart';
-import 'package:snapedit/services/services.dart';
+import 'package:phosart/app.dart';
+import 'package:phosart/common/configuration.dart';
+import 'package:phosart/env/env.dart';
+import 'package:phosart/firebase_options.dart';
+import 'package:phosart/models/config/app_config.dart';
+import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
+import 'package:phosart/providers/enhance/enhance_provider.dart';
+import 'package:phosart/providers/remove_object/remove_object_provider.dart';
+import 'package:phosart/providers/gallery/gallery_provider.dart';
+import 'package:phosart/providers/restyle/restyle_provider.dart';
+import 'package:phosart/services/services.dart';
 
 void main() {
   AwesomeApp(
@@ -23,6 +24,7 @@ void main() {
       () => RemoveObjectProvider.instance,
       () => EnhanceProvider.instance,
       () => RestyleProvider.instance,
+      () => AnimeAIProvider.instance,
     ],
     onWillInitialize: () async {
       return Configuration.instance.fromEnviroment(enviroment);
@@ -40,7 +42,7 @@ void main() {
 
       Services.instance.snapEdit.init(Configuration.instance.snapEditConfig);
 
-      Debug.debugMode = Configuration.instance.appConfig.appMode == AppMode.debug;
+      Debug.debugMode = Configuration.instance.businessConfig.appMode == AppMode.debug;
 
       return true;
     },

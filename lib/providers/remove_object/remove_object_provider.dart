@@ -4,14 +4,14 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/edit_image_provider.dart';
-import 'package:snapedit/providers/remove_object/remove_object_state.dart';
-import 'package:snapedit/providers/storage_provider.dart';
-import 'package:snapedit/services/services.dart';
-import 'package:snapedit/utils/image.dart';
-import 'package:snapedit/view_models/detected_object_vm.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/providers/edit_image_provider.dart';
+import 'package:phosart/providers/remove_object/remove_object_state.dart';
+import 'package:phosart/providers/storage_provider.dart';
+import 'package:phosart/services/services.dart';
+import 'package:phosart/utils/image.dart';
+import 'package:phosart/view_models/detected_object_vm.dart';
+import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
   bool get canRemove;

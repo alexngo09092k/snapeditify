@@ -1,6 +1,6 @@
-import 'package:snapedit/providers/edit_image_provider.dart';
-import 'package:snapedit/providers/edit_image_state.dart';
-import 'package:snapedit/widgets/painter/painter.dart';
+import 'package:phosart/providers/edit_image_provider.dart';
+import 'package:phosart/providers/edit_image_state.dart';
+import 'package:phosart/widgets/painter/painter.dart';
 
 class RestyleState extends EditImageState {
   RestyleState() {

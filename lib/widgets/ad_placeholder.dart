@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/generated/l10n.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/generated/l10n.dart';
 
 class AdPlaceHolder extends StatelessWidget {
   const AdPlaceHolder({Key? key, this.width, this.height}) : super(key: key);

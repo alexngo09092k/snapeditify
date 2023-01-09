@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snapedit/common/app_routes.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/common/extensions.dart';
+import 'package:phosart/common/app_routes.dart';
+import 'package:phosart/common/constants.dart';
 
 class UnlockProBanner extends StatelessWidget {
   const UnlockProBanner({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapedit/common/constants.dart';
-import 'package:snapedit/providers/restyle/restyle_provider.dart';
-import 'package:snapedit/widgets/base/custom_icon.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/providers/restyle/restyle_provider.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 
 class RestyleRevert extends StatelessWidget {
   const RestyleRevert({super.key, required this.provider});
