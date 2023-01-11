@@ -5,7 +5,7 @@ import 'package:phosart/pages/restyle/widgets/restyle_revert.dart';
 import 'package:phosart/pages/restyle/widgets/restyle_save.dart';
 import 'package:phosart/pages/restyle/widgets/style_list.dart';
 import 'package:phosart/providers/restyle/restyle_provider.dart';
-import 'package:phosart/widgets/app_layout.dart';
+import 'package:phosart/widgets/base/app_layout.dart';
 
 class RestylePage extends StatefulWidget {
   const RestylePage({super.key});

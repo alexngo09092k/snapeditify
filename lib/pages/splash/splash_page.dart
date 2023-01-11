@@ -4,7 +4,6 @@ import 'package:phosart/common/app_routes.dart';
 import 'package:phosart/common/configuration.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/models/config/app_config.dart';
-import 'package:phosart/widgets/widget.utils.dart';
 import 'package:phosart/common/extensions.dart';
 
 class SplashPage extends StatefulWidget {
@@ -26,18 +25,7 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
   void onSplash(bool resultOnWillSplash) async {
     if (resultOnWillSplash && await ClientHttp.instance.shouldSendRequest()) {
       _goTo();
-    } else {
-      showNoInternetPopup(
-        context,
-        (_) {
-          if (AwesomeApp.instance != null) {
-            AwesomeApp.instance!.restart().then((value) {
-              onSplash(true);
-            });
-          }
-        },
-      );
-    }
+    } else {}
   }
 
   _goTo() {

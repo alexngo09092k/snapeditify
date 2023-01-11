@@ -3,7 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:phosart/pages/enhance/widgets/enhance_image.dart';
 import 'package:phosart/pages/enhance/widgets/enhance_save.dart';
 import 'package:phosart/providers/enhance/enhance_provider.dart';
-import 'package:phosart/widgets/app_layout.dart';
+import 'package:phosart/widgets/base/app_layout.dart';
 
 class EnhancePage extends StatefulWidget {
   const EnhancePage({super.key});

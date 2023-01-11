@@ -28,14 +28,14 @@ class BusinessConfig {
 
   factory BusinessConfig.defaultValue() {
     return BusinessConfig(
-      appName: "SnapEdit",
+      appName: "Phosart AI Photo Editor Pro",
       appLogo: "",
       protocols: ['https://', 'http://', 'data:'],
-      sharedKeyPrefix: "snapedit.",
+      sharedKeyPrefix: "app.phosart.studio",
       contact: "brennanngo992k@gmail.com",
       shareApp: ShareApp(
         link: '',
-        message: "SnapEdit",
+        message: "Phosart AI Photo Editor Pro",
       ),
       telegram: '',
       maintenanceMode: const MaintenanceMode(
@@ -43,7 +43,7 @@ class BusinessConfig {
         link: '',
         message: "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
       ),
-      appMode: AppMode.production,
+      appMode: AppMode.debug,
     );
   }
 

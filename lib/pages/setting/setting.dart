@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:phosart/common/constants.dart';
-import 'package:phosart/pages/setting/widgets/rate_popup.dart';
-import 'package:phosart/pages/setting/widgets/share_popup.dart';
-import 'package:phosart/widgets/app_layout.dart';
-import 'package:phosart/widgets/base/block.dart';
+import 'package:phosart/widgets/base/app_layout.dart';
 import 'package:phosart/widgets/base/tile_row.dart';
 import 'package:phosart/widgets/base/separated_list_view.dart';
-import 'package:phosart/widgets/unlock_pro_banner.dart';
-import 'package:phosart/widgets/widget.utils.dart';
+import 'package:phosart/pages/setting/widgets/unlock_pro_banner.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
 
-  _showRatePopup(BuildContext context) => showPopup(context, const RatePopup());
-  _showSharePopup(BuildContext context) => showPopup(context, const SharePopup());
+  _showRatePopup(BuildContext context) {}
+  _showSharePopup(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +30,11 @@ class SettingPage extends StatelessWidget {
       children: [
         const UnlockProBanner(),
         SizedBox(height: AppDimensions.instance.padding),
-        Block(
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(1))),
+            color: Theme.of(context).cardColor,
+          ),
           child: SeparatedListView.withList(
             separator: Padding(
               padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
@@ -57,7 +57,11 @@ class SettingPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: AppDimensions.instance.padding),
-        Block(
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(1))),
+            color: Theme.of(context).cardColor,
+          ),
           child: SeparatedListView.withList(
             separator: Padding(
               padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),

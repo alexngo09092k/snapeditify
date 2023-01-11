@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:loading_more_list/loading_more_list.dart';
-import 'package:phosart/widgets/base/load_more/source_list.dart';
+import 'package:phosart/widgets/load_more/source_list.dart';
 
 class MultipleSliverLoadMore<T> extends StatefulWidget {
   final List<MultipleSliverSourceList<T>> list;

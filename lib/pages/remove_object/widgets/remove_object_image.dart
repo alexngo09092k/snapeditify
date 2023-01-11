@@ -5,11 +5,10 @@ import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/generated/l10n.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
-import 'package:phosart/widgets/base/block.dart';
 import 'package:phosart/widgets/base/custom_icon.dart';
-import 'package:phosart/widgets/base_image_editor.dart';
+import 'package:phosart/widgets/base/base_image_editor.dart';
 import 'package:phosart/widgets/painter/painter_pure.dart';
-import 'package:phosart/widgets/custom_button.dart';
+import 'package:phosart/widgets/base/custom_button.dart';
 
 class RemoveObjectImage extends StatelessWidget {
   const RemoveObjectImage({Key? key, required this.provider, this.onStartDraw, this.onEndDraw}) : super(key: key);
@@ -24,8 +23,12 @@ class RemoveObjectImage extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.all(AppDimensions.instance.paddingX(3)),
-            child: Block(
+            child: Container(
               padding: EdgeInsets.all(AppDimensions.instance.padding),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(1))),
+                color: Theme.of(context).cardColor,
+              ),
               child: ColorPicker(
                 pickerColor: provider.state.strokeColor,
                 paletteType: PaletteType.hueWheel,
@@ -113,7 +116,7 @@ class RemoveObjectImage extends StatelessWidget {
                                 builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                                   context,
                                   icon: AppAssets.instance.icUndo,
-                                  color: p.canUndo ? AppColors.instance.blue : AppColors.instance.blue100,
+                                  color: p.canUndo ? AppColors.instance.mediumSlateBlue : AppColors.instance.black,
                                 ),
                               ),
                             ),
@@ -127,7 +130,7 @@ class RemoveObjectImage extends StatelessWidget {
                                 builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                                   context,
                                   icon: AppAssets.instance.icRedo,
-                                  color: p.canRedo ? AppColors.instance.blue : AppColors.instance.blue100,
+                                  color: p.canRedo ? AppColors.instance.mediumSlateBlue : AppColors.instance.black,
                                 ),
                               ),
                             ),
@@ -142,7 +145,7 @@ class RemoveObjectImage extends StatelessWidget {
                                   onTap: () => provider.removeObjects(context),
                                   title: S.of(context).remove,
                                   titleColor: Colors.white,
-                                  gradient: const LinearGradient(colors: [Color.fromRGBO(108, 118, 241, 1), Color.fromRGBO(114, 213, 187, 1)]),
+                                  gradient: AppColors.instance.gradient,
                                   width: 150,
                                   height: 50,
                                 )
@@ -177,7 +180,7 @@ class RemoveObjectImage extends StatelessWidget {
                                 builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                                   context,
                                   icon: AppAssets.instance.icCompare,
-                                  color: p.canCompare ? AppColors.instance.blue : AppColors.instance.blue100,
+                                  color: p.canCompare ? AppColors.instance.mediumSlateBlue : AppColors.instance.black,
                                 ),
                               ),
                             ),

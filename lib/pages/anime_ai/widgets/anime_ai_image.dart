@@ -3,7 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
 import 'package:phosart/widgets/base/custom_icon.dart';
-import 'package:phosart/widgets/base_image_editor.dart';
+import 'package:phosart/widgets/base/base_image_editor.dart';
 import 'package:phosart/widgets/painter/painter_pure.dart';
 
 class AnimeAIImage extends StatelessWidget {
@@ -40,7 +40,7 @@ class AnimeAIImage extends StatelessWidget {
                 builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                   context,
                   icon: AppAssets.instance.icCompare,
-                  color: p.canCompare ? AppColors.instance.blue : AppColors.instance.blue100,
+                  color: p.canCompare ? AppColors.instance.mediumSlateBlue : AppColors.instance.black,
                 ),
               ),
             ),

@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:phosart/common/constants.dart';
-import 'package:phosart/widgets/custom_button.dart';
-import 'package:phosart/widgets/lottie_viewer.dart';
+import 'package:phosart/widgets/base/custom_button.dart';
+import 'package:phosart/widgets/base/lottie_viewer.dart';
 
 class HomeBaseBanner extends StatelessWidget {
   const HomeBaseBanner({
@@ -48,7 +48,7 @@ class HomeBaseBanner extends StatelessWidget {
                   Text(
                     title,
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: Colors.white,
+                          color: AppColors.instance.white,
                           fontWeight: FontWeight.w600,
                         ),
                   ),
@@ -56,7 +56,7 @@ class HomeBaseBanner extends StatelessWidget {
                     onTap: action,
                     title: buttonTitle,
                     titleColor: Colors.white,
-                    gradient: const LinearGradient(colors: [Color.fromRGBO(108, 118, 241, 1), Color.fromRGBO(114, 213, 187, 1)]),
+                    gradient: AppColors.instance.gradient,
                     width: 100,
                     height: 40,
                   ),

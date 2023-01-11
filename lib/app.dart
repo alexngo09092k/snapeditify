@@ -45,10 +45,7 @@ class _AppState extends AwesomeAppState<App> {
           themeMode: provider.themeMode,
           initialRoute: AppRoutes.instance.initialRoute,
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,
-          navigatorObservers: [
-            AppRouteObserver(action: (name) => Debug.log("==== SCREEN $name ====")),
-            FlutterSmartDialog.observer,
-          ],
+          navigatorObservers: [AwesomeApp.observer, FlutterSmartDialog.observer],
           routes: AppRoutes.instance.routes,
           // locale: _appProvider.currentLocale,
           localeResolutionCallback: provider.onChangeLocale,

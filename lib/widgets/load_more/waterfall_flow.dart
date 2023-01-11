@@ -2,12 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:loading_more_list/loading_more_list.dart';
-import 'package:phosart/widgets/base/load_more/source_list.dart';
+import 'package:phosart/widgets/load_more/source_list.dart';
 
-class ListViewLoadMore<T> extends StatefulWidget {
-  const ListViewLoadMore({
+class WaterfallFlow<T> extends StatefulWidget {
+  const WaterfallFlow({
     super.key,
     this.padding = EdgeInsets.zero,
+    this.extendedListDelegate = const SliverWaterfallFlowDelegateWithMaxCrossAxisExtent(
+      maxCrossAxisExtent: 300,
+      crossAxisSpacing: 5,
+      mainAxisSpacing: 5,
+    ),
     required this.itemBuilder,
     required this.sourceList,
     this.indicatorBuilder,
@@ -21,23 +26,22 @@ class ListViewLoadMore<T> extends StatefulWidget {
 
   final Widget? Function(BuildContext, IndicatorStatus)? indicatorBuilder;
 
+  final ExtendedListDelegate? extendedListDelegate;
+
   @override
-  _ListViewLoadMoreState<T> createState() => _ListViewLoadMoreState<T>();
+  _WaterfallFlowState<T> createState() => _WaterfallFlowState<T>();
 }
 
-class _ListViewLoadMoreState<T> extends State<ListViewLoadMore<T>> {
+class _WaterfallFlowState<T> extends State<WaterfallFlow<T>> {
   @override
   Widget build(BuildContext context) {
     return LoadingMoreList<T>(
       ListConfig<T>(
+        extendedListDelegate: widget.extendedListDelegate,
         itemBuilder: widget.itemBuilder,
         sourceList: widget.sourceList,
-        indicatorBuilder: widget.indicatorBuilder,
-        physics: const FixedOverscrollBouncingScrollPhysics(),
-        padding: const EdgeInsets.all(0.0),
-        extendedListDelegate: ExtendedListDelegate(
-          collectGarbage: (List<int> indexes) {},
-        ),
+        padding: const EdgeInsets.all(5.0),
+        lastChildLayoutType: LastChildLayoutType.foot,
       ),
     );
   }

@@ -26,13 +26,12 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               const HomeHeader(),
+              const HomeOptions(),
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.all(AppDimensions.instance.padding),
                   child: Column(
                     children: [
-                      const HomeOptions(),
-                      SizedBox(height: AppDimensions.instance.padding),
                       HomeBaseBanner(
                         banner: AppAssets.instance.homeRemoveObjectBanner,
                         title: 'Turn your\nphotos\ninto Art',

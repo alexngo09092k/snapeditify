@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          color: color ?? AppColors.instance.blue,
+          color: color ?? AppColors.instance.mediumSlateBlue,
           borderRadius: const BorderRadius.all(
             Radius.circular(30),
           ),
@@ -51,7 +51,7 @@ class CustomButton extends StatelessWidget {
                   Text(
                     title ?? '',
                     style: TextStyle(
-                      color: titleColor ?? AppColors.instance.blue,
+                      color: titleColor ?? AppColors.instance.mediumSlateBlue,
                       fontSize: titleSize,
                       fontWeight: FontWeight.bold,
                     ),

@@ -9,9 +9,9 @@ import 'package:phosart/pages/gallery/widgets/album_image.dart';
 import 'package:phosart/pages/gallery/widgets/album_title.dart';
 import 'package:phosart/pages/gallery/widgets/try_suggested_images.dart';
 import 'package:phosart/providers/gallery/gallery_provider.dart';
-import 'package:phosart/widgets/app_layout.dart';
-import 'package:phosart/widgets/base/load_more/multiple_sliver_load_more.dart';
-import 'package:phosart/widgets/base/load_more/source_list.dart';
+import 'package:phosart/widgets/base/app_layout.dart';
+import 'package:phosart/widgets/load_more/multiple_sliver_load_more.dart';
+import 'package:phosart/widgets/load_more/source_list.dart';
 
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});

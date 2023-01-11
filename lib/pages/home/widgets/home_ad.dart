@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:phosart/common/constants.dart';
 
 class HomeAd extends StatelessWidget {
@@ -8,14 +9,13 @@ class HomeAd extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final lottieWidth = screenWidth - AppDimensions.instance.padding * 2;
-    return const SizedBox();
-    return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.padding)),
-      child: Container(
-        width: lottieWidth,
-        height: (lottieWidth * 2 / 3) * 2 / 3,
-        color: Colors.red,
+    return AdBuilder(
+      width: lottieWidth,
+      height: lottieWidth * 1 / 3,
+      errorBuilder: (_) => const SizedBox(
+        child: Text("hELLO"),
       ),
+      borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
     );
   }
 }

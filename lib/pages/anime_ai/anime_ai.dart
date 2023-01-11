@@ -4,7 +4,7 @@ import 'package:phosart/pages/anime_ai/widgets/anime_ai_image.dart';
 import 'package:phosart/pages/anime_ai/widgets/anime_ai_save.dart';
 import 'package:phosart/pages/anime_ai/widgets/anime_ai_style_list.dart';
 import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
-import 'package:phosart/widgets/app_layout.dart';
+import 'package:phosart/widgets/base/app_layout.dart';
 
 class AnimeAIPage extends StatefulWidget {
   const AnimeAIPage({super.key});

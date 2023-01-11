@@ -37,7 +37,7 @@ class StyleItem extends StatelessWidget {
               builder: (_, __, p, ___) => Text(
                 style.name,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                      color: p.state.styleId == style.styleId ? AppColors.instance.blue600 : null,
+                      color: p.state.styleId == style.styleId ? AppColors.instance.mediumSlateBlue : null,
                     ),
               ),
             ),

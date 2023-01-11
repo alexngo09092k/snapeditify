@@ -65,23 +65,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDxbPpf-nPTUDLkia1l4nvQTtOmN1qZssc',
-    appId: '1:268730434934:ios:c0a0e1f3c3cf76c9d2e657',
+    appId: '1:268730434934:ios:510ec56203e44a76d2e657',
     messagingSenderId: '268730434934',
     projectId: 'phosart-5d64f',
     databaseURL: 'https://phosart-5d64f-default-rtdb.firebaseio.com',
     storageBucket: 'phosart-5d64f.appspot.com',
-    iosClientId: '268730434934-odi60oiu0380k2o2n5egnafdoasp6pa3.apps.googleusercontent.com',
-    iosBundleId: 'com.example.phosart',
+    iosClientId: '268730434934-j96uc8fmv6ahnhi2gqv4p6qsgdhr842e.apps.googleusercontent.com',
+    iosBundleId: 'app.phosart.studio',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDxbPpf-nPTUDLkia1l4nvQTtOmN1qZssc',
-    appId: '1:268730434934:ios:c0a0e1f3c3cf76c9d2e657',
+    appId: '1:268730434934:ios:510ec56203e44a76d2e657',
     messagingSenderId: '268730434934',
     projectId: 'phosart-5d64f',
     databaseURL: 'https://phosart-5d64f-default-rtdb.firebaseio.com',
     storageBucket: 'phosart-5d64f.appspot.com',
-    iosClientId: '268730434934-odi60oiu0380k2o2n5egnafdoasp6pa3.apps.googleusercontent.com',
-    iosBundleId: 'com.example.phosart',
+    iosClientId: '268730434934-j96uc8fmv6ahnhi2gqv4p6qsgdhr842e.apps.googleusercontent.com',
+    iosBundleId: 'app.phosart.studio',
   );
 }

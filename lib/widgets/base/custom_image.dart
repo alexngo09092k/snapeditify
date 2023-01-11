@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:phosart/common/configuration.dart';
-import 'package:phosart/widgets/custom_network_image.dart';
 
 class CustomImage extends StatelessWidget {
   const CustomImage({
@@ -20,8 +20,8 @@ class CustomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Configuration.instance.isNetwork(image)
-        ? CustomNetworkImage(
-            image: image,
+        ? CachedNetworkImage(
+            imageUrl: image,
             width: width,
             height: height,
             color: color,
