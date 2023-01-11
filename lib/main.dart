@@ -42,7 +42,7 @@ void main() {
 
       Services.instance.snapEdit.init(Configuration.instance.snapEditConfig);
 
-      Debug.debugMode = Configuration.instance.businessConfig.appMode == AppMode.debug;
+      Debug.debugMode =  Configuration.instance.businessConfig.appMode == AppMode.debug;
 
       return true;
     },
