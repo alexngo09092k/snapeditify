@@ -40,22 +40,37 @@ const advertisementConfig = {
       "iosId": "ca-app-pub-3940256099942544/5224354917",
       "androidId": "ca-app-pub-3940256099942544/5224354917",
     },
-    // {
-    //   "type": "native",
-    //   "provider": "google",
-    //   "iosId": "ca-app-pub-3940256099942544/6300978111",
-    //   "androidId": "ca-app-pub-3940256099942544/6300978111",
-    // },
+    {
+      "type": "native",
+      "provider": "google",
+      "iosId": "ca-app-pub-3940256099942544/6300978111",
+      "androidId": "ca-app-pub-3940256099942544/6300978111",
+    },
 
     /// HUAWEI
     {
+      "type": "banner",
+      "provider": "huawei",
+      "iosId": "testw6vs28auh3",
+      "androidId": "testw6vs28auh3",
+      "showOnScreens": [],
+      "hideOnScreens": [],
+    },
+    {
       "type": "interstitial",
       "provider": "huawei",
-      "iosId": "",
-      "androidId": "",
-      "showOnScreens": ['edit'],
-      "hideOnScreens": ['edit'],
-      "waitingTimeToDisplay": 5,
+      "iosId": "teste9ih9j0rc3",
+      "androidId": "teste9ih9j0rc3",
+      "showOnScreens": [],
+      "hideOnScreens": [],
+    },
+    {
+      "type": "splash",
+      "provider": "huawei",
+      "iosId": "testq6zq98hecj",
+      "androidId": "testq6zq98hecj",
+      "showOnScreens": [],
+      "hideOnScreens": [],
     },
   ],
 };
