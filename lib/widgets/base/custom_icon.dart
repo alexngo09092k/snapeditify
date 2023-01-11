@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:phosart/common/constants.dart';
 
 class CustomIcon extends StatelessWidget {
-  const CustomIcon(this.icon, {super.key, this.size, this.color, this.background, this.spacing, this.radius});
+  const CustomIcon(this.icon, {super.key, this.size, this.color, this.background, this.spacing, this.radius, this.normal = false});
   final String icon;
   final double? size;
   final Color? color;
   final Color? background;
   final double? spacing;
   final double? radius;
+  final bool normal;
 
   factory CustomIcon.defaultStyle(
     BuildContext context, {
@@ -17,14 +18,16 @@ class CustomIcon extends StatelessWidget {
     Color? color,
     Color? background,
     double? spacing,
+    bool normal = false,
   }) {
     return CustomIcon(
       icon,
       size: size ?? AppDimensions.instance.icon,
       color: color,
       spacing: spacing ?? AppDimensions.instance.iconX(0.5),
-      background: background ?? Theme.of(context).disabledColor.withOpacity(0.1),
+      background: background ?? Theme.of(context).iconTheme.color!.withOpacity(0.1),
       radius: (size ?? AppDimensions.instance.icon) / 2,
+      normal: normal,
     );
   }
 
@@ -43,7 +46,7 @@ class CustomIcon extends StatelessWidget {
             icon,
             width: size == null ? AppDimensions.instance.icon : (size ?? 0) - (spacing ?? 0),
             height: size == null ? AppDimensions.instance.icon : (size ?? 0) - (spacing ?? 0),
-            color: color,
+            color: !normal ? (color ?? Theme.of(context).iconTheme.color) : null,
           ),
         ),
       ),

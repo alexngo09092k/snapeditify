@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/base/app_card.dart';
 import 'package:phosart/widgets/base/custom_button.dart';
 import 'package:phosart/widgets/base/lottie_viewer.dart';
 
@@ -24,10 +25,9 @@ class HomeBaseBanner extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final lottieWidth = screenWidth - AppDimensions.instance.padding * 2;
     final heightWidth = lottieWidth * 1.7 / 3;
-    return Container(
-      decoration: const BoxDecoration(
-        boxShadow: [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.1), offset: Offset(0, 8), blurRadius: 10)],
-      ),
+    return AppCard(
+      width: lottieWidth,
+      height: heightWidth,
       child: Stack(
         children: [
           LottieViewer(
@@ -55,7 +55,6 @@ class HomeBaseBanner extends StatelessWidget {
                   CustomButton(
                     onTap: action,
                     title: buttonTitle,
-                    titleColor: Colors.white,
                     gradient: AppColors.instance.gradient,
                     width: 100,
                     height: 40,

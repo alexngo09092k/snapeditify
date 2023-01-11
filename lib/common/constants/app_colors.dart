@@ -17,8 +17,11 @@ class AppColors {
   /// [TEXT]
   final Color black = const Color.fromRGBO(0, 0, 0, 1);
 
+  /// [TEXT]
+  final Color darkLiver = const Color.fromRGBO(86, 74, 87, 1);
+
   /// [BUTTON]
-  final Color white = const Color.fromRGBO(0, 0, 0, 1);
+  final Color white = Colors.white;
 
   /// [BUTTON]
   LinearGradient get gradient => LinearGradient(colors: [mediumSlateBlue, downy]);

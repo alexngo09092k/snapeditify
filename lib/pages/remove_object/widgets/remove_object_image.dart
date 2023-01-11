@@ -116,7 +116,7 @@ class RemoveObjectImage extends StatelessWidget {
                                 builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                                   context,
                                   icon: AppAssets.instance.icUndo,
-                                  color: p.canUndo ? AppColors.instance.mediumSlateBlue : AppColors.instance.black,
+                                  color: p.canUndo ? Theme.of(context).primaryColor : null,
                                 ),
                               ),
                             ),
@@ -130,7 +130,7 @@ class RemoveObjectImage extends StatelessWidget {
                                 builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                                   context,
                                   icon: AppAssets.instance.icRedo,
-                                  color: p.canRedo ? AppColors.instance.mediumSlateBlue : AppColors.instance.black,
+                                  color: p.canRedo ? Theme.of(context).primaryColor : null,
                                 ),
                               ),
                             ),
@@ -144,7 +144,6 @@ class RemoveObjectImage extends StatelessWidget {
                               ? CustomButton(
                                   onTap: () => provider.removeObjects(context),
                                   title: S.of(context).remove,
-                                  titleColor: Colors.white,
                                   gradient: AppColors.instance.gradient,
                                   width: 150,
                                   height: 50,
@@ -163,6 +162,7 @@ class RemoveObjectImage extends StatelessWidget {
                                   CustomIcon.defaultStyle(
                                     context,
                                     icon: AppAssets.instance.icColor,
+                                    normal: true,
                                   ),
                                 ],
                               ),
@@ -180,7 +180,7 @@ class RemoveObjectImage extends StatelessWidget {
                                 builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                                   context,
                                   icon: AppAssets.instance.icCompare,
-                                  color: p.canCompare ? AppColors.instance.mediumSlateBlue : AppColors.instance.black,
+                                  color: p.canCompare ? Theme.of(context).primaryColor : null,
                                 ),
                               ),
                             ),

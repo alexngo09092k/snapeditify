@@ -2,7 +2,7 @@ import 'package:phosart/common/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton(
+  const CustomButton(
       {Key? key,
       this.gradient,
       this.titleColor,
@@ -25,7 +25,7 @@ class CustomButton extends StatelessWidget {
   final double? titleSize;
   final Widget? child;
   final Widget? icon;
-  void Function()? onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class CustomButton extends StatelessWidget {
                   Text(
                     title ?? '',
                     style: TextStyle(
-                      color: titleColor ?? AppColors.instance.mediumSlateBlue,
+                      color: titleColor ?? AppColors.instance.white,
                       fontSize: titleSize,
                       fontWeight: FontWeight.bold,
                     ),

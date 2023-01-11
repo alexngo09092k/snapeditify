@@ -14,26 +14,29 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     brightness: Brightness.dark,
 
     textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.black,
+      bodyColor: AppColors.instance.darkLiver,
     ),
 
     primaryTextTheme: buildTextTheme(base.primaryTextTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.black,
+      bodyColor: AppColors.instance.darkLiver,
     ),
 
-    primaryColor: base.primaryColor,
+    primaryColor: AppColors.instance.mediumSlateBlue,
 
     secondaryHeaderColor: base.secondaryHeaderColor,
 
     /// ================== CARD =====================
-    cardColor: base.cardColor,
+    cardColor: AppColors.instance.white,
 
     textButtonTheme: base.textButtonTheme,
 
     listTileTheme: base.listTileTheme,
 
     /// =================== COLOR SCHEME ====================
-    colorScheme: base.colorScheme,
+    colorScheme: base.colorScheme.copyWith(
+      primary: AppColors.instance.mediumSlateBlue,
+      secondary: AppColors.instance.downy,
+    ),
 
     /// ====================== TEXT SELECTION THEME ======================
     textSelectionTheme: base.textSelectionTheme,
@@ -74,7 +77,7 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     cardTheme: base.cardTheme,
 
     /// ======================== ICON =======================
-    iconTheme: base.iconTheme,
+    iconTheme: base.iconTheme.copyWith(color: AppColors.instance.darkLiver),
 
     primaryIconTheme: base.primaryIconTheme,
 

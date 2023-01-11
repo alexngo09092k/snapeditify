@@ -5,7 +5,7 @@ import 'package:phosart/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:phosart/widgets/base/loading.dart';
+import 'package:phosart/widgets/base/loading_popup.dart';
 import 'package:phosart/widgets/base/toast.dart';
 
 class App extends StatefulWidget {
@@ -47,7 +47,6 @@ class _AppState extends AwesomeAppState<App> {
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,
           navigatorObservers: [AwesomeApp.observer, FlutterSmartDialog.observer],
           routes: AppRoutes.instance.routes,
-          // locale: _appProvider.currentLocale,
           localeResolutionCallback: provider.onChangeLocale,
           localizationsDelegates: const [
             S.delegate,
@@ -58,7 +57,7 @@ class _AppState extends AwesomeAppState<App> {
           supportedLocales: S.delegate.supportedLocales,
           builder: FlutterSmartDialog.init(
             toastBuilder: (String msg) => Toast(message: msg),
-            loadingBuilder: (String msg) => Loading(message: msg),
+            loadingBuilder: (String msg) => LoadingPopup(message: msg),
           ),
         );
       },

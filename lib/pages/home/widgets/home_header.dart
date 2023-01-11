@@ -17,31 +17,6 @@ class HomeHeader extends StatelessWidget {
           Row(
             children: [
               GestureDetector(
-                onTap: () => AppRoutes.instance.goPremiumProPage(context),
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppDimensions.instance.paddingX(0.5), //// padding small
-                    vertical: AppDimensions.instance.paddingX(0.2), //// padding extra small
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.instance.black,
-                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(2))), //// radius large
-                  ),
-                  child: Row(
-                    children: [
-                      Image.asset(AppAssets.instance.icPro, width: AppDimensions.instance.iconX(0.6)), //// icon small
-                      SizedBox(width: AppDimensions.instance.paddingX(0.5)), //// padding small
-                      Image.asset(
-                        AppAssets.instance.icProText,
-                        width: AppDimensions.instance.iconX(0.8), //// icon sm
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(width: AppDimensions.instance.padding),
-              GestureDetector(
                 onTap: () => AppRoutes.instance.goSettingPage(context),
                 child: Image.asset(AppAssets.instance.icMenu, width: AppDimensions.instance.iconX(1)),
               )
