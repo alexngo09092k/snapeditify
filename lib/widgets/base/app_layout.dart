@@ -17,7 +17,9 @@ class AppLayout extends StatelessWidget {
     this.scaffoldKey,
     this.scroll = false,
     this.padding,
-    this.end,
+    this.before,
+    this.after,
+    this.decoration,
   });
 
   final String? screen;
@@ -26,7 +28,8 @@ class AppLayout extends StatelessWidget {
   final Widget? leading;
   final Widget? center;
   final Widget? action;
-  final Widget? end;
+  final Widget? before;
+  final Widget? after;
   final bool back;
   final bool useSafeArea;
   final void Function()? goBack;
@@ -34,6 +37,7 @@ class AppLayout extends StatelessWidget {
   final Key? scaffoldKey;
   final bool scroll;
   final EdgeInsetsGeometry? padding;
+  final Decoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -41,37 +45,49 @@ class AppLayout extends StatelessWidget {
       onWillPop: onWillPop,
       child: Scaffold(
         key: scaffoldKey,
-        body: SafeArea(
-          bottom: useSafeArea,
-          top: useSafeArea,
-          left: useSafeArea,
-          right: useSafeArea,
-          child: Column(
-            children: [
-              if (appBar || back)
-                _AppBar(
-                  back: back,
-                  center: center ??
-                      Text(
-                        screen ?? "",
-                        style: Theme.of(context).textTheme.bodyText1,
+        body: Container(
+          decoration: decoration,
+          child: SafeArea(
+            bottom: useSafeArea,
+            top: useSafeArea,
+            left: useSafeArea,
+            right: useSafeArea,
+            child: Column(
+              children: [
+                if (appBar || back)
+                  _AppBar(
+                    back: back,
+                    center: center ??
+                        Text(
+                          screen ?? "",
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                    action: action,
+                    leading: leading,
+                    onBack: goBack,
+                  ),
+                if (before != null) before!,
+                if (scroll)
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: padding,
+                      child: Column(
+                        children: children,
                       ),
-                  action: action,
-                  leading: leading,
-                  onBack: goBack,
-                ),
-              if (scroll)
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: padding,
-                    child: Column(
-                      children: children,
                     ),
                   ),
-                ),
-              if (!scroll) ...children,
-              if (end != null) end!,
-            ],
+                if (!scroll)
+                  Expanded(
+                    child: Container(
+                      padding: padding,
+                      child: Column(
+                        children: children,
+                      ),
+                    ),
+                  ),
+                if (after != null) after!,
+              ],
+            ),
           ),
         ),
       ),

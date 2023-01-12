@@ -44,6 +44,7 @@ class AppAssets {
   final String snapEditLogoText = "$imagePath/snapedit_logo_text.png";
   final String splashTitle = "$imagePath/splash_title.png";
   final String noObject = "$imagePath/no_object.webp";
+  final String premium = "$imagePath/premium.png";
 
   /// Icons
   static const String iconPath = 'assets/images/icons';
