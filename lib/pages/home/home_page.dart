@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(AppAssets.instance.homeBg),
+          image: AssetImage(AppAssets.instance.pageBackground),
           fit: BoxFit.cover,
         ),
       ),

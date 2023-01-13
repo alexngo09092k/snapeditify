@@ -81,8 +81,8 @@ class RemoveObjectState extends EditImageState {
 
   @override
   Future<bool> setImage(String imageBase64, {EditImageProvider? provider}) async {
-    await super.setImage(imageBase64, provider: provider);
-    _paint.background = imageUI.backgroundDrawable;
+    await super.setImage(imageBase64);
+    _paint.background = image.imageUI.backgroundDrawable;
     return true;
   }
 

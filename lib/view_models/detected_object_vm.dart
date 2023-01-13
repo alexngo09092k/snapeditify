@@ -115,9 +115,9 @@ class DetectedObjectVM extends DetectedObject with Provider {
   Future<void> paintParse() async {
     final renderBox = state.paint.painterKey.currentContext?.findRenderObject() as RenderBox?;
     if (renderBox == null) return;
-    ui.Size realSize = ui.Size(state.imageUI.width.toDouble(), state.imageUI.height.toDouble());
+    ui.Size realSize = state.image.size;
     ui.Size viewSize = renderBox.size;
-    String originalImageBase64 = state.imageBase64;
+    String originalImageBase64 = state.image.imageBase64;
 
     /// BOX [left, top , right, bottom]
     if (box.length > 3) {

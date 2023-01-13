@@ -4,12 +4,15 @@ import 'package:fluttering/fluttering.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
 import 'package:phosart/providers/enhance/enhance_state.dart';
 import 'package:phosart/services/services.dart';
+import 'package:phosart/view_models/editing_image.dart';
 import 'package:phosart/view_models/enhanced_vm.dart';
 import 'package:phosart/view_models/face_vm.dart';
 import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   Future<bool> enhanceImage();
+
+  bool get canSave;
 }
 
 class EnhanceProvider extends IEnhanceProvider {
@@ -27,12 +30,18 @@ class EnhanceProvider extends IEnhanceProvider {
   EnhanceState get state => _state;
 
   @override
+  EditingImage get editedImage => _state.image;
+
+  @override
+  bool get canSave => _state.enhancedImages.isNotEmpty;
+
+  @override
   Future<bool> enhanceImage() async {
     /// SHOW LOADING POPUP
     SmartDialog.showLoading();
 
     /// CALL API
-    EnhanceBody body = EnhanceBody(inputImage: _state.imageBytes, imageId: _state.imageId);
+    EnhanceBody body = EnhanceBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
     final SnapEditResponse<EnhanceResponse?> res = await Services.instance.snapEdit.enhance(body);
     if (res.data != null) {
       /// ENHANCED IMAGES

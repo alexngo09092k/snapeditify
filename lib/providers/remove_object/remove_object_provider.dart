@@ -11,6 +11,7 @@ import 'package:phosart/providers/storage_provider.dart';
 import 'package:phosart/services/services.dart';
 import 'package:phosart/utils/image.dart';
 import 'package:phosart/view_models/detected_object_vm.dart';
+import 'package:phosart/view_models/editing_image.dart';
 import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
@@ -28,7 +29,7 @@ abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvi
 
   Future<bool> revert();
 
-  bool compare();
+  Future<bool> compare();
 
   bool toBrush(BuildContext context);
 
@@ -58,6 +59,9 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   RemoveObjectState get state => _state;
 
   @override
+  EditingImage get editedImage => _state.image;
+
+  @override
   bool get canUndo => _state.prev != null || _state.paint.canUndo;
 
   @override
@@ -75,16 +79,16 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
   bool _compared = false;
   @override
-  bool compare() {
+  Future<bool> compare() async {
     if (canCompare) {
       Debug.log("===== COMPARE ====");
       if (!_compared) {
         Debug.log("===== COMPARE ORIGINAL BACKGROUND====");
-        _state.paint.background = imageUI.backgroundDrawable;
+        _state.paint.background = originalImage.imageUI.backgroundDrawable;
         _compared = true;
       } else {
         Debug.log("===== COMPARE CURRENT BACKGROUND====");
-        _state.paint.background = _state.imageUI.backgroundDrawable;
+        _state.paint.background = _state.image.imageUI.backgroundDrawable;
         _compared = false;
       }
       return true;
@@ -155,7 +159,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       strokeWidth: _state.strokeWidth,
     );
     _state.addListener(notifyListeners);
-    return _state.setImage(imageBase64);
+    return _state.setImage(originalImage.imageBase64);
   }
 
   @override
@@ -166,7 +170,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     SmartDialog.showLoading();
 
     /// CALL API
-    AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.imageBytes, sessionId: _state.sessionId);
+    AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
     SnapEditResponse<AIDetectionResponse?> res = await Services.instance.snapEdit.detection(body);
 
     if (res.data != null) {
@@ -240,7 +244,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     SmartDialog.showLoading();
 
     /// CALL API
-    ui.Image mask = await _state.paint.renderMask(Size(imageUI.width.toDouble(), imageUI.height.toDouble()));
+    ui.Image mask = await _state.paint.renderMask(originalImage.size);
     String? maskBase64 = await ImageUtils.instance.imageUIToBase64(mask);
     if (maskBase64 == null) {
       /// HIDE LOADING POPUP
@@ -248,7 +252,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       return false;
     }
 
-    EraseBody body = EraseBody(originalPreviewImage: _state.imageBytes, maskBrush: base64.decode(maskBase64), sessionId: _state.sessionId);
+    EraseBody body = EraseBody(originalPreviewImage: _state.image.imageBytes, maskBrush: base64.decode(maskBase64), sessionId: _state.sessionId);
     SnapEditResponse<EraseResponse?> res = await Services.instance.snapEdit.erase(body);
 
     if (res.data != null) {

@@ -17,7 +17,7 @@ class _SavedImageState extends State<SavedImage> {
   @override
   void initState() {
     _controller = PainterController();
-    _controller.background = widget.provider.imageUI.backgroundDrawable;
+    _controller.background = widget.provider.state.image.imageUI.backgroundDrawable;
     super.initState();
   }
 
@@ -26,7 +26,7 @@ class _SavedImageState extends State<SavedImage> {
     return BaseImageEditor(
       builder: (width, height) => Center(
         child: AspectRatio(
-          aspectRatio: (widget.provider.imageUI.width / widget.provider.imageUI.height),
+          aspectRatio: (widget.provider.state.image.imageUI.width / widget.provider.state.image.imageUI.height),
           child: FlutterPainter(controller: _controller),
         ),
       ),

@@ -25,8 +25,8 @@ class AppAssets {
   /// Images
   static const String imagePath = 'assets/images';
 
-  final String homeBg = "$imagePath/home_bg.jpg";
-  final String bgProBanner = "$imagePath/bg_pro_banner.webp";
+  final String cardBackground = "$imagePath/card_background.png";
+  final String pageBackground = "$imagePath/page_background.png";
   final String bgShareImage = "$imagePath/bg_share_image.webp";
   final String snapEditDemo1 = "$imagePath/snapedit_demo_1.jpg";
   final String snapEditDemo2 = "$imagePath/snapedit_demo_2.jpeg";

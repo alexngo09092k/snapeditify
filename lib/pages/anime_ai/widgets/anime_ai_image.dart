@@ -18,7 +18,7 @@ class AnimeAIImage extends StatelessWidget {
           /// PAINT
           Center(
             child: AspectRatio(
-              aspectRatio: (provider.imageUI.width / provider.imageUI.height),
+              aspectRatio: provider.state.image.ratio,
               child: BasePropConsumer<AnimeAIProvider, PainterController>(
                 listenable: provider,
                 select: (p) => p.state.paint,

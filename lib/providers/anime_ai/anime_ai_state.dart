@@ -34,9 +34,9 @@ class AnimeAIState extends EditImageState {
 
   @override
   Future<bool> setImage(String imageBase64, {EditImageProvider? provider, String? styleId}) async {
-    await super.setImage(imageBase64, provider: provider);
+    await super.setImage(imageBase64);
     _styleId = styleId;
-    _paint.background = imageUI.backgroundDrawable;
+    _paint.background = (image.imageUI).backgroundDrawable;
     return true;
   }
 

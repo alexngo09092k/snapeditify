@@ -9,6 +9,7 @@ import 'package:phosart/providers/restyle/restyle_state.dart';
 import 'package:phosart/providers/storage_provider.dart';
 import 'package:phosart/services/services.dart';
 import 'package:phosart/services/snap_edit/src/models/response/styles_response.dart';
+import 'package:phosart/view_models/editing_image.dart';
 import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
@@ -22,7 +23,7 @@ abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
 
   Future<bool> revert();
 
-  bool compare();
+  Future<bool> compare();
 }
 
 class RestyleProvider extends IRestyleProvider with ProviderDelegate {
@@ -44,6 +45,9 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   RestyleState get state => _state;
 
   @override
+  EditingImage get editedImage => _state.image;
+
+  @override
   bool get canSave => _state.styledImages.isNotEmpty;
 
   @override
@@ -54,16 +58,16 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   bool _compared = false;
   @override
-  bool compare() {
+  Future<bool> compare() async {
     if (canCompare) {
       Debug.log("===== COMPARE ====");
       if (!_compared) {
         Debug.log("===== COMPARE ORIGINAL BACKGROUND====");
-        _state.paint.background = imageUI.backgroundDrawable;
+        _state.paint.background = originalImage.imageUI.backgroundDrawable;
         _compared = true;
       } else {
         Debug.log("===== COMPARE CURRENT BACKGROUND====");
-        _state.paint.background = _state.imageUI.backgroundDrawable;
+        _state.paint.background = _state.image.imageUI.backgroundDrawable;
         _compared = false;
       }
       return true;
@@ -74,7 +78,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   @override
   Future<bool> revert() async {
     Debug.log("===== REVERT ====");
-    return _state.setImage(imageBase64, styleId: null);
+    return _state.setImage(originalImage.imageBase64, styleId: null);
   }
 
   @override
@@ -89,7 +93,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     SmartDialog.showLoading();
 
     /// CALL API
-    RestyleBody body = RestyleBody(styleId: styleId, inputImage: imageBytes, imageId: _state.imageId);
+    RestyleBody body = RestyleBody(styleId: styleId, inputImage: originalImage.imageBytes, imageId: _state.imageId);
     SnapEditResponse<RestyleResponse?> res = await Services.instance.snapEdit.restyle(body);
 
     if (res.data != null) {
@@ -133,7 +137,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   void clean([bool notify = false]) {
     _styles.clear();
     _state.styledImages.clear();
-    _state.setImage(imageBase64, styleId: null);
+    _state.setImage(originalImage.imageBase64, styleId: null);
     if (notify) notifyListeners();
   }
 

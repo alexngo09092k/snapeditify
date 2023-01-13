@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
@@ -11,6 +12,7 @@ import 'package:phosart/services/snap_edit/src/models/body/anime_ai_video_body.d
 import 'package:phosart/services/snap_edit/src/models/response/anime_image_response.dart';
 import 'package:phosart/services/snap_edit/src/models/response/anime_styles_response.dart';
 import 'package:phosart/services/snap_edit/src/models/response/anime_video_response.dart';
+import 'package:phosart/view_models/editing_image.dart';
 import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IAnimeAIProvider extends EditImageProvider with StorageProvider {
@@ -23,9 +25,7 @@ abstract class IAnimeAIProvider extends EditImageProvider with StorageProvider {
   Future<bool> restyleImage(String styleId);
   Future<bool> videoEffect(String styleId);
 
-  Future<bool> revert();
-
-  bool compare();
+  Future<bool> compare();
 }
 
 class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
@@ -47,6 +47,9 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   AnimeAIState get state => _state;
 
   @override
+  EditingImage get editedImage => _state.image;
+
+  @override
   bool get canSave => _state.styledImages.isNotEmpty;
 
   @override
@@ -57,27 +60,21 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   bool _compared = false;
   @override
-  bool compare() {
+  Future<bool> compare() async {
     if (canCompare) {
       Debug.log("===== COMPARE ====");
       if (!_compared) {
         Debug.log("===== COMPARE ORIGINAL BACKGROUND====");
-        _state.paint.background = imageUI.backgroundDrawable;
+        _state.paint.background = originalImage.imageUI.backgroundDrawable;
         _compared = true;
       } else {
         Debug.log("===== COMPARE CURRENT BACKGROUND====");
-        _state.paint.background = _state.imageUI.backgroundDrawable;
+        _state.paint.background = _state.image.imageUI.backgroundDrawable;
         _compared = false;
       }
       return true;
     }
     return false;
-  }
-
-  @override
-  Future<bool> revert() async {
-    Debug.log("===== REVERT ====");
-    return _state.setImage(imageBase64, styleId: null);
   }
 
   @override
@@ -92,7 +89,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     SmartDialog.showLoading();
 
     /// CALL API
-    AnimeAIImageBody body = AnimeAIImageBody(style: styleId, inputImage: imageBytes);
+    AnimeAIImageBody body = AnimeAIImageBody(style: styleId, inputImage: originalImage.imageBytes);
     SnapEditResponse<AnimeImageResponse?> res = await Services.instance.snapEdit.animeRestyle(body);
 
     Debug.log(res.data!.outputImages.first.imageId);
@@ -139,9 +136,6 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     SnapEditResponse<AnimeVideoResponse?> res = await Services.instance.snapEdit.animeVideoEffect(body);
 
     if (res.data != null) {
-      // await _state.setImage(res.data!.outputImages.first.image, styleId: styleId);
-      // _state.styledImages[styleId] = res.data!.outputImages.first.image;
-      // notifyListeners();
 
       /// HIDE LOADING POPUP
       SmartDialog.dismiss();
@@ -226,4 +220,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     _state.addListener(notifyListeners);
     return true;
   }
+
+  @override
+  Uint8List get editedImageBytes => throw UnimplementedError();
 }

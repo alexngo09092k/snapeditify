@@ -1,33 +1,15 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/providers/edit_image_provider.dart';
-import 'package:phosart/utils/image.dart';
+import 'package:phosart/view_models/editing_image.dart';
 
 abstract class EditImageState extends ChangeNotifier {
-  Future<bool> setImage(String imageBase64, {EditImageProvider? provider}) async {
-    _imageBase64 = imageBase64;
-
-    /// CREATE IMAGE UI
-    _imageUI = provider != null ? provider.imageUI : await ImageUtils.instance.base64ToImageUI(imageBase64);
-
-    /// DECODE IMAGE BASE64
-    _imageBytes = provider != null ? provider.imageBytes : base64.decode(imageBase64);
-
+  Future<bool> setImage(String imageBase64) async {
+    _image = EditingImage(imageBase64);
     Debug.log("====== STATE SET IMAGE DONE ======");
-
     return true;
   }
 
-  late ui.Image _imageUI;
-  ui.Image get imageUI => _imageUI;
-
-  late String _imageBase64;
-  String get imageBase64 => _imageBase64;
-
-  late Uint8List _imageBytes;
-  Uint8List get imageBytes => _imageBytes;
+  late EditingImage _image;
+  EditingImage get image => _image;
 }

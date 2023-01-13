@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
@@ -8,36 +7,27 @@ import 'package:phosart/common/configuration.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/edit_image_state.dart';
 import 'package:phosart/services/services.dart';
-import 'package:phosart/utils/image.dart';
+import 'package:phosart/view_models/editing_image.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;
 
-  late ui.Image _imageUI;
-  ui.Image get imageUI => _imageUI;
-
-  late String _imageBase64;
-  String get imageBase64 => _imageBase64;
-
-  late Uint8List _imageBytes;
-  Uint8List get imageBytes => _imageBytes;
+  late EditingImage _originalImage;
+  EditingImage get originalImage => _originalImage;
 
   SnapEditConfig get config => Configuration.instance.snapEditConfig;
+
+  EditingImage get editedImage;
 
   Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
     /// RENEW STATE
     if (refesh) await refresh(context);
 
-    _imageBytes = bytes;
-    _imageBase64 = base64.encode(bytes);
-
-    /// CREATE IMAGE UI
-    _imageUI = await ImageUtils.instance.base64ToImageUI(imageBase64);
-
-    Debug.log("====== PROVIDER SET IMAGE DONE ======");
+    _originalImage = EditingImage(base64.encode(bytes));
+    await _originalImage.paintParse();
 
     /// SET IMAGE FOR STATE
-    return state.setImage(imageBase64, provider: this);
+    return state.setImage(_originalImage.imageBase64);
   }
 
   Future<bool> refresh(BuildContext context);

@@ -32,7 +32,6 @@ class FaceVM extends Face with Provider {
 
   List<ui.Image> get faceEnhancedImages => _faceEnhancedImages;
 
-
   Future<void> paintParse() async {
     /// BOX [x, y, width, height]
     if (box.length > 3) {
@@ -48,14 +47,14 @@ class FaceVM extends Face with Provider {
         final faceEnhancedImageUI = await ImageUtils.instance.base64ToImageUI(await faceEnhancedImage);
         _faceEnhancedImages.add(faceEnhancedImageUI);
 
-        double ratioX = state.imageUI.width / enhancedImageBase64.imageUI!.width;
-        double ratioY = state.imageUI.height / enhancedImageBase64.imageUI!.height;
+        double ratioX = state.image.size.width / enhancedImageBase64.imageUI!.width;
+        double ratioY = state.image.size.height / enhancedImageBase64.imageUI!.height;
 
         Debug.log(ratioX);
         Debug.log(ratioY);
 
         final faceImage = ImageUtils.instance.cropImageBase64(
-          state.imageBase64,
+          state.image.imageBase64,
           size: Size(realBoxSize.width * ratioX, realBoxSize.height * ratioY),
           position: Offset(realBoxPosition.dx * ratioX, realBoxPosition.dy * ratioY),
         );
