@@ -39,12 +39,12 @@ void main() {
 
       await Configuration.instance.loadRemoteConfig();
 
+      Debug.debugMode = Configuration.instance.businessConfig.appMode == AppMode.debug;
+
       AwesomeAdvertisement.instance.initial(Configuration.instance.advertisementConfig);
       AwesomeIAP.instance.initial(Configuration.instance.iapConfig);
 
       Services.instance.snapEdit.init(Configuration.instance.snapEditConfig);
-
-      Debug.debugMode = Configuration.instance.businessConfig.appMode == AppMode.debug;
 
       return true;
     },
