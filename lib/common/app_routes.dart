@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/pages/active_pro/active_pro.dart';
+import 'package:phosart/pages/premium/premium.dart';
 import 'package:phosart/pages/anime_ai/anime_ai.dart';
 import 'package:phosart/pages/restyle/restyle.dart';
 import 'package:phosart/pages/enhance/enhance.dart';
@@ -59,7 +59,7 @@ class AppRoutes extends IAppRoutes {
     removeObjectPage: (context) => const RemoveObjectPage(),
     enhanceImagePage: (context) => const EnhancePage(),
     settingPage: (context) => const SettingPage(),
-    activeProPage: (context) => const ActiveProPage(),
+    activeProPage: (context) => const PremiumPage(),
     applyArtEffectPage: (context) => const RestylePage(),
     galleryPage: (context) => const GalleryPage(),
   };
@@ -88,7 +88,7 @@ class AppRoutes extends IAppRoutes {
       case settingPage:
         return buildRoute(const SettingPage(), settings);
       case activeProPage:
-        return buildRoute(const ActiveProPage(), settings);
+        return buildRoute(const PremiumPage(), settings);
       case applyArtEffectPage:
         return buildRoute(const RestylePage(), settings);
       case galleryPage:

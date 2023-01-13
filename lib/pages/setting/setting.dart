@@ -4,7 +4,6 @@ import 'package:phosart/common/constants.dart';
 import 'package:phosart/pages/setting/widgets/setting_ad.dart';
 import 'package:phosart/widgets/base/app_card.dart';
 import 'package:phosart/widgets/base/app_layout.dart';
-import 'package:phosart/widgets/base/custom_image.dart';
 import 'package:phosart/widgets/base/lottie_viewer.dart';
 import 'package:phosart/widgets/base/separated_list_view.dart';
 import 'package:phosart/widgets/base/tile_row.dart';
@@ -18,7 +17,6 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: "Setting",
       padding: EdgeInsets.all(AppDimensions.instance.padding),
       scroll: true,
       decoration: BoxDecoration(
@@ -44,9 +42,10 @@ class SettingPage extends StatelessWidget {
           padding: EdgeInsets.all(AppDimensions.instance.padding),
           child: Row(
             children: [
-              CustomImage(
-                image: AppAssets.instance.premium,
+              LottieViewer(
+                lottie: AppAssets.instance.premiumGold,
                 height: AppDimensions.instance.iconX(1.5),
+                width: AppDimensions.instance.iconX(1.5),
               ),
               SizedBox(width: AppDimensions.instance.padding),
               Column(
@@ -54,7 +53,7 @@ class SettingPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Unlock Phosart Pro",
+                    "Unlock Phosart Premium",
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
                           fontWeight: FontWeight.w600,
                         ),

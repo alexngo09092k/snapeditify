@@ -21,6 +21,7 @@ class AppAssets {
   final String homeRemoveObjectBanner = '$lottiePath/home_remove_object_banner.json';
   final String homeAnimeAIBanner = '$lottiePath/home_anime_ai_banner.json';
   final String heartTeam = "$lottiePath/heart.json";
+  final String premiumGold = "$imagePath/premium_gold.json";
 
   /// Images
   static const String imagePath = 'assets/images';
@@ -45,7 +46,6 @@ class AppAssets {
   final String snapEditLogoText = "$imagePath/snapedit_logo_text.png";
   final String splashTitle = "$imagePath/splash_title.png";
   final String noObject = "$imagePath/no_object.webp";
-  final String premium = "$imagePath/premium.png";
 
   /// Icons
   static const String iconPath = 'assets/images/icons';

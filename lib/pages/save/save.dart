@@ -13,7 +13,6 @@ class SavePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = type.provider;
     return AppLayout(
-      screen: 'Preview',
       action: Row(
         children: const [
           SavedImageShare(),

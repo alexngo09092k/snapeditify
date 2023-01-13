@@ -78,7 +78,6 @@ class _GalleryPageState extends ProviderState<GalleryPage, GalleryProvider> {
     return AppLayout(
       back: true,
       scroll: false,
-      screen: "Gallery",
       children: [
         Expanded(
           child: MultipleSliverLoadMore(
