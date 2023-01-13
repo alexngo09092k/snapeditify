@@ -9,10 +9,11 @@ class BusinessConfig {
   final List<String> protocols;
   final String sharedKeyPrefix;
   final String contact;
-  final String telegram;
+  final List<SocialNetwork> socialNetworks;
   final ShareApp shareApp;
   final MaintenanceMode maintenanceMode;
   final AppMode appMode;
+  final String version;
 
   BusinessConfig({
     required this.appName,
@@ -23,7 +24,8 @@ class BusinessConfig {
     required this.shareApp,
     required this.maintenanceMode,
     required this.appMode,
-    required this.telegram,
+    required this.socialNetworks,
+    required this.version,
   });
 
   factory BusinessConfig.defaultValue() {
@@ -37,12 +39,13 @@ class BusinessConfig {
         link: '',
         message: "Phosart AI Photo Editor Pro",
       ),
-      telegram: '',
+      socialNetworks: [],
       maintenanceMode: const MaintenanceMode(
         title: "We'll be back soon",
         link: '',
         message: "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
       ),
+      version: '1.0.0',
       appMode: AppMode.debug,
     );
   }
@@ -56,7 +59,8 @@ class BusinessConfig {
     ShareApp? shareApp,
     MaintenanceMode? maintenanceMode,
     AppMode? appMode,
-    String? telegram,
+    List<SocialNetwork>? socialNetworks,
+    String? version,
   }) {
     return BusinessConfig(
       appName: appName ?? this.appName,
@@ -67,7 +71,8 @@ class BusinessConfig {
       shareApp: shareApp ?? this.shareApp,
       appMode: appMode ?? this.appMode,
       maintenanceMode: maintenanceMode ?? this.maintenanceMode,
-      telegram: telegram ?? this.telegram,
+      socialNetworks: socialNetworks ?? this.socialNetworks,
+      version: version ?? this.version,
     );
   }
 
@@ -81,7 +86,8 @@ class BusinessConfig {
       'shareApp': shareApp.toMap(),
       'appMode': appMode.name,
       'maintenanceMode': maintenanceMode.toMap(),
-      'telegram': telegram,
+      'socialNetworks': socialNetworks.map((e) => e.toMap()),
+      'version': version,
     };
   }
 
@@ -94,8 +100,9 @@ class BusinessConfig {
       contact: map['contact'] as String,
       shareApp: ShareApp.fromMap(map['shareApp']),
       appMode: AppMode.values.firstWhere((element) => element.name == map['appMode']),
-      telegram: map['telegram'],
+      socialNetworks: map['socialNetworks'].map<SocialNetwork>((e) => SocialNetwork.fromMap(e)).toList(),
       maintenanceMode: MaintenanceMode.fromMap(map['maintenanceMode']),
+      version: map['version'],
     );
   }
 
@@ -105,7 +112,7 @@ class BusinessConfig {
 
   @override
   String toString() {
-    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, protocols: $protocols, sharedKeyPrefix: $sharedKeyPrefix, shareApp: $shareApp, appMode: $appMode, maintenanceMode: $maintenanceMode, telegram: $telegram)';
+    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, protocols: $protocols, sharedKeyPrefix: $sharedKeyPrefix, shareApp: $shareApp, appMode: $appMode, maintenanceMode: $maintenanceMode, socialNetworks: $socialNetworks, version: $version)';
   }
 
   @override
@@ -119,8 +126,9 @@ class BusinessConfig {
         other.contact == contact &&
         other.appMode == appMode &&
         other.maintenanceMode == maintenanceMode &&
-        other.telegram == telegram &&
-        other.shareApp == shareApp;
+        other.socialNetworks == socialNetworks &&
+        other.shareApp == shareApp &&
+        other.version == version;
   }
 
   @override
@@ -132,8 +140,9 @@ class BusinessConfig {
         contact.hashCode ^
         shareApp.hashCode ^
         maintenanceMode.hashCode ^
-        telegram.hashCode ^
-        appMode.hashCode;
+        socialNetworks.hashCode ^
+        appMode.hashCode ^
+        version.hashCode;
   }
 }
 
@@ -249,4 +258,64 @@ class MaintenanceMode {
 
   @override
   int get hashCode => title.hashCode ^ message.hashCode ^ link.hashCode;
+}
+
+class SocialNetwork {
+  final String link;
+  final String brand;
+  final String image;
+
+  SocialNetwork({
+    required this.link,
+    required this.brand,
+    required this.image,
+  });
+
+  SocialNetwork copyWith({
+    String? link,
+    String? brand,
+    String? image,
+  }) {
+    return SocialNetwork(
+      link: link ?? this.link,
+      brand: brand ?? this.brand,
+      image: image ?? this.image,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'link': link,
+      'brand': brand,
+      'image': image,
+    };
+  }
+
+  factory SocialNetwork.fromMap(Map<String, dynamic> map) {
+    return SocialNetwork(
+      link: map['link'] as String,
+      brand: map['brand'] as String,
+      image: map['image'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory SocialNetwork.fromJson(String source) => SocialNetwork.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() => 'SocialNetwork(link: $link, brand: $brand, image: $image)';
+
+  @override
+  bool operator ==(covariant SocialNetwork other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.link == link &&
+      other.brand == brand &&
+      other.image == image;
+  }
+
+  @override
+  int get hashCode => link.hashCode ^ brand.hashCode ^ image.hashCode;
 }

@@ -20,6 +20,7 @@ class AppAssets {
   final String homeEnhanceBanner = '$lottiePath/home_enhance_banner.json';
   final String homeRemoveObjectBanner = '$lottiePath/home_remove_object_banner.json';
   final String homeAnimeAIBanner = '$lottiePath/home_anime_ai_banner.json';
+  final String heartTeam = "$lottiePath/heart.json";
 
   /// Images
   static const String imagePath = 'assets/images';
@@ -86,4 +87,5 @@ class AppAssets {
   final String icCheckboxReload = "$iconPath/ic_checkbox_reload.png";
   final String icCheckboxSelected = "$iconPath/ic_checkbox_selected.png";
   final String icCheckbox = "$iconPath/ic_checkbox.png";
+  final String icImagePlaceholder = "$iconPath/ic_image_place_holder.png";
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/pages/restyle/widgets/restyle_image.dart';
-import 'package:phosart/pages/restyle/widgets/restyle_revert.dart';
 import 'package:phosart/pages/restyle/widgets/restyle_save.dart';
 import 'package:phosart/pages/restyle/widgets/style_list.dart';
 import 'package:phosart/providers/restyle/restyle_provider.dart';
@@ -18,8 +17,6 @@ class _RestylePageState extends ProviderState<RestylePage, RestyleProvider> {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      back: true,
-      center: RestyleRevert(provider: provider),
       action: RestyleSave(provider: provider),
       children: [
         RestyleImage(provider: provider),

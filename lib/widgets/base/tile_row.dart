@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 
 class TileRow extends StatelessWidget {
   const TileRow({super.key, this.leading, required this.main, this.action, this.onTap, this.padding});
@@ -15,6 +16,7 @@ class TileRow extends StatelessWidget {
     required String title,
     String? image,
     void Function(BuildContext)? onTap,
+    bool normal = false,
   }) {
     return TileRow(
       padding: EdgeInsets.all(AppDimensions.instance.padding),
@@ -26,18 +28,10 @@ class TileRow extends StatelessWidget {
       leading: image != null
           ? Padding(
               padding: EdgeInsets.only(right: AppDimensions.instance.padding),
-              child: Image.asset(
-                image,
-                width: AppDimensions.instance.icon,
-                height: AppDimensions.instance.icon,
-              ),
+              child: CustomIcon(image, normal: normal,),
             )
           : null,
-      action: Image.asset(
-        AppAssets.instance.icArrowRight,
-        width: AppDimensions.instance.icon,
-        height: AppDimensions.instance.icon,
-      ),
+      action: CustomIcon(AppAssets.instance.icArrowRight),
     );
   }
 

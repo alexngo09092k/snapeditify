@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/base/custom_image.dart';
 
 class CustomIcon extends StatelessWidget {
   const CustomIcon(this.icon, {super.key, this.size, this.color, this.background, this.spacing, this.radius, this.normal = false});
@@ -42,8 +43,8 @@ class CustomIcon extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(radius ?? 0)),
         ),
         child: Center(
-          child: Image.asset(
-            icon,
+          child: CustomImage(
+            image: icon,
             width: size == null ? AppDimensions.instance.icon : (size ?? 0) - (spacing ?? 0),
             height: size == null ? AppDimensions.instance.icon : (size ?? 0) - (spacing ?? 0),
             color: !normal ? (color ?? Theme.of(context).iconTheme.color) : null,

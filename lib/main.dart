@@ -6,7 +6,7 @@ import 'package:phosart/app.dart';
 import 'package:phosart/common/configuration.dart';
 import 'package:phosart/env/env.dart';
 import 'package:phosart/firebase_options.dart';
-import 'package:phosart/models/config/app_config.dart';
+import 'package:phosart/models/config/bussiness_config.dart';
 import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
 import 'package:phosart/providers/enhance/enhance_provider.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';

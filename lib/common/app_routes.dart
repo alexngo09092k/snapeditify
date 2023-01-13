@@ -12,6 +12,7 @@ import 'package:phosart/pages/gallery/gallery.dart';
 import 'package:phosart/pages/remove_object/remove_object.dart';
 import 'package:phosart/pages/home/home_page.dart';
 import 'package:phosart/pages/maintenance/maintenance_page.dart';
+import 'package:phosart/pages/save/save.dart';
 import 'package:phosart/pages/setting/setting.dart';
 import 'package:phosart/pages/splash/splash_page.dart';
 import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
@@ -44,6 +45,7 @@ class AppRoutes extends IAppRoutes {
   static const String maintenancePage = 'maintenance_page';
   static const String removeObjectPage = 'remove_object_page';
   static const String animeAIPage = 'anime_ai_page';
+  static const String savePage = 'save_page';
   static const String settingPage = 'setting_page';
   static const String splashPage = 'splash_page';
 
@@ -93,6 +95,9 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const GalleryPage(), settings);
       case animeAIPage:
         return buildRoute(const AnimeAIPage(), settings);
+      case savePage:
+        EditImageType type = settings.arguments as EditImageType;
+        return buildRoute(SavePage(type: type), settings);
       default:
         throw ErrorDescription("Not found page");
     }
@@ -105,6 +110,10 @@ extension AppRoutesUtils on IAppRoutes {
   goGalleryPage(BuildContext context, EditImageType photosFor) {
     ManagerProvider.of<GalleryProvider>().photosFor = photosFor;
     Navigator.of(context).pushNamed(AppRoutes.galleryPage);
+  }
+
+  goSavePage(BuildContext context, {required EditImageType photosFor}) {
+    Navigator.of(context).pushNamed(AppRoutes.savePage, arguments: photosFor);
   }
 
   goPremiumProPage(BuildContext context) {

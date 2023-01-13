@@ -1,4 +1,9 @@
 import 'package:fluttering/fluttering.dart';
+import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
+import 'package:phosart/providers/edit_image_provider.dart';
+import 'package:phosart/providers/enhance/enhance_provider.dart';
+import 'package:phosart/providers/remove_object/remove_object_provider.dart';
+import 'package:phosart/providers/restyle/restyle_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/models/config/gallery_config.dart';
@@ -11,7 +16,7 @@ enum EditImageType {
 }
 
 extension EditImageTypeEX on EditImageType {
-  get icon {
+  String get icon {
     switch (this) {
       case EditImageType.animeAI:
         return AppAssets.instance.icAI;
@@ -22,10 +27,11 @@ extension EditImageTypeEX on EditImageType {
       case EditImageType.enhanceImage:
         return AppAssets.instance.icEnhence;
       default:
+        throw 'Edit Image Type Not Found';
     }
   }
 
-  get title {
+  String get title {
     switch (this) {
       case EditImageType.animeAI:
         return 'Anime AI';
@@ -36,6 +42,22 @@ extension EditImageTypeEX on EditImageType {
       case EditImageType.enhanceImage:
         return 'Enhance';
       default:
+        throw 'Edit Image Type Not Found';
+    }
+  }
+
+  EditImageProvider get provider {
+    switch (this) {
+      case EditImageType.animeAI:
+        return ManagerProvider.of<AnimeAIProvider>();
+      case EditImageType.removeObject:
+        return ManagerProvider.of<RemoveObjectProvider>();
+      case EditImageType.applyArtEffect:
+        return ManagerProvider.of<RestyleProvider>();
+      case EditImageType.enhanceImage:
+        return ManagerProvider.of<EnhanceProvider>();
+      default:
+        throw 'Edit Image Type Not Found';
     }
   }
 }

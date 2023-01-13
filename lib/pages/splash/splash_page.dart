@@ -3,7 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/app_routes.dart';
 import 'package:phosart/common/configuration.dart';
 import 'package:phosart/common/constants.dart';
-import 'package:phosart/models/config/app_config.dart';
+import 'package:phosart/models/config/bussiness_config.dart';
 import 'package:phosart/common/extensions.dart';
 
 class SplashPage extends StatefulWidget {

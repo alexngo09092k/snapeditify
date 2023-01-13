@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 
 class AppLayout extends StatelessWidget {
   const AppLayout({
@@ -60,7 +61,7 @@ class AppLayout extends StatelessWidget {
                     center: center ??
                         Text(
                           screen ?? "",
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.w600),
                         ),
                     action: action,
                     leading: leading,
@@ -133,11 +134,7 @@ class _AppBar extends StatelessWidget {
                             left: AppDimensions.instance.padding,
                           ),
                           color: Colors.transparent,
-                          child: Image.asset(
-                            AppAssets.instance.icBack,
-                            width: AppDimensions.instance.icon,
-                            height: AppDimensions.instance.icon,
-                          ),
+                          child: CustomIcon(AppAssets.instance.icBack),
                         ),
                       )
                     : (leading ?? const SizedBox()),

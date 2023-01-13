@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:fluttering_iap/fluttering_iap.dart';
-import 'package:phosart/models/config/app_config.dart';
+import 'package:phosart/models/config/bussiness_config.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:phosart/common/configuration.dart';
+import 'package:phosart/common/constants.dart';
 
 class CustomImage extends StatelessWidget {
   const CustomImage({
@@ -26,6 +27,12 @@ class CustomImage extends StatelessWidget {
             height: height,
             color: color,
             fit: fit,
+            placeholder: (context, url) => Image.asset(
+              AppAssets.instance.icImagePlaceholder,
+              width: width,
+              height: height,
+              fit: fit,
+            ),
           )
         : Image.asset(
             image,
