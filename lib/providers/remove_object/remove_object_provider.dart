@@ -11,7 +11,7 @@ import 'package:phosart/providers/storage_provider.dart';
 import 'package:phosart/services/services.dart';
 import 'package:phosart/utils/image.dart';
 import 'package:phosart/view_models/detected_object_vm.dart';
-import 'package:phosart/view_models/editing_image.dart';
+import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
@@ -59,7 +59,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   RemoveObjectState get state => _state;
 
   @override
-  EditingImage get editedImage => _state.image;
+  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBase64, _state.image.imageUI);
 
   @override
   bool get canUndo => _state.prev != null || _state.paint.canUndo;

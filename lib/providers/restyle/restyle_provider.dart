@@ -9,7 +9,7 @@ import 'package:phosart/providers/restyle/restyle_state.dart';
 import 'package:phosart/providers/storage_provider.dart';
 import 'package:phosart/services/services.dart';
 import 'package:phosart/services/snap_edit/src/models/response/styles_response.dart';
-import 'package:phosart/view_models/editing_image.dart';
+import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
@@ -45,7 +45,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   RestyleState get state => _state;
 
   @override
-  EditingImage get editedImage => _state.image;
+  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBase64, _state.image.imageUI);
 
   @override
   bool get canSave => _state.styledImages.isNotEmpty;

@@ -7,23 +7,24 @@ import 'package:phosart/common/configuration.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/edit_image_state.dart';
 import 'package:phosart/services/services.dart';
-import 'package:phosart/view_models/editing_image.dart';
+import 'package:phosart/view_models/edited_image_vm.dart';
+import 'package:phosart/view_models/editing_image_vm.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;
 
-  late EditingImage _originalImage;
-  EditingImage get originalImage => _originalImage;
+  late EditingImageVM _originalImage;
+  EditingImageVM get originalImage => _originalImage;
 
   SnapEditConfig get config => Configuration.instance.snapEditConfig;
 
-  EditingImage get editedImage;
+  EditedImageVM get editedImage;
 
   Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
     /// RENEW STATE
     if (refesh) await refresh(context);
 
-    _originalImage = EditingImage(base64.encode(bytes));
+    _originalImage = EditingImageVM(base64.encode(bytes));
     await _originalImage.paintParse();
 
     /// SET IMAGE FOR STATE

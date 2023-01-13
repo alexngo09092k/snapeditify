@@ -12,7 +12,7 @@ import 'package:phosart/services/snap_edit/src/models/body/anime_ai_video_body.d
 import 'package:phosart/services/snap_edit/src/models/response/anime_image_response.dart';
 import 'package:phosart/services/snap_edit/src/models/response/anime_styles_response.dart';
 import 'package:phosart/services/snap_edit/src/models/response/anime_video_response.dart';
-import 'package:phosart/view_models/editing_image.dart';
+import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IAnimeAIProvider extends EditImageProvider with StorageProvider {
@@ -47,7 +47,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   AnimeAIState get state => _state;
 
   @override
-  EditingImage get editedImage => _state.image;
+  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBase64, _state.image.imageUI);
 
   @override
   bool get canSave => _state.styledImages.isNotEmpty;
@@ -136,7 +136,6 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     SnapEditResponse<AnimeVideoResponse?> res = await Services.instance.snapEdit.animeVideoEffect(body);
 
     if (res.data != null) {
-
       /// HIDE LOADING POPUP
       SmartDialog.dismiss();
       return true;

@@ -4,7 +4,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
 import 'package:phosart/providers/enhance/enhance_state.dart';
 import 'package:phosart/services/services.dart';
-import 'package:phosart/view_models/editing_image.dart';
+import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/view_models/enhanced_vm.dart';
 import 'package:phosart/view_models/face_vm.dart';
 import 'package:phosart/widgets/painter/painter.dart';
@@ -30,7 +30,13 @@ class EnhanceProvider extends IEnhanceProvider {
   EnhanceState get state => _state;
 
   @override
-  EditingImage get editedImage => _state.image;
+  EditedImageVM get editedImage {
+    final enhancedimage = _state.enhancedImages[_state.enhancedImageIndex];
+    return EditedImageVM(
+      enhancedimage.imageBase64,
+      enhancedimage.imageUI!,
+    );
+  }
 
   @override
   bool get canSave => _state.enhancedImages.isNotEmpty;

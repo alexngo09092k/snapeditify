@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:fluttering/fluttering.dart';
-import 'package:phosart/view_models/editing_image.dart';
+import 'package:phosart/view_models/editing_image_vm.dart';
 
 abstract class EditImageState extends ChangeNotifier {
   Future<bool> setImage(String imageBase64) async {
-    _image = EditingImage(imageBase64);
-    Debug.log("====== STATE SET IMAGE DONE ======");
+    _image = EditingImageVM(imageBase64);
+    await _image.paintParse();
     return true;
   }
 
-  late EditingImage _image;
-  EditingImage get image => _image;
+  late EditingImageVM _image;
+  EditingImageVM get image => _image;
 }
