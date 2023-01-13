@@ -73,7 +73,7 @@ abstract class IGalleryProvider extends Provider with ProviderDelegate {
 
   GalleryConfig get config;
 
-  EditImageType photosFor = EditImageType.removeObject;
+  EditImageType editImageType = EditImageType.removeObject;
 
   List<String> get suggestedPhotos;
 
@@ -99,15 +99,15 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Map<AssetPathEntity, int> get albumList => _albumList;
 
-  EditImageType _photosFor = EditImageType.removeObject;
+  EditImageType _editImageType = EditImageType.removeObject;
 
   @override
-  EditImageType get photosFor => _photosFor;
+  EditImageType get editImageType => _editImageType;
 
   @override
-  set photosFor(EditImageType value) {
-    if (_photosFor != value) {
-      _photosFor = value;
+  set editImageType(EditImageType value) {
+    if (_editImageType != value) {
+      _editImageType = value;
       notifyListeners();
     }
   }
@@ -136,7 +136,7 @@ class GalleryProvider extends IGalleryProvider {
   };
 
   @override
-  List<String> get suggestedPhotos => suggestedPhotosStore[_photosFor] ?? [];
+  List<String> get suggestedPhotos => suggestedPhotosStore[_editImageType] ?? [];
 
   @override
   Future<bool> initial(GalleryConfig config) async {

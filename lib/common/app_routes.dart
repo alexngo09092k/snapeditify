@@ -107,13 +107,13 @@ class AppRoutes extends IAppRoutes {
 }
 
 extension AppRoutesUtils on IAppRoutes {
-  goGalleryPage(BuildContext context, EditImageType photosFor) {
-    ManagerProvider.of<GalleryProvider>().photosFor = photosFor;
+  goGalleryPage(BuildContext context, EditImageType editImageType) {
+    ManagerProvider.of<GalleryProvider>().editImageType = editImageType;
     Navigator.of(context).pushNamed(AppRoutes.galleryPage);
   }
 
-  goSavePage(BuildContext context, {required EditImageType photosFor}) {
-    Navigator.of(context).pushNamed(AppRoutes.savePage, arguments: photosFor);
+  goSavePage(BuildContext context, {required EditImageType editImageType}) {
+    Navigator.of(context).pushNamed(AppRoutes.savePage, arguments: editImageType);
   }
 
   goPremiumProPage(BuildContext context) {
@@ -127,13 +127,13 @@ extension AppRoutesUtils on IAppRoutes {
   goEditImagePage(BuildContext context, {required ImageSource type, required Uint8List bytes}) {
     UserPermission.instance.requestStoragePermission(
       onHasPermisson: () async {
-        final EditImageType photosFor = ManagerProvider.of<GalleryProvider>().photosFor;
+        final EditImageType editImageType = ManagerProvider.of<GalleryProvider>().editImageType;
         late final bool res;
         late final String target;
 
         SmartDialog.showLoading();
 
-        switch (photosFor) {
+        switch (editImageType) {
           case EditImageType.applyArtEffect:
             res = await ManagerProvider.of<RestyleProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.applyArtEffectPage;

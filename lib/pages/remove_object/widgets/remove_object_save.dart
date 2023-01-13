@@ -15,7 +15,7 @@ class RemoveObjectSave extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (provider.canSave) {
-          AppRoutes.instance.goSavePage(context, photosFor: EditImageType.removeObject);
+          AppRoutes.instance.goSavePage(context, editImageType: EditImageType.removeObject);
         }
       },
       child: PropConsumer<RemoveObjectProvider, bool>(

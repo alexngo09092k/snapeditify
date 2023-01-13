@@ -15,7 +15,7 @@ class RestyleSave extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (provider.canSave) {
-          AppRoutes.instance.goSavePage(context, photosFor: EditImageType.applyArtEffect);
+          AppRoutes.instance.goSavePage(context, editImageType: EditImageType.applyArtEffect);
         }
       },
       child: BasePropConsumer<RestyleProvider, bool>(

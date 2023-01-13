@@ -28,7 +28,7 @@ class TrySuggestedImages extends StatelessWidget {
           ),
         ),
         PropConsumer<GalleryProvider, EditImageType>(
-          select: (_) => _.photosFor,
+          select: (_) => _.editImageType,
           builder: (_, __, p, ___) => Wrap(
             spacing: gridDelegate.mainAxisSpacing,
             runSpacing: gridDelegate.crossAxisSpacing,

@@ -15,7 +15,7 @@ class AnimeAISave extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (provider.canSave) {
-          AppRoutes.instance.goSavePage(context, photosFor: EditImageType.animeAI);
+          AppRoutes.instance.goSavePage(context, editImageType: EditImageType.animeAI);
         }
       },
       child: PropConsumer<AnimeAIProvider, bool>(

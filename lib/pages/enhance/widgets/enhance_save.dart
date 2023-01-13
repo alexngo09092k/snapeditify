@@ -15,7 +15,7 @@ class EnhanceSave extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (provider.canSave) {
-          AppRoutes.instance.goSavePage(context, photosFor: EditImageType.enhanceImage);
+          AppRoutes.instance.goSavePage(context, editImageType: EditImageType.enhanceImage);
         }
       },
       child: PropConsumer<EnhanceProvider, bool>(
