@@ -40,7 +40,7 @@ class BrushModeSetting extends StatelessWidget {
               value: p.state.strokeWidth,
               label: '${p.state.strokeWidth.round()}',
               divisions: 100,
-              onChanged: (value) => p.state.strokeWidth = value,
+              onChanged: (value) => p.changeStrokeWidth(context, value),
               onChangeStart: (_) => p.strokeWidthIsChanged = true,
               onChangeEnd: (_) => p.strokeWidthIsChanged = false,
             ),

@@ -1,20 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/generated/l10n.dart';
 import 'package:phosart/view_models/detected_object_vm.dart';
-import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 import 'package:phosart/widgets/base/tile_row.dart';
 
 class DetectedObjectItem extends StatelessWidget {
-  const DetectedObjectItem({Key? key, required this.detectedObject, required this.provider}) : super(key: key);
+  const DetectedObjectItem({Key? key, required this.detectedObject}) : super(key: key);
   final DetectedObjectVM detectedObject;
-  final RemoveObjectProvider provider;
 
   _onTap(_) {
-    provider.state.detectedObjects.firstWhere((element) => element.maskId == detectedObject.maskId).toggleSelection();
+    detectedObject.toggleSelection();
   }
 
   @override
@@ -29,18 +26,12 @@ class DetectedObjectItem extends StatelessWidget {
         ),
       ),
     );
-    final actionWidget = BasePropConsumer<RemoveObjectProvider, bool>(
-      listenable: provider,
-      select: (p) => p.state.detectedObjects.firstWhere((element) => element.maskId == detectedObject.maskId).isSelected,
-      builder: (_, __, p, isSelected) {
-        return Container(
-          alignment: Alignment.center,
-          child: Image.asset(
-            (isSelected ?? false) ? AppAssets.instance.icCheckboxSelected : AppAssets.instance.icCheckbox,
-            width: 30,
-          ),
-        );
-      },
+    final actionWidget = Container(
+      alignment: Alignment.center,
+      child: Image.asset(
+        detectedObject.isSelected ? AppAssets.instance.icCheckboxSelected : AppAssets.instance.icCheckbox,
+        width: 30,
+      ),
     );
     final subTitle = Text(
       '${(double.parse(detectedObject.accuracy) * 100).toStringAsFixed(2)} ${S.of(context).accurate}',
@@ -61,20 +52,16 @@ class DetectedObjectItem extends StatelessWidget {
         style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.red),
       ),
     );
-    return BasePropConsumer<RemoveObjectProvider, bool>(
-      listenable: provider,
-      select: (p) => p.state.detectedObjects.firstWhere((element) => element.maskId == detectedObject.maskId).isRemoved,
-      builder: (_, __, p, isRemoved) => TileRow(
-        onTap: _onTap,
-        leading: imageWidget,
-        main: Column(
-          children: [
-            Row(children: [title, if (isRemoved ?? false) removeText]),
-            subTitle
-          ],
-        ),
-        action: actionWidget,
+    return TileRow(
+      onTap: _onTap,
+      leading: imageWidget,
+      main: Column(
+        children: [
+          Row(children: [title, if (detectedObject.isRemoved) removeText]),
+          subTitle
+        ],
       ),
+      action: actionWidget,
     );
   }
 }

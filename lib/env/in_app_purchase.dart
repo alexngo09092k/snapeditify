@@ -14,5 +14,5 @@ const iapConfig = {
     }
   ],
   "provider": "google",
-  "enable": true,
+  "enable": false,
 };

@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
       this.titleSize = 14,
       this.color,
       this.width,
-      this.height = 50,
+      this.height,
       this.onTap,
       this.child,
       this.icon,
@@ -34,12 +34,15 @@ class CustomButton extends StatelessWidget {
       child: Container(
         height: height,
         width: width,
+        padding: EdgeInsets.symmetric(
+          horizontal: AppDimensions.instance.padding,
+          vertical: AppDimensions.instance.paddingX(0.5),
+        ),
         decoration: BoxDecoration(
           color: color ?? AppColors.instance.mediumSlateBlue,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(30),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(3))),
           gradient: gradient,
+          boxShadow: [AppColors.instance.boxShadow],
         ),
         child: child ??
             Center(

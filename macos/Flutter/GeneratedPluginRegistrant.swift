@@ -17,7 +17,7 @@ import package_info_plus
 import path_provider_macos
 import photo_manager
 import share_plus
-import shared_preferences_macos
+import shared_preferences_foundation
 import sqflite
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

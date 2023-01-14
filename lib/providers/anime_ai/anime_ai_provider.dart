@@ -18,6 +18,10 @@ import 'package:phosart/widgets/painter/painter.dart';
 abstract class IAnimeAIProvider extends EditImageProvider with StorageProvider {
   List<AnimeStyle> get styles;
 
+  List<String> get categories;
+
+  String? get category;
+
   bool get canSave;
   bool get canRevert;
   bool get canCompare;
@@ -42,9 +46,24 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   @override
   List<AnimeStyle> get styles => _styles;
 
+  final List<String> _categories = [];
+
+  @override
+  List<String> get categories => _categories;
+
   late AnimeAIState _state;
   @override
   AnimeAIState get state => _state;
+
+  String? _category;
+  @override
+  String? get category => _category;
+  set category(String? val) {
+    if (_category != val) {
+      _category = val;
+      notifyListeners();
+    }
+  }
 
   @override
   EditedImageVM get editedImage => EditedImageVM(_state.image.imageBase64, _state.image.imageUI);
@@ -184,6 +203,12 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
       AnimeStylesResponse data = AnimeStylesResponse.fromJson(styleStrings);
       _styles.clear();
       _styles.addAll(data.styles);
+      for (var style in _styles) {
+        if (!_categories.contains(style.category)) {
+          _categories.add(style.category);
+        }
+      }
+      _category = _categories.first;
     }
     if (notify) notifyListeners();
   }

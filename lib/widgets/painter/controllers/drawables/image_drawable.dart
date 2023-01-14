@@ -104,7 +104,7 @@ class ImageDrawable extends ObjectDrawable {
 
     // Draw the image onto the canvas.
     canvas.drawImageRect(image, Rect.fromPoints(Offset.zero, Offset(image.width.toDouble(), image.height.toDouble())),
-        Rect.fromPoints(position - scaledSize / 2, position + scaledSize / 2), Paint());
+        Rect.fromPoints(position - scaledSize / 2, position + scaledSize / 2), Paint()..color = Color.fromRGBO(255, 255, 255, opacity));
   }
 
   /// Calculates the size of the rendered object.

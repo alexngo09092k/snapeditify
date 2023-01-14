@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phosart/common/configuration.dart';
 import 'package:phosart/common/constants.dart';
-import 'package:phosart/pages/setting/widgets/setting_ad.dart';
+import 'package:phosart/pages/setting/widgets/unlock_premium.dart';
+import 'package:phosart/widgets/base/ad_view.dart';
 import 'package:phosart/widgets/base/app_card.dart';
 import 'package:phosart/widgets/base/app_layout.dart';
 import 'package:phosart/widgets/base/lottie_viewer.dart';
@@ -17,6 +18,7 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
+      screen: 'Setting',
       padding: EdgeInsets.all(AppDimensions.instance.padding),
       scroll: true,
       decoration: BoxDecoration(
@@ -38,37 +40,7 @@ class SettingPage extends StatelessWidget {
         ],
       ),
       children: [
-        AppCard(
-          padding: EdgeInsets.all(AppDimensions.instance.padding),
-          child: Row(
-            children: [
-              LottieViewer(
-                lottie: AppAssets.instance.premiumGold,
-                height: AppDimensions.instance.iconX(1.5),
-                width: AppDimensions.instance.iconX(1.5),
-              ),
-              SizedBox(width: AppDimensions.instance.padding),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Unlock Phosart Premium",
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                  SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                  Text(
-                    "No ads & Best image quality",
-                    style: Theme.of(context).textTheme.bodyText2!.copyWith(),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-        SizedBox(height: AppDimensions.instance.padding),
+        const UnlockPremium(),
         AppCard(
           child: SeparatedListView.withList(
             separator: Padding(
@@ -135,7 +107,7 @@ class SettingPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: AppDimensions.instance.padding),
-        const SettingAd(),
+        const AdView(),
       ],
     );
   }

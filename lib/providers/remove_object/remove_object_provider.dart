@@ -50,7 +50,10 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   static IRemoveObjectProvider get instance => _instance;
 
   RemoveObjectProvider.internal() {
-    _state = RemoveObjectState(strokeWidth: config.removeObject.strokeWidth.init.toDouble(), strokeColor: config.removeObject.strokeWidth.color);
+    _state = RemoveObjectState(
+      strokeWidth: config.removeObject.strokeWidth.init.toDouble(),
+      strokeColor: config.removeObject.strokeWidth.color,
+    );
     _state.addListener(notifyListeners);
   }
 
@@ -287,7 +290,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
   @override
   bool changeStrokeWidth(BuildContext context, double strokeWidth) {
-    _strokeChanged = true;
     _state.strokeWidth = strokeWidth;
 
     /// CACHE LOCAL STORAGE
@@ -297,7 +299,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
   @override
   bool changeStrokeColor(BuildContext context, Color strokeColor) {
-    _strokeChanged = true;
     _state.strokeColor = strokeColor;
 
     /// CACHE LOCAL STORAGE
@@ -320,7 +321,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     _compared = false;
     _strokeChanged = false;
     _state.removeListener(notifyListeners);
-    _state = RemoveObjectState();
+    _state = RemoveObjectState(strokeColor: _state.strokeColor, strokeWidth: _state.strokeWidth);
     _state.addListener(notifyListeners);
     return true;
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/base/app_card.dart';
 
 class LoadingPopup extends StatelessWidget {
   const LoadingPopup({super.key, this.message});
@@ -8,10 +9,9 @@ class LoadingPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppCard(
       width: 100,
       height: 100,
-      decoration: BoxDecoration(color: AppColors.instance.black.withOpacity(0.1)),
       child: Stack(
         fit: StackFit.expand,
         children: [

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/widgets/base/app_card.dart';
-import 'package:phosart/widgets/base/custom_button.dart';
 import 'package:phosart/widgets/base/lottie_viewer.dart';
 
 class HomeBaseBanner extends StatelessWidget {
@@ -25,45 +24,62 @@ class HomeBaseBanner extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final lottieWidth = screenWidth - AppDimensions.instance.padding * 2;
     final heightWidth = lottieWidth * 1.7 / 3;
-    return AppCard(
-      width: lottieWidth,
-      height: heightWidth,
-      child: Stack(
-        children: [
-          LottieViewer(
-            lottie: banner,
-            width: lottieWidth,
-            height: heightWidth,
-            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: Padding(
-              padding: EdgeInsets.all(AppDimensions.instance.padding),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: AppColors.instance.white,
-                          fontWeight: FontWeight.w600,
+    return GestureDetector(
+      onTap: action,
+      child: AppCard(
+        width: lottieWidth,
+        height: heightWidth,
+        child: Stack(
+          children: [
+            LottieViewer(
+              lottie: banner,
+              width: lottieWidth,
+              height: heightWidth,
+              borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Padding(
+                padding: EdgeInsets.all(AppDimensions.instance.padding),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.headline6!.copyWith(
+                            color: AppColors.instance.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimensions.instance.padding,
+                        vertical: AppDimensions.instance.paddingX(0.5),
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.instance.white.withOpacity(0.3),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(AppDimensions.instance.radiusX(2)),
                         ),
-                  ),
-                  CustomButton(
-                    onTap: action,
-                    title: buttonTitle,
-                    gradient: AppColors.instance.gradient,
-                    width: 100,
-                    height: 40,
-                  ),
-                ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          buttonTitle,
+                          style: Theme.of(context).textTheme.headline6!.copyWith(
+                                color: AppColors.instance.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -17,8 +17,8 @@ class RemoveObjectImage extends StatelessWidget {
   final Function()? onEndDraw;
 
   _showColorPopup(BuildContext context) {
-    SmartDialog.show(builder: (_) {
-      return Column(
+    SmartDialog.show(
+      builder: (_) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
@@ -33,14 +33,14 @@ class RemoveObjectImage extends StatelessWidget {
                 pickerColor: provider.state.strokeColor,
                 paletteType: PaletteType.hueWheel,
                 onColorChanged: (Color color) {
-                  provider.state.strokeColor = color;
+                  provider.changeStrokeColor(context, color);
                 },
               ),
             ),
           ),
         ],
-      );
-    });
+      ),
+    );
   }
 
   @override
@@ -145,8 +145,7 @@ class RemoveObjectImage extends StatelessWidget {
                                   onTap: () => provider.removeObjects(context),
                                   title: S.of(context).remove,
                                   gradient: AppColors.instance.gradient,
-                                  width: 150,
-                                  height: 50,
+                                  width: 100,
                                 )
                               : const SizedBox(),
                         ),

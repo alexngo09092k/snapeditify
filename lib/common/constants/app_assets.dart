@@ -21,7 +21,7 @@ class AppAssets {
   final String homeRemoveObjectBanner = '$lottiePath/home_remove_object_banner.json';
   final String homeAnimeAIBanner = '$lottiePath/home_anime_ai_banner.json';
   final String heartTeam = "$lottiePath/heart.json";
-  final String premiumGold = "$imagePath/premium_gold.json";
+  final String premiumGold = "$lottiePath/premium_gold.json";
 
   /// Images
   static const String imagePath = 'assets/images';

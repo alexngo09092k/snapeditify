@@ -18,21 +18,28 @@ class AnimeAIStyleList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 180,
-      child: BasePropConsumer<AnimeAIProvider, int>(
+      child: BasePropConsumer<AnimeAIProvider, String?>(
         listenable: provider,
-        select: (_) => _.styles.length,
-        builder: (_, __, p, ___) => ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: p.styles.length,
-          itemBuilder: (_, index) => Container(
-            padding: EdgeInsets.only(left: AppDimensions.instance.padding),
-            child: AnimeStyleItem(
-              key: Key('$index'),
-              provider: provider,
-              style: p.styles[index],
-              onStyle: _onStyle,
-            ),
-          ),
+        select: (_) => _.category,
+        builder: (_, __, p, ___) => BasePropConsumer<AnimeAIProvider, int>(
+          listenable: provider,
+          select: (_) => _.styles.where((element) => element.category == p.category).length,
+          builder: (_, __, p, ___) {
+            final styles = p.styles.where((element) => element.category == p.category).toList();
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: styles.length,
+              itemBuilder: (_, index) => Container(
+                padding: EdgeInsets.only(left: AppDimensions.instance.padding),
+                child: AnimeStyleItem(
+                  key: Key('$index'),
+                  provider: provider,
+                  style: styles[index],
+                  onStyle: _onStyle,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

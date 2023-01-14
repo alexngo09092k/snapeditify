@@ -48,7 +48,7 @@ class RemoveObjectControl extends StatelessWidget {
                       ),
                     ),
 
-                    /// BURSH BUTTON
+                    /// BRUSH BUTTON
                     GestureDetector(
                       onTap: () => provider.toBrush(context),
                       child: Column(

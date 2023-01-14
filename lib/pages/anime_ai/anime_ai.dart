@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/provider/widgets/pstate.dart';
+import 'package:phosart/pages/anime_ai/widgets/anime_ai_category_list.dart';
 import 'package:phosart/pages/anime_ai/widgets/anime_ai_image.dart';
 import 'package:phosart/pages/anime_ai/widgets/anime_ai_save.dart';
 import 'package:phosart/pages/anime_ai/widgets/anime_ai_style_list.dart';
@@ -21,6 +22,7 @@ class _AnimeAIPageState extends ProviderState<AnimeAIPage, AnimeAIProvider> {
       action: AnimeAISave(provider: provider),
       children: [
         AnimeAIImage(provider: provider),
+        AnimeAICategoryList(provider: provider),
         AnimeAIStyleList(provider: provider),
       ],
     );
