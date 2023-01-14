@@ -12,7 +12,6 @@ import 'package:phosart/providers/enhance/enhance_provider.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 import 'package:phosart/providers/gallery/gallery_provider.dart';
 import 'package:phosart/providers/restyle/restyle_provider.dart';
-import 'package:phosart/providers/save/save_provider.dart';
 import 'package:phosart/services/services.dart';
 
 void main() {
@@ -21,7 +20,6 @@ void main() {
     debugMode: kDebugMode,
     providers: [AwesomeAdvertisement.instance, AwesomeIAP.instance],
     lazyProviders: [
-      () => SaveProvider.instance,
       () => GalleryProvider.instance,
       () => RemoveObjectProvider.instance,
       () => EnhanceProvider.instance,

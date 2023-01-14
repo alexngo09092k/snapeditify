@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/provider/widgets/pstate.dart';
 import 'package:phosart/pages/anime_ai/widgets/anime_ai_category_list.dart';
 import 'package:phosart/pages/anime_ai/widgets/anime_ai_image.dart';
-import 'package:phosart/pages/anime_ai/widgets/anime_ai_save.dart';
 import 'package:phosart/pages/anime_ai/widgets/anime_ai_style_list.dart';
 import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
 import 'package:phosart/widgets/base/app_layout.dart';
+import 'package:phosart/widgets/base/save_button.dart';
 
 class AnimeAIPage extends StatefulWidget {
   const AnimeAIPage({super.key});
@@ -19,7 +19,7 @@ class _AnimeAIPageState extends ProviderState<AnimeAIPage, AnimeAIProvider> {
   Widget build(BuildContext context) {
     return AppLayout(
       back: true,
-      action: AnimeAISave(provider: provider),
+      action: SaveButton(provider: provider),
       children: [
         AnimeAIImage(provider: provider),
         AnimeAICategoryList(provider: provider),

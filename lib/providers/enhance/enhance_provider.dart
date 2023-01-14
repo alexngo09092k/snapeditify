@@ -11,8 +11,6 @@ import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   Future<bool> enhanceImage();
-
-  bool get canSave;
 }
 
 class EnhanceProvider extends IEnhanceProvider {
@@ -83,16 +81,6 @@ class EnhanceProvider extends IEnhanceProvider {
     /// HIDE LOADING POPUP
     SmartDialog.dismiss();
     return false;
-  }
-
-  @override
-  Future<bool> saveImage(BuildContext context) {
-    return checkoutSaveImage(context, () async {
-      /// SAVE IMAGE
-      return true;
-    }, () {
-      /// MAX COUNT DOWNLOAD IMAGE
-    });
   }
 
   @override

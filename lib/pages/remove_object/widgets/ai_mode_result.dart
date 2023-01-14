@@ -70,7 +70,7 @@ class _AIModeResultState extends State<AIModeResult> {
               children: [
                 Row(
                   children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () => widget.provider.toBrush(context),
                       child: CustomIcon(
                         AppAssets.instance.icArrowLeft,

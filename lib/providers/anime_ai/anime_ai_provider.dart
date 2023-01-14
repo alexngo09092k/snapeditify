@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
@@ -22,7 +21,6 @@ abstract class IAnimeAIProvider extends EditImageProvider with StorageProvider {
 
   String? get category;
 
-  bool get canSave;
   bool get canRevert;
   bool get canCompare;
 
@@ -227,16 +225,6 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   }
 
   @override
-  Future<bool> saveImage(BuildContext context) async {
-    return checkoutSaveImage(context, () async {
-      /// SAVE IMAGE
-      return true;
-    }, () {
-      /// MAX COUNT DOWNLOAD IMAGE
-    });
-  }
-
-  @override
   Future<bool> refresh(BuildContext context) async {
     _state.removeListener(notifyListeners);
     _state.dispose();
@@ -244,7 +232,4 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     _state.addListener(notifyListeners);
     return true;
   }
-
-  @override
-  Uint8List get editedImageBytes => throw UnimplementedError();
 }

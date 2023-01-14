@@ -15,7 +15,6 @@ import 'package:phosart/widgets/painter/painter.dart';
 abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
   List<Style> get styles;
 
-  bool get canSave;
   bool get canRevert;
   bool get canCompare;
 
@@ -114,17 +113,6 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     /// HIDE LOADING POPUP
     SmartDialog.dismiss();
     return false;
-  }
-
-  @override
-  Future<bool> saveImage(BuildContext context) {
-    return checkoutSaveImage(context, () async {
-      /// SAVE IMAGE
-      return true;
-    }, () {
-      /// MAX COUNT DOWNLOAD IMAGE
-      SmartDialog.showToast('');
-    });
   }
 
   @override

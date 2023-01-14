@@ -16,7 +16,6 @@ import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
   bool get canRemove;
-  bool get canSave;
   bool get canUndo;
   bool get canRedo;
   bool get canCompare;
@@ -169,7 +168,10 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   Future<bool> toAI(BuildContext context) async {
     if (_state.mode == RemoveObjectMode.ai) return true;
 
-    ///SHOW LOADING POPUP
+    /// SHOW ADS
+    adProvider.handleAd();
+
+    /// SHOW LOADING POPUP
     SmartDialog.showLoading();
 
     /// CALL API
@@ -243,6 +245,9 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   Future<bool> removeObjects(BuildContext context) async {
     if (!canRemove) return false;
 
+    /// SHOW ADS
+    adProvider.handleAd();
+
     /// SHOW LOADING POPUP
     SmartDialog.showLoading();
 
@@ -304,16 +309,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     /// CACHE LOCAL STORAGE
     AsyncStorage.instance.setInt(AppSharedKey.instance.strokeColor, _state.strokeColor.value);
     return true;
-  }
-
-  @override
-  Future<bool> saveImage(BuildContext context) {
-    return checkoutSaveImage(context, () async {
-      /// SAVE IMAGE
-      return true;
-    }, () {
-      /// MAX COUNT DOWNLOAD IMAGE
-    });
   }
 
   @override

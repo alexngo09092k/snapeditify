@@ -3,9 +3,9 @@ import 'package:fluttering/fluttering.dart';
 import 'package:phosart/pages/remove_object/widgets/remove_object_image.dart';
 import 'package:phosart/pages/remove_object/widgets/remove_object_control.dart';
 import 'package:phosart/pages/remove_object/widgets/remove_object_revert.dart';
-import 'package:phosart/pages/remove_object/widgets/remove_object_save.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 import 'package:phosart/widgets/base/app_layout.dart';
+import 'package:phosart/widgets/base/save_button.dart';
 
 class RemoveObjectPage extends StatefulWidget {
   const RemoveObjectPage({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _RemoveObjectPageState extends ProviderState<RemoveObjectPage, RemoveObjec
       goBack: goBack,
       onWillPop: () async => _canPop,
       center: RemoveObjectRevert(provider: provider),
-      action: RemoveObjectSave(provider: provider),
+      action: SaveButton(provider: provider),
       children: [
         RemoveObjectImage(
           provider: provider,

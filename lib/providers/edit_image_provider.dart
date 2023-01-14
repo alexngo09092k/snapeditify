@@ -1,14 +1,21 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:fluttering_ads/advertisement/advertisement.dart';
 import 'package:phosart/common/configuration.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/edit_image_state.dart';
 import 'package:phosart/services/services.dart';
 import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/view_models/editing_image_vm.dart';
+import 'package:phosart/widgets/base/saved_mage_preview.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;
@@ -19,6 +26,10 @@ abstract class EditImageProvider extends Provider {
   SnapEditConfig get config => Configuration.instance.snapEditConfig;
 
   EditedImageVM get editedImage;
+
+  bool get canSave;
+
+  AwesomeAdvertisement get adProvider => ManagerProvider.of<AwesomeAdvertisement>();
 
   Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
     /// RENEW STATE
@@ -49,7 +60,34 @@ abstract class EditImageProvider extends Provider {
     return false;
   }
 
-  Future<bool> saveImage(BuildContext context);
+  Future<bool> saveImage(BuildContext context) async {
+    return checkoutSaveImage(context, () async {
+      /// SHOW ADS
+      adProvider.handleAd();
+
+      SmartDialog.showLoading();
+
+      /// SAVE IMAGE
+      AssetEntity? asset = await PhotoManager.editor.saveImage(
+        editedImage.imageBytes,
+        title: '${Configuration.instance.businessConfig.appName}_${DateTime.now().millisecond}',
+      );
+      File? file = await asset?.file;
+
+      SmartDialog.dismiss();
+
+      if (file != null) {
+        SmartDialog.show(builder: (_) => SavedImagePreview(file: file));
+        return true;
+      }
+
+      /// SHOW ALERT
+      return false;
+    }, () {
+      /// MAX COUNT DOWNLOAD IMAGE
+      /// SHOW ALERT
+    });
+  }
 
   @override
   void dispose() {

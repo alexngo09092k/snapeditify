@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/pages/enhance/widgets/enhance_image.dart';
-import 'package:phosart/pages/enhance/widgets/enhance_save.dart';
 import 'package:phosart/providers/enhance/enhance_provider.dart';
 import 'package:phosart/widgets/base/app_layout.dart';
+import 'package:phosart/widgets/base/save_button.dart';
 
 class EnhancePage extends StatefulWidget {
   const EnhancePage({super.key});
@@ -23,7 +23,7 @@ class _EnhancePageState extends ProviderState<EnhancePage, EnhanceProvider> {
   Widget build(BuildContext context) {
     return AppLayout(
       back: true,
-      action: EnhanceSave(provider: provider),
+      action: SaveButton(provider: provider),
       children: [
         EnhanceImage(provider: provider),
       ],
