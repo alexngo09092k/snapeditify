@@ -28,7 +28,10 @@ class TileRow extends StatelessWidget {
       leading: image != null
           ? Padding(
               padding: EdgeInsets.only(right: AppDimensions.instance.padding),
-              child: CustomIcon(image, normal: normal,),
+              child: CustomIcon(
+                image,
+                normal: normal,
+              ),
             )
           : null,
       action: CustomIcon(AppAssets.instance.icArrowRight),
@@ -40,6 +43,7 @@ class TileRow extends StatelessWidget {
     return GestureDetector(
       onTap: onTap != null ? () => onTap!(context) : null,
       child: Container(
+        color: Colors.transparent,
         padding: padding,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

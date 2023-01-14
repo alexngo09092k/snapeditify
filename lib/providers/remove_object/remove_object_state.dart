@@ -52,7 +52,7 @@ class RemoveObjectState extends EditImageState {
     double? strokeWidth,
     List<Drawable>? drawables,
     String? sessionId,
-    List<DetectedObjectVM>? detectedObjects,
+    Map<int, DetectedObjectVM>? detectedObjects,
     RemoveObjectState? prev,
     RemoveObjectState? next,
   }) {
@@ -66,8 +66,8 @@ class RemoveObjectState extends EditImageState {
       .._prev = prev ?? this.prev
       .._next = next ?? this.next;
 
-    other._detectedObjects.addAll((detectedObjects ?? this.detectedObjects).map((detectedObject) {
-      return detectedObject.copyWith(state: other, isRemoved: detectedObject.isSelected);
+    other._detectedObjects.addAll((detectedObjects ?? this.detectedObjects).map((maskId, detectedObject) {
+      return MapEntry(maskId, detectedObject.copyWith(state: other, isRemoved: detectedObject.isSelected));
     }));
 
     if (other.mode == RemoveObjectMode.ai) {
@@ -87,9 +87,9 @@ class RemoveObjectState extends EditImageState {
   }
 
   /// AI DETECTED OBJECT
-  final List<DetectedObjectVM> _detectedObjects = [];
-  List<DetectedObjectVM> get detectedObjects => _detectedObjects;
-  set detectedObjects(List<DetectedObjectVM> value) {
+  final Map<int, DetectedObjectVM> _detectedObjects = {};
+  Map<int, DetectedObjectVM> get detectedObjects => _detectedObjects;
+  set detectedObjects(Map<int, DetectedObjectVM> value) {
     _detectedObjects.clear();
     _detectedObjects.addAll(value);
     _addAllBoxMask();
@@ -185,7 +185,7 @@ class RemoveObjectState extends EditImageState {
 extension DetectedObjectEx on RemoveObjectState {
   _addAllBoxMask() {
     List<RectangleDrawable> drawables = [];
-    for (var detectedObject in _detectedObjects) {
+    for (var detectedObject in _detectedObjects.values) {
       /// IF DETECTED OBJECT IS NOT REMOVED, PAINT SELECTED BOX
       if (!detectedObject.isRemoved) {
         drawables.add(detectedObject.boxDrawble!);
@@ -204,7 +204,7 @@ extension DetectedObjectEx on RemoveObjectState {
   }
 
   _removeAllBoxMask() {
-    for (var detectedObject in _detectedObjects) {
+    for (var detectedObject in _detectedObjects.values) {
       _paint.removeDrawable(detectedObject.boxDrawble!, saveAction: false);
     }
   }

@@ -71,8 +71,8 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
   @override
   bool get canRemove {
-    int setectedLength = _state.detectedObjects.where((detectedObject) => detectedObject.isSelected).length;
-    int removedLength = _state.detectedObjects.where((detectedObject) => detectedObject.isRemoved).length;
+    int setectedLength = _state.detectedObjects.values.where((detectedObject) => detectedObject.isSelected).length;
+    int removedLength = _state.detectedObjects.values.where((detectedObject) => detectedObject.isRemoved).length;
     return _state.paint.drawables.isNotEmpty || setectedLength > removedLength;
   }
 
@@ -180,11 +180,11 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
     if (res.data != null) {
       /// DETECTED OBJECT VM
-      List<DetectedObjectVM> detectedObjectVMs = [];
+      Map<int, DetectedObjectVM> detectedObjectVMs = {};
       for (var detectedObject in res.data!.detectedObjects) {
         final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
         await vm.paintParse();
-        detectedObjectVMs.add(vm);
+        detectedObjectVMs[vm.maskId] =  vm;
       }
       _state.detectedObjects = detectedObjectVMs;
 
@@ -215,7 +215,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (_state.mode == RemoveObjectMode.brush) return true;
 
     /// CLEAR AI DETECTED OBJECTS
-    for (var detectedObject in _state.detectedObjects) {
+    for (var detectedObject in _state.detectedObjects.values) {
       _state.paint.removeDrawable(detectedObject.boxDrawble!);
     }
 
@@ -230,7 +230,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (_state.mode == RemoveObjectMode.erase) return true;
 
     /// CLEAR AI DETECTED OBJECTS
-    for (var detectedObject in _state.detectedObjects) {
+    for (var detectedObject in _state.detectedObjects.values) {
       _state.paint.removeDrawable(detectedObject.boxDrawble!);
     }
 

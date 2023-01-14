@@ -93,6 +93,7 @@ class DetectedObjectVM extends DetectedObject with Provider {
     if (maskDrawable != null) {
       state.paint.removeDrawable(maskDrawable!, saveAction: false);
       isSelected = false;
+      notifyListeners();
     }
   }
 
@@ -100,6 +101,7 @@ class DetectedObjectVM extends DetectedObject with Provider {
     if (maskDrawable != null) {
       state.paint.addDrawables([maskDrawable!], saveAction: false);
       isSelected = true;
+      notifyListeners();
     }
   }
 
