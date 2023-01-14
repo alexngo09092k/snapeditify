@@ -246,7 +246,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!canRemove) return false;
 
     /// SHOW ADS
-    adProvider.handleAd();
+    // adProvider.handleAd();
 
     /// SHOW LOADING POPUP
     SmartDialog.showLoading();

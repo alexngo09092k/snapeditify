@@ -14,12 +14,6 @@ class EnhancePage extends StatefulWidget {
 
 class _EnhancePageState extends ProviderState<EnhancePage, EnhanceProvider> {
   @override
-  void initState() {
-    super.initState();
-    provider.enhanceImage();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return AppLayout(
       screen: 'Enhance',

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
@@ -38,6 +39,12 @@ class EnhanceProvider extends IEnhanceProvider {
 
   @override
   bool get canSave => _state.enhancedImages.isNotEmpty;
+
+  @override
+  Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
+    await super.setImage(context, bytes: bytes, refesh: refesh);
+    return await enhanceImage();
+  }
 
   @override
   Future<bool> enhanceImage() async {
