@@ -22,7 +22,7 @@ class _EnhancePageState extends ProviderState<EnhancePage, EnhanceProvider> {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      back: true,
+      screen: 'Enhance',
       action: SaveButton(provider: provider),
       children: [
         EnhanceImage(provider: provider),

@@ -12,6 +12,7 @@ class LoadingPopup extends StatelessWidget {
     return AppCard(
       width: 100,
       height: 100,
+      color: AppColors.instance.black.withOpacity(0.1),
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -19,23 +20,17 @@ class LoadingPopup extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Theme(
-                data: ThemeData(indicatorColor: AppColors.instance.white),
-                child: const CupertinoActivityIndicator(),
+              CupertinoActivityIndicator(
+                color: AppColors.instance.white,
               ),
-            ],
-          ),
-          if (message != null)
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              if (message != null) SizedBox(height: AppDimensions.instance.padding),
+              if (message != null)
                 Text(
                   message!,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(color: AppColors.instance.white),
                 ),
-              ],
-            )
+            ],
+          ),
         ],
       ),
     );

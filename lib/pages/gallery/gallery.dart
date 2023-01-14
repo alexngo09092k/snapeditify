@@ -76,8 +76,7 @@ class _GalleryPageState extends ProviderState<GalleryPage, GalleryProvider> {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      back: true,
-      scroll: false,
+      screen: 'Photos',
       children: [
         Expanded(
           child: MultipleSliverLoadMore(

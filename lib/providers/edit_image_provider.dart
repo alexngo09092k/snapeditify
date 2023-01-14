@@ -61,6 +61,7 @@ abstract class EditImageProvider extends Provider {
   }
 
   Future<bool> saveImage(BuildContext context) async {
+    if (!canSave) return false;
     return checkoutSaveImage(context, () async {
       /// SHOW ADS
       adProvider.handleAd();

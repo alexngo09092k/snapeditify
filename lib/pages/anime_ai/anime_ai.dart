@@ -18,7 +18,7 @@ class _AnimeAIPageState extends ProviderState<AnimeAIPage, AnimeAIProvider> {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      back: true,
+      screen: 'Anime AI',
       action: SaveButton(provider: provider),
       children: [
         AnimeAIImage(provider: provider),
