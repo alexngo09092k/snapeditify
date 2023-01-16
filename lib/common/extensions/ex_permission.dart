@@ -1,27 +1,25 @@
 part of '../extensions.dart';
 
 extension MPermissionStore on UserPermission {
-  requestStoragePermission({
-    BuildContext? context,
+  requestStoragePermission(
+    BuildContext context, {
     Function? onHasPermisson,
     Function? onNoPermisson,
   }) async {
     requestPermission(
       permission: [Permission.storage],
       onNoPermisson: () {
-        if (context != null) {
-          Navigator.pop(context);
-          // showNoPermissionPopup(
-          //   context,
-          //   message: 'Allow ${Configuration.instance.businessConfig.appName} to access photos on your device.',
-          //   onBackApp: (_) {
-          //     requestPermission(
-          //       permission: [Permission.storage],
-          //       onHasPermisson: Navigator.of(_).pop,
-          //     );
-          //   },
-          // );
-        }
+        WidgetUtils.instance.showRequestPermissionPopup(
+          context,
+          title: "Photo",
+          message: 'Allow ${Configuration.instance.businessConfig.appName} to access photos on your device.',
+          onForeground: () {
+            requestPermission(
+              permission: [Permission.storage],
+              onHasPermisson: Navigator.of(context).pop,
+            );
+          },
+        );
         if (onNoPermisson != null) {
           onNoPermisson();
         }
@@ -30,8 +28,8 @@ extension MPermissionStore on UserPermission {
     );
   }
 
-  requestLocationPermission({
-    BuildContext? context,
+  requestLocationPermission(
+    BuildContext context, {
     Function? onHasPermisson,
     Function? onNoPermisson,
   }) async {
@@ -40,20 +38,19 @@ extension MPermissionStore on UserPermission {
           requestPermission(
             permission: [Permission.location],
             onNoPermisson: () {
-              if (context != null) {
-                Navigator.pop(context);
-                // showNoPermissionPopup(
-                //   context,
-                //   message:
-                //       'Allow ${Configuration.instance.businessConfig.appName} to collect location data to enable fitness tracking even when the app is closed or not in use.',
-                //   onBackApp: (_) {
-                //     requestPermission(
-                //       permission: [Permission.location],
-                //       onHasPermisson: Navigator.of(_).pop,
-                //     );
-                //   },
-                // );
-              }
+              WidgetUtils.instance.showRequestPermissionPopup(
+                context,
+                title: "Location",
+                message:
+                    'Allow ${Configuration.instance.businessConfig.appName} to collect location data to enable fitness tracking even when the app is closed or not in use.',
+                onForeground: () {
+                  requestPermission(
+                    permission: [Permission.location],
+                    onHasPermisson: Navigator.of(context).pop,
+                  );
+                },
+              );
+
               if (onNoPermisson != null) {
                 onNoPermisson();
               }

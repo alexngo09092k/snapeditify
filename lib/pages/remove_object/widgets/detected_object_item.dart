@@ -13,10 +13,6 @@ class DetectedObjectItem extends StatelessWidget {
   final DetectedObjectVM detectedObject;
   final RemoveObjectProvider provider;
 
-  _onTap(_) {
-    provider.state.detectedObjects[detectedObject.maskId]!.toggleSelection();
-  }
-
   @override
   Widget build(BuildContext context) {
     final imageWidget = ClipRRect(
@@ -30,13 +26,13 @@ class DetectedObjectItem extends StatelessWidget {
         ),
       ),
     );
-    final actionWidget = BasePropConsumer<DetectedObjectVM, bool>(
-      listenable: provider.state.detectedObjects[detectedObject.maskId]!,
-      select: (detectedObject) => detectedObject.isSelected,
-      builder: (_, __, detectedObject, ___) => Container(
+    final actionWidget = BasePropConsumer<RemoveObjectProvider, bool>(
+      listenable: provider,
+      select: (p) => p.state.detectedObjects[detectedObject.maskId]!.isSelected,
+      builder: (_, __, p, ___) => Container(
         alignment: Alignment.center,
         child: Image.asset(
-          detectedObject.isSelected ? AppAssets.instance.icCheckboxSelected : AppAssets.instance.icCheckbox,
+          p.state.detectedObjects[detectedObject.maskId]!.isSelected ? AppAssets.instance.icCheckboxSelected : AppAssets.instance.icCheckbox,
           width: 30,
         ),
       ),
@@ -49,10 +45,10 @@ class DetectedObjectItem extends StatelessWidget {
       detectedObject.objectDescription,
       style: Theme.of(context).textTheme.subtitle1,
     );
-    final removeText = BasePropConsumer<DetectedObjectVM, bool>(
-      listenable: provider.state.detectedObjects[detectedObject.maskId]!,
-      select: (detectedObject) => detectedObject.isRemoved,
-      builder: (_, __, detectedObject, ___) => detectedObject.isRemoved
+    final removeText = BasePropConsumer<RemoveObjectProvider, bool>(
+      listenable: provider,
+      select: (p) => p.state.detectedObjects[detectedObject.maskId]!.isRemoved,
+      builder: (_, __, p, ___) => p.state.detectedObjects[detectedObject.maskId]!.isRemoved
           ? Padding(
               padding: EdgeInsets.only(left: AppDimensions.instance.paddingX(0.5)),
               child: Container(
@@ -74,7 +70,7 @@ class DetectedObjectItem extends StatelessWidget {
         vertical: AppDimensions.instance.paddingX(0.5),
         horizontal: AppDimensions.instance.padding,
       ),
-      onTap: _onTap,
+      onTap: (_) => detectedObject.toggleSelection(),
       leading: imageWidget,
       main: Padding(
         padding: EdgeInsets.only(left: AppDimensions.instance.padding),

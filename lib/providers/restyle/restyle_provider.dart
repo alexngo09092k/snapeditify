@@ -1,7 +1,6 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
@@ -9,6 +8,7 @@ import 'package:phosart/providers/restyle/restyle_state.dart';
 import 'package:phosart/providers/storage_provider.dart';
 import 'package:phosart/services/services.dart';
 import 'package:phosart/services/snap_edit/src/models/response/styles_response.dart';
+import 'package:phosart/utils/widget.dart';
 import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/widgets/painter/painter.dart';
 
@@ -18,11 +18,11 @@ abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
   bool get canRevert;
   bool get canCompare;
 
-  Future<bool> restyleImage(String styleId);
+  Future<bool> restyleImage(BuildContext context, String styleId);
 
-  Future<bool> revert();
+  Future<bool> revert(BuildContext context);
 
-  Future<bool> compare();
+  Future<bool> compare(BuildContext context);
 }
 
 class RestyleProvider extends IRestyleProvider with ProviderDelegate {
@@ -57,7 +57,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   bool _compared = false;
   @override
-  Future<bool> compare() async {
+  Future<bool> compare(BuildContext context) async {
     if (canCompare) {
       Debug.log("===== COMPARE ====");
       if (!_compared) {
@@ -75,13 +75,13 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   }
 
   @override
-  Future<bool> revert() async {
+  Future<bool> revert(BuildContext context) async {
     Debug.log("===== REVERT ====");
     return _state.setImage(originalImage.imageBase64, styleId: null);
   }
 
   @override
-  Future<bool> restyleImage(String styleId) async {
+  Future<bool> restyleImage(BuildContext context, String styleId) async {
     if (_state.styledImages.containsKey(styleId)) {
       _state.setImage(_state.styledImages[styleId]!, styleId: styleId);
       notifyListeners();
@@ -89,7 +89,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    SmartDialog.showLoading();
+    WidgetUtils.instance.showLoadingPopup(context);
 
     /// CALL API
     RestyleBody body = RestyleBody(styleId: styleId, inputImage: originalImage.imageBytes, imageId: _state.imageId);
@@ -101,17 +101,18 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      SmartDialog.dismiss();
+      Navigator.pop(context);
       return true;
     }
 
+    /// HIDE LOADING POPUP
+    Navigator.pop(context);
+
     if (res.error != null) {
-      SmartDialog.showToast(res.error!);
+      WidgetUtils.instance.alert(context, title: 'Restyle Image', message: res.error.toString());
       Debug.log('====== RESTYLE IMAGE ${res.error} ======');
     }
 
-    /// HIDE LOADING POPUP
-    SmartDialog.dismiss();
     return false;
   }
 

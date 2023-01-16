@@ -1,12 +1,9 @@
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:phosart/common/app_routes.dart';
 import 'package:phosart/common/theme.dart';
 import 'package:phosart/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:phosart/widgets/base/loading_popup.dart';
-import 'package:phosart/widgets/base/toast.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -45,7 +42,7 @@ class _AppState extends AwesomeAppState<App> {
           themeMode: provider.themeMode,
           initialRoute: AppRoutes.instance.initialRoute,
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,
-          navigatorObservers: [AwesomeApp.observer, FlutterSmartDialog.observer],
+          navigatorObservers: [AwesomeApp.observer],
           routes: AppRoutes.instance.routes,
           localeResolutionCallback: provider.onChangeLocale,
           localizationsDelegates: const [
@@ -55,10 +52,6 @@ class _AppState extends AwesomeAppState<App> {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          builder: FlutterSmartDialog.init(
-            toastBuilder: (String msg) => Toast(message: msg),
-            loadingBuilder: (String msg) => LoadingPopup(message: msg),
-          ),
         );
       },
     );

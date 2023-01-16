@@ -4,6 +4,7 @@ import 'package:phosart/common/configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/models/config/bussiness_config.dart';
+import 'package:phosart/utils/widget.dart';
 
 part 'extensions/ex_list.dart';
 part 'extensions/ex_permission.dart';

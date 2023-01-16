@@ -32,8 +32,8 @@ class RestyleImage extends StatelessWidget {
             right: AppDimensions.instance.padding,
             bottom: AppDimensions.instance.padding,
             child: GestureDetector(
-              onTapDown: (_) => provider.compare(),
-              onTapUp: (_) => provider.compare(),
+              onTapDown: (_) => provider.compare(context),
+              onTapUp: (_) => provider.compare(context),
               child: BasePropConsumer<RestyleProvider, bool>(
                 listenable: provider,
                 select: (p) => p.canCompare,

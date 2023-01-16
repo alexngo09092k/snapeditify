@@ -5,6 +5,7 @@ import 'package:phosart/generated/l10n.dart';
 import 'package:phosart/pages/remove_object/widgets/detected_object_item.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 import 'package:phosart/services/snap_edit/snap_edit.dart';
+import 'package:phosart/widgets/base/lottie_viewer.dart';
 
 class DetectedObjectList extends StatelessWidget {
   const DetectedObjectList({Key? key, required this.type, required this.provider}) : super(key: key);
@@ -33,10 +34,10 @@ class DetectedObjectList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      AppAssets.instance.noObject,
+                    LottieViewer(
+                      lottie: AppAssets.instance.notFound,
                       width: AppDimensions.instance.iconX(2),
-                      fit: BoxFit.cover,
+                      height: AppDimensions.instance.iconX(2),
                     ),
                     SizedBox(height: AppDimensions.instance.padding),
                     Text(

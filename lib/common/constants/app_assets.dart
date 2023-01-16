@@ -22,30 +22,30 @@ class AppAssets {
   final String homeAnimeAIBanner = '$lottiePath/home_anime_ai_banner.json';
   final String heartTeam = "$lottiePath/heart.json";
   final String premiumGold = "$lottiePath/premium_gold.json";
+  final String notFound = "$lottiePath/not_found.json";
 
   /// Images
   static const String imagePath = 'assets/images';
 
   final String cardBackground = "$imagePath/card_background.png";
   final String pageBackground = "$imagePath/page_background.png";
-  final String bgShareImage = "$imagePath/bg_share_image.webp";
-  final String snapEditDemo1 = "$imagePath/snapedit_demo_1.jpg";
-  final String snapEditDemo2 = "$imagePath/snapedit_demo_2.jpeg";
-  final String snapEditDemo3 = "$imagePath/snapedit_demo_3.jpg";
-  final String snapEditEnhanceDemo1 = "$imagePath/snapedit_enhance_demo_1.jpeg";
-  final String snapEditEnhanceDemo2 = "$imagePath/snapedit_enhance_demo_2.jpeg";
-  final String snapEditEnhanceDemo3 = "$imagePath/snapedit_enhance_demo_3.jpeg";
+
+  /// Suggest images
+  final String removeObjectDemo1 = "$imagePath/remove_object_demo_1.jpg";
+  final String removeObjectDemo2 = "$imagePath/remove_object_demo_2.jpeg";
+  final String removeObjectDemo3 = "$imagePath/remove_object_demo_3.jpg";
+
+  final String enhanceDemo1 = "$imagePath/enhance_demo_1.jpg";
+  final String enhanceDemo2 = "$imagePath/enhance_demo_2.jpg";
+  final String enhanceDemo3 = "$imagePath/enhance_demo_3.jpg";
+
   final String restyleDemo1 = "$imagePath/restyle_demo_1.jpeg";
   final String restyleDemo2 = "$imagePath/restyle_demo_2.jpeg";
   final String restyleDemo3 = "$imagePath/restyle_demo_3.jpeg";
-  final String animeDemo1 = "$imagePath/anime_demo_1.jpg";
+
+  final String animeDemo1 = "$imagePath/anime_demo_1.jpeg";
   final String animeDemo2 = "$imagePath/anime_demo_2.jpeg";
-  final String animeDemo3 = "$imagePath/anime_demo_3.jpg";
-  final String snapEditCopyRightTitle = "$imagePath/snapedit_copy_right_title.png";
-  final String snapEditLogoFull = "$imagePath/snapedit_logo_full.png";
-  final String snapEditLogoText = "$imagePath/snapedit_logo_text.png";
-  final String splashTitle = "$imagePath/splash_title.png";
-  final String noObject = "$imagePath/no_object.webp";
+  final String animeDemo3 = "$imagePath/anime_demo_3.jpeg";
 
   /// Icons
   static const String iconPath = 'assets/images/icons';

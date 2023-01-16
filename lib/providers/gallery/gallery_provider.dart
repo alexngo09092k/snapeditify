@@ -119,14 +119,14 @@ class GalleryProvider extends IGalleryProvider {
       AppAssets.instance.restyleDemo3,
     ],
     EditImageType.enhanceImage: [
-      AppAssets.instance.snapEditEnhanceDemo1,
-      AppAssets.instance.snapEditEnhanceDemo2,
-      AppAssets.instance.snapEditEnhanceDemo3,
+      AppAssets.instance.enhanceDemo1,
+      AppAssets.instance.enhanceDemo2,
+      AppAssets.instance.enhanceDemo3,
     ],
     EditImageType.removeObject: [
-      AppAssets.instance.snapEditDemo1,
-      AppAssets.instance.snapEditDemo2,
-      AppAssets.instance.snapEditDemo3,
+      AppAssets.instance.removeObjectDemo1,
+      AppAssets.instance.removeObjectDemo2,
+      AppAssets.instance.removeObjectDemo3,
     ],
     EditImageType.animeAI: [
       AppAssets.instance.animeDemo1,
@@ -147,9 +147,7 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Future<bool> refreshGalleryList() async {
     final PermissionState ps = await PhotoManager.requestPermissionExtend();
-    if (!ps.hasAccess) {
-      Debug.log("Hello");
-    }
+    if (!ps.hasAccess) {}
 
     final List<AssetPathEntity> albumList = await PhotoManager.getAssetPathList(
       type: RequestType.image,

@@ -1,0 +1,120 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/base/app_card.dart';
+import 'package:phosart/widgets/base/custom_alert.dart';
+
+class WidgetUtils {
+  static final WidgetUtils _instance = WidgetUtils._internal();
+
+  static WidgetUtils get instance => _instance;
+
+  WidgetUtils._internal();
+
+  showLoadingPopup<T>(BuildContext context, {String? message}) {
+    showDialog<T>(
+      context: context,
+      builder: (BuildContext context) => AppCard(
+        width: 100,
+        height: 100,
+        color: AppColors.instance.black.withOpacity(0.1),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CupertinoActivityIndicator(
+                  color: AppColors.instance.white,
+                ),
+                if (message != null) SizedBox(height: AppDimensions.instance.padding),
+                if (message != null)
+                  Text(
+                    message,
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(color: AppColors.instance.white),
+                  ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  alert<T>(
+    BuildContext context, {
+    String? title,
+    String? message,
+    List<AlertAction> actions = const [],
+    void Function()? onBackground,
+    void Function()? onForeground,
+  }) {
+    return showCupertinoModalPopup<T>(
+      context: context,
+      builder: (BuildContext context) => CustomAlert(
+        title: title,
+        message: message,
+        onBackground: onBackground,
+        onForeground: onForeground,
+        actions: actions,
+      ),
+    );
+  }
+
+  showNoInternetPopup<T>(
+    BuildContext context, {
+    required void Function()? retry,
+    void Function()? onBackground,
+    void Function()? onForeground,
+  }) {
+    return alert<T>(
+      context,
+      title: '',
+      message: '',
+      onBackground: onBackground,
+      onForeground: onForeground,
+      actions: <AlertAction>[
+        AlertAction(
+          isDefaultAction: true,
+          onPressed: openAppSettings,
+          title: 'Open settings',
+        ),
+        AlertAction(
+          isDefaultAction: true,
+          onPressed: retry,
+          title: 'Retry',
+        ),
+      ],
+    );
+  }
+
+  showRequestPermissionPopup<T>(
+    BuildContext context, {
+    required String title,
+    required String message,
+    void Function()? onBackground,
+    void Function()? onForeground,
+  }) {
+    return alert<T>(
+      context,
+      title: '',
+      message: '',
+      onBackground: onBackground,
+      onForeground: onForeground,
+      actions: <AlertAction>[
+        AlertAction(
+          isDefaultAction: true,
+          onPressed: Navigator.of(context).pop,
+          title: 'Cancel',
+        ),
+        AlertAction(
+          isDefaultAction: true,
+          onPressed: openAppSettings,
+          title: 'Open settings',
+        ),
+      ],
+    );
+  }
+}

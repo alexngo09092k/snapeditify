@@ -1,17 +1,19 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
 import 'package:phosart/providers/enhance/enhance_state.dart';
 import 'package:phosart/services/services.dart';
+import 'package:phosart/utils/widget.dart';
 import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/view_models/enhanced_vm.dart';
 import 'package:phosart/view_models/face_vm.dart';
 import 'package:phosart/widgets/painter/painter.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
-  Future<bool> enhanceImage();
+  Future<bool> enhanceImage(BuildContext context);
 }
 
 class EnhanceProvider extends IEnhanceProvider {
@@ -43,13 +45,13 @@ class EnhanceProvider extends IEnhanceProvider {
   @override
   Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
     await super.setImage(context, bytes: bytes, refesh: refesh);
-    return await enhanceImage();
+    return enhanceImage(context);
   }
 
   @override
-  Future<bool> enhanceImage() async {
+  Future<bool> enhanceImage(BuildContext context) async {
     /// SHOW LOADING POPUP
-    SmartDialog.showLoading();
+    WidgetUtils.instance.showLoadingPopup(context);
 
     /// CALL API
     EnhanceBody body = EnhanceBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
@@ -76,17 +78,18 @@ class EnhanceProvider extends IEnhanceProvider {
       _state.faces = faces;
 
       /// HIDE LOADING POPUP
-      SmartDialog.dismiss();
+      Navigator.pop(context);
       return true;
     }
 
+    /// HIDE LOADING POPUP
+    Navigator.pop(context);
+
     if (res.error != null) {
-      SmartDialog.showToast(res.error!);
+      WidgetUtils.instance.alert(context, title: 'Enhance Image', message: res.error.toString());
       Debug.log('===== ENAHNCE IMAGE ${res.error} =====');
     }
 
-    /// HIDE LOADING POPUP
-    SmartDialog.dismiss();
     return false;
   }
 

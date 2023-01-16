@@ -11,7 +11,7 @@
 // roll,
 
 const advertisementConfig = {
-  "enable": true,
+  "enable": false,
   "adMobAppIdIos": "",
   "adMobAppIdAndroid": "",
   "ads": [

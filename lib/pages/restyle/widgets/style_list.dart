@@ -37,17 +37,13 @@ class StyleItem extends StatelessWidget {
   final RestyleProvider provider;
   final Style style;
 
-  _onStyle() {
-    provider.restyleImage(style.styleId);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
       width: (180 * 1.7 / 3),
       child: GestureDetector(
-        onTap: () => _onStyle(),
+        onTap: () => provider.restyleImage(context, style.styleId),
         child: AppCard(
           width: AwesomeAppState.screen.width / 4.5,
           child: Column(

@@ -1,8 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
@@ -10,6 +11,7 @@ import 'package:phosart/providers/remove_object/remove_object_state.dart';
 import 'package:phosart/providers/storage_provider.dart';
 import 'package:phosart/services/services.dart';
 import 'package:phosart/utils/image.dart';
+import 'package:phosart/utils/widget.dart';
 import 'package:phosart/view_models/detected_object_vm.dart';
 import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/widgets/painter/painter.dart';
@@ -172,7 +174,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     adProvider.handleAd();
 
     /// SHOW LOADING POPUP
-    SmartDialog.showLoading();
+    WidgetUtils.instance.showLoadingPopup(context);
 
     /// CALL API
     AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
@@ -184,7 +186,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       for (var detectedObject in res.data!.detectedObjects) {
         final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
         await vm.paintParse();
-        detectedObjectVMs[vm.maskId] =  vm;
+        detectedObjectVMs[vm.maskId] = vm;
       }
       _state.detectedObjects = detectedObjectVMs;
 
@@ -196,17 +198,18 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       _state.mode = RemoveObjectMode.ai;
 
       /// HIDE LOADING POPUP
-      SmartDialog.dismiss();
+      Navigator.pop(context);
       return true;
     }
 
+    /// HIDE LOADING POPUP
+    Navigator.pop(context);
+
     if (res.error != null) {
-      SmartDialog.showToast(res.error!);
+      WidgetUtils.instance.alert(context, title: 'AI Mode', message: res.error.toString());
       Debug.log("===== TO AI DETECTED OBJECTS ${res.error} =====");
     }
 
-    /// HIDE LOADING POPUP
-    SmartDialog.dismiss();
     return false;
   }
 
@@ -245,18 +248,15 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   Future<bool> removeObjects(BuildContext context) async {
     if (!canRemove) return false;
 
-    /// SHOW ADS
-    // adProvider.handleAd();
-
     /// SHOW LOADING POPUP
-    SmartDialog.showLoading();
+    WidgetUtils.instance.showLoadingPopup(context);
 
     /// CALL API
     ui.Image mask = await _state.paint.renderMask(originalImage.size);
     String? maskBase64 = await ImageUtils.instance.imageUIToBase64(mask);
     if (maskBase64 == null) {
       /// HIDE LOADING POPUP
-      SmartDialog.dismiss();
+      Navigator.pop(context);
       return false;
     }
 
@@ -279,17 +279,18 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      SmartDialog.dismiss();
+      Navigator.pop(context);
       return true;
     }
 
+    /// HIDE LOADING POPUP
+    Navigator.pop(context);
+
     if (res.error != null) {
-      SmartDialog.showToast(res.error!);
+      WidgetUtils.instance.alert(context, title: 'Remove Objects', message: res.error.toString());
       Debug.log("===== REMOVE OBJECTS ${res.error} =====");
     }
 
-    /// HIDE LOADING POPUP
-    SmartDialog.dismiss();
     return false;
   }
 

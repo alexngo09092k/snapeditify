@@ -5,13 +5,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/advertisement/advertisement.dart';
 import 'package:phosart/common/configuration.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/edit_image_state.dart';
 import 'package:phosart/services/services.dart';
+import 'package:phosart/utils/widget.dart';
 import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/view_models/editing_image_vm.dart';
 import 'package:phosart/widgets/base/saved_mage_preview.dart';
@@ -66,7 +66,7 @@ abstract class EditImageProvider extends Provider {
       /// SHOW ADS
       adProvider.handleAd();
 
-      SmartDialog.showLoading();
+      WidgetUtils.instance.showLoadingPopup(context);
 
       /// SAVE IMAGE
       AssetEntity? asset = await PhotoManager.editor.saveImage(
@@ -75,18 +75,21 @@ abstract class EditImageProvider extends Provider {
       );
       File? file = await asset?.file;
 
-      SmartDialog.dismiss();
+      Navigator.pop(context);
 
       if (file != null) {
-        SmartDialog.show(builder: (_) => SavedImagePreview(file: file));
+        /// SHOW SAVED IMAGE
+        showDialog(context: context, builder: (_) => SavedImagePreview(file: file));
         return true;
       }
 
       /// SHOW ALERT
+      WidgetUtils.instance.alert(context, title: 'Save Image', message: 'Somethings wrong, please try again.');
       return false;
     }, () {
       /// MAX COUNT DOWNLOAD IMAGE
       /// SHOW ALERT
+      WidgetUtils.instance.alert(context, title: 'Save Image', message: 'Somethings wrong, please try again.');
     });
   }
 

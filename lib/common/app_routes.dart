@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/pages/premium/premium.dart';
 import 'package:phosart/pages/anime_ai/anime_ai.dart';
@@ -20,6 +19,7 @@ import 'package:phosart/providers/gallery/gallery_provider.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 import 'package:phosart/providers/restyle/restyle_provider.dart';
 import 'package:phosart/common/extensions.dart';
+import 'package:phosart/utils/widget.dart';
 
 abstract class IAppRoutes {
   String get initialRoute;
@@ -117,12 +117,13 @@ extension AppRoutesUtils on IAppRoutes {
 
   goEditImagePage(BuildContext context, {required ImageSource type, required Uint8List bytes}) {
     UserPermission.instance.requestStoragePermission(
+      context,
       onHasPermisson: () async {
         final EditImageType editImageType = ManagerProvider.of<GalleryProvider>().editImageType;
         late final bool res;
         late final String target;
 
-        SmartDialog.showLoading();
+        WidgetUtils.instance.showLoadingPopup(context);
 
         switch (editImageType) {
           case EditImageType.applyArtEffect:
@@ -144,15 +145,13 @@ extension AppRoutesUtils on IAppRoutes {
           default:
             throw ErrorDescription("Not support action");
         }
-        SmartDialog.dismiss();
+
+        Navigator.pop(context);
 
         if (res) {
-          Navigator.of(context).pushNamed(target);
-        } else {
-          SmartDialog.showToast('Something wrong');
+          Navigator.pushNamed(context, target);
         }
       },
-      onNoPermisson: openAppSettings,
     );
   }
 }

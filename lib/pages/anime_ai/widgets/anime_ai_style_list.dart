@@ -10,10 +10,6 @@ class AnimeAIStyleList extends StatelessWidget {
   const AnimeAIStyleList({super.key, required this.provider});
   final AnimeAIProvider provider;
 
-  _onStyle(AnimeStyle style) {
-    provider.videoEffect(style.styleId);
-  }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -35,7 +31,7 @@ class AnimeAIStyleList extends StatelessWidget {
                   key: Key('$index'),
                   provider: provider,
                   style: styles[index],
-                  onStyle: _onStyle,
+                  onStyle: (style) => provider.videoEffect(context, style.styleId),
                 ),
               ),
             );

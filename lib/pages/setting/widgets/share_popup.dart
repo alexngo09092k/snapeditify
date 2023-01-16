@@ -31,10 +31,6 @@ class SharePopup extends StatelessWidget {
                 ),
               ],
             ),
-            Image.asset(
-              AppAssets.instance.bgShareImage,
-              width: AppDimensions.instance.popup * 2 / 3,
-            ),
             SizedBox(height: AppDimensions.instance.padding),
             Text(
               'Share SnapEdit App',

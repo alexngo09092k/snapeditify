@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/app_routes.dart';
 import 'package:phosart/common/configuration.dart';
-import 'package:phosart/common/constants.dart';
 import 'package:phosart/models/config/bussiness_config.dart';
 import 'package:phosart/common/extensions.dart';
+import 'package:phosart/widgets/base/app_layout.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -23,7 +23,7 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
 
   @override
   void onSplash(bool resultOnWillSplash) async {
-    if (resultOnWillSplash && await ClientHttp.instance.shouldSendRequest()) {
+    if (resultOnWillSplash && await ClientHttp.instance.safeEnvironment()) {
       _goTo();
     } else {}
   }
@@ -42,69 +42,37 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
         Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.homePage, (_) => false);
         break;
       case AppMode.maintenance:
-        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.homePage, (_) => false);
-        break;
       default:
+        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.maintenancePage, (_) => false);
+        break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        top: false,
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AwesomeAnimation<double>.tweenSequence(
-                  duration: const Duration(milliseconds: 200),
-                  items: [
-                    TweenSequenceItem(tween: Tween<double>(begin: 0, end: 1), weight: 10),
-                  ],
-                  builder: (_, __, animation, ___) => Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Opacity(
-                        opacity: animation.value,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Image.asset(
-                              AppAssets.instance.snapEditLogoFull,
-                              width: AwesomeAppState.screen.width * 1.6 / 3,
-                            ),
-                            SizedBox(height: AppDimensions.instance.padding),
-                            Image.asset(
-                              AppAssets.instance.splashTitle,
-                              width: AwesomeAppState.screen.width * 1.5 / 3,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: AppDimensions.instance.padding,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    AppAssets.instance.snapEditCopyRightTitle,
-                    width: 100,
-                  ),
-                ],
-              ),
-            ),
+    return AppLayout(
+      back: false,
+      children: [
+        AwesomeAnimation<double>.tweenSequence(
+          duration: const Duration(milliseconds: 200),
+          items: [
+            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 1), weight: 10),
           ],
+          builder: (_, __, animation, ___) => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Opacity(
+                opacity: animation.value,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [],
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

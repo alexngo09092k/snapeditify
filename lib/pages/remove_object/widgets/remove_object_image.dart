@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/generated/l10n.dart';
@@ -16,8 +15,9 @@ class RemoveObjectImage extends StatelessWidget {
   final Function()? onStartDraw;
   final Function()? onEndDraw;
 
-  _showColorPopup(BuildContext context) {
-    SmartDialog.show(
+  _showColorPopup<T>(BuildContext context) {
+    return showDialog<T>(
+      context: context,
       builder: (_) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
