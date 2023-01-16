@@ -1,0 +1,18 @@
+Map<String, dynamic> galleryConfig = {
+  'countInPage': 50,
+  'hasAll': true,
+  'onlyAll': false,
+  'minWidth': 0,
+  'maxWidth': 100000,
+  'minHeight': 0,
+  'maxHeight': 100000,
+  'ignoreSize': true,
+  'minDuration': 0,
+  'maxDuration': 60 * 60 * 1000,
+  'needTitle': false,
+  'startTime': DateTime(2005).millisecondsSinceEpoch,
+  'endTime': DateTime.now().millisecondsSinceEpoch,
+  'containsPathModified': true,
+  'containsLivePhotos': false,
+  'onlyLivePhotos': false,
+};

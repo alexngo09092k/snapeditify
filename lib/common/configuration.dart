@@ -7,6 +7,7 @@ import 'package:phosart/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:phosart/models/config/gallery_config.dart';
 import 'package:phosart/services/services.dart';
 
 class Configuration {
@@ -24,6 +25,10 @@ class Configuration {
   /// APP CONFIGUARATIONS
   BusinessConfig _businessConfig = DefaultConfig.businessConfig;
   BusinessConfig get businessConfig => _businessConfig;
+
+  /// GALLERY CONFIGUARATIONS
+  GalleryConfig _galleryConfig = DefaultConfig.galleryConfig;
+  GalleryConfig get galleryConfig => _galleryConfig;
 
   /// IAP CONFIGURATIONS
   IAPConfig _iapConfig = DefaultConfig.iapConfig;
@@ -48,6 +53,10 @@ class Configuration {
 
     if (enviroment['advertisementConfig'] != null) {
       _advertisementConfig = AdvertisementConfig.fromMap(enviroment['advertisementConfig']);
+    }
+
+    if (enviroment['galleryConfig'] != null) {
+      _galleryConfig = GalleryConfig.fromMap(enviroment['galleryConfig']);
     }
 
     if (enviroment['snapEditConfig'] != null) {
@@ -83,6 +92,9 @@ abstract class DefaultConfig {
     ads: [],
     enable: true,
   );
+
+  /// GALLERY CONFIGUARATIONS
+  static GalleryConfig galleryConfig = GalleryConfig.defaultValue();
 
   /// DEFAULT IAP CONFIG
   static IAPConfig iapConfig = const IAPConfig(
