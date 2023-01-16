@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
-import 'package:phosart/generated/l10n.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 import 'package:phosart/widgets/base/custom_icon.dart';
 import 'package:phosart/widgets/base/base_image_editor.dart';
@@ -143,7 +142,7 @@ class RemoveObjectImage extends StatelessWidget {
                           builder: (_, __, p, ___) => p.canRemove
                               ? CustomButton(
                                   onTap: () => provider.removeObjects(context),
-                                  title: S.of(context).remove,
+                                  title: 'Remove',
                                   gradient: AppColors.instance.gradient,
                                   width: 100,
                                 )

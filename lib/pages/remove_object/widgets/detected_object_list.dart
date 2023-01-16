@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
-import 'package:phosart/generated/l10n.dart';
 import 'package:phosart/pages/remove_object/widgets/detected_object_item.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 import 'package:phosart/services/snap_edit/snap_edit.dart';
@@ -41,7 +40,7 @@ class DetectedObjectList extends StatelessWidget {
                     ),
                     SizedBox(height: AppDimensions.instance.padding),
                     Text(
-                      S.of(context).noPotentialObjectHasBeenDetected,
+                      'No potential object has been detected',
                       style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).disabledColor),
                     )
                   ],

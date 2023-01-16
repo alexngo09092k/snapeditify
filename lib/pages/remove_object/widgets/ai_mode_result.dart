@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
-import 'package:phosart/generated/l10n.dart';
 import 'package:phosart/view_models/detected_object_vm.dart';
 import 'package:phosart/pages/remove_object/widgets/detected_object_list.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
@@ -82,7 +81,7 @@ class _AIModeResultState extends State<AIModeResult> {
                       listenable: widget.provider,
                       select: (p) => p.state.detectedObjects.length,
                       builder: (_, __, p, ___) => Text(
-                        '${p.state.detectedObjects.length} ${S.of(context).objects}',
+                        '${p.state.detectedObjects.length} Objects',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),

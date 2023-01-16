@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
-import 'package:phosart/generated/l10n.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 import 'package:phosart/view_models/detected_object_vm.dart';
 import 'package:phosart/widgets/base/tile_row.dart';
@@ -38,7 +37,7 @@ class DetectedObjectItem extends StatelessWidget {
       ),
     );
     final subTitle = Text(
-      '${(double.parse(detectedObject.accuracy) * 100).toStringAsFixed(2)} ${S.of(context).accurate}',
+      '${(double.parse(detectedObject.accuracy) * 100).toStringAsFixed(2)} % accurate',
       style: Theme.of(context).textTheme.bodyText2!,
     );
     final title = Text(
@@ -58,7 +57,7 @@ class DetectedObjectItem extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                 ),
                 child: Text(
-                  S.of(context).removed,
+                  'Remove',
                   style: Theme.of(context).textTheme.caption!.copyWith(color: Colors.red),
                 ),
               ),

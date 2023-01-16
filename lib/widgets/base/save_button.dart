@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
-import 'package:phosart/generated/l10n.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
 
 class SaveButton<T extends EditImageProvider> extends StatelessWidget {
@@ -17,7 +16,7 @@ class SaveButton<T extends EditImageProvider> extends StatelessWidget {
         builder: (_, __, p, ___) => Padding(
           padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
           child: Text(
-            S.of(context).save,
+            'Save',
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                   color: p.canSave ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                 ),
