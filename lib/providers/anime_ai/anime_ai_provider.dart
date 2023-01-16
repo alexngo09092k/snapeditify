@@ -135,12 +135,6 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   @override
   Future<bool> videoEffect(BuildContext context, String styleId) async {
-    // if (_state.styledImages.containsKey(styleId)) {
-    //   _state.setImage(_state.styledImages[styleId]!, styleId: styleId);
-    //   notifyListeners();
-    //   return true;
-    // }
-
     /// SHOW LOADING POPUP
     WidgetUtils.instance.showLoadingPopup(context);
 
