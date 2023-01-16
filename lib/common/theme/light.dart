@@ -55,10 +55,10 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     primaryColorLight: base.primaryColorLight,
 
     /// ====================== BACKGROUND AND DIALOG ======================
-    splashColor: base.splashColor,
-    backgroundColor: base.backgroundColor,
-    dialogBackgroundColor: base.dialogBackgroundColor,
-    scaffoldBackgroundColor: base.scaffoldBackgroundColor,
+    splashColor: AppColors.instance.white,
+    backgroundColor: AppColors.instance.white,
+    dialogBackgroundColor: AppColors.instance.white,
+    scaffoldBackgroundColor: AppColors.instance.white,
 
     /// ====================== STATUS BAR ======================
     appBarTheme: base.appBarTheme,
