@@ -12,6 +12,7 @@ class EnhanceImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseImageEditor(
+      background: Colors.transparent,
       builder: (width, height) => BeforeAfter(
         beforeImage: EnhanceBefore(provider: provider),
         afterImage: EnhanceAfter(provider: provider),

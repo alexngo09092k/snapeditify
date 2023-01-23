@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
 import 'package:phosart/providers/enhance/enhance_state.dart';
@@ -43,15 +42,11 @@ class EnhanceProvider extends IEnhanceProvider {
   bool get canSave => _state.enhancedImages.isNotEmpty;
 
   @override
-  Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
-    await super.setImage(context, bytes: bytes, refesh: refesh);
-    return enhanceImage(context);
-  }
-
-  @override
   Future<bool> enhanceImage(BuildContext context) async {
+    renewSavedFile();
+
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context);
+    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
     /// CALL API
     EnhanceBody body = EnhanceBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
@@ -99,6 +94,6 @@ class EnhanceProvider extends IEnhanceProvider {
     _state.dispose();
     _state = EnhanceState();
     _state.addListener(notifyListeners);
-    return true;
+    return super.refresh(context);
   }
 }

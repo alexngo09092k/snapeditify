@@ -38,7 +38,7 @@ extension DetectedImage on SnapEdit {
 
       return handleResponse<AIDetectionResponse>(response, (p0) => AIDetectionResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<AIDetectionResponse?>(error: 'Something wrongs');
+      return SnapEditResponse<AIDetectionResponse?>(error: error.toString());
     }
   }
 
@@ -88,7 +88,7 @@ extension DetectedImage on SnapEdit {
 
       return handleResponse<EraseResponse>(response, (p0) => EraseResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<EraseResponse?>(error: 'Something wrongs');
+      return SnapEditResponse<EraseResponse?>(error: error.toString());
     }
   }
 }

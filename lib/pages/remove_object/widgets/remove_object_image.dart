@@ -17,27 +17,18 @@ class RemoveObjectImage extends StatelessWidget {
   _showColorPopup<T>(BuildContext context) {
     return showDialog<T>(
       context: context,
-      builder: (_) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(AppDimensions.instance.paddingX(3)),
-            child: Container(
-              padding: EdgeInsets.all(AppDimensions.instance.padding),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(1))),
-                color: Theme.of(context).cardColor,
-              ),
-              child: ColorPicker(
-                pickerColor: provider.state.strokeColor,
-                paletteType: PaletteType.hueWheel,
-                onColorChanged: (Color color) {
-                  provider.changeStrokeColor(context, color);
-                },
-              ),
+      builder: (_) => Dialog(
+        backgroundColor: Theme.of(context).cardColor,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(AppDimensions.instance.padding),
+            child: ColorPicker(
+              pickerColor: provider.state.strokeColor,
+              paletteType: PaletteType.hueWheel,
+              onColorChanged: (Color color) => provider.changeStrokeColor(context, color),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

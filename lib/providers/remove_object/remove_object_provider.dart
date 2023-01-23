@@ -174,7 +174,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     adProvider.handleAd();
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context);
+    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
     /// CALL API
     AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
@@ -246,10 +246,12 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
   @override
   Future<bool> removeObjects(BuildContext context) async {
+    renewSavedFile();
+
     if (!canRemove) return false;
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context);
+    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
     /// CALL API
     ui.Image mask = await _state.paint.renderMask(originalImage.size);
@@ -319,7 +321,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     _state.removeListener(notifyListeners);
     _state = RemoveObjectState(strokeColor: _state.strokeColor, strokeWidth: _state.strokeWidth);
     _state.addListener(notifyListeners);
-    return true;
+    return super.refresh(context);
   }
 
   @override

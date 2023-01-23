@@ -82,6 +82,8 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   Future<bool> restyleImage(BuildContext context, String styleId) async {
+    renewSavedFile();
+
     if (_state.styledImages.containsKey(styleId)) {
       _state.setImage(_state.styledImages[styleId]!, styleId: styleId);
       notifyListeners();
@@ -89,7 +91,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context);
+    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
     /// CALL API
     RestyleBody body = RestyleBody(styleId: styleId, inputImage: originalImage.imageBytes, imageId: _state.imageId);

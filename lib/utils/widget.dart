@@ -15,14 +15,15 @@ class WidgetUtils {
   showLoadingPopup<T>(BuildContext context, {String? message}) {
     showDialog<T>(
       context: context,
-      builder: (BuildContext context) => AppCard(
-        width: 100,
-        height: 100,
-        color: AppColors.instance.black.withOpacity(0.1),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Column(
+      builder: (BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          AppCard(
+            constraints: const BoxConstraints(minHeight: 100, minWidth: 100),
+            color: AppColors.instance.black.withOpacity(0.5),
+            padding: EdgeInsets.all(AppDimensions.instance.padding),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -33,12 +34,12 @@ class WidgetUtils {
                 if (message != null)
                   Text(
                     message,
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(color: AppColors.instance.white),
+                    style: Theme.of(context).textTheme.caption!.copyWith(color: AppColors.instance.white),
                   ),
               ],
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

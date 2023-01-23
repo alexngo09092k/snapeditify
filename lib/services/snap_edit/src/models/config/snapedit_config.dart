@@ -2,11 +2,13 @@
 // ignore_for_file: unnecessary_overrides
 
 import 'dart:convert';
-
+import 'dart:io';
+import 'package:fluttering/fluttering.dart';
 import 'package:phosart/services/snap_edit/src/models/config/end_points.dart';
 import 'package:phosart/services/snap_edit/src/models/config/enhance_config.dart';
 import 'package:phosart/services/snap_edit/src/models/config/remove_object_config.dart';
 import 'package:phosart/services/snap_edit/src/models/config/restyle_config.dart';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 class SnapEditConfig {
   final String baseUrl;
@@ -37,14 +39,18 @@ class SnapEditConfig {
     required this.removeObject,
     required this.waterMark,
     required this.maxFreeDownloadCount,
-    
-  });
+  }) {
+    _jwt = _buildJWT();
+  }
+
+  late String _jwt;
+  String get jwt => _jwt;
 
   factory SnapEditConfig.defaultValue() {
     return SnapEditConfig(
       baseUrl: "https://be-prod-1.snapedit.app/",
       apiKey: "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
-      version: "",
+      version: "3.1.0",
       waterMark: false,
       maxFreeDownloadCount: 100,
       endPoints: EndPoints.defaultValue(),
@@ -146,15 +152,33 @@ class SnapEditConfig {
 
 extension HeaderBuilders on SnapEditConfig {
   Map<String, String> get headers => {
-        "User-Agent": "SnapEdit/$version (com.sfun.snapedit; build:155; iOS 15.6.1) Alamofire/5.6.2",
+        // "User-Agent": "SnapEdit/$version (com.sfun.snapedit; build:155; iOS 15.6.1) Alamofire/5.6.2",
         "Authorization": "Bearer $jwt",
       };
 }
 
 extension JWTBuilders on SnapEditConfig {
-  String get jwt => _buildJWT();
-
   String _buildJWT() {
+    String token;
+
+    final jwt = JWT(
+      {
+        "version": "3.1.0",
+        "exp": '${DateTime.fromMillisecondsSinceEpoch(DateTime.now().millisecondsSinceEpoch + (24 * 60 * 60 * 1000)).millisecondsSinceEpoch}',
+        "sub": "ignore",
+        "platform": Platform.isAndroid ? 'android' : 'ios',
+      },
+      subject: 'exp',
+    );
+
+    // Sign it
+    Debug.log(latin1.decode(base64.decode(apiKey)));
+    token = jwt.sign(SecretKey(latin1.decode(base64.decode(apiKey))));
+
+    Debug.log(token);
+
+    // return token;
+
     return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoiMy4xLjAiLCJleHAiOjE3Njk2MjI0MDEsInN1YiI6Imlnbm9yZSIsInBsYXRmb3JtIjoiYW5kcm9pZCJ9.OufJuEzKvN2RVCw-Ofy1oY6d9oRuOnM_Vxmt6aqLWAk";
   }
 }

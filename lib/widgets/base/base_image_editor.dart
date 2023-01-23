@@ -22,7 +22,7 @@ class BaseImageEditor extends StatelessWidget {
     return Expanded(
       child: LayoutBuilder(
         builder: (_, __) => Container(
-          color: AppColors.instance.darkLiver.withOpacity(0.1),
+          color: background ?? AppColors.instance.darkLiver.withOpacity(0.1),
           child: builder(__.maxWidth, __.maxHeight),
         ),
       ),

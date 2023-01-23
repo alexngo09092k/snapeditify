@@ -19,7 +19,7 @@ extension EnimeAI on SnapEdit {
 
       return handleResponse<AnimeStylesResponse>(response, (p0) => AnimeStylesResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<AnimeStylesResponse?>(error: 'Something wrongs');
+      return SnapEditResponse<AnimeStylesResponse?>(error: error.toString());
     }
   }
 
@@ -52,7 +52,7 @@ extension EnimeAI on SnapEdit {
 
       return handleResponse<AnimeImageResponse>(response, (p0) => AnimeImageResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<AnimeImageResponse?>(error: 'Something wrongs');
+      return SnapEditResponse<AnimeImageResponse?>(error: error.toString());
     }
   }
 
@@ -73,7 +73,7 @@ extension EnimeAI on SnapEdit {
 
       return handleResponse<AnimeVideoResponse>(response, (p0) => AnimeVideoResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<AnimeVideoResponse?>(error: 'Something wrongs');
+      return SnapEditResponse<AnimeVideoResponse?>(error: error.toString());
     }
   }
 }

@@ -34,11 +34,13 @@ class _AppState extends AwesomeAppState<App> {
       builder: (_, __, ___) {
         Debug.log("===== START APP =====");
         Debug.log("===== THEME MODE: ${provider.themeMode} =====");
+        final light = getLightTheme(context, scale: scale);
+        final dark = getDarkTheme(context, scale: scale);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           navigatorKey: AwesomeAppState.navigatorKey,
-          theme: getLightTheme(context, scale: scale),
-          darkTheme: getDarkTheme(context, scale: scale),
+          theme: light,
+          darkTheme: dark,
           themeMode: provider.themeMode,
           initialRoute: AppRoutes.instance.initialRoute,
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,

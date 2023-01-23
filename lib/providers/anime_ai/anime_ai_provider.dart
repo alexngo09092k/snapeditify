@@ -98,6 +98,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   @override
   Future<bool> restyleImage(BuildContext context, String styleId) async {
+    renewSavedFile();
     if (_state.styledImages.containsKey(styleId)) {
       _state.setImage(_state.styledImages[styleId]!.outputImages.first.image, styleId: styleId);
       notifyListeners();
@@ -105,13 +106,11 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context);
+    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
     /// CALL API
     AnimeAIImageBody body = AnimeAIImageBody(style: styleId, inputImage: originalImage.imageBytes);
     SnapEditResponse<AnimeImageResponse?> res = await Services.instance.snapEdit.animeRestyle(body);
-
-    Debug.log(res.data!.outputImages.first.imageId);
 
     if (res.data != null) {
       await _state.setImage(res.data!.outputImages.first.image, styleId: styleId);
@@ -136,7 +135,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   @override
   Future<bool> videoEffect(BuildContext context, String styleId) async {
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context);
+    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
     /// CALL API
     AnimeAIVideoBody body = AnimeAIVideoBody(
@@ -177,7 +176,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
     if (res.data != null) {
       Debug.log("===== SYNC FROM SERVER GET STYLES ${res.data} =====");
-      AsyncStorage.instance.setString(AppSharedKey.instance.styles, res.data!.toJson());
+      AsyncStorage.instance.setString(AppSharedKey.instance.animeStyles, res.data!.toJson());
     }
 
     if (res.error != null) {
@@ -191,7 +190,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? styleStrings = AsyncStorage.instance.getString(AppSharedKey.instance.styles);
+    String? styleStrings = AsyncStorage.instance.getString(AppSharedKey.instance.animeStyles);
     if (styleStrings != null) {
       Debug.log("===== SYNC FROM STORAGE $styleStrings =====");
       AnimeStylesResponse data = AnimeStylesResponse.fromJson(styleStrings);
@@ -226,6 +225,6 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     _state.dispose();
     _state = AnimeAIState();
     _state.addListener(notifyListeners);
-    return true;
+    return super.refresh(context);
   }
 }

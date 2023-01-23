@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/enhance/enhance_provider.dart';
 import 'package:phosart/widgets/painter/painter_pure.dart';
 
@@ -12,10 +13,25 @@ class EnhanceBefore extends StatelessWidget {
     return Center(
       child: AspectRatio(
         aspectRatio: provider.state.image.ratio,
-        child: BasePropConsumer<EnhanceProvider, PainterController>(
-          listenable: provider,
-          select: (p) => p.state.paintBefore,
-          builder: (_, __, p, ___) => FlutterPainter(controller: p.state.paintBefore),
+        child: Stack(
+          children: [
+            BasePropConsumer<EnhanceProvider, PainterController>(
+              listenable: provider,
+              select: (p) => p.state.paintBefore,
+              builder: (_, __, p, ___) => FlutterPainter(controller: p.state.paintBefore),
+            ),
+            Positioned(
+              left: AppDimensions.instance.padding,
+              top: AppDimensions.instance.padding,
+              child: Text(
+                'Before',
+                style: Theme.of(context).textTheme.headline5!.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.instance.white,
+                    ),
+              ),
+            ),
+          ],
         ),
       ),
     );

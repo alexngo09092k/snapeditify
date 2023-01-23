@@ -65,6 +65,7 @@ extension EditImageTypeEX on EditImageType {
 enum ImageSource {
   inSuggesstedPhotos,
   inAlbum,
+  camera,
 }
 
 abstract class IGalleryProvider extends Provider with ProviderDelegate {

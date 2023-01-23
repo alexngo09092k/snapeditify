@@ -17,6 +17,8 @@ class _RestylePageState extends ProviderState<RestylePage, RestyleProvider> {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
+      onWillPop: () async => provider.canBack,
+      goBack: () => provider.goBack(context),
       action: SaveButton(provider: provider),
       children: [
         RestyleImage(provider: provider),

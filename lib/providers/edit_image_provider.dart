@@ -14,6 +14,7 @@ import 'package:phosart/services/services.dart';
 import 'package:phosart/utils/widget.dart';
 import 'package:phosart/view_models/edited_image_vm.dart';
 import 'package:phosart/view_models/editing_image_vm.dart';
+import 'package:phosart/widgets/base/custom_alert.dart';
 import 'package:phosart/widgets/base/saved_mage_preview.dart';
 import 'package:photo_manager/photo_manager.dart';
 
@@ -29,7 +30,16 @@ abstract class EditImageProvider extends Provider {
 
   bool get canSave;
 
+  File? _savedFile;
+  File? get savedFile => _savedFile;
+
+  bool get canBack => _savedFile != null || (!canSave && _savedFile == null);
+
   AwesomeAdvertisement get adProvider => ManagerProvider.of<AwesomeAdvertisement>();
+
+  renewSavedFile() {
+    _savedFile = null;
+  }
 
   Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
     /// RENEW STATE
@@ -42,7 +52,10 @@ abstract class EditImageProvider extends Provider {
     return state.setImage(_originalImage.imageBase64);
   }
 
-  Future<bool> refresh(BuildContext context);
+  Future<bool> refresh(BuildContext context) async {
+    _savedFile = null;
+    return true;
+  }
 
   Future<bool> checkoutSaveImage(
     BuildContext context, [
@@ -66,31 +79,86 @@ abstract class EditImageProvider extends Provider {
       /// SHOW ADS
       adProvider.handleAd();
 
-      WidgetUtils.instance.showLoadingPopup(context);
+      WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
+
+      Navigator.pop(context);
 
       /// SAVE IMAGE
       AssetEntity? asset = await PhotoManager.editor.saveImage(
         editedImage.imageBytes,
         title: '${Configuration.instance.businessConfig.appName}_${DateTime.now().millisecond}',
       );
-      File? file = await asset?.file;
 
-      Navigator.pop(context);
+      _savedFile = (await asset?.file);
 
-      if (file != null) {
+      if (_savedFile != null) {
         /// SHOW SAVED IMAGE
-        showDialog(context: context, builder: (_) => SavedImagePreview(file: file));
-        return true;
+        return (await showModalBottomSheet<bool>(
+              context: context,
+              builder: (_) => SavedImagePreview(provider: this),
+            )) ??
+            false;
       }
 
       /// SHOW ALERT
-      WidgetUtils.instance.alert(context, title: 'Save Image', message: 'Somethings wrong, please try again.');
+      WidgetUtils.instance.alert(
+        context,
+        title: 'Save Image',
+        message: 'Somethings wrong, please try again.',
+        actions: [
+          AlertAction(title: 'Cancel', onPressed: Navigator.of(context).pop),
+          AlertAction(
+            title: 'Retry',
+            isDestructiveAction: true,
+            onPressed: () {
+              Navigator.of(context).pop();
+              saveImage(context);
+            },
+          ),
+        ],
+      );
       return false;
     }, () {
       /// MAX COUNT DOWNLOAD IMAGE
       /// SHOW ALERT
-      WidgetUtils.instance.alert(context, title: 'Save Image', message: 'Somethings wrong, please try again.');
+      WidgetUtils.instance.alert(
+        context,
+        title: 'Save Image',
+        message: 'Somethings wrong, please try again.',
+        actions: [
+          AlertAction(title: 'Cancel', onPressed: Navigator.of(context).pop),
+          AlertAction(
+            title: 'Retry',
+            isDestructiveAction: true,
+            onPressed: () {
+              Navigator.of(context).pop();
+              saveImage(context);
+            },
+          ),
+        ],
+      );
     });
+  }
+
+  goBack(BuildContext context) {
+    if (!canBack) {
+      WidgetUtils.instance.alert(context, title: '', message: 'Are you sure cancel all edit image', actions: [
+        AlertAction(
+          title: 'Cancel',
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        AlertAction(
+            title: 'Ok',
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            })
+      ]);
+    } else {
+      Navigator.pop(context);
+    }
   }
 
   @override

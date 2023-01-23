@@ -41,7 +41,7 @@ extension Enhance on SnapEdit {
 
       return handleResponse<EnhanceResponse>(response, (p0) => EnhanceResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<EnhanceResponse?>(error: 'Something wrongs');
+      return SnapEditResponse<EnhanceResponse?>(error: error.toString());
     }
   }
 }

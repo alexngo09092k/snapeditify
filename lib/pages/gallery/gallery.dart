@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:phosart/pages/gallery/widgets/camera_image.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:phosart/common/app_routes.dart';
 import 'package:phosart/pages/gallery/widgets/album_image.dart';
@@ -77,6 +78,7 @@ class _GalleryPageState extends ProviderState<GalleryPage, GalleryProvider> {
   Widget build(BuildContext context) {
     return AppLayout(
       screen: 'Photos',
+      action: CameraImage(onImage: onImage),
       children: [
         Expanded(
           child: MultipleSliverLoadMore(

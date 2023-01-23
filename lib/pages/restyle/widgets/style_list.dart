@@ -39,52 +39,49 @@ class StyleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
-      width: (180 * 1.7 / 3),
-      child: GestureDetector(
-        onTap: () => provider.restyleImage(context, style.styleId),
-        child: AppCard(
-          width: AwesomeAppState.screen.width / 4.5,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                child: Stack(
-                  children: [
-                    CustomImage(
-                      image: style.thumbnailUrl,
-                    ),
-                    Positioned(
-                      right: 0,
-                      child: BasePropConsumer<RestyleProvider, String?>(
-                        listenable: provider,
-                        select: (_) => _.state.styleId,
-                        builder: (_, __, p, ___) => p.state.styleId == style.styleId
-                            ? Padding(
-                                padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
-                                child: Icon(
-                                  Icons.check_circle,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                              )
-                            : const SizedBox(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Text(
-                    style.name,
-                    style: Theme.of(context).textTheme.bodyText2,
+    return GestureDetector(
+      onTap: () => provider.restyleImage(context, style.styleId),
+      child: AppCard(
+        margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
+        width: 180 * 3 / 6.5,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+              child: Stack(
+                children: [
+                  CustomImage(
+                    image: style.thumbnailUrl,
                   ),
+                  Positioned(
+                    right: 0,
+                    child: BasePropConsumer<RestyleProvider, String?>(
+                      listenable: provider,
+                      select: (_) => _.state.styleId,
+                      builder: (_, __, p, ___) => p.state.styleId == style.styleId
+                          ? Padding(
+                              padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
+                              child: Icon(
+                                Icons.check_circle,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            )
+                          : const SizedBox(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  style.name,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

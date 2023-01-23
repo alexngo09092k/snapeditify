@@ -31,7 +31,7 @@ class AnimeAIStyleList extends StatelessWidget {
                   key: Key('$index'),
                   provider: provider,
                   style: styles[index],
-                  onStyle: (style) => provider.videoEffect(context, style.styleId),
+                  onStyle: (style) => provider.restyleImage(context, style.styleId),
                 ),
               ),
             );
@@ -50,51 +50,49 @@ class AnimeStyleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
-      width: (180 * 3 / 4),
-      child: GestureDetector(
-        onTap: () => onStyle(style),
-        child: AppCard(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                child: Stack(
-                  children: [
-                    CustomImage(
-                      image: style.thumbnailUrl,
-                    ),
-                    Positioned(
-                      right: 0,
-                      child: BasePropConsumer<AnimeAIProvider, String?>(
-                        listenable: provider,
-                        select: (_) => _.state.styleId,
-                        builder: (_, __, p, ___) => p.state.styleId == style.styleId
-                            ? Padding(
-                                padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
-                                child: Icon(
-                                  Icons.check_circle,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                              )
-                            : const SizedBox(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Text(
-                    style.name,
-                    style: Theme.of(context).textTheme.bodyText2,
+    return GestureDetector(
+      onTap: () => onStyle(style),
+      child: AppCard(
+        width: (180 * 4.2 / 6),
+        margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.25), vertical: AppDimensions.instance.padding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+              child: Stack(
+                children: [
+                  CustomImage(
+                    image: style.thumbnailUrl,
                   ),
+                  Positioned(
+                    right: 0,
+                    child: BasePropConsumer<AnimeAIProvider, String?>(
+                      listenable: provider,
+                      select: (_) => _.state.styleId,
+                      builder: (_, __, p, ___) => p.state.styleId == style.styleId
+                          ? Padding(
+                              padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
+                              child: Icon(
+                                Icons.check_circle,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            )
+                          : const SizedBox(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  style.name,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

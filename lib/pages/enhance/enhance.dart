@@ -12,11 +12,24 @@ class EnhancePage extends StatefulWidget {
   State<EnhancePage> createState() => _EnhancePageState();
 }
 
-class _EnhancePageState extends ProviderState<EnhancePage, EnhanceProvider> {
+class _EnhancePageState extends ProviderStateObserver<EnhancePage, EnhanceProvider> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void onNextFrame(Duration timestamp) {
+    provider.enhanceImage(context);
+    super.onNextFrame(timestamp);
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppLayout(
       screen: 'Enhance',
+      onWillPop: () async => provider.canBack,
+      goBack: () => provider.goBack(context),
       action: SaveButton(provider: provider),
       children: [
         EnhanceImage(provider: provider),

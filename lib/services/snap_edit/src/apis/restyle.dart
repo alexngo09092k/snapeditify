@@ -15,7 +15,7 @@ extension Restyle on SnapEdit {
 
       return handleResponse<StylesResponse>(response, (p0) => StylesResponse.fromJson(p0));
     } catch (error) {
-      return SnapEditResponse<StylesResponse>(error: 'Something wrongs');
+      return SnapEditResponse<StylesResponse>(error: error.toString());
     }
   }
 
@@ -48,7 +48,7 @@ extension Restyle on SnapEdit {
 
       return handleResponse<RestyleResponse>(response, (p0) => RestyleResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<RestyleResponse?>(error: 'Something wrongs');
+      return SnapEditResponse<RestyleResponse?>(error: error.toString());
     }
   }
 }

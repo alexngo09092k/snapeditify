@@ -16,25 +16,11 @@ Future<File?> uint8ListToFile(
     File file = File('${tempDir.path}/${(DateTime.now()).millisecond}.jpeg');
     await file.writeAsBytes(imageBytes);
     if (await file.exists()) {
-      // final filePath = file.absolute.path;
-      // final lastIndex = filePath.lastIndexOf(RegExp(r'.jp'));
-      // final splitted = filePath.substring(0, (lastIndex));
-      // final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
-      // File? compressedFile = await FlutterImageCompress.compressAndGetFile(
-      //   filePath,
-      //   outPath,
-      //   minWidth: minWidth,
-      //   minHeight: minHeight,
-      //   quality: quality,
-      //   format: format,
-      // );
-      // if (compressedFile != null && await compressedFile.exists()) return compressedFile;
-      // file.delete();
       return file;
     }
+    throw 'Can not create image file';
   } catch (error) {
     Debug.log(error);
     return null;
   }
-  return null;
 }

@@ -20,23 +20,18 @@ class HomeOptions extends StatelessWidget {
         children: EditImageType.values
             .map((e) => GestureDetector(
                   onTap: () => AppRoutes.instance.goGalleryPage(context, e),
-                  child: SizedBox(
+                  child: AppCard(
+                    margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.25), vertical: AppDimensions.instance.padding),
                     width: itemWidth,
-                    height: itemWidth * 3 / 2,
-                    child: Center(
-                      child: AppCard(
-                        width: itemWidth,
-                        height: itemWidth,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CustomIcon(e.icon, size: AppDimensions.instance.iconX(1)),
-                            SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                            Text(e.title, style: Theme.of(context).textTheme.bodyText1)
-                          ],
-                        ),
-                      ),
+                    height: itemWidth,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomIcon(e.icon, size: AppDimensions.instance.iconX(1)),
+                        SizedBox(height: AppDimensions.instance.paddingX(0.5)),
+                        Text(e.title, style: Theme.of(context).textTheme.bodyText1)
+                      ],
                     ),
                   ),
                 ))

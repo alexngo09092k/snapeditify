@@ -1,7 +1,7 @@
 const snapEditConfig = {
     'baseUrl': "https://be-prod-1.snapedit.app/",
     'apiKey': "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
-    'version': "v6",
+    'version': "3.1.0",
     'endPoints': {
       'erase': 'api/v6/erase',
       'erasePro': 'api/v6/erase',

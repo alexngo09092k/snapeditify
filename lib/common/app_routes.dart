@@ -123,7 +123,7 @@ extension AppRoutesUtils on IAppRoutes {
         late final bool res;
         late final String target;
 
-        WidgetUtils.instance.showLoadingPopup(context);
+        WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
         switch (editImageType) {
           case EditImageType.applyArtEffect:

@@ -35,9 +35,9 @@ class AppAssets {
   final String removeObjectDemo2 = "$imagePath/remove_object_demo_2.jpeg";
   final String removeObjectDemo3 = "$imagePath/remove_object_demo_3.jpg";
 
-  final String enhanceDemo1 = "$imagePath/enhance_demo_1.jpg";
-  final String enhanceDemo2 = "$imagePath/enhance_demo_2.jpg";
-  final String enhanceDemo3 = "$imagePath/enhance_demo_3.jpg";
+  final String enhanceDemo1 = "$imagePath/enhance_demo_1.webp";
+  final String enhanceDemo2 = "$imagePath/enhance_demo_2.webp";
+  final String enhanceDemo3 = "$imagePath/enhance_demo_3.webp";
 
   final String restyleDemo1 = "$imagePath/restyle_demo_1.jpeg";
   final String restyleDemo2 = "$imagePath/restyle_demo_2.jpeg";
