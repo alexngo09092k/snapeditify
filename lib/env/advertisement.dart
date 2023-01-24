@@ -50,10 +50,10 @@ const advertisementConfig = {
 
     /// HUAWEI
     {
-      "type": "banner",
+      "type": "roll",
       "provider": "huawei",
-      "iosId": "testw6vs28auh3",
-      "androidId": "testw6vs28auh3",
+      "iosId": "testy3cglm3pj0",
+      "androidId": "testy3cglm3pj0",
       "showOnScreens": [],
       "hideOnScreens": [],
     },
@@ -66,10 +66,10 @@ const advertisementConfig = {
       "hideOnScreens": [],
     },
     {
-      "type": "splash",
+      "type": "reward",
       "provider": "huawei",
-      "iosId": "testq6zq98hecj",
-      "androidId": "testq6zq98hecj",
+      "iosId": "testx9dtjwj8hp",
+      "androidId": "testx9dtjwj8hp",
       "showOnScreens": [],
       "hideOnScreens": [],
     },
