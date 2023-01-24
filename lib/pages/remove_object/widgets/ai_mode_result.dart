@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
@@ -71,12 +72,8 @@ class _AIModeResultState extends State<AIModeResult> {
                   children: [
                     GestureDetector(
                       onTap: () => widget.provider.toBrush(context),
-                      child: CustomIcon(
-                        AppAssets.instance.icArrowLeft,
-                        size: AppDimensions.instance.iconX(0.5),
-                      ),
+                      child: const CustomIcon(CupertinoIcons.back),
                     ),
-                    SizedBox(width: AppDimensions.instance.paddingX(0.5)),
                     BasePropConsumer<RemoveObjectProvider, int>(
                       listenable: widget.provider,
                       select: (p) => p.state.detectedObjects.length,

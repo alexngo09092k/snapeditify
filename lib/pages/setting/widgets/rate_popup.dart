@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:phosart/common/constants.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 import 'package:phosart/widgets/base/lottie_viewer.dart';
 
 class RatePopup extends StatelessWidget {
@@ -33,10 +35,7 @@ class RatePopup extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
-                      child: Image.asset(
-                        AppAssets.instance.icClose,
-                        width: AppDimensions.instance.icon,
-                      ),
+                      child: const CustomIcon(CupertinoIcons.clear),
                     ),
                   ],
                 ),

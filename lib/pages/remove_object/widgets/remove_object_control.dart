@@ -14,7 +14,7 @@ class RemoveObjectControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AwesomeAppState.screen.height * 1 / 5,
+      height: AwesomeAppState.screen.height * 1.2 / 5,
       child: BasePropConsumer<RemoveObjectProvider, RemoveObjectMode>(
         listenable: provider,
         select: (p) => p.state.mode,

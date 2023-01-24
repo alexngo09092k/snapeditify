@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/widgets/base/custom_icon.dart';
@@ -34,7 +35,7 @@ class TileRow extends StatelessWidget {
               ),
             )
           : null,
-      action: CustomIcon(AppAssets.instance.icArrowRight),
+      action: const CustomIcon(CupertinoIcons.forward),
     );
   }
 

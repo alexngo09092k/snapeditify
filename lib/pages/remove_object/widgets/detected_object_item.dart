@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/remove_object/remove_object_provider.dart';
 import 'package:phosart/view_models/detected_object_vm.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 import 'package:phosart/widgets/base/tile_row.dart';
 
 class DetectedObjectItem extends StatelessWidget {
@@ -18,8 +20,8 @@ class DetectedObjectItem extends StatelessWidget {
       borderRadius: const BorderRadius.all(Radius.circular(5)),
       child: Container(
         color: Theme.of(context).disabledColor,
-        width: AppDimensions.instance.iconX(2),
-        height: AppDimensions.instance.iconX(2),
+        width: AppDimensions.instance.iconX(1.5),
+        height: AppDimensions.instance.iconX(1.5),
         child: Center(
           child: detectedObject.image != null ? Image.memory(base64.decode(detectedObject.image!)) : const SizedBox(),
         ),
@@ -30,10 +32,12 @@ class DetectedObjectItem extends StatelessWidget {
       select: (p) => p.state.detectedObjects[detectedObject.maskId]!.isSelected,
       builder: (_, __, p, ___) => Container(
         alignment: Alignment.center,
-        child: Image.asset(
-          p.state.detectedObjects[detectedObject.maskId]!.isSelected ? AppAssets.instance.icCheckboxSelected : AppAssets.instance.icCheckbox,
-          width: 30,
-        ),
+        child: p.state.detectedObjects[detectedObject.maskId]!.isSelected
+            ? CustomIcon(
+                CupertinoIcons.check_mark_circled_solid,
+                color: Theme.of(context).primaryColor,
+              )
+            : const CustomIcon(CupertinoIcons.circle),
       ),
     );
     final subTitle = Text(

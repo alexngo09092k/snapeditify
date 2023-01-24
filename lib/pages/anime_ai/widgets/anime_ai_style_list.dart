@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
 import 'package:phosart/services/snap_edit/src/models/response/anime_styles_response.dart';
 import 'package:phosart/widgets/base/app_card.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 import 'package:phosart/widgets/base/custom_image.dart';
 
 class AnimeAIStyleList extends StatelessWidget {
@@ -73,9 +75,9 @@ class AnimeStyleItem extends StatelessWidget {
                       builder: (_, __, p, ___) => p.state.styleId == style.styleId
                           ? Padding(
                               padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
-                              child: Icon(
-                                Icons.check_circle,
-                                color: Theme.of(context).colorScheme.primary,
+                              child: CustomIcon(
+                                Icons.check_circle_outline,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                             )
                           : const SizedBox(),

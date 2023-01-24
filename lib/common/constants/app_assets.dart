@@ -27,7 +27,6 @@ class AppAssets {
   /// Images
   static const String imagePath = 'assets/images';
 
-  final String cardBackground = "$imagePath/card_background.png";
   final String pageBackground = "$imagePath/page_background.png";
 
   /// Suggest images
@@ -48,33 +47,19 @@ class AppAssets {
   final String animeDemo3 = "$imagePath/anime_demo_3.jpeg";
 
   /// Icons
-  static const String iconPath = 'assets/images/icons';
+  static const String iconPath = '$imagePath/icons';
 
-  final String icProBanner = "$iconPath/ic_pro_banner.webp";
-  final String icPro = "$iconPath/ic_pro.png";
-  final String icProBadge = "$iconPath/ic_pro_badge.png";
-  final String icMenu = "$iconPath/ic_menu.png";
   final String icEnhence = "$iconPath/ic_enhance.png";
   final String icArtEffect = "$iconPath/ic_art_effect.png";
   final String icRemoveObject = "$iconPath/ic_remove_object.png";
-  final String icNewBadge = "$iconPath/ic_new_badge.png";
-  final String icAdd = "$iconPath/ic_add.png";
   final String icRate = "$iconPath/ic_rate.png";
   final String icShare = "$iconPath/ic_share.png";
   final String icTerm = "$iconPath/ic_term.png";
   final String icFAQ = "$iconPath/ic_faq.png";
-  final String icFeedback = "$iconPath/ic_feedback.png";
-  final String icProText = "$iconPath/ic_pro_text.png";
-  final String icBack = "$iconPath/ic_back.png";
-  final String icArrowLeft = "$iconPath/ic_arrow_left.png";
-  final String icArrowRight = "$iconPath/ic_arrow_right.png";
   final String icStarNormal = "$iconPath/ic_star_normal.png";
   final String icStarHighlight = "$iconPath/ic_star_highlight.png";
-  final String icClose = "$iconPath/ic_close.png";
   final String icArrowRating = "$iconPath/ic_arrow_rating.png";
   final String icBling = "$iconPath/ic_bling.png";
-  final String icStar = "$iconPath/ic_star.png";
-  final String icExpandMore = "$iconPath/ic_expand_more.png";
   final String icHand = "$iconPath/ic_hand.png";
   final String icRedo = "$iconPath/ic_redo.png";
   final String icUndo = "$iconPath/ic_undo.png";
@@ -83,9 +68,5 @@ class AppAssets {
   final String icColor = "$iconPath/ic_color.png";
   final String icBrush = "$iconPath/ic_brush.png";
   final String icAI = "$iconPath/ic_ai.png";
-  final String icRevert = "$iconPath/ic_revert.png";
-  final String icCheckboxReload = "$iconPath/ic_checkbox_reload.png";
-  final String icCheckboxSelected = "$iconPath/ic_checkbox_selected.png";
-  final String icCheckbox = "$iconPath/ic_checkbox.png";
   final String icImagePlaceholder = "$iconPath/ic_image_place_holder.png";
 }

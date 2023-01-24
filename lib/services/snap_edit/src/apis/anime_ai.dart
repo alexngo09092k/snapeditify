@@ -50,7 +50,11 @@ extension EnimeAI on SnapEdit {
 
       if (file != null && await file.exists()) file.delete();
 
-      return handleResponse<AnimeImageResponse>(response, (p0) => AnimeImageResponse.fromMap(p0));
+      return handleResponse<AnimeImageResponse?>(response, (p0) {
+        if (p0 is Map<String, dynamic>) return AnimeImageResponse.fromMap(p0);
+        Debug.log("animeRestyle No response");
+        return null;
+      });
     } catch (error) {
       return SnapEditResponse<AnimeImageResponse?>(error: error.toString());
     }
@@ -71,7 +75,11 @@ extension EnimeAI on SnapEdit {
         headers: config.headers,
       );
 
-      return handleResponse<AnimeVideoResponse>(response, (p0) => AnimeVideoResponse.fromMap(p0));
+      return handleResponse<AnimeVideoResponse?>(response, (p0) {
+        if (p0 is Map<String, dynamic>) return AnimeVideoResponse.fromMap(p0);
+        Debug.log("animeVideoEffect No response");
+        return null;
+      });
     } catch (error) {
       return SnapEditResponse<AnimeVideoResponse?>(error: error.toString());
     }

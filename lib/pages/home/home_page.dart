@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:phosart/common/app_routes.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/pages/home/widgets/home_base_banner.dart';
-import 'package:phosart/pages/home/widgets/home_header.dart';
+import 'package:phosart/pages/home/widgets/home_logo.dart';
 import 'package:phosart/pages/home/widgets/home_options.dart';
 import 'package:phosart/providers/gallery/gallery_provider.dart';
 import 'package:phosart/widgets/base/ad_view.dart';
 import 'package:phosart/widgets/base/app_layout.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,13 +17,21 @@ class HomePage extends StatelessWidget {
     double bottomPadding = AppDimensions.instance.padding * 3;
     return AppLayout(
       back: false,
+      appBar: true,
       scroll: true,
-      before: Column(
-        children: const [
-          HomeHeader(),
-          HomeOptions(),
-        ],
+      leading: const HomeLogo(),
+      action: Padding(
+        padding: EdgeInsets.only(right: AppDimensions.instance.padding),
+        child: Row(
+          children: [
+            GestureDetector(
+              onTap: () => AppRoutes.instance.goSettingPage(context),
+              child: const CustomIcon(CupertinoIcons.square_grid_2x2),
+            )
+          ],
+        ),
       ),
+      before: const HomeOptions(),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(AppAssets.instance.pageBackground),

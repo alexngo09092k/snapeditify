@@ -40,7 +40,7 @@ class AnimeAIImage extends StatelessWidget {
                 builder: (_, __, p, ___) => CustomIcon.defaultStyle(
                   context,
                   icon: AppAssets.instance.icCompare,
-                  color: p.canCompare ? AppColors.instance.mediumSlateBlue : AppColors.instance.black,
+                  color: p.canCompare ? AppColors.instance.mediumSlateBlue : null,
                 ),
               ),
             ),

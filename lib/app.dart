@@ -27,7 +27,7 @@ class _AppState extends AwesomeAppState<App> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = AwesomeAppState.screen.width < 270 ? 0.65 : (AwesomeAppState.screen.width < 361 ? 0.85 : 1);
+    double scale = AwesomeAppState.screen.width < 250 ? 0.65 : (AwesomeAppState.screen.width < 340 ? 0.85 : 1);
     Debug.log("============= SCALE $scale =============");
 
     return Consumer<IThemeProvider>(

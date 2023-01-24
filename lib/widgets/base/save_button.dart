@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 
 class SaveButton<T extends EditImageProvider> extends StatelessWidget {
   const SaveButton({super.key, required this.provider});
@@ -15,11 +17,9 @@ class SaveButton<T extends EditImageProvider> extends StatelessWidget {
         select: (p) => p.canSave,
         builder: (_, __, p, ___) => Padding(
           padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
-          child: Text(
-            'Save',
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: p.canSave ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
-                ),
+          child: CustomIcon(
+            CupertinoIcons.share,
+            color: p.canSave ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
           ),
         ),
       ),

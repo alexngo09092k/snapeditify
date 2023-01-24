@@ -1,6 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:phosart/models/config/maintenance_mode.dart';
+import 'package:phosart/models/config/share_app.dart';
+import 'package:phosart/models/config/social_network.dart';
+import 'package:phosart/models/config/web_link.dart';
+
+enum AppMode {
+  production,
+  debug,
+  maintenance,
+}
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class BusinessConfig {
@@ -10,6 +20,7 @@ class BusinessConfig {
   final String sharedKeyPrefix;
   final String contact;
   final List<SocialNetwork> socialNetworks;
+  final List<WebLink> webLinks;
   final ShareApp shareApp;
   final MaintenanceMode maintenanceMode;
   final AppMode appMode;
@@ -25,6 +36,7 @@ class BusinessConfig {
     required this.maintenanceMode,
     required this.appMode,
     required this.socialNetworks,
+    required this.webLinks,
     required this.version,
   });
 
@@ -36,10 +48,15 @@ class BusinessConfig {
       sharedKeyPrefix: "app.phosart.studio",
       contact: "brennanngo992k@gmail.com",
       shareApp: ShareApp(
-        link: '',
+        links: {
+          ShareAppPlatform.android: '',
+          ShareAppPlatform.ios: '',
+          ShareAppPlatform.huawei: '',
+        },
         message: "Phosart AI Photo Editor Pro",
       ),
       socialNetworks: [],
+      webLinks: [],
       maintenanceMode: const MaintenanceMode(
         title: "We'll be back soon",
         link: '',
@@ -60,6 +77,7 @@ class BusinessConfig {
     MaintenanceMode? maintenanceMode,
     AppMode? appMode,
     List<SocialNetwork>? socialNetworks,
+    List<WebLink>? webLinks,
     String? version,
   }) {
     return BusinessConfig(
@@ -72,6 +90,7 @@ class BusinessConfig {
       appMode: appMode ?? this.appMode,
       maintenanceMode: maintenanceMode ?? this.maintenanceMode,
       socialNetworks: socialNetworks ?? this.socialNetworks,
+      webLinks: webLinks ?? this.webLinks,
       version: version ?? this.version,
     );
   }
@@ -87,6 +106,7 @@ class BusinessConfig {
       'appMode': appMode.name,
       'maintenanceMode': maintenanceMode.toMap(),
       'socialNetworks': socialNetworks.map((e) => e.toMap()),
+      'webLinks': webLinks.map((e) => e.toMap()),
       'version': version,
     };
   }
@@ -101,6 +121,7 @@ class BusinessConfig {
       shareApp: ShareApp.fromMap(map['shareApp']),
       appMode: AppMode.values.firstWhere((element) => element.name == map['appMode']),
       socialNetworks: map['socialNetworks'].map<SocialNetwork>((e) => SocialNetwork.fromMap(e)).toList(),
+      webLinks: map['webLinks'].map<WebLink>((e) => WebLink.fromMap(e)).toList(),
       maintenanceMode: MaintenanceMode.fromMap(map['maintenanceMode']),
       version: map['version'],
     );
@@ -112,7 +133,7 @@ class BusinessConfig {
 
   @override
   String toString() {
-    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, protocols: $protocols, sharedKeyPrefix: $sharedKeyPrefix, shareApp: $shareApp, appMode: $appMode, maintenanceMode: $maintenanceMode, socialNetworks: $socialNetworks, version: $version)';
+    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, protocols: $protocols, sharedKeyPrefix: $sharedKeyPrefix, shareApp: $shareApp, appMode: $appMode, maintenanceMode: $maintenanceMode, socialNetworks: $socialNetworks, webLinks: $webLinks, version: $version)';
   }
 
   @override
@@ -127,6 +148,7 @@ class BusinessConfig {
         other.appMode == appMode &&
         other.maintenanceMode == maintenanceMode &&
         other.socialNetworks == socialNetworks &&
+        other.webLinks == webLinks &&
         other.shareApp == shareApp &&
         other.version == version;
   }
@@ -141,181 +163,8 @@ class BusinessConfig {
         shareApp.hashCode ^
         maintenanceMode.hashCode ^
         socialNetworks.hashCode ^
+        webLinks.hashCode ^
         appMode.hashCode ^
         version.hashCode;
   }
-}
-
-class ShareApp {
-  final String message;
-  final String link;
-
-  ShareApp({
-    required this.message,
-    required this.link,
-  });
-
-  ShareApp copyWith({
-    String? message,
-    String? link,
-  }) {
-    return ShareApp(
-      message: message ?? this.message,
-      link: link ?? this.link,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'message': message,
-      'link': link,
-    };
-  }
-
-  factory ShareApp.fromMap(Map<String, dynamic> map) {
-    return ShareApp(
-      message: map['message'] as String,
-      link: map['link'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ShareApp.fromJson(String source) => ShareApp.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'ShareApp(message: $message, link: $link)';
-
-  @override
-  bool operator ==(covariant ShareApp other) {
-    if (identical(this, other)) return true;
-
-    return other.message == message && other.link == link;
-  }
-
-  @override
-  int get hashCode => message.hashCode ^ link.hashCode;
-}
-
-enum AppMode {
-  production,
-  debug,
-  maintenance,
-}
-
-class MaintenanceMode {
-  final String title;
-  final String message;
-  final String link;
-
-  const MaintenanceMode({
-    required this.title,
-    required this.message,
-    required this.link,
-  });
-
-  MaintenanceMode copyWith({
-    String? title,
-    String? message,
-    String? link,
-  }) {
-    return MaintenanceMode(
-      title: title ?? this.title,
-      message: message ?? this.message,
-      link: link ?? this.link,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'title': title,
-      'message': message,
-      'link': link,
-    };
-  }
-
-  factory MaintenanceMode.fromMap(Map<String, dynamic> map) {
-    return MaintenanceMode(
-      title: map['title'] as String,
-      message: map['message'] as String,
-      link: map['link'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory MaintenanceMode.fromJson(String source) => MaintenanceMode.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'MaintenanceMode(title: $title, message: $message, link: $link)';
-
-  @override
-  bool operator ==(covariant MaintenanceMode other) {
-    if (identical(this, other)) return true;
-
-    return other.title == title && other.message == message && other.link == link;
-  }
-
-  @override
-  int get hashCode => title.hashCode ^ message.hashCode ^ link.hashCode;
-}
-
-class SocialNetwork {
-  final String link;
-  final String brand;
-  final String image;
-
-  SocialNetwork({
-    required this.link,
-    required this.brand,
-    required this.image,
-  });
-
-  SocialNetwork copyWith({
-    String? link,
-    String? brand,
-    String? image,
-  }) {
-    return SocialNetwork(
-      link: link ?? this.link,
-      brand: brand ?? this.brand,
-      image: image ?? this.image,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'link': link,
-      'brand': brand,
-      'image': image,
-    };
-  }
-
-  factory SocialNetwork.fromMap(Map<String, dynamic> map) {
-    return SocialNetwork(
-      link: map['link'] as String,
-      brand: map['brand'] as String,
-      image: map['image'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory SocialNetwork.fromJson(String source) => SocialNetwork.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'SocialNetwork(link: $link, brand: $brand, image: $image)';
-
-  @override
-  bool operator ==(covariant SocialNetwork other) {
-    if (identical(this, other)) return true;
-  
-    return 
-      other.link == link &&
-      other.brand == brand &&
-      other.image == image;
-  }
-
-  @override
-  int get hashCode => link.hashCode ^ brand.hashCode ^ image.hashCode;
 }

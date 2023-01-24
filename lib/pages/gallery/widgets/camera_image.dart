@@ -1,11 +1,12 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart' as impk;
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/gallery/gallery_provider.dart';
 import 'package:phosart/utils/image.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 
 class CameraImage extends StatelessWidget {
   const CameraImage({super.key, required this.onImage});
@@ -24,7 +25,7 @@ class CameraImage extends StatelessWidget {
       onTap: _onPickCamera,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
-        child: const Icon(Icons.camera),
+        child: const CustomIcon(CupertinoIcons.camera),
       ),
     );
   }

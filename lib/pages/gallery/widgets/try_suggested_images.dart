@@ -4,6 +4,7 @@ import 'package:fluttering/provider/widgets/autopplistener.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/pages/gallery/widgets/album_image.dart';
 import 'package:phosart/providers/gallery/gallery_provider.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 
 class TrySuggestedImages extends StatelessWidget {
   const TrySuggestedImages({super.key, required this.gridDelegate, required this.size, this.onImage});
@@ -20,10 +21,7 @@ class TrySuggestedImages extends StatelessWidget {
           child: Row(
             children: [
               Text('Try suggested images', style: Theme.of(context).textTheme.bodyText1),
-              Image.asset(
-                AppAssets.instance.icStar,
-                width: AppDimensions.instance.icon,
-              )
+              CustomIcon(Icons.star, color: Theme.of(context).textTheme.bodyText1!.color),
             ],
           ),
         ),

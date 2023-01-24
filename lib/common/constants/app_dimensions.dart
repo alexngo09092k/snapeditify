@@ -22,7 +22,7 @@ class AppDimensions {
   double radiusX(double x) => radius * x;
 
   /// ICON
-  final double icon = 32;
+  final double icon = 25;
   double iconX(double x) => icon * x;
 
   /// POPUP

@@ -1,19 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:fluttering/utils/logs.dart';
 import 'package:phosart/common/configuration.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/pages/setting/widgets/unlock_premium.dart';
+import 'package:phosart/utils/widget.dart';
 import 'package:phosart/widgets/base/ad_view.dart';
 import 'package:phosart/widgets/base/app_card.dart';
 import 'package:phosart/widgets/base/app_layout.dart';
 import 'package:phosart/widgets/base/lottie_viewer.dart';
 import 'package:phosart/widgets/base/separated_list_view.dart';
 import 'package:phosart/widgets/base/tile_row.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
 
   _showRatePopup(BuildContext context) {}
+
   _showSharePopup(BuildContext context) {}
+
+  _launchUrlInApp(BuildContext context, String url) async {
+    try {
+      if (!await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView)) {
+        WidgetUtils.instance.alert(context, title: '', message: '');
+      }
+    } catch (error) {
+      Debug.log('launchUrlInApp $error');
+    }
+  }
+
+  _launchUrl(BuildContext context, String url) async {
+    try {
+      if (!await launchUrl(Uri.parse(url))) {
+        WidgetUtils.instance.alert(context, title: '', message: '');
+      }
+    } catch (error) {
+      Debug.log('launchUrl $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,29 +65,27 @@ class SettingPage extends StatelessWidget {
       ),
       children: [
         const UnlockPremium(),
-        AppCard(
-          child: SeparatedListView.withList(
-            separator: Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
-              child: const Divider(height: 0),
+        if (Configuration.instance.businessConfig.webLinks.isNotEmpty)
+          AppCard(
+            child: SeparatedListView.withList(
+              separator: Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
+                child: const Divider(height: 0),
+              ),
+              list: Configuration.instance.businessConfig.webLinks
+                  .map(
+                    (e) => TileRow.defaultStyle(
+                      context,
+                      title: e.title,
+                      image: e.image,
+                      normal: true,
+                      onTap: (_) => _launchUrlInApp(context, e.link),
+                    ),
+                  )
+                  .toList(),
             ),
-            list: [
-              TileRow.defaultStyle(
-                context,
-                title: 'Terms of service',
-                image: AppAssets.instance.icTerm,
-                onTap: (_) {},
-              ),
-              TileRow.defaultStyle(
-                context,
-                title: 'FAQ',
-                image: AppAssets.instance.icFAQ,
-                onTap: (_) {},
-              ),
-            ],
           ),
-        ),
-        SizedBox(height: AppDimensions.instance.padding),
+        if (Configuration.instance.businessConfig.webLinks.isNotEmpty) SizedBox(height: AppDimensions.instance.padding),
         AppCard(
           child: SeparatedListView.withList(
             separator: Padding(
@@ -87,26 +109,27 @@ class SettingPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: AppDimensions.instance.padding),
-        AppCard(
-          child: SeparatedListView.withList(
-            separator: Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
-              child: const Divider(height: 0),
+        if (Configuration.instance.businessConfig.socialNetworks.isNotEmpty)
+          AppCard(
+            child: SeparatedListView.withList(
+              separator: Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
+                child: const Divider(height: 0),
+              ),
+              list: Configuration.instance.businessConfig.socialNetworks
+                  .map(
+                    (e) => TileRow.defaultStyle(
+                      context,
+                      title: e.brand,
+                      image: e.image,
+                      normal: true,
+                      onTap: (_) => _launchUrl(context, e.link),
+                    ),
+                  )
+                  .toList(),
             ),
-            list: Configuration.instance.businessConfig.socialNetworks
-                .map(
-                  (e) => TileRow.defaultStyle(
-                    context,
-                    title: e.brand,
-                    image: e.image,
-                    normal: true,
-                    onTap: _showRatePopup,
-                  ),
-                )
-                .toList(),
           ),
-        ),
-        SizedBox(height: AppDimensions.instance.padding),
+        if (Configuration.instance.businessConfig.socialNetworks.isNotEmpty) SizedBox(height: AppDimensions.instance.padding),
         const AdView(),
       ],
     );

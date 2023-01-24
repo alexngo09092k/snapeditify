@@ -28,27 +28,42 @@ const businessConfig = {
   /// Contact
   'contact': 'support@phosart.app',
 
+  /// Social Networks
   'socialNetworks': [
     {
       'brand': 'Telegram',
-      'link': '',
+      'link': 'https://pub.dev/packages/url_launcher/example',
       'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
     },
     {
       'brand': 'Facebook',
-      'link': '',
+      'link': 'https://pub.dev/packages/url_launcher/example',
       'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
     },
     {
       'brand': 'Tiktok',
-      'link': '',
+      'link': 'https://pub.dev/packages/url_launcher/example',
       'image': 'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
+    }
+  ],
+
+  /// Web links
+  'webLinks': [
+    {
+      'title': 'Terms of service',
+      'link': 'https://pub.dev/packages/url_launcher/example',
+      'image': 'assets/images/icons/ic_term.png',
+    },
+    {
+      'title': 'FAQ',
+      'link': 'https://pub.dev/packages/url_launcher/example',
+      'image': 'assets/images/icons/ic_faq.png',
     }
   ],
 
   /// Share app
   'shareApp': {
     'message': 'Phosart AI Photo Editor Pro',
-    'link': 'https://t.me/+9UBuQxKY7N80YTc1',
+    'links': {'android': ''},
   },
 };

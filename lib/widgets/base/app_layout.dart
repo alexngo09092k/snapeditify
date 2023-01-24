@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/widgets/base/custom_icon.dart';
@@ -117,7 +118,7 @@ class _AppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: AppDimensions.instance.padding),
+      padding: EdgeInsets.symmetric(vertical: AppDimensions.instance.padding),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -134,7 +135,7 @@ class _AppBar extends StatelessWidget {
                             left: AppDimensions.instance.padding,
                           ),
                           color: Colors.transparent,
-                          child: CustomIcon(AppAssets.instance.icBack),
+                          child: const CustomIcon(CupertinoIcons.back),
                         ),
                       )
                     : (leading ?? const SizedBox()),

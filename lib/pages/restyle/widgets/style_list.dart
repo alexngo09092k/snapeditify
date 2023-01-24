@@ -4,6 +4,7 @@ import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/restyle/restyle_provider.dart';
 import 'package:phosart/services/snap_edit/src/models/response/styles_response.dart';
 import 'package:phosart/widgets/base/app_card.dart';
+import 'package:phosart/widgets/base/custom_icon.dart';
 import 'package:phosart/widgets/base/custom_image.dart';
 
 class StyleList extends StatelessWidget {
@@ -62,7 +63,7 @@ class StyleItem extends StatelessWidget {
                       builder: (_, __, p, ___) => p.state.styleId == style.styleId
                           ? Padding(
                               padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
-                              child: Icon(
+                              child: CustomIcon(
                                 Icons.check_circle,
                                 color: Theme.of(context).colorScheme.primary,
                               ),

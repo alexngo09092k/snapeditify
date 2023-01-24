@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:phosart/common/configuration.dart';
 import 'package:phosart/common/constants.dart';
 import 'package:phosart/providers/edit_image_provider.dart';
 import 'package:phosart/widgets/base/app_card.dart';
@@ -29,9 +31,7 @@ class SavedImagePreview extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: Navigator.of(context).pop,
-                    child: CustomIcon(
-                      AppAssets.instance.icClose,
-                    ),
+                    child: const CustomIcon(CupertinoIcons.clear),
                   )
                 ],
               ),
@@ -64,7 +64,7 @@ class SavedImagePreview extends StatelessWidget {
                     title: 'SHARE',
                     width: 150,
                     height: 40,
-                    onTap: () => Share.shareXFiles([XFile(provider.savedFile!.path)]),
+                    onTap: () => Share.shareXFiles([XFile(provider.savedFile!.path)], subject: Configuration.instance.businessConfig.shareApp.message),
                   )
                 ],
               ),
