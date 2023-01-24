@@ -14,7 +14,7 @@ class StyleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
+      height: AwesomeAppState.screen.height * 1.2 / 5,
       padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
       child: BasePropConsumer<RestyleProvider, int>(
         listenable: provider,
@@ -44,7 +44,7 @@ class StyleItem extends StatelessWidget {
       onTap: () => provider.restyleImage(context, style.styleId),
       child: AppCard(
         margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
-        width: 180 * 3 / 6.5,
+        width: (AwesomeAppState.screen.height * 1.2 / 5) * 3 / 6.5,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

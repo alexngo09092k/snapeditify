@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:phosart/common/constants.dart';
@@ -15,7 +14,7 @@ class AnimeAIStyleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180,
+      height: AwesomeAppState.screen.height * 1.2 / 5,
       child: BasePropConsumer<AnimeAIProvider, String?>(
         listenable: provider,
         select: (_) => _.category,
@@ -55,7 +54,7 @@ class AnimeStyleItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => onStyle(style),
       child: AppCard(
-        width: (180 * 4.2 / 6),
+        width: ((AwesomeAppState.screen.height * 1.2 / 5) * 4.2 / 6),
         margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.25), vertical: AppDimensions.instance.padding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
