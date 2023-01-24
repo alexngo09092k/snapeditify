@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:phosart/widgets/base/cupertino_block.dart';
 
 class CustomAlert extends StatefulWidget {
   const CustomAlert({super.key, this.onBackground, this.onForeground, this.message, this.title, this.actions = const []});
@@ -32,19 +32,10 @@ class _CustomAlertState extends State<CustomAlert> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTheme(
-      data: CupertinoThemeData(
-        barBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      ),
+    return CupertinoBlock(
       child: CupertinoAlertDialog(
-        title: widget.title != null
-            ? Text(
-                widget.title!,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600),
-              )
-            : null,
-        content: widget.message != null ? Text(widget.message!, style: Theme.of(context).textTheme.bodyText2!.copyWith()) : null,
+        title: widget.title != null ? Text(widget.title!) : null,
+        content: widget.message != null ? Text(widget.message!) : null,
         actions: widget.actions
             .map((e) => CupertinoDialogAction(
                   onPressed: e.onPressed,
@@ -53,7 +44,7 @@ class _CustomAlertState extends State<CustomAlert> with WidgetsBindingObserver {
                   textStyle: e.textStyle,
                   child: Text(
                     e.title,
-                    style: e.textStyle ?? Theme.of(context).textTheme.bodyText1,
+                    style: e.textStyle,
                   ),
                 ))
             .toList(),

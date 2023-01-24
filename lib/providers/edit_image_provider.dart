@@ -142,7 +142,7 @@ abstract class EditImageProvider extends Provider {
 
   goBack(BuildContext context) {
     if (!canBack) {
-      WidgetUtils.instance.alert(context, title: '', message: 'Are you sure cancel all edit image', actions: [
+      WidgetUtils.instance.alert(context, message: 'Are you sure cancel all edit image', actions: [
         AlertAction(
           title: 'Cancel',
           onPressed: () {
@@ -151,6 +151,7 @@ abstract class EditImageProvider extends Provider {
         ),
         AlertAction(
             title: 'Ok',
+            isDestructiveAction: true,
             onPressed: () {
               Navigator.pop(context);
               Navigator.pop(context);

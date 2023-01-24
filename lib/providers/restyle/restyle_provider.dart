@@ -93,6 +93,9 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
+    /// SHOW ADS
+    adProvider.handleAd();
+
     /// CALL API
     RestyleBody body = RestyleBody(styleId: styleId, inputImage: originalImage.imageBytes, imageId: _state.imageId);
     SnapEditResponse<RestyleResponse?> res = await Services.instance.snapEdit.restyle(body);

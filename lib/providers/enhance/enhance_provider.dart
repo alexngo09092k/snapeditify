@@ -48,6 +48,9 @@ class EnhanceProvider extends IEnhanceProvider {
     /// SHOW LOADING POPUP
     WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
+    /// SHOW ADS
+    adProvider.handleAd();
+
     /// CALL API
     EnhanceBody body = EnhanceBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
     final SnapEditResponse<EnhanceResponse?> res = await Services.instance.snapEdit.enhance(body);

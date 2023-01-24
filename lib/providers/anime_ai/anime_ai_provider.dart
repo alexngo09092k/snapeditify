@@ -137,13 +137,16 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
+    /// SHOW ADS
+    adProvider.handleAd();
+
     /// CALL API
     AnimeAIVideoBody body = AnimeAIVideoBody(
       style: styleId,
       outputImageId: _state.styledImages[styleId]!.outputImages.first.imageId,
       imageId: _state.styledImages[styleId]!.imageId,
     );
-    Debug.log(styleId);
+
     SnapEditResponse<AnimeVideoResponse?> res = await Services.instance.snapEdit.animeVideoEffect(body);
 
     if (res.data != null) {
