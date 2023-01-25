@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/widgets/base/app_card.dart';
-import 'package:phosart/widgets/base/custom_alert.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/custom_alert.dart';
 
 class WidgetUtils {
   static final WidgetUtils _instance = WidgetUtils._internal();

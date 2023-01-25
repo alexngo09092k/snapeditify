@@ -2,15 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/edit_image_provider.dart';
-import 'package:phosart/providers/restyle/restyle_state.dart';
-import 'package:phosart/providers/storage_provider.dart';
-import 'package:phosart/services/services.dart';
-import 'package:phosart/services/snap_edit/src/models/response/styles_response.dart';
-import 'package:phosart/utils/widget.dart';
-import 'package:phosart/view_models/edited_image_vm.dart';
-import 'package:phosart/widgets/painter/painter.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/edit_image_provider.dart';
+import 'package:snapeditify/providers/restyle/restyle_state.dart';
+import 'package:snapeditify/providers/storage_provider.dart';
+import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/services/snap_edit/src/models/response/styles_response.dart';
+import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/view_models/edited_image_vm.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
   List<Style> get styles;

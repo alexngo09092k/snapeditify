@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phosart/common/constants.dart';
+import 'package:snapeditify/common/constants.dart';
 
 class AppCard extends StatelessWidget {
   const AppCard({

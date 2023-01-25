@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/pages/remove_object/widgets/ai_mode_result.dart';
-import 'package:phosart/pages/remove_object/widgets/brush_mode_setting.dart';
-import 'package:phosart/providers/remove_object/remove_object_provider.dart';
-import 'package:phosart/providers/remove_object/remove_object_state.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/pages/remove_object/widgets/ai_mode_result.dart';
+import 'package:snapeditify/pages/remove_object/widgets/brush_mode_setting.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class RemoveObjectControl extends StatelessWidget {
   const RemoveObjectControl({super.key, required this.provider});

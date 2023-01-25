@@ -44,44 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCawMzbAm89_K8Ts4xRCw6TkhVl1Fk_9pE',
-    appId: '1:268730434934:web:7fd3d084edf19963d2e657',
-    messagingSenderId: '268730434934',
-    projectId: 'phosart-5d64f',
-    authDomain: 'phosart-5d64f.firebaseapp.com',
-    databaseURL: 'https://phosart-5d64f-default-rtdb.firebaseio.com',
-    storageBucket: 'phosart-5d64f.appspot.com',
-    measurementId: 'G-GSZD3W82RJ',
+    apiKey: 'AIzaSyAYSChzmSaHIgxqVoU-NnG7GNUxI1_h6sY',
+    appId: '1:851709128615:web:d465d8ccb3cd5287a19082',
+    messagingSenderId: '851709128615',
+    projectId: 'snapeditify-67a19',
+    authDomain: 'snapeditify-67a19.firebaseapp.com',
+    storageBucket: 'snapeditify-67a19.appspot.com',
+    measurementId: 'G-VFDK99V2TG',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD-7cmPDlnPRHFu5Lk4a8rMR33moa8B_ao',
-    appId: '1:268730434934:android:bbe3a430bd82b9ccd2e657',
-    messagingSenderId: '268730434934',
-    projectId: 'phosart-5d64f',
-    databaseURL: 'https://phosart-5d64f-default-rtdb.firebaseio.com',
-    storageBucket: 'phosart-5d64f.appspot.com',
+    apiKey: 'AIzaSyAEcOFJkT6sd_RgmNSll5luj7c0LYAenEo',
+    appId: '1:851709128615:android:663d46bc83eddfeca19082',
+    messagingSenderId: '851709128615',
+    projectId: 'snapeditify-67a19',
+    storageBucket: 'snapeditify-67a19.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDxbPpf-nPTUDLkia1l4nvQTtOmN1qZssc',
-    appId: '1:268730434934:ios:510ec56203e44a76d2e657',
-    messagingSenderId: '268730434934',
-    projectId: 'phosart-5d64f',
-    databaseURL: 'https://phosart-5d64f-default-rtdb.firebaseio.com',
-    storageBucket: 'phosart-5d64f.appspot.com',
-    iosClientId: '268730434934-j96uc8fmv6ahnhi2gqv4p6qsgdhr842e.apps.googleusercontent.com',
-    iosBundleId: 'app.phosart.studio',
+    apiKey: 'AIzaSyCsHaOMewpPcGbdClTv05F7yA5OHRQTu3I',
+    appId: '1:851709128615:ios:de628509de9bddd3a19082',
+    messagingSenderId: '851709128615',
+    projectId: 'snapeditify-67a19',
+    storageBucket: 'snapeditify-67a19.appspot.com',
+    iosClientId: '851709128615-ptunqje9bf9get5e8g81vsp0vq7pj8qs.apps.googleusercontent.com',
+    iosBundleId: 'app.snapeditify.studio',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDxbPpf-nPTUDLkia1l4nvQTtOmN1qZssc',
-    appId: '1:268730434934:ios:510ec56203e44a76d2e657',
-    messagingSenderId: '268730434934',
-    projectId: 'phosart-5d64f',
-    databaseURL: 'https://phosart-5d64f-default-rtdb.firebaseio.com',
-    storageBucket: 'phosart-5d64f.appspot.com',
-    iosClientId: '268730434934-j96uc8fmv6ahnhi2gqv4p6qsgdhr842e.apps.googleusercontent.com',
-    iosBundleId: 'app.phosart.studio',
+    apiKey: 'AIzaSyCsHaOMewpPcGbdClTv05F7yA5OHRQTu3I',
+    appId: '1:851709128615:ios:de628509de9bddd3a19082',
+    messagingSenderId: '851709128615',
+    projectId: 'snapeditify-67a19',
+    storageBucket: 'snapeditify-67a19.appspot.com',
+    iosClientId: '851709128615-ptunqje9bf9get5e8g81vsp0vq7pj8qs.apps.googleusercontent.com',
+    iosBundleId: 'app.snapeditify.studio',
   );
 }

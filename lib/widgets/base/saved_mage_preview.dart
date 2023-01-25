@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/configuration.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/edit_image_provider.dart';
-import 'package:phosart/widgets/base/app_card.dart';
-import 'package:phosart/widgets/base/custom_button.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/edit_image_provider.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/custom_button.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:share_plus/share_plus.dart';
 
 class SavedImagePreview extends StatelessWidget {

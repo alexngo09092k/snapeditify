@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/restyle/restyle_provider.dart';
-import 'package:phosart/services/snap_edit/src/models/response/styles_response.dart';
-import 'package:phosart/widgets/base/app_card.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
-import 'package:phosart/widgets/base/custom_image.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/restyle/restyle_provider.dart';
+import 'package:snapeditify/services/snap_edit/src/models/response/styles_response.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
+import 'package:snapeditify/widgets/base/custom_image.dart';
 
 class StyleList extends StatelessWidget {
   const StyleList({super.key, required this.provider});

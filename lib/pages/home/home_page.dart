@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:phosart/common/app_routes.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/pages/home/widgets/home_base_banner.dart';
-import 'package:phosart/pages/home/widgets/home_logo.dart';
-import 'package:phosart/pages/home/widgets/home_options.dart';
-import 'package:phosart/providers/gallery/gallery_provider.dart';
-import 'package:phosart/widgets/base/ad_view.dart';
-import 'package:phosart/widgets/base/app_layout.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:snapeditify/common/app_routes.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/pages/home/widgets/home_base_banner.dart';
+import 'package:snapeditify/pages/home/widgets/home_logo.dart';
+import 'package:snapeditify/pages/home/widgets/home_options.dart';
+import 'package:snapeditify/providers/gallery/gallery_provider.dart';
+import 'package:snapeditify/widgets/base/ad_view.dart';
+import 'package:snapeditify/widgets/base/app_layout.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

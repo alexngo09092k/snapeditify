@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:phosart/app.dart';
+import 'package:snapeditify/app.dart';
 
 
 void main() {

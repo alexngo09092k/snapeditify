@@ -1,9 +1,9 @@
-import 'package:phosart/env/advertisement.dart';
-import 'package:phosart/env/business.dart';
-import 'package:phosart/env/firebase.dart';
-import 'package:phosart/env/gallery.dart';
-import 'package:phosart/env/in_app_purchase.dart';
-import 'package:phosart/env/snap_edit.dart';
+import 'package:snapeditify/env/advertisement.dart';
+import 'package:snapeditify/env/business.dart';
+import 'package:snapeditify/env/firebase.dart';
+import 'package:snapeditify/env/gallery.dart';
+import 'package:snapeditify/env/in_app_purchase.dart';
+import 'package:snapeditify/env/snap_edit.dart';
 
 //! NOTE: UNIT TIME: SECONDS
 Map<String, dynamic> enviroment = {

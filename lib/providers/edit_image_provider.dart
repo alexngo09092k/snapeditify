@@ -7,15 +7,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/advertisement/advertisement.dart';
-import 'package:phosart/common/configuration.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/edit_image_state.dart';
-import 'package:phosart/services/services.dart';
-import 'package:phosart/utils/widget.dart';
-import 'package:phosart/view_models/edited_image_vm.dart';
-import 'package:phosart/view_models/editing_image_vm.dart';
-import 'package:phosart/widgets/base/custom_alert.dart';
-import 'package:phosart/widgets/base/saved_mage_preview.dart';
+import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/edit_image_state.dart';
+import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/view_models/edited_image_vm.dart';
+import 'package:snapeditify/view_models/editing_image_vm.dart';
+import 'package:snapeditify/widgets/base/custom_alert.dart';
+import 'package:snapeditify/widgets/base/saved_mage_preview.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 abstract class EditImageProvider extends Provider {

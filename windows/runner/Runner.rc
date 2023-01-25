@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "phosart" "\0"
+            VALUE "FileDescription", "snapeditify" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "phosart" "\0"
+            VALUE "InternalName", "snapeditify" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "phosart.exe" "\0"
-            VALUE "ProductName", "phosart" "\0"
+            VALUE "OriginalFilename", "snapeditify.exe" "\0"
+            VALUE "ProductName", "snapeditify" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

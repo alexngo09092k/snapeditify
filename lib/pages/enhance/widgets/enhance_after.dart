@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/enhance/enhance_provider.dart';
-import 'package:phosart/widgets/painter/painter_pure.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/enhance/enhance_provider.dart';
+import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
 class EnhanceAfter extends StatelessWidget {
   const EnhanceAfter({Key? key, required this.provider}) : super(key: key);

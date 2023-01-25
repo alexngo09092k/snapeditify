@@ -5,16 +5,16 @@ import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/edit_image_provider.dart';
-import 'package:phosart/providers/remove_object/remove_object_state.dart';
-import 'package:phosart/providers/storage_provider.dart';
-import 'package:phosart/services/services.dart';
-import 'package:phosart/utils/image.dart';
-import 'package:phosart/utils/widget.dart';
-import 'package:phosart/view_models/detected_object_vm.dart';
-import 'package:phosart/view_models/edited_image_vm.dart';
-import 'package:phosart/widgets/painter/painter.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/edit_image_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
+import 'package:snapeditify/providers/storage_provider.dart';
+import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/utils/image.dart';
+import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/view_models/detected_object_vm.dart';
+import 'package:snapeditify/view_models/edited_image_vm.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
   bool get canRemove;

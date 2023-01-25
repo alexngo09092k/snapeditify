@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class AppLayout extends StatelessWidget {
   const AppLayout({

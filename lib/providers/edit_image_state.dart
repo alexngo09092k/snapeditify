@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:phosart/view_models/editing_image_vm.dart';
+import 'package:snapeditify/view_models/editing_image_vm.dart';
 
 abstract class EditImageState extends ChangeNotifier {
   Future<bool> setImage(String imageBase64) async {

@@ -1,4 +1,4 @@
-package app.phosart.studio
+package app.snapeditify.studio
 
 import io.flutter.embedding.android.FlutterActivity
 

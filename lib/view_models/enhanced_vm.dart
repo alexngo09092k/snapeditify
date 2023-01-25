@@ -1,8 +1,8 @@
-import 'package:phosart/providers/enhance/enhance_state.dart';
-import 'package:phosart/widgets/painter/painter.dart';
+import 'package:snapeditify/providers/enhance/enhance_state.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 import 'dart:ui' as ui;
 
-import 'package:phosart/utils/image.dart';
+import 'package:snapeditify/utils/image.dart';
 
 class EnhancedVM {
   final int index;

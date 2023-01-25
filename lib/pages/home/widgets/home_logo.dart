@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:phosart/common/configuration.dart';
-import 'package:phosart/common/constants.dart';
+import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/common/constants.dart';
 
 class HomeLogo extends StatelessWidget {
   const HomeLogo({super.key});

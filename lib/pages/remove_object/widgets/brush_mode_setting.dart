@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/remove_object/remove_object_provider.dart';
-import 'package:phosart/providers/remove_object/remove_object_state.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class BrushModeSetting extends StatelessWidget {
   const BrushModeSetting({Key? key, required this.provider}) : super(key: key);

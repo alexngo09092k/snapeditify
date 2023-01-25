@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/widgets/base/app_card.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
 
 class AdView extends StatelessWidget {
   const AdView({super.key});

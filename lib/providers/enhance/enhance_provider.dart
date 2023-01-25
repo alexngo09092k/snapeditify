@@ -2,14 +2,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/providers/edit_image_provider.dart';
-import 'package:phosart/providers/enhance/enhance_state.dart';
-import 'package:phosart/services/services.dart';
-import 'package:phosart/utils/widget.dart';
-import 'package:phosart/view_models/edited_image_vm.dart';
-import 'package:phosart/view_models/enhanced_vm.dart';
-import 'package:phosart/view_models/face_vm.dart';
-import 'package:phosart/widgets/painter/painter.dart';
+import 'package:snapeditify/providers/edit_image_provider.dart';
+import 'package:snapeditify/providers/enhance/enhance_state.dart';
+import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/view_models/edited_image_vm.dart';
+import 'package:snapeditify/view_models/enhanced_vm.dart';
+import 'package:snapeditify/view_models/face_vm.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   Future<bool> enhanceImage(BuildContext context);

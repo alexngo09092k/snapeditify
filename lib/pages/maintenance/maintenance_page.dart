@@ -1,5 +1,5 @@
-import 'package:phosart/common/configuration.dart';
-import 'package:phosart/common/constants.dart';
+import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:flutter/material.dart';
 
 class MaintenancePage extends StatelessWidget {

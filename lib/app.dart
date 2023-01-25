@@ -1,6 +1,6 @@
-import 'package:phosart/common/app_routes.dart';
-import 'package:phosart/common/theme.dart';
-import 'package:phosart/generated/l10n.dart';
+import 'package:snapeditify/common/app_routes.dart';
+import 'package:snapeditify/common/theme.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
-import 'package:phosart/widgets/base/base_image_editor.dart';
-import 'package:phosart/widgets/painter/painter_pure.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
+import 'package:snapeditify/widgets/base/base_image_editor.dart';
+import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
 class AnimeAIImage extends StatelessWidget {
   const AnimeAIImage({super.key, required this.provider});

@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/cupertino.dart';
-import 'package:phosart/widgets/base/cupertino_block.dart';
+import 'package:snapeditify/widgets/base/cupertino_block.dart';
 
 class CustomAlert extends StatefulWidget {
   const CustomAlert({super.key, this.onBackground, this.onForeground, this.message, this.title, this.actions = const []});

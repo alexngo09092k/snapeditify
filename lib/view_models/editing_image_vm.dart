@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
-import 'package:phosart/utils/image.dart';
+import 'package:snapeditify/utils/image.dart';
 
 class EditingImageVM {
   EditingImageVM(String imageBase64) {

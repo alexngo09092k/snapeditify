@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/utils/logs.dart';
-import 'package:phosart/common/configuration.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/pages/setting/widgets/unlock_premium.dart';
-import 'package:phosart/utils/widget.dart';
-import 'package:phosart/widgets/base/ad_view.dart';
-import 'package:phosart/widgets/base/app_card.dart';
-import 'package:phosart/widgets/base/app_layout.dart';
-import 'package:phosart/widgets/base/lottie_viewer.dart';
-import 'package:phosart/widgets/base/separated_list_view.dart';
-import 'package:phosart/widgets/base/tile_row.dart';
+import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/pages/setting/widgets/unlock_premium.dart';
+import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/widgets/base/ad_view.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/app_layout.dart';
+import 'package:snapeditify/widgets/base/lottie_viewer.dart';
+import 'package:snapeditify/widgets/base/separated_list_view.dart';
+import 'package:snapeditify/widgets/base/tile_row.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {

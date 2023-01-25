@@ -3,16 +3,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/pages/gallery/widgets/camera_image.dart';
+import 'package:snapeditify/pages/gallery/widgets/camera_image.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:phosart/common/app_routes.dart';
-import 'package:phosart/pages/gallery/widgets/album_image.dart';
-import 'package:phosart/pages/gallery/widgets/album_title.dart';
-import 'package:phosart/pages/gallery/widgets/try_suggested_images.dart';
-import 'package:phosart/providers/gallery/gallery_provider.dart';
-import 'package:phosart/widgets/base/app_layout.dart';
-import 'package:phosart/widgets/load_more/multiple_sliver_load_more.dart';
-import 'package:phosart/widgets/load_more/source_list.dart';
+import 'package:snapeditify/common/app_routes.dart';
+import 'package:snapeditify/pages/gallery/widgets/album_image.dart';
+import 'package:snapeditify/pages/gallery/widgets/album_title.dart';
+import 'package:snapeditify/pages/gallery/widgets/try_suggested_images.dart';
+import 'package:snapeditify/providers/gallery/gallery_provider.dart';
+import 'package:snapeditify/widgets/base/app_layout.dart';
+import 'package:snapeditify/widgets/load_more/multiple_sliver_load_more.dart';
+import 'package:snapeditify/widgets/load_more/source_list.dart';
 
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});

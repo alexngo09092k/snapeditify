@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/widgets/base/app_card.dart';
-import 'package:phosart/widgets/base/lottie_viewer.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 
 class HomeBaseBanner extends StatelessWidget {
   const HomeBaseBanner({

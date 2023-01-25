@@ -1,8 +1,8 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/widgets/base/custom_image.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/base/custom_image.dart';
 
 class CustomIcon extends StatelessWidget {
   const CustomIcon(this.icon, {super.key, this.size, this.color, this.background, this.spacing, this.radius, this.normal = false});

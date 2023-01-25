@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:phosart/services/snap_edit/src/models/config/dimension.dart';
+import 'package:snapeditify/services/snap_edit/src/models/config/dimension.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class RestyleConfig {

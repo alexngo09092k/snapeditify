@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/providers/enhance/enhance_state.dart';
-import 'package:phosart/services/services.dart';
-import 'package:phosart/utils/image.dart';
-import 'package:phosart/widgets/painter/painter.dart';
+import 'package:snapeditify/providers/enhance/enhance_state.dart';
+import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/utils/image.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 import 'dart:ui' as ui;
 
 class FaceVM extends Face with Provider {

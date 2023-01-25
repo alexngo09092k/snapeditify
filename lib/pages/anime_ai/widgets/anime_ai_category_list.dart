@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 
 class AnimeAICategoryList extends StatelessWidget {
   const AnimeAICategoryList({super.key, required this.provider});

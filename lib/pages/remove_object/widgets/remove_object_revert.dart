@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/providers/remove_object/remove_object_provider.dart';
-import 'package:phosart/utils/widget.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
+import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class RemoveObjectRevert extends StatelessWidget {
   const RemoveObjectRevert({super.key, required this.provider});

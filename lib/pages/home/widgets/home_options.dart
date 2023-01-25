@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:phosart/common/app_routes.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/gallery/gallery_provider.dart';
-import 'package:phosart/widgets/base/app_card.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:snapeditify/common/app_routes.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/gallery/gallery_provider.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class HomeOptions extends StatelessWidget {
   const HomeOptions({super.key});

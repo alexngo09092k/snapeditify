@@ -4,10 +4,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/services/snap_edit/src/models/config/end_points.dart';
-import 'package:phosart/services/snap_edit/src/models/config/enhance_config.dart';
-import 'package:phosart/services/snap_edit/src/models/config/remove_object_config.dart';
-import 'package:phosart/services/snap_edit/src/models/config/restyle_config.dart';
+import 'package:snapeditify/services/snap_edit/src/models/config/end_points.dart';
+import 'package:snapeditify/services/snap_edit/src/models/config/enhance_config.dart';
+import 'package:snapeditify/services/snap_edit/src/models/config/remove_object_config.dart';
+import 'package:snapeditify/services/snap_edit/src/models/config/restyle_config.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 class SnapEditConfig {

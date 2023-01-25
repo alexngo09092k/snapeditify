@@ -1,41 +1,40 @@
 {
   "project_info": {
-    "project_number": "268730434934",
-    "firebase_url": "https://phosart-5d64f-default-rtdb.firebaseio.com",
-    "project_id": "phosart-5d64f",
-    "storage_bucket": "phosart-5d64f.appspot.com"
+    "project_number": "851709128615",
+    "project_id": "snapeditify-67a19",
+    "storage_bucket": "snapeditify-67a19.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:268730434934:android:bbe3a430bd82b9ccd2e657",
+        "mobilesdk_app_id": "1:851709128615:android:663d46bc83eddfeca19082",
         "android_client_info": {
-          "package_name": "app.phosart.studio"
+          "package_name": "app.snapeditify.studio"
         }
       },
       "oauth_client": [
         {
-          "client_id": "268730434934-aaspifrl3f5a4088c5abqa6findpvdnq.apps.googleusercontent.com",
+          "client_id": "851709128615-2fq5nus6di77dhhfbgd0i8bd080nt2tp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD-7cmPDlnPRHFu5Lk4a8rMR33moa8B_ao"
+          "current_key": "AIzaSyAEcOFJkT6sd_RgmNSll5luj7c0LYAenEo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "268730434934-aaspifrl3f5a4088c5abqa6findpvdnq.apps.googleusercontent.com",
+              "client_id": "851709128615-2fq5nus6di77dhhfbgd0i8bd080nt2tp.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "268730434934-j96uc8fmv6ahnhi2gqv4p6qsgdhr842e.apps.googleusercontent.com",
+              "client_id": "851709128615-ptunqje9bf9get5e8g81vsp0vq7pj8qs.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "app.phosart.studio"
+                "bundle_id": "app.snapeditify.studio"
               }
             }
           ]

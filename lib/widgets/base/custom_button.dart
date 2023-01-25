@@ -1,4 +1,4 @@
-import 'package:phosart/common/constants.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {

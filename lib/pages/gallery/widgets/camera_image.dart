@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart' as impk;
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/gallery/gallery_provider.dart';
-import 'package:phosart/utils/image.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/gallery/gallery_provider.dart';
+import 'package:snapeditify/utils/image.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class CameraImage extends StatelessWidget {
   const CameraImage({super.key, required this.onImage});

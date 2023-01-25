@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phosart/common/configuration.dart';
+import 'package:snapeditify/common/configuration.dart';
 
 part 'constants/app_assets.dart';
 

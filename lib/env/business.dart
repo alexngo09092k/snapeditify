@@ -11,7 +11,7 @@ const businessConfig = {
   },
 
   /// Display name is used in app
-  'appName': 'Phosart',
+  'appName': 'SnapEditify',
 
   /// Version
   'version': '1.0.0',
@@ -23,10 +23,10 @@ const businessConfig = {
   'protocols': ['https://', 'http://', 'data:'],
 
   /// Prefix stored key
-  'sharedKeyPrefix': 'app.phosart.studio.',
+  'sharedKeyPrefix': 'app.snapeditify.studio.',
 
   /// Contact
-  'contact': 'support@phosart.app',
+  'contact': 'support@snapeditify.app',
 
   /// Social Networks
   'socialNetworks': [
@@ -63,7 +63,7 @@ const businessConfig = {
 
   /// Share app
   'shareApp': {
-    'message': 'Phosart AI Photo Editor Pro',
+    'message': 'SnapEditify AI Photo Editor Pro',
     'links': {'android': ''},
   },
 };

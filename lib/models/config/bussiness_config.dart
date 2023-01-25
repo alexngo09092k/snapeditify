@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:phosart/models/config/maintenance_mode.dart';
-import 'package:phosart/models/config/share_app.dart';
-import 'package:phosart/models/config/social_network.dart';
-import 'package:phosart/models/config/web_link.dart';
+import 'package:snapeditify/models/config/maintenance_mode.dart';
+import 'package:snapeditify/models/config/share_app.dart';
+import 'package:snapeditify/models/config/social_network.dart';
+import 'package:snapeditify/models/config/web_link.dart';
 
 enum AppMode {
   production,
@@ -42,10 +42,10 @@ class BusinessConfig {
 
   factory BusinessConfig.defaultValue() {
     return BusinessConfig(
-      appName: "Phosart AI Photo Editor Pro",
+      appName: "SnapEditify AI Photo Editor Pro",
       appLogo: "",
       protocols: ['https://', 'http://', 'data:'],
-      sharedKeyPrefix: "app.phosart.studio",
+      sharedKeyPrefix: "app.snapeditify.studio",
       contact: "brennanngo992k@gmail.com",
       shareApp: ShareApp(
         links: {
@@ -53,7 +53,7 @@ class BusinessConfig {
           ShareAppPlatform.ios: '',
           ShareAppPlatform.huawei: '',
         },
-        message: "Phosart AI Photo Editor Pro",
+        message: "SnapEditify AI Photo Editor Pro",
       ),
       socialNetworks: [],
       webLinks: [],

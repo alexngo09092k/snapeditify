@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/pages/enhance/widgets/enhance_image.dart';
-import 'package:phosart/providers/enhance/enhance_provider.dart';
-import 'package:phosart/widgets/base/app_layout.dart';
-import 'package:phosart/widgets/base/save_button.dart';
+import 'package:snapeditify/pages/enhance/widgets/enhance_image.dart';
+import 'package:snapeditify/providers/enhance/enhance_provider.dart';
+import 'package:snapeditify/widgets/base/app_layout.dart';
+import 'package:snapeditify/widgets/base/save_button.dart';
 
 class EnhancePage extends StatefulWidget {
   const EnhancePage({super.key});

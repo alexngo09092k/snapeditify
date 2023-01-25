@@ -1,12 +1,12 @@
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/providers/anime_ai/anime_ai_provider.dart';
-import 'package:phosart/providers/edit_image_provider.dart';
-import 'package:phosart/providers/enhance/enhance_provider.dart';
-import 'package:phosart/providers/remove_object/remove_object_provider.dart';
-import 'package:phosart/providers/restyle/restyle_provider.dart';
+import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
+import 'package:snapeditify/providers/edit_image_provider.dart';
+import 'package:snapeditify/providers/enhance/enhance_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
+import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/models/config/gallery_config.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/models/config/gallery_config.dart';
 
 enum EditImageType {
   removeObject,

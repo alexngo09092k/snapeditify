@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/services/snap_edit/snap_edit.dart';
-import 'package:phosart/services/snap_edit/src/utils.dart';
+import 'package:snapeditify/services/snap_edit/snap_edit.dart';
+import 'package:snapeditify/services/snap_edit/src/utils.dart';
 
 extension DetectedImage on SnapEdit {
   Future<SnapEditResponse<AIDetectionResponse?>> detection(AIDetectionBody body) async {

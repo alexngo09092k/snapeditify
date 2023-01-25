@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/remove_object/remove_object_provider.dart';
-import 'package:phosart/view_models/detected_object_vm.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
-import 'package:phosart/widgets/base/tile_row.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
+import 'package:snapeditify/view_models/detected_object_vm.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
+import 'package:snapeditify/widgets/base/tile_row.dart';
 
 class DetectedObjectItem extends StatelessWidget {
   const DetectedObjectItem({Key? key, required this.detectedObject, required this.provider}) : super(key: key);

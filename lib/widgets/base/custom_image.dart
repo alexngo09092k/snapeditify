@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:phosart/common/configuration.dart';
-import 'package:phosart/common/constants.dart';
+import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/common/constants.dart';
 
 class CustomImage extends StatelessWidget {
   const CustomImage({

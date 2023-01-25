@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/providers/edit_image_provider.dart';
-import 'package:phosart/widgets/base/custom_icon.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/edit_image_provider.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class SaveButton<T extends EditImageProvider> extends StatelessWidget {
   const SaveButton({super.key, required this.provider});

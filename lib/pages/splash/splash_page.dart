@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/common/app_routes.dart';
-import 'package:phosart/common/configuration.dart';
-import 'package:phosart/models/config/bussiness_config.dart';
-import 'package:phosart/common/extensions.dart';
-import 'package:phosart/widgets/base/app_layout.dart';
+import 'package:snapeditify/common/app_routes.dart';
+import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/models/config/bussiness_config.dart';
+import 'package:snapeditify/common/extensions.dart';
+import 'package:snapeditify/widgets/base/app_layout.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

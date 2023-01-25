@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:phosart/common/configuration.dart';
+import 'package:snapeditify/common/configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:phosart/models/config/bussiness_config.dart';
-import 'package:phosart/utils/widget.dart';
+import 'package:snapeditify/models/config/bussiness_config.dart';
+import 'package:snapeditify/utils/widget.dart';
 
 part 'extensions/ex_list.dart';
 part 'extensions/ex_permission.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_iap/fluttering_iap.dart';
-import 'package:phosart/common/constants.dart';
-import 'package:phosart/widgets/base/app_card.dart';
-import 'package:phosart/widgets/base/lottie_viewer.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 
 class UnlockPremium extends StatelessWidget {
   const UnlockPremium({
@@ -29,7 +29,7 @@ class UnlockPremium extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Unlock Phosart Premium",
+                "Unlock SnapEditify Premium",
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
