@@ -138,7 +138,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
-    AsyncStorage.instance.remove(AppSharedKey.instance.styles);
+    AsyncStorage.instance.remove(AsyncStorageKey.instance.styles);
     return true;
   }
 
@@ -149,7 +149,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
     if (res.data != null) {
       Debug.log("===== SYNC FROM SERVER GET STYLES ${res.data} =====");
-      AsyncStorage.instance.setString(AppSharedKey.instance.styles, res.data!.toJson());
+      AsyncStorage.instance.setString(AsyncStorageKey.instance.styles, res.data!.toJson());
     }
 
     if (res.error != null) {
@@ -163,7 +163,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? styleStrings = AsyncStorage.instance.getString(AppSharedKey.instance.styles);
+    String? styleStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.styles);
     if (styleStrings != null) {
       Debug.log("===== SYNC FROM STORAGE $styleStrings =====");
       StylesResponse data = StylesResponse.fromJson(styleStrings);

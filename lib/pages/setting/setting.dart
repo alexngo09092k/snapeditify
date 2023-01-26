@@ -156,7 +156,7 @@ class SettingPage extends StatelessWidget {
               TileRow.defaultStyle(
                 context,
                 title: 'Feedback',
-                image: AppAssets.instance.icRate,
+                image: AppAssets.instance.icFeedback,
                 onTap: _feedback,
               ),
               TileRow.defaultStyle(

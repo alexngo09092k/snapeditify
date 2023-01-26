@@ -14,7 +14,13 @@ class RemoveObjectPage extends StatefulWidget {
   State<RemoveObjectPage> createState() => _RemoveObjectPageState();
 }
 
-class _RemoveObjectPageState extends ProviderState<RemoveObjectPage, RemoveObjectProvider> {
+class _RemoveObjectPageState extends ProviderStateObserver<RemoveObjectPage, RemoveObjectProvider> {
+  @override
+  void onNextFrame(Duration timestamp) {
+    provider.showBrushGuide(context);
+    super.onNextFrame(timestamp);
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppLayout(

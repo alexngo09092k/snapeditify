@@ -6,6 +6,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/pages/remove_object/widgets/ai_guide.dart';
+import 'package:snapeditify/pages/remove_object/widgets/brush_guide.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
@@ -43,6 +45,10 @@ abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvi
   bool changeStrokeWidth(BuildContext context, double strokeWidth);
 
   bool changeStrokeColor(BuildContext context, Color strokeColor);
+
+  bool showAutoAIGuide(BuildContext context);
+
+  bool showBrushGuide(BuildContext context);
 }
 
 class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
@@ -155,6 +161,26 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   }
 
   @override
+  bool showAutoAIGuide(BuildContext context) {
+    int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.autoAIGuide);
+    if (num != null && num > 1) return false;
+
+    showDialog(context: context, builder: (_) => const AIGuide());
+    AsyncStorage.instance.setInt(AsyncStorageKey.instance.autoAIGuide, num == null ? 1 : num + 1);
+    return true;
+  }
+
+  @override
+  bool showBrushGuide(BuildContext context) {
+    int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.brushGuide);
+    if (num != null && num > 1) return false;
+
+    showDialog(context: context, builder: (_) => const BrushGuide());
+    AsyncStorage.instance.setInt(AsyncStorageKey.instance.brushGuide, num == null ? 1 : num + 1);
+    return true;
+  }
+
+  @override
   Future<bool> revert() {
     Debug.log("===== REVERT ====");
     _state.removeListener(notifyListeners);
@@ -199,6 +225,10 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
       /// HIDE LOADING POPUP
       Navigator.pop(context);
+
+      /// SHOW GUIDE
+      showAutoAIGuide(context);
+
       return true;
     }
 
@@ -301,7 +331,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     _state.strokeWidth = strokeWidth;
 
     /// CACHE LOCAL STORAGE
-    AsyncStorage.instance.setDouble(AppSharedKey.instance.strokeWidth, _state.strokeWidth);
+    AsyncStorage.instance.setDouble(AsyncStorageKey.instance.strokeWidth, _state.strokeWidth);
     return true;
   }
 
@@ -310,7 +340,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     _state.strokeColor = strokeColor;
 
     /// CACHE LOCAL STORAGE
-    AsyncStorage.instance.setInt(AppSharedKey.instance.strokeColor, _state.strokeColor.value);
+    AsyncStorage.instance.setInt(AsyncStorageKey.instance.strokeColor, _state.strokeColor.value);
     return true;
   }
 
@@ -343,8 +373,8 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
-    AsyncStorage.instance.remove(AppSharedKey.instance.strokeColor);
-    AsyncStorage.instance.remove(AppSharedKey.instance.strokeWidth);
+    AsyncStorage.instance.remove(AsyncStorageKey.instance.strokeColor);
+    AsyncStorage.instance.remove(AsyncStorageKey.instance.strokeWidth);
     return true;
   }
 
@@ -355,12 +385,12 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    int? strokeColor = AsyncStorage.instance.getInt(AppSharedKey.instance.strokeColor);
+    int? strokeColor = AsyncStorage.instance.getInt(AsyncStorageKey.instance.strokeColor);
     if (strokeColor != null) {
       _state.strokeColor = Color(strokeColor);
     }
 
-    double? strokeWidth = AsyncStorage.instance.getDouble(AppSharedKey.instance.strokeWidth);
+    double? strokeWidth = AsyncStorage.instance.getDouble(AsyncStorageKey.instance.strokeWidth);
     if (strokeWidth != null) {
       _state.strokeWidth = strokeWidth;
     }

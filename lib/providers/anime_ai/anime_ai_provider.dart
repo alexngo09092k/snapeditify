@@ -179,7 +179,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
     if (res.data != null) {
       Debug.log("===== SYNC FROM SERVER GET STYLES ${res.data} =====");
-      AsyncStorage.instance.setString(AppSharedKey.instance.animeStyles, res.data!.toJson());
+      AsyncStorage.instance.setString(AsyncStorageKey.instance.animeStyles, res.data!.toJson());
     }
 
     if (res.error != null) {
@@ -193,7 +193,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? styleStrings = AsyncStorage.instance.getString(AppSharedKey.instance.animeStyles);
+    String? styleStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.animeStyles);
     if (styleStrings != null) {
       Debug.log("===== SYNC FROM STORAGE $styleStrings =====");
       AnimeStylesResponse data = AnimeStylesResponse.fromJson(styleStrings);
@@ -218,7 +218,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
-    AsyncStorage.instance.remove(AppSharedKey.instance.animeStyles);
+    AsyncStorage.instance.remove(AsyncStorageKey.instance.animeStyles);
     return true;
   }
 

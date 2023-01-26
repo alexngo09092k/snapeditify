@@ -62,13 +62,13 @@ abstract class EditImageProvider extends Provider {
     Future<bool> Function()? save,
     void Function()? canNotSave,
   ]) async {
-    int saveCount = AsyncStorage.instance.getInt(AppSharedKey.instance.saveCount) ?? 0;
+    int saveCount = AsyncStorage.instance.getInt(AsyncStorageKey.instance.saveCount) ?? 0;
     Debug.log("Checkout save image count $saveCount");
     if (saveCount > config.maxFreeDownloadCount && canNotSave != null) {
       canNotSave();
       return false;
     } else if (save != null && await save()) {
-      AsyncStorage.instance.setInt(AppSharedKey.instance.saveCount, saveCount + 1);
+      AsyncStorage.instance.setInt(AsyncStorageKey.instance.saveCount, saveCount + 1);
       return true;
     }
     return false;
@@ -96,6 +96,9 @@ abstract class EditImageProvider extends Provider {
         /// SHOW SAVED IMAGE
         await showModalBottomSheet<bool>(
           context: context,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+          ),
           builder: (_) => SavedImagePreview(provider: this),
         );
         return true;
@@ -111,7 +114,8 @@ abstract class EditImageProvider extends Provider {
       WidgetUtils.instance.showErrorPopup(
         context,
         title: 'Save Image Limit',
-        message: 'You have reached the limit of saved image, please upgrade premium version or contact ${Configuration.instance.business.appName} Team to support.',
+        message:
+            'You have reached the limit of saved image, please upgrade premium version or contact ${Configuration.instance.business.appName} Team to support.',
         retry: saveImage,
       );
     });

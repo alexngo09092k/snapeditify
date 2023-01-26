@@ -23,7 +23,7 @@ const business = {
   'protocols': ['https://', 'http://', 'data:'],
 
   /// Prefix stored key
-  'sharedKeyPrefix': 'app.snapeditify.studio.',
+  'prefix': 'app.snapeditify.studio.',
 
   /// Contact
   'contact': 'support@snapeditify.app',

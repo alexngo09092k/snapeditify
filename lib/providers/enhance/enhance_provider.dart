@@ -1,7 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/pages/enhance/widgets/enhance_guide.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_state.dart';
 import 'package:snapeditify/services/services.dart';
@@ -13,6 +15,8 @@ import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   Future<bool> enhanceImage(BuildContext context);
+
+  bool showEnhanceGuide(BuildContext context);
 }
 
 class EnhanceProvider extends IEnhanceProvider {
@@ -77,6 +81,10 @@ class EnhanceProvider extends IEnhanceProvider {
 
       /// HIDE LOADING POPUP
       Navigator.pop(context);
+
+      /// SHOW GUIDE
+      showEnhanceGuide(context);
+
       return true;
     }
 
@@ -89,6 +97,16 @@ class EnhanceProvider extends IEnhanceProvider {
     }
 
     return false;
+  }
+
+  @override
+  bool showEnhanceGuide(BuildContext context) {
+    int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.enhanceGuide);
+    if (num != null && num > 1) return false;
+
+    showDialog(context: context, builder: (_) => const EnhanceGuide());
+    AsyncStorage.instance.setInt(AsyncStorageKey.instance.autoAIGuide, num == null ? 1 : num + 1);
+    return true;
   }
 
   @override

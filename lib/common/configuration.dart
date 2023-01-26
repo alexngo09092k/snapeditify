@@ -148,7 +148,7 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
       }
 
       /// setConfig in store
-      AsyncStorage.instance.setString(AppSharedKey.instance.remoteConfig, stringConfig);
+      AsyncStorage.instance.setString(AsyncStorageKey.instance.remoteConfig, stringConfig);
 
       Map<String, dynamic> enviroment = json.decode(stringConfig);
 
@@ -156,7 +156,7 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
 
       /// miliseconds
       AsyncStorage.instance.setInt(
-        AppSharedKey.instance.remoteConfigExpriedDate,
+        AsyncStorageKey.instance.remoteConfigExpriedDate,
         (Configuration.instance.firebase.minimumFetchInterval.inMilliseconds + DateTime.now().millisecondsSinceEpoch),
       );
     }
@@ -168,7 +168,7 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
       return false;
     }
 
-    String? stringConfig = AsyncStorage.instance.getString(AppSharedKey.instance.remoteConfig);
+    String? stringConfig = AsyncStorage.instance.getString(AsyncStorageKey.instance.remoteConfig);
     if (stringConfig == null) {
       return false;
     }
@@ -180,7 +180,7 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
   }
 
   bool isExpriedRemoteConfig() {
-    int? timestampExpriedDate = AsyncStorage.instance.getInt(AppSharedKey.instance.remoteConfigExpriedDate);
+    int? timestampExpriedDate = AsyncStorage.instance.getInt(AsyncStorageKey.instance.remoteConfigExpriedDate);
     int timestampNow = DateTime.now().millisecondsSinceEpoch;
     if (timestampExpriedDate == null || (timestampNow > timestampExpriedDate)) return true;
     return false;

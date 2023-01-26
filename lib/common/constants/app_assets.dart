@@ -12,7 +12,6 @@ class AppAssets {
   /// Lotties
   static const String lottiePath = 'assets/lotties';
 
-  final String animRatingStar = '$lottiePath/anim_rating_star.json';
   final String auToAIAnim = '$lottiePath/autoai_anim.json';
   final String brushAnim = '$lottiePath/brush_anim.json';
   final String enhanceGuideBfAf = '$lottiePath/enhance_guide_bf_af.json';
@@ -23,6 +22,7 @@ class AppAssets {
   final String heartTeam = "$lottiePath/heart.json";
   final String premiumGold = "$lottiePath/premium_gold.json";
   final String notFound = "$lottiePath/not_found.json";
+  final String confetti = "$lottiePath/confetti.json";
 
   /// Images
   static const String imagePath = 'assets/images';
@@ -52,14 +52,10 @@ class AppAssets {
   final String icEnhence = "$iconPath/ic_enhance.png";
   final String icArtEffect = "$iconPath/ic_art_effect.png";
   final String icRemoveObject = "$iconPath/ic_remove_object.png";
-  final String icRate = "$iconPath/ic_rate.png";
+  final String icFeedback = "$iconPath/ic_rate.png";
   final String icShare = "$iconPath/ic_share.png";
   final String icTerm = "$iconPath/ic_term.png";
   final String icFAQ = "$iconPath/ic_faq.png";
-  final String icStarNormal = "$iconPath/ic_star_normal.png";
-  final String icStarHighlight = "$iconPath/ic_star_highlight.png";
-  final String icArrowRating = "$iconPath/ic_arrow_rating.png";
-  final String icBling = "$iconPath/ic_bling.png";
   final String icHand = "$iconPath/ic_hand.png";
   final String icRedo = "$iconPath/ic_redo.png";
   final String icUndo = "$iconPath/ic_undo.png";

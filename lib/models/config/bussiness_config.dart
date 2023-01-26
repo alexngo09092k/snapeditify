@@ -17,7 +17,7 @@ class BusinessConfig {
   final String appName;
   final String appLogo;
   final List<String> protocols;
-  final String sharedKeyPrefix;
+  final String prefix;
   final String contact;
   final List<SocialNetwork> socialNetworks;
   final List<WebLink> webLinks;
@@ -30,7 +30,7 @@ class BusinessConfig {
     required this.appName,
     required this.appLogo,
     required this.protocols,
-    required this.sharedKeyPrefix,
+    required this.prefix,
     required this.contact,
     required this.shareApp,
     required this.maintenanceMode,
@@ -45,7 +45,7 @@ class BusinessConfig {
       appName: "SnapEditify AI Photo Editor Pro",
       appLogo: "",
       protocols: ['https://', 'http://', 'data:'],
-      sharedKeyPrefix: "app.snapeditify.studio",
+      prefix: "app.snapeditify.studio",
       contact: "brennanngo992k@gmail.com",
       shareApp: ShareApp(
         links: {
@@ -71,7 +71,7 @@ class BusinessConfig {
     String? appName,
     String? appLogo,
     List<String>? protocols,
-    String? sharedKeyPrefix,
+    String? prefix,
     String? contact,
     ShareApp? shareApp,
     MaintenanceMode? maintenanceMode,
@@ -84,7 +84,7 @@ class BusinessConfig {
       appName: appName ?? this.appName,
       appLogo: appLogo ?? this.appLogo,
       protocols: protocols ?? this.protocols,
-      sharedKeyPrefix: sharedKeyPrefix ?? this.sharedKeyPrefix,
+      prefix: prefix ?? this.prefix,
       contact: contact ?? this.contact,
       shareApp: shareApp ?? this.shareApp,
       appMode: appMode ?? this.appMode,
@@ -100,7 +100,7 @@ class BusinessConfig {
       'appName': appName,
       'appLogo': appLogo,
       'protocols': protocols,
-      'sharedKeyPrefix': sharedKeyPrefix,
+      'prefix': prefix,
       'contact': contact,
       'shareApp': shareApp.toMap(),
       'appMode': appMode.name,
@@ -116,7 +116,7 @@ class BusinessConfig {
       appName: map['appName'] as String,
       appLogo: map['appLogo'] as String,
       protocols: (map['protocols'] as List).map((e) => e.toString()).toList(),
-      sharedKeyPrefix: map['sharedKeyPrefix'] as String,
+      prefix: map['prefix'] as String,
       contact: map['contact'] as String,
       shareApp: ShareApp.fromMap(map['shareApp']),
       appMode: AppMode.values.firstWhere((element) => element.name == map['appMode']),
@@ -133,7 +133,7 @@ class BusinessConfig {
 
   @override
   String toString() {
-    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, protocols: $protocols, sharedKeyPrefix: $sharedKeyPrefix, shareApp: $shareApp, appMode: $appMode, maintenanceMode: $maintenanceMode, socialNetworks: $socialNetworks, webLinks: $webLinks, version: $version)';
+    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, protocols: $protocols, prefix: $prefix, shareApp: $shareApp, appMode: $appMode, maintenanceMode: $maintenanceMode, socialNetworks: $socialNetworks, webLinks: $webLinks, version: $version)';
   }
 
   @override
@@ -143,7 +143,7 @@ class BusinessConfig {
     return other.appName == appName &&
         other.appLogo == appLogo &&
         listEquals(other.protocols, protocols) &&
-        other.sharedKeyPrefix == sharedKeyPrefix &&
+        other.prefix == prefix &&
         other.contact == contact &&
         other.appMode == appMode &&
         other.maintenanceMode == maintenanceMode &&
@@ -158,7 +158,7 @@ class BusinessConfig {
     return appName.hashCode ^
         appLogo.hashCode ^
         protocols.hashCode ^
-        sharedKeyPrefix.hashCode ^
+        prefix.hashCode ^
         contact.hashCode ^
         shareApp.hashCode ^
         maintenanceMode.hashCode ^
