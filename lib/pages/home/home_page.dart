@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
       children: [
         HomeBaseBanner(
           banner: AppAssets.instance.homeRemoveObjectBanner,
-          title: 'Turn your\nphotos\ninto Art',
+          title: 'Remove things \nfrom image',
           buttonTitle: 'Try it now',
           action: () => AppRoutes.instance.goGalleryPage(context, EditImageType.removeObject),
         ),
@@ -49,23 +49,21 @@ class HomePage extends StatelessWidget {
         const AdView(),
         HomeBaseBanner(
           banner: AppAssets.instance.homeEnhanceBanner,
-          title: 'Turn your\nphotos\ninto Art',
+          title: 'Turn your \nimage \ninto Art',
           buttonTitle: 'Try it now',
           action: () => AppRoutes.instance.goGalleryPage(context, EditImageType.enhanceImage),
         ),
         SizedBox(height: AppDimensions.instance.padding),
-        const AdView(),
         HomeBaseBanner(
           banner: AppAssets.instance.homeArtEffectBanner,
-          title: 'Turn your\nphotos\ninto Art',
+          title: 'Enhance \nimage quality',
           buttonTitle: 'Try it now',
           action: () => AppRoutes.instance.goGalleryPage(context, EditImageType.applyArtEffect),
         ),
         SizedBox(height: AppDimensions.instance.padding),
-        const AdView(),
         HomeBaseBanner(
           banner: AppAssets.instance.homeAnimeAIBanner,
-          title: 'Turn your\nphotos\ninto Art',
+          title: 'Create \nAnime avatar',
           buttonTitle: 'Try it now',
           action: () => AppRoutes.instance.goGalleryPage(context, EditImageType.animeAI),
         ),

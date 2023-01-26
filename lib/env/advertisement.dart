@@ -11,7 +11,7 @@
 // roll,
 
 const advertisement = {
-  "enable": false,
+  "enable": true,
   "adMobAppIdIos": "",
   "adMobAppIdAndroid": "",
   "providers": ["google", "huawei"],

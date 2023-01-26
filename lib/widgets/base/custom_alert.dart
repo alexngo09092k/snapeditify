@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:snapeditify/widgets/base/cupertino_block.dart';
 
 class CustomAlert extends StatefulWidget {
@@ -34,8 +35,8 @@ class _CustomAlertState extends State<CustomAlert> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return CupertinoBlock(
       child: CupertinoAlertDialog(
-        title: widget.title != null ? Text(widget.title!) : null,
-        content: widget.message != null ? Text(widget.message!) : null,
+        title: widget.title != null ? Text(widget.title!, style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.w600)) : null,
+        content: widget.message != null ? Text(widget.message!, style: Theme.of(context).textTheme.bodyText1) : null,
         actions: widget.actions
             .map((e) => CupertinoDialogAction(
                   onPressed: e.onPressed,
