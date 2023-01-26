@@ -31,6 +31,7 @@ class _MultipleSliverLoadMoreState<T> extends State<MultipleSliverLoadMore<T>> {
               padding: item.padding,
               extendedListDelegate: item.extendedListDelegate,
               gridDelegate: item.gridDelegate,
+              showNoMore: false,
             ),
           ),
         );

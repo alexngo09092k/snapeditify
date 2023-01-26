@@ -1,6 +1,6 @@
 const inAppReview = {
   'enable': true,
-  'minLaunchTimes': 0,
+  'minLaunchTimes': 1,
   'minDaysAfterInstall': 0,
-  'minDaysBeforeRemind': 0,
+  'minDaysBeforeRemind': 1,
 };
