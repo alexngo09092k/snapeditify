@@ -1,4 +1,4 @@
-const businessConfig = {
+const business = {
   /// App mode
   /// production, debug, maintenance
   'appMode': 'debug',

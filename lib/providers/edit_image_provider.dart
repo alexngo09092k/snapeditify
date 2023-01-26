@@ -24,7 +24,7 @@ abstract class EditImageProvider extends Provider {
   late EditingImageVM _originalImage;
   EditingImageVM get originalImage => _originalImage;
 
-  SnapEditConfig get config => Configuration.instance.snapEditConfig;
+  SnapEditConfig get config => Configuration.instance.snapEdit;
 
   EditedImageVM get editedImage;
 
@@ -86,7 +86,7 @@ abstract class EditImageProvider extends Provider {
       /// SAVE IMAGE
       AssetEntity? asset = await PhotoManager.editor.saveImage(
         editedImage.imageBytes,
-        title: '${Configuration.instance.businessConfig.appName}_${DateTime.now().millisecond}',
+        title: '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
       );
 
       _savedFile = (await asset?.file);
@@ -142,21 +142,26 @@ abstract class EditImageProvider extends Provider {
 
   goBack(BuildContext context) {
     if (!canBack) {
-      WidgetUtils.instance.alert(context, message: 'Are you sure cancel all edit image', actions: [
-        AlertAction(
-          title: 'Cancel',
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        AlertAction(
+      WidgetUtils.instance.alert(
+        context,
+        message: 'All changes will be lost. Are you sure you want to leave without saving?',
+        actions: [
+          AlertAction(
+            title: 'Cancel',
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          AlertAction(
             title: 'Ok',
             isDestructiveAction: true,
             onPressed: () {
               Navigator.pop(context);
               Navigator.pop(context);
-            })
-      ]);
+            },
+          )
+        ],
+      );
     } else {
       Navigator.pop(context);
     }

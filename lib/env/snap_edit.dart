@@ -1,4 +1,4 @@
-const snapEditConfig = {
+const snapEdit = {
     'baseUrl': "https://be-prod-1.snapedit.app/",
     'apiKey': "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
     'version': "3.1.0",

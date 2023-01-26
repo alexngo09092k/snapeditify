@@ -13,7 +13,7 @@ class HomeLogo extends StatelessWidget {
       child: AnimatedTextKit(
         animatedTexts: [
           ColorizeAnimatedText(
-            Configuration.instance.businessConfig.appName,
+            Configuration.instance.business.appName,
             textStyle: Theme.of(context).textTheme.headline5!,
             colors: [Theme.of(context).primaryColor, Theme.of(context).colorScheme.secondary],
           ),

@@ -3,25 +3,29 @@ import 'package:snapeditify/env/business.dart';
 import 'package:snapeditify/env/firebase.dart';
 import 'package:snapeditify/env/gallery.dart';
 import 'package:snapeditify/env/in_app_purchase.dart';
+import 'package:snapeditify/env/in_app_review.dart';
 import 'package:snapeditify/env/snap_edit.dart';
 
 //! NOTE: UNIT TIME: SECONDS
 Map<String, dynamic> enviroment = {
   /// FIREBASE
-  "firebaseConfig": firebaseConfig,
+  "firebase": firebase,
+
+  /// IN APP REVIEW
+  "inAppReview": inAppReview,
 
   /// BUSSINESS
-  "businessConfig": businessConfig,
+  "business": business,
 
   /// GALLERY
-  "galleryConfig": galleryConfig,
+  "gallery": gallery,
 
   // ADVERTISEMENT
-  "advertisementConfig": advertisementConfig,
+  "advertisement": advertisement,
 
   //IN APP PURCHASE
-  "iapConfig": iapConfig,
+  "iap": iap,
 
   /// SNAPEDIT
-  'snapEditConfig': snapEditConfig,
+  'snapEdit': snapEdit,
 };

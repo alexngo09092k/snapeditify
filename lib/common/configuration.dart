@@ -19,52 +19,60 @@ class Configuration {
   Configuration._internal();
 
   /// FIREBASE CONFIGURATIONS
-  FirebaseConfig _firebaseConfig = DefaultConfig.firebaseConfig;
-  FirebaseConfig get firebaseConfig => _firebaseConfig;
+  FirebaseConfig _firebase = DefaultConfig.firebase;
+  FirebaseConfig get firebase => _firebase;
+
+  /// IN APP REVIEW CONFIGUARATIONS
+  InAppReviewConfig _inAppReview = DefaultConfig.inAppReview;
+  InAppReviewConfig get inAppReview => _inAppReview;
 
   /// APP CONFIGUARATIONS
-  BusinessConfig _businessConfig = DefaultConfig.businessConfig;
-  BusinessConfig get businessConfig => _businessConfig;
+  BusinessConfig _business = DefaultConfig.business;
+  BusinessConfig get business => _business;
 
   /// GALLERY CONFIGUARATIONS
-  GalleryConfig _galleryConfig = DefaultConfig.galleryConfig;
-  GalleryConfig get galleryConfig => _galleryConfig;
+  GalleryConfig _gallery = DefaultConfig.gallery;
+  GalleryConfig get gallery => _gallery;
 
   /// IAP CONFIGURATIONS
-  IAPConfig _iapConfig = DefaultConfig.iapConfig;
-  IAPConfig get iapConfig => _iapConfig;
+  IAPConfig _iap = DefaultConfig.iap;
+  IAPConfig get iap => _iap;
 
   /// ADS CONFIGURATIONS
-  AdvertisementConfig _advertisementConfig = DefaultConfig.advertisementConfig;
-  AdvertisementConfig get advertisementConfig => _advertisementConfig;
+  AdvertisementConfig _advertisement = DefaultConfig.advertisement;
+  AdvertisementConfig get advertisement => _advertisement;
 
   /// API CONFIGURATIONS
-  SnapEditConfig _snapEditConfig = DefaultConfig.snapEditConfig;
-  SnapEditConfig get snapEditConfig => _snapEditConfig;
+  SnapEditConfig _snapEdit = DefaultConfig.snapEdit;
+  SnapEditConfig get snapEdit => _snapEdit;
 
   bool fromEnviroment(Map<String, dynamic> enviroment) {
-    if (enviroment['businessConfig'] != null) {
-      _businessConfig = BusinessConfig.fromMap(enviroment['businessConfig']);
+    if (enviroment['business'] != null) {
+      _business = BusinessConfig.fromMap(enviroment['business']);
     }
 
-    if (enviroment['firebaseConfig'] != null) {
-      _firebaseConfig = FirebaseConfig.fromMap(enviroment['firebaseConfig']);
+    if (enviroment['firebase'] != null) {
+      _firebase = FirebaseConfig.fromMap(enviroment['firebase']);
     }
 
-    if (enviroment['advertisementConfig'] != null) {
-      _advertisementConfig = AdvertisementConfig.fromMap(enviroment['advertisementConfig']);
+    if (enviroment['inAppReview'] != null) {
+      _inAppReview = InAppReviewConfig.fromMap(enviroment['inAppReview']);
     }
 
-    if (enviroment['galleryConfig'] != null) {
-      _galleryConfig = GalleryConfig.fromMap(enviroment['galleryConfig']);
+    if (enviroment['advertisement'] != null) {
+      _advertisement = AdvertisementConfig.fromMap(enviroment['advertisement']);
     }
 
-    if (enviroment['snapEditConfig'] != null) {
-      _snapEditConfig = SnapEditConfig.fromMap(enviroment['snapEditConfig']);
+    if (enviroment['gallery'] != null) {
+      _gallery = GalleryConfig.fromMap(enviroment['gallery']);
     }
 
-    if (enviroment['iapConfig'] != null) {
-      _iapConfig = IAPConfig.fromMap(enviroment['iapConfig']);
+    if (enviroment['snapEdit'] != null) {
+      _snapEdit = SnapEditConfig.fromMap(enviroment['snapEdit']);
+    }
+
+    if (enviroment['iap'] != null) {
+      _iap = IAPConfig.fromMap(enviroment['iap']);
     }
 
     return true;
@@ -73,7 +81,7 @@ class Configuration {
 
 abstract class DefaultConfig {
   /// DEFAULT FIREBASE CONFIGURATIONS
-  static FirebaseConfig firebaseConfig = FirebaseConfig(
+  static FirebaseConfig firebase = FirebaseConfig(
     enableFirebase: false,
     enableCrashAnalytics: true,
     enableRemoteConfigFirebase: false,
@@ -81,23 +89,31 @@ abstract class DefaultConfig {
     minimumFetchInterval: const Duration(milliseconds: 24 * 60 * 1000), // 1 day
   );
 
+  /// DEFAULT IN APP REVIEW CONFIGUARATIONS
+  static InAppReviewConfig inAppReview = const InAppReviewConfig(
+    enable: true,
+    minDaysAfterInstall: 1,
+    minDaysBeforeRemind: 1,
+    minLaunchTimes: 1,
+  );
+
   /// DEFAULT API CONFIGURATIONS
-  static SnapEditConfig snapEditConfig = SnapEditConfig.defaultValue();
+  static SnapEditConfig snapEdit = SnapEditConfig.defaultValue();
 
   /// DEFAULT APP CONFIGURATIONS
-  static BusinessConfig businessConfig = BusinessConfig.defaultValue();
+  static BusinessConfig business = BusinessConfig.defaultValue();
 
   /// DEFAULT ADS CONFIGURATIONS
-  static AdvertisementConfig advertisementConfig = const AdvertisementConfig(
+  static AdvertisementConfig advertisement = const AdvertisementConfig(
     ads: [],
     enable: true,
   );
 
   /// GALLERY CONFIGUARATIONS
-  static GalleryConfig galleryConfig = GalleryConfig.defaultValue();
+  static GalleryConfig gallery = GalleryConfig.defaultValue();
 
   /// DEFAULT IAP CONFIG
-  static IAPConfig iapConfig = const IAPConfig(
+  static IAPConfig iap = const IAPConfig(
     products: [],
     enable: true,
     provider: IAPProvider.google,
@@ -141,14 +157,14 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
       /// miliseconds
       AsyncStorage.instance.setInt(
         AppSharedKey.instance.remoteConfigExpriedDate,
-        (Configuration.instance.firebaseConfig.minimumFetchInterval.inMilliseconds + DateTime.now().millisecondsSinceEpoch),
+        (Configuration.instance.firebase.minimumFetchInterval.inMilliseconds + DateTime.now().millisecondsSinceEpoch),
       );
     }
   }
 
   Future<bool> loadRemoteConfigFromLocalStore() async {
     /// enable remote config
-    if (!firebaseConfig.enableRemoteConfigFirebase) {
+    if (!firebase.enableRemoteConfigFirebase) {
       return false;
     }
 
@@ -190,7 +206,7 @@ extension PackageInfoExtesnion on Configuration {
 
 extension NetworkExtension on Configuration {
   bool isNetwork(String url) {
-    for (var protocol in businessConfig.protocols) {
+    for (var protocol in business.protocols) {
       if (url.startsWith(protocol)) {
         return true;
       }

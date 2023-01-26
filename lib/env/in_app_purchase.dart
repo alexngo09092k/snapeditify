@@ -1,4 +1,4 @@
-const iapConfig = {
+const iap = {
   "products": [
     {
       "type": "consumables",

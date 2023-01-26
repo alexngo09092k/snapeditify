@@ -12,7 +12,7 @@ extension MPermissionStore on UserPermission {
         WidgetUtils.instance.showRequestPermissionPopup(
           context,
           title: "Photo",
-          message: 'Allow ${Configuration.instance.businessConfig.appName} to access photos on your device.',
+          message: 'Allow ${Configuration.instance.business.appName} to access photos on your device.',
           onForeground: () {
             requestPermission(
               permission: [Permission.storage],
@@ -42,7 +42,7 @@ extension MPermissionStore on UserPermission {
 //                 context,
 //                 title: "Location",
 //                 message:
-//                     'Allow ${Configuration.instance.businessConfig.appName} to collect location data to enable fitness tracking even when the app is closed or not in use.',
+//                     'Allow ${Configuration.instance.business.appName} to collect location data to enable fitness tracking even when the app is closed or not in use.',
 //                 onForeground: () {
 //                   requestPermission(
 //                     permission: [Permission.location],

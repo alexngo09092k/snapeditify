@@ -10,8 +10,8 @@
 // splash,
 // roll,
 
-const advertisementConfig = {
-  "enable": true,
+const advertisement = {
+  "enable": false,
   "adMobAppIdIos": "",
   "adMobAppIdAndroid": "",
   "providers": ["google", "huawei"],

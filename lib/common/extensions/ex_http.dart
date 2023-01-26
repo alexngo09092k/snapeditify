@@ -7,7 +7,7 @@ extension NetworkTracking on IClientHttp {
 
     if (!hasInternet) return false;
 
-    if (Configuration.instance.businessConfig.appMode == AppMode.debug) return true;
+    if (Configuration.instance.business.appMode == AppMode.debug) return true;
 
     final bool vpnActive = await isVpnActive();
     Debug.log("==========> VPN: $vpnActive");

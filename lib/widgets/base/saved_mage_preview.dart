@@ -64,7 +64,7 @@ class SavedImagePreview extends StatelessWidget {
                     title: 'SHARE',
                     width: 150,
                     height: 40,
-                    onTap: () => Share.shareXFiles([XFile(provider.savedFile!.path)], subject: Configuration.instance.businessConfig.shareApp.message),
+                    onTap: () => Share.shareXFiles([XFile(provider.savedFile!.path)], subject: Configuration.instance.business.shareApp.message),
                   )
                 ],
               ),

@@ -4,6 +4,7 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:snapeditify/services/services.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -13,15 +14,19 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends AwesomeAppState<App> {
+  late final IThemeProvider _provider;
   @override
   void initState() {
+    _provider = ManagerProvider.of<ThemeProvider>();
+    _provider.onChangePlatformBrightness();
     super.initState();
-    provider.onChangePlatformBrightness();
+
+    Services.instance.inAppReview.monitor();
   }
 
   @override
   void didChangePlatformBrightness() {
-    provider.onChangePlatformBrightness();
+    _provider.onChangePlatformBrightness();
     super.didChangePlatformBrightness();
   }
 
@@ -33,7 +38,7 @@ class _AppState extends AwesomeAppState<App> {
     return Consumer<IThemeProvider>(
       builder: (_, __, ___) {
         Debug.log("===== START APP =====");
-        Debug.log("===== THEME MODE: ${provider.themeMode} =====");
+        Debug.log("===== THEME MODE: ${_provider.themeMode} =====");
         final light = getLightTheme(context, scale: scale);
         final dark = getDarkTheme(context, scale: scale);
         return MaterialApp(
@@ -41,12 +46,12 @@ class _AppState extends AwesomeAppState<App> {
           navigatorKey: AwesomeAppState.navigatorKey,
           theme: light,
           darkTheme: dark,
-          themeMode: provider.themeMode,
+          themeMode: _provider.themeMode,
           initialRoute: AppRoutes.instance.initialRoute,
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,
           navigatorObservers: [AwesomeApp.observer],
           routes: AppRoutes.instance.routes,
-          localeResolutionCallback: provider.onChangeLocale,
+          localeResolutionCallback: _provider.onChangeLocale,
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,

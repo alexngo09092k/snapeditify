@@ -1,4 +1,4 @@
-const firebaseConfig = {
+const firebase = {
   "enableFirebase": true,
   "enableCrashAnalytics": true,
   "enableRemoteConfigFirebase": true,

@@ -1,4 +1,4 @@
-Map<String, dynamic> galleryConfig = {
+Map<String, dynamic> gallery = {
   'countInPage': 50,
   'hasAll': true,
   'onlyAll': false,

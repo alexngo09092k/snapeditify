@@ -17,6 +17,7 @@ class _RestylePageState extends ProviderState<RestylePage, RestyleProvider> {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
+      screen: 'Art Effect',
       onWillPop: () async => provider.canBack,
       goBack: () => provider.goBack(context),
       action: SaveButton(provider: provider),

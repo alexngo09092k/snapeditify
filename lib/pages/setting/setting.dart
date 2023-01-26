@@ -54,25 +54,25 @@ class SettingPage extends StatelessWidget {
       after: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Version ${Configuration.instance.businessConfig.version}', style: Theme.of(context).textTheme.bodyText1),
+          Text('Version ${Configuration.instance.business.version}', style: Theme.of(context).textTheme.bodyText1),
           LottieViewer(
             lottie: AppAssets.instance.heartTeam,
             width: AppDimensions.instance.icon,
             height: AppDimensions.instance.icon,
           ),
-          Text('${Configuration.instance.businessConfig.appName} Team', style: Theme.of(context).textTheme.bodyText1),
+          Text('${Configuration.instance.business.appName} Team', style: Theme.of(context).textTheme.bodyText1),
         ],
       ),
       children: [
         const UnlockPremium(),
-        if (Configuration.instance.businessConfig.webLinks.isNotEmpty)
+        if (Configuration.instance.business.webLinks.isNotEmpty)
           AppCard(
             child: SeparatedListView.withList(
               separator: Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
                 child: const Divider(height: 0),
               ),
-              list: Configuration.instance.businessConfig.webLinks
+              list: Configuration.instance.business.webLinks
                   .map(
                     (e) => TileRow.defaultStyle(
                       context,
@@ -85,7 +85,7 @@ class SettingPage extends StatelessWidget {
                   .toList(),
             ),
           ),
-        if (Configuration.instance.businessConfig.webLinks.isNotEmpty) SizedBox(height: AppDimensions.instance.padding),
+        if (Configuration.instance.business.webLinks.isNotEmpty) SizedBox(height: AppDimensions.instance.padding),
         AppCard(
           child: SeparatedListView.withList(
             separator: Padding(
@@ -109,14 +109,14 @@ class SettingPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: AppDimensions.instance.padding),
-        if (Configuration.instance.businessConfig.socialNetworks.isNotEmpty)
+        if (Configuration.instance.business.socialNetworks.isNotEmpty)
           AppCard(
             child: SeparatedListView.withList(
               separator: Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
                 child: const Divider(height: 0),
               ),
-              list: Configuration.instance.businessConfig.socialNetworks
+              list: Configuration.instance.business.socialNetworks
                   .map(
                     (e) => TileRow.defaultStyle(
                       context,
@@ -129,7 +129,7 @@ class SettingPage extends StatelessWidget {
                   .toList(),
             ),
           ),
-        if (Configuration.instance.businessConfig.socialNetworks.isNotEmpty) SizedBox(height: AppDimensions.instance.padding),
+        if (Configuration.instance.business.socialNetworks.isNotEmpty) SizedBox(height: AppDimensions.instance.padding),
         const AdView(),
       ],
     );

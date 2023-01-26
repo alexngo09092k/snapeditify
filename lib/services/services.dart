@@ -7,6 +7,8 @@ abstract class IServices {
   IFirebaseService get firebase;
 
   SnapEdit get snapEdit;
+
+  InAppReviewService get inAppReview;
 }
 
 class Services extends IServices {
@@ -19,6 +21,9 @@ class Services extends IServices {
 
   @override
   final IFirebaseService firebase = FirebaseService();
+
+  @override
+  final InAppReviewService inAppReview = InAppReviewService();
 
   @override
   final SnapEdit snapEdit = SnapEdit();

@@ -9,13 +9,13 @@ class AppSharedKey {
 
   AppSharedKey._internal();
 
-  String get remoteConfig => '${Configuration.instance.businessConfig.sharedKeyPrefix}remoteConfig';
-  String get remoteConfigExpriedDate => '${Configuration.instance.businessConfig.sharedKeyPrefix}remoteConfigExpriedDate';
-  String get themeMode => '${Configuration.instance.businessConfig.sharedKeyPrefix}themeMode';
-  String get styles => '${Configuration.instance.businessConfig.sharedKeyPrefix}styles';
-  String get animeStyles => '${Configuration.instance.businessConfig.sharedKeyPrefix}animeStyles';
+  String get remoteConfig => '${Configuration.instance.business.sharedKeyPrefix}remoteConfig';
+  String get remoteConfigExpriedDate => '${Configuration.instance.business.sharedKeyPrefix}remoteConfigExpriedDate';
+  String get themeMode => '${Configuration.instance.business.sharedKeyPrefix}themeMode';
+  String get styles => '${Configuration.instance.business.sharedKeyPrefix}styles';
+  String get animeStyles => '${Configuration.instance.business.sharedKeyPrefix}animeStyles';
 
-  String get downloadCount => '${Configuration.instance.businessConfig.sharedKeyPrefix}downloadCount';
-  String get strokeWidth => '${Configuration.instance.businessConfig.sharedKeyPrefix}strokeWidth';
-  String get strokeColor => '${Configuration.instance.businessConfig.sharedKeyPrefix}strokeColor';
+  String get downloadCount => '${Configuration.instance.business.sharedKeyPrefix}downloadCount';
+  String get strokeWidth => '${Configuration.instance.business.sharedKeyPrefix}strokeWidth';
+  String get strokeColor => '${Configuration.instance.business.sharedKeyPrefix}strokeColor';
 }

@@ -15,6 +15,7 @@ class WidgetUtils {
   showLoadingPopup<T>(BuildContext context, {String? message}) {
     showDialog<T>(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,12 +49,14 @@ class WidgetUtils {
     BuildContext context, {
     String? title,
     String? message,
+    bool barrierDismissible = false,
     List<AlertAction> actions = const [],
     void Function()? onBackground,
     void Function()? onForeground,
   }) {
     return showCupertinoModalPopup<T>(
       context: context,
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) => CustomAlert(
         title: title,
         message: message,

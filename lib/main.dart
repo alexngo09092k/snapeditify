@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:fluttering_iap/iap/iap.dart';
@@ -17,8 +16,7 @@ import 'package:snapeditify/services/services.dart';
 void main() {
   AwesomeApp(
     app: const App(),
-    debugMode: kDebugMode,
-    providers: [AwesomeAdvertisement.instance, AwesomeIAP.instance],
+    providers: [AwesomeAdvertisement.instance, AwesomeIAP.instance, ThemeProvider.instance],
     lazyProviders: [
       () => GalleryProvider.instance,
       () => RemoveObjectProvider.instance,
@@ -31,18 +29,18 @@ void main() {
     },
     onDidInitialize: () async {
       await Services.instance.firebase.init(
-        Configuration.instance.firebaseConfig,
+        Configuration.instance.firebase,
         options: DefaultFirebaseOptions.currentPlatform,
       );
 
       await Configuration.instance.loadRemoteConfig();
 
-      Debug.debugMode = Configuration.instance.businessConfig.appMode == AppMode.debug;
+      Debug.debugMode = Configuration.instance.business.appMode == AppMode.debug;
 
-      AwesomeAdvertisement.instance.initial(Configuration.instance.advertisementConfig);
-      AwesomeIAP.instance.initial(Configuration.instance.iapConfig);
+      AwesomeAdvertisement.instance.initial(Configuration.instance.advertisement);
+      AwesomeIAP.instance.initial(Configuration.instance.iap);
 
-      Services.instance.snapEdit.init(Configuration.instance.snapEditConfig);
+      Services.instance.snapEdit.init(Configuration.instance.snapEdit);
 
       return true;
     },

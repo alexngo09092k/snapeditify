@@ -36,7 +36,7 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
   }
 
   _mode() {
-    switch (Configuration.instance.businessConfig.appMode) {
+    switch (Configuration.instance.business.appMode) {
       case AppMode.debug:
       case AppMode.production:
         Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.homePage, (_) => false);
