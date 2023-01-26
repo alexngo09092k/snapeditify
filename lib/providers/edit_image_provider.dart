@@ -78,7 +78,7 @@ abstract class EditImageProvider extends Provider {
     if (!canSave) return false;
     return checkoutSaveImage(context, () async {
       /// SHOW ADS
-      adProvider.handleAd();
+      // adProvider.handleAd();
 
       WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 

@@ -25,11 +25,11 @@ class BeforeAfter extends StatefulWidget {
     this.imageWidth,
     this.imageCornerRadius = 8.0,
     this.thumbColor = Colors.white,
-    this.thumbRadius = 16.0,
+    this.thumbRadius = 20.0,
     this.overlayColor,
     this.isVertical = false,
     this.thumbImage,
-    this.slideWidth = 2,
+    this.slideWidth = 1,
   }) : super(key: key);
 
   @override
@@ -141,7 +141,7 @@ class CustomThumbShape extends SliderComponentShape {
       ..isAntiAlias = true
       ..strokeWidth = _thumbWidth
       ..color = _thumbColor
-      ..style = PaintingStyle.stroke;
+      ..style = PaintingStyle.fill;
 
     canvas.drawCircle(
       center,
