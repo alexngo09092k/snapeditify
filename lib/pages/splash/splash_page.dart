@@ -4,6 +4,7 @@ import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/common/extensions.dart';
+import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
 
 class SplashPage extends StatefulWidget {
@@ -25,7 +26,14 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
   void onSplash(bool resultOnWillSplash) async {
     if (resultOnWillSplash && await ClientHttp.instance.safeEnvironment()) {
       _goTo();
-    } else {}
+    } else {
+      WidgetUtils.instance.showErrorPopup(
+        context,
+        title: 'Internet connection',
+        message: 'You are no longer connected to the internet',
+        retry: (_) => AwesomeApp.instance?.restart(),
+      );
+    }
   }
 
   _goTo() {

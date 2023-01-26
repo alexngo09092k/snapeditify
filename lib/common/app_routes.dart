@@ -52,7 +52,7 @@ class AppRoutes extends IAppRoutes {
   @override
   Map<String, Widget Function(BuildContext)> routes = {
     splashPage: (context) => const SplashPage(),
-    maintenancePage: (context) => const HomePage(),
+    maintenancePage: (context) => const MaintenancePage(),
     homePage: (context) => const HomePage(),
     removeObjectPage: (context) => const RemoveObjectPage(),
     enhanceImagePage: (context) => const EnhancePage(),

@@ -172,7 +172,7 @@ extension JWTBuilders on SnapEditConfig {
     );
 
     // Sign it
-    Debug.log(latin1.decode(base64.decode(apiKey)));
+    // Debug.log(latin1.decode(base64.decode(apiKey)));
     token = jwt.sign(SecretKey(latin1.decode(base64.decode(apiKey))));
 
     Debug.log(token);
