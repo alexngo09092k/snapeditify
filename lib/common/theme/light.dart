@@ -21,7 +21,7 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
       bodyColor: AppColors.instance.darkLiver,
     ),
 
-    primaryColor: AppColors.instance.mediumSlateBlue,
+    primaryColor: AppColors.instance.primaryColor,
 
     secondaryHeaderColor: base.secondaryHeaderColor,
 
@@ -34,8 +34,8 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
 
     /// =================== COLOR SCHEME ====================
     colorScheme: base.colorScheme.copyWith(
-      primary: AppColors.instance.mediumSlateBlue,
-      secondary: AppColors.instance.downy,
+      primary: AppColors.instance.primaryColor,
+      secondary: AppColors.instance.secondaryColor,
     ),
 
     /// ====================== TEXT SELECTION THEME ======================

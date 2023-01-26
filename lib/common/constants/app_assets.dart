@@ -28,6 +28,7 @@ class AppAssets {
   static const String imagePath = 'assets/images';
 
   final String pageBackground = "$imagePath/page_background.png";
+  final String logo = "$imagePath/logo.png";
 
   /// Suggest images
   final String removeObjectDemo1 = "$imagePath/remove_object_demo_1.jpg";

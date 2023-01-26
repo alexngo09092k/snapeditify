@@ -28,7 +28,7 @@ class SavedImagePreview extends StatelessWidget {
                 children: [
                   Text(
                     'Saved Image',
-                    style: Theme.of(context).textTheme.headline6!.copyWith(color: AppColors.instance.mediumSlateBlue),
+                    style: Theme.of(context).textTheme.headline6!.copyWith(color: Theme.of(context).primaryColor),
                   ),
                   GestureDetector(
                     onTap: Navigator.of(context).pop,
@@ -62,7 +62,7 @@ class SavedImagePreview extends StatelessWidget {
                     width: 150,
                     height: 40,
                     color: AppColors.instance.white,
-                    titleColor: AppColors.instance.mediumSlateBlue,
+                    titleColor: Theme.of(context).primaryColor,
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.pop(context);

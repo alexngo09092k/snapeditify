@@ -5,7 +5,7 @@ import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/common/extensions.dart';
 import 'package:snapeditify/utils/widget.dart';
-import 'package:snapeditify/widgets/base/app_layout.dart';
+import 'package:snapeditify/widgets/base/custom_image.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -16,6 +16,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends AwesomeSplashState<SplashPage> {
   bool _goToApp = false;
+  final time = 2000;
 
   @override
   void initState() {
@@ -24,8 +25,14 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
 
   @override
   void onSplash(bool resultOnWillSplash) async {
+    final start = DateTime.now().millisecondsSinceEpoch;
     if (resultOnWillSplash && await ClientHttp.instance.safeEnvironment()) {
-      _goTo();
+      final end = DateTime.now().millisecondsSinceEpoch;
+      if ((end - start) >= time) {
+        _goTo();
+      } else {
+        Future.delayed(Duration(milliseconds: (time - ((end - start)))), _goTo);
+      }
     } else {
       WidgetUtils.instance.showErrorPopup(
         context,
@@ -58,29 +65,49 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AppLayout(
-      back: false,
-      children: [
-        AwesomeAnimation<double>.tweenSequence(
-          duration: const Duration(milliseconds: 200),
+    final logoWidth = AwesomeAppState.screen.width * 1 / 3;
+    return Scaffold(
+      body: Center(
+        child: AwesomeAnimation<double>.tweenSequence(
+          duration: Duration(milliseconds: time - 200),
           items: [
-            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 1), weight: 10),
+            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.2), weight: 1),
+            TweenSequenceItem(tween: Tween<double>(begin: 0.8, end: 1), weight: 1),
           ],
-          builder: (_, __, animation, ___) => Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          builder: (_, __, animation, ___) => Stack(
+            alignment: Alignment.center,
             children: [
-              Opacity(
-                opacity: animation.value,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [],
+              Transform.translate(
+                offset: Offset(logoWidth * (animation.value > 0.5 ? (0.3 - animation.value) : 0), 0),
+                child: CustomImage(
+                  image: Configuration.instance.business.appLogo,
+                  width: logoWidth * (animation.value < 0.5 ? (animation.value + 0.5) : (1.5 - animation.value)),
                 ),
-              )
+              ),
+              Opacity(
+                opacity: (animation.value < 1 ? 0 : animation.value),
+                child: Transform.translate(
+                  offset: Offset(logoWidth * 0.3, 0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        Configuration.instance.business.appName,
+                        style: Theme.of(context).textTheme.headline4!,
+                      ),
+                      Text(
+                        Configuration.instance.business.appBio,
+                        style: Theme.of(context).textTheme.bodyText1!,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
-      ],
+      ),
     );
   }
 }

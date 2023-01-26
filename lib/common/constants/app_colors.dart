@@ -9,7 +9,9 @@ class AppColors {
   AppColors._internal();
 
   /// [ACTIVE]
-  final Color mediumSlateBlue = const Color.fromRGBO(108, 118, 241, 1);
+  final Color primaryColor = const Color.fromRGBO(109, 124, 238, 1);
+
+  final Color secondaryColor = const Color.fromRGBO(113, 184, 205, 1);
 
   /// [ACTIVE]
   final Color downy = const Color.fromRGBO(114, 213, 187, 1);
@@ -24,7 +26,7 @@ class AppColors {
   final Color white = Colors.white;
 
   /// [BUTTON]
-  LinearGradient get gradient => LinearGradient(colors: [mediumSlateBlue, downy]);
+  LinearGradient get gradient => LinearGradient(colors: [primaryColor, secondaryColor]);
 
   /// [SHADOW]
   BoxShadow get boxShadow => BoxShadow(color: black.withOpacity(0.1), offset: const Offset(0, 8), blurRadius: 10);

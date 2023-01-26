@@ -19,7 +19,7 @@ class DetectedObjectItem extends StatelessWidget {
     final imageWidget = ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(5)),
       child: Container(
-        color: Theme.of(context).disabledColor,
+        color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
         width: AppDimensions.instance.iconX(1.5),
         height: AppDimensions.instance.iconX(1.5),
         child: Center(

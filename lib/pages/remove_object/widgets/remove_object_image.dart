@@ -76,7 +76,7 @@ class RemoveObjectImage extends StatelessWidget {
                                   width: p.state.strokeWidth,
                                   height: p.state.strokeWidth,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white, width: 1),
+                                    border: Border.all(color: AppColors.instance.white, width: 2),
                                     borderRadius: BorderRadius.all(Radius.circular(p.state.strokeWidth / 2)),
                                   ),
                                 ),

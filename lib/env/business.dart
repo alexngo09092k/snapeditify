@@ -19,6 +19,8 @@ const business = {
   /// Logo is used in splash screen and app ui
   'appLogo': 'assets/images/logo.png',
 
+  'appBio': 'Make life beautiful',
+
   /// Protocols is use to check
   'protocols': ['https://', 'http://', 'data:'],
 

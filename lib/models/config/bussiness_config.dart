@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+
 import 'package:snapeditify/models/config/maintenance_mode.dart';
 import 'package:snapeditify/models/config/share_app.dart';
 import 'package:snapeditify/models/config/social_network.dart';
@@ -16,6 +17,7 @@ enum AppMode {
 class BusinessConfig {
   final String appName;
   final String appLogo;
+  final String appBio;
   final List<String> protocols;
   final String prefix;
   final String contact;
@@ -29,21 +31,23 @@ class BusinessConfig {
   BusinessConfig({
     required this.appName,
     required this.appLogo,
+    required this.appBio,
     required this.protocols,
     required this.prefix,
     required this.contact,
+    required this.socialNetworks,
+    required this.webLinks,
     required this.shareApp,
     required this.maintenanceMode,
     required this.appMode,
-    required this.socialNetworks,
-    required this.webLinks,
     required this.version,
   });
 
   factory BusinessConfig.defaultValue() {
     return BusinessConfig(
       appName: "SnapEditify AI Photo Editor Pro",
-      appLogo: "",
+      appLogo: "assets/images/logo.png",
+      appBio: "Make life beautiful",
       protocols: ['https://', 'http://', 'data:'],
       prefix: "app.snapeditify.studio",
       contact: "brennanngo992k@gmail.com",
@@ -70,19 +74,21 @@ class BusinessConfig {
   BusinessConfig copyWith({
     String? appName,
     String? appLogo,
+    String? appBio,
     List<String>? protocols,
     String? prefix,
     String? contact,
+    List<SocialNetwork>? socialNetworks,
+    List<WebLink>? webLinks,
     ShareApp? shareApp,
     MaintenanceMode? maintenanceMode,
     AppMode? appMode,
-    List<SocialNetwork>? socialNetworks,
-    List<WebLink>? webLinks,
     String? version,
   }) {
     return BusinessConfig(
       appName: appName ?? this.appName,
       appLogo: appLogo ?? this.appLogo,
+      appBio: appBio ?? this.appBio,
       protocols: protocols ?? this.protocols,
       prefix: prefix ?? this.prefix,
       contact: contact ?? this.contact,
@@ -99,6 +105,7 @@ class BusinessConfig {
     return <String, dynamic>{
       'appName': appName,
       'appLogo': appLogo,
+      'appBio': appBio,
       'protocols': protocols,
       'prefix': prefix,
       'contact': contact,
@@ -115,6 +122,7 @@ class BusinessConfig {
     return BusinessConfig(
       appName: map['appName'] as String,
       appLogo: map['appLogo'] as String,
+      appBio: map['appBio'] as String,
       protocols: (map['protocols'] as List).map((e) => e.toString()).toList(),
       prefix: map['prefix'] as String,
       contact: map['contact'] as String,
@@ -133,7 +141,7 @@ class BusinessConfig {
 
   @override
   String toString() {
-    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, protocols: $protocols, prefix: $prefix, shareApp: $shareApp, appMode: $appMode, maintenanceMode: $maintenanceMode, socialNetworks: $socialNetworks, webLinks: $webLinks, version: $version)';
+    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, appBio: $appBio, protocols: $protocols, prefix: $prefix, contact: $contact, socialNetworks: $socialNetworks, webLinks: $webLinks, shareApp: $shareApp, maintenanceMode: $maintenanceMode, appMode: $appMode, version: $version)';
   }
 
   @override
@@ -142,14 +150,15 @@ class BusinessConfig {
 
     return other.appName == appName &&
         other.appLogo == appLogo &&
+        other.appBio == appBio &&
         listEquals(other.protocols, protocols) &&
         other.prefix == prefix &&
         other.contact == contact &&
-        other.appMode == appMode &&
-        other.maintenanceMode == maintenanceMode &&
-        other.socialNetworks == socialNetworks &&
-        other.webLinks == webLinks &&
+        listEquals(other.socialNetworks, socialNetworks) &&
+        listEquals(other.webLinks, webLinks) &&
         other.shareApp == shareApp &&
+        other.maintenanceMode == maintenanceMode &&
+        other.appMode == appMode &&
         other.version == version;
   }
 
@@ -157,13 +166,14 @@ class BusinessConfig {
   int get hashCode {
     return appName.hashCode ^
         appLogo.hashCode ^
+        appBio.hashCode ^
         protocols.hashCode ^
         prefix.hashCode ^
         contact.hashCode ^
-        shareApp.hashCode ^
-        maintenanceMode.hashCode ^
         socialNetworks.hashCode ^
         webLinks.hashCode ^
+        shareApp.hashCode ^
+        maintenanceMode.hashCode ^
         appMode.hashCode ^
         version.hashCode;
   }
