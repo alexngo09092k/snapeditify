@@ -62,12 +62,13 @@ abstract class EditImageProvider extends Provider {
     Future<bool> Function()? save,
     void Function()? canNotSave,
   ]) async {
-    int downloadCount = AsyncStorage.instance.getInt(AppSharedKey.instance.downloadCount) ?? 0;
-    if (downloadCount > config.maxFreeDownloadCount && canNotSave != null) {
+    int saveCount = AsyncStorage.instance.getInt(AppSharedKey.instance.saveCount) ?? 0;
+    Debug.log("Checkout save image count $saveCount");
+    if (saveCount > config.maxFreeDownloadCount && canNotSave != null) {
       canNotSave();
       return false;
     } else if (save != null && await save()) {
-      AsyncStorage.instance.setInt(AppSharedKey.instance.downloadCount, downloadCount + 1);
+      AsyncStorage.instance.setInt(AppSharedKey.instance.saveCount, saveCount + 1);
       return true;
     }
     return false;
@@ -93,49 +94,25 @@ abstract class EditImageProvider extends Provider {
 
       if (_savedFile != null) {
         /// SHOW SAVED IMAGE
-        return (await showModalBottomSheet<bool>(
-              context: context,
-              builder: (_) => SavedImagePreview(provider: this),
-            )) ??
-            false;
+        await showModalBottomSheet<bool>(
+          context: context,
+          builder: (_) => SavedImagePreview(provider: this),
+        );
+        return true;
       }
 
       /// SHOW ALERT
-      WidgetUtils.instance.alert(
-        context,
-        title: 'Save Image',
-        message: 'Somethings wrong, please try again.',
-        actions: [
-          AlertAction(title: 'Cancel', onPressed: Navigator.of(context).pop),
-          AlertAction(
-            title: 'Retry',
-            isDestructiveAction: true,
-            onPressed: () {
-              Navigator.of(context).pop();
-              saveImage(context);
-            },
-          ),
-        ],
-      );
+      WidgetUtils.instance.showErrorPopup(context, title: 'Save Image', retry: saveImage);
       return false;
     }, () {
       /// MAX COUNT DOWNLOAD IMAGE
       /// SHOW ALERT
-      WidgetUtils.instance.alert(
+
+      WidgetUtils.instance.showErrorPopup(
         context,
-        title: 'Save Image',
-        message: 'Somethings wrong, please try again.',
-        actions: [
-          AlertAction(title: 'Cancel', onPressed: Navigator.of(context).pop),
-          AlertAction(
-            title: 'Retry',
-            isDestructiveAction: true,
-            onPressed: () {
-              Navigator.of(context).pop();
-              saveImage(context);
-            },
-          ),
-        ],
+        title: 'Save Image Limit',
+        message: 'You have reached the limit of saved image, please upgrade premium version or contact ${Configuration.instance.business.appName} Team to support.',
+        retry: saveImage,
       );
     });
   }

@@ -206,7 +206,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     Navigator.pop(context);
 
     if (res.error != null) {
-      WidgetUtils.instance.alert(context, title: 'AI Mode', message: res.error.toString());
+      WidgetUtils.instance.showErrorPopup(context, title: 'AI Detection', retry: (_) => toAI(context));
       Debug.log("===== TO AI DETECTED OBJECTS ${res.error} =====");
     }
 
@@ -289,7 +289,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     Navigator.pop(context);
 
     if (res.error != null) {
-      WidgetUtils.instance.alert(context, title: 'Remove Objects', message: res.error.toString());
+      WidgetUtils.instance.showErrorPopup(context, title: 'Remove Objects', retry: (_) => removeObjects(context));
       Debug.log("===== REMOVE OBJECTS ${res.error} =====");
     }
 

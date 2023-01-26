@@ -12,6 +12,26 @@ class WidgetUtils {
 
   WidgetUtils._internal();
 
+  showErrorPopup<T>(BuildContext context, {String? title, String? message, Function(BuildContext)? retry}) {
+    return alert<T>(
+      context,
+      title: title ?? 'Something wrongs',
+      message: message ?? 'Somethings wrong, please try again.',
+      actions: [
+        AlertAction(title: 'Cancel', onPressed: Navigator.of(context).pop),
+        if (retry != null)
+          AlertAction(
+            title: 'Retry',
+            isDestructiveAction: true,
+            onPressed: () {
+              Navigator.of(context).pop();
+              retry(context);
+            },
+          ),
+      ],
+    );
+  }
+
   showLoadingPopup<T>(BuildContext context, {String? message}) {
     showDialog<T>(
       context: context,

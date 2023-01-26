@@ -64,6 +64,10 @@ const business = {
   /// Share app
   'shareApp': {
     'message': 'SnapEditify AI Photo Editor Pro',
-    'links': {'android': ''},
+    'links': {
+      'android': 'https://pub.dev/packages/url_launcher/example',
+      'ios': 'https://pub.dev/packages/url_launcher/example',
+      'huawei': 'https://pub.dev/packages/url_launcher/example'
+    },
   },
 };

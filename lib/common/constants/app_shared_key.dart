@@ -15,7 +15,7 @@ class AppSharedKey {
   String get styles => '${Configuration.instance.business.sharedKeyPrefix}styles';
   String get animeStyles => '${Configuration.instance.business.sharedKeyPrefix}animeStyles';
 
-  String get downloadCount => '${Configuration.instance.business.sharedKeyPrefix}downloadCount';
+  String get saveCount => '${Configuration.instance.business.sharedKeyPrefix}saveCount';
   String get strokeWidth => '${Configuration.instance.business.sharedKeyPrefix}strokeWidth';
   String get strokeColor => '${Configuration.instance.business.sharedKeyPrefix}strokeColor';
 }

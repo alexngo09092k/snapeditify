@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/utils/logs.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/pages/setting/widgets/unlock_premium.dart';
@@ -7,6 +8,7 @@ import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/ad_view.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
+import 'package:snapeditify/widgets/base/custom_alert.dart';
 import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 import 'package:snapeditify/widgets/base/separated_list_view.dart';
 import 'package:snapeditify/widgets/base/tile_row.dart';
@@ -15,27 +17,85 @@ import 'package:url_launcher/url_launcher.dart';
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
 
-  _showRatePopup(BuildContext context) {}
+  String? _encodeQueryParameters(Map<String, String> params) {
+    return params.entries.map((MapEntry<String, String> e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}').join('&');
+  }
 
-  _showSharePopup(BuildContext context) {}
+  _feedback(BuildContext context) {
+    mail(BuildContext context) async {
+      try {
+        final Uri emailLaunchUri = Uri(
+          scheme: 'mailto',
+          path: Configuration.instance.business.contact,
+          query: _encodeQueryParameters({
+            'subject': 'Feedback to ${Configuration.instance.business.appName} Team',
+          }),
+        );
+        if (!await launchUrl(emailLaunchUri)) {
+          WidgetUtils.instance.showErrorPopup(context, retry: mail);
+        }
+      } catch (error) {
+        Debug.log('feedback $error');
+        WidgetUtils.instance.showErrorPopup(context, retry: mail);
+      }
+    }
+
+    WidgetUtils.instance.alert(
+      context,
+      title: "Are you happy with\n${Configuration.instance.business.appName}?",
+      message: "Your feedback of the app and provide a better experience",
+      actions: [
+        AlertAction(
+          title: "Cancel",
+          isDestructiveAction: true,
+          onPressed: Navigator.of(context).pop,
+        ),
+        AlertAction(
+          title: "Send",
+          onPressed: () async {
+            Navigator.of(context).pop();
+            mail(context);
+          },
+        ),
+      ],
+    );
+  }
+
+  _showSharePopup(BuildContext context) {
+    WidgetUtils.instance.alert(
+      context,
+      title: "Share ${Configuration.instance.business.appName}",
+      message: "Let's share one of the best photo editing app with your friends, family and community",
+      actions: [
+        AlertAction(
+          title: "Cancel",
+          isDestructiveAction: true,
+          onPressed: Navigator.of(context).pop,
+        ),
+        AlertAction(
+          title: "Share",
+          onPressed: () {
+            Navigator.of(context).pop();
+            if (Configuration.instance.business.shareApp.link != null) {
+              Share.share(
+                Configuration.instance.business.shareApp.link!,
+                subject: Configuration.instance.business.appName,
+              );
+            }
+          },
+        ),
+      ],
+    );
+  }
 
   _launchUrlInApp(BuildContext context, String url) async {
     try {
       if (!await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView)) {
-        WidgetUtils.instance.alert(context, title: '', message: '');
+        WidgetUtils.instance.showErrorPopup(context, retry: (_) => _launchUrlInApp(context, url));
       }
     } catch (error) {
       Debug.log('launchUrlInApp $error');
-    }
-  }
-
-  _launchUrl(BuildContext context, String url) async {
-    try {
-      if (!await launchUrl(Uri.parse(url))) {
-        WidgetUtils.instance.alert(context, title: '', message: '');
-      }
-    } catch (error) {
-      Debug.log('launchUrl $error');
+      WidgetUtils.instance.showErrorPopup(context, retry: (_) => _launchUrlInApp(context, url));
     }
   }
 
@@ -95,13 +155,13 @@ class SettingPage extends StatelessWidget {
             list: [
               TileRow.defaultStyle(
                 context,
-                title: 'Rate us on App Store',
+                title: 'Feedback',
                 image: AppAssets.instance.icRate,
-                onTap: _showRatePopup,
+                onTap: _feedback,
               ),
               TileRow.defaultStyle(
                 context,
-                title: 'Share app',
+                title: 'Share ${Configuration.instance.business.appName}',
                 image: AppAssets.instance.icShare,
                 onTap: _showSharePopup,
               )
@@ -123,7 +183,7 @@ class SettingPage extends StatelessWidget {
                       title: e.brand,
                       image: e.image,
                       normal: true,
-                      onTap: (_) => _launchUrl(context, e.link),
+                      onTap: (_) => _launchUrlInApp(context, e.link),
                     ),
                   )
                   .toList(),

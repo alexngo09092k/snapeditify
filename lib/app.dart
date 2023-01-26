@@ -1,4 +1,5 @@
 import 'package:snapeditify/common/app_routes.dart';
+import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/theme.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
@@ -15,13 +16,15 @@ class App extends StatefulWidget {
 
 class _AppState extends AwesomeAppState<App> {
   late final IThemeProvider _provider;
+
   @override
   void initState() {
     _provider = ManagerProvider.of<ThemeProvider>();
     _provider.onChangePlatformBrightness();
-    super.initState();
 
-    Services.instance.inAppReview.monitor();
+    Services.instance.inAppReview.monitor(config: Configuration.instance.inAppReview);
+
+    super.initState();
   }
 
   @override

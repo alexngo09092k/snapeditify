@@ -84,7 +84,7 @@ class EnhanceProvider extends IEnhanceProvider {
     Navigator.pop(context);
 
     if (res.error != null) {
-      WidgetUtils.instance.alert(context, title: 'Enhance Image', message: res.error.toString());
+      WidgetUtils.instance.showErrorPopup(context, title: 'Enhance Image', retry: (_) => enhanceImage(context));
       Debug.log('===== ENAHNCE IMAGE ${res.error} =====');
     }
 

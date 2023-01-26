@@ -114,7 +114,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     Navigator.pop(context);
 
     if (res.error != null) {
-      WidgetUtils.instance.alert(context, title: 'Restyle Image', message: res.error.toString());
+      WidgetUtils.instance.showErrorPopup(context, title: 'Restyle Image', retry: (_) => restyleImage(context, styleId));
       Debug.log('====== RESTYLE IMAGE ${res.error} ======');
     }
 
