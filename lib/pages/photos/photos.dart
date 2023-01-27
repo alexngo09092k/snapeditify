@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:loading_more_list/loading_more_list.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/constants.dart';
@@ -10,6 +11,7 @@ import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
 import 'package:snapeditify/widgets/base/camera_picker.dart';
 import 'package:snapeditify/pages/photos/widgets/image_item.dart';
+import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 import 'package:snapeditify/widgets/load_more/sliver_grid_load_more.dart';
 import 'package:snapeditify/widgets/load_more/source_list.dart';
 
@@ -56,6 +58,31 @@ class _PhotosPageState extends ProviderState<PhotosPage, GalleryProvider> {
                   ),
                   gridDelegate: AppDimensions.instance.gridDelegate,
                   itemBuilder: (_, photo, ___) => ImageItem.withAssetEntity(photo, size: size, onImage: onImage),
+                  indicatorBuilder: (_, status) {
+                    switch (status) {
+                      case IndicatorStatus.empty:
+                        return IndicatorWidget(
+                          status,
+                          isSliver: true,
+                          emptyWidget: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LottieViewer(
+                                lottie: AppAssets.instance.notFound,
+                                width: AwesomeAppState.screen.width * 1 / 3,
+                                height: AwesomeAppState.screen.width * 1 / 3,
+                              ),
+                              Text(
+                                'Not found images',
+                                style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).disabledColor),
+                              )
+                            ],
+                          ),
+                        );
+                      default:
+                    }
+                    return null;
+                  },
                 ),
               )
             : BasePropConsumer<GalleryProvider, EditImageType>(
