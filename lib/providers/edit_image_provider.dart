@@ -132,31 +132,34 @@ abstract class EditImageProvider extends Provider {
     return result;
   }
 
-  goBack(BuildContext context) {
+  Future<bool> goBack(BuildContext context, [bool onPop = false]) async {
     if (!canBack) {
-      WidgetUtils.instance.alert(
-        context,
-        message: 'All changes will be lost. Are you sure you want to leave without saving?',
-        actions: [
-          AlertAction(
-            title: 'Cancel',
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          AlertAction(
-            title: 'Ok',
-            isDestructiveAction: true,
-            onPressed: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
-            },
-          )
-        ],
-      );
-    } else {
+      return (await WidgetUtils.instance.alert<bool>(
+            context,
+            message: 'All changes will be lost. Are you sure you want to leave without saving?',
+            actions: [
+              AlertAction(
+                title: 'Cancel',
+                onPressed: () {
+                  Navigator.pop<bool>(context, false);
+                },
+              ),
+              AlertAction(
+                title: 'Ok',
+                isDestructiveAction: true,
+                onPressed: () {
+                  Navigator.pop(context, true);
+                  if (!onPop) Navigator.pop(context, true);
+                },
+              )
+            ],
+          ) ??
+          canBack);
+    }
+    if (!onPop) {
       Navigator.pop(context);
     }
+    return canBack;
   }
 
   @override

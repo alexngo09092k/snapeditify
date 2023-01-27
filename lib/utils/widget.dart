@@ -12,7 +12,7 @@ class WidgetUtils {
 
   WidgetUtils._internal();
 
-  showErrorPopup<T>(
+  Future<T?> showErrorPopup<T>(
     BuildContext context, {
     String? title,
     String? message,
@@ -41,8 +41,8 @@ class WidgetUtils {
     );
   }
 
-  showLoadingPopup<T>(BuildContext context, {String? message}) {
-    showDialog<T>(
+  Future<T?> showLoadingPopup<T>(BuildContext context, {String? message}) {
+    return showDialog<T>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => Column(
@@ -74,7 +74,7 @@ class WidgetUtils {
     );
   }
 
-  alert<T>(
+  Future<T?> alert<T>(
     BuildContext context, {
     String? title,
     String? message,
@@ -96,7 +96,7 @@ class WidgetUtils {
     );
   }
 
-  showNoInternetPopup<T>(
+  Future<T?> showNoInternetPopup<T>(
     BuildContext context, {
     void Function(BuildContext)? retry,
   }) {
@@ -123,7 +123,7 @@ class WidgetUtils {
     );
   }
 
-  showRequestPermissionPopup<T>(
+  Future<T?> showRequestPermissionPopup<T>(
     BuildContext context, {
     required String title,
     required String message,

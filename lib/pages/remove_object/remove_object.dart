@@ -24,7 +24,7 @@ class _RemoveObjectPageState extends ProviderStateObserver<RemoveObjectPage, Rem
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      onWillPop: () async => provider.canBack,
+      onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       center: RemoveObjectRevert(provider: provider),
       action: SaveButton(provider: provider),

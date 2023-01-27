@@ -19,7 +19,7 @@ class _AnimeAIPageState extends ProviderState<AnimeAIPage, AnimeAIProvider> {
   Widget build(BuildContext context) {
     return AppLayout(
       screen: 'Anime AI',
-      onWillPop: () async => provider.canBack,
+      onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       action: SaveButton(provider: provider),
       children: [

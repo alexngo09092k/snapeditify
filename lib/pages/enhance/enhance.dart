@@ -28,7 +28,7 @@ class _EnhancePageState extends ProviderStateObserver<EnhancePage, EnhanceProvid
   Widget build(BuildContext context) {
     return AppLayout(
       screen: 'Enhance',
-      onWillPop: () async => provider.canBack,
+      onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       action: SaveButton(provider: provider),
       children: [
