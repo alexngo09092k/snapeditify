@@ -132,8 +132,8 @@ class WidgetUtils {
   }) {
     return alert<T>(
       context,
-      title: '',
-      message: '',
+      title: title,
+      message: message,
       onBackground: onBackground,
       onForeground: onForeground,
       actions: <AlertAction>[
