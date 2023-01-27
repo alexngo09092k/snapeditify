@@ -83,7 +83,7 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
             alignment: Alignment.center,
             children: [
               Transform.translate(
-                offset: Offset(logoWidth * (animation.value > 0.5 ? (0.3 - animation.value) : 0), 0),
+                offset: Offset(logoWidth * (animation.value > 0.5 ? (0.4 - animation.value) : 0), 0),
                 child: CustomImage(
                   image: Configuration.instance.business.appLogo,
                   width: logoWidth * (animation.value < 0.5 ? (animation.value + 0.5) : (1.5 - animation.value)),

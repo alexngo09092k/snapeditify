@@ -59,11 +59,13 @@ class AppLayout extends StatelessWidget {
                 if (appBar || back)
                   _AppBar(
                     back: back,
-                    center: center ??
-                        Text(
-                          screen ?? "",
-                          style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.w600),
-                        ),
+                    center: screen != null
+                        ? center ??
+                            Text(
+                              screen!,
+                              style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.w600),
+                            )
+                        : null,
                     action: action,
                     leading: leading,
                     onBack: goBack,
@@ -142,12 +144,13 @@ class _AppBar extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [center != null ? center! : const SizedBox()],
+          if (center != null)
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [center!],
+              ),
             ),
-          ),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,

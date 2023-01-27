@@ -76,7 +76,7 @@ class AnimeStyleItem extends StatelessWidget {
                               padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
                               child: CustomIcon(
                                 Icons.check_circle_outline,
-                                color: Theme.of(context).colorScheme.secondary,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                             )
                           : const SizedBox(),

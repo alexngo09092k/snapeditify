@@ -64,7 +64,7 @@ class StyleItem extends StatelessWidget {
                           ? Padding(
                               padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
                               child: CustomIcon(
-                                Icons.check_circle,
+                                Icons.check_circle_outline,
                                 color: Theme.of(context).colorScheme.primary,
                               ),
                             )
