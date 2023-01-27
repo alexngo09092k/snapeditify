@@ -80,9 +80,8 @@ abstract class EditImageProvider extends Provider {
       /// SHOW ADS
       // adProvider.handleAd();
 
+      /// SHOW LOADING
       WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
-
-      Navigator.pop(context);
 
       /// SAVE IMAGE
       AssetEntity? asset = await PhotoManager.editor.saveImage(
@@ -91,6 +90,9 @@ abstract class EditImageProvider extends Provider {
       );
 
       _savedFile = (await asset?.file);
+
+      /// HIDE LOADING
+      Navigator.pop(context);
 
       if (_savedFile != null) {
         /// SHOW SAVED IMAGE

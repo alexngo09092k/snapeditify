@@ -19,7 +19,7 @@ class HomeOptions extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: EditImageType.values
             .map((e) => GestureDetector(
-                  onTap: () => AppRoutes.instance.goGalleryPage(context, e),
+                  onTap: () => AppRoutes.instance.goAlbumsPage(context, e),
                   child: AppCard(
                     margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.25), vertical: AppDimensions.instance.padding),
                     width: itemWidth,

@@ -87,7 +87,7 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
               Opacity(
                 opacity: (animation.value < 1 ? 0 : animation.value),
                 child: Transform.translate(
-                  offset: Offset(logoWidth * 0.3, 0),
+                  offset: Offset(logoWidth * 0.4, 0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,

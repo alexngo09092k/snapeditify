@@ -25,7 +25,10 @@ class AppDimensions {
   final double icon = 25;
   double iconX(double x) => icon * x;
 
-  /// POPUP
-  final double popup = 300;
-  double popupX(double x) => popup * x;
+  /// GRID DELEGATE
+  final gridDelegate = const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 3,
+    crossAxisSpacing: 3.0,
+    mainAxisSpacing: 3.0,
+  );
 }

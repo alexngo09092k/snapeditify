@@ -62,15 +62,10 @@ extension EditImageTypeEX on EditImageType {
   }
 }
 
-enum ImageSource {
-  inSuggesstedPhotos,
-  inAlbum,
-  camera,
-}
 
 abstract class IGalleryProvider extends Provider with ProviderDelegate {
   /// GALLERY LIST <ALBUM>
-  Map<AssetPathEntity, int> get albumList;
+  List<AssetPathEntity> get albumList;
 
   GalleryConfig get config;
 
@@ -95,10 +90,10 @@ class GalleryProvider extends IGalleryProvider {
   @override
   GalleryConfig get config => _config;
 
-  final Map<AssetPathEntity, int> _albumList = {};
+  final List<AssetPathEntity> _albumList = [];
 
   @override
-  Map<AssetPathEntity, int> get albumList => _albumList;
+  List<AssetPathEntity> get albumList => _albumList;
 
   EditImageType _editImageType = EditImageType.removeObject;
 
@@ -149,19 +144,13 @@ class GalleryProvider extends IGalleryProvider {
   Future<bool> refreshGalleryList() async {
     final PermissionState ps = await PhotoManager.requestPermissionExtend();
     if (!ps.hasAccess) {}
-
-    final List<AssetPathEntity> albumList = await PhotoManager.getAssetPathList(
+    _albumList.clear();
+    _albumList.addAll(await PhotoManager.getAssetPathList(
       type: RequestType.image,
       hasAll: _config.hasAll,
       onlyAll: _config.onlyAll,
       filterOption: _config.option,
-    );
-
-    _albumList.clear();
-
-    for (var album in albumList) {
-      _albumList[album] = await album.assetCountAsync;
-    }
+    ));
 
     return true;
   }

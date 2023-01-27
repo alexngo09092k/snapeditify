@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:photo_manager/photo_manager.dart';
+import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
 import 'package:snapeditify/pages/restyle/restyle.dart';
 import 'package:snapeditify/pages/enhance/enhance.dart';
-import 'package:snapeditify/pages/gallery/gallery.dart';
+import 'package:snapeditify/pages/albums/albums.dart';
 import 'package:snapeditify/pages/remove_object/remove_object.dart';
 import 'package:snapeditify/pages/home/home_page.dart';
 import 'package:snapeditify/pages/maintenance/maintenance_page.dart';
@@ -39,7 +41,8 @@ class AppRoutes extends IAppRoutes {
   static const String activeProPage = 'active_pro_page';
   static const String applyArtEffectPage = 'apply_art_effect_page';
   static const String enhanceImagePage = 'enahnce_page';
-  static const String galleryPage = 'gallery_page';
+  static const String albumsPage = 'albums_page';
+  static const String photosPage = 'photos_page';
   static const String homePage = 'home_page';
   static const String maintenancePage = 'maintenance_page';
   static const String removeObjectPage = 'remove_object_page';
@@ -59,7 +62,7 @@ class AppRoutes extends IAppRoutes {
     settingPage: (context) => const SettingPage(),
     activeProPage: (context) => const PremiumPage(),
     applyArtEffectPage: (context) => const RestylePage(),
-    galleryPage: (context) => const GalleryPage(),
+    albumsPage: (context) => const AlbumsPage(),
   };
 
   @override
@@ -89,8 +92,10 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const PremiumPage(), settings);
       case applyArtEffectPage:
         return buildRoute(const RestylePage(), settings);
-      case galleryPage:
-        return buildRoute(const GalleryPage(), settings);
+      case albumsPage:
+        return buildRoute(const AlbumsPage(), settings);
+      case photosPage:
+        return buildRoute(PhotosPage(album: (settings.arguments as AssetPathEntity?)), settings);
       case animeAIPage:
         return buildRoute(const AnimeAIPage(), settings);
       default:
@@ -102,9 +107,13 @@ class AppRoutes extends IAppRoutes {
 }
 
 extension AppRoutesUtils on IAppRoutes {
-  goGalleryPage(BuildContext context, EditImageType editImageType) {
+  goAlbumsPage(BuildContext context, EditImageType editImageType) {
     ManagerProvider.of<GalleryProvider>().editImageType = editImageType;
-    Navigator.of(context).pushNamed(AppRoutes.galleryPage);
+    Navigator.of(context).pushNamed(AppRoutes.albumsPage);
+  }
+
+  goPhotosPage(BuildContext context, {AssetPathEntity? album}) {
+    Navigator.of(context).pushNamed(AppRoutes.photosPage, arguments: album);
   }
 
   goPremiumProPage(BuildContext context) {
@@ -115,7 +124,7 @@ extension AppRoutesUtils on IAppRoutes {
     Navigator.of(context).pushNamed(AppRoutes.settingPage);
   }
 
-  goEditImagePage(BuildContext context, {required ImageSource type, required Uint8List bytes}) {
+  goEditImagePage(BuildContext context, {required Uint8List bytes}) {
     UserPermission.instance.requestStoragePermission(
       context,
       onHasPermisson: () async {
