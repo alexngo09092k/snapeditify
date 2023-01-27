@@ -76,8 +76,8 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
         child: AwesomeAnimation<double>.tweenSequence(
           duration: Duration(milliseconds: time - 200),
           items: [
-            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.4), weight: 0.6),
-            TweenSequenceItem(tween: Tween<double>(begin: 0.4, end: 1), weight: 0.4),
+            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.5), weight: 0.6),
+            TweenSequenceItem(tween: Tween<double>(begin: 0.5, end: 1), weight: 0.4),
           ],
           builder: (_, __, animation, ___) => Stack(
             alignment: Alignment.center,
