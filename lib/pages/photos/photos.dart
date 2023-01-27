@@ -9,7 +9,7 @@ import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
 import 'package:snapeditify/widgets/base/camera_picker.dart';
-import 'package:snapeditify/widgets/base/image_item.dart';
+import 'package:snapeditify/pages/photos/widgets/image_item.dart';
 import 'package:snapeditify/widgets/load_more/sliver_grid_load_more.dart';
 import 'package:snapeditify/widgets/load_more/source_list.dart';
 
