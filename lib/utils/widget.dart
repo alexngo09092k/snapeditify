@@ -113,7 +113,6 @@ class WidgetUtils {
         if (retry != null)
           AlertAction(
             title: 'Retry',
-            isDestructiveAction: true,
             onPressed: () {
               Navigator.of(context).pop();
               retry(context);
