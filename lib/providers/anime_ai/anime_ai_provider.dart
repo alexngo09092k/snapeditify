@@ -98,6 +98,10 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   @override
   Future<bool> restyleImage(BuildContext context, String styleId) async {
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => restyleImage(context, styleId));
+    if (!result) return false;
+
     renewSavedFile();
     if (_state.styledImages.containsKey(styleId)) {
       _state.setImage(_state.styledImages[styleId]!.outputImages.first.image, styleId: styleId);
@@ -134,6 +138,10 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   @override
   Future<bool> videoEffect(BuildContext context, String styleId) async {
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => videoEffect(context, styleId));
+    if (!result) return false;
+
     /// SHOW LOADING POPUP
     WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 

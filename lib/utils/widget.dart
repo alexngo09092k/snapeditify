@@ -12,11 +12,20 @@ class WidgetUtils {
 
   WidgetUtils._internal();
 
-  showErrorPopup<T>(BuildContext context, {String? title, String? message, Function(BuildContext)? retry}) {
+  showErrorPopup<T>(
+    BuildContext context, {
+    String? title,
+    String? message,
+    Function(BuildContext)? retry,
+    void Function()? onBackground,
+    void Function()? onForeground,
+  }) {
     return alert<T>(
       context,
       title: title ?? 'Something wrongs',
       message: message ?? 'Somethings wrong, please try again.',
+      onBackground: onBackground,
+      onForeground: onForeground,
       actions: [
         AlertAction(title: 'Cancel', onPressed: Navigator.of(context).pop),
         if (retry != null)
@@ -89,27 +98,27 @@ class WidgetUtils {
 
   showNoInternetPopup<T>(
     BuildContext context, {
-    required void Function()? retry,
-    void Function()? onBackground,
-    void Function()? onForeground,
+    void Function(BuildContext)? retry,
   }) {
     return alert<T>(
       context,
-      title: '',
-      message: '',
-      onBackground: onBackground,
-      onForeground: onForeground,
-      actions: <AlertAction>[
-        AlertAction(
-          isDefaultAction: true,
-          onPressed: openAppSettings,
-          title: 'Open settings',
-        ),
-        AlertAction(
-          isDefaultAction: true,
-          onPressed: retry,
-          title: 'Retry',
-        ),
+      title: 'Internet connection',
+      message: 'You are no longer connected to the internet',
+      onForeground: () {
+        Navigator.of(context).pop();
+        if (retry != null) retry(context);
+      },
+      actions: [
+        AlertAction(title: 'Open settings', onPressed: openAppSettings),
+        if (retry != null)
+          AlertAction(
+            title: 'Retry',
+            isDestructiveAction: true,
+            onPressed: () {
+              Navigator.of(context).pop();
+              retry(context);
+            },
+          ),
       ],
     );
   }

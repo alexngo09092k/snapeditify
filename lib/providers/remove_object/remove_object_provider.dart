@@ -194,6 +194,10 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
   @override
   Future<bool> toAI(BuildContext context) async {
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => toAI(context));
+    if (!result) return false;
+
     if (_state.mode == RemoveObjectMode.ai) return true;
 
     /// SHOW ADS
@@ -276,6 +280,10 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
   @override
   Future<bool> removeObjects(BuildContext context) async {
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => removeObjects(context));
+    if (!result) return false;
+
     renewSavedFile();
 
     if (!canRemove) return false;

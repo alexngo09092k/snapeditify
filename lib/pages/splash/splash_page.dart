@@ -26,19 +26,24 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
   @override
   void onSplash(bool resultOnWillSplash) async {
     final start = DateTime.now().millisecondsSinceEpoch;
-    if (resultOnWillSplash && await ClientHttp.instance.safeEnvironment()) {
-      final end = DateTime.now().millisecondsSinceEpoch;
-      if ((end - start) >= time) {
-        _goTo();
+    if (await ClientHttp.instance.safeEnvironment()) {
+      if (resultOnWillSplash) {
+        final end = DateTime.now().millisecondsSinceEpoch;
+        if ((end - start) >= time) {
+          _goTo();
+        } else {
+          Future.delayed(Duration(milliseconds: (time - ((end - start)))), _goTo);
+        }
       } else {
-        Future.delayed(Duration(milliseconds: (time - ((end - start)))), _goTo);
+        WidgetUtils.instance.showErrorPopup(
+          context,
+          retry: (_) => AwesomeApp.instance?.restart(),
+        );
       }
     } else {
-      WidgetUtils.instance.showErrorPopup(
+      WidgetUtils.instance.showNoInternetPopup(
         context,
-        title: 'Internet connection',
-        message: 'You are no longer connected to the internet',
-        retry: (_) => AwesomeApp.instance?.restart(),
+        retry: (_) => onSplash(resultOnWillSplash),
       );
     }
   }
@@ -71,8 +76,8 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
         child: AwesomeAnimation<double>.tweenSequence(
           duration: Duration(milliseconds: time - 200),
           items: [
-            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.2), weight: 1),
-            TweenSequenceItem(tween: Tween<double>(begin: 0.8, end: 1), weight: 1),
+            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.4), weight: 0.6),
+            TweenSequenceItem(tween: Tween<double>(begin: 0.4, end: 1), weight: 0.4),
           ],
           builder: (_, __, animation, ___) => Stack(
             alignment: Alignment.center,
@@ -85,7 +90,7 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
                 ),
               ),
               Opacity(
-                opacity: (animation.value < 1 ? 0 : animation.value),
+                opacity: (animation.value < 0.9 ? 0 : animation.value),
                 child: Transform.translate(
                   offset: Offset(logoWidth * 0.4, 0),
                   child: Column(

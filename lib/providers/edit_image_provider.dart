@@ -17,6 +17,7 @@ import 'package:snapeditify/view_models/editing_image_vm.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 import 'package:snapeditify/widgets/base/saved_mage_preview.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:snapeditify/common/extensions.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;
@@ -121,6 +122,14 @@ abstract class EditImageProvider extends Provider {
         retry: saveImage,
       );
     });
+  }
+
+  Future<bool> checkEnviroment(BuildContext context, {void Function(BuildContext)? retry}) async {
+    final result = await ClientHttp.instance.safeEnvironment();
+    if (!result) {
+      WidgetUtils.instance.showNoInternetPopup(context, retry: retry);
+    }
+    return result;
   }
 
   goBack(BuildContext context) {

@@ -18,17 +18,29 @@ class CustomAlert extends StatefulWidget {
 
 class _CustomAlertState extends State<CustomAlert> with WidgetsBindingObserver {
   @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     switch (state) {
       case AppLifecycleState.resumed:
-        if (widget.onBackground != null) widget.onBackground!();
+        if (widget.onForeground != null) widget.onForeground!();
         break;
       case AppLifecycleState.inactive:
-        if (widget.onForeground != null) widget.onForeground!();
+        if (widget.onBackground != null) widget.onBackground!();
         break;
       default:
     }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override

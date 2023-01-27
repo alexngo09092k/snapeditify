@@ -82,6 +82,10 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   Future<bool> restyleImage(BuildContext context, String styleId) async {
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => restyleImage(context, styleId));
+    if (!result) return false;
+
     renewSavedFile();
 
     if (_state.styledImages.containsKey(styleId)) {

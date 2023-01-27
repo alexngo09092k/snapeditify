@@ -47,6 +47,10 @@ class EnhanceProvider extends IEnhanceProvider {
 
   @override
   Future<bool> enhanceImage(BuildContext context) async {
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => enhanceImage(context));
+    if (!result) return false;
+
     renewSavedFile();
 
     /// SHOW LOADING POPUP
