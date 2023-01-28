@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
@@ -41,7 +42,7 @@ class DetectedObjectItem extends StatelessWidget {
       ),
     );
     final subTitle = Text(
-      '${(double.parse(detectedObject.accuracy) * 100).toStringAsFixed(2)} % accurate',
+      '${(double.parse(detectedObject.accuracy) * 100).toStringAsFixed(2)} ${S.of(context).accurate}',
       style: Theme.of(context).textTheme.bodyText2!,
     );
     final title = Text(
@@ -61,7 +62,7 @@ class DetectedObjectItem extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                 ),
                 child: Text(
-                  'Remove',
+                  S.of(context).remove,
                   style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).errorColor),
                 ),
               ),

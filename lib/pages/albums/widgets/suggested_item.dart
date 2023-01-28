@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
@@ -53,7 +54,7 @@ class SuggestedItem extends StatelessWidget {
           ),
           SizedBox(height: AppDimensions.instance.paddingX(1.5)),
           Text(
-            'Sugessted (${provider.suggestedPhotos.length})',
+            '${S.of(context).sugessted} (${provider.suggestedPhotos.length})',
             style: Theme.of(context).textTheme.bodyText1!,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

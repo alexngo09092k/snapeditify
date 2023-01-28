@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/provider/widgets/pstate.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/anime_ai/widgets/anime_ai_category_list.dart';
 import 'package:snapeditify/pages/anime_ai/widgets/anime_ai_image.dart';
 import 'package:snapeditify/pages/anime_ai/widgets/anime_ai_style_list.dart';
@@ -18,7 +19,7 @@ class _AnimeAIPageState extends ProviderState<AnimeAIPage, AnimeAIProvider> {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: 'Anime AI',
+      screen: S.of(context).animeAi,
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       action: SaveButton(provider: provider),

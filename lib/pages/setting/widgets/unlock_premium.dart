@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 
@@ -29,14 +30,14 @@ class UnlockPremium extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Unlock SnapEditify Premium",
+                S.of(context).unlockSnapeditifyPremium,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
               ),
               SizedBox(height: AppDimensions.instance.paddingX(0.5)),
               Text(
-                "No ads & Best image quality",
+                S.of(context).noAdsBestImageQuality,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(),
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/base_image_editor.dart';
@@ -133,7 +134,7 @@ class RemoveObjectImage extends StatelessWidget {
                           builder: (_, __, p, ___) => p.canRemove
                               ? CustomButton(
                                   onTap: () => provider.removeObjects(context),
-                                  title: 'Remove',
+                                  title: S.of(context).remove,
                                   gradient: AppColors.instance.gradient,
                                   width: 100,
                                 )

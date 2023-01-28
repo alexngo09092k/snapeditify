@@ -7,6 +7,7 @@ import 'package:loading_more_list/loading_more_list.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
 import 'package:snapeditify/widgets/base/camera_picker.dart';
@@ -43,7 +44,7 @@ class _PhotosPageState extends ProviderState<PhotosPage, GalleryProvider> {
       (AwesomeAppState.screen.width - AppDimensions.instance.gridDelegate.crossAxisSpacing * 2) / 3,
     );
     return AppLayout(
-      screen: widget.album != null ? widget.album!.name : 'Suggested',
+      screen: widget.album != null ? widget.album!.name : S.of(context).suggested,
       action: const CameraPicker(),
       children: [
         widget.album != null
@@ -73,7 +74,7 @@ class _PhotosPageState extends ProviderState<PhotosPage, GalleryProvider> {
                                 height: AwesomeAppState.screen.width * 1 / 3,
                               ),
                               Text(
-                                'Not found images',
+                                S.of(context).notFoundImages,
                                 style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).disabledColor),
                               )
                             ],

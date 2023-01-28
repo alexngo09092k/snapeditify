@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_image.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
@@ -27,7 +28,7 @@ class _EnhancePageState extends ProviderStateObserver<EnhancePage, EnhanceProvid
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: 'Enhance',
+      screen: S.of(context).enhance,
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       action: SaveButton(provider: provider),

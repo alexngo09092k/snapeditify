@@ -6,6 +6,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/remove_object/widgets/ai_guide.dart';
 import 'package:snapeditify/pages/remove_object/widgets/brush_guide.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
@@ -204,7 +205,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     adProvider.handleAd();
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
+    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
     /// CALL API
     AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
@@ -240,7 +241,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     Navigator.pop(context);
 
     if (res.error != null) {
-      WidgetUtils.instance.showErrorPopup(context, title: 'AI Detection', retry: (_) => toAI(context));
+      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).aiDetection, retry: (_) => toAI(context));
       Debug.log("===== TO AI DETECTED OBJECTS ${res.error} =====");
     }
 
@@ -289,7 +290,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!canRemove) return false;
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
+    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
     /// CALL API
     ui.Image mask = await _state.paint.renderMask(originalImage.size);
@@ -327,7 +328,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     Navigator.pop(context);
 
     if (res.error != null) {
-      WidgetUtils.instance.showErrorPopup(context, title: 'Remove Objects', retry: (_) => removeObjects(context));
+      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).removeObjects, retry: (_) => removeObjects(context));
       Debug.log("===== REMOVE OBJECTS ${res.error} =====");
     }
 

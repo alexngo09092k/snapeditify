@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_guide.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_state.dart';
@@ -54,7 +55,7 @@ class EnhanceProvider extends IEnhanceProvider {
     renewSavedFile();
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
+    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
     /// SHOW ADS
     adProvider.handleAd();
@@ -96,7 +97,7 @@ class EnhanceProvider extends IEnhanceProvider {
     Navigator.pop(context);
 
     if (res.error != null) {
-      WidgetUtils.instance.showErrorPopup(context, title: 'Enhance Image', retry: (_) => enhanceImage(context));
+      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).enhanceImage, retry: (_) => enhanceImage(context));
       Debug.log('===== ENAHNCE IMAGE ${res.error} =====');
     }
 

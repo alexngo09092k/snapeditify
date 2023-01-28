@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 
@@ -22,15 +23,15 @@ class WidgetUtils {
   }) {
     return alert<T>(
       context,
-      title: title ?? 'Something wrongs',
-      message: message ?? 'Somethings wrong, please try again.',
+      title: title ?? S.of(context).somethingWrongs,
+      message: message ?? S.of(context).somethingsWrongPleaseTryAgain,
       onBackground: onBackground,
       onForeground: onForeground,
       actions: [
-        AlertAction(title: 'Cancel', onPressed: Navigator.of(context).pop),
+        AlertAction(title: S.of(context).cancel, onPressed: Navigator.of(context).pop),
         if (retry != null)
           AlertAction(
-            title: 'Retry',
+            title: S.of(context).retry,
             isDestructiveAction: true,
             onPressed: () {
               Navigator.of(context).pop();
@@ -102,17 +103,17 @@ class WidgetUtils {
   }) {
     return alert<T>(
       context,
-      title: 'You are currently offline!',
-      message: 'Looks like your comnnection is interrupted. Check network connection and try again.',
+      title: S.of(context).youAreCurrentlyOffline,
+      message: S.of(context).looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
       onForeground: () {
         Navigator.of(context).pop();
         if (retry != null) retry(context);
       },
       actions: [
-        AlertAction(title: 'Open settings', onPressed: openAppSettings),
+        AlertAction(title: S.of(context).openSettings, onPressed: openAppSettings),
         if (retry != null)
           AlertAction(
-            title: 'Retry',
+            title: S.of(context).retry,
             onPressed: () {
               Navigator.of(context).pop();
               retry(context);
@@ -139,12 +140,12 @@ class WidgetUtils {
         AlertAction(
           isDefaultAction: true,
           onPressed: Navigator.of(context).pop,
-          title: 'Cancel',
+          title: S.of(context).cancel,
         ),
         AlertAction(
           isDefaultAction: true,
           onPressed: openAppSettings,
-          title: 'Open settings',
+          title: S.of(context).openSettings,
         ),
       ],
     );

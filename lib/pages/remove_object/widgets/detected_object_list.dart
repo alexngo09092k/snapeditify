@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/remove_object/widgets/detected_object_item.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/services/snap_edit/snap_edit.dart';
@@ -40,7 +41,7 @@ class DetectedObjectList extends StatelessWidget {
                     ),
                     SizedBox(height: AppDimensions.instance.padding),
                     Text(
-                      'No potential object has been detected',
+                      S.of(context).noPotentialObjectHasBeenDetected,
                       style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).disabledColor),
                     )
                   ],

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
@@ -13,17 +14,17 @@ class RemoveObjectRevert extends StatelessWidget {
   _revert(BuildContext context) {
     WidgetUtils.instance.alert(
       context,
-      title: 'Discard changes and revert?',
-      message: 'All changes will be lost. Your image will be reverted to its original states.',
+      title: S.of(context).discardChangesAndRevert,
+      message: S.of(context).allChangesWillBeLostYourImageWillBeReverted,
       actions: [
         AlertAction(
-          title: 'Cancel',
+          title: S.of(context).cancel,
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         AlertAction(
-          title: 'Ok',
+          title: S.of(context).ok,
           isDestructiveAction: true,
           onPressed: () {
             Navigator.pop(context);

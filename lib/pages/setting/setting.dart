@@ -3,6 +3,7 @@ import 'package:fluttering/utils/logs.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/setting/widgets/unlock_premium.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/ad_view.dart';
@@ -28,7 +29,7 @@ class SettingPage extends StatelessWidget {
           scheme: 'mailto',
           path: Configuration.instance.business.contact,
           query: _encodeQueryParameters({
-            'subject': 'Feedback to ${Configuration.instance.business.appName} Team',
+            'subject': '${S.of(context).feedbackTo} ${Configuration.instance.business.appName} ${S.of(context).team}',
           }),
         );
         if (!await launchUrl(emailLaunchUri)) {
@@ -42,16 +43,16 @@ class SettingPage extends StatelessWidget {
 
     WidgetUtils.instance.alert(
       context,
-      title: "Are you happy with\n${Configuration.instance.business.appName}?",
-      message: "Your feedback of the app and provide a better experience",
+      title: "${S.of(context).areYouHappyWith} ${Configuration.instance.business.appName}?",
+      message: S.of(context).yourFeedbackOfTheAppAndProvideABetterExperience,
       actions: [
         AlertAction(
-          title: "Cancel",
+          title: S.of(context).cancel,
           isDestructiveAction: true,
           onPressed: Navigator.of(context).pop,
         ),
         AlertAction(
-          title: "Send",
+          title: S.of(context).send,
           onPressed: () async {
             Navigator.of(context).pop();
             mail(context);
@@ -64,16 +65,16 @@ class SettingPage extends StatelessWidget {
   _showSharePopup(BuildContext context) {
     WidgetUtils.instance.alert(
       context,
-      title: "Share ${Configuration.instance.business.appName}",
-      message: "Let's share one of the best photo editing app with your friends, family and community",
+      title: '${S.of(context).share} ${Configuration.instance.business.appName}',
+      message: S.of(context).letsShareOneOfTheBestPhotoEditingAppWith,
       actions: [
         AlertAction(
-          title: "Cancel",
+          title: S.of(context).cancel,
           isDestructiveAction: true,
           onPressed: Navigator.of(context).pop,
         ),
         AlertAction(
-          title: "Share",
+          title: S.of(context).share,
           onPressed: () {
             Navigator.of(context).pop();
             if (Configuration.instance.business.shareApp.link != null) {
@@ -102,7 +103,7 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: 'Setting',
+      screen: S.of(context).setting,
       padding: EdgeInsets.all(AppDimensions.instance.padding),
       scroll: true,
       decoration: BoxDecoration(
@@ -114,13 +115,13 @@ class SettingPage extends StatelessWidget {
       after: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Version ${Configuration.instance.business.version}', style: Theme.of(context).textTheme.bodyText1),
+          Text('${S.of(context).version} ${Configuration.instance.business.version}', style: Theme.of(context).textTheme.bodyText1),
           LottieViewer(
             lottie: AppAssets.instance.heartTeam,
             width: AppDimensions.instance.icon,
             height: AppDimensions.instance.icon,
           ),
-          Text('${Configuration.instance.business.appName} Team', style: Theme.of(context).textTheme.bodyText1),
+          Text('${Configuration.instance.business.appName} ${S.of(context).team}', style: Theme.of(context).textTheme.bodyText1),
         ],
       ),
       children: [
@@ -155,13 +156,13 @@ class SettingPage extends StatelessWidget {
             list: [
               TileRow.defaultStyle(
                 context,
-                title: 'Feedback',
+                title: S.of(context).feedback,
                 image: AppAssets.instance.icFeedback,
                 onTap: _feedback,
               ),
               TileRow.defaultStyle(
                 context,
-                title: 'Share ${Configuration.instance.business.appName}',
+                title: '${S.of(context).share} ${Configuration.instance.business.appName}',
                 image: AppAssets.instance.icShare,
                 onTap: _showSharePopup,
               )

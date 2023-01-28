@@ -9,6 +9,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/advertisement/advertisement.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/widget.dart';
@@ -108,7 +109,7 @@ abstract class EditImageProvider extends Provider {
       }
 
       /// SHOW ALERT
-      WidgetUtils.instance.showErrorPopup(context, title: 'Save Image', retry: saveImage);
+      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).saveImage, retry: saveImage);
       return false;
     }, () {
       /// MAX COUNT DOWNLOAD IMAGE
@@ -116,9 +117,9 @@ abstract class EditImageProvider extends Provider {
 
       WidgetUtils.instance.showErrorPopup(
         context,
-        title: 'Save Image Limit',
+        title: S.of(context).saveImageLimit,
         message:
-            'You have reached the limit of saved image, please upgrade premium version or contact ${Configuration.instance.business.appName} Team to support.',
+            '${S.of(context).youHaveReachedTheLimitOfSavedImagePleaseUpgrade} ${Configuration.instance.business.appName} ${S.of(context).teamToSupport}',
         retry: saveImage,
       );
     });
@@ -136,16 +137,16 @@ abstract class EditImageProvider extends Provider {
     if (!canBack) {
       return (await WidgetUtils.instance.alert<bool>(
             context,
-            message: 'All changes will be lost. Are you sure you want to leave without saving?',
+            message: S.of(context).allChangesWillBeLostAreYouSureYouWant,
             actions: [
               AlertAction(
-                title: 'Cancel',
+                title: S.of(context).cancel,
                 onPressed: () {
                   Navigator.pop<bool>(context, false);
                 },
               ),
               AlertAction(
-                title: 'Ok',
+                title: S.of(context).ok,
                 isDestructiveAction: true,
                 onPressed: () {
                   Navigator.pop(context, true);

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_state.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
@@ -110,7 +111,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
+    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
     /// CALL API
     AnimeAIImageBody body = AnimeAIImageBody(style: styleId, inputImage: originalImage.imageBytes);
@@ -130,7 +131,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     Navigator.pop(context);
 
     if (res.error != null) {
-      WidgetUtils.instance.showErrorPopup(context, title: 'Restyle Image', retry: (_) => restyleImage(context, styleId));
+      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, retry: (_) => restyleImage(context, styleId));
       Debug.log('====== RESTYLE IMAGE ${res.error} ======');
     }
     return false;
@@ -143,7 +144,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     if (!result) return false;
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
+    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
     /// SHOW ADS
     adProvider.handleAd();
@@ -167,7 +168,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     Navigator.pop(context);
 
     if (res.error != null) {
-      WidgetUtils.instance.showErrorPopup(context, title: 'Restyle Image', retry: (_) => videoEffect(context, styleId));
+      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, retry: (_) => videoEffect(context, styleId));
       Debug.log('====== RESTYLE IMAGE ${res.error} ======');
     }
 

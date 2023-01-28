@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/home/widgets/home_base_banner.dart';
 import 'package:snapeditify/pages/home/widgets/home_logo.dart';
 import 'package:snapeditify/pages/home/widgets/home_options.dart';
@@ -41,30 +42,30 @@ class HomePage extends StatelessWidget {
       children: [
         HomeBaseBanner(
           banner: AppAssets.instance.homeRemoveObjectBanner,
-          title: 'Remove things \nfrom image',
-          buttonTitle: 'Try it now',
+          title: S.of(context).removeThingsNfromImage,
+          buttonTitle: S.of(context).tryItNow,
           action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.removeObject),
         ),
         SizedBox(height: AppDimensions.instance.padding),
         const AdView(),
         HomeBaseBanner(
           banner: AppAssets.instance.homeEnhanceBanner,
-          title: 'Turn your \nimage \ninto Art',
-          buttonTitle: 'Try it now',
+          title: S.of(context).turnYourNimageNintoArt,
+          buttonTitle: S.of(context).tryItNow,
           action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.enhanceImage),
         ),
         SizedBox(height: AppDimensions.instance.padding),
         HomeBaseBanner(
           banner: AppAssets.instance.homeArtEffectBanner,
-          title: 'Enhance \nimage quality',
-          buttonTitle: 'Try it now',
+          title: S.of(context).enhanceNimageQuality,
+          buttonTitle: S.of(context).tryItNow,
           action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.applyArtEffect),
         ),
         SizedBox(height: AppDimensions.instance.padding),
         HomeBaseBanner(
           banner: AppAssets.instance.homeAnimeAIBanner,
-          title: 'Create \nAnime avatar',
-          buttonTitle: 'Try it now',
+          title: S.of(context).createNanimeAvatar,
+          buttonTitle: S.of(context).tryItNow,
           action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.animeAI),
         ),
         SizedBox(height: bottomPadding),

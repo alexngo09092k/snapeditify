@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
@@ -24,7 +25,7 @@ class EnhanceAfter extends StatelessWidget {
               right: AppDimensions.instance.padding,
               top: AppDimensions.instance.padding,
               child: Text(
-                'After',
+                S.of(context).after,
                 style: Theme.of(context).textTheme.headline5!.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AppColors.instance.white,

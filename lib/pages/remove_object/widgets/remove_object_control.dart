@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/remove_object/widgets/ai_mode_result.dart';
 import 'package:snapeditify/pages/remove_object/widgets/brush_mode_setting.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
@@ -42,7 +43,7 @@ class RemoveObjectControl extends StatelessWidget {
                         children: [
                           CustomIcon(AppAssets.instance.icAI),
                           SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                          Text('Auto', style: Theme.of(context).textTheme.bodyText1),
+                          Text(S.of(context).auto, style: Theme.of(context).textTheme.bodyText1),
                         ],
                       ),
                     ),
@@ -58,7 +59,7 @@ class RemoveObjectControl extends StatelessWidget {
                           ),
                           SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                           Text(
-                            'Brush',
+                            S.of(context).brush,
                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                   color: p.state.mode != RemoveObjectMode.ai ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                                 ),
