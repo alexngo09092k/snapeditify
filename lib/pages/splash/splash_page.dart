@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/common/extensions.dart';
 import 'package:snapeditify/utils/widget.dart';
@@ -70,43 +71,42 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    final logoWidth = AwesomeAppState.screen.width * 1 / 3;
+    final logoWidth = AwesomeAppState.screen.width * 1 / 4;
     return Scaffold(
       body: Center(
         child: AwesomeAnimation<double>.tweenSequence(
           duration: Duration(milliseconds: time - 200),
           items: [
-            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.5), weight: 0.6),
-            TweenSequenceItem(tween: Tween<double>(begin: 0.5, end: 1), weight: 0.4),
+            TweenSequenceItem(tween: Tween<double>(begin: 1, end: 0.99), weight: 0.6),
+            TweenSequenceItem(tween: Tween<double>(begin: 0.99, end: 0.5), weight: 0.2),
+            TweenSequenceItem(tween: Tween<double>(begin: 0.5, end: 0), weight: 0.2),
           ],
-          builder: (_, __, animation, ___) => Stack(
-            alignment: Alignment.center,
+          builder: (_, __, animation, ___) => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Transform.translate(
-                offset: Offset(logoWidth * (animation.value > 0.5 ? (0.4 - animation.value) : 0), 0),
+                offset: Offset(logoWidth * animation.value, 0),
                 child: CustomImage(
                   image: Configuration.instance.business.appLogo,
-                  width: logoWidth * (animation.value < 0.5 ? (animation.value + 0.5) : (1.5 - animation.value)),
+                  width: logoWidth * (animation.value + 1),
                 ),
               ),
+              SizedBox(width: AppDimensions.instance.padding),
               Opacity(
-                opacity: (animation.value < 0.9 ? 0 : animation.value),
-                child: Transform.translate(
-                  offset: Offset(logoWidth * 0.4, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        Configuration.instance.business.appName,
-                        style: Theme.of(context).textTheme.headline4!,
-                      ),
-                      Text(
-                        Configuration.instance.business.appBio,
-                        style: Theme.of(context).textTheme.bodyText1!,
-                      ),
-                    ],
-                  ),
+                opacity: animation.value == 0 ? 1 : 0,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      Configuration.instance.business.appName,
+                      style: Theme.of(context).textTheme.headline4!,
+                    ),
+                    Text(
+                      Configuration.instance.business.appBio,
+                      style: Theme.of(context).textTheme.bodyText1!,
+                    ),
+                  ],
                 ),
               ),
             ],
