@@ -92,21 +92,24 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
                 ),
               ),
               SizedBox(width: AppDimensions.instance.padding),
-              Opacity(
-                opacity: animation.value == 0 ? 1 : 0,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      Configuration.instance.business.appName,
-                      style: Theme.of(context).textTheme.headline4!,
-                    ),
-                    Text(
-                      Configuration.instance.business.appBio,
-                      style: Theme.of(context).textTheme.bodyText1!,
-                    ),
-                  ],
+              SizedBox(
+                width: animation.value == 0 ? null : 0,
+                child: Opacity(
+                  opacity: animation.value == 0 ? 1 : 0,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        Configuration.instance.business.appName,
+                        style: Theme.of(context).textTheme.headline4!,
+                      ),
+                      Text(
+                        Configuration.instance.business.appBio,
+                        style: Theme.of(context).textTheme.bodyText1!,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
