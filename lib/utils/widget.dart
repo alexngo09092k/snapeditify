@@ -102,8 +102,8 @@ class WidgetUtils {
   }) {
     return alert<T>(
       context,
-      title: 'Internet connection',
-      message: 'You are no longer connected to the internet',
+      title: 'You are currently offline!',
+      message: 'Looks like your comnnection is interrupted. Check network connection and try again.',
       onForeground: () {
         Navigator.of(context).pop();
         if (retry != null) retry(context);
