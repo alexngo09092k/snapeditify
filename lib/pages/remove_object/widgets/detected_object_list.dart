@@ -36,8 +36,8 @@ class DetectedObjectList extends StatelessWidget {
                   children: [
                     LottieViewer(
                       lottie: AppAssets.instance.notFound,
-                      width: AppDimensions.instance.iconX(2),
-                      height: AppDimensions.instance.iconX(2),
+                      width: AppDimensions.instance.iconX(3),
+                      height: AppDimensions.instance.iconX(3),
                     ),
                     SizedBox(height: AppDimensions.instance.padding),
                     Text(
