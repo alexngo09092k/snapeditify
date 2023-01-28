@@ -59,13 +59,13 @@ class AppLayout extends StatelessWidget {
                 if (appBar || back)
                   _AppBar(
                     back: back,
-                    center: screen != null
-                        ? center ??
-                            Text(
-                              screen!,
-                              style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.w600),
-                            )
-                        : null,
+                    center: center ??
+                        (screen != null
+                            ? Text(
+                                screen!,
+                                style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.w600),
+                              )
+                            : null),
                     action: action,
                     leading: leading,
                     onBack: goBack,
