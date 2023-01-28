@@ -1,7 +1,7 @@
 part of '../theme.dart';
 
 ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
-  final base = ThemeData.dark().copyWith(
+  final base = ThemeData.light().copyWith(
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
@@ -14,26 +14,29 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     brightness: Brightness.dark,
 
     textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.black,
+      bodyColor: AppColors.instance.textColor,
     ),
 
     primaryTextTheme: buildTextTheme(base.primaryTextTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.black,
+      bodyColor: AppColors.instance.textColor,
     ),
 
-    primaryColor: base.primaryColor,
+    primaryColor: AppColors.instance.primaryColor,
 
     secondaryHeaderColor: base.secondaryHeaderColor,
 
     /// ================== CARD =====================
-    cardColor: base.cardColor,
+    cardColor: AppColors.instance.white,
 
     textButtonTheme: base.textButtonTheme,
 
     listTileTheme: base.listTileTheme,
 
     /// =================== COLOR SCHEME ====================
-    colorScheme: base.colorScheme,
+    colorScheme: base.colorScheme.copyWith(
+      primary: AppColors.instance.primaryColor,
+      secondary: AppColors.instance.secondaryColor,
+    ),
 
     /// ====================== TEXT SELECTION THEME ======================
     textSelectionTheme: base.textSelectionTheme,
@@ -52,10 +55,10 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     primaryColorLight: base.primaryColorLight,
 
     /// ====================== BACKGROUND AND DIALOG ======================
-    splashColor: base.splashColor,
-    backgroundColor: base.backgroundColor,
-    dialogBackgroundColor: base.dialogBackgroundColor,
-    scaffoldBackgroundColor: base.scaffoldBackgroundColor,
+    splashColor: AppColors.instance.white,
+    backgroundColor: AppColors.instance.white,
+    dialogBackgroundColor: AppColors.instance.white,
+    scaffoldBackgroundColor: AppColors.instance.white,
 
     /// ====================== STATUS BAR ======================
     appBarTheme: base.appBarTheme,
@@ -68,13 +71,13 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     bottomAppBarColor: base.bottomAppBarColor,
 
     /// ====================== DISABLED ====================
-    disabledColor: base.disabledColor,
+    disabledColor: AppColors.instance.textColor.withOpacity(0.5),
 
     /// ======================= CARD =======================
     cardTheme: base.cardTheme,
 
     /// ======================== ICON =======================
-    iconTheme: base.iconTheme,
+    iconTheme: base.iconTheme.copyWith(color: AppColors.instance.textColor),
 
     primaryIconTheme: base.primaryIconTheme,
 
@@ -82,6 +85,9 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     inputDecorationTheme: base.inputDecorationTheme,
 
     /// ========================= DIVIDER ========================
-    dividerColor: base.dividerColor,
+    dividerColor: AppColors.instance.textColor.withOpacity(0.1),
+
+    /// ========================= ERROR ========================
+    errorColor: AppColors.instance.errorColor,
   );
 }

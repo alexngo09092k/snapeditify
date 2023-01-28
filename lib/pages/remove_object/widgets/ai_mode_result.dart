@@ -10,14 +10,13 @@ import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/sliding_control.dart';
 
 class AIModeResult extends StatefulWidget {
-  const AIModeResult({Key? key, required this.provider}) : super(key: key);
-  final RemoveObjectProvider provider;
+  const AIModeResult({Key? key}) : super(key: key);
 
   @override
   State<AIModeResult> createState() => _AIModeResultState();
 }
 
-class _AIModeResultState extends State<AIModeResult> {
+class _AIModeResultState extends ProviderStateObserver<AIModeResult, RemoveObjectProvider> {
   final ValueNotifier<int> _indexTab = ValueNotifier(0);
 
   late final PageController _controller;
@@ -34,6 +33,16 @@ class _AIModeResultState extends State<AIModeResult> {
     super.initState();
   }
 
+  @override
+  void onNextFrame(Duration timestamp) {
+    final detectedObjects = provider.state.detectedObjects;
+    final bool hasPersonObject = detectedObjects.values.any((element) => element.objectType == DetectedObjectType.person);
+    if (!hasPersonObject && detectedObjects.isNotEmpty) {
+      _controller.animateToPage(1, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+    }
+    super.onNextFrame(timestamp);
+  }
+
   void _onChangedTab(DetectedObjectType? type) {
     if (type == null) return;
     switch (type) {
@@ -45,11 +54,7 @@ class _AIModeResultState extends State<AIModeResult> {
         break;
       default:
     }
-    _controller.animateToPage(
-      _indexTab.value,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeInOut,
-    );
+    _controller.animateToPage(_indexTab.value, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
   }
 
   @override
@@ -71,11 +76,11 @@ class _AIModeResultState extends State<AIModeResult> {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () => widget.provider.toBrush(context),
+                      onTap: () => provider.toBrush(context),
                       child: const CustomIcon(CupertinoIcons.back),
                     ),
                     BasePropConsumer<RemoveObjectProvider, int>(
-                      listenable: widget.provider,
+                      listenable: provider,
                       select: (p) => p.state.detectedObjects.length,
                       builder: (_, __, p, ___) => Text(
                         '${p.state.detectedObjects.length} Objects',
@@ -104,7 +109,7 @@ class _AIModeResultState extends State<AIModeResult> {
               children: DetectedObjectType.values
                   .map<Widget>((type) => DetectedObjectList(
                         type: type,
-                        provider: widget.provider,
+                        provider: provider,
                       ))
                   .toList(),
             ),

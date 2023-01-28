@@ -57,12 +57,12 @@ class DetectedObjectItem extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.2)),
                 decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.1),
+                  color: Theme.of(context).errorColor.withOpacity(0.1),
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                 ),
                 child: Text(
                   'Remove',
-                  style: Theme.of(context).textTheme.caption!.copyWith(color: Colors.red),
+                  style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).errorColor),
                 ),
               ),
             )

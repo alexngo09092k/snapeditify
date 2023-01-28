@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
@@ -75,7 +76,7 @@ class AnimeStyleItem extends StatelessWidget {
                           ? Padding(
                               padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
                               child: CustomIcon(
-                                Icons.check_circle_outline,
+                                CupertinoIcons.check_mark_circled_solid,
                                 color: Theme.of(context).colorScheme.primary,
                               ),
                             )

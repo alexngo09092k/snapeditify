@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
 import 'package:snapeditify/services/snap_edit/snap_edit.dart';
 import 'package:snapeditify/utils/image.dart';
@@ -138,7 +139,7 @@ class DetectedObjectVM extends DetectedObject with Provider {
 
       var paint = Paint()
         ..strokeWidth = 0.5
-        ..color = Colors.blue
+        ..color = AppColors.instance.primaryColor
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round;
 
@@ -148,7 +149,6 @@ class DetectedObjectVM extends DetectedObject with Provider {
         image: await ImageUtils.instance.base64ToImageUI(mask),
         locked: true,
         onTap: (_) => _removeMask(),
-        opacity: 0.2,
       );
 
       boxDrawble = RectangleDrawable(

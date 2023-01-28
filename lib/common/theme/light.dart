@@ -14,11 +14,11 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     brightness: Brightness.dark,
 
     textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.darkLiver,
+      bodyColor: AppColors.instance.textColor,
     ),
 
     primaryTextTheme: buildTextTheme(base.primaryTextTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.darkLiver,
+      bodyColor: AppColors.instance.textColor,
     ),
 
     primaryColor: AppColors.instance.primaryColor,
@@ -71,13 +71,13 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     bottomAppBarColor: base.bottomAppBarColor,
 
     /// ====================== DISABLED ====================
-    disabledColor: base.disabledColor,
+    disabledColor: AppColors.instance.textColor.withOpacity(0.5),
 
     /// ======================= CARD =======================
     cardTheme: base.cardTheme,
 
     /// ======================== ICON =======================
-    iconTheme: base.iconTheme.copyWith(color: AppColors.instance.darkLiver),
+    iconTheme: base.iconTheme.copyWith(color: AppColors.instance.textColor),
 
     primaryIconTheme: base.primaryIconTheme,
 
@@ -85,6 +85,9 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     inputDecorationTheme: base.inputDecorationTheme,
 
     /// ========================= DIVIDER ========================
-    dividerColor: base.dividerColor,
+    dividerColor: AppColors.instance.textColor.withOpacity(0.1),
+
+    /// ========================= ERROR ========================
+    errorColor: AppColors.instance.errorColor,
   );
 }

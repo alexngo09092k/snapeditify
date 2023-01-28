@@ -24,7 +24,7 @@ class BrushModeSetting extends StatelessWidget {
             builder: (_, __, p, ___) => CustomIcon.defaultStyle(
               context,
               icon: AppAssets.instance.icHand,
-              color: p.state.mode == RemoveObjectMode.brush ? Theme.of(context).primaryColor : null,
+              color: p.state.mode == RemoveObjectMode.brush ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
             ),
           ),
         ),
@@ -56,7 +56,7 @@ class BrushModeSetting extends StatelessWidget {
             builder: (_, __, p, ___) => CustomIcon.defaultStyle(
               context,
               icon: AppAssets.instance.icEraser,
-              color: p.state.mode == RemoveObjectMode.erase ? Theme.of(context).primaryColor : null,
+              color: p.state.mode == RemoveObjectMode.erase ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
             ),
           ),
         ),

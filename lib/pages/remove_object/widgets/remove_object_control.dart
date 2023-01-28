@@ -26,7 +26,7 @@ class RemoveObjectControl extends StatelessWidget {
             if (p.state.mode != RemoveObjectMode.ai) BrushModeSetting(provider: provider),
 
             /// DETECTED OBJECT LIST
-            if (p.state.mode == RemoveObjectMode.ai) AIModeResult(provider: provider),
+            if (p.state.mode == RemoveObjectMode.ai) const AIModeResult(),
 
             /// MODE BUTTONS
             if (p.state.mode != RemoveObjectMode.ai)
