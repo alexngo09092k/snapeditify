@@ -25,7 +25,7 @@ class DetectedObjectList extends StatelessWidget {
                 itemCount: data.length,
                 itemBuilder: (_, index) => DetectedObjectItem(
                   key: Key('$index'),
-                  detectedObject: data.elementAt(index),
+                 maskId: data.elementAt(index).maskId,
                   provider: provider,
                 ),
               )

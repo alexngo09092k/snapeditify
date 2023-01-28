@@ -31,7 +31,6 @@ class ImageItem extends StatelessWidget {
                   assetEntity,
                   thumbnailSize: size != null ? ThumbnailSize(size.width.toInt(), size.height.toInt()) : null,
                   fit: BoxFit.cover,
-                  // isOriginal: false,
                 ),
               ),
             ],

@@ -80,6 +80,16 @@ class _PhotosPageState extends ProviderState<PhotosPage, GalleryProvider> {
                             ],
                           ),
                         );
+                      case IndicatorStatus.noMoreLoad:
+                        return Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(AppDimensions.instance.padding),
+                            child: Text(
+                              'End',
+                              style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).disabledColor),
+                            ),
+                          ),
+                        );
                       default:
                     }
                     return null;

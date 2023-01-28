@@ -11,9 +11,11 @@ import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/tile_row.dart';
 
 class DetectedObjectItem extends StatelessWidget {
-  const DetectedObjectItem({Key? key, required this.detectedObject, required this.provider}) : super(key: key);
-  final DetectedObjectVM detectedObject;
+  const DetectedObjectItem({Key? key, required this.maskId, required this.provider}) : super(key: key);
+  final int maskId;
   final RemoveObjectProvider provider;
+
+  DetectedObjectVM get detectedObject => provider.state.detectedObjects[maskId]!;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,10 @@ class DetectedObjectItem extends StatelessWidget {
     );
     final actionWidget = BasePropConsumer<RemoveObjectProvider, bool>(
       listenable: provider,
-      select: (p) => p.state.detectedObjects[detectedObject.maskId]!.isSelected,
+      select: (p) => detectedObject.isSelected,
       builder: (_, __, p, ___) => Container(
         alignment: Alignment.center,
-        child: p.state.detectedObjects[detectedObject.maskId]!.isSelected
+        child: detectedObject.isSelected
             ? CustomIcon(
                 CupertinoIcons.check_mark_circled_solid,
                 color: Theme.of(context).primaryColor,
@@ -51,8 +53,8 @@ class DetectedObjectItem extends StatelessWidget {
     );
     final removeText = BasePropConsumer<RemoveObjectProvider, bool>(
       listenable: provider,
-      select: (p) => p.state.detectedObjects[detectedObject.maskId]!.isRemoved,
-      builder: (_, __, p, ___) => p.state.detectedObjects[detectedObject.maskId]!.isRemoved
+      select: (p) => detectedObject.isRemoved,
+      builder: (_, __, p, ___) => detectedObject.isRemoved
           ? Padding(
               padding: EdgeInsets.only(left: AppDimensions.instance.paddingX(0.5)),
               child: Container(

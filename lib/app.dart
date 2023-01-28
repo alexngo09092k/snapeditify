@@ -1,3 +1,4 @@
+import 'package:photo_manager/photo_manager.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/theme.dart';
@@ -31,6 +32,12 @@ class _AppState extends AwesomeAppState<App> {
   void didChangePlatformBrightness() {
     _provider.onChangePlatformBrightness();
     super.didChangePlatformBrightness();
+  }
+
+  @override
+  void dispose() {
+    PhotoManager.clearFileCache();
+    super.dispose();
   }
 
   @override

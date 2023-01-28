@@ -27,7 +27,7 @@ class _AlbumItemState extends State<AlbumItem> {
   }
 
   _initial() async {
-    _assetEntities.addAll(await widget.album.getAssetListPaged(page: 0, size: 2));
+    _assetEntities.addAll(await widget.album.getAssetListPaged(page: 0, size: 1));
     setState(() {});
   }
 

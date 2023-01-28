@@ -72,43 +72,52 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
   @override
   Widget build(BuildContext context) {
     final logoWidth = AwesomeAppState.screen.width * 1 / 4;
+    final textWidth = AwesomeAppState.screen.width * 1 / 3;
+    final widthTotal = logoWidth + textWidth + AppDimensions.instance.padding;
+    final logoAlpha = (widthTotal / 2 - logoWidth / 2);
+    final textAlpha = (widthTotal / 2 - textWidth / 2);
     return Scaffold(
       body: Center(
         child: AwesomeAnimation<double>.tweenSequence(
           duration: Duration(milliseconds: time - 200),
           items: [
-            TweenSequenceItem(tween: Tween<double>(begin: 1, end: 0.99), weight: 0.6),
-            TweenSequenceItem(tween: Tween<double>(begin: 0.99, end: 0.5), weight: 0.2),
-            TweenSequenceItem(tween: Tween<double>(begin: 0.5, end: 0), weight: 0.2),
+            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0), weight: 0.6),
+            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.5), weight: 0.3),
+            TweenSequenceItem(tween: Tween<double>(begin: 0.5, end: 1), weight: 0.1),
           ],
-          builder: (_, __, animation, ___) => Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          builder: (_, __, animation, ___) => Stack(
+            alignment: Alignment.center,
             children: [
               Transform.translate(
-                offset: Offset(logoWidth * animation.value, 0),
+                offset: Offset(-logoAlpha * animation.value, 0),
                 child: CustomImage(
                   image: Configuration.instance.business.appLogo,
-                  width: logoWidth * (animation.value + 1),
+                  width: logoWidth * (2 - animation.value),
                 ),
               ),
-              SizedBox(width: AppDimensions.instance.padding),
-              SizedBox(
-                width: animation.value == 0 ? null : 0,
-                child: Opacity(
-                  opacity: animation.value == 0 ? 1 : 0,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        Configuration.instance.business.appName,
-                        style: Theme.of(context).textTheme.headline4!,
-                      ),
-                      Text(
-                        Configuration.instance.business.appBio,
-                        style: Theme.of(context).textTheme.bodyText1!,
-                      ),
-                    ],
+              Transform.translate(
+                offset: Offset(textAlpha, 0),
+                child: SizedBox(
+                  width: textWidth,
+                  child: Opacity(
+                    opacity: animation.value >= 1 ? 1 : 0,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            Configuration.instance.business.appName,
+                            style: Theme.of(context).textTheme.headline4!,
+                          ),
+                        ),
+                        Text(
+                          Configuration.instance.business.appBio,
+                          style: Theme.of(context).textTheme.bodyText1!,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
