@@ -6,7 +6,7 @@ import 'package:snapeditify/widgets/painter/painter_pure.dart';
 class AnimeAIState extends EditImageState {
   AnimeAIState() {
     _paint = PainterController();
-    _paint.addListener(notifyListeners);
+    _paint.addListener(notifyState);
   }
 
   /// PAINT
@@ -21,7 +21,7 @@ class AnimeAIState extends EditImageState {
   set styledImages(Map<String, AnimeImageResponse> styledImages) {
     _styledImages.clear();
     _styledImages.addAll(styledImages);
-    notifyListeners();
+    notifyState();
   }
 
   final Map<String, String> _videoEffects = {};
@@ -29,7 +29,7 @@ class AnimeAIState extends EditImageState {
   set videoEffects(Map<String, String> videoEffects) {
     _videoEffects.clear();
     _videoEffects.addAll(videoEffects);
-    notifyListeners();
+    notifyState();
   }
 
   @override

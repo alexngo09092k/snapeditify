@@ -5,7 +5,7 @@ import 'package:snapeditify/widgets/painter/painter.dart';
 class RestyleState extends EditImageState {
   RestyleState() {
     _paint = PainterController();
-    _paint.addListener(notifyListeners);
+    _paint.addListener(notifyState);
   }
 
   /// PAINT
@@ -16,7 +16,7 @@ class RestyleState extends EditImageState {
   String? get imageId => _imageId;
   set imageId(String? imageId) {
     _imageId = imageId;
-    notifyListeners();
+    notifyState();
   }
 
   String? _styleId;
@@ -27,7 +27,7 @@ class RestyleState extends EditImageState {
   set styledImages(Map<String, String> styledImages) {
     _styledImages.clear();
     _styledImages.addAll(styledImages);
-    notifyListeners();
+    notifyState();
   }
 
   @override

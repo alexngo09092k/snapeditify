@@ -9,6 +9,10 @@ abstract class EditImageState extends ChangeNotifier {
     return true;
   }
 
+  void notifyState() {
+    notifyListeners();
+  }
+
   late EditingImageVM _image;
   EditingImageVM get image => _image;
 }

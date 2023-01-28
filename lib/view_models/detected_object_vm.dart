@@ -8,7 +8,7 @@ import 'package:snapeditify/widgets/painter/painter_pure.dart';
 import 'package:snapeditify/widgets/painter/painter.dart';
 import 'dart:ui' as ui;
 
-class DetectedObjectVM extends DetectedObject with Provider {
+class DetectedObjectVM extends DetectedObject {
   DetectedObjectVM({
     required super.accuracy,
     required super.box,
@@ -28,7 +28,7 @@ class DetectedObjectVM extends DetectedObject with Provider {
   set isRemoved(bool value) {
     if (_isRemoved != value) {
       _isRemoved = value;
-      notifyListeners();
+      state.notifyState();
     }
   }
 
@@ -37,7 +37,7 @@ class DetectedObjectVM extends DetectedObject with Provider {
   set isSelected(bool value) {
     if (_isSelected != value) {
       _isSelected = value;
-      notifyListeners();
+      state.notifyState();
     }
   }
 

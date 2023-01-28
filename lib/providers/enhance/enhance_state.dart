@@ -8,10 +8,10 @@ import 'package:snapeditify/widgets/painter/painter.dart';
 class EnhanceState extends EditImageState {
   EnhanceState() {
     _paintBefore = PainterController();
-    _paintBefore.addListener(notifyListeners);
+    _paintBefore.addListener(notifyState);
 
     _paintAfter = PainterController();
-    _paintAfter.addListener(notifyListeners);
+    _paintAfter.addListener(notifyState);
 
     _paintSize = Size.zero;
   }
@@ -39,7 +39,7 @@ class EnhanceState extends EditImageState {
   set paintSize(Size size) {
     if (_paintSize != size) {
       _paintSize = size;
-      notifyListeners();
+      notifyState();
     }
   }
 
@@ -47,14 +47,14 @@ class EnhanceState extends EditImageState {
   String? get imageId => _imageId;
   set imageId(String? value) {
     _imageId = value;
-    notifyListeners();
+    notifyState();
   }
 
   int _enhancedImageIndex = 0;
   int get enhancedImageIndex => _enhancedImageIndex;
   set enhancedImageIndex(int value) {
     _enhancedImageIndex = value;
-    notifyListeners();
+    notifyState();
   }
 
   final List<EnhancedVM> _enhancedImages = [];
@@ -62,7 +62,7 @@ class EnhanceState extends EditImageState {
   set enhancedImages(List<EnhancedVM> value) {
     _enhancedImages.clear();
     _enhancedImages.addAll(value);
-    notifyListeners();
+    notifyState();
   }
 
   final List<FaceVM> _faces = [];
@@ -70,7 +70,7 @@ class EnhanceState extends EditImageState {
   set faces(List<FaceVM> value) {
     _faces.clear();
     _faces.addAll(value);
-    notifyListeners();
+    notifyState();
   }
 
   @override

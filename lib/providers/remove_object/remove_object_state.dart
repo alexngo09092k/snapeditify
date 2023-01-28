@@ -43,7 +43,7 @@ class RemoveObjectState extends EditImageState {
         ),
       ),
     );
-    _paint.addListener(notifyListeners);
+    _paint.addListener(notifyState);
   }
 
   RemoveObjectState copyWith({
@@ -93,7 +93,7 @@ class RemoveObjectState extends EditImageState {
     _detectedObjects.clear();
     _detectedObjects.addAll(value);
     _addAllBoxMask();
-    notifyListeners();
+    notifyState();
   }
 
   /// PAINT
@@ -121,7 +121,7 @@ class RemoveObjectState extends EditImageState {
         default:
           break;
       }
-      notifyListeners();
+      notifyState();
     }
   }
 
@@ -132,7 +132,7 @@ class RemoveObjectState extends EditImageState {
     if (_strokeWidth != value) {
       _strokeWidth = value;
       _paint.freeStyleStrokeWidth = strokeWidth;
-      notifyListeners();
+      notifyState();
     }
   }
 
@@ -143,7 +143,7 @@ class RemoveObjectState extends EditImageState {
     if (_strokeColor != value) {
       _strokeColor = value;
       _paint.freeStyleColor = strokeColor;
-      notifyListeners();
+      notifyState();
     }
   }
 
@@ -151,7 +151,7 @@ class RemoveObjectState extends EditImageState {
   String? get sessionId => _sessionId;
   set sessionId(String? value) {
     _sessionId = value;
-    notifyListeners();
+    notifyState();
   }
 
   /// PREV STATE
@@ -160,7 +160,7 @@ class RemoveObjectState extends EditImageState {
   set prev(RemoveObjectState? value) {
     if (_prev != value) {
       _prev = value;
-      notifyListeners();
+      notifyState();
     }
   }
 
@@ -170,7 +170,7 @@ class RemoveObjectState extends EditImageState {
   set next(RemoveObjectState? value) {
     if (_next != value) {
       _next = value;
-      notifyListeners();
+      notifyState();
     }
   }
 
