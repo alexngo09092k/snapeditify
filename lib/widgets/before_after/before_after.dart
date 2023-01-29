@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/widgets/before_after/rect_clipper.dart';
 import 'dart:ui' as ui;
+import 'package:snapeditify/widgets/painter/painter.dart';
 
 class BeforeAfter extends StatefulWidget {
   final Widget beforeImage;
@@ -12,10 +13,10 @@ class BeforeAfter extends StatefulWidget {
   final double imageCornerRadius;
   final Color thumbColor;
   final double thumbRadius;
-  final ui.Image? thumbImage;
   final Color? overlayColor;
   final bool isVertical;
   final double slideWidth;
+  final ImageProvider? thumbImage;
 
   const BeforeAfter({
     Key? key,
@@ -38,6 +39,16 @@ class BeforeAfter extends StatefulWidget {
 
 class _BeforeAfterState extends State<BeforeAfter> {
   double _clipFactor = 0.5;
+  ui.Image? _thumbImage;
+
+  @override
+  void initState() {
+    (() async {
+      _thumbImage = await widget.thumbImage?.image;
+      setState(() {});
+    })();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +75,7 @@ class _BeforeAfterState extends State<BeforeAfter> {
             data: SliderThemeData(
               trackHeight: 0.0,
               overlayColor: widget.overlayColor,
-              thumbShape: CustomThumbShape(widget.thumbRadius, widget.thumbColor, widget.thumbImage, widget.slideWidth),
+              thumbShape: CustomThumbShape(widget.thumbRadius, widget.thumbColor, _thumbImage, widget.slideWidth),
             ),
             child: widget.isVertical
                 ? RotatedBox(
