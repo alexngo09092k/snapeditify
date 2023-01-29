@@ -19,6 +19,7 @@ class SavedImagePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final gallery = ManagerProvider.of<GalleryProvider>();
     return AppCard(
       height: AwesomeAppState.screen.height * 2 / 3,
       child: SafeArea(
@@ -57,10 +58,7 @@ class SavedImagePreview extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppDimensions.instance.padding),
-              PropConsumer<GalleryProvider, EditImageType>(
-                select: (_) => _.editImageType,
-                builder: (_, __, p, ___) => _Options(current: p.editImageType, provider: provider),
-              ),
+              _Options(current: gallery.editImageType, provider: provider),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
