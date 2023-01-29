@@ -32,6 +32,7 @@ class AlbumList extends StatelessWidget {
             ...p.albumList
                 .map((e) => AlbumItem(
                       album: e,
+                      provider: provider,
                       width: itemWidth,
                       height: itemWidth,
                     ))

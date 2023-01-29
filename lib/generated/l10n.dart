@@ -569,6 +569,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Saved Image`
+  String get savedImage {
+    return Intl.message(
+      'Saved Image',
+      name: 'savedImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Image`
+  String get newImage {
+    return Intl.message(
+      'New Image',
+      name: 'newImage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

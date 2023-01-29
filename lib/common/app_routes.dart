@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:photo_manager/photo_manager.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
@@ -22,6 +21,7 @@ import 'package:snapeditify/providers/remove_object/remove_object_provider.dart'
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:snapeditify/common/extensions.dart';
 import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/view_models/album_vm.dart';
 
 abstract class IAppRoutes {
   String get initialRoute;
@@ -95,7 +95,7 @@ class AppRoutes extends IAppRoutes {
       case albumsPage:
         return buildRoute(const AlbumsPage(), settings);
       case photosPage:
-        return buildRoute(PhotosPage(album: (settings.arguments as AssetPathEntity?)), settings);
+        return buildRoute(PhotosPage(album: (settings.arguments as AlbumVM?)), settings);
       case animeAIPage:
         return buildRoute(const AnimeAIPage(), settings);
       default:
@@ -109,32 +109,33 @@ class AppRoutes extends IAppRoutes {
 extension AppRoutesUtils on IAppRoutes {
   goAlbumsPage(BuildContext context, EditImageType editImageType) {
     ManagerProvider.of<GalleryProvider>().editImageType = editImageType;
-    Navigator.of(context).pushNamed(AppRoutes.albumsPage);
+    Navigator.pushNamed(context, AppRoutes.albumsPage);
   }
 
-  goPhotosPage(BuildContext context, {AssetPathEntity? album}) {
-    Navigator.of(context).pushNamed(AppRoutes.photosPage, arguments: album);
+  goPhotosPage(BuildContext context, {AlbumVM? album}) {
+    Navigator.pushNamed(context, AppRoutes.photosPage, arguments: album);
   }
 
   goPremiumProPage(BuildContext context) {
-    Navigator.of(context).pushNamed(AppRoutes.activeProPage);
+    Navigator.pushNamed(context, AppRoutes.activeProPage);
   }
 
   goSettingPage(BuildContext context) {
-    Navigator.of(context).pushNamed(AppRoutes.settingPage);
+    Navigator.pushNamed(context, AppRoutes.settingPage);
   }
 
-  goEditImagePage(BuildContext context, {required Uint8List bytes}) {
+  goEditImagePage(BuildContext context, {required Uint8List bytes, EditImageType? editImageType}) {
+    if (editImageType != null) ManagerProvider.of<GalleryProvider>().editImageType = editImageType;
     UserPermission.instance.requestStoragePermission(
       context,
       onHasPermisson: () async {
-        final EditImageType editImageType = ManagerProvider.of<GalleryProvider>().editImageType;
+        final EditImageType current = ManagerProvider.of<GalleryProvider>().editImageType;
         late final bool res;
         late final String target;
 
         WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
 
-        switch (editImageType) {
+        switch (current) {
           case EditImageType.applyArtEffect:
             res = await ManagerProvider.of<RestyleProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.applyArtEffectPage;
@@ -158,7 +159,11 @@ extension AppRoutesUtils on IAppRoutes {
         Navigator.pop(context);
 
         if (res) {
-          Navigator.pushNamed(context, target);
+          if (editImageType != null) {
+            Navigator.pushReplacementNamed(context, target);
+          } else {
+            Navigator.pushNamed(context, target);
+          }
         }
       },
     );

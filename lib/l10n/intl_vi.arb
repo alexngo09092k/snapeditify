@@ -51,5 +51,7 @@
   "retry": "Retry",
   "youAreCurrentlyOffline": "You are currently offline!",
   "looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd": "Looks like your comnnection is interrupted. Check network connection and try again.",
-  "openSettings": "Open settings"
+  "openSettings": "Open settings",
+  "savedImage": "Saved Image",
+  "newImage": "New Image"
 }

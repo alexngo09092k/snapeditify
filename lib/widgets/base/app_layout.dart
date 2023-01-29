@@ -22,6 +22,8 @@ class AppLayout extends StatelessWidget {
     this.before,
     this.after,
     this.decoration,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.mainAxisAlignment = MainAxisAlignment.start,
   });
 
   final String? screen;
@@ -40,7 +42,8 @@ class AppLayout extends StatelessWidget {
   final bool scroll;
   final EdgeInsetsGeometry? padding;
   final Decoration? decoration;
-
+  final CrossAxisAlignment crossAxisAlignment;
+  final MainAxisAlignment mainAxisAlignment;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -55,6 +58,8 @@ class AppLayout extends StatelessWidget {
             left: useSafeArea,
             right: useSafeArea,
             child: Column(
+              crossAxisAlignment: crossAxisAlignment,
+              mainAxisAlignment: mainAxisAlignment,
               children: [
                 if (appBar || back)
                   _AppBar(

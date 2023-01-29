@@ -7,6 +7,7 @@ import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/models/config/gallery_config.dart';
+import 'package:snapeditify/view_models/album_vm.dart';
 
 enum EditImageType {
   removeObject,
@@ -62,10 +63,9 @@ extension EditImageTypeEX on EditImageType {
   }
 }
 
-
 abstract class IGalleryProvider extends Provider with ProviderDelegate {
   /// GALLERY LIST <ALBUM>
-  List<AssetPathEntity> get albumList;
+  List<AlbumVM> get albumList;
 
   GalleryConfig get config;
 
@@ -90,10 +90,10 @@ class GalleryProvider extends IGalleryProvider {
   @override
   GalleryConfig get config => _config;
 
-  final List<AssetPathEntity> _albumList = [];
+  final List<AlbumVM> _albumList = [];
 
   @override
-  List<AssetPathEntity> get albumList => _albumList;
+  List<AlbumVM> get albumList => _albumList;
 
   EditImageType _editImageType = EditImageType.removeObject;
 
@@ -141,16 +141,32 @@ class GalleryProvider extends IGalleryProvider {
   }
 
   @override
-  Future<bool> refreshGalleryList() async {
+  Future<bool> refreshGalleryList([bool notify = true]) async {
     final PermissionState ps = await PhotoManager.requestPermissionExtend();
     if (!ps.hasAccess) {}
     _albumList.clear();
-    _albumList.addAll(await PhotoManager.getAssetPathList(
+
+    final entityPaths = await PhotoManager.getAssetPathList(
       type: RequestType.image,
       hasAll: _config.hasAll,
       onlyAll: _config.onlyAll,
       filterOption: _config.option,
-    ));
+    );
+
+    var index = 0;
+    for (var entityPath in entityPaths) {
+      final entities = (await entityPath.getAssetListPaged(page: 0, size: 1));
+      final acount = await entityPath.assetCountAsync;
+      _albumList.add(AlbumVM(
+        entityPath: entityPath,
+        thumnail: entities.isNotEmpty ? entities.first : null,
+        count: acount,
+        index: index,
+      ));
+      index++;
+    }
+
+    if (notify) notifyListeners();
 
     return true;
   }
@@ -158,7 +174,7 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Future<bool> registered() async {
     ///SET GALLERY LIST
-    refreshGalleryList();
+    refreshGalleryList(false);
     return super.registered();
   }
 }

@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd":
             MessageLookupByLibrary.simpleMessage(
                 "Looks like your comnnection is interrupted. Check network connection and try again."),
+        "newImage": MessageLookupByLibrary.simpleMessage("New Image"),
         "noAdsBestImageQuality":
             MessageLookupByLibrary.simpleMessage("No ads & Best image quality"),
         "noPotentialObjectHasBeenDetected":
@@ -77,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),
         "saveImageLimit":
             MessageLookupByLibrary.simpleMessage("Save Image Limit"),
+        "savedImage": MessageLookupByLibrary.simpleMessage("Saved Image"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),

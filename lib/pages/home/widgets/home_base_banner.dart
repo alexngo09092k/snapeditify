@@ -21,8 +21,7 @@ class HomeBaseBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final lottieWidth = screenWidth - AppDimensions.instance.padding * 2;
+    final lottieWidth = AppDimensions.instance.bannerWidth;
     final heightWidth = lottieWidth * 1.7 / 3;
     return GestureDetector(
       onTap: action,

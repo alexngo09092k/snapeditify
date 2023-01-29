@@ -11,6 +11,7 @@ import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
+import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
@@ -81,22 +82,27 @@ abstract class EditImageProvider extends Provider {
     return checkoutSaveImage(context, () async {
       /// SHOW ADS
       // adProvider.handleAd();
-
-      /// SHOW LOADING
-      WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
+      final provider = ManagerProvider.of<GalleryProvider>();
 
       /// SAVE IMAGE
-      AssetEntity? asset = await PhotoManager.editor.saveImage(
-        editedImage.imageBytes,
-        title: '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
-      );
+      if (_savedFile == null) {
+        /// SHOW LOADING
+        WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
-      _savedFile = (await asset?.file);
+        AssetEntity? asset = await PhotoManager.editor.saveImage(
+          editedImage.imageBytes,
+          title: '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
+        );
+        _savedFile = (await asset?.file);
 
-      /// HIDE LOADING
-      Navigator.pop(context);
+        /// HIDE LOADING
+        Navigator.pop(context);
+      }
 
       if (_savedFile != null) {
+        /// REFRESH GALLERY
+        provider.refreshGalleryList();
+
         /// SHOW SAVED IMAGE
         await showModalBottomSheet<bool>(
           context: context,

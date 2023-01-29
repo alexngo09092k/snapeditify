@@ -31,4 +31,11 @@ class AppDimensions {
     crossAxisSpacing: 3.0,
     mainAxisSpacing: 3.0,
   );
+
+  Size get gridItemSize => Size(
+        (AwesomeAppState.screen.width - gridDelegate.crossAxisSpacing * 3) / gridDelegate.crossAxisCount,
+        (AwesomeAppState.screen.width - gridDelegate.crossAxisSpacing * 3) / gridDelegate.crossAxisCount,
+      );
+
+  double get bannerWidth => AwesomeAppState.screen.width - padding * 2;
 }

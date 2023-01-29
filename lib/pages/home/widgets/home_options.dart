@@ -10,8 +10,7 @@ class HomeOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final lottieWidth = screenWidth - AppDimensions.instance.padding * 2;
+    final lottieWidth = AppDimensions.instance.bannerWidth;
     final itemWidth = lottieWidth / 4 - AppDimensions.instance.padding;
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.padding)),

@@ -34,7 +34,7 @@ class WidgetUtils {
             title: S.of(context).retry,
             isDestructiveAction: true,
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
               retry(context);
             },
           ),
@@ -46,6 +46,7 @@ class WidgetUtils {
     return showDialog<T>(
       context: context,
       barrierDismissible: false,
+      useSafeArea: false,
       builder: (BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -106,7 +107,7 @@ class WidgetUtils {
       title: S.of(context).youAreCurrentlyOffline,
       message: S.of(context).looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
       onForeground: () {
-        Navigator.of(context).pop();
+        Navigator.pop(context);
         if (retry != null) retry(context);
       },
       actions: [
@@ -115,7 +116,7 @@ class WidgetUtils {
           AlertAction(
             title: S.of(context).retry,
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
               retry(context);
             },
           ),

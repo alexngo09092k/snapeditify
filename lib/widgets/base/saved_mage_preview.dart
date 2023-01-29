@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
+import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 
 class SavedImagePreview extends StatelessWidget {
@@ -27,7 +30,7 @@ class SavedImagePreview extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Saved Image',
+                    S.of(context).savedImage,
                     style: Theme.of(context).textTheme.headline6!.copyWith(color: Theme.of(context).primaryColor),
                   ),
                   GestureDetector(
@@ -54,11 +57,15 @@ class SavedImagePreview extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppDimensions.instance.padding),
+              PropConsumer<GalleryProvider, EditImageType>(
+                select: (_) => _.editImageType,
+                builder: (_, __, p, ___) => _Options(current: p.editImageType, provider: provider),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomButton(
-                    title: 'NEW IMAGE',
+                    title: S.of(context).newImage,
                     width: 150,
                     height: 40,
                     color: AppColors.instance.white,
@@ -69,7 +76,7 @@ class SavedImagePreview extends StatelessWidget {
                     },
                   ),
                   CustomButton(
-                    title: 'SHARE',
+                    title: S.of(context).share,
                     width: 150,
                     height: 40,
                     gradient: AppColors.instance.gradient,
@@ -83,6 +90,54 @@ class SavedImagePreview extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _Options extends StatelessWidget {
+  const _Options({this.current, required this.provider});
+  final EditImageType? current;
+  final EditImageProvider provider;
+
+  @override
+  Widget build(BuildContext context) {
+    final lottieWidth = AppDimensions.instance.bannerWidth;
+    final itemWidth = lottieWidth / 4 - AppDimensions.instance.padding;
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.padding)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: EditImageType.values
+            .where((element) => element != current)
+            .map((e) => GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    AppRoutes.instance.goEditImagePage(
+                      context,
+                      bytes: provider.editedImage.imageBytes,
+                      editImageType: e,
+                    );
+                  },
+                  child: AppCard(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: AppDimensions.instance.paddingX(0.25),
+                      vertical: AppDimensions.instance.padding,
+                    ),
+                    width: itemWidth,
+                    height: itemWidth,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomIcon(e.icon),
+                        SizedBox(height: AppDimensions.instance.paddingX(0.5)),
+                        Text(e.title, style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600))
+                      ],
+                    ),
+                  ),
+                ))
+            .toList(),
       ),
     );
   }

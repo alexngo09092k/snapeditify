@@ -54,7 +54,7 @@ class SettingPage extends StatelessWidget {
         AlertAction(
           title: S.of(context).send,
           onPressed: () async {
-            Navigator.of(context).pop();
+            Navigator.pop(context);
             mail(context);
           },
         ),
@@ -76,7 +76,7 @@ class SettingPage extends StatelessWidget {
         AlertAction(
           title: S.of(context).share,
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pop(context);
             if (Configuration.instance.business.shareApp.link != null) {
               Share.share(
                 Configuration.instance.business.shareApp.link!,
