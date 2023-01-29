@@ -41,6 +41,20 @@ class HomePage extends StatelessWidget {
       ),
       children: [
         HomeBaseBanner(
+          banner: AppAssets.instance.homeAnimeAIBanner,
+          title: S.of(context).createNanimeAvatar,
+          buttonTitle: S.of(context).tryItNow,
+          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.animeAI),
+        ),
+        SizedBox(height: AppDimensions.instance.padding),
+        HomeBaseBanner(
+          banner: AppAssets.instance.homeArtEffectBanner,
+          title: S.of(context).enhanceNimageQuality,
+          buttonTitle: S.of(context).tryItNow,
+          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.applyArtEffect),
+        ),
+        SizedBox(height: AppDimensions.instance.padding),
+        HomeBaseBanner(
           banner: AppAssets.instance.homeRemoveObjectBanner,
           title: S.of(context).removeThingsNfromImage,
           buttonTitle: S.of(context).tryItNow,
@@ -53,20 +67,6 @@ class HomePage extends StatelessWidget {
           title: S.of(context).turnYourNimageNintoArt,
           buttonTitle: S.of(context).tryItNow,
           action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.enhanceImage),
-        ),
-        SizedBox(height: AppDimensions.instance.padding),
-        HomeBaseBanner(
-          banner: AppAssets.instance.homeArtEffectBanner,
-          title: S.of(context).enhanceNimageQuality,
-          buttonTitle: S.of(context).tryItNow,
-          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.applyArtEffect),
-        ),
-        SizedBox(height: AppDimensions.instance.padding),
-        HomeBaseBanner(
-          banner: AppAssets.instance.homeAnimeAIBanner,
-          title: S.of(context).createNanimeAvatar,
-          buttonTitle: S.of(context).tryItNow,
-          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.animeAI),
         ),
         SizedBox(height: bottomPadding),
       ],
