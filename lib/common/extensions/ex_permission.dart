@@ -6,8 +6,10 @@ extension MPermissionStore on UserPermission {
     Function? onHasPermisson,
     Function? onNoPermisson,
   }) async {
+    final permission = [Permission.storage];
+    if (CurrentPlatform.instance.isAndroid) permission.add(Permission.photos);
     requestPermission(
-      permission: [Permission.storage, Permission.photos],
+      permission: permission,
       onNoPermisson: () {
         WidgetUtils.instance.showRequestPermissionPopup(
           context,
@@ -15,7 +17,7 @@ extension MPermissionStore on UserPermission {
           message: 'Allow ${Configuration.instance.business.appName} to access photos on your device.',
           onForeground: () {
             requestPermission(
-              permission: [Permission.storage],
+              permission: permission,
               onHasPermisson: Navigator.of(context).pop,
             );
           },

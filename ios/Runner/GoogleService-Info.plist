@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>55912039461-1fdabn3p01snk8e7plp97g6a4fg91h00.apps.googleusercontent.com</string>
+	<string>851709128615-ptunqje9bf9get5e8g81vsp0vq7pj8qs.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.55912039461-1fdabn3p01snk8e7plp97g6a4fg91h00</string>
+	<string>com.googleusercontent.apps.851709128615-ptunqje9bf9get5e8g81vsp0vq7pj8qs</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDgby9p-WyQvTmB0njTlPCHcjDOcKJfFTg</string>
+	<string>AIzaSyCsHaOMewpPcGbdClTv05F7yA5OHRQTu3I</string>
 	<key>GCM_SENDER_ID</key>
-	<string>55912039461</string>
+	<string>851709128615</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>app.snapeditify.studio</string>
 	<key>PROJECT_ID</key>
-	<string>snapeditify</string>
+	<string>snapeditify-67a19</string>
 	<key>STORAGE_BUCKET</key>
-	<string>snapeditify.appspot.com</string>
+	<string>snapeditify-67a19.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:55912039461:ios:40a58907e19f0df7cdebcc</string>
+	<string>1:851709128615:ios:de628509de9bddd3a19082</string>
 </dict>
 </plist>

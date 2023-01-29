@@ -78,50 +78,53 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
     final textAlpha = (widthTotal / 2 - textWidth / 2);
     return Scaffold(
       body: Center(
-        child: AwesomeAnimation<double>.tweenSequence(
-          duration: Duration(milliseconds: time - 200),
-          items: [
-            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0), weight: 0.6),
-            TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.5), weight: 0.3),
-            TweenSequenceItem(tween: Tween<double>(begin: 0.5, end: 1), weight: 0.1),
-          ],
-          builder: (_, __, animation, ___) => Stack(
-            alignment: Alignment.center,
-            children: [
-              Transform.translate(
-                offset: Offset(-logoAlpha * animation.value, 0),
-                child: CustomImage(
-                  image: Configuration.instance.business.appLogo,
-                  width: logoWidth * (2 - animation.value),
+        child: Transform.translate(
+          offset: Offset(0, -logoWidth),
+          child: AwesomeAnimation<double>.tweenSequence(
+            duration: Duration(milliseconds: time - 200),
+            items: [
+              TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0), weight: 0.6),
+              TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.5), weight: 0.3),
+              TweenSequenceItem(tween: Tween<double>(begin: 0.5, end: 1), weight: 0.1),
+            ],
+            builder: (_, __, animation, ___) => Stack(
+              alignment: Alignment.center,
+              children: [
+                Transform.translate(
+                  offset: Offset(-logoAlpha * animation.value, 0),
+                  child: CustomImage(
+                    image: Configuration.instance.business.appLogo,
+                    width: logoWidth * (2 - animation.value),
+                  ),
                 ),
-              ),
-              Transform.translate(
-                offset: Offset(textAlpha, 0),
-                child: SizedBox(
-                  width: textWidth,
-                  child: Opacity(
-                    opacity: animation.value >= 1 ? 1 : 0,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: Text(
-                            Configuration.instance.business.appName,
-                            style: Theme.of(context).textTheme.headline4!,
+                Transform.translate(
+                  offset: Offset(textAlpha, 0),
+                  child: SizedBox(
+                    width: textWidth,
+                    child: Opacity(
+                      opacity: animation.value >= 1 ? 1 : 0,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text(
+                              Configuration.instance.business.appName,
+                              style: Theme.of(context).textTheme.headline4!,
+                            ),
                           ),
-                        ),
-                        Text(
-                          Configuration.instance.business.appBio,
-                          style: Theme.of(context).textTheme.bodyText1!,
-                        ),
-                      ],
+                          Text(
+                            Configuration.instance.business.appBio,
+                            style: Theme.of(context).textTheme.bodyText1!,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
