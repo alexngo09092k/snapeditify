@@ -34,20 +34,20 @@ class MessageLookup extends MessageLookupByLibrary {
                 "All changes will be lost. Your image will be reverted to its original states."),
         "animeAi": MessageLookupByLibrary.simpleMessage("Anime AI"),
         "areYouHappyWith":
-            MessageLookupByLibrary.simpleMessage("Are you happy with\\n"),
+            MessageLookupByLibrary.simpleMessage("Are you happy with\n"),
         "artEffect": MessageLookupByLibrary.simpleMessage("Art Effect"),
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
         "before": MessageLookupByLibrary.simpleMessage("Before"),
         "brush": MessageLookupByLibrary.simpleMessage("Brush"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "createNanimeAvatar":
-            MessageLookupByLibrary.simpleMessage("Create \\nAnime avatar"),
+            MessageLookupByLibrary.simpleMessage("Create\nAnime avatar"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("Discard changes and revert?"),
         "enhance": MessageLookupByLibrary.simpleMessage("Enhance"),
         "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),
         "enhanceNimageQuality":
-            MessageLookupByLibrary.simpleMessage("Enhance \\nimage quality"),
+            MessageLookupByLibrary.simpleMessage("Enhance\nimage quality"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
@@ -72,7 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Remove Objects"),
         "removeThingsNfromImage":
-            MessageLookupByLibrary.simpleMessage("Remove things \\nfrom image"),
+            MessageLookupByLibrary.simpleMessage("Remove things\nfrom image"),
         "restyleImage": MessageLookupByLibrary.simpleMessage("Restyle Image"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),
@@ -92,8 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "teamToSupport":
             MessageLookupByLibrary.simpleMessage("Team to support."),
         "tryItNow": MessageLookupByLibrary.simpleMessage("Try it now"),
-        "turnYourNimageNintoArt": MessageLookupByLibrary.simpleMessage(
-            "Turn your \\nimage \\ninto Art"),
+        "turnYourNimageNintoArt":
+            MessageLookupByLibrary.simpleMessage("Turn your\nimage\ninto Art"),
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("Unlock SnapEditify Premium"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),

@@ -110,40 +110,40 @@ class S {
     );
   }
 
-  /// `Remove things \nfrom image`
+  /// `Remove things\nfrom image`
   String get removeThingsNfromImage {
     return Intl.message(
-      'Remove things \\nfrom image',
+      'Remove things\nfrom image',
       name: 'removeThingsNfromImage',
       desc: '',
       args: [],
     );
   }
 
-  /// `Turn your \nimage \ninto Art`
+  /// `Turn your\nimage\ninto Art`
   String get turnYourNimageNintoArt {
     return Intl.message(
-      'Turn your \\nimage \\ninto Art',
+      'Turn your\nimage\ninto Art',
       name: 'turnYourNimageNintoArt',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enhance \nimage quality`
+  /// `Enhance\nimage quality`
   String get enhanceNimageQuality {
     return Intl.message(
-      'Enhance \\nimage quality',
+      'Enhance\nimage quality',
       name: 'enhanceNimageQuality',
       desc: '',
       args: [],
     );
   }
 
-  /// `Create \nAnime avatar`
+  /// `Create\nAnime avatar`
   String get createNanimeAvatar {
     return Intl.message(
-      'Create \\nAnime avatar',
+      'Create\nAnime avatar',
       name: 'createNanimeAvatar',
       desc: '',
       args: [],
@@ -313,7 +313,7 @@ class S {
   /// `Are you happy with\n`
   String get areYouHappyWith {
     return Intl.message(
-      'Are you happy with\\n',
+      'Are you happy with\n',
       name: 'areYouHappyWith',
       desc: '',
       args: [],

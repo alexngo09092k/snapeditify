@@ -65,19 +65,21 @@ class _ImageListState extends ProviderStateObserver<ImageList, GalleryProvider> 
   Widget build(BuildContext context) {
     if (_images?.isNotEmpty != true) {
       return Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            LottieViewer(
-              lottie: AppAssets.instance.notFound,
-              width: AwesomeAppState.screen.width * 1 / 3,
-              height: AwesomeAppState.screen.width * 1 / 3,
-            ),
-            Text(
-              S.of(context).notFoundImages,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).disabledColor),
-            )
-          ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              LottieViewer(
+                lottie: AppAssets.instance.notFound,
+                width: AwesomeAppState.screen.width * 1 / 3,
+                height: AwesomeAppState.screen.width * 1 / 3,
+              ),
+              Text(
+                S.of(context).notFoundImages,
+                style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).disabledColor),
+              )
+            ],
+          ),
         ),
       );
     }

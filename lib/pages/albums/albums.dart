@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/albums/widgets/album_list.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
@@ -16,6 +17,12 @@ class AlbumsPage extends StatefulWidget {
 }
 
 class _AlbumsPageState extends ProviderState<AlbumsPage, GalleryProvider> {
+  @override
+  void dispose() {
+    PhotoManager.clearFileCache();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppLayout(
