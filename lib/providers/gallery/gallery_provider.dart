@@ -162,9 +162,6 @@ class GalleryProvider extends IGalleryProvider {
 
   @override
   Future<bool> refreshGalleryList([bool notify = true]) async {
-    final PermissionState ps = await PhotoManager.requestPermissionExtend();
-    if (!ps.hasAccess) {}
-
     final entityPaths = await PhotoManager.getAssetPathList(
       type: RequestType.image,
       hasAll: _config.hasAll,
@@ -199,13 +196,6 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Future<void> clearCache() {
     return PhotoManager.clearFileCache();
-  }
-
-  @override
-  Future<bool> registered() async {
-    ///SET GALLERY LIST
-    refreshGalleryList(false);
-    return super.registered();
   }
 
   _listenChangePhotos(_) {

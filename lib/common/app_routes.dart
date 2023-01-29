@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
@@ -108,8 +109,17 @@ class AppRoutes extends IAppRoutes {
 
 extension AppRoutesUtils on IAppRoutes {
   goAlbumsPage(BuildContext context, EditImageType editImageType) {
-    ManagerProvider.of<GalleryProvider>().editImageType = editImageType;
-    Navigator.pushNamed(context, AppRoutes.albumsPage);
+    final provider = ManagerProvider.of<GalleryProvider>();
+    provider.editImageType = editImageType;
+    UserPermission.instance.requestStoragePermission(context, onHasPermisson: () async {
+      WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+
+      await provider.refreshGalleryList(true);
+
+      Navigator.pop(context);
+
+      Navigator.pushNamed(context, AppRoutes.albumsPage);
+    });
   }
 
   goPhotosPage(BuildContext context, {AlbumVM? album}) {
@@ -125,15 +135,16 @@ extension AppRoutesUtils on IAppRoutes {
   }
 
   goEditImagePage(BuildContext context, {required Uint8List bytes, EditImageType? editImageType}) {
-    if (editImageType != null) ManagerProvider.of<GalleryProvider>().editImageType = editImageType;
+    final provider = ManagerProvider.of<GalleryProvider>();
+    if (editImageType != null) provider.editImageType = editImageType;
     UserPermission.instance.requestStoragePermission(
       context,
       onHasPermisson: () async {
-        final EditImageType current = ManagerProvider.of<GalleryProvider>().editImageType;
+        final EditImageType current = provider.editImageType;
         late final bool res;
         late final String target;
 
-        WidgetUtils.instance.showLoadingPopup(context, message: 'Please wait a moment!');
+        WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
         switch (current) {
           case EditImageType.applyArtEffect:
