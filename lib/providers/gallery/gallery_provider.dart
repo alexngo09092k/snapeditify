@@ -1,4 +1,9 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
@@ -65,7 +70,7 @@ extension EditImageTypeEX on EditImageType {
 
 abstract class IGalleryProvider extends Provider with ProviderDelegate {
   /// GALLERY LIST <ALBUM>
-  List<AlbumVM> get albumList;
+  Map<String, AlbumVM> get albumList;
 
   GalleryConfig get config;
 
@@ -76,6 +81,12 @@ abstract class IGalleryProvider extends Provider with ProviderDelegate {
   Future<bool> initial(GalleryConfig config);
 
   Future<bool> refreshGalleryList();
+
+  Future<File?> saveImage(Uint8List data);
+
+  Future<void> clearCache();
+
+  Stream get galleryChanged;
 }
 
 class GalleryProvider extends IGalleryProvider {
@@ -83,17 +94,21 @@ class GalleryProvider extends IGalleryProvider {
 
   static IGalleryProvider get instance => _instance;
 
-  GalleryProvider.internal();
+  GalleryProvider.internal() {
+    PhotoManager.startChangeNotify();
+    PhotoManager.addChangeCallback(_listenChangePhotos);
+    _controller = StreamController.broadcast();
+  }
 
   GalleryConfig _config = GalleryConfig.defaultValue();
 
   @override
   GalleryConfig get config => _config;
 
-  final List<AlbumVM> _albumList = [];
+  final Map<String, AlbumVM> _albumList = {};
 
   @override
-  List<AlbumVM> get albumList => _albumList;
+  Map<String, AlbumVM> get albumList => _albumList;
 
   EditImageType _editImageType = EditImageType.removeObject;
 
@@ -134,6 +149,11 @@ class GalleryProvider extends IGalleryProvider {
   @override
   List<String> get suggestedPhotos => suggestedPhotosStore[_editImageType] ?? [];
 
+  late final StreamController<dynamic> _controller;
+
+  @override
+  Stream get galleryChanged => _controller.stream;
+
   @override
   Future<bool> initial(GalleryConfig config) async {
     _config = config;
@@ -144,7 +164,6 @@ class GalleryProvider extends IGalleryProvider {
   Future<bool> refreshGalleryList([bool notify = true]) async {
     final PermissionState ps = await PhotoManager.requestPermissionExtend();
     if (!ps.hasAccess) {}
-    _albumList.clear();
 
     final entityPaths = await PhotoManager.getAssetPathList(
       type: RequestType.image,
@@ -153,17 +172,14 @@ class GalleryProvider extends IGalleryProvider {
       filterOption: _config.option,
     );
 
-    var index = 0;
     for (var entityPath in entityPaths) {
       final entities = (await entityPath.getAssetListPaged(page: 0, size: 1));
       final acount = await entityPath.assetCountAsync;
-      _albumList.add(AlbumVM(
+      _albumList[entityPath.id] = AlbumVM(
         entityPath: entityPath,
         thumnail: entities.isNotEmpty ? entities.first : null,
         count: acount,
-        index: index,
-      ));
-      index++;
+      );
     }
 
     if (notify) notifyListeners();
@@ -172,9 +188,38 @@ class GalleryProvider extends IGalleryProvider {
   }
 
   @override
+  Future<File?> saveImage(Uint8List data) async {
+    AssetEntity? asset = await PhotoManager.editor.saveImage(
+      data,
+      title: '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
+    );
+    return asset?.file;
+  }
+
+  @override
+  Future<void> clearCache() {
+    return PhotoManager.clearFileCache();
+  }
+
+  @override
   Future<bool> registered() async {
     ///SET GALLERY LIST
     refreshGalleryList(false);
     return super.registered();
+  }
+
+  _listenChangePhotos(_) {
+    Debug.log("====== PHOTOS CHANGED ======");
+    refreshGalleryList(true);
+    _controller.sink.add(_);
+  }
+
+  @override
+  void dispose() {
+    PhotoManager.removeChangeCallback(_listenChangePhotos);
+    PhotoManager.stopChangeNotify();
+    _controller.close();
+    clearCache();
+    super.dispose();
   }
 }

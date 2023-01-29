@@ -48,11 +48,11 @@ class AlbumItem extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                         child: BasePropConsumer<GalleryProvider, AssetEntity?>(
                           listenable: provider,
-                          select: (_) => _.albumList[album.index].thumnail,
+                          select: (_) => _.albumList[album.entityPath.id]!.thumnail,
                           builder: (_, __, p, ___) => AssetEntityImage(
                             width: width,
                             height: height,
-                            p.albumList[album.index].thumnail!,
+                            p.albumList[album.entityPath.id]!.thumnail!,
                             fit: BoxFit.cover,
                             isOriginal: false,
                           ),
@@ -65,9 +65,9 @@ class AlbumItem extends StatelessWidget {
           SizedBox(height: AppDimensions.instance.paddingX(1.5)),
           BasePropConsumer<GalleryProvider, int>(
             listenable: provider,
-            select: (_) => _.albumList[album.index].count,
+            select: (_) => _.albumList[album.entityPath.id]!.count,
             builder: (_, __, p, ___) => Text(
-              '${album.entityPath.name} (${p.albumList[album.index].count})',
+              '${album.entityPath.name} (${p.albumList[album.entityPath.id]!.count})',
               style: Theme.of(context).textTheme.bodyText1!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

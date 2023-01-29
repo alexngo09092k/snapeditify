@@ -5,12 +5,10 @@ class AlbumVM {
   final AssetPathEntity entityPath;
   final AssetEntity? thumnail;
   final int count;
-  final int index;
 
   const AlbumVM({
     required this.entityPath,
     this.thumnail,
     this.count = 0,
-    required this.index,
   });
 }

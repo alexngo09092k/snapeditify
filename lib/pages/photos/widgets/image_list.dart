@@ -29,6 +29,9 @@ class _ImageListState extends ProviderStateObserver<ImageList, GalleryProvider> 
   void initState() {
     super.initState();
     _requestAssets();
+    provider.galleryChanged.listen((_) {
+      _requestAssets();
+    });
   }
 
   Future<void> _requestAssets() async {
