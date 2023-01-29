@@ -7,7 +7,6 @@ extension MPermissionStore on UserPermission {
     Function? onNoPermisson,
   }) async {
     final permission = [Permission.storage];
-    if (CurrentPlatform.instance.isAndroid) permission.add(Permission.photos);
     requestPermission(
       permission: permission,
       onNoPermisson: () {
