@@ -19,7 +19,7 @@ const business = {
   /// Logo is used in splash screen and app ui
   'appLogo': 'assets/images/logo.png',
 
-  'appBio': 'Make life beautiful',
+  'appBio': 'Make your life beautiful',
 
   /// Protocols is use to check
   'protocols': ['https://', 'http://', 'data:'],

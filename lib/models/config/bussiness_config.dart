@@ -47,7 +47,7 @@ class BusinessConfig {
     return BusinessConfig(
       appName: "SnapEditify AI Photo Editor Pro",
       appLogo: "assets/images/logo.png",
-      appBio: "Make life beautiful",
+      appBio: "Make your life beautiful",
       protocols: ['https://', 'http://', 'data:'],
       prefix: "app.snapeditify.studio",
       contact: "brennanngo992k@gmail.com",
