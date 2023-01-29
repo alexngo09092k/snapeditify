@@ -7,7 +7,7 @@ const business = {
   'maintenanceMode': {
     'title': "We'll be back soon",
     'message': "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
-    'link': 'https://t.me/+9UBuQxKY7N80YTc1',
+    'link': '',
   },
 
   /// Display name is used in app
@@ -28,37 +28,42 @@ const business = {
   'prefix': 'app.snapeditify.studio.',
 
   /// Contact
-  'contact': 'support@snapeditify.app',
+  'contact': 'contact.snapeditify@gmail.com',
 
   /// Social Networks
   'socialNetworks': [
     {
-      'brand': 'Telegram',
-      'link': 'https://pub.dev/packages/url_launcher/example',
-      'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
-    },
-    {
       'brand': 'Facebook',
-      'link': 'https://pub.dev/packages/url_launcher/example',
+      'link': 'https://www.facebook.com/snapeditify/',
       'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
     },
     {
       'brand': 'Tiktok',
-      'link': 'https://pub.dev/packages/url_launcher/example',
+      'link': 'https://www.tiktok.com/@snapeditify',
       'image': 'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
-    }
+    },
+    {
+      'brand': 'Youtube',
+      'link': 'https://www.youtube.com/@snapeditify',
+      'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/318px-YouTube_full-color_icon_%282017%29.svg.png',
+    },
+    {
+      'brand': 'Telegram',
+      'link': 'https://t.me/+GPyDosamyKA2OGVl',
+      'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
+    },
   ],
 
   /// Web links
   'webLinks': [
     {
       'title': 'Terms of service',
-      'link': 'https://pub.dev/packages/url_launcher/example',
+      'link': '',
       'image': 'assets/images/icons/ic_term.png',
     },
     {
       'title': 'FAQ',
-      'link': 'https://pub.dev/packages/url_launcher/example',
+      'link': '',
       'image': 'assets/images/icons/ic_faq.png',
     }
   ],
@@ -66,10 +71,6 @@ const business = {
   /// Share app
   'shareApp': {
     'message': 'SnapEditify AI Photo Editor Pro',
-    'links': {
-      'android': 'https://pub.dev/packages/url_launcher/example',
-      'ios': 'https://pub.dev/packages/url_launcher/example',
-      'huawei': 'https://pub.dev/packages/url_launcher/example'
-    },
+    'links': {'android': '', 'ios': '', 'huawei': ''},
   },
 };

@@ -49,8 +49,8 @@ class BusinessConfig {
       appLogo: "assets/images/logo.png",
       appBio: "Make your life beautiful",
       protocols: ['https://', 'http://', 'data:'],
-      prefix: "app.snapeditify.studio",
-      contact: "brennanngo992k@gmail.com",
+      prefix: "app.snapeditify.studio.",
+      contact: "contact.snapeditify@gmail.com",
       shareApp: ShareApp(
         links: {
           ShareAppPlatform.android: '',
