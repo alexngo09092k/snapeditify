@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% accurate"),
         "after": MessageLookupByLibrary.simpleMessage("After"),
+        "ai": MessageLookupByLibrary.simpleMessage("AI"),
         "aiDetection": MessageLookupByLibrary.simpleMessage("AI Detection"),
         "albums": MessageLookupByLibrary.simpleMessage("Albums"),
         "allChangesWillBeLostAreYouSureYouWant":
@@ -97,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("Unlock SnapEditify Premium"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
+        "withText": MessageLookupByLibrary.simpleMessage("with"),
         "youAreCurrentlyOffline":
             MessageLookupByLibrary.simpleMessage("You are currently offline!"),
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":

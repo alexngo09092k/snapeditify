@@ -79,7 +79,7 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
     return Scaffold(
       body: Center(
         child: Transform.translate(
-          offset: Offset(0, -logoWidth),
+          offset: Offset(0, -logoWidth/2),
           child: AwesomeAnimation<double>.tweenSequence(
             duration: Duration(milliseconds: time - 200),
             items: [

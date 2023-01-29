@@ -589,6 +589,26 @@ class S {
       args: [],
     );
   }
+
+  /// `with`
+  String get withText {
+    return Intl.message(
+      'with',
+      name: 'withText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AI`
+  String get ai {
+    return Intl.message(
+      'AI',
+      name: 'ai',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

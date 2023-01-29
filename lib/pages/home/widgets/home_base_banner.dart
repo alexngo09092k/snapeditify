@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
+import 'package:snapeditify/widgets/base/ai_icon.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 
@@ -45,12 +47,19 @@ class HomeBaseBanner extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      title,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: AppColors.instance.white,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          '$title ${S.of(context).withText} ',
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: AppColors.instance.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                        const AIIcon(),
+                      ],
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(

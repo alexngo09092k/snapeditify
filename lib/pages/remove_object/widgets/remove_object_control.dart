@@ -6,6 +6,7 @@ import 'package:snapeditify/pages/remove_object/widgets/ai_mode_result.dart';
 import 'package:snapeditify/pages/remove_object/widgets/brush_mode_setting.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
+import 'package:snapeditify/widgets/base/ai_icon.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class RemoveObjectControl extends StatelessWidget {
@@ -43,7 +44,13 @@ class RemoveObjectControl extends StatelessWidget {
                         children: [
                           CustomIcon(AppAssets.instance.icAI),
                           SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                          Text(S.of(context).auto, style: Theme.of(context).textTheme.bodyText1),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('${S.of(context).auto} ', style: Theme.of(context).textTheme.bodyText1),
+                              const AIIcon(),
+                            ],
+                          ),
                         ],
                       ),
                     ),
