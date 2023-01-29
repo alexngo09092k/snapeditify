@@ -7,7 +7,7 @@ extension MPermissionStore on UserPermission {
     Function? onNoPermisson,
   }) async {
     requestPermission(
-      permission: [Permission.storage],
+      permission: [Permission.storage, Permission.photos],
       onNoPermisson: () {
         WidgetUtils.instance.showRequestPermissionPopup(
           context,
