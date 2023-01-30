@@ -161,7 +161,7 @@ packages:
       name: dart_jsonwebtoken
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.4"
+    version: "2.7.1"
   dbus:
     dependency: transitive
     description:
@@ -397,7 +397,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "7ed90a9dbb96bfce39cb3952e14e914a6dc73087"
+      resolved-ref: "841b5879a59000d8763f634d76f0026d0a353c72"
       url: "git@github.com:brennan992k/fluttering.git"
     source: git
     version: "1.0.2"

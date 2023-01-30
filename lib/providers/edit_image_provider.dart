@@ -7,6 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/advertisement/advertisement.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
@@ -82,15 +84,17 @@ abstract class EditImageProvider extends Provider {
       /// SHOW ADS
       // adProvider.handleAd();
 
+      final provider = ManagerProvider.of<GalleryProvider>();
+
       if (_savedFile == null) {
         /// SHOW LOADING
         WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
         /// SAVE IMAGE
-        _savedFile = await ManagerProvider.of<GalleryProvider>().saveImage(editedImage.imageBytes);
+        _savedFile = await provider.saveImage(editedImage.imageBytes);
 
         /// HIDE LOADING
-        Navigator.pop(context);
+        WidgetUtils.instance.hideLoadingPopup();
       }
 
       if (_savedFile != null) {
@@ -100,7 +104,17 @@ abstract class EditImageProvider extends Provider {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
           ),
-          builder: (_) => SavedImagePreview(provider: this),
+          builder: (_) => SavedImagePreview(
+            editedImage: editedImage,
+            editImageType: provider.editImageType,
+            onNewEditImage: (__) => AppRoutes.instance.goEditImagePage(context, bytes: editedImage.imageBytes, editImageType: __),
+            savedFile: _savedFile!,
+            onShare: () => Share.shareXFiles(
+              [XFile(savedFile!.path)],
+              subject: Configuration.instance.business.shareApp.message,
+            ),
+            onNewImage: Navigator.of(context).pop,
+          ),
         );
         return true;
       }
@@ -146,8 +160,8 @@ abstract class EditImageProvider extends Provider {
                 title: S.of(context).ok,
                 isDestructiveAction: true,
                 onPressed: () {
-                  Navigator.pop(context, true);
-                  if (!onPop) Navigator.pop(context, true);
+                  Navigator.of(context).pop(true);
+                  if (!onPop) Navigator.of(context).pop(true);
                 },
               )
             ],
@@ -155,7 +169,7 @@ abstract class EditImageProvider extends Provider {
           canBack);
     }
     if (!onPop) {
-      Navigator.pop(context);
+      Navigator.of(context).pop();
     }
     return canBack;
   }

@@ -112,11 +112,13 @@ extension AppRoutesUtils on IAppRoutes {
     final provider = ManagerProvider.of<GalleryProvider>();
     provider.editImageType = editImageType;
     UserPermission.instance.requestStoragePermission(context, onHasPermisson: () async {
+      /// SHOW LOADING POPUP
       WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
       await provider.refreshGalleryList(true);
 
-      Navigator.pop(context);
+      /// HIDE LOADING
+      WidgetUtils.instance.hideLoadingPopup();
 
       Navigator.pushNamed(context, AppRoutes.albumsPage);
     });
@@ -144,6 +146,7 @@ extension AppRoutesUtils on IAppRoutes {
         late final bool res;
         late final String target;
 
+        /// SHOW LOADING POPUP
         WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
         switch (current) {
@@ -167,7 +170,8 @@ extension AppRoutesUtils on IAppRoutes {
             throw ErrorDescription("Not support action");
         }
 
-        Navigator.pop(context);
+        /// HIDE LOADING
+        WidgetUtils.instance.hideLoadingPopup();
 
         if (res) {
           if (editImageType != null) {

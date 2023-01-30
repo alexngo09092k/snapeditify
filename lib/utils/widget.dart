@@ -34,7 +34,7 @@ class WidgetUtils {
             title: S.of(context).retry,
             isDestructiveAction: true,
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context).pop();
               retry(context);
             },
           ),
@@ -43,8 +43,7 @@ class WidgetUtils {
   }
 
   Future<T?> showLoadingPopup<T>(BuildContext context, {String? message}) {
-    return showDialog<T>(
-      context: context,
+    return AwesomeAppState.dialog<T>(
       barrierDismissible: false,
       useSafeArea: false,
       builder: (BuildContext context) => Column(
@@ -74,6 +73,10 @@ class WidgetUtils {
         ],
       ),
     );
+  }
+
+  void hideLoadingPopup() {
+    AwesomeAppState.dimiss();
   }
 
   Future<T?> alert<T>(
@@ -107,7 +110,7 @@ class WidgetUtils {
       title: S.of(context).youAreCurrentlyOffline,
       message: S.of(context).looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
       onForeground: () {
-        Navigator.pop(context);
+        Navigator.of(context).pop();
         if (retry != null) retry(context);
       },
       actions: [
@@ -116,7 +119,7 @@ class WidgetUtils {
           AlertAction(
             title: S.of(context).retry,
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context).pop();
               retry(context);
             },
           ),

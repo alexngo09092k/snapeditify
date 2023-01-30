@@ -85,7 +85,7 @@ class EnhanceProvider extends IEnhanceProvider {
       _state.faces = faces;
 
       /// HIDE LOADING POPUP
-      Navigator.pop(context);
+      WidgetUtils.instance.hideLoadingPopup();
 
       /// SHOW GUIDE
       showEnhanceGuide(context);
@@ -94,7 +94,7 @@ class EnhanceProvider extends IEnhanceProvider {
     }
 
     /// HIDE LOADING POPUP
-    Navigator.pop(context);
+    WidgetUtils.instance.hideLoadingPopup();
 
     if (res.error != null) {
       WidgetUtils.instance.showErrorPopup(context, title: S.of(context).enhanceImage, retry: (_) => enhanceImage(context));

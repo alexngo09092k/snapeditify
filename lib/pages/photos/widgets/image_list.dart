@@ -88,7 +88,7 @@ class _ImageListState extends ProviderStateObserver<ImageList, GalleryProvider> 
       child: GridView.custom(
         gridDelegate: AppDimensions.instance.gridDelegate,
         childrenDelegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
+          (BuildContext _, int index) {
             if (index == _images!.length - 8 && !_isLoadingMore && _hasMoreToLoad) {
               _loadMoreAsset();
             }

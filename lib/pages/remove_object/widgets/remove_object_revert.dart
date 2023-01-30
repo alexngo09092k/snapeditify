@@ -19,15 +19,13 @@ class RemoveObjectRevert extends StatelessWidget {
       actions: [
         AlertAction(
           title: S.of(context).cancel,
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: Navigator.of(context).pop,
         ),
         AlertAction(
           title: S.of(context).ok,
           isDestructiveAction: true,
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pop();
             provider.revert();
           },
         )

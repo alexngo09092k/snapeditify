@@ -69,6 +69,7 @@ class AppLayout extends StatelessWidget {
                             ? Text(
                                 screen!,
                                 style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.w600),
+                                maxLines: 1,
                               )
                             : null),
                     action: action,
@@ -117,7 +118,7 @@ class _AppBar extends StatelessWidget {
       if (onBack != null) {
         onBack!();
       } else {
-        Navigator.pop(context);
+        Navigator.of(context).pop();
       }
     }
   }
@@ -151,10 +152,7 @@ class _AppBar extends StatelessWidget {
           ),
           if (center != null)
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [center!],
-              ),
+              child: Center(child: center!),
             ),
           Expanded(
             child: Row(

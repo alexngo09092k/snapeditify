@@ -1,25 +1,36 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:snapeditify/common/app_routes.dart';
-import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
+import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 
 class SavedImagePreview extends StatelessWidget {
-  const SavedImagePreview({super.key, required this.provider});
-  final EditImageProvider provider;
+  const SavedImagePreview({
+    super.key,
+    required this.editedImage,
+    required this.editImageType,
+    required this.onNewEditImage,
+    required this.savedFile,
+    required this.onShare,
+    required this.onNewImage,
+  });
+  final EditedImageVM editedImage;
+  final EditImageType editImageType;
+  final File savedFile;
+  final Function(EditImageType) onNewEditImage;
+  final Function() onShare;
+  final Function() onNewImage;
 
   @override
   Widget build(BuildContext context) {
-    final gallery = ManagerProvider.of<GalleryProvider>();
     return AppCard(
       height: AwesomeAppState.screen.height * 2 / 3,
       child: SafeArea(
@@ -43,12 +54,12 @@ class SavedImagePreview extends StatelessWidget {
               SizedBox(height: AppDimensions.instance.padding),
               Expanded(
                 child: AspectRatio(
-                  aspectRatio: provider.editedImage.ratio,
+                  aspectRatio: editedImage.ratio,
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
                       Image.file(
-                        provider.savedFile!,
+                        savedFile,
                         fit: BoxFit.cover,
                         width: AwesomeAppState.screen.width,
                       ),
@@ -58,7 +69,13 @@ class SavedImagePreview extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppDimensions.instance.padding),
-              _Options(current: gallery.editImageType, provider: provider),
+              _Options(
+                current: editImageType,
+                onOptions: (_) {
+                  Navigator.of(context).pop();
+                  onNewEditImage(_);
+                },
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -69,8 +86,8 @@ class SavedImagePreview extends StatelessWidget {
                     color: AppColors.instance.white,
                     titleColor: Theme.of(context).primaryColor,
                     onTap: () {
-                      Navigator.pop(context);
-                      Navigator.pop(context);
+                      Navigator.of(context).pop();
+                      onNewImage();
                     },
                   ),
                   CustomButton(
@@ -78,10 +95,10 @@ class SavedImagePreview extends StatelessWidget {
                     width: 150,
                     height: 40,
                     gradient: AppColors.instance.gradient,
-                    onTap: () => Share.shareXFiles(
-                      [XFile(provider.savedFile!.path)],
-                      subject: Configuration.instance.business.shareApp.message,
-                    ),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      onShare();
+                    },
                   )
                 ],
               )
@@ -94,9 +111,9 @@ class SavedImagePreview extends StatelessWidget {
 }
 
 class _Options extends StatelessWidget {
-  const _Options({this.current, required this.provider});
+  const _Options({this.current, required this.onOptions});
   final EditImageType? current;
-  final EditImageProvider provider;
+  final Function(EditImageType) onOptions;
 
   @override
   Widget build(BuildContext context) {
@@ -109,14 +126,7 @@ class _Options extends StatelessWidget {
         children: EditImageType.values
             .where((element) => element != current)
             .map((e) => GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                    AppRoutes.instance.goEditImagePage(
-                      context,
-                      bytes: provider.editedImage.imageBytes,
-                      editImageType: e,
-                    );
-                  },
+                  onTap: () => onOptions(e),
                   child: AppCard(
                     margin: EdgeInsets.symmetric(
                       horizontal: AppDimensions.instance.paddingX(0.25),

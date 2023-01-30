@@ -16,8 +16,7 @@ class RemoveObjectImage extends StatelessWidget {
   final Function()? onEndDraw;
 
   _showColorPopup<T>(BuildContext context) {
-    return showDialog<T>(
-      context: context,
+    return AwesomeAppState.dialog<T>(
       builder: (_) => Dialog(
         backgroundColor: Theme.of(context).cardColor,
         child: SingleChildScrollView(

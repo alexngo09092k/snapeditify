@@ -229,7 +229,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       _state.mode = RemoveObjectMode.ai;
 
       /// HIDE LOADING POPUP
-      Navigator.pop(context);
+      WidgetUtils.instance.hideLoadingPopup();
 
       /// SHOW GUIDE
       showAutoAIGuide(context);
@@ -238,7 +238,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     }
 
     /// HIDE LOADING POPUP
-    Navigator.pop(context);
+    WidgetUtils.instance.hideLoadingPopup();
 
     if (res.error != null) {
       WidgetUtils.instance.showErrorPopup(context, title: S.of(context).aiDetection, retry: (_) => toAI(context));
@@ -297,7 +297,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     String? maskBase64 = await ImageUtils.instance.imageUIToBase64(mask);
     if (maskBase64 == null) {
       /// HIDE LOADING POPUP
-      Navigator.pop(context);
+      WidgetUtils.instance.hideLoadingPopup();
       return false;
     }
 
@@ -320,12 +320,12 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      Navigator.pop(context);
+      WidgetUtils.instance.hideLoadingPopup();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    Navigator.pop(context);
+    WidgetUtils.instance.hideLoadingPopup();
 
     if (res.error != null) {
       WidgetUtils.instance.showErrorPopup(context, title: S.of(context).removeObjects, retry: (_) => removeObjects(context));

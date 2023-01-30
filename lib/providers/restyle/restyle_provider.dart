@@ -111,12 +111,12 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      Navigator.pop(context);
+      WidgetUtils.instance.hideLoadingPopup();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    Navigator.pop(context);
+    WidgetUtils.instance.hideLoadingPopup();
 
     if (res.error != null) {
       WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, retry: (_) => restyleImage(context, styleId));
