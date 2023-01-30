@@ -141,7 +141,9 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
       }
 
       PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
-      String stringConfig = remoteConfig.getString(packageInfo.packageName.split('.').join().split('-').join().toLowerCase());
+      /// app.snapeditify.studio
+      /// app_snapeditify_studio
+      String stringConfig = remoteConfig.getString(packageInfo.packageName.split('.').join().split('-').join('_').toLowerCase());
 
       if (stringConfig.isEmpty) {
         return;
