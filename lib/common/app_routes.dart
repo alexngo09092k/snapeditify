@@ -22,7 +22,6 @@ import 'package:snapeditify/providers/remove_object/remove_object_provider.dart'
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:snapeditify/common/extensions.dart';
 import 'package:snapeditify/utils/widget.dart';
-import 'package:snapeditify/view_models/album_vm.dart';
 
 abstract class IAppRoutes {
   String get initialRoute;
@@ -96,7 +95,7 @@ class AppRoutes extends IAppRoutes {
       case albumsPage:
         return buildRoute(const AlbumsPage(), settings);
       case photosPage:
-        return buildRoute(PhotosPage(album: (settings.arguments as AlbumVM?)), settings);
+        return buildRoute(PhotosPage(albumId: (settings.arguments as String?)), settings);
       case animeAIPage:
         return buildRoute(const AnimeAIPage(), settings);
       default:
@@ -124,8 +123,8 @@ extension AppRoutesUtils on IAppRoutes {
     });
   }
 
-  goPhotosPage(BuildContext context, {AlbumVM? album}) {
-    Navigator.pushNamed(context, AppRoutes.photosPage, arguments: album);
+  goPhotosPage(BuildContext context, {String? albumId}) {
+    Navigator.pushNamed(context, AppRoutes.photosPage, arguments: albumId);
   }
 
   goPremiumProPage(BuildContext context) {

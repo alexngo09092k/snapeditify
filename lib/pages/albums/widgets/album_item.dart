@@ -20,7 +20,7 @@ class AlbumItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => AppRoutes.instance.goPhotosPage(context, album: album),
+      onTap: () => AppRoutes.instance.goPhotosPage(context, albumId: album.entityPath.id),
       child: Column(
         children: [
           Stack(

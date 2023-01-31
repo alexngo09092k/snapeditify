@@ -85,8 +85,6 @@ abstract class IGalleryProvider extends Provider with ProviderDelegate {
   Future<File?> saveImage(Uint8List data);
 
   Future<void> clearCache();
-
-  Stream get galleryChanged;
 }
 
 class GalleryProvider extends IGalleryProvider {
@@ -97,7 +95,6 @@ class GalleryProvider extends IGalleryProvider {
   GalleryProvider.internal() {
     PhotoManager.startChangeNotify();
     PhotoManager.addChangeCallback(_listenChangePhotos);
-    _controller = StreamController.broadcast();
   }
 
   GalleryConfig _config = GalleryConfig.defaultValue();
@@ -152,9 +149,6 @@ class GalleryProvider extends IGalleryProvider {
   late final StreamController<dynamic> _controller;
 
   @override
-  Stream get galleryChanged => _controller.stream;
-
-  @override
   Future<bool> initial(GalleryConfig config) async {
     _config = config;
     return true;
@@ -201,7 +195,6 @@ class GalleryProvider extends IGalleryProvider {
   _listenChangePhotos(_) {
     Debug.log("====== PHOTOS CHANGED ======");
     refreshGalleryList(true);
-    _controller.sink.add(_);
   }
 
   @override

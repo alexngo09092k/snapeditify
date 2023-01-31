@@ -12,46 +12,44 @@ import 'package:snapeditify/view_models/album_vm.dart';
 import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 
 class ImageList extends StatefulWidget {
-  const ImageList({super.key, required this.album});
+  const ImageList({super.key, required this.album, required this.provider});
   final AlbumVM album;
+  final GalleryProvider provider;
 
   @override
   _ImageListState createState() => _ImageListState();
 }
 
-class _ImageListState extends ProviderStateObserver<ImageList, GalleryProvider> {
+class _ImageListState extends State<ImageList> {
   List<AssetEntity>? _images;
   int _page = 0;
   bool _isLoadingMore = false;
   bool _hasMoreToLoad = true;
 
-  AlbumVM get album => provider.albumList[widget.album.entityPath.id]!;
-
   @override
   void initState() {
     super.initState();
     _requestAssets();
-    provider.galleryChanged.listen((_) => _requestAssets());
   }
 
   Future<void> _requestAssets() async {
-    final List<AssetEntity> entities = await album.entityPath.getAssetListPaged(
+    final List<AssetEntity> entities = await widget.album.entityPath.getAssetListPaged(
       page: 0,
-      size: provider.config.countInPage,
+      size: widget.provider.config.countInPage,
     );
     if (!mounted) {
       return;
     }
     setState(() {
       _images = entities;
-      _hasMoreToLoad = _images!.length < album.count;
+      _hasMoreToLoad = _images!.length < widget.album.count;
     });
   }
 
   Future<void> _loadMoreAsset() async {
-    final List<AssetEntity> entities = await album.entityPath.getAssetListPaged(
+    final List<AssetEntity> entities = await widget.album.entityPath.getAssetListPaged(
       page: _page + 1,
-      size: provider.config.countInPage,
+      size: widget.provider.config.countInPage,
     );
     if (!mounted) {
       return;
@@ -59,7 +57,7 @@ class _ImageListState extends ProviderStateObserver<ImageList, GalleryProvider> 
     setState(() {
       _images!.addAll(entities);
       _page++;
-      _hasMoreToLoad = _images!.length < album.count;
+      _hasMoreToLoad = _images!.length < widget.album.count;
       _isLoadingMore = false;
     });
   }
