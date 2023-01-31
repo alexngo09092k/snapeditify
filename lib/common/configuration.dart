@@ -115,7 +115,7 @@ abstract class DefaultConfig {
   /// DEFAULT IAP CONFIG
   static IAPConfig iap = const IAPConfig(
     products: [],
-    enable: true,
+    enable: false,
     provider: IAPProvider.google,
   );
 }
@@ -128,10 +128,10 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
     bool isExpried = isExpriedRemoteConfig();
 
     /// if expried, get new remote config
-    Debug.log('======= REMOTE CONFIG ON LOCAL IS EXPRITED $isExpried');
+    Debug.log('======= REMOTE CONFIG ON LOCAL IS EXPRITED $isExpried =======');
 
     if (isExpried && InternetConnection.instance.hasConnection) {
-      Debug.log('====== SET REMOTE CONFIG FROM FIREBASE======');
+      Debug.log('====== SET REMOTE CONFIG FROM FIREBASE ======');
       if (before != null) await before();
 
       FirebaseRemoteConfig? remoteConfig = Services().firebase.remoteConfig;
@@ -141,9 +141,15 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
       }
 
       PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
+
       /// app.snapeditify.studio
-      /// app_snapeditify_studio
-      String stringConfig = remoteConfig.getString(packageInfo.packageName.split('.').join().split('-').join('_').toLowerCase());
+      /// app_snapeditify_studio on firebase
+      String remoteKey = packageInfo.packageName.split('.').join('_').split('-').join().toLowerCase();
+      Debug.log(remoteKey);
+      String stringConfig = remoteConfig.getString(remoteKey);
+      Debug.log('====== REMOTE CONFIG FROM FIREBASE======');
+      Debug.log(stringConfig);
+      Debug.log('====== REMOTE CONFIG FROM FIREBASE======');
 
       if (stringConfig.isEmpty) {
         return;
