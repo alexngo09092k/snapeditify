@@ -387,7 +387,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "9baba97c30ec6f72f5c3b98bfffea5909cbc349e"
+      resolved-ref: "7798b45e223a38e3a7c9021fef0890afe5879bff"
       url: "git@github.com:brennan992k/fluttering_iap.git"
     source: git
     version: "0.0.1"
@@ -446,7 +446,7 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.12"
+    version: "4.0.13"
   image_picker:
     dependency: "direct main"
     description:

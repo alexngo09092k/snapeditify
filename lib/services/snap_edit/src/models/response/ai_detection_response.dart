@@ -132,7 +132,7 @@ class DetectedObject {
   factory DetectedObject.fromMap(Map<String, dynamic> map) {
     return DetectedObject.defaultValue().copyWith(
       accuracy: map['accuracy'],
-      box: List<int>.from(((map['box'] ?? []).map<int>((e) => e as int))),
+      box: List<int>.from(((map['box'] ?? []).map<int>((e) => int.parse(e.toString())))),
       mask: map['mask'],
       maskId: map['mask_id'],
       objectDescription: map['object_description'],

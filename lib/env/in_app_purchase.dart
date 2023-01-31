@@ -8,7 +8,7 @@ const iap = {
         "name": "",
         "description": "",
         "price": "\$1000",
-        "rawPrice": 1000.0,
+        "rawPrice": 1000,
         "currency": "USD",
       }
     }

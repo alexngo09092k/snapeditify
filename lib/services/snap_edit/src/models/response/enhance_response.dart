@@ -123,7 +123,7 @@ class Face {
 
   factory Face.fromMap(Map<String, dynamic> map) {
     return Face.defaultValue().copyWith(
-      box: List<int>.from(((map['box'] ?? []).map<int>((e) => e as int))),
+      box: List<int>.from(((map['box'] ?? []).map<int>((e) => int.parse(e.toString())))),
       faceId: map['faceId'],
       png: List<String>.from(((map['png'] ?? []).map<String>((e) => e.toString()))),
     );
