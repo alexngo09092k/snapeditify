@@ -10,8 +10,6 @@ Map<String, dynamic> gallery = {
   'minDuration': 0,
   'maxDuration': 60 * 60 * 1000,
   'needTitle': false,
-  'startTime': DateTime(2005).millisecondsSinceEpoch,
-  'endTime': DateTime.now().millisecondsSinceEpoch,
   'containsPathModified': true,
   'containsLivePhotos': false,
   'onlyLivePhotos': false,

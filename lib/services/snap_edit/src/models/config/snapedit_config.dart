@@ -2,13 +2,10 @@
 // ignore_for_file: unnecessary_overrides
 
 import 'dart:convert';
-import 'dart:io';
-import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/services/snap_edit/src/models/config/end_points.dart';
 import 'package:snapeditify/services/snap_edit/src/models/config/enhance_config.dart';
 import 'package:snapeditify/services/snap_edit/src/models/config/remove_object_config.dart';
 import 'package:snapeditify/services/snap_edit/src/models/config/restyle_config.dart';
-import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 class SnapEditConfig {
   final String baseUrl;
@@ -49,7 +46,8 @@ class SnapEditConfig {
   factory SnapEditConfig.defaultValue() {
     return SnapEditConfig(
       baseUrl: "https://be-prod-1.snapedit.app/",
-      apiKey: "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
+      // apiKey: "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
+      apiKey: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoiMy4xLjAiLCJleHAiOjE3Njk2MjI0MDEsInN1YiI6Imlnbm9yZSIsInBsYXRmb3JtIjoiYW5kcm9pZCJ9.OufJuEzKvN2RVCw-Ofy1oY6d9oRuOnM_Vxmt6aqLWAk",
       version: "3.1.0",
       waterMark: false,
       maxFreeDownloadCount: 100,
@@ -103,10 +101,10 @@ class SnapEditConfig {
       baseUrl: map['baseUrl'],
       apiKey: map['apiKey'],
       version: map['version'],
-      endPoints: EndPoints.fromMap(map['endPoints']),
-      enhance: EnhanceConfig.fromMap(map['enhance']),
-      restyle: RestyleConfig.fromMap(map['restyle']),
-      removeObject: RemoveObjectConfig.fromMap(map['removeObject']),
+      endPoints: map['endPoints'] != null ? EndPoints.fromMap(map['endPoints']) : null,
+      enhance: map['enhance'] != null ? EnhanceConfig.fromMap(map['enhance']) : null,
+      restyle: map['restyle'] != null ? RestyleConfig.fromMap(map['restyle']) : null,
+      removeObject: map['removeObject'] != null ? RemoveObjectConfig.fromMap(map['removeObject']) : null,
       waterMark: map['waterMark'],
       maxFreeDownloadCount: map['maxFreeDownloadCount'],
     );
@@ -159,26 +157,26 @@ extension HeaderBuilders on SnapEditConfig {
 
 extension JWTBuilders on SnapEditConfig {
   String _buildJWT() {
-    String token;
+    // String token;
 
-    final jwt = JWT(
-      {
-        "version": "3.1.0",
-        "exp": '${DateTime.fromMillisecondsSinceEpoch(DateTime.now().millisecondsSinceEpoch + (24 * 60 * 60 * 1000)).millisecondsSinceEpoch}',
-        "sub": "ignore",
-        "platform": Platform.isAndroid ? 'android' : 'ios',
-      },
-      subject: 'exp',
-    );
+    // final jwt = JWT(
+    //   {
+    //     "version": "3.1.0",
+    //     "exp": '${DateTime.fromMillisecondsSinceEpoch(DateTime.now().millisecondsSinceEpoch + (24 * 60 * 60 * 1000)).millisecondsSinceEpoch}',
+    //     "sub": "ignore",
+    //     "platform": Platform.isAndroid ? 'android' : 'ios',
+    //   },
+    //   subject: 'exp',
+    // );
 
     // Sign it
     // Debug.log(latin1.decode(base64.decode(apiKey)));
-    token = jwt.sign(SecretKey(latin1.decode(base64.decode(apiKey))));
+    // token = jwt.sign(SecretKey(latin1.decode(base64.decode(apiKey))));
 
-    Debug.log(token);
+    // Debug.log(token);
 
     // return token;
 
-    return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoiMy4xLjAiLCJleHAiOjE3Njk2MjI0MDEsInN1YiI6Imlnbm9yZSIsInBsYXRmb3JtIjoiYW5kcm9pZCJ9.OufJuEzKvN2RVCw-Ofy1oY6d9oRuOnM_Vxmt6aqLWAk";
+    return apiKey;
   }
 }

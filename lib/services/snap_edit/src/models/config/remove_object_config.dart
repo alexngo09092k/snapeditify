@@ -37,8 +37,8 @@ class RemoveObjectConfig {
 
   factory RemoveObjectConfig.fromMap(Map<String, dynamic> map) {
     return RemoveObjectConfig.defaultValue().copyWith(
-      dimension: Dimension.fromMap(map['dimension']),
-      strokeWidth: StrokeWidth.fromMap(map['strokeWidth']),
+      dimension: map['dimension'] != null ? Dimension.fromMap(map['dimension']) : null,
+      strokeWidth: map['strokeWidth'] != null ? StrokeWidth.fromMap(map['strokeWidth']) : null,
     );
   }
 

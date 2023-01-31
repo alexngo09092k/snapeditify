@@ -119,18 +119,18 @@ class BusinessConfig {
   }
 
   factory BusinessConfig.fromMap(Map<String, dynamic> map) {
-    return BusinessConfig(
-      appName: map['appName'] as String,
-      appLogo: map['appLogo'] as String,
-      appBio: map['appBio'] as String,
-      protocols: (map['protocols'] as List).map((e) => e.toString()).toList(),
-      prefix: map['prefix'] as String,
-      contact: map['contact'] as String,
-      shareApp: ShareApp.fromMap(map['shareApp']),
-      appMode: AppMode.values.firstWhere((element) => element.name == map['appMode']),
-      socialNetworks: map['socialNetworks'].map<SocialNetwork>((e) => SocialNetwork.fromMap(e)).toList(),
-      webLinks: map['webLinks'].map<WebLink>((e) => WebLink.fromMap(e)).toList(),
-      maintenanceMode: MaintenanceMode.fromMap(map['maintenanceMode']),
+    return BusinessConfig.defaultValue().copyWith(
+      appName: map['appName'],
+      appLogo: map['appLogo'],
+      appBio: map['appBio'],
+      protocols: map['protocols'] != null ? (map['protocols'] as List).map((e) => e.toString()).toList(): null,
+      prefix: map['prefix'],
+      contact: map['contact'],
+      shareApp: map['shareApp'] != null ? ShareApp.fromMap(map['shareApp']) : null,
+      appMode: map['appMode'] != null ? AppMode.values.firstWhere((element) => element.name == map['appMode']) : null,
+      socialNetworks: map['socialNetworks'] != null ? (map['socialNetworks'] as List).map<SocialNetwork>((e) => SocialNetwork.fromMap(e)).toList(): null,
+      webLinks: map['webLinks'] != null ? (map['webLinks'] as List).map<WebLink>((e) => WebLink.fromMap(e)).toList(): null,
+      maintenanceMode: map['maintenanceMode'] != null ? MaintenanceMode.fromMap(map['maintenanceMode']): null,
       version: map['version'],
     );
   }

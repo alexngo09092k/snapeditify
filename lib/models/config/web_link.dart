@@ -1,11 +1,10 @@
-
 import 'dart:convert';
 
 class WebLink {
   final String link;
   final String title;
   final String image;
-  
+
   WebLink({
     required this.link,
     required this.title,
@@ -34,9 +33,9 @@ class WebLink {
 
   factory WebLink.fromMap(Map<String, dynamic> map) {
     return WebLink(
-      link: map['link'] as String,
-      title: map['title'] as String,
-      image: map['image'] as String,
+      link: map['link'],
+      title: map['title'],
+      image: map['image'],
     );
   }
 
@@ -50,11 +49,8 @@ class WebLink {
   @override
   bool operator ==(covariant WebLink other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.link == link &&
-      other.title == title &&
-      other.image == image;
+
+    return other.link == link && other.title == title && other.image == image;
   }
 
   @override

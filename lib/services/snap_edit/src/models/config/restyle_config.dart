@@ -30,8 +30,8 @@ class RestyleConfig {
   }
 
   factory RestyleConfig.fromMap(Map<String, dynamic> map) {
-    return RestyleConfig(
-      dimension: Dimension.fromMap(map['dimension'] as Map<String, dynamic>),
+    return RestyleConfig.defaultValue().copyWith(
+      dimension: map['dimension'] != null ? Dimension.fromMap(map['dimension']) : null,
     );
   }
 

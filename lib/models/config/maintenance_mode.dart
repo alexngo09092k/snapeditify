@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 class MaintenanceMode {
@@ -34,9 +33,9 @@ class MaintenanceMode {
 
   factory MaintenanceMode.fromMap(Map<String, dynamic> map) {
     return MaintenanceMode(
-      title: map['title'] as String,
-      message: map['message'] as String,
-      link: map['link'] as String,
+      title: map['title'],
+      message: map['message'],
+      link: map['link'],
     );
   }
 

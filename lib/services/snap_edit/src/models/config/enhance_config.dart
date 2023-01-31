@@ -43,8 +43,8 @@ class EnhanceConfig {
 
   factory EnhanceConfig.fromMap(Map<String, dynamic> map) {
     return EnhanceConfig.defaultValue().copyWith(
-      suportedImageSize: Dimension.fromMap(map['suportedImageSize']),
-      uploadImageSize: Dimension.fromMap(map['uploadImageSize']),
+      suportedImageSize: map['suportedImageSize'] != null ? Dimension.fromMap(map['suportedImageSize']) : null,
+      uploadImageSize: map['uploadImageSize'] != null ? Dimension.fromMap(map['uploadImageSize']) : null,
       upscaleMaxImageSize: map['upscaleMaxImageSize'],
     );
   }

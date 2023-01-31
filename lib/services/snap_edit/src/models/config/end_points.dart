@@ -135,23 +135,23 @@ class EndPoints {
   }
 
   factory EndPoints.fromMap(Map<String, dynamic> map) {
-    return EndPoints(
-      erase: map['erase'] as String,
-      erasePro: map['erasePro'] as String,
-      ai: map['ai'] as String,
-      aiPro: map['aiPro'] as String,
-      enhance: map['enhance'] as String,
-      enhancePro: map['enhancePro'] as String,
-      restyle: map['restyle'] as String,
-      restylePro: map['restylePro'] as String,
-      styles: map['styles'] as String,
-      stylesPro: map['stylesPro'] as String,
-      animeStyles: map['animeStyles'] as String,
-      animeStylesPro: map['animeStylesPro'] as String,
-      animeImageAI: map['animeImageAI'] as String,
-      animeImageAIPro: map['animeImageAIPro'] as String,
-      animeVideoAI: map['animeVideoAI'] as String,
-      animeVideoAIPro: map['animeVideoAIPro'] as String,
+    return EndPoints.defaultValue().copyWith(
+      erase: map['erase'],
+      erasePro: map['erasePro'],
+      ai: map['ai'],
+      aiPro: map['aiPro'],
+      enhance: map['enhance'],
+      enhancePro: map['enhancePro'],
+      restyle: map['restyle'],
+      restylePro: map['restylePro'],
+      styles: map['styles'],
+      stylesPro: map['stylesPro'],
+      animeStyles: map['animeStyles'],
+      animeStylesPro: map['animeStylesPro'],
+      animeImageAI: map['animeImageAI'],
+      animeImageAIPro: map['animeImageAIPro'],
+      animeVideoAI: map['animeVideoAI'],
+      animeVideoAIPro: map['animeVideoAIPro'],
     );
   }
 

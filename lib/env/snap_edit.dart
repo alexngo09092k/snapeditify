@@ -1,58 +1,59 @@
 const snapEdit = {
-    'baseUrl': "https://be-prod-1.snapedit.app/",
-    'apiKey': "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
-    'version': "3.1.0",
-    'endPoints': {
-      'erase': 'api/v6/erase',
-      'erasePro': 'api/v6/erase',
-      'ai': 'api/v6/ai_detection',
-      'aiPro': 'api/v6/ai_detection',
-      'enhance': 'api/v2/enhance',
-      'enhancePro': 'api/v2/pro/enhance',
-      'restyle': 'api/v1/restyle',
-      'restylePro': 'api/v1/restyle',
-      'styles': 'api/v1/restyle/styles',
-      'stylesPro': 'api/v1/restyle/styles',
-      'animeStyles': "api/imagen/v1/styles",
-      'animeStylesPro': "api/imagen/v1/styles",
-      'animeImageAI': "api/imagen/v1",
-      'animeImageAIPro': "api/imagen/v1",
-      'animeVideoAI': "api/imagen/v1/video",
-      'animeVideoAIPro': "api/imagen/v1/video",
+  'baseUrl': "https://be-prod-1.snapedit.app/",
+  // 'apiKey': "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
+  'apiKey': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoiMy4xLjAiLCJleHAiOjE3Njk2MjI0MDEsInN1YiI6Imlnbm9yZSIsInBsYXRmb3JtIjoiYW5kcm9pZCJ9.OufJuEzKvN2RVCw-Ofy1oY6d9oRuOnM_Vxmt6aqLWAk",
+  'version': "3.1.0",
+  'endPoints': {
+    'erase': 'api/v6/erase',
+    'erasePro': 'api/v6/erase',
+    'ai': 'api/v6/ai_detection',
+    'aiPro': 'api/v6/ai_detection',
+    'enhance': 'api/v2/enhance',
+    'enhancePro': 'api/v2/pro/enhance',
+    'restyle': 'api/v1/restyle',
+    'restylePro': 'api/v1/restyle',
+    'styles': 'api/v1/restyle/styles',
+    'stylesPro': 'api/v1/restyle/styles',
+    'animeStyles': "api/imagen/v1/styles",
+    'animeStylesPro': "api/imagen/v1/styles",
+    'animeImageAI': "api/imagen/v1",
+    'animeImageAIPro': "api/imagen/v1",
+    'animeVideoAI': "api/imagen/v1/video",
+    'animeVideoAIPro': "api/imagen/v1/video",
+  },
+  'enhance': {
+    'suportedImageSize': {
+      'high': 1920,
+      'standard': 1920,
+      'pro': 3000,
     },
-    'enhance': {
-      'suportedImageSize': {
-        'high': 1920,
-        'standard': 1920,
-        'pro': 3000,
-      },
-      'uploadImageSize': {
-        'high': 1920,
-        'standard': 1920,
-        'pro': 3000,
-      },
-      'upscaleMaxImageSize': 1000,
+    'uploadImageSize': {
+      'high': 1920,
+      'standard': 1920,
+      'pro': 3000,
     },
-    'restyle': {
-      'dimension': {
-        'high': 1920,
-        'standard': 1920,
-        'pro': 3000,
-      },
+    'upscaleMaxImageSize': 1000,
+  },
+  'restyle': {
+    'dimension': {
+      'high': 1920,
+      'standard': 1920,
+      'pro': 3000,
     },
-    'removeObject': {
-      'dimension': {
-        'high': 1920,
-        'standard': 1920,
-        'pro': 3000,
-      },
-      'strokeWidth': {
-        'min': 1,
-        'max': 100,
-        'init': 30,
-        'color': [255, 255, 255, 0.5],
-      }
+  },
+  'removeObject': {
+    'dimension': {
+      'high': 1920,
+      'standard': 1920,
+      'pro': 3000,
     },
-    'waterMark': false,
-    'maxFreeDownloadCount': 100,
-  };
+    'strokeWidth': {
+      'min': 1,
+      'max': 100,
+      'init': 30,
+      'color': [255, 255, 255, 0.5],
+    }
+  },
+  'waterMark': false,
+  'maxFreeDownloadCount': 100,
+};

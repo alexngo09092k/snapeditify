@@ -25,6 +25,8 @@ class _ImageListState extends ProviderStateObserver<ImageList, GalleryProvider> 
   bool _isLoadingMore = false;
   bool _hasMoreToLoad = true;
 
+  AlbumVM get album => provider.albumList[widget.album.entityPath.id]!;
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +35,7 @@ class _ImageListState extends ProviderStateObserver<ImageList, GalleryProvider> 
   }
 
   Future<void> _requestAssets() async {
-    final List<AssetEntity> entities = await widget.album.entityPath.getAssetListPaged(
+    final List<AssetEntity> entities = await album.entityPath.getAssetListPaged(
       page: 0,
       size: provider.config.countInPage,
     );
@@ -42,12 +44,12 @@ class _ImageListState extends ProviderStateObserver<ImageList, GalleryProvider> 
     }
     setState(() {
       _images = entities;
-      _hasMoreToLoad = _images!.length < widget.album.count;
+      _hasMoreToLoad = _images!.length < album.count;
     });
   }
 
   Future<void> _loadMoreAsset() async {
-    final List<AssetEntity> entities = await widget.album.entityPath.getAssetListPaged(
+    final List<AssetEntity> entities = await album.entityPath.getAssetListPaged(
       page: _page + 1,
       size: provider.config.countInPage,
     );
@@ -57,7 +59,7 @@ class _ImageListState extends ProviderStateObserver<ImageList, GalleryProvider> 
     setState(() {
       _images!.addAll(entities);
       _page++;
-      _hasMoreToLoad = _images!.length < widget.album.count;
+      _hasMoreToLoad = _images!.length < album.count;
       _isLoadingMore = false;
     });
   }

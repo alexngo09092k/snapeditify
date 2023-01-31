@@ -21,9 +21,6 @@ class GalleryConfig {
 
   final bool needTitle;
 
-  final DateTime startTime;
-  final DateTime endTime;
-
   final bool containsPathModified;
   final bool containsLivePhotos;
   final bool onlyLivePhotos;
@@ -40,8 +37,6 @@ class GalleryConfig {
     required this.minDuration,
     required this.maxDuration,
     required this.needTitle,
-    required this.startTime,
-    required this.endTime,
     required this.containsPathModified,
     required this.containsLivePhotos,
     required this.onlyLivePhotos,
@@ -60,8 +55,6 @@ class GalleryConfig {
       minDuration: Duration.zero,
       maxDuration: const Duration(milliseconds: 60 * 60 * 1000),
       needTitle: false,
-      startTime: DateTime(2005), // Default Before 8 years
-      endTime: DateTime.now(),
       containsLivePhotos: true,
       containsPathModified: false,
       onlyLivePhotos: false,
@@ -88,10 +81,6 @@ class GalleryConfig {
       ..setOption(AssetType.video, option)
       ..setOption(AssetType.image, option)
       ..setOption(AssetType.audio, option)
-      ..createTimeCond = DateTimeCond(
-        min: startTime,
-        max: endTime,
-      )
       ..containsPathModified = containsPathModified
       ..containsLivePhotos = containsLivePhotos
       ..onlyLivePhotos = onlyLivePhotos;
@@ -109,8 +98,6 @@ class GalleryConfig {
     Duration? minDuration,
     Duration? maxDuration,
     bool? needTitle,
-    DateTime? startTime,
-    DateTime? endTime,
     bool? containsPathModified,
     bool? containsLivePhotos,
     bool? onlyLivePhotos,
@@ -127,8 +114,6 @@ class GalleryConfig {
       minDuration: minDuration ?? this.minDuration,
       maxDuration: maxDuration ?? this.maxDuration,
       needTitle: needTitle ?? this.needTitle,
-      startTime: startTime ?? this.startTime,
-      endTime: endTime ?? this.endTime,
       containsPathModified: containsPathModified ?? this.containsPathModified,
       containsLivePhotos: containsLivePhotos ?? this.containsLivePhotos,
       onlyLivePhotos: onlyLivePhotos ?? this.onlyLivePhotos,
@@ -148,8 +133,6 @@ class GalleryConfig {
       'minDuration': minDuration.inMilliseconds,
       'maxDuration': maxDuration.inMilliseconds,
       'needTitle': needTitle,
-      'startTime': startTime.millisecondsSinceEpoch,
-      'endTime': endTime.millisecondsSinceEpoch,
       'containsPathModified': containsPathModified,
       'containsLivePhotos': containsLivePhotos,
       'onlyLivePhotos': onlyLivePhotos,
@@ -157,23 +140,21 @@ class GalleryConfig {
   }
 
   factory GalleryConfig.fromMap(Map<String, dynamic> map) {
-    return GalleryConfig(
-      countInPage: map['countInPage'] as int,
-      hasAll: map['hasAll'] as bool,
-      onlyAll: map['onlyAll'] as bool,
-      minWidth: map['minWidth'] as int,
-      maxWidth: map['maxWidth'] as int,
-      minHeight: map['minHeight'] as int,
-      maxHeight: map['maxHeight'] as int,
-      ignoreSize: map['ignoreSize'] as bool,
-      minDuration: Duration(milliseconds: map['minDuration']),
-      maxDuration: Duration(milliseconds: map['maxDuration']),
-      needTitle: map['needTitle'] as bool,
-      startTime: DateTime.fromMillisecondsSinceEpoch(map['startTime'] as int),
-      endTime: DateTime.fromMillisecondsSinceEpoch(map['endTime'] as int),
-      containsPathModified: map['containsPathModified'] as bool,
-      containsLivePhotos: map['containsLivePhotos'] as bool,
-      onlyLivePhotos: map['onlyLivePhotos'] as bool,
+    return GalleryConfig.defaultValue().copyWith(
+      countInPage: map['countInPage'],
+      hasAll: map['hasAll'],
+      onlyAll: map['onlyAll'],
+      minWidth: map['minWidth'],
+      maxWidth: map['maxWidth'],
+      minHeight: map['minHeight'],
+      maxHeight: map['maxHeight'],
+      ignoreSize: map['ignoreSize'],
+      minDuration: map['minDuration'] != null ? Duration(milliseconds: map['minDuration']) : null,
+      maxDuration: map['maxDuration'] != null ? Duration(milliseconds: map['maxDuration']) : null,
+      needTitle: map['needTitle'],
+      containsPathModified: map['containsPathModified'],
+      containsLivePhotos: map['containsLivePhotos'],
+      onlyLivePhotos: map['onlyLivePhotos'],
     );
   }
 
@@ -183,7 +164,7 @@ class GalleryConfig {
 
   @override
   String toString() {
-    return 'GalleryConfig(countInPage: $countInPage, hasAll: $hasAll, onlyAll: $onlyAll, minWidth: $minWidth, maxWidth: $maxWidth, minHeight: $minHeight, maxHeight: $maxHeight, ignoreSize: $ignoreSize, minDuration: $minDuration, maxDuration: $maxDuration, needTitle: $needTitle, startTime: $startTime, endTime: $endTime, containsPathModified: $containsPathModified, containsLivePhotos: $containsLivePhotos, onlyLivePhotos: $onlyLivePhotos)';
+    return 'GalleryConfig(countInPage: $countInPage, hasAll: $hasAll, onlyAll: $onlyAll, minWidth: $minWidth, maxWidth: $maxWidth, minHeight: $minHeight, maxHeight: $maxHeight, ignoreSize: $ignoreSize, minDuration: $minDuration, maxDuration: $maxDuration, needTitle: $needTitle, containsPathModified: $containsPathModified, containsLivePhotos: $containsLivePhotos, onlyLivePhotos: $onlyLivePhotos)';
   }
 
   @override
@@ -201,8 +182,6 @@ class GalleryConfig {
         other.minDuration == minDuration &&
         other.maxDuration == maxDuration &&
         other.needTitle == needTitle &&
-        other.startTime == startTime &&
-        other.endTime == endTime &&
         other.containsPathModified == containsPathModified &&
         other.containsLivePhotos == containsLivePhotos &&
         other.onlyLivePhotos == onlyLivePhotos;
@@ -221,8 +200,6 @@ class GalleryConfig {
         minDuration.hashCode ^
         maxDuration.hashCode ^
         needTitle.hashCode ^
-        startTime.hashCode ^
-        endTime.hashCode ^
         containsPathModified.hashCode ^
         containsLivePhotos.hashCode ^
         onlyLivePhotos.hashCode;

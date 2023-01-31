@@ -51,12 +51,14 @@ class StrokeWidth {
       min: map['min'],
       max: map['max'],
       init: map['init'],
-      color: Color.fromRGBO(
-        (map['color'][0] ?? 255).toInt(),
-        (map['color'][1] ?? 255).toInt(),
-        (map['color'][2] ?? 255).toInt(),
-        (map['color'][3] ?? 0.5),
-      ),
+      color: map['color'] != null
+          ? Color.fromRGBO(
+              (map['color'][0] ?? 255).toInt(),
+              (map['color'][1] ?? 255).toInt(),
+              (map['color'][2] ?? 255).toInt(),
+              (map['color'][3] ?? 0.5),
+            )
+          : null,
     );
   }
 
