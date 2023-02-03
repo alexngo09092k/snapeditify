@@ -63,26 +63,22 @@ class BusinessConfig {
         SocialNetwork.fromMap({
           'brand': 'Facebook',
           'link': 'https://www.facebook.com/snapeditify/',
-          'image':
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
+          'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
         }),
         SocialNetwork.fromMap({
           'brand': 'Tiktok',
           'link': 'https://www.tiktok.com/@snapeditify',
-          'image':
-              'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
+          'image': 'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
         }),
         SocialNetwork.fromMap({
           'brand': 'Youtube',
           'link': 'https://www.youtube.com/@snapeditify',
-          'image':
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/318px-YouTube_full-color_icon_%282017%29.svg.png',
+          'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/318px-YouTube_full-color_icon_%282017%29.svg.png',
         }),
         SocialNetwork.fromMap({
           'brand': 'Telegram',
           'link': 'https://t.me/+GPyDosamyKA2OGVl',
-          'image':
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
+          'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
         }),
       ],
       webLinks: [
@@ -105,8 +101,7 @@ class BusinessConfig {
       maintenanceMode: MaintenanceMode.fromMap({
         'title': "We'll be back soon",
         'link': 'https://snapeditify.netlify.app/',
-        'message':
-            "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
+        'message': "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
       }),
       version: '1.0.0',
       appMode: AppMode.debug,
