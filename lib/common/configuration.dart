@@ -155,12 +155,16 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
         return;
       }
 
-      /// setConfig in store
-      AsyncStorage.instance.setString(AsyncStorageKey.instance.remoteConfig, stringConfig);
+      try {
+        Debug.log('====== SET REMOTE CONFIG FROM FIREBASE ======');
+        Map<String, dynamic> enviroment = json.decode(stringConfig);
+        fromEnviroment(enviroment);
 
-      Map<String, dynamic> enviroment = json.decode(stringConfig);
-
-      fromEnviroment(enviroment);
+        /// setConfig in store
+        AsyncStorage.instance.setString(AsyncStorageKey.instance.remoteConfig, stringConfig);
+      }catch(error) {
+         Debug.log('====== SET REMOTE CONFIG FROM FIREBASE ERROR $error======');
+      }
 
       /// miliseconds
       AsyncStorage.instance.setInt(
@@ -181,10 +185,16 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
       return false;
     }
 
-    Debug.log('====== SET REMOTE CONFIG FROM LOCAL ======');
-    Map<String, dynamic> enviroment = json.decode(stringConfig);
-    fromEnviroment(enviroment);
-    return true;
+    try {
+      Debug.log('====== SET REMOTE CONFIG FROM LOCAL ======');
+      Map<String, dynamic> enviroment = json.decode(stringConfig);
+      fromEnviroment(enviroment);
+      return true;
+    }catch(error) {
+      Debug.log('====== SET REMOTE CONFIG FROM LOCAL ERROR $error======');
+      return false;
+
+    }
   }
 
   bool isExpriedRemoteConfig() {

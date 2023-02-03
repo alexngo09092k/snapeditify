@@ -7,7 +7,7 @@ const business = {
   'maintenanceMode': {
     'title': "We'll be back soon",
     'message': "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
-    'link': '',
+    'link': 'https://snapeditify.netlify.app',
   },
 
   /// Display name is used in app
@@ -58,14 +58,19 @@ const business = {
   'webLinks': [
     {
       'title': 'Terms of service',
-      'link': '',
+      'link': 'https://snapeditify.netlify.app/terms-of-service',
       'image': 'assets/images/icons/ic_term.png',
     },
     {
+      'title': 'Privacy policy',
+      'link': 'https://snapeditify.netlify.app/privacy-policy/',
+      'image': 'assets/images/icons/ic_policy.png',
+    },
+    {
       'title': 'FAQ',
-      'link': '',
+      'link': 'https://snapeditify.netlify.app/faq',
       'image': 'assets/images/icons/ic_faq.png',
-    }
+    },
   ],
 
   /// Share app

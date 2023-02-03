@@ -57,15 +57,57 @@ class BusinessConfig {
           ShareAppPlatform.ios: '',
           ShareAppPlatform.huawei: '',
         },
-        message: "SnapEditify AI Photo Editor Pro",
+        message: "SnapEditify AI Photo Editor",
       ),
-      socialNetworks: [],
-      webLinks: [],
-      maintenanceMode: const MaintenanceMode(
-        title: "We'll be back soon",
-        link: '',
-        message: "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
-      ),
+      socialNetworks: [
+        SocialNetwork.fromMap({
+          'brand': 'Facebook',
+          'link': 'https://www.facebook.com/snapeditify/',
+          'image':
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
+        }),
+        SocialNetwork.fromMap({
+          'brand': 'Tiktok',
+          'link': 'https://www.tiktok.com/@snapeditify',
+          'image':
+              'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
+        }),
+        SocialNetwork.fromMap({
+          'brand': 'Youtube',
+          'link': 'https://www.youtube.com/@snapeditify',
+          'image':
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/318px-YouTube_full-color_icon_%282017%29.svg.png',
+        }),
+        SocialNetwork.fromMap({
+          'brand': 'Telegram',
+          'link': 'https://t.me/+GPyDosamyKA2OGVl',
+          'image':
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
+        }),
+      ],
+      webLinks: [
+        WebLink.fromMap({
+          'title': 'Terms of service',
+          'link': 'https://snapeditify.netlify.app/terms-of-service/',
+          'image': 'assets/images/icons/ic_term.png',
+        }),
+        WebLink.fromMap({
+          'title': 'Privacy policy',
+          'link': 'https://snapeditify.netlify.app/privacy-policy/',
+          'image': 'assets/images/icons/ic_policy.png',
+        }),
+        WebLink.fromMap({
+          'title': 'FAQ',
+          'link': 'https://snapeditify.netlify.app/faq/',
+          'image': 'assets/images/icons/ic_faq.png',
+        })
+      ],
+      maintenanceMode: MaintenanceMode.fromMap({
+        'title': "We'll be back soon",
+        'link': 'https://snapeditify.netlify.app/',
+        'message':
+            "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
+      }),
       version: '1.0.0',
       appMode: AppMode.debug,
     );
@@ -123,14 +165,14 @@ class BusinessConfig {
       appName: map['appName'],
       appLogo: map['appLogo'],
       appBio: map['appBio'],
-      protocols: map['protocols'] != null ? (map['protocols'] as List).map((e) => e.toString()).toList(): null,
+      protocols: map['protocols'] != null ? (map['protocols'] as List).map((e) => e.toString()).toList() : null,
       prefix: map['prefix'],
       contact: map['contact'],
       shareApp: map['shareApp'] != null ? ShareApp.fromMap(map['shareApp']) : null,
       appMode: map['appMode'] != null ? AppMode.values.firstWhere((element) => element.name == map['appMode']) : null,
-      socialNetworks: map['socialNetworks'] != null ? (map['socialNetworks'] as List).map<SocialNetwork>((e) => SocialNetwork.fromMap(e)).toList(): null,
-      webLinks: map['webLinks'] != null ? (map['webLinks'] as List).map<WebLink>((e) => WebLink.fromMap(e)).toList(): null,
-      maintenanceMode: map['maintenanceMode'] != null ? MaintenanceMode.fromMap(map['maintenanceMode']): null,
+      socialNetworks: map['socialNetworks'] != null ? (map['socialNetworks'] as List).map<SocialNetwork>((e) => SocialNetwork.fromMap(e)).toList() : null,
+      webLinks: map['webLinks'] != null ? (map['webLinks'] as List).map<WebLink>((e) => WebLink.fromMap(e)).toList() : null,
+      maintenanceMode: map['maintenanceMode'] != null ? MaintenanceMode.fromMap(map['maintenanceMode']) : null,
       version: map['version'],
     );
   }
