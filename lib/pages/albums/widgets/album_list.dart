@@ -20,7 +20,7 @@ class AlbumList extends StatelessWidget {
         builder: (_, __, p, ___) => GridView.count(
           crossAxisCount: 2,
           crossAxisSpacing: spacing * 2,
-          mainAxisSpacing: spacing * 2,
+          mainAxisSpacing: spacing,
           padding: EdgeInsets.only(left: spacing, right: spacing * 2),
           childAspectRatio: itemWidth / (itemWidth + spacing * 3),
           children: [
