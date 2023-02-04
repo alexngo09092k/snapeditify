@@ -106,12 +106,6 @@ class SettingPage extends StatelessWidget {
       screen: S.of(context).setting,
       padding: EdgeInsets.all(AppDimensions.instance.padding),
       scroll: true,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppAssets.instance.pageBackground),
-          fit: BoxFit.cover,
-        ),
-      ),
       after: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

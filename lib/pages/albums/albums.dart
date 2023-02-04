@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/albums/widgets/album_list.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
@@ -27,12 +26,6 @@ class _AlbumsPageState extends ProviderState<AlbumsPage, GalleryProvider> {
   Widget build(BuildContext context) {
     return AppLayout(
       screen: S.of(context).albums,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppAssets.instance.pageBackground),
-          fit: BoxFit.cover,
-        ),
-      ),
       action: const CameraPicker(),
       children: [
         AlbumList(provider: provider),
