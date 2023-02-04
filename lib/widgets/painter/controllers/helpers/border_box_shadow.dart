@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:flutter/painting.dart';
 
 /// Custom BoxShadow that can be passed its [BlurStyle].
