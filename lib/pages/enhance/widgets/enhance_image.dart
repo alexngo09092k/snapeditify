@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_after.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_before.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
@@ -18,6 +19,8 @@ class EnhanceImage extends StatelessWidget {
         afterImage: EnhanceAfter(provider: provider),
         imageWidth: width,
         imageHeight: height,
+        thumbImage: Image.asset(AppAssets.instance.icSeekbarThumb).image,
+        thumbColor: Colors.transparent,
       ),
     );
   }

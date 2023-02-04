@@ -67,4 +67,5 @@ class AppAssets {
   final String icImagePlaceholder = "$iconPath/ic_image_place_holder.png";
   final String icAnimeAI = "$iconPath/ic_anime_ai.png";
   final String icFeedback = "$iconPath/ic_feedback.png";
+  final String icSeekbarThumb = "$iconPath/ic_seekbar_thumb.png";
 }
