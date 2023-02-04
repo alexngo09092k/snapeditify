@@ -25,7 +25,7 @@ extension EditImageTypeEX on EditImageType {
   String get icon {
     switch (this) {
       case EditImageType.animeAI:
-        return AppAssets.instance.icAI;
+        return AppAssets.instance.icAnimeAI;
       case EditImageType.removeObject:
         return AppAssets.instance.icRemoveObject;
       case EditImageType.applyArtEffect:

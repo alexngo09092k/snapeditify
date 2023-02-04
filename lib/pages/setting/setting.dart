@@ -139,7 +139,6 @@ class SettingPage extends StatelessWidget {
                       context,
                       title: e.title,
                       image: e.image,
-                      normal: true,
                       onTap: (_) => _launchUrlInApp(context, e.link),
                     ),
                   )

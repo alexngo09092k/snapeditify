@@ -2,7 +2,7 @@ const snapEdit = {
   'baseUrl': "https://be-prod-1.snapedit.app/",
   // 'apiKey': "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
   'apiKey': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoiMy4xLjAiLCJleHAiOjE3Njk2MjI0MDEsInN1YiI6Imlnbm9yZSIsInBsYXRmb3JtIjoiYW5kcm9pZCJ9.OufJuEzKvN2RVCw-Ofy1oY6d9oRuOnM_Vxmt6aqLWAk",
-  'version': "3.1.0",
+  'version': "3.4.1",
   'endPoints': {
     'erase': 'api/v6/erase',
     'erasePro': 'api/v6/erase',

@@ -53,7 +53,6 @@ class AppAssets {
   final String icEnhence = "$iconPath/ic_enhance.png";
   final String icArtEffect = "$iconPath/ic_art_effect.png";
   final String icRemoveObject = "$iconPath/ic_remove_object.png";
-  final String icFeedback = "$iconPath/ic_rate.png";
   final String icShare = "$iconPath/ic_share.png";
   final String icTerm = "$iconPath/ic_term.png";
   final String icFAQ = "$iconPath/ic_faq.png";
@@ -66,4 +65,6 @@ class AppAssets {
   final String icBrush = "$iconPath/ic_brush.png";
   final String icAI = "$iconPath/ic_ai.png";
   final String icImagePlaceholder = "$iconPath/ic_image_place_holder.png";
+  final String icAnimeAI = "$iconPath/ic_anime_ai.png";
+  final String icFeedback = "$iconPath/ic_feedback.png";
 }

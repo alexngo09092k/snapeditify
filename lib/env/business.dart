@@ -64,7 +64,7 @@ const business = {
     {
       'title': 'Privacy policy',
       'link': 'https://snapeditify.netlify.app/privacy-policy/',
-      'image': 'assets/images/icons/ic_policy.png',
+      'image': 'assets/images/icons/ic_term.png',
     },
     {
       'title': 'FAQ',

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/photos/widgets/image_list.dart';
 import 'package:snapeditify/pages/photos/widgets/suggested_image_list.dart';
@@ -22,11 +23,20 @@ class _PhotosPageState extends ProviderState<PhotosPage, GalleryProvider> {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(AppAssets.instance.pageBackground),
+          fit: BoxFit.cover,
+        ),
+      ),
       center: BasePropConsumer<GalleryProvider, String?>(
         listenable: provider,
         builder: (_, __, ___, albumName) => Text(
           albumName ?? S.of(context).suggested,
-          style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(context)
+              .textTheme
+              .headline6!
+              .copyWith(fontWeight: FontWeight.w600),
           maxLines: 1,
         ),
         select: (_) => _.albumList[widget.albumId]?.entityPath.name,

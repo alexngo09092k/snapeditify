@@ -48,7 +48,7 @@ class SnapEditConfig {
       baseUrl: "https://be-prod-1.snapedit.app/",
       // apiKey: "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
       apiKey: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoiMy4xLjAiLCJleHAiOjE3Njk2MjI0MDEsInN1YiI6Imlnbm9yZSIsInBsYXRmb3JtIjoiYW5kcm9pZCJ9.OufJuEzKvN2RVCw-Ofy1oY6d9oRuOnM_Vxmt6aqLWAk",
-      version: "3.1.0",
+      version: "3.4.1",
       waterMark: false,
       maxFreeDownloadCount: 100,
       endPoints: EndPoints.defaultValue(),
@@ -161,7 +161,7 @@ extension JWTBuilders on SnapEditConfig {
 
     // final jwt = JWT(
     //   {
-    //     "version": "3.1.0",
+    //     "version": "3.4.1",
     //     "exp": '${DateTime.fromMillisecondsSinceEpoch(DateTime.now().millisecondsSinceEpoch + (24 * 60 * 60 * 1000)).millisecondsSinceEpoch}',
     //     "sub": "ignore",
     //     "platform": Platform.isAndroid ? 'android' : 'ios',
