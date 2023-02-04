@@ -100,7 +100,7 @@ class TextDrawable extends ObjectDrawable {
 
   @override
   void onTapped() {
-    print('tapped TextDrawable $position');
+    // print('tapped TextDrawable $position');
     if (onTap != null) {
       onTap!(position);
     }

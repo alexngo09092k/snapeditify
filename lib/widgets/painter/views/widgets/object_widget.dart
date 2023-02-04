@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, unused_element, unused_local_variable
+
 part of 'flutter_painter.dart';
 
 /// Flutter widget to move, scale and rotate [ObjectDrawable]s.
@@ -215,7 +217,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
                                                   // ),
                                                 );
                                               }
-                                              return SizedBox();
+                                              return const SizedBox();
                                               // return Container(
                                               //   decoration: BoxDecoration(
                                               //       border: Border.all(
@@ -558,7 +560,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
   /// Deselects the selected object drawable.
   void onBackgroundTapped() {
     SelectedObjectDrawableUpdatedNotification(null).dispatch(context);
-    print('on background tapped');
+    // print('on background tapped');
 
     setState(() {
       // selectedDrawableIndex = null;
@@ -570,7 +572,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
   ///
   /// Dispatches an [ObjectDrawableNotification] that the object was tapped.
   void tapDrawable(ObjectDrawable drawable) {
-    print('tapped drawable $drawable');
+    // print('tapped drawable $drawable');
     drawable.onTapped();
     if (drawable.locked) return;
 
@@ -592,7 +594,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
   void onDrawableScaleStart(
       MapEntry<int, ObjectDrawable> entry, ScaleStartDetails details) {
     if (!widget.interactionEnabled) return;
-    print('onDrawableScaleStart');
+    // print('onDrawableScaleStart');
 
     final index = entry.key;
     final drawable = entry.value;
@@ -947,7 +949,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
     setState(() {
       controlsAreActive[controlIndex] = true;
     });
-    print('onResizeControlPanStart');
+    // print('onResizeControlPanStart');
     onDrawableScaleStart(
         entry,
         ScaleStartDetails(

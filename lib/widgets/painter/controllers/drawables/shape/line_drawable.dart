@@ -81,7 +81,7 @@ class LineDrawable extends Sized1DDrawable implements ShapeDrawable {
 
   @override
   void onTapped() {
-    print('tapped LineDrawable');
+    // print('tapped LineDrawable');
     if (onTap != null) {
       onTap!(position);
     }

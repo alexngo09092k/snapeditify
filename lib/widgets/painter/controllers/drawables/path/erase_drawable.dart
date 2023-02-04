@@ -37,7 +37,7 @@ class EraseDrawable extends PathDrawable {
 
   @override
   void onTapped() {
-    print('tapped  EraseDrawable');
+    // print('tapped  EraseDrawable');
   }
 
   /// Compares two [EraseDrawable]s for equality.

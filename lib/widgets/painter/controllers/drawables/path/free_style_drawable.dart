@@ -51,7 +51,7 @@ class FreeStyleDrawable extends PathDrawable {
 
   @override
   void onTapped() {
-    print('tapped  FreeStyleDrawable');
+    // print('tapped  FreeStyleDrawable');
   }
 
   /// Compares two [FreeStyleDrawable]s for equality.

@@ -93,7 +93,7 @@ class OvalDrawable extends Sized2DDrawable implements ShapeDrawable {
 
   @override
   void onTapped() {
-    print('tapped OvalDrawable');
+    // print('tapped OvalDrawable');
     if (onTap != null) {
       onTap!(position);
     }

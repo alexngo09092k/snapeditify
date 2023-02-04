@@ -23,7 +23,7 @@ class GroupedDrawable extends Drawable {
   
   @override
   void onTapped() {
-    print('tapped grouped drawable');
+    // print('tapped grouped drawable');
   }
 
   /// Compares two [GroupedDrawable]s for equality.

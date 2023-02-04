@@ -144,7 +144,7 @@ class ImageDrawable extends ObjectDrawable {
 
   @override
   void onTapped() {
-    print('tapped  image drawble $position');
+    // print('tapped  image drawble $position');
     if (onTap != null) {
       onTap!(position);
     }

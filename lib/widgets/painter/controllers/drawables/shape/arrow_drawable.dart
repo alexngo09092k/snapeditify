@@ -121,7 +121,7 @@ class ArrowDrawable extends Sized1DDrawable implements ShapeDrawable {
 
   @override
   void onTapped() {
-    print('tapped  ArrowDrawable');
+    // print('tapped  ArrowDrawable');
     if (onTap != null) {
       onTap!(position);
     }

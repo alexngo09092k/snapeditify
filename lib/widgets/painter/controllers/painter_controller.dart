@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, deprecated_member_use
+
 import 'dart:async';
 import 'dart:collection';
 import 'dart:ui' as ui;
@@ -240,7 +242,7 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   void undo() {
     if (!canUndo) return;
     final action = performedActions.where((action) => action.canUndo).last;
-    print('total undo action ${performedActions.where((action) => action.canUndo)}');
+    // print('total undo action ${performedActions.where((action) => action.canUndo)}');
     performedActions.remove(action);
     action.unperform(this);
     unperformedActions.add(action);
@@ -255,7 +257,7 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   /// this method should only be called between frames, e.g. in response to user
   /// actions, not during the build, layout, or paint phases.
   void redo() {
-    print('total redo action ${performedActions.length}');
+    // print('total redo action ${performedActions.length}');
     if (!canRedo) return;
     final action = unperformedActions.removeLast();
     action.perform(this);
@@ -534,7 +536,7 @@ class _NoBackgroundPassedBackgroundDrawable extends BackgroundDrawable {
 
   @override
   void onTapped() {
-    print('tapped BackgroundDrawable');
+    // print('tapped BackgroundDrawable');
   }
 }
 
@@ -577,6 +579,6 @@ class _NoObjectPassedBackgroundDrawable extends ObjectDrawable {
 
   @override
   void onTapped() {
-    print('tapped NoObjectPassedBackgroundDrawable');
+    // print('tapped NoObjectPassedBackgroundDrawable');
   }
 }

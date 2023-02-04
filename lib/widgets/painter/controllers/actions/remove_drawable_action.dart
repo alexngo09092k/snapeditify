@@ -41,10 +41,10 @@ class RemoveDrawableAction extends ControllerAction<bool, bool> {
   bool perform$(PainterController controller) {
     final value = controller.value;
     final currentDrawables = List<Drawable>.from(value.drawables);
-    print(drawable);
-    print(currentDrawables);
+    // print(drawable);
+    // print(currentDrawables);
     final index = currentDrawables.indexOf(drawable);
-    print('drawable index $index');
+    // print('drawable index $index');
     if (index < 0) return false;
     final selectedObject = controller.value.selectedObjectDrawable;
     final isSelectedObject = currentDrawables[index] == selectedObject;

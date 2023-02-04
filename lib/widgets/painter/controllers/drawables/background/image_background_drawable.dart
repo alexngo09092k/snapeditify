@@ -27,7 +27,7 @@ class ImageBackgroundDrawable extends BackgroundDrawable {
   
   @override
   void onTapped() {
-    print('tapped  ImageBackgroundDrawable');
+    // print('tapped  ImageBackgroundDrawable');
   }
 
   // /// Compares two [ImageBackgroundDrawable]s for equality.
