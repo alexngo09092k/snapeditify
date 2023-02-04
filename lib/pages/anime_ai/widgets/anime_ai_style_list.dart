@@ -88,9 +88,13 @@ class AnimeStyleItem extends StatelessWidget {
             ),
             Expanded(
               child: Center(
-                child: Text(
-                  style.name,
-                  style: Theme.of(context).textTheme.bodyText2,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
+                  child: Text(
+                    style.name,
+                    style: Theme.of(context).textTheme.bodyText2,
+                    maxLines: 1,
+                  ),
                 ),
               ),
             ),
