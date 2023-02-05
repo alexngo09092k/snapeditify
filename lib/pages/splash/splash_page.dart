@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/app_routes.dart';
@@ -18,11 +20,6 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends AwesomeSplashState<SplashPage> {
   bool _goToApp = false;
   final time = 2000;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void onSplash(bool resultOnWillSplash) async {

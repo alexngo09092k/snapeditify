@@ -14,10 +14,6 @@ class EnhancePage extends StatefulWidget {
 }
 
 class _EnhancePageState extends ProviderStateObserver<EnhancePage, EnhanceProvider> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void onNextFrame(Duration timestamp) {
