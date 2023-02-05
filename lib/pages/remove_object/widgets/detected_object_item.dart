@@ -45,11 +45,11 @@ class DetectedObjectItem extends StatelessWidget {
     );
     final subTitle = Text(
       '${(double.parse(detectedObject.accuracy) * 100).toStringAsFixed(2)} ${S.of(context).accurate}',
-      style: Theme.of(context).textTheme.bodyText2!,
+      style: Theme.of(context).textTheme.bodyMedium!,
     );
     final title = Text(
       detectedObject.objectDescription,
-      style: Theme.of(context).textTheme.subtitle1,
+      style: Theme.of(context).textTheme.titleMedium,
     );
     final removeText = BasePropConsumer<RemoveObjectProvider, bool>(
       listenable: provider,
@@ -60,12 +60,12 @@ class DetectedObjectItem extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.2)),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).errorColor.withOpacity(0.1),
+                  color: Theme.of(context).colorScheme.error.withOpacity(0.1),
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                 ),
                 child: Text(
                   S.of(context).remove,
-                  style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).errorColor),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).colorScheme.error),
                 ),
               ),
             )

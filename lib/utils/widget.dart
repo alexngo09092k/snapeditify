@@ -65,7 +65,7 @@ class WidgetUtils {
                 if (message != null)
                   Text(
                     message,
-                    style: Theme.of(context).textTheme.caption!.copyWith(color: AppColors.instance.white),
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(color: AppColors.instance.white),
                   ),
               ],
             ),

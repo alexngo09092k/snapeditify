@@ -60,7 +60,7 @@ class AnimeCategoryItem extends StatelessWidget {
             ),
             child: Text(
               category,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: p.category == category ? Theme.of(context).primaryColor : null,
                   ),
             ),

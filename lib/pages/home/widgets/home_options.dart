@@ -29,7 +29,7 @@ class HomeOptions extends StatelessWidget {
                       children: [
                         CustomIcon(e.icon),
                         SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                        Text(e.title, style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600))
+                        Text(e.title, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600))
                       ],
                     ),
                   ),

@@ -22,11 +22,11 @@ class HomeLogo extends StatelessWidget {
           children: [
             Text(
               Configuration.instance.business.appName,
-              style: Theme.of(context).textTheme.headline5!,
+              style: Theme.of(context).textTheme.headlineSmall!,
             ),
             Text(
               Configuration.instance.business.appBio,
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
         ),

@@ -24,7 +24,7 @@ class TileRow extends StatelessWidget {
       onTap: onTap,
       main: Text(
         title,
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
       leading: image != null
           ? Padding(

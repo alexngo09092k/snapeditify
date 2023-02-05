@@ -16,7 +16,7 @@ class AIIcon extends StatelessWidget {
       ),
       child: Text(
         S.of(context).ai,
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(color: AppColors.instance.white),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.instance.white),
       ),
     );
   }

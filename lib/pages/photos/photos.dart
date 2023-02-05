@@ -26,10 +26,7 @@ class _PhotosPageState extends ProviderState<PhotosPage, GalleryProvider> {
         listenable: provider,
         builder: (_, __, ___, albumName) => Text(
           albumName ?? S.of(context).suggested,
-          style: Theme.of(context)
-              .textTheme
-              .headline6!
-              .copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w600),
           maxLines: 1,
         ),
         select: (_) => _.albumList[widget.albumId]?.entityPath.name,

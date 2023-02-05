@@ -53,7 +53,7 @@ class HomeBaseBanner extends StatelessWidget {
                       children: [
                         Text(
                           '$title ${S.of(context).withText} ',
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                 color: AppColors.instance.white,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -75,7 +75,7 @@ class HomeBaseBanner extends StatelessWidget {
                       child: Center(
                         child: Text(
                           buttonTitle,
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                 color: AppColors.instance.white,
                                 fontWeight: FontWeight.w600,
                               ),

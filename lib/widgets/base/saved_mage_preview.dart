@@ -43,7 +43,7 @@ class SavedImagePreview extends StatelessWidget {
                 children: [
                   Text(
                     S.of(context).savedImage,
-                    style: Theme.of(context).textTheme.headline6!.copyWith(color: Theme.of(context).primaryColor),
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Theme.of(context).primaryColor),
                   ),
                   GestureDetector(
                     onTap: Navigator.of(context).pop,
@@ -140,7 +140,7 @@ class _Options extends StatelessWidget {
                       children: [
                         CustomIcon(e.icon),
                         SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                        Text(e.title, style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600))
+                        Text(e.title, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600))
                       ],
                     ),
                   ),

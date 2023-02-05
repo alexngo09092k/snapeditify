@@ -68,7 +68,7 @@ class AlbumItem extends StatelessWidget {
             select: (_) => _.albumList[album.entityPath.id]!.count,
             builder: (_, __, p, ___) => Text(
               '${album.entityPath.name} (${p.albumList[album.entityPath.id]!.count})',
-              style: Theme.of(context).textTheme.bodyText1!,
+              style: Theme.of(context).textTheme.bodyLarge!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

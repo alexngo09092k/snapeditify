@@ -55,7 +55,7 @@ class SuggestedItem extends StatelessWidget {
           SizedBox(height: AppDimensions.instance.paddingX(1.5)),
           Text(
             '${S.of(context).sugessted} (${provider.suggestedPhotos.length})',
-            style: Theme.of(context).textTheme.bodyText1!,
+            style: Theme.of(context).textTheme.bodyLarge!,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           )

@@ -29,7 +29,7 @@ class SlidingControl<T> extends StatelessWidget {
           key,
           Text(
             item,
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
       ),

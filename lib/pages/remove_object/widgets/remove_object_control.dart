@@ -47,7 +47,7 @@ class RemoveObjectControl extends StatelessWidget {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text('${S.of(context).auto} ', style: Theme.of(context).textTheme.bodyText1),
+                              Text('${S.of(context).auto} ', style: Theme.of(context).textTheme.bodyLarge),
                               const AIIcon(),
                             ],
                           ),
@@ -67,7 +67,7 @@ class RemoveObjectControl extends StatelessWidget {
                           SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                           Text(
                             S.of(context).brush,
-                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                   color: p.state.mode != RemoveObjectMode.ai ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                                 ),
                           )

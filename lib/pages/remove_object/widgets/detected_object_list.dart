@@ -42,7 +42,7 @@ class DetectedObjectList extends StatelessWidget {
                     SizedBox(height: AppDimensions.instance.padding),
                     Text(
                       S.of(context).noPotentialObjectHasBeenDetected,
-                      style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).disabledColor),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).disabledColor),
                     )
                   ],
                 ),

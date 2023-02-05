@@ -77,7 +77,7 @@ class _ImageListState extends State<ImageList> {
               ),
               Text(
                 S.of(context).notFoundImages,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).disabledColor),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Theme.of(context).disabledColor),
               )
             ],
           ),

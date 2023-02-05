@@ -111,12 +111,12 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
                             fit: BoxFit.fitWidth,
                             child: Text(
                               Configuration.instance.business.appName,
-                              style: Theme.of(context).textTheme.headline4!,
+                              style: Theme.of(context).textTheme.headlineMedium!,
                             ),
                           ),
                           Text(
                             Configuration.instance.business.appBio,
-                            style: Theme.of(context).textTheme.bodyText1!,
+                            style: Theme.of(context).textTheme.bodyLarge!,
                           ),
                         ],
                       ),

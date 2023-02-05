@@ -68,7 +68,7 @@ class AppLayout extends StatelessWidget {
                         (screen != null
                             ? Text(
                                 screen!,
-                                style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.w600),
+                                style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w600),
                                 maxLines: 1,
                               )
                             : null),

@@ -26,7 +26,7 @@ class EnhanceAfter extends StatelessWidget {
               top: AppDimensions.instance.padding,
               child: Text(
                 S.of(context).after,
-                style: Theme.of(context).textTheme.headline5!.copyWith(
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AppColors.instance.white,
                     ),

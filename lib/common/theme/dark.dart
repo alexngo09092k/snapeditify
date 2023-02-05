@@ -56,7 +56,6 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
 
     /// ====================== BACKGROUND AND DIALOG ======================
     splashColor: AppColors.instance.white,
-    backgroundColor: AppColors.instance.white,
     dialogBackgroundColor: AppColors.instance.white,
     scaffoldBackgroundColor: AppColors.instance.white,
 
@@ -66,9 +65,6 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     buttonTheme: base.buttonTheme,
 
     tabBarTheme: base.tabBarTheme,
-
-    /// ====================== BOTTOM APP BAR ====================
-    bottomAppBarColor: base.bottomAppBarColor,
 
     /// ====================== DISABLED ====================
     disabledColor: AppColors.instance.textColor.withOpacity(0.5),
@@ -87,7 +83,5 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     /// ========================= DIVIDER ========================
     dividerColor: AppColors.instance.textColor.withOpacity(0.1),
 
-    /// ========================= ERROR ========================
-    errorColor: AppColors.instance.errorColor,
   );
 }

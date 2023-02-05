@@ -31,14 +31,14 @@ class UnlockPremium extends StatelessWidget {
             children: [
               Text(
                 S.of(context).unlockSnapeditifyPremium,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
               ),
               SizedBox(height: AppDimensions.instance.paddingX(0.5)),
               Text(
                 S.of(context).noAdsBestImageQuality,
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
               ),
             ],
           )

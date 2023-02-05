@@ -109,13 +109,13 @@ class SettingPage extends StatelessWidget {
       after: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('${S.of(context).version} ${Configuration.instance.business.version}', style: Theme.of(context).textTheme.bodyText1),
+          Text('${S.of(context).version} ${Configuration.instance.business.version}', style: Theme.of(context).textTheme.bodyLarge),
           LottieViewer(
             lottie: AppAssets.instance.heartTeam,
             width: AppDimensions.instance.icon,
             height: AppDimensions.instance.icon,
           ),
-          Text('${Configuration.instance.business.appName} ${S.of(context).team}', style: Theme.of(context).textTheme.bodyText1),
+          Text('${Configuration.instance.business.appName} ${S.of(context).team}', style: Theme.of(context).textTheme.bodyLarge),
         ],
       ),
       children: [

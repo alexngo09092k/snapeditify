@@ -17,12 +17,12 @@ class MaintenancePage extends StatelessWidget {
             SizedBox(width: AppDimensions.instance.paddingX(1)),
             Text(
               Configuration.instance.business.maintenanceMode.title,
-              style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w600),
             ),
             SizedBox(width: AppDimensions.instance.padding),
             Text(
               Configuration.instance.business.maintenanceMode.message,
-              style: Theme.of(context).textTheme.bodyText1!,
+              style: Theme.of(context).textTheme.bodyLarge!,
             ),
             SizedBox(width: AppDimensions.instance.paddingX(1)),
           ],
