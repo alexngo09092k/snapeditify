@@ -8,6 +8,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.12"
+  agconnect_core:
+    dependency: "direct main"
+    description:
+      name: agconnect_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.6.0+300"
+  agconnect_remote_config:
+    dependency: transitive
+    description:
+      name: agconnect_remote_config
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.6.0+300"
   archive:
     dependency: transitive
     description:
@@ -240,7 +254,7 @@ packages:
     source: hosted
     version: "6.1.4"
   firebase_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
@@ -260,27 +274,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  firebase_messaging:
-    dependency: transitive
-    description:
-      name: firebase_messaging
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "14.2.1"
-  firebase_messaging_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_messaging_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.2.10"
-  firebase_messaging_web:
-    dependency: transitive
-    description:
-      name: firebase_messaging_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.2.11"
   firebase_remote_config:
     dependency: transitive
     description:
@@ -369,7 +362,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "841b5879a59000d8763f634d76f0026d0a353c72"
+      resolved-ref: ab4a80d9295963b16f8bcf8ebda0f49003a95848
       url: "git@github.com:brennan992k/fluttering.git"
     source: git
     version: "1.0.2"
@@ -378,7 +371,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: a65afc05afb6a2bd8574653b9223d1500443dc01
+      resolved-ref: "7b5095a3f95ed6b12d83501dbf5e8fbd36717f8a"
       url: "git@github.com:brennan992k/fluttering_ads.git"
     source: git
     version: "0.0.1"
@@ -387,17 +380,19 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "7798b45e223a38e3a7c9021fef0890afe5879bff"
+      resolved-ref: "453631aa2b2850551014580b742880a7da289ab2"
       url: "git@github.com:brennan992k/fluttering_iap.git"
     source: git
     version: "0.0.1"
-  gms_check:
-    dependency: transitive
+  fluttering_remote_config:
+    dependency: "direct main"
     description:
-      name: gms_check
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
+      path: "."
+      ref: HEAD
+      resolved-ref: "71d9db3e8f1528e5d5b8870dbbee04afd88d5de2"
+      url: "git@github.com:brennan992k/fluttering_remote_config.git"
+    source: git
+    version: "0.0.1"
   google_mobile_ads:
     dependency: transitive
     description:
@@ -426,13 +421,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "13.4.58+304"
-  huawei_hmsavailability:
-    dependency: transitive
-    description:
-      name: huawei_hmsavailability
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.6.0+300"
   huawei_iap:
     dependency: transitive
     description:
@@ -511,7 +499,7 @@ packages:
     source: hosted
     version: "0.3.5+2"
   in_app_review:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: in_app_review
       url: "https://pub.dartlang.org"

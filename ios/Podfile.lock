@@ -1,4 +1,16 @@
 PODS:
+  - agconnect_remote_config (0.0.1):
+    - AGConnectRemoteConfig (= 1.7.1.300)
+    - Flutter
+  - AGConnectABTest (1.8.0.300):
+    - AGConnectCredential (~> 1.4)
+  - AGConnectCore (1.8.0.300):
+    - HMFoundation (~> 1.4)
+  - AGConnectCredential (1.8.0.300):
+    - AGConnectCore (~> 1.4)
+  - AGConnectRemoteConfig (1.7.1.300):
+    - AGConnectABTest (~> 1.4)
+    - AGConnectCredential (~> 1.7)
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
@@ -6,18 +18,11 @@ PODS:
     - Flutter
   - Firebase/CoreOnly (10.3.0):
     - FirebaseCore (= 10.3.0)
-  - Firebase/Messaging (10.3.0):
-    - Firebase/CoreOnly
-    - FirebaseMessaging (~> 10.3.0)
   - Firebase/RemoteConfig (10.3.0):
     - Firebase/CoreOnly
     - FirebaseRemoteConfig (~> 10.3.0)
   - firebase_core (2.4.1):
     - Firebase/CoreOnly (= 10.3.0)
-    - Flutter
-  - firebase_messaging (14.2.1):
-    - Firebase/Messaging (= 10.3.0)
-    - firebase_core
     - Flutter
   - firebase_remote_config (3.0.9):
     - Firebase/RemoteConfig (= 10.3.0)
@@ -36,15 +41,6 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseMessaging (10.3.0):
-    - FirebaseCore (~> 10.0)
-    - FirebaseInstallations (~> 10.0)
-    - GoogleDataTransport (~> 9.2)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
-    - GoogleUtilities/Environment (~> 7.8)
-    - GoogleUtilities/Reachability (~> 7.8)
-    - GoogleUtilities/UserDefaults (~> 7.8)
-    - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseRemoteConfig (10.3.0):
     - FirebaseABTesting (~> 10.0)
     - FirebaseCore (~> 10.0)
@@ -60,6 +56,8 @@ PODS:
   - fluttering_ads (0.0.1):
     - Flutter
   - fluttering_iap (0.0.1):
+    - Flutter
+  - fluttering_remote_config (0.0.1):
     - Flutter
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
@@ -90,10 +88,6 @@ PODS:
     - GoogleUtilities/Network (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleDataTransport (9.2.0):
-    - GoogleUtilities/Environment (~> 7.7)
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-    - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUserMessagingPlatform (2.0.1)
   - GoogleUtilities/AppDelegateSwizzler (7.10.0):
     - GoogleUtilities/Environment
@@ -114,6 +108,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.10.0):
     - GoogleUtilities/Logger
+  - HMFoundation (1.8.0.300)
   - image_picker_ios (0.0.1):
     - Flutter
   - in_app_purchase_storekit (0.0.1):
@@ -170,15 +165,16 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - agconnect_remote_config (from `.symlinks/plugins/agconnect_remote_config/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - Flutter (from `Flutter`)
   - flutter_image_compress (from `.symlinks/plugins/flutter_image_compress/ios`)
   - fluttering_ads (from `.symlinks/plugins/fluttering_ads/ios`)
   - fluttering_iap (from `.symlinks/plugins/fluttering_iap/ios`)
+  - fluttering_remote_config (from `.symlinks/plugins/fluttering_remote_config/ios`)
   - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - in_app_purchase_storekit (from `.symlinks/plugins/in_app_purchase_storekit/ios`)
@@ -195,19 +191,22 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AGConnectABTest
+    - AGConnectCore
+    - AGConnectCredential
+    - AGConnectRemoteConfig
     - Firebase
     - FirebaseABTesting
     - FirebaseCore
     - FirebaseCoreInternal
     - FirebaseInstallations
-    - FirebaseMessaging
     - FirebaseRemoteConfig
     - FMDB
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
-    - GoogleDataTransport
     - GoogleUserMessagingPlatform
     - GoogleUtilities
+    - HMFoundation
     - libwebp
     - Mantle
     - nanopb
@@ -217,14 +216,14 @@ SPEC REPOS:
     - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
+  agconnect_remote_config:
+    :path: ".symlinks/plugins/agconnect_remote_config/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
-  firebase_messaging:
-    :path: ".symlinks/plugins/firebase_messaging/ios"
   firebase_remote_config:
     :path: ".symlinks/plugins/firebase_remote_config/ios"
   Flutter:
@@ -235,6 +234,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluttering_ads/ios"
   fluttering_iap:
     :path: ".symlinks/plugins/fluttering_iap/ios"
+  fluttering_remote_config:
+    :path: ".symlinks/plugins/fluttering_remote_config/ios"
   google_mobile_ads:
     :path: ".symlinks/plugins/google_mobile_ads/ios"
   image_picker_ios:
@@ -263,29 +264,33 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  agconnect_remote_config: 7063eea4d52673a20ecbf2ce6f8ebbff9d7a89f5
+  AGConnectABTest: cf58810de5526027ed810329716e0d50656a2cf9
+  AGConnectCore: 4d95388b97ccbc00c7eb1895d832d5429f847f9f
+  AGConnectCredential: 52b6a1846193e7ea83610b78fb4b82d516df4936
+  AGConnectRemoteConfig: be9fc31ba18e94d0710bdbefc089dd98a5f4fe47
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
   firebase_core: bf59c32d2e53814f558efa20840c1902fa2fe461
-  firebase_messaging: ee597229fc260f8fa491fa8f2d4a32dfbfa406fa
   firebase_remote_config: 5007603d4cec2dc1e5016077a7ec36ed93c5041b
   FirebaseABTesting: e6660693429b4663573c82f8d2f1041deff1753a
   FirebaseCore: 988754646ab3bd4bdcb740f1bfe26b9f6c0d5f2a
   FirebaseCoreInternal: 29b76f784d607df8b2a1259d73c3f04f1210137b
   FirebaseInstallations: e2f26126089dcf41e215f7b8925af8d953c7d602
-  FirebaseMessaging: e345b219fd15d325f0cf2fef28cb8ce00d851b3f
   FirebaseRemoteConfig: c24f767c17b0440ee63c7e93380d599173556113
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_image_compress: 5a5e9aee05b6553048b8df1c3bc456d0afaac433
   fluttering_ads: c9cbf0479ad427214045e50179260f30bf8047df
   fluttering_iap: ad36ec6a5309726850dd5e8d658bfb0ec17ebdcc
+  fluttering_remote_config: 61e232fa91e272b4c9b74bdb6f4eeb45860b97ae
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Google-Mobile-Ads-SDK: 4fe6304b771f8467d29978cb790ec1e56e646946
   google_mobile_ads: 6bfe04d9c9fd5c2a026e6f09ca2d97ae25b78f7e
   GoogleAppMeasurement: c7d6fff39bf2d829587d74088d582e32d75133c3
-  GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
   GoogleUtilities: bad72cb363809015b1f7f19beb1f1cd23c589f95
+  HMFoundation: 578af8b08444653a722a62e32ec681d954775942
   image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
   in_app_purchase_storekit: 6b297e2b5eab9fa3251a492d57301722e4132a71
   in_app_review: 318597b3a06c22bb46dc454d56828c85f444f99d

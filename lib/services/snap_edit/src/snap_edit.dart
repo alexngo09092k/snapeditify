@@ -10,7 +10,7 @@ class SnapEdit {
     if (config != null) _config = config;
   }
 
-  void init(SnapEditConfig config) {
+  void initital(SnapEditConfig config) {
     _config = config;
   }
 }

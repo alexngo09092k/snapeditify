@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/common/constants.dart';
@@ -9,6 +10,7 @@ import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:snapeditify/models/config/gallery_config.dart';
 import 'package:snapeditify/services/services.dart';
+import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 
 class Configuration {
   static final Configuration _instance = Configuration._internal();
@@ -18,13 +20,9 @@ class Configuration {
 
   Configuration._internal();
 
-  /// FIREBASE CONFIGURATIONS
-  FirebaseConfig _firebase = DefaultConfig.firebase;
-  FirebaseConfig get firebase => _firebase;
-
-  /// IN APP REVIEW CONFIGUARATIONS
-  InAppReviewConfig _inAppReview = DefaultConfig.inAppReview;
-  InAppReviewConfig get inAppReview => _inAppReview;
+  /// REMOTE CONFIGURATIONS
+  AwesomeRemoteConfigSetting _remoteConfig = DefaultConfig.remoteConfig;
+  AwesomeRemoteConfigSetting get remoteConfig => _remoteConfig;
 
   /// APP CONFIGUARATIONS
   BusinessConfig _business = DefaultConfig.business;
@@ -46,17 +44,20 @@ class Configuration {
   SnapEditConfig _snapEdit = DefaultConfig.snapEdit;
   SnapEditConfig get snapEdit => _snapEdit;
 
-  bool fromEnviroment(Map<String, dynamic> enviroment) {
+  Future<void> loadLocalConfig(Map<String, dynamic> defaultConfig) async {
+    fromEnviroment(defaultConfig);
+
+    /// load remote config from local
+    await loadRemoteConfigFromLocalStore();
+  }
+
+  void fromEnviroment(Map<String, dynamic> enviroment) {
     if (enviroment['business'] != null) {
       _business = BusinessConfig.fromMap(enviroment['business']);
     }
 
-    if (enviroment['firebase'] != null) {
-      _firebase = FirebaseConfig.fromMap(enviroment['firebase']);
-    }
-
-    if (enviroment['inAppReview'] != null) {
-      _inAppReview = InAppReviewConfig.fromMap(enviroment['inAppReview']);
+    if (enviroment['remoteConfig'] != null) {
+      _remoteConfig = AwesomeRemoteConfigSetting.fromMap(enviroment['remoteConfig']);
     }
 
     if (enviroment['advertisement'] != null) {
@@ -74,17 +75,14 @@ class Configuration {
     if (enviroment['iap'] != null) {
       _iap = IAPConfig.fromMap(enviroment['iap']);
     }
-
-    return true;
   }
 }
 
 abstract class DefaultConfig {
-  /// DEFAULT FIREBASE CONFIGURATIONS
-  static FirebaseConfig firebase = FirebaseConfig(
-    enableFirebase: false,
-    enableCrashAnalytics: true,
-    enableRemoteConfigFirebase: false,
+  /// DEFAULT CONFIGURATIONS
+  static AwesomeRemoteConfigSetting remoteConfig = AwesomeRemoteConfigSetting(
+    enable: false,
+    provider: RemoteConfigProvider.google,
     fetchTimeout: const Duration(milliseconds: 60 * 1000), // 1 minutes
     minimumFetchInterval: const Duration(milliseconds: 24 * 60 * 1000), // 1 day
   );
@@ -120,10 +118,10 @@ abstract class DefaultConfig {
   );
 }
 
-extension ConfigurationsFireBaseRemoteConfig on Configuration {
+extension ConfigurationsRemoteConfig on Configuration {
   Future<void> loadRemoteConfig({Function? before}) async {
-    /// load remote config from local
-    await loadRemoteConfigFromLocalStore();
+    /// if not enabled return
+    if(!_remoteConfig.enable) return;
 
     bool isExpried = isExpriedRemoteConfig();
 
@@ -131,55 +129,43 @@ extension ConfigurationsFireBaseRemoteConfig on Configuration {
     Debug.log('======= REMOTE CONFIG ON LOCAL IS EXPRITED $isExpried =======');
 
     if (isExpried && InternetConnection.instance.hasConnection) {
-      Debug.log('====== SET REMOTE CONFIG FROM FIREBASE ======');
-      if (before != null) await before();
-
-      FirebaseRemoteConfig? remoteConfig = Services().firebase.remoteConfig;
-
-      if (remoteConfig == null) {
-        return;
-      }
-
-      PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
-
-      /// app.snapeditify.studio
-      /// app_snapeditify_studio on firebase
-      String remoteKey = packageInfo.packageName.split('.').join('_').split('-').join().toLowerCase();
-      Debug.log(remoteKey);
-      String stringConfig = remoteConfig.getString(remoteKey);
-      Debug.log('====== REMOTE CONFIG FROM FIREBASE======');
-      Debug.log(stringConfig);
-      Debug.log('====== REMOTE CONFIG FROM FIREBASE======');
-
-      if (stringConfig.isEmpty) {
-        return;
-      }
-
       try {
-        Debug.log('====== SET REMOTE CONFIG FROM FIREBASE ======');
+        Debug.log('====== SET REMOTE CONFIG ======');
+        if (before != null) await before();
+  
+        PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
+  
+        /// app.snapeditify.studio
+        /// => app_snapeditify_studio
+        String remoteKey = packageInfo.packageName.split('.').join('_').split('-').join().toLowerCase();
+        Debug.log(remoteKey);
+  
+        String? stringConfig = await AwesomeRemoteConfig.instance.getConfig(remoteKey);
+        if(stringConfig == null || stringConfig.isEmpty) throw ErrorDescription('REMOTE CONFIG EMPTY');
+  
+        Debug.log('====== REMOTE CONFIG======');
+        Debug.log(stringConfig);
+
+      
+        Debug.log('====== SET REMOTE CONFIG ======');
         Map<String, dynamic> enviroment = json.decode(stringConfig);
         fromEnviroment(enviroment);
 
         /// setConfig in store
         AsyncStorage.instance.setString(AsyncStorageKey.instance.remoteConfig, stringConfig);
-      }catch(error) {
-         Debug.log('====== SET REMOTE CONFIG FROM FIREBASE ERROR $error======');
-      }
 
-      /// miliseconds
-      AsyncStorage.instance.setInt(
-        AsyncStorageKey.instance.remoteConfigExpriedDate,
-        (Configuration.instance.firebase.minimumFetchInterval.inMilliseconds + DateTime.now().millisecondsSinceEpoch),
-      );
+         /// miliseconds
+        AsyncStorage.instance.setInt(
+          AsyncStorageKey.instance.remoteConfigExpriedDate,
+          (Configuration.instance.remoteConfig.minimumFetchInterval.inMilliseconds + DateTime.now().millisecondsSinceEpoch),
+        );
+      }catch(error) {
+         Debug.log('====== SET REMOTE CONFIG ERROR $error======');
+      }
     }
   }
 
   Future<bool> loadRemoteConfigFromLocalStore() async {
-    /// enable remote config
-    if (!firebase.enableRemoteConfigFirebase) {
-      return false;
-    }
-
     String? stringConfig = AsyncStorage.instance.getString(AsyncStorageKey.instance.remoteConfig);
     if (stringConfig == null) {
       return false;

@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:fluttering_iap/iap/iap.dart';
+import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 import 'package:snapeditify/app.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/env/env.dart';
@@ -16,7 +18,13 @@ import 'package:snapeditify/services/services.dart';
 void main() {
   AwesomeApp(
     app: const App(),
-    providers: [AwesomeAdvertisement.instance, AwesomeIAP.instance, ThemeProvider.instance],
+    inAppReview: const InAppReviewConfig(enable: true),
+    providers: [
+      AwesomeAdvertisement.instance,
+      AwesomeIAP.instance,
+      AwesomeRemoteConfig.instance,
+      ThemeProvider.instance,
+    ],
     lazyProviders: [
       () => GalleryProvider.instance,
       () => RemoveObjectProvider.instance,
@@ -25,14 +33,17 @@ void main() {
       () => AnimeAIProvider.instance,
     ],
     onWillInitialize: () async {
-      return Configuration.instance.fromEnviroment(enviroment);
-    },
-    onDidInitialize: () async {
-      await Services.instance.firebase.init(
-        Configuration.instance.firebase,
+      await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
 
+      await Configuration.instance.loadLocalConfig(enviroment);
+
+      AwesomeRemoteConfig.instance.initial(Configuration.instance.remoteConfig);
+
+      return true;
+    },
+    onDidInitialize: () async {
       await Configuration.instance.loadRemoteConfig();
 
       Debug.debugMode = Configuration.instance.business.appMode == AppMode.debug;
@@ -40,7 +51,7 @@ void main() {
       AwesomeAdvertisement.instance.initial(Configuration.instance.advertisement);
       AwesomeIAP.instance.initial(Configuration.instance.iap);
 
-      Services.instance.snapEdit.init(Configuration.instance.snapEdit);
+      Services.instance.snapEdit.initital(Configuration.instance.snapEdit);
 
       return true;
     },

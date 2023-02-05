@@ -47,6 +47,10 @@ dependencies:
   fluttering_iap:
     git:
       url: git@github.com:brennan992k/fluttering_iap.git
+  ### REMOTE CONFIG FLUTTER APP
+  fluttering_remote_config:
+    git:
+      url: git@github.com:brennan992k/fluttering_remote_config.git
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -68,7 +72,8 @@ dependencies:
   http_parser: ^4.0.2
   image: ^4.0.6
   url_launcher: ^6.1.8
-  in_app_review: ^2.0.6
+  firebase_core: ^2.4.1
+  agconnect_core: ^1.6.0+300
 
 dev_dependencies:
   flutter_test:

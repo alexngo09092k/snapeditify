@@ -1,11 +1,9 @@
 import 'package:snapeditify/common/app_routes.dart';
-import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/theme.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:snapeditify/services/services.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -21,9 +19,6 @@ class _AppState extends AwesomeAppState<App> {
   void initState() {
     _provider = ManagerProvider.of<ThemeProvider>();
     _provider.onChangePlatformBrightness();
-
-    Services.instance.inAppReview.monitor(config: Configuration.instance.inAppReview);
-
     super.initState();
   }
 
