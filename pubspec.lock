@@ -20,11 +20,12 @@ packages:
   agconnect_remote_config:
     dependency: transitive
     description:
-      name: agconnect_remote_config
-      sha256: "5f7e8709ca8b4319f2741220f940a0b7ee9a99d53a3859faabefb681d08618ea"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.6.0+300"
+      path: "."
+      ref: HEAD
+      resolved-ref: ba0524ba8361013ab744096163b3cf8fb772f722
+      url: "git@github.com:brennan992k/agconnect_remote_config_plus.git"
+    source: git
+    version: "1.2.0+301"
   archive:
     dependency: transitive
     description:
@@ -437,7 +438,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "07a52b2c314e9c6db8b5281e5e54ad9ad71250cc"
+      resolved-ref: "6117ed94a0072ad8d8da43c819763a081d2c0594"
       url: "git@github.com:brennan992k/fluttering_remote_config.git"
     source: git
     version: "0.0.1"
