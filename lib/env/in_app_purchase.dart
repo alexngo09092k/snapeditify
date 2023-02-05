@@ -1,17 +1,17 @@
 const iap = {
   "products": [
-    {
-      "type": "consumables",
-      "provider": "google",
-      "id": "123456789",
-      "info": {
-        "name": "",
-        "description": "",
-        "price": "\$1000",
-        "rawPrice": 1000,
-        "currency": "USD",
-      }
-    }
+    // {
+    //   "type": "consumables",
+    //   "provider": "google",
+    //   "id": "123456789",
+    //   "info": {
+    //     "name": "",
+    //     "description": "",
+    //     "price": "\$1000",
+    //     "rawPrice": 1000,
+    //     "currency": "USD",
+    //   }
+    // }
   ],
   "provider": "google",
   "enable": false,
