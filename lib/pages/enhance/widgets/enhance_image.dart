@@ -20,7 +20,6 @@ class EnhanceImage extends StatelessWidget {
         imageWidth: width,
         imageHeight: height,
         thumbImage: Image.asset(AppAssets.instance.icSeekbarThumb).image,
-        thumbColor: Colors.transparent,
       ),
     );
   }

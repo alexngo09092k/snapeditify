@@ -1,4 +1,6 @@
 PODS:
+  - agconnect_core (0.0.1):
+    - Flutter
   - agconnect_remote_config (0.0.1):
     - AGConnectRemoteConfig (= 1.7.1.300)
     - Flutter
@@ -165,6 +167,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - agconnect_core (from `.symlinks/plugins/agconnect_core/ios`)
   - agconnect_remote_config (from `.symlinks/plugins/agconnect_remote_config/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
@@ -216,6 +219,8 @@ SPEC REPOS:
     - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
+  agconnect_core:
+    :path: ".symlinks/plugins/agconnect_core/ios"
   agconnect_remote_config:
     :path: ".symlinks/plugins/agconnect_remote_config/ios"
   connectivity_plus:
@@ -264,6 +269,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  agconnect_core: e81b9d5787637897487580e43676c93e7f63448a
   agconnect_remote_config: 7063eea4d52673a20ecbf2ce6f8ebbff9d7a89f5
   AGConnectABTest: cf58810de5526027ed810329716e0d50656a2cf9
   AGConnectCore: 4d95388b97ccbc00c7eb1895d832d5429f847f9f
