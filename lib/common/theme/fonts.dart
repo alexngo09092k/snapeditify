@@ -19,6 +19,10 @@ TextTheme buildTextTheme(
       fontFamily: fontFamily,
       fontWeight: FontWeight.w700,
     ),
+    headlineLarge: base.headlineLarge!.copyWith(
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w700,
+    ),
     headlineMedium: base.headlineMedium!.copyWith(
       fontFamily: fontFamily,
       fontWeight: FontWeight.w700,
@@ -60,7 +64,17 @@ TextTheme buildTextTheme(
     labelLarge: base.labelLarge!.copyWith(
       fontFamily: fontFamily,
       fontWeight: FontWeight.w400,
+      fontSize: AppDimensions.instance.fontsizeX(1.1) * scale,
+    ),
+    labelMedium: base.labelMedium!.copyWith(
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w400,
       fontSize: AppDimensions.instance.fontsizeX(1) * scale,
+    ),
+    labelSmall: base.labelMedium!.copyWith(
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w400,
+      fontSize: AppDimensions.instance.fontsizeX(0.7) * scale,
     ),
   );
 }
