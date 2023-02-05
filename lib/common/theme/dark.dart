@@ -82,6 +82,5 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
 
     /// ========================= DIVIDER ========================
     dividerColor: AppColors.instance.textColor.withOpacity(0.1),
-
   );
 }
