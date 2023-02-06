@@ -1,4 +1,5 @@
 import 'package:snapeditify/common/app_routes.dart';
+import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/theme.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
@@ -40,7 +41,7 @@ class _AppState extends AwesomeAppState<App> {
         final light = getLightTheme(context, scale: scale);
         final dark = getDarkTheme(context, scale: scale);
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
+          title: Configuration.instance.business.appName,
           navigatorKey: AwesomeAppState.navigatorKey,
           theme: light,
           darkTheme: dark,

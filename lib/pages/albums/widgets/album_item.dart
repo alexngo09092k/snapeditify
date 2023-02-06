@@ -49,10 +49,10 @@ class AlbumItem extends StatelessWidget {
                         child: BasePropConsumer<GalleryProvider, AssetEntity?>(
                           listenable: provider,
                           select: (_) => _.albumList[album.entityPath.id]!.thumnail,
-                          builder: (_, __, p, ___) => AssetEntityImage(
+                          builder: (_, __, ___, thumnail) => AssetEntityImage(
                             width: width,
                             height: height,
-                            p.albumList[album.entityPath.id]!.thumnail!,
+                            thumnail!,
                             fit: BoxFit.cover,
                             isOriginal: false,
                           ),
@@ -66,8 +66,8 @@ class AlbumItem extends StatelessWidget {
           BasePropConsumer<GalleryProvider, int>(
             listenable: provider,
             select: (_) => _.albumList[album.entityPath.id]!.count,
-            builder: (_, __, p, ___) => Text(
-              '${album.entityPath.name} (${p.albumList[album.entityPath.id]!.count})',
+            builder: (_, __, ___, length) => Text(
+              '${album.entityPath.name} ($length)',
               style: Theme.of(context).textTheme.bodyLarge!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

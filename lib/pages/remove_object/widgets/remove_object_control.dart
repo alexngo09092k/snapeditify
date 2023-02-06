@@ -20,18 +20,18 @@ class RemoveObjectControl extends StatelessWidget {
       child: BasePropConsumer<RemoveObjectProvider, RemoveObjectMode>(
         listenable: provider,
         select: (p) => p.state.mode,
-        builder: (_, __, p, ___) => Column(
+        builder: (_, __, ___, mode) => Column(
           children: [
             SizedBox(height: AppDimensions.instance.padding),
 
             /// BRUSH SETTING
-            if (p.state.mode != RemoveObjectMode.ai) BrushModeSetting(provider: provider),
+            if (mode != RemoveObjectMode.ai) BrushModeSetting(provider: provider),
 
             /// DETECTED OBJECT LIST
-            if (p.state.mode == RemoveObjectMode.ai) const AIModeResult(),
+            if (mode == RemoveObjectMode.ai) const AIModeResult(),
 
             /// MODE BUTTONS
-            if (p.state.mode != RemoveObjectMode.ai)
+            if (mode != RemoveObjectMode.ai)
               Padding(
                 padding: EdgeInsets.all(AppDimensions.instance.padding),
                 child: Row(
@@ -62,13 +62,13 @@ class RemoveObjectControl extends StatelessWidget {
                         children: [
                           CustomIcon(
                             AppAssets.instance.icBrush,
-                            color: p.state.mode != RemoveObjectMode.ai ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+                            color: mode != RemoveObjectMode.ai ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                           ),
                           SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                           Text(
                             S.of(context).brush,
                             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                  color: p.state.mode != RemoveObjectMode.ai ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+                                  color: mode != RemoveObjectMode.ai ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                                 ),
                           )
                         ],

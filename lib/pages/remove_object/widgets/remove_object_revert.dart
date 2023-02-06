@@ -38,11 +38,11 @@ class RemoveObjectRevert extends StatelessWidget {
     return BasePropConsumer<RemoveObjectProvider, bool>(
       listenable: provider,
       select: (p) => p.canRevert,
-      builder: (_, __, p, ___) => GestureDetector(
-        onTap: p.canRevert ? () => _revert(context) : null,
+      builder: (_, __, ___, canRevert) => GestureDetector(
+        onTap: canRevert ? () => _revert(context) : null,
         child: CustomIcon(
           CupertinoIcons.arrow_counterclockwise,
-          color: p.canRevert ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+          color: canRevert ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
         ),
       ),
     );

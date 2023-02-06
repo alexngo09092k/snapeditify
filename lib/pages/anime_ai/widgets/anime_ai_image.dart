@@ -22,7 +22,7 @@ class AnimeAIImage extends StatelessWidget {
               child: BasePropConsumer<AnimeAIProvider, PainterController>(
                 listenable: provider,
                 select: (p) => p.state.paint,
-                builder: (_, __, p, ___) => FlutterPainter(controller: p.state.paint),
+                builder: (_, __, ___, paint) => FlutterPainter(controller: paint),
               ),
             ),
           ),
@@ -37,10 +37,10 @@ class AnimeAIImage extends StatelessWidget {
               child: BasePropConsumer<AnimeAIProvider, bool>(
                 listenable: provider,
                 select: (p) => p.canCompare,
-                builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+                builder: (_, __, ___, canCompare) => CustomIcon.defaultStyle(
                   context,
                   icon: AppAssets.instance.icCompare,
-                  color: p.canCompare ? Theme.of(context).primaryColor : null,
+                  color: canCompare ? Theme.of(context).primaryColor : null,
                 ),
               ),
             ),

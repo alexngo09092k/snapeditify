@@ -19,7 +19,7 @@ class EnhanceAfter extends StatelessWidget {
             BasePropConsumer<EnhanceProvider, PainterController>(
               listenable: provider,
               select: (p) => p.state.paintAfter,
-              builder: (_, __, p, ___) => FlutterPainter(controller: p.state.paintAfter),
+              builder: (_, __, ___, paint) => FlutterPainter(controller: paint),
             ),
             Positioned(
               right: AppDimensions.instance.padding,

@@ -33,9 +33,9 @@ class DetectedObjectItem extends StatelessWidget {
     final actionWidget = BasePropConsumer<RemoveObjectProvider, bool>(
       listenable: provider,
       select: (p) => detectedObject.isSelected,
-      builder: (_, __, p, ___) => Container(
+      builder: (_, __, ___, isSelected) => Container(
         alignment: Alignment.center,
-        child: detectedObject.isSelected
+        child: isSelected
             ? CustomIcon(
                 CupertinoIcons.check_mark_circled_solid,
                 color: Theme.of(context).primaryColor,
@@ -54,7 +54,7 @@ class DetectedObjectItem extends StatelessWidget {
     final removeText = BasePropConsumer<RemoveObjectProvider, bool>(
       listenable: provider,
       select: (p) => detectedObject.isRemoved,
-      builder: (_, __, p, ___) => detectedObject.isRemoved
+      builder: (_, __, ___, isRemoved) => isRemoved
           ? Padding(
               padding: EdgeInsets.only(left: AppDimensions.instance.paddingX(0.5)),
               child: Container(

@@ -22,11 +22,11 @@ class EnhanceFaceItem extends StatelessWidget {
             BasePropConsumer<EnhanceProvider, int>(
               listenable: provider,
               select: (p) => p.state.enhancedImageIndex,
-              builder: (_, __, p, ___) => ClipRRect(
+              builder: (_, __, ___, index) => ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                 child: Container(
                   child: Image.network(
-                    face.png[p.state.enhancedImageIndex],
+                    face.png[index],
                     width: 80,
                     height: 80,
                   ),

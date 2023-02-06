@@ -19,11 +19,10 @@ class AnimeAIStyleList extends StatelessWidget {
       child: BasePropConsumer<AnimeAIProvider, String?>(
         listenable: provider,
         select: (_) => _.category,
-        builder: (_, __, p, ___) => BasePropConsumer<AnimeAIProvider, int>(
+        builder: (_, __, p, ___) => BasePropConsumer<AnimeAIProvider, List<AnimeStyle>>(
           listenable: provider,
-          select: (_) => _.styles.where((element) => element.category == p.category).length,
-          builder: (_, __, p, ___) {
-            final styles = p.styles.where((element) => element.category == p.category).toList();
+          select: (_) => _.styles.where((element) => element.category == p.category).toList(),
+          builder: (_, __, ___, styles) {
             return ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: styles.length,
@@ -72,7 +71,7 @@ class AnimeStyleItem extends StatelessWidget {
                     child: BasePropConsumer<AnimeAIProvider, String?>(
                       listenable: provider,
                       select: (_) => _.state.styleId,
-                      builder: (_, __, p, ___) => p.state.styleId == style.styleId
+                      builder: (_, __, ___, styleId) => styleId == style.styleId
                           ? Padding(
                               padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
                               child: CustomIcon(

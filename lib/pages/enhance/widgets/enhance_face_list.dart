@@ -16,7 +16,7 @@ class EnhanceFaceList extends StatelessWidget {
       height: AwesomeAppState.screen.height * 1 / 5,
       child: BasePropConsumer<EnhanceProvider, int>(
         listenable: provider,
-        select: (p) => p.state.faces.length + 1,
+        select: (p) => p.state.faces.length,
         builder: (_, __, p, ___) => ListView.builder(
           scrollDirection: Axis.horizontal,
           itemBuilder: (_, index) => EnhanceFaceItem(

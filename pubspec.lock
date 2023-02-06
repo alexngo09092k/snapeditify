@@ -411,7 +411,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: ab4a80d9295963b16f8bcf8ebda0f49003a95848
+      resolved-ref: "16ee5cc53a2144512e271f26056c464da32e03bd"
       url: "git@github.com:brennan992k/fluttering.git"
     source: git
     version: "1.0.2"
@@ -1095,5 +1095,5 @@ packages:
     source: hosted
     version: "6.2.2"
 sdks:
-  dart: ">=2.18.6 <3.0.0"
+  dart: ">=2.19.1 <3.0.0"
   flutter: ">=3.3.0"

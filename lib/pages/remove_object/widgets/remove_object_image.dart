@@ -45,8 +45,8 @@ class RemoveObjectImage extends StatelessWidget {
                     child: BasePropConsumer<RemoveObjectProvider, PainterController>(
                       listenable: provider,
                       select: (p) => p.state.paint,
-                      builder: (_, __, p, ___) => FlutterPainter(
-                        controller: p.state.paint,
+                      builder: (_, __, ___, paint) => FlutterPainter(
+                        controller: paint,
                         onHorizontalDragDown: (_) {
                           if (onStartDraw != null) onStartDraw!();
                         },
@@ -63,7 +63,7 @@ class RemoveObjectImage extends StatelessWidget {
                   child: BasePropConsumer<RemoveObjectProvider, bool>(
                     listenable: provider,
                     select: (p) => p.strokeWidthIsChanged,
-                    builder: (_, __, p, ___) => p.strokeWidthIsChanged
+                    builder: (_, __, ___, strokeWidthIsChanged) => strokeWidthIsChanged
                         ? AwesomeAnimation<double>.tweenSequence(
                             duration: const Duration(milliseconds: 1000),
                             items: [TweenSequenceItem(tween: Tween(begin: 0, end: 1), weight: 1)],
@@ -72,12 +72,12 @@ class RemoveObjectImage extends StatelessWidget {
                               child: BasePropConsumer<RemoveObjectProvider, double>(
                                 listenable: provider,
                                 select: (p) => p.state.strokeWidth,
-                                builder: (_, __, ___, ____) => Container(
-                                  width: p.state.strokeWidth,
-                                  height: p.state.strokeWidth,
+                                builder: (_, __, ___, strokeWidth) => Container(
+                                  width: strokeWidth,
+                                  height: strokeWidth,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: AppColors.instance.white, width: 2),
-                                    borderRadius: BorderRadius.all(Radius.circular(p.state.strokeWidth / 2)),
+                                    borderRadius: BorderRadius.all(Radius.circular(strokeWidth / 2)),
                                   ),
                                 ),
                               ),
@@ -103,10 +103,10 @@ class RemoveObjectImage extends StatelessWidget {
                               child: BasePropConsumer<RemoveObjectProvider, bool>(
                                 listenable: provider,
                                 select: (p) => p.canUndo,
-                                builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+                                builder: (_, __, ___, canUndo) => CustomIcon.defaultStyle(
                                   context,
                                   icon: AppAssets.instance.icUndo,
-                                  color: p.canUndo ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+                                  color: canUndo ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                                 ),
                               ),
                             ),
@@ -117,10 +117,10 @@ class RemoveObjectImage extends StatelessWidget {
                               onTap: provider.redo,
                               child: PropConsumer<RemoveObjectProvider, bool>(
                                 select: (p) => p.canRedo,
-                                builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+                                builder: (_, __, ___, canRedo) => CustomIcon.defaultStyle(
                                   context,
                                   icon: AppAssets.instance.icRedo,
-                                  color: p.canRedo ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+                                  color: canRedo ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                                 ),
                               ),
                             ),
@@ -130,7 +130,7 @@ class RemoveObjectImage extends StatelessWidget {
                         ///REMOVE BUTTON
                         PropConsumer<RemoveObjectProvider, bool>(
                           select: (p) => p.canRemove,
-                          builder: (_, __, p, ___) => p.canRemove
+                          builder: (_, __, ___, canRemove) => canRemove
                               ? CustomButton(
                                   onTap: () => provider.removeObjects(context),
                                   title: S.of(context).remove,
@@ -166,10 +166,10 @@ class RemoveObjectImage extends StatelessWidget {
                               child: BasePropConsumer<RemoveObjectProvider, bool>(
                                 listenable: provider,
                                 select: (p) => p.canCompare,
-                                builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+                                builder: (_, __, ___, canCompare) => CustomIcon.defaultStyle(
                                   context,
                                   icon: AppAssets.instance.icCompare,
-                                  color: p.canCompare ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+                                  color: canCompare ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                                 ),
                               ),
                             ),

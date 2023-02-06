@@ -17,16 +17,16 @@ class StyleList extends StatelessWidget {
     return Container(
       height: AwesomeAppState.screen.height * 1.2 / 5,
       padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
-      child: BasePropConsumer<RestyleProvider, int>(
+      child: BasePropConsumer<RestyleProvider, List<Style>>(
         listenable: provider,
-        select: (_) => _.styles.length,
-        builder: (_, __, p, ___) => ListView.builder(
+        select: (_) => _.styles,
+        builder: (_, __, ___, styles) => ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: p.styles.length,
+          itemCount: styles.length,
           itemBuilder: (_, index) => StyleItem(
             key: Key('$index'),
             provider: provider,
-            style: p.styles[index],
+            style: styles[index],
           ),
         ),
       ),
@@ -61,7 +61,7 @@ class StyleItem extends StatelessWidget {
                     child: BasePropConsumer<RestyleProvider, String?>(
                       listenable: provider,
                       select: (_) => _.state.styleId,
-                      builder: (_, __, p, ___) => p.state.styleId == style.styleId
+                      builder: (_, __, ___, styleId) => styleId == style.styleId
                           ? Padding(
                               padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
                               child: CustomIcon(

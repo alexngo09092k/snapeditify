@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double bottomPadding = AppDimensions.instance.padding * 3;
+    double bottomPadding = AppDimensions.instance.paddingX(3);
     return AppLayout(
       back: false,
       appBar: true,

@@ -18,9 +18,9 @@ class AnimeAICategoryList extends StatelessWidget {
       child: BasePropConsumer<AnimeAIProvider, int>(
         listenable: provider,
         select: (_) => _.categories.length,
-        builder: (_, __, p, ___) => ListView.builder(
+        builder: (_, __, p, count) => ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: p.categories.length,
+          itemCount: count,
           itemBuilder: (_, index) => Container(
             padding: EdgeInsets.only(left: AppDimensions.instance.padding),
             child: AnimeCategoryItem(
@@ -51,17 +51,17 @@ class AnimeCategoryItem extends StatelessWidget {
         child: BasePropConsumer<AnimeAIProvider, String?>(
           listenable: provider,
           select: (_) => _.category,
-          builder: (_, __, p, ___) => Container(
+          builder: (_, __, ___, c) => Container(
             padding: EdgeInsets.symmetric(vertical: AppDimensions.instance.paddingX(0.5), horizontal: AppDimensions.instance.padding),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(2))),
-              border: p.category == category ? Border.all(color: Theme.of(context).primaryColor) : null,
-              color: p.category == category ? Theme.of(context).primaryColor.withOpacity(0.1) : Theme.of(context).disabledColor.withOpacity(0.1),
+              border: c == category ? Border.all(color: Theme.of(context).primaryColor) : null,
+              color: c == category ? Theme.of(context).primaryColor.withOpacity(0.1) : Theme.of(context).disabledColor.withOpacity(0.1),
             ),
             child: Text(
               category,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: p.category == category ? Theme.of(context).primaryColor : null,
+                    color: c == category ? Theme.of(context).primaryColor : null,
                   ),
             ),
           ),

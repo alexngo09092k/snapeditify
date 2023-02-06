@@ -83,8 +83,8 @@ class _AIModeResultState extends ProviderStateObserver<AIModeResult, RemoveObjec
                     BasePropConsumer<RemoveObjectProvider, int>(
                       listenable: provider,
                       select: (p) => p.state.detectedObjects.length,
-                      builder: (_, __, p, ___) => Text(
-                        '${p.state.detectedObjects.length} ${S.of(context).objects}',
+                      builder: (_, __, ___, count) => Text(
+                        '$count ${S.of(context).objects}',
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ),

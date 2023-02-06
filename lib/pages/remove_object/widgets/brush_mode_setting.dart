@@ -21,10 +21,10 @@ class BrushModeSetting extends StatelessWidget {
           child: BasePropConsumer<RemoveObjectProvider, bool>(
             listenable: provider,
             select: (p) => p.state.mode == RemoveObjectMode.brush,
-            builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+            builder: (_, __, ___, isBrush) => CustomIcon.defaultStyle(
               context,
               icon: AppAssets.instance.icHand,
-              color: p.state.mode == RemoveObjectMode.brush ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+              color: isBrush ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
             ),
           ),
         ),
@@ -34,11 +34,11 @@ class BrushModeSetting extends StatelessWidget {
           child: BasePropConsumer<RemoveObjectProvider, double>(
             listenable: provider,
             select: (p) => p.state.strokeWidth,
-            builder: (_, __, p, ___) => Slider(
+            builder: (_, __, p, strokeWidth) => Slider(
               min: p.config.removeObject.strokeWidth.min.toDouble(),
               max: p.config.removeObject.strokeWidth.max.toDouble(),
-              value: p.state.strokeWidth,
-              label: '${p.state.strokeWidth.round()}',
+              value: strokeWidth,
+              label: '${strokeWidth.round()}',
               divisions: 100,
               onChanged: (value) => p.changeStrokeWidth(context, value),
               onChangeStart: (_) => p.strokeWidthIsChanged = true,
@@ -53,10 +53,10 @@ class BrushModeSetting extends StatelessWidget {
           child: BasePropConsumer<RemoveObjectProvider, bool>(
             listenable: provider,
             select: (p) => p.state.mode == RemoveObjectMode.erase,
-            builder: (_, __, p, ___) => CustomIcon.defaultStyle(
+            builder: (_, __, ___, isEraser) => CustomIcon.defaultStyle(
               context,
               icon: AppAssets.instance.icEraser,
-              color: p.state.mode == RemoveObjectMode.erase ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+              color:isEraser ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
             ),
           ),
         ),
