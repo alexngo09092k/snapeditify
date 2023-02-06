@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttering/fluttering.dart';
-import 'package:fluttering_iap/fluttering_iap.dart';
+// import 'package:fluttering/fluttering.dart';
+// import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
@@ -13,7 +13,7 @@ class UnlockPremium extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!ManagerProvider.of<AwesomeIAP>().config.enable) return const SizedBox();
+    // if (!ManagerProvider.of<AwesomeIAP>().config.enable) return const SizedBox();
     return AppCard(
       margin: EdgeInsets.only(bottom: AppDimensions.instance.padding),
       padding: EdgeInsets.all(AppDimensions.instance.padding),
