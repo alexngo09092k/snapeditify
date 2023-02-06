@@ -74,8 +74,11 @@ class AnimeStyleItem extends StatelessWidget {
                       builder: (_, __, ___, styleId) => styleId == style.styleId
                           ? Padding(
                               padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
-                              child: CustomIcon(
-                                CupertinoIcons.check_mark_circled_solid,
+                              child: CustomIcon.defaultStyle(
+                                context,
+                                icon: CupertinoIcons.check_mark_circled_solid,
+                                background: AppColors.instance.white,
+                                spacing: AppDimensions.instance.paddingX(0.1),
                                 color: Theme.of(context).colorScheme.primary,
                               ),
                             )

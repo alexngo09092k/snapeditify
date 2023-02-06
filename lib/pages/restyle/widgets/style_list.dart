@@ -64,9 +64,13 @@ class StyleItem extends StatelessWidget {
                       builder: (_, __, ___, styleId) => styleId == style.styleId
                           ? Padding(
                               padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
-                              child: CustomIcon(
-                                CupertinoIcons.check_mark_circled_solid,
+                              child: CustomIcon.defaultStyle(
+                                context,
+                                icon: CupertinoIcons.check_mark_circled_solid,
+                                spacing: AppDimensions.instance.paddingX(0.1),
+                                background: AppColors.instance.white,
                                 color: Theme.of(context).colorScheme.primary,
+                                size: AppDimensions.instance.iconX(0.8),
                               ),
                             )
                           : const SizedBox(),
