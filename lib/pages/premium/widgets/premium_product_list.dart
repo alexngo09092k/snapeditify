@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttering/fluttering.dart';
+// import 'package:fluttering/fluttering.dart';
 // import 'package:fluttering_iap/iap/iap.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
@@ -9,17 +9,20 @@ class PremiumProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = (AwesomeAppState.screen.width - AppDimensions.instance.paddingX(3)) / 2;
-    final height = width * 2 / 3;
-    // return PropConsumer<AwesomeIAP, int>(
-    //   select: (_) => _.products.length,
-    //   builder: (_, __, p, ___) => 
-     return Row(
-        children: [
-          _PremiumProduct(key: const Key('0'), width: width, height: height),
-          _PremiumProduct(key: const Key('1'), width: width, height: height),
-        ],
-      // ),
+    return Expanded(
+      child: LayoutBuilder(
+        builder: (_, __) {
+          final double width = (__.maxWidth - AppDimensions.instance.paddingX(3)) / 2;
+          double height = __.maxHeight > width * 2.5 / 2? width * 2.5 / 2: __.maxHeight - AppDimensions.instance.padding;
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _PremiumProduct(key: const Key('0'), width: width, height: height),
+              _PremiumProduct(key: const Key('1'), width: width, height: height),
+            ],
+          );
+        },
+      ),
     );
   }
 }
