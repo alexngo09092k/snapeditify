@@ -50,7 +50,10 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   final List<String> _categories = [];
 
   @override
-  List<String> get categories => _categories;
+  List<String> get categories {
+    if(_categories.isEmpty) syncFromServer(true);
+    return  _categories;
+  }
 
   late AnimeAIState _state;
   @override

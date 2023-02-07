@@ -38,7 +38,10 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   final List<Style> _styles = [];
   @override
-  List<Style> get styles => _styles;
+  List<Style> get styles {
+    if(_styles.isEmpty) syncFromServer(true);
+    return  _styles;
+  }
 
   late RestyleState _state;
   @override
