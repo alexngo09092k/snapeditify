@@ -14,20 +14,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends AwesomeAppState<App> {
-  late final IThemeProvider _provider;
-
-  @override
-  void initState() {
-    _provider = ManagerProvider.of<ThemeProvider>();
-    _provider.onChangePlatformBrightness();
-    super.initState();
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    _provider.onChangePlatformBrightness();
-    super.didChangePlatformBrightness();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +21,9 @@ class _AppState extends AwesomeAppState<App> {
     Debug.log("============= SCALE $scale =============");
 
     return Consumer<IThemeProvider>(
-      builder: (_, __, ___) {
+      builder: (_, __, provider) {
         Debug.log("===== START APP =====");
-        Debug.log("===== THEME MODE: ${_provider.themeMode} =====");
+        Debug.log("===== THEME MODE: ${provider.themeMode} =====");
         final light = getLightTheme(context, scale: scale);
         final dark = getDarkTheme(context, scale: scale);
         return MaterialApp(
@@ -45,12 +31,12 @@ class _AppState extends AwesomeAppState<App> {
           navigatorKey: AwesomeAppState.navigatorKey,
           theme: light,
           darkTheme: dark,
-          themeMode: _provider.themeMode,
+          themeMode: provider.themeMode,
           initialRoute: AppRoutes.instance.initialRoute,
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,
           navigatorObservers: [AwesomeApp.observer],
           routes: AppRoutes.instance.routes,
-          localeResolutionCallback: _provider.onChangeLocale,
+          localeResolutionCallback: provider.onChangeLocale,
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
