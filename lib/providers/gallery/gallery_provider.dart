@@ -85,6 +85,8 @@ abstract class IGalleryProvider extends Provider with ProviderDelegate {
   Future<File?> saveImage(Uint8List data);
 
   Future<void> clearCache();
+
+  Future<void> listenPhotos();
 }
 
 class GalleryProvider extends IGalleryProvider {
@@ -92,10 +94,7 @@ class GalleryProvider extends IGalleryProvider {
 
   static IGalleryProvider get instance => _instance;
 
-  GalleryProvider.internal() {
-    PhotoManager.startChangeNotify();
-    PhotoManager.addChangeCallback(_listenChangePhotos);
-  }
+  GalleryProvider.internal();
 
   GalleryConfig _config = GalleryConfig.defaultValue();
 
@@ -190,6 +189,16 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Future<void> clearCache() {
     return PhotoManager.clearFileCache();
+  }
+
+  bool _listened = false;
+  @override
+  Future<void> listenPhotos() async {
+    if(_listened) return;
+    PhotoManager.startChangeNotify();
+    PhotoManager.addChangeCallback(_listenChangePhotos);
+    _listened = true;
+    return;
   }
 
   _listenChangePhotos(_) {

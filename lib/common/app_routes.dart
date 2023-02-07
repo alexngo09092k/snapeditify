@@ -114,6 +114,7 @@ extension AppRoutesUtils on IAppRoutes {
       /// SHOW LOADING POPUP
       WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
 
+      await provider.listenPhotos();
       await provider.refreshGalleryList(true);
 
       /// HIDE LOADING
