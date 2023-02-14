@@ -57,8 +57,7 @@ class Configuration {
     }
 
     if (enviroment['remoteConfig'] != null) {
-      _remoteConfig =
-          AwesomeRemoteConfigSetting.fromMap(enviroment['remoteConfig']);
+      _remoteConfig = AwesomeRemoteConfigSetting.fromMap(enviroment['remoteConfig']);
     }
 
     if (enviroment['advertisement'] != null) {
@@ -80,8 +79,6 @@ class Configuration {
 }
 
 abstract class DefaultConfig {
-
-
   /// DEFAULT API CONFIGURATIONS
   static SnapEditConfig snapEdit = SnapEditConfig.defaultValue();
 
@@ -140,18 +137,14 @@ extension ConfigurationsRemoteConfig on Configuration {
 
         /// app.snapeditify.studio
         /// => app_snapeditify_studio
-        String remoteKey = packageInfo.packageName
-            .split('.')
-            .join('_')
-            .split('-')
-            .join()
-            .toLowerCase();
+        String remoteKey = packageInfo.packageName.split('.').join('_').split('-').join().toLowerCase();
+        Debug.log('====== REMOTE KEY======');
         Debug.log(remoteKey);
 
-        String? stringConfig =
-            await AwesomeRemoteConfig.instance.getConfig(remoteKey);
-        if (stringConfig == null || stringConfig.isEmpty)
+        String? stringConfig = await AwesomeRemoteConfig.instance.getConfig(remoteKey);
+        if (stringConfig == null || stringConfig.isEmpty) {
           throw ErrorDescription('REMOTE CONFIG EMPTY');
+        }
 
         Debug.log('====== REMOTE CONFIG======');
         Debug.log(stringConfig);
@@ -161,15 +154,12 @@ extension ConfigurationsRemoteConfig on Configuration {
         fromEnviroment(enviroment);
 
         /// setConfig in store
-        AsyncStorage.instance
-            .setString(AsyncStorageKey.instance.remoteConfig, stringConfig);
+        AsyncStorage.instance.setString(AsyncStorageKey.instance.remoteConfig, stringConfig);
 
         /// miliseconds
         AsyncStorage.instance.setInt(
           AsyncStorageKey.instance.remoteConfigExpriedDate,
-          (Configuration
-                  .instance.remoteConfig.minimumFetchInterval.inMilliseconds +
-              DateTime.now().millisecondsSinceEpoch),
+          (Configuration.instance.remoteConfig.minimumFetchInterval.inMilliseconds + DateTime.now().millisecondsSinceEpoch),
         );
       } catch (error) {
         Debug.log('====== SET REMOTE CONFIG ERROR $error======');
@@ -178,8 +168,7 @@ extension ConfigurationsRemoteConfig on Configuration {
   }
 
   Future<bool> loadRemoteConfigFromLocalStore() async {
-    String? stringConfig =
-        AsyncStorage.instance.getString(AsyncStorageKey.instance.remoteConfig);
+    String? stringConfig = AsyncStorage.instance.getString(AsyncStorageKey.instance.remoteConfig);
     if (stringConfig == null) {
       return false;
     }
@@ -196,11 +185,11 @@ extension ConfigurationsRemoteConfig on Configuration {
   }
 
   bool isExpriedRemoteConfig() {
-    int? timestampExpriedDate = AsyncStorage.instance
-        .getInt(AsyncStorageKey.instance.remoteConfigExpriedDate);
+    int? timestampExpriedDate = AsyncStorage.instance.getInt(AsyncStorageKey.instance.remoteConfigExpriedDate);
     int timestampNow = DateTime.now().millisecondsSinceEpoch;
-    if (timestampExpriedDate == null || (timestampNow > timestampExpriedDate))
+    if (timestampExpriedDate == null || (timestampNow > timestampExpriedDate)) {
       return true;
+    }
     return false;
   }
 }
