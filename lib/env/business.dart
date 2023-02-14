@@ -1,7 +1,7 @@
 const business = {
   /// App mode
   /// production, debug, maintenance
-  'appMode': 'production',
+  'appMode': 'debug',
 
   /// Maintenance mode
   'maintenanceMode': {
@@ -78,4 +78,8 @@ const business = {
     'message': 'SnapEditify AI Photo Editor Pro',
     'links': {'android': '', 'ios': '', 'huawei': ''},
   },
+
+  'moreApps': {
+    
+  }
 };

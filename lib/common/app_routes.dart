@@ -38,7 +38,7 @@ class AppRoutes extends IAppRoutes {
 
   AppRoutes._internal();
 
-  static const String activeProPage = 'active_pro_page';
+  static const String premiumPage = 'premium_page';
   static const String applyArtEffectPage = 'apply_art_effect_page';
   static const String enhanceImagePage = 'enahnce_page';
   static const String albumsPage = 'albums_page';
@@ -60,7 +60,7 @@ class AppRoutes extends IAppRoutes {
     removeObjectPage: (context) => const RemoveObjectPage(),
     enhanceImagePage: (context) => const EnhancePage(),
     settingPage: (context) => const SettingPage(),
-    activeProPage: (context) => const PremiumPage(),
+    premiumPage: (context) => const PremiumPage(),
     applyArtEffectPage: (context) => const RestylePage(),
     albumsPage: (context) => const AlbumsPage(),
   };
@@ -88,7 +88,7 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const EnhancePage(), settings);
       case settingPage:
         return buildRoute(const SettingPage(), settings);
-      case activeProPage:
+      case premiumPage:
         return buildRoute(const PremiumPage(), settings);
       case applyArtEffectPage:
         return buildRoute(const RestylePage(), settings);
@@ -129,7 +129,7 @@ extension AppRoutesUtils on IAppRoutes {
   }
 
   goPremiumProPage(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.activeProPage);
+    Navigator.pushNamed(context, AppRoutes.premiumPage);
   }
 
   goSettingPage(BuildContext context) {

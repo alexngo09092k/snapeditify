@@ -5,7 +5,7 @@ import 'package:snapeditify/pages/restyle/widgets/restyle_image.dart';
 import 'package:snapeditify/pages/restyle/widgets/style_list.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
-import 'package:snapeditify/widgets/base/save_button.dart';
+import 'package:snapeditify/widgets/app_use/save_button.dart';
 
 class RestylePage extends StatefulWidget {
   const RestylePage({super.key});

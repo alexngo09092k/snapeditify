@@ -3,7 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
-import 'package:snapeditify/widgets/base/base_image_editor.dart';
+import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
 class RestyleImage extends StatelessWidget {

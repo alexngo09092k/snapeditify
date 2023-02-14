@@ -6,7 +6,7 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/albums/widgets/album_list.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
-import 'package:snapeditify/widgets/base/camera_picker.dart';
+import 'package:snapeditify/widgets/app_use/camera_picker.dart';
 
 class AlbumsPage extends StatefulWidget {
   const AlbumsPage({super.key});

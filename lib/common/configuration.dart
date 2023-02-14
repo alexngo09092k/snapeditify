@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-// import 'package:fluttering_iap/fluttering_iap.dart';
+import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
@@ -32,9 +32,9 @@ class Configuration {
   GalleryConfig _gallery = DefaultConfig.gallery;
   GalleryConfig get gallery => _gallery;
 
-  // /// IAP CONFIGURATIONS
-  // IAPConfig _iap = DefaultConfig.iap;
-  // IAPConfig get iap => _iap;
+  /// IAP CONFIGURATIONS
+  IAPConfig _iap = DefaultConfig.iap;
+  IAPConfig get iap => _iap;
 
   /// ADS CONFIGURATIONS
   AdvertisementConfig _advertisement = DefaultConfig.advertisement;
@@ -57,7 +57,8 @@ class Configuration {
     }
 
     if (enviroment['remoteConfig'] != null) {
-      _remoteConfig = AwesomeRemoteConfigSetting.fromMap(enviroment['remoteConfig']);
+      _remoteConfig =
+          AwesomeRemoteConfigSetting.fromMap(enviroment['remoteConfig']);
     }
 
     if (enviroment['advertisement'] != null) {
@@ -72,13 +73,21 @@ class Configuration {
       _snapEdit = SnapEditConfig.fromMap(enviroment['snapEdit']);
     }
 
-    // if (enviroment['iap'] != null) {
-    //   _iap = IAPConfig.fromMap(enviroment['iap']);
-    // }
+    if (enviroment['iap'] != null) {
+      _iap = IAPConfig.fromMap(enviroment['iap']);
+    }
   }
 }
 
 abstract class DefaultConfig {
+
+
+  /// DEFAULT API CONFIGURATIONS
+  static SnapEditConfig snapEdit = SnapEditConfig.defaultValue();
+
+  /// GALLERY CONFIGUARATIONS
+  static GalleryConfig gallery = GalleryConfig.defaultValue();
+
   /// DEFAULT CONFIGURATIONS
   static AwesomeRemoteConfigSetting remoteConfig = AwesomeRemoteConfigSetting(
     enable: false,
@@ -95,9 +104,6 @@ abstract class DefaultConfig {
     minLaunchTimes: 1,
   );
 
-  /// DEFAULT API CONFIGURATIONS
-  static SnapEditConfig snapEdit = SnapEditConfig.defaultValue();
-
   /// DEFAULT APP CONFIGURATIONS
   static BusinessConfig business = BusinessConfig.defaultValue();
 
@@ -107,21 +113,18 @@ abstract class DefaultConfig {
     enable: true,
   );
 
-  /// GALLERY CONFIGUARATIONS
-  static GalleryConfig gallery = GalleryConfig.defaultValue();
-
-  // /// DEFAULT IAP CONFIG
-  // static IAPConfig iap = const IAPConfig(
-  //   products: [],
-  //   enable: false,
-  //   provider: IAPProvider.google,
-  // );
+  /// DEFAULT IAP CONFIG
+  static IAPConfig iap = const IAPConfig(
+    products: [],
+    enable: false,
+    provider: IAPProvider.google,
+  );
 }
 
 extension ConfigurationsRemoteConfig on Configuration {
   Future<void> loadRemoteConfig({Function? before}) async {
     /// if not enabled return
-    if(!_remoteConfig.enable) return;
+    if (!_remoteConfig.enable) return;
 
     bool isExpried = isExpriedRemoteConfig();
 
@@ -132,41 +135,51 @@ extension ConfigurationsRemoteConfig on Configuration {
       try {
         Debug.log('====== SET REMOTE CONFIG ======');
         if (before != null) await before();
-  
+
         PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
-  
+
         /// app.snapeditify.studio
         /// => app_snapeditify_studio
-        String remoteKey = packageInfo.packageName.split('.').join('_').split('-').join().toLowerCase();
+        String remoteKey = packageInfo.packageName
+            .split('.')
+            .join('_')
+            .split('-')
+            .join()
+            .toLowerCase();
         Debug.log(remoteKey);
-  
-        String? stringConfig = await AwesomeRemoteConfig.instance.getConfig(remoteKey);
-        if(stringConfig == null || stringConfig.isEmpty) throw ErrorDescription('REMOTE CONFIG EMPTY');
-  
+
+        String? stringConfig =
+            await AwesomeRemoteConfig.instance.getConfig(remoteKey);
+        if (stringConfig == null || stringConfig.isEmpty)
+          throw ErrorDescription('REMOTE CONFIG EMPTY');
+
         Debug.log('====== REMOTE CONFIG======');
         Debug.log(stringConfig);
 
-      
         Debug.log('====== SET REMOTE CONFIG ======');
         Map<String, dynamic> enviroment = json.decode(stringConfig);
         fromEnviroment(enviroment);
 
         /// setConfig in store
-        AsyncStorage.instance.setString(AsyncStorageKey.instance.remoteConfig, stringConfig);
+        AsyncStorage.instance
+            .setString(AsyncStorageKey.instance.remoteConfig, stringConfig);
 
-         /// miliseconds
+        /// miliseconds
         AsyncStorage.instance.setInt(
           AsyncStorageKey.instance.remoteConfigExpriedDate,
-          (Configuration.instance.remoteConfig.minimumFetchInterval.inMilliseconds + DateTime.now().millisecondsSinceEpoch),
+          (Configuration
+                  .instance.remoteConfig.minimumFetchInterval.inMilliseconds +
+              DateTime.now().millisecondsSinceEpoch),
         );
-      }catch(error) {
-         Debug.log('====== SET REMOTE CONFIG ERROR $error======');
+      } catch (error) {
+        Debug.log('====== SET REMOTE CONFIG ERROR $error======');
       }
     }
   }
 
   Future<bool> loadRemoteConfigFromLocalStore() async {
-    String? stringConfig = AsyncStorage.instance.getString(AsyncStorageKey.instance.remoteConfig);
+    String? stringConfig =
+        AsyncStorage.instance.getString(AsyncStorageKey.instance.remoteConfig);
     if (stringConfig == null) {
       return false;
     }
@@ -176,17 +189,18 @@ extension ConfigurationsRemoteConfig on Configuration {
       Map<String, dynamic> enviroment = json.decode(stringConfig);
       fromEnviroment(enviroment);
       return true;
-    }catch(error) {
+    } catch (error) {
       Debug.log('====== SET REMOTE CONFIG FROM LOCAL ERROR $error======');
       return false;
-
     }
   }
 
   bool isExpriedRemoteConfig() {
-    int? timestampExpriedDate = AsyncStorage.instance.getInt(AsyncStorageKey.instance.remoteConfigExpriedDate);
+    int? timestampExpriedDate = AsyncStorage.instance
+        .getInt(AsyncStorageKey.instance.remoteConfigExpriedDate);
     int timestampNow = DateTime.now().millisecondsSinceEpoch;
-    if (timestampExpriedDate == null || (timestampNow > timestampExpriedDate)) return true;
+    if (timestampExpriedDate == null || (timestampNow > timestampExpriedDate))
+      return true;
     return false;
   }
 }

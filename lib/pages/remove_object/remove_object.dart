@@ -5,7 +5,7 @@ import 'package:snapeditify/pages/remove_object/widgets/remove_object_control.da
 import 'package:snapeditify/pages/remove_object/widgets/remove_object_revert.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
-import 'package:snapeditify/widgets/base/save_button.dart';
+import 'package:snapeditify/widgets/app_use/save_button.dart';
 
 class RemoveObjectPage extends StatefulWidget {
   const RemoveObjectPage({Key? key}) : super(key: key);

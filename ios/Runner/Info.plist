@@ -32,7 +32,7 @@
 	<string>ca-app-pub-1015352980203217~4610692644</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-		<key>NSCameraUsageDescription</key>
+	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to take the photo from camera</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Requesting local network for debugging processes</string>

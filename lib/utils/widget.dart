@@ -61,11 +61,15 @@ class WidgetUtils {
                 CupertinoActivityIndicator(
                   color: AppColors.instance.white,
                 ),
-                if (message != null) SizedBox(height: AppDimensions.instance.padding),
+                if (message != null)
+                  SizedBox(height: AppDimensions.instance.padding),
                 if (message != null)
                   Text(
                     message,
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(color: AppColors.instance.white),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: AppColors.instance.white),
                   ),
               ],
             ),
@@ -108,13 +112,16 @@ class WidgetUtils {
     return alert<T>(
       context,
       title: S.of(context).youAreCurrentlyOffline,
-      message: S.of(context).looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
+      message: S
+          .of(context)
+          .looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
       onForeground: () {
         Navigator.of(context).pop();
         if (retry != null) retry(context);
       },
       actions: [
-        AlertAction(title: S.of(context).openSettings, onPressed: openAppSettings),
+        AlertAction(
+            title: S.of(context).openSettings, onPressed: openAppSettings),
         if (retry != null)
           AlertAction(
             title: S.of(context).retry,
@@ -152,6 +159,26 @@ class WidgetUtils {
           title: S.of(context).openSettings,
         ),
       ],
+    );
+  }
+
+  snack(BuildContext context, {required String message}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        margin: EdgeInsets.all(AppDimensions.instance.padding),
+        padding: EdgeInsets.all(AppDimensions.instance.padding),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppDimensions.instance.radius),
+          ),
+        ),
+        content: Text(
+          message,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      ),
     );
   }
 }

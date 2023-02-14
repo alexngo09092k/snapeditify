@@ -1,5 +1,5 @@
 const remoteConfig = {
-  "enable": true,
+  "enable": false,
   "provider": "huawei",
   'fetchTimeout': 60 * 1000, // 1 minutes
   'minimumFetchInterval': 60 * 1000, // 1 minutes

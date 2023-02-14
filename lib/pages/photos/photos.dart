@@ -8,7 +8,7 @@ import 'package:snapeditify/pages/photos/widgets/suggested_image_list.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/view_models/album_vm.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
-import 'package:snapeditify/widgets/base/camera_picker.dart';
+import 'package:snapeditify/widgets/app_use/camera_picker.dart';
 
 class PhotosPage extends StatefulWidget {
   const PhotosPage({super.key, this.albumId});

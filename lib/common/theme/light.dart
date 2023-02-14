@@ -15,10 +15,14 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
 
     textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
       bodyColor: AppColors.instance.textColor,
+      displayColor: AppColors.instance.textColor,
+      decorationColor: AppColors.instance.textColor,
     ),
 
     primaryTextTheme: buildTextTheme(base.primaryTextTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.textColor,
+      bodyColor: AppColors.instance.primaryColor,
+      displayColor: AppColors.instance.primaryColor,
+      decorationColor: AppColors.instance.primaryColor,
     ),
 
     primaryColor: AppColors.instance.primaryColor,

@@ -4,7 +4,7 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_image.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
-import 'package:snapeditify/widgets/base/save_button.dart';
+import 'package:snapeditify/widgets/app_use/save_button.dart';
 
 class EnhancePage extends StatefulWidget {
   const EnhancePage({super.key});

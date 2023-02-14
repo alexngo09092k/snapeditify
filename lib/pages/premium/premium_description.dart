@@ -8,18 +8,23 @@ class PremiumDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'It is along It is along',
+          'Unlock Premium',
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         SizedBox(height: AppDimensions.instance.paddingX(2)),
-        const _ActiveRow(title: 'Unlimited access to powerful AI features'),
-        SizedBox(height: AppDimensions.instance.padding),
-        const _ActiveRow(title: 'No ads - enjoy the best experience'),
-        SizedBox(height: AppDimensions.instance.padding),
-        const _ActiveRow(title: 'Best output image quality'),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const _ActiveRow(title: 'Unlimited access to powerful AI features'),
+            SizedBox(height: AppDimensions.instance.padding),
+            const _ActiveRow(title: 'No ads - enjoy the best experience'),
+            SizedBox(height: AppDimensions.instance.padding),
+            const _ActiveRow(title: 'Best output image quality'),
+          ],
+        )
       ],
     );
   }

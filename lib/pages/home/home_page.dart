@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
             GestureDetector(
               onTap: () => AppRoutes.instance.goSettingPage(context),
               child: const CustomIcon(CupertinoIcons.square_grid_2x2),
-            )
+            ),
           ],
         ),
       ),

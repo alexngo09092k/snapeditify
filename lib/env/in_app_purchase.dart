@@ -1,18 +1,30 @@
 const iap = {
   "products": [
-    // {
-    //   "type": "consumables",
-    //   "provider": "google",
-    //   "id": "123456789",
-    //   "info": {
-    //     "name": "",
-    //     "description": "",
-    //     "price": "\$1000",
-    //     "rawPrice": 1000,
-    //     "currency": "USD",
-    //   }
-    // }
+    {
+      "type": "subscriptions",
+      "provider": "huawei",
+      "id": "test",
+      "info": {
+        "name": "",
+        "description": "",
+        "price": "\$1000",
+        "rawPrice": 1000,
+        "currency": "USD",
+      }
+    },
+    {
+      "type": "nonConsumables",
+      "provider": "huawei",
+      "id": "test2",
+      "info": {
+        "name": "",
+        "description": "",
+        "price": "\$1000",
+        "rawPrice": 1000,
+        "currency": "USD",
+      }
+    }
   ],
-  "provider": "google",
-  "enable": false,
+  "provider": "huawei",
+  "enable": true,
 };

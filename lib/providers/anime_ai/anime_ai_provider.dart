@@ -186,7 +186,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   @override
   Future<void> syncFromServer([bool notify = false]) async {
-    Locale locale = ManagerProvider.of<ThemeProvider>().currentLocale;
+    Locale locale = ManagerProvider.of<ThemeProvider>().locale;
     SnapEditResponse<AnimeStylesResponse?> res = await Services.instance.snapEdit.getAnimeStyles(locale.languageCode);
 
     if (res.data != null) {

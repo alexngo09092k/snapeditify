@@ -152,7 +152,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   Future<void> syncFromServer([bool notify = false]) async {
-    Locale locale = ManagerProvider.of<ThemeProvider>().currentLocale;
+    Locale locale = ManagerProvider.of<ThemeProvider>().locale;
     SnapEditResponse<StylesResponse?> res = await Services.instance.snapEdit.getStyles(locale.languageCode);
 
     if (res.data != null) {

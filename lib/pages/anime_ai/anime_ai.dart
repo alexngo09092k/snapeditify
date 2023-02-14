@@ -6,7 +6,7 @@ import 'package:snapeditify/pages/anime_ai/widgets/anime_ai_image.dart';
 import 'package:snapeditify/pages/anime_ai/widgets/anime_ai_style_list.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/widgets/base/app_layout.dart';
-import 'package:snapeditify/widgets/base/save_button.dart';
+import 'package:snapeditify/widgets/app_use/save_button.dart';
 
 class AnimeAIPage extends StatefulWidget {
   const AnimeAIPage({super.key});

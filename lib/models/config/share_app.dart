@@ -2,18 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
-
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
-enum ShareAppPlatform {
-  android,
-  huawei,
-  ios,
-}
+import 'app_platform.dart';
 
 class ShareApp {
   final String message;
-  final Map<ShareAppPlatform, String> links;
+  final Map<AppPlatform, String> links;
 
   ShareApp({
     required this.message,
@@ -22,15 +15,15 @@ class ShareApp {
 
   String? get link {
     if (CurrentPlatform.instance.isIos) {
-      return links[ShareAppPlatform.ios];
+      return links[AppPlatform.ios];
+    }
+
+    if(CurrentPlatform.instance.isHuawei) {
+      return links[AppPlatform.huawei];
     }
 
     if (CurrentPlatform.instance.isAndroid) {
-      if (DeviceInfo.instance.android != null && (DeviceInfo.instance.android!.manufacturer ?? '').toUpperCase() == 'HUAWEI') {
-        return links[ShareAppPlatform.huawei];
-      }
-
-      return links[ShareAppPlatform.android];
+      return links[AppPlatform.android];
     }
 
     return null;
@@ -38,7 +31,7 @@ class ShareApp {
 
   ShareApp copyWith({
     String? message,
-    Map<ShareAppPlatform, String>? links,
+    Map<AppPlatform, String>? links,
   }) {
     return ShareApp(
       message: message ?? this.message,
@@ -56,9 +49,9 @@ class ShareApp {
   factory ShareApp.fromMap(Map<String, dynamic> map) {
     return ShareApp(
       message: map['message'] as String,
-      links: map['links'].map<ShareAppPlatform, String>(
+      links: map['links'].map<AppPlatform, String>(
         (key, value) => MapEntry(
-          ShareAppPlatform.values.firstWhere((element) => element.name == key),
+          AppPlatform.values.firstWhere((element) => element.name == key),
           value.toString(),
         ),
       ),

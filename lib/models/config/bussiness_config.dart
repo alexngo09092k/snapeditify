@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:snapeditify/models/config/app_platform.dart';
 
 import 'package:snapeditify/models/config/maintenance_mode.dart';
+import 'package:snapeditify/models/config/more_app.dart';
 import 'package:snapeditify/models/config/share_app.dart';
 import 'package:snapeditify/models/config/social_network.dart';
 import 'package:snapeditify/models/config/web_link.dart';
@@ -23,6 +25,7 @@ class BusinessConfig {
   final String contact;
   final List<SocialNetwork> socialNetworks;
   final List<WebLink> webLinks;
+  final List<MoreApp> moreApps;
   final ShareApp shareApp;
   final MaintenanceMode maintenanceMode;
   final AppMode appMode;
@@ -37,6 +40,7 @@ class BusinessConfig {
     required this.contact,
     required this.socialNetworks,
     required this.webLinks,
+    required this.moreApps,
     required this.shareApp,
     required this.maintenanceMode,
     required this.appMode,
@@ -53,9 +57,9 @@ class BusinessConfig {
       contact: "contact.snapeditify@gmail.com",
       shareApp: ShareApp(
         links: {
-          ShareAppPlatform.android: '',
-          ShareAppPlatform.ios: '',
-          ShareAppPlatform.huawei: '',
+          AppPlatform.android: '',
+          AppPlatform.ios: '',
+          AppPlatform.huawei: '',
         },
         message: "SnapEditify AI Photo Editor",
       ),
@@ -63,22 +67,26 @@ class BusinessConfig {
         SocialNetwork.fromMap({
           'brand': 'Facebook',
           'link': 'https://www.facebook.com/snapeditify/',
-          'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
+          'image':
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
         }),
         SocialNetwork.fromMap({
           'brand': 'Tiktok',
           'link': 'https://www.tiktok.com/@snapeditify',
-          'image': 'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
+          'image':
+              'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
         }),
         SocialNetwork.fromMap({
           'brand': 'Youtube',
           'link': 'https://www.youtube.com/@snapeditify',
-          'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/318px-YouTube_full-color_icon_%282017%29.svg.png',
+          'image':
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/318px-YouTube_full-color_icon_%282017%29.svg.png',
         }),
         SocialNetwork.fromMap({
           'brand': 'Telegram',
           'link': 'https://t.me/+GPyDosamyKA2OGVl',
-          'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
+          'image':
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
         }),
       ],
       webLinks: [
@@ -103,6 +111,7 @@ class BusinessConfig {
         'link': 'https://snapeditify.netlify.app/',
         'message': "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
       }),
+      moreApps: [],
       version: '1.0.0',
       appMode: AppMode.production,
     );
@@ -117,6 +126,7 @@ class BusinessConfig {
     String? contact,
     List<SocialNetwork>? socialNetworks,
     List<WebLink>? webLinks,
+    List<MoreApp>? moreApps,
     ShareApp? shareApp,
     MaintenanceMode? maintenanceMode,
     AppMode? appMode,
@@ -134,6 +144,7 @@ class BusinessConfig {
       maintenanceMode: maintenanceMode ?? this.maintenanceMode,
       socialNetworks: socialNetworks ?? this.socialNetworks,
       webLinks: webLinks ?? this.webLinks,
+      moreApps: moreApps ?? this.moreApps,
       version: version ?? this.version,
     );
   }
@@ -152,6 +163,7 @@ class BusinessConfig {
       'socialNetworks': socialNetworks.map((e) => e.toMap()),
       'webLinks': webLinks.map((e) => e.toMap()),
       'version': version,
+      'moreApps': moreApps.map((e) => e.toMap()),
     };
   }
 
@@ -160,14 +172,15 @@ class BusinessConfig {
       appName: map['appName'],
       appLogo: map['appLogo'],
       appBio: map['appBio'],
-      protocols: map['protocols'] != null ? (map['protocols'] as List).map((e) => e.toString()).toList() : null,
+      protocols: map['protocols'] != null? (map['protocols'] as List).map((e) => e.toString()).toList(): null,
       prefix: map['prefix'],
       contact: map['contact'],
-      shareApp: map['shareApp'] != null ? ShareApp.fromMap(map['shareApp']) : null,
-      appMode: map['appMode'] != null ? AppMode.values.firstWhere((element) => element.name == map['appMode']) : null,
-      socialNetworks: map['socialNetworks'] != null ? (map['socialNetworks'] as List).map<SocialNetwork>((e) => SocialNetwork.fromMap(e)).toList() : null,
-      webLinks: map['webLinks'] != null ? (map['webLinks'] as List).map<WebLink>((e) => WebLink.fromMap(e)).toList() : null,
-      maintenanceMode: map['maintenanceMode'] != null ? MaintenanceMode.fromMap(map['maintenanceMode']) : null,
+      shareApp:map['shareApp'] != null? ShareApp.fromMap(map['shareApp']): null,
+      moreApps: map['moreApps'] != null? (map['moreApps'] as List).map<MoreApp>((e) => MoreApp.fromMap(e)).toList(): null,
+      appMode: map['appMode'] != null? AppMode.values.firstWhere((element) => element.name == map['appMode']): null,
+      socialNetworks: map['socialNetworks'] != null? (map['socialNetworks'] as List).map<SocialNetwork>((e) => SocialNetwork.fromMap(e)).toList(): null,
+      webLinks: map['webLinks'] != null? (map['webLinks'] as List).map<WebLink>((e) => WebLink.fromMap(e)).toList(): null,
+      maintenanceMode: map['maintenanceMode'] != null? MaintenanceMode.fromMap(map['maintenanceMode']): null,
       version: map['version'],
     );
   }
@@ -178,7 +191,7 @@ class BusinessConfig {
 
   @override
   String toString() {
-    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, appBio: $appBio, protocols: $protocols, prefix: $prefix, contact: $contact, socialNetworks: $socialNetworks, webLinks: $webLinks, shareApp: $shareApp, maintenanceMode: $maintenanceMode, appMode: $appMode, version: $version)';
+    return 'BusinessConfig(appName: $appName, appLogo: $appLogo, appBio: $appBio, protocols: $protocols, prefix: $prefix, contact: $contact, socialNetworks: $socialNetworks, moreApps: $moreApps, webLinks: $webLinks, shareApp: $shareApp, maintenanceMode: $maintenanceMode, appMode: $appMode, version: $version)';
   }
 
   @override
@@ -194,6 +207,7 @@ class BusinessConfig {
         listEquals(other.socialNetworks, socialNetworks) &&
         listEquals(other.webLinks, webLinks) &&
         other.shareApp == shareApp &&
+        other.moreApps == moreApps &&
         other.maintenanceMode == maintenanceMode &&
         other.appMode == appMode &&
         other.version == version;
@@ -210,6 +224,7 @@ class BusinessConfig {
         socialNetworks.hashCode ^
         webLinks.hashCode ^
         shareApp.hashCode ^
+        moreApps.hashCode ^
         maintenanceMode.hashCode ^
         appMode.hashCode ^
         version.hashCode;
