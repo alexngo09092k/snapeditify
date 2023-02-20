@@ -112,7 +112,9 @@ abstract class EditImageProvider extends Provider {
               [XFile(savedFile!.path)],
               subject: Configuration.instance.business.shareApp.message,
             ),
-            onNewImage: Navigator.of(context).pop,
+            onNewImage: () {
+              Navigator.of(context).popUntil((_) => _.settings.name == AppRoutes.albumsPage);
+            },
           ),
         );
         return true;

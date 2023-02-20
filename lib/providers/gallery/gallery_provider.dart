@@ -191,9 +191,16 @@ class GalleryProvider extends IGalleryProvider {
         );
         // final Directory dataDirectory = await getApplicationDocumentsDirectory();
         final Directory cacheDirectory = await getTemporaryDirectory();
+
+        /// IMAGE FILE
         final File imageFile = File('${cacheDirectory.path}/$name.jpg');
         imageFile.writeAsBytesSync(data);
+
         if (result != null && result['filePath'] != null && await imageFile.exists()) {
+
+          /// REFRESH IMAGE
+          await refreshGalleryList(true);
+
           return imageFile;
         }
       }else {
