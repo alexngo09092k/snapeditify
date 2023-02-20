@@ -16,62 +16,36 @@ const advertisement = {
   "adMobAppIdAndroid": "",
   "providers": ["google", "huawei"],
   "ads": [
-    /// GOOGLE
-    {
-      "type": "openApp",
-      "provider": "google",
-      "iosId": "ca-app-pub-3940256099942544/3419835294",
-      "androidId": "ca-app-pub-3940256099942544/3419835294",
-    },
-    {
-      "type": "banner",
-      "provider": "google",
-      "iosId": "ca-app-pub-3940256099942544/6300978111",
-      "androidId": "ca-app-pub-3940256099942544/6300978111",
-    },
-    {
-      "type": "interstitial",
-      "provider": "google",
-      "iosId": "ca-app-pub-3940256099942544/1033173712",
-      "androidId": "ca-app-pub-3940256099942544/6300978111",
-    },
-    {
-      "type": "reward",
-      "provider": "google",
-      "iosId": "ca-app-pub-3940256099942544/5224354917",
-      "androidId": "ca-app-pub-3940256099942544/5224354917",
-    },
-    {
-      "type": "native",
-      "provider": "google",
-      "iosId": "ca-app-pub-3940256099942544/6300978111",
-      "androidId": "ca-app-pub-3940256099942544/6300978111",
-    },
-
     /// HUAWEI
     {
       "type": "roll",
       "provider": "huawei",
-      "iosId": "testy3cglm3pj0",
-      "androidId": "testy3cglm3pj0",
-      "showOnScreens": [],
-      "hideOnScreens": [],
+      "iosId": "h2bea5p6f4",
+      "androidId": "h2bea5p6f4",
     },
     {
       "type": "interstitial",
       "provider": "huawei",
-      "iosId": "teste9ih9j0rc3",
-      "androidId": "teste9ih9j0rc3",
-      "showOnScreens": [],
-      "hideOnScreens": [],
+      "iosId": "r0o9tg4ocx",
+      "androidId": "r0o9tg4ocx",
     },
     {
       "type": "reward",
       "provider": "huawei",
-      "iosId": "testx9dtjwj8hp",
-      "androidId": "testx9dtjwj8hp",
-      "showOnScreens": [],
-      "hideOnScreens": [],
+      "iosId": "h7s9d468ol",
+      "androidId": "h7s9d468ol",
+    },
+    {
+      "type": "splash",
+      "provider": "huawei",
+      "iosId": "t17z7pus7m",
+      "androidId": "t17z7pus7m",
+    },
+    {
+      "type": "banner",
+      "provider": "huawei",
+      "iosId": "v7y4ozn8r7",
+      "androidId": "v7y4ozn8r7",
     },
   ],
 };

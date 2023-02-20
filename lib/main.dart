@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
-import 'package:fluttering_iap/iap/iap.dart';
+// import 'package:fluttering_iap/iap/iap.dart';
 import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 import 'package:snapeditify/app.dart';
 import 'package:snapeditify/common/configuration.dart';
@@ -24,7 +24,7 @@ void main() {
     inAppReview: const InAppReviewConfig(enable: true),
     providers: [
       AwesomeAdvertisement.instance,
-      AwesomeIAP.instance,
+      // AwesomeIAP.instance,
       AwesomeRemoteConfig.instance,
       ThemeProvider(themeMode: ThemeMode.light),
     ],
@@ -52,7 +52,7 @@ void main() {
       Debug.debugMode = Configuration.instance.business.appMode == AppMode.debug;
 
       AwesomeAdvertisement.instance.initial(Configuration.instance.advertisement);
-      AwesomeIAP.instance.initial(Configuration.instance.iap);
+      // AwesomeIAP.instance.initial(Configuration.instance.iap);
 
       Services.instance.snapEdit.initital(Configuration.instance.snapEdit);
 

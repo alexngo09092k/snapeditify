@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:fluttering_iap/fluttering_iap.dart';
+import 'package:flutter/foundation.dart';
+// import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
@@ -33,8 +33,8 @@ class Configuration {
   GalleryConfig get gallery => _gallery;
 
   /// IAP CONFIGURATIONS
-  IAPConfig _iap = DefaultConfig.iap;
-  IAPConfig get iap => _iap;
+  // IAPConfig _iap = DefaultConfig.iap;
+  // IAPConfig get iap => _iap;
 
   /// ADS CONFIGURATIONS
   AdvertisementConfig _advertisement = DefaultConfig.advertisement;
@@ -72,9 +72,9 @@ class Configuration {
       _snapEdit = SnapEditConfig.fromMap(enviroment['snapEdit']);
     }
 
-    if (enviroment['iap'] != null) {
-      _iap = IAPConfig.fromMap(enviroment['iap']);
-    }
+    // if (enviroment['iap'] != null) {
+    //   _iap = IAPConfig.fromMap(enviroment['iap']);
+    // }
   }
 }
 
@@ -87,8 +87,8 @@ abstract class DefaultConfig {
 
   /// DEFAULT CONFIGURATIONS
   static AwesomeRemoteConfigSetting remoteConfig = AwesomeRemoteConfigSetting(
-    enable: false,
-    provider: RemoteConfigProvider.google,
+    enable: kDebugMode,
+    providers: [RemoteConfigProvider.google, RemoteConfigProvider.huawei],
     fetchTimeout: const Duration(milliseconds: 60 * 1000), // 1 minutes
     minimumFetchInterval: const Duration(milliseconds: 24 * 60 * 1000), // 1 day
   );
@@ -105,17 +105,70 @@ abstract class DefaultConfig {
   static BusinessConfig business = BusinessConfig.defaultValue();
 
   /// DEFAULT ADS CONFIGURATIONS
-  static AdvertisementConfig advertisement = const AdvertisementConfig(
-    ads: [],
-    enable: true,
+  static AdvertisementConfig advertisement = AdvertisementConfig(
+    enable: kDebugMode,
+    ads: [
+      /// GOOGLE
+      AdvertisementItem.fromMap({
+        "type": "openApp",
+        "provider": "google",
+        "iosId": "ca-app-pub-3940256099942544/3419835294",
+        "androidId": "ca-app-pub-3940256099942544/3419835294",
+      }),
+      AdvertisementItem.fromMap({
+        "type": "banner",
+        "provider": "google",
+        "iosId": "ca-app-pub-3940256099942544/6300978111",
+        "androidId": "ca-app-pub-3940256099942544/6300978111",
+      }),
+      AdvertisementItem.fromMap({
+        "type": "interstitial",
+        "provider": "google",
+        "iosId": "ca-app-pub-3940256099942544/1033173712",
+        "androidId": "ca-app-pub-3940256099942544/6300978111",
+      }),
+      AdvertisementItem.fromMap({
+        "type": "reward",
+        "provider": "google",
+        "iosId": "ca-app-pub-3940256099942544/5224354917",
+        "androidId": "ca-app-pub-3940256099942544/5224354917",
+      }),
+      AdvertisementItem.fromMap({
+        "type": "native",
+        "provider": "google",
+        "iosId": "ca-app-pub-3940256099942544/6300978111",
+        "androidId": "ca-app-pub-3940256099942544/6300978111",
+      }),
+
+      ///HUAWEI
+      AdvertisementItem.fromMap({
+        "type": "roll",
+        "provider": "huawei",
+        "iosId": "testy3cglm3pj0",
+        "androidId": "testy3cglm3pj0",
+      }),
+      AdvertisementItem.fromMap({
+        "type": "interstitial",
+        "provider": "huawei",
+        "iosId": "teste9ih9j0rc3",
+        "androidId": "teste9ih9j0rc3",
+      }),
+      AdvertisementItem.fromMap( {
+        "type": "reward",
+        "provider": "huawei",
+        "iosId": "testx9dtjwj8hp",
+        "androidId": "testx9dtjwj8hp",
+      }),
+    ],
+    providers: [AdvertisementProvider.google, AdvertisementProvider.huawei],
   );
 
   /// DEFAULT IAP CONFIG
-  static IAPConfig iap = const IAPConfig(
-    products: [],
-    enable: false,
-    provider: IAPProvider.google,
-  );
+  // static IAPConfig iap = const IAPConfig(
+  //   enable: kDebugMode,
+  //   products: [],
+  //   providers: [],
+  // );
 }
 
 extension ConfigurationsRemoteConfig on Configuration {

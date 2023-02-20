@@ -1,7 +1,9 @@
-import 'package:fluttering/fluttering.dart';
-import 'package:fluttering_iap/fluttering_iap.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: unused_local_variable
+// import 'package:fluttering_iap/fluttering_iap.dart';
 // import 'package:fluttering_iap/iap/iap.dart';
 import 'package:flutter/material.dart';
+
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
@@ -11,8 +13,6 @@ class PremiumProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    Debug.log(AwesomeIAP.instance.products);
     return Expanded(
       child: LayoutBuilder(
         builder: (_, __) {
@@ -20,27 +20,27 @@ class PremiumProductList extends StatelessWidget {
           double height = __.maxHeight > width * 2.5 / 2? width * 2.5 / 2: __.maxHeight - AppDimensions.instance.padding;
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _PremiumProduct(
-                width: width,
-                height: height,
-                onSelect: (product) => {},
-                product: IAPProduct(
-                  id: '1', 
-                  provider: IAPProvider.google, 
-                  type: IAPType.subscriptions,
-                ),
-              ),
-              _PremiumProduct(
-                width: width,
-                height: height,
-                onSelect: (product) => {},
-                product: IAPProduct(
-                  id: '1', 
-                  provider: IAPProvider.google, 
-                  type: IAPType.subscriptions,
-                ),
-              ),
+            children: const [
+              // _PremiumProduct(
+              //   width: width,
+              //   height: height,
+              //   onSelect: (product) => {},
+              //   product: IAPProduct(
+              //     id: '1', 
+              //     provider: IAPProvider.google, 
+              //     type: IAPType.subscriptions,
+              //   ),
+              // ),
+              // _PremiumProduct(
+              //   width: width,
+              //   height: height,
+              //   onSelect: (product) => {},
+              //   product: IAPProduct(
+              //     id: '1', 
+              //     provider: IAPProvider.google, 
+              //     type: IAPType.subscriptions,
+              //   ),
+              // ),
             ],
           );
         },
@@ -49,17 +49,16 @@ class PremiumProductList extends StatelessWidget {
   }
 }
 
-class _PremiumProduct extends StatelessWidget {
-  const _PremiumProduct({
+class PremiumProduct extends StatelessWidget {
+  const PremiumProduct({
+    Key? key,
     required this.width,
     required this.height,
-    required this.onSelect,
-    required this.product,
-  });
+  }) : super(key: key);
   final double width;
   final double height;
-  final Function(IAPProduct ) onSelect;
-  final IAPProduct product;
+  // final Function(IAPProduct ) onSelect;
+  // final IAPProduct product;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +75,7 @@ class _PremiumProduct extends StatelessWidget {
             title: "Get it", 
             gradient: AppColors.instance.gradient,
             height: 40,
-            onTap: () => onSelect(product),
+            // onTap: () => onSelect(product),
           )
         ],
       ),

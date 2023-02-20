@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
+
 const business = {
   /// App mode
   /// production, debug, maintenance
-  'appMode': 'debug',
+  'appMode': kDebugMode ? 'debug': 'production',
 
   /// Maintenance mode
   'maintenanceMode': {
