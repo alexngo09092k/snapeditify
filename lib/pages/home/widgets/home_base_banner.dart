@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/widgets/base/ai_icon.dart';
+import 'package:snapeditify/widgets/app_use/ai_icon.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 

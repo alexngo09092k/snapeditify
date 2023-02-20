@@ -6,7 +6,7 @@ import 'package:snapeditify/pages/remove_object/widgets/ai_mode_result.dart';
 import 'package:snapeditify/pages/remove_object/widgets/brush_mode_setting.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
-import 'package:snapeditify/widgets/base/ai_icon.dart';
+import 'package:snapeditify/widgets/app_use/ai_icon.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class RemoveObjectControl extends StatelessWidget {

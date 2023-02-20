@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
@@ -179,11 +180,33 @@ class GalleryProvider extends IGalleryProvider {
 
   @override
   Future<File?> saveImage(Uint8List data) async {
-    AssetEntity? asset = await PhotoManager.editor.saveImage(
-      data,
-      title: '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
-    );
-    return asset?.file;
+    try {
+      final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
+      if(CurrentPlatform.instance.isHuawei) {
+        final result = await ImageGallerySaver.saveImage(
+          data,
+          quality: 100,
+          name: name,
+          isReturnImagePathOfIOS: CurrentPlatform.instance.isIos,
+        );
+        // final Directory dataDirectory = await getApplicationDocumentsDirectory();
+        final Directory cacheDirectory = await getTemporaryDirectory();
+        final File imageFile = File('${cacheDirectory.path}/$name.jpg');
+        imageFile.writeAsBytesSync(data);
+        if (result != null && result['filePath'] != null && await imageFile.exists()) {
+          return imageFile;
+        }
+      }else {
+        AssetEntity? asset = await PhotoManager.editor.saveImage(
+          data,
+          title: '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
+        );
+        return asset?.file;
+      }
+    }catch(error) {
+      Debug.log(error);
+    }
+    return null;
   }
 
   @override

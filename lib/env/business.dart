@@ -79,7 +79,5 @@ const business = {
     'links': {'android': '', 'ios': '', 'huawei': ''},
   },
 
-  'moreApps': {
-    
-  }
+  'moreApps': []
 };
