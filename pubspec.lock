@@ -367,6 +367,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+  flutter_hms_gms_availability:
+    dependency: transitive
+    description:
+      name: flutter_hms_gms_availability
+      sha256: "54cb1fdc7b43228a9cd4b790cf62d5a34ddcd281ae9374877309e5f6a9065be0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   flutter_image_compress:
     dependency: "direct main"
     description:
@@ -411,7 +419,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "1de76447e7a70b09a74810e1e2a15f642febdca3"
+      resolved-ref: "879077f770cda5bafff0ed214ef1d52a06a05887"
       url: "git@github.com:brennan992k/fluttering.git"
     source: git
     version: "1.0.2"
@@ -420,7 +428,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5542866bae396f6b3f366dd3765d1075006ae5d0"
+      resolved-ref: a985ddc84f21d89798387492bbc91dc59fcde064
       url: "git@github.com:brennan992k/fluttering_ads.git"
     source: git
     version: "0.0.1"
@@ -429,7 +437,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5887aba6c5090bfb1157fed622c38357bb4feea6"
+      resolved-ref: "1fcc31a80654ba266015fa83b797046807fd297e"
       url: "git@github.com:brennan992k/fluttering_remote_config.git"
     source: git
     version: "0.0.1"

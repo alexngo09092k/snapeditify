@@ -6,7 +6,7 @@ import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 import 'package:snapeditify/app.dart';
 import 'package:snapeditify/common/configuration.dart';
-import 'package:snapeditify/env/env.dart';
+import 'package:snapeditify/enviroment.dart';
 import 'package:snapeditify/firebase_options.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
