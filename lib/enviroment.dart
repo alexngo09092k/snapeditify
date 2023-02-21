@@ -120,7 +120,7 @@ const enviroment = {
     "enable": true,
     "adMobAppIdIos": "",
     "adMobAppIdAndroid": "",
-    "providers": ["google", "huawei"],
+    "providers": [ "huawei"],
     "ads": [
       /// HUAWEI
       {

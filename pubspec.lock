@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: "953f097772b5fd095e0ee6eeeab34e3a42de91d5f43fa86b5de8485a57494f96"
+      sha256: "64fcb0dbca4386356386c085142fa6e79c00a3326ceaa778a2d25f5d9ba61441"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.15"
+    version: "1.0.16"
   agconnect_core:
     dependency: "direct main"
     description:
@@ -294,10 +294,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "46b80acfb472d8abc500c2cb6ce65c4b5237d825e4c23bfc3efc70df9eec1a6e"
+      sha256: fe30ac230f12f8836bb97e6e09197340d3c584526825b1746ea362a82e1e43f7
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
+    version: "2.7.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -318,26 +318,26 @@ packages:
     dependency: transitive
     description:
       name: firebase_remote_config
-      sha256: f564386fdf95be5925fa7cfd14c84cc51f2ee27fb65884e355f537329dfe3aab
+      sha256: "1309deefd5ff29ea719fa3c48441f492204822c258c001751f762d8bbec1a222"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.12"
+    version: "3.0.13"
   firebase_remote_config_platform_interface:
     dependency: transitive
     description:
       name: firebase_remote_config_platform_interface
-      sha256: c2b8b0facd17c9837c1c65320c6d3697dc8702fc03f182153f19c30ccf5137ce
+      sha256: "3e20fa1d937d10a52b8e9b3c955161890d30d0924e18438280797b960d2799a4"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.32"
+    version: "1.1.33"
   firebase_remote_config_web:
     dependency: transitive
     description:
       name: firebase_remote_config_web
-      sha256: "9698cfb1ab381870eb8f9409bef0e9fe8fe10572c6e7001feeb3a044fe991864"
+      sha256: f79573f237fe84c5927a7d2d5cee5ee6529a70bfe430c63ef0d2aa257eac4c96
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.21"
+    version: "1.1.22"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -428,7 +428,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: a985ddc84f21d89798387492bbc91dc59fcde064
+      resolved-ref: "763bedaeb66b6139fe475e4c89c194522fe0b007"
       url: "git@github.com:brennan992k/fluttering_ads.git"
     source: git
     version: "0.0.1"
@@ -437,7 +437,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "1fcc31a80654ba266015fa83b797046807fd297e"
+      resolved-ref: a9547de96876b079535e19301cced93fb325f04b
       url: "git@github.com:brennan992k/fluttering_remote_config.git"
     source: git
     version: "0.0.1"
