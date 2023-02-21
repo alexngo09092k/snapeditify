@@ -187,7 +187,7 @@ const enviroment = {
       // }
     ],
   },
-  
+
   //! ====================================== SNAPEDIT ==============================================
   "snapEdit": {
     'baseUrl': "https://be-prod-1.snapedit.app/",
