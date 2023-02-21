@@ -428,7 +428,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "763bedaeb66b6139fe475e4c89c194522fe0b007"
+      resolved-ref: "317566d340c984495fbd026f41af0114efbd1955"
       url: "git@github.com:brennan992k/fluttering_ads.git"
     source: git
     version: "0.0.1"
@@ -437,7 +437,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: a9547de96876b079535e19301cced93fb325f04b
+      resolved-ref: "97f5d152479bd0a705fe19784280067b0344d0e0"
       url: "git@github.com:brennan992k/fluttering_remote_config.git"
     source: git
     version: "0.0.1"
