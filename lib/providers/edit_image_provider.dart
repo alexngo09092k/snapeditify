@@ -130,8 +130,7 @@ abstract class EditImageProvider extends Provider {
       WidgetUtils.instance.showErrorPopup(
         context,
         title: S.of(context).saveImageLimit,
-        message:
-            '${S.of(context).youHaveReachedTheLimitOfSavedImagePleaseUpgrade} ${Configuration.instance.business.appName} ${S.of(context).teamToSupport}',
+        message: '${S.of(context).youHaveReachedTheLimitOfSavedImagePleaseUpgrade} ${Configuration.instance.business.appName} ${S.of(context).teamToSupport}',
         retry: saveImage,
       );
     });

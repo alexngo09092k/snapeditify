@@ -134,7 +134,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     WidgetUtils.instance.hideLoadingPopup();
 
     if (res.error != null) {
-      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, retry: (_) => restyleImage(context, styleId));
+      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, message: S.of(context).failedToStyleImagePleaseTryAgain, retry: (_) => restyleImage(context, styleId));
       Debug.log('====== RESTYLE IMAGE ${res.error} ======');
     }
     return false;
@@ -171,7 +171,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     WidgetUtils.instance.hideLoadingPopup();
 
     if (res.error != null) {
-      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, retry: (_) => videoEffect(context, styleId));
+      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, message: S.of(context).failedToStyleImagePleaseTryAgain, retry: (_) => videoEffect(context, styleId));
       Debug.log('====== RESTYLE IMAGE ${res.error} ======');
     }
 

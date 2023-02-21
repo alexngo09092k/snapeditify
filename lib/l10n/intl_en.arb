@@ -55,5 +55,12 @@
   "savedImage": "Saved Image",
   "newImage": "New Image",
   "withText": "with",
-  "ai": "AI"
+  "ai": "AI",
+  "failedToChangeStylePleaseTryAgain": "Failed to change style, please try again!",
+  "failedToRemoveObjectsPleaseTryAgain": "Failed to remove objects, please try again!",
+  "failedToDetectObjectPleaseTryAgain": "Failed to detect object, please try again!",
+  "failedToEnhanceImagePleaseTryAgain": "Failed to enhance image, please try again!",
+  "failedToStyleImagePleaseTryAgain": "Failed to style image, please try again!",
+  "pleaseTryAgainOrOpenTheAppAgain": "Please try again or open the app again!",
+  "openApp": "Open app"
 }

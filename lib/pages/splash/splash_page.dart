@@ -5,6 +5,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
@@ -34,6 +35,8 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
       } else {
         WidgetUtils.instance.showErrorPopup(
           context,
+          title: S.of(context).openApp,
+          message: S.of(context).pleaseTryAgainOrOpenTheAppAgain,
           retry: (_) => AwesomeApp.instance?.restart(),
         );
       }

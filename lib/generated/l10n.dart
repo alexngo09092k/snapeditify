@@ -609,6 +609,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Failed to change style, please try again!`
+  String get failedToChangeStylePleaseTryAgain {
+    return Intl.message(
+      'Failed to change style, please try again!',
+      name: 'failedToChangeStylePleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to remove objects, please try again!`
+  String get failedToRemoveObjectsPleaseTryAgain {
+    return Intl.message(
+      'Failed to remove objects, please try again!',
+      name: 'failedToRemoveObjectsPleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to detect object, please try again!`
+  String get failedToDetectObjectPleaseTryAgain {
+    return Intl.message(
+      'Failed to detect object, please try again!',
+      name: 'failedToDetectObjectPleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to enhance image, please try again!`
+  String get failedToEnhanceImagePleaseTryAgain {
+    return Intl.message(
+      'Failed to enhance image, please try again!',
+      name: 'failedToEnhanceImagePleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to style image, please try again!`
+  String get failedToStyleImagePleaseTryAgain {
+    return Intl.message(
+      'Failed to style image, please try again!',
+      name: 'failedToStyleImagePleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please try again or open the app again!`
+  String get pleaseTryAgainOrOpenTheAppAgain {
+    return Intl.message(
+      'Please try again or open the app again!',
+      name: 'pleaseTryAgainOrOpenTheAppAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open app`
+  String get openApp {
+    return Intl.message(
+      'Open app',
+      name: 'openApp',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

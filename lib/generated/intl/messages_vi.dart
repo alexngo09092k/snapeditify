@@ -49,6 +49,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),
         "enhanceNimageQuality":
             MessageLookupByLibrary.simpleMessage("Enhance\nimage quality"),
+        "failedToChangeStylePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Failed to change style, please try again!"),
+        "failedToDetectObjectPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Failed to detect object, please try again!"),
+        "failedToEnhanceImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Failed to enhance image, please try again!"),
+        "failedToRemoveObjectsPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Failed to remove objects, please try again!"),
+        "failedToStyleImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Failed to style image, please try again!"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
@@ -67,7 +82,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Not found images"),
         "objects": MessageLookupByLibrary.simpleMessage("Objects"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "openApp": MessageLookupByLibrary.simpleMessage("Open app"),
         "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
+        "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
+            "Please try again or open the app again!"),
         "pleaseWaitAMoment":
             MessageLookupByLibrary.simpleMessage("Please wait a moment!"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
