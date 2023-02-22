@@ -42,6 +42,7 @@ dependencies:
   fluttering_ads:
     git:
       url: git@github.com:brennan992k/fluttering_ads.git
+      # ref: google
   # ## IN APP PURCHARSE FLUTTER APP
   # fluttering_iap:
   #   git:
