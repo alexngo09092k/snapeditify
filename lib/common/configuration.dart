@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-// import 'package:fluttering_iap/fluttering_iap.dart';
+import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
@@ -33,8 +33,8 @@ class Configuration {
   GalleryConfig get gallery => _gallery;
 
   /// IAP CONFIGURATIONS
-  // IAPConfig _iap = DefaultConfig.iap;
-  // IAPConfig get iap => _iap;
+  IAPConfig _iap = DefaultConfig.iap;
+  IAPConfig get iap => _iap;
 
   /// ADS CONFIGURATIONS
   AdvertisementConfig _advertisement = DefaultConfig.advertisement;
@@ -72,9 +72,9 @@ class Configuration {
       _snapEdit = SnapEditConfig.fromMap(enviroment['snapEdit']);
     }
 
-    // if (enviroment['iap'] != null) {
-    //   _iap = IAPConfig.fromMap(enviroment['iap']);
-    // }
+    if (enviroment['iap'] != null) {
+      _iap = IAPConfig.fromMap(enviroment['iap']);
+    }
   }
 }
 
@@ -164,11 +164,11 @@ abstract class DefaultConfig {
   );
 
   /// DEFAULT IAP CONFIG
-  // static IAPConfig iap = const IAPConfig(
-  //   enable: kDebugMode,
-  //   products: [],
-  //   providers: [],
-  // );
+  static IAPConfig iap = const IAPConfig(
+    enable: kDebugMode,
+    products: [],
+    providers: [],
+  );
 }
 
 extension ConfigurationsRemoteConfig on Configuration {

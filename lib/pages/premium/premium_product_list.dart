@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: unused_local_variable
-// import 'package:fluttering_iap/fluttering_iap.dart';
-// import 'package:fluttering_iap/iap/iap.dart';
+import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:flutter/material.dart';
 
 import 'package:snapeditify/common/constants.dart';
@@ -20,27 +19,27 @@ class PremiumProductList extends StatelessWidget {
           double height = __.maxHeight > width * 2.5 / 2? width * 2.5 / 2: __.maxHeight - AppDimensions.instance.padding;
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              // _PremiumProduct(
-              //   width: width,
-              //   height: height,
-              //   onSelect: (product) => {},
-              //   product: IAPProduct(
-              //     id: '1', 
-              //     provider: IAPProvider.google, 
-              //     type: IAPType.subscriptions,
-              //   ),
-              // ),
-              // _PremiumProduct(
-              //   width: width,
-              //   height: height,
-              //   onSelect: (product) => {},
-              //   product: IAPProduct(
-              //     id: '1', 
-              //     provider: IAPProvider.google, 
-              //     type: IAPType.subscriptions,
-              //   ),
-              // ),
+            children: [
+              PremiumProduct(
+                width: width,
+                height: height,
+                onSelect: (product) => {},
+                product: IAPProduct(
+                  id: '1', 
+                  provider: IAPProvider.google, 
+                  type: IAPType.subscriptions,
+                ),
+              ),
+              PremiumProduct(
+                width: width,
+                height: height,
+                onSelect: (product) => {},
+                product: IAPProduct(
+                  id: '1', 
+                  provider: IAPProvider.google, 
+                  type: IAPType.subscriptions,
+                ),
+              ),
             ],
           );
         },
@@ -54,11 +53,13 @@ class PremiumProduct extends StatelessWidget {
     Key? key,
     required this.width,
     required this.height,
+    required this.onSelect,
+    required this.product,
   }) : super(key: key);
   final double width;
   final double height;
-  // final Function(IAPProduct ) onSelect;
-  // final IAPProduct product;
+  final Function(IAPProduct ) onSelect;
+  final IAPProduct product;
 
   @override
   Widget build(BuildContext context) {

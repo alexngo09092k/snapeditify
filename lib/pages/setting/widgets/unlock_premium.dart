@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/app_routes.dart';
-// import 'package:fluttering/fluttering.dart';
-// import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
@@ -14,7 +12,6 @@ class UnlockPremium extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (!ManagerProvider.of<AwesomeIAP>().config.enable) return const SizedBox();
     return GestureDetector(
       onTap: () => AppRoutes.instance.goPremiumProPage(context),
       child: AppCard(

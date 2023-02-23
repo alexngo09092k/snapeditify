@@ -43,10 +43,10 @@ dependencies:
     git:
       url: git@github.com:brennan992k/fluttering_ads.git
       # ref: google
-  # ## IN APP PURCHARSE FLUTTER APP
-  # fluttering_iap:
-  #   git:
-  #     url: git@github.com:brennan992k/fluttering_iap.git
+  ## IN APP PURCHARSE FLUTTER APP
+  fluttering_iap:
+    git:
+      url: git@github.com:brennan992k/fluttering_iap.git
   ### REMOTE CONFIG FLUTTER APP
   fluttering_remote_config:
     git:
