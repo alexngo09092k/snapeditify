@@ -15,7 +15,7 @@ extension Enhance on SnapEdit {
       final Map<String, dynamic> data = {'zoom_factor': body.zoomFactor};
 
       if (body.inputImage == null && body.imageId == null) {
-        return SnapEditResponse<EnhanceResponse?>(data: null, error: 'Input image and image id, the both are null.');
+        return SnapEditResponse<EnhanceResponse?>(message: 'Input image and image id, the both are null.');
       }
 
       if (body.imageId != null) data['image_id'] = body.imageId!;
@@ -23,7 +23,7 @@ extension Enhance on SnapEdit {
       File? file;
       if (body.inputImage != null) {
         file = await uint8ListToFile(body.inputImage!);
-        if (file == null) return SnapEditResponse<EnhanceResponse?>(data: null, error: 'Input image is not valid.');
+        if (file == null) return SnapEditResponse<EnhanceResponse?>(message: 'Input image is not valid.');
         parts.add(MultipartBody<File>(
           key: 'input_image',
           data: file,
@@ -41,7 +41,7 @@ extension Enhance on SnapEdit {
 
       return handleResponse<EnhanceResponse>(response, (p0) => EnhanceResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<EnhanceResponse?>(error: error.toString());
+      return SnapEditResponse<EnhanceResponse?>(message: error.toString());
     }
   }
 }

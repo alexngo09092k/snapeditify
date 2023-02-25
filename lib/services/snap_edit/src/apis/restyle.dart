@@ -15,7 +15,7 @@ extension Restyle on SnapEdit {
 
       return handleResponse<StylesResponse>(response, (p0) => StylesResponse.fromJson(p0));
     } catch (error) {
-      return SnapEditResponse<StylesResponse>(error: error.toString());
+      return SnapEditResponse<StylesResponse>(message: error.toString());
     }
   }
 
@@ -25,7 +25,7 @@ extension Restyle on SnapEdit {
       final Map<String, dynamic> data = {'style_id': body.styleId};
 
       if (body.imageId == null && body.inputImage == null) {
-        return SnapEditResponse<RestyleResponse?>(data: null, error: 'Input image and image id, the both are null.');
+        return SnapEditResponse<RestyleResponse?>(message: 'Input image and image id, the both are null.');
       }
 
       if (body.imageId != null) data['image_id'] = body.imageId!;
@@ -33,7 +33,7 @@ extension Restyle on SnapEdit {
       File? file;
       if (body.inputImage != null) {
         file = await uint8ListToFile(body.inputImage!);
-        if (file == null) return SnapEditResponse<RestyleResponse?>(data: null, error: 'Input image is not valid.');
+        if (file == null) return SnapEditResponse<RestyleResponse?>(message: 'Input image is not valid.');
         parts.add(MultipartBody<File>(key: 'input_image', data: file));
       }
 
@@ -48,7 +48,7 @@ extension Restyle on SnapEdit {
 
       return handleResponse<RestyleResponse>(response, (p0) => RestyleResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<RestyleResponse?>(error: error.toString());
+      return SnapEditResponse<RestyleResponse?>(message: error.toString());
     }
   }
 }

@@ -19,7 +19,7 @@ extension EnimeAI on SnapEdit {
 
       return handleResponse<AnimeStylesResponse>(response, (p0) => AnimeStylesResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<AnimeStylesResponse?>(error: error.toString());
+      return SnapEditResponse<AnimeStylesResponse?>(message: error.toString());
     }
   }
 
@@ -29,7 +29,7 @@ extension EnimeAI on SnapEdit {
       final Map<String, dynamic> data = {'style': body.style};
 
       if (body.imageId == null && body.inputImage == null) {
-        return SnapEditResponse<AnimeImageResponse?>(data: null, error: 'Input image and image id, the both are null.');
+        return SnapEditResponse<AnimeImageResponse?>(message: 'Input image and image id, the both are null.');
       }
 
       if (body.imageId != null) data['image_id'] = body.imageId!;
@@ -37,7 +37,7 @@ extension EnimeAI on SnapEdit {
       File? file;
       if (body.inputImage != null) {
         file = await uint8ListToFile(body.inputImage!);
-        if (file == null) return SnapEditResponse<AnimeImageResponse?>(data: null, error: 'Input image is not valid.');
+        if (file == null) return SnapEditResponse<AnimeImageResponse?>(message: 'Input image is not valid.');
         parts.add(MultipartBody<File>(key: 'input_image', data: file));
       }
 
@@ -56,7 +56,7 @@ extension EnimeAI on SnapEdit {
         return null;
       });
     } catch (error) {
-      return SnapEditResponse<AnimeImageResponse?>(error: error.toString());
+      return SnapEditResponse<AnimeImageResponse?>(message: error.toString());
     }
   }
 
@@ -81,7 +81,7 @@ extension EnimeAI on SnapEdit {
         return null;
       });
     } catch (error) {
-      return SnapEditResponse<AnimeVideoResponse?>(error: error.toString());
+      return SnapEditResponse<AnimeVideoResponse?>(message: error.toString());
     }
   }
 }

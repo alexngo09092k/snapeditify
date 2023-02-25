@@ -96,9 +96,9 @@ class EnhanceProvider extends IEnhanceProvider {
     /// HIDE LOADING POPUP
     WidgetUtils.instance.hideLoadingPopup();
 
-    if (res.error != null) {
+    if (!res.status) {
       WidgetUtils.instance.showErrorPopup(context, title: S.of(context).enhanceImage, message: S.of(context).failedToEnhanceImagePleaseTryAgain, retry: (_) => enhanceImage(context));
-      Debug.log('===== ENAHNCE IMAGE ${res.error} =====');
+      Debug.log('===== ENAHNCE IMAGE ${res.message} =====');
     }
 
     return false;

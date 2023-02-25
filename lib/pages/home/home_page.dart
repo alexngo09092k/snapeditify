@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
           banner: AppAssets.instance.homeEnhanceBanner,
           title: S.of(context).enhanceNimageQuality,
           buttonTitle: S.of(context).tryItNow,
-          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.applyArtEffect),
+          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.enhanceImage),
         ),
         SizedBox(height: AppDimensions.instance.padding),
         HomeBaseBanner(
@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
           banner: AppAssets.instance.homeArtEffectBanner,
           title: S.of(context).turnYourNimageNintoArt,
           buttonTitle: S.of(context).tryItNow,
-          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.enhanceImage),
+          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.applyArtEffect),
         ),
         SizedBox(height: bottomPadding),
       ],

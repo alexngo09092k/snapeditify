@@ -121,9 +121,9 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     /// HIDE LOADING POPUP
     WidgetUtils.instance.hideLoadingPopup();
 
-    if (res.error != null) {
+    if (!res.status) {
       WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, message: S.of(context).failedToChangeStylePleaseTryAgain, retry: (_) => restyleImage(context, styleId));
-      Debug.log('====== RESTYLE IMAGE ${res.error} ======');
+      Debug.log('====== RESTYLE IMAGE ${res.message} ======');
     }
 
     return false;
@@ -160,8 +160,8 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
       AsyncStorage.instance.setString(AsyncStorageKey.instance.styles, res.data!.toJson());
     }
 
-    if (res.error != null) {
-      Debug.log("===== SYNC FROM SERVER GET STYLES ERROR ${res.error} =====");
+    if (!res.status) {
+      Debug.log("===== SYNC FROM SERVER GET STYLES ERROR ${res.message} =====");
     }
 
     syncFromStorage(notify);

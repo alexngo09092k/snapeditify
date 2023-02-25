@@ -20,23 +20,23 @@ extension SnapEditResponseEx on SnapEdit {
     Debug.log("======= HANDLE RESPONSE DATA ${response.data} =======");
     if (response.error != null || response.data == null) {
       Debug.log("======= HANDLE RESPONSE ERROR ${response.error} =======");
-      return SnapEditResponse(error: response.error.toString());
+      return SnapEditResponse(message: response.error.toString());
     }
 
     if (response.data is Map) {
       /// {"msg":"Bad Authorization header. Expected 'Authorization: Bearer <JWT>'"}
       if (response.data['msg'] != null) {
         Debug.log("======= HANDLE RESPONSE ERROR ${response.data['msg']} =======");
-        return SnapEditResponse(error: response.data['msg'].toString());
+        return SnapEditResponse(message: response.data['msg'].toString());
       }
 
       /// {"error":"Exception: Image shape (1520, 720, 3) too large for free users"}
       if (response.data['error'] != null) {
         Debug.log("======= HANDLE RESPONSE ERROR ${response.data['error']} =======");
-        return SnapEditResponse(error: response.data['error'].toString());
+        return SnapEditResponse(message: response.data['error'].toString());
       }
     }
 
-    return SnapEditResponse<T>(data: fromData(response.data));
+    return SnapEditResponse<T>(status: true, data: fromData(response.data));
   }
 }

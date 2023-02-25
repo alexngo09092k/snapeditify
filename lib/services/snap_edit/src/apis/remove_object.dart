@@ -11,7 +11,7 @@ extension DetectedImage on SnapEdit {
       final Map<String, dynamic> data = {};
 
       if (body.sessionId == null && body.originalPreviewImage == null) {
-        return SnapEditResponse<AIDetectionResponse?>(data: null, error: 'Original Preview Image and Session Id, the both are null');
+        return SnapEditResponse<AIDetectionResponse?>(message: 'Original Preview Image and Session Id, the both are null');
       }
 
       if (body.sessionId != null) data['session_id'] = body.sessionId;
@@ -19,7 +19,7 @@ extension DetectedImage on SnapEdit {
       File? file;
       if (body.originalPreviewImage != null) {
         file = await uint8ListToFile(body.originalPreviewImage!);
-        if (file == null) return SnapEditResponse<AIDetectionResponse?>(data: null, error: 'Input image is not valid.');
+        if (file == null) return SnapEditResponse<AIDetectionResponse?>(message: 'Input image is not valid.');
 
         files.add(MultipartBody<File>(
           key: 'original_preview_image',
@@ -38,7 +38,7 @@ extension DetectedImage on SnapEdit {
 
       return handleResponse<AIDetectionResponse>(response, (p0) => AIDetectionResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<AIDetectionResponse?>(error: error.toString());
+      return SnapEditResponse<AIDetectionResponse?>(message: error.toString());
     }
   }
 
@@ -48,7 +48,7 @@ extension DetectedImage on SnapEdit {
       final Map<String, dynamic> data = {};
 
       if (body.sessionId == null && body.originalPreviewImage == null) {
-        return SnapEditResponse<EraseResponse?>(data: null, error: 'Original Preview Image and Session Id, the both are null.');
+        return SnapEditResponse<EraseResponse?>(message: 'Original Preview Image and Session Id, the both are null.');
       }
 
       if (body.sessionId != null) data['session_id'] = body.sessionId;
@@ -56,21 +56,21 @@ extension DetectedImage on SnapEdit {
       File? file1;
       if (body.originalPreviewImage != null) {
         file1 = await uint8ListToFile(body.originalPreviewImage!);
-        if (file1 == null) return SnapEditResponse<EraseResponse?>(data: null, error: 'Original Preview Image is not valid.');
+        if (file1 == null) return SnapEditResponse<EraseResponse?>(message: 'Original Preview Image is not valid.');
         parts.add(MultipartBody<File>(key: 'original_preview_image', data: file1));
       }
 
       File? file2;
       if (body.maskBrush != null) {
         file2 = await uint8ListToFile(body.maskBrush!);
-        if (file2 == null) return SnapEditResponse<EraseResponse?>(data: null, error: 'Mask Brush Image is not valid.');
+        if (file2 == null) return SnapEditResponse<EraseResponse?>(message: 'Mask Brush Image is not valid.');
         parts.add(MultipartBody<File>(key: 'mask_brush', data: file2));
       }
 
       File? file3;
       if (body.maskBase != null) {
         file3 = await uint8ListToFile(body.maskBase!);
-        if (file3 == null) return SnapEditResponse<EraseResponse?>(data: null, error: 'Mask Base Image is not valid.');
+        if (file3 == null) return SnapEditResponse<EraseResponse?>(message: 'Mask Base Image is not valid.');
         parts.add(MultipartBody<File>(key: 'mask_base', data: file3));
       }
       if (body.maskObjects != null) data['mask_objects'] = body.maskObjects;
@@ -88,7 +88,7 @@ extension DetectedImage on SnapEdit {
 
       return handleResponse<EraseResponse>(response, (p0) => EraseResponse.fromMap(p0));
     } catch (error) {
-      return SnapEditResponse<EraseResponse?>(error: error.toString());
+      return SnapEditResponse<EraseResponse?>(message: error.toString());
     }
   }
 }
