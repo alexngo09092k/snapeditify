@@ -1,6 +1,6 @@
 part of '../extensions.dart';
 
-extension MPermissionStore on UserPermission {
+extension MPermissionStore on IUserPermission {
   requestStoragePermission(BuildContext context, {
     Function? onHasPermisson,
     Function? onNoPermisson,

@@ -19,8 +19,8 @@ import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
-import 'package:snapeditify/common/extensions.dart';
 import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/common/extensions.dart';
 
 abstract class IAppRoutes {
   String get initialRoute;
