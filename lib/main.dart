@@ -10,6 +10,7 @@ import 'package:snapeditify/enviroment.dart';
 import 'package:snapeditify/firebase_options.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
+import 'package:snapeditify/providers/app_theme_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
@@ -26,7 +27,7 @@ void main() {
       AwesomeAdvertisement.instance,
       AwesomeIAP.instance,
       AwesomeRemoteConfig.instance,
-      ThemeProvider(themeMode: ThemeMode.light),
+      AppThemeProvider(themeMode: ThemeMode.light, locale: const Locale('en')),
     ],
     lazyProviders: [
       () => GalleryProvider.instance,
