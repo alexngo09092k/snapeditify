@@ -27,7 +27,7 @@ class AppAssets {
   /// Images
   static const String imagePath = 'assets/images';
 
-  final String imagePlaceholder = "$imagePath/ic_image_place_holder.png";
+  final String imagePlaceholder = "$imagePath/image_place_holder.png";
   final String logo = "$imagePath/logo.png";
 
   /// Suggest images
