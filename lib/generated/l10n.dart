@@ -70,6 +70,36 @@ class S {
     );
   }
 
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vietnamese`
+  String get vietnamese {
+    return Intl.message(
+      'Vietnamese',
+      name: 'vietnamese',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chinese`
+  String get chinese {
+    return Intl.message(
+      'Chinese',
+      name: 'chinese',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Albums`
   String get albums {
     return Intl.message(
@@ -745,36 +775,6 @@ class S {
     return Intl.message(
       'Failed to open browser, please try again',
       name: 'failedToOpenBrowserPleaseTryAgain',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `English`
-  String get english {
-    return Intl.message(
-      'English',
-      name: 'english',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Vietnamese`
-  String get vietnamese {
-    return Intl.message(
-      'Vietnamese',
-      name: 'vietnamese',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Chinese`
-  String get chinese {
-    return Intl.message(
-      'Chinese',
-      name: 'chinese',
       desc: '',
       args: [],
     );

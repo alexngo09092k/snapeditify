@@ -2,6 +2,9 @@
   "@@locale": "vi",
   "languageFlag": "",
   "languageName": "Vietnamese",
+  "english": "Tiếng Anh",
+  "vietnamese": "Tiếng Việt",
+  "chinese": "Tiếng Trung Quốc",
   "albums": "Albums",
   "animeAi": "Anime AI",
   "after": "Sau",
@@ -70,8 +73,5 @@
   "failedToOpenMailPleaseTryGain": "Failed to open mail, please try gain!",
   "openBrowser": "Open browser",
   "failedToOpenBrowserPleaseTryAgain": "Failed to open browser, please try again",
-  "english": "Tiếng Anh",
-  "vietnamese": "Tiếng Việt",
-  "chinese": "Tiếng Trung Quốc",
   "failedToSaveImagePleaseTryAgain": "Failed to save image, please try again!"
 }

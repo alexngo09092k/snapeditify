@@ -2,6 +2,9 @@
   "@@locale": "en",
   "languageFlag": "",
   "languageName": "English",
+  "english": "English",
+  "vietnamese": "Vietnamese",
+  "chinese": "Chinese",
   "albums": "Albums",
   "animeAi": "Anime AI",
   "after": "After",
@@ -70,8 +73,5 @@
   "failedToOpenMailPleaseTryGain": "Failed to open mail, please try gain!",
   "openBrowser": "Open browser",
   "failedToOpenBrowserPleaseTryAgain": "Failed to open browser, please try again",
-  "english": "English",
-  "vietnamese": "Vietnamese",
-  "chinese": "Chinese",
   "failedToSaveImagePleaseTryAgain": "Failed to save image, please try again!"
 }
