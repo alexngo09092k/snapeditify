@@ -47,7 +47,7 @@ class _CustomAlertState extends State<CustomAlert> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return CupertinoBlock(
       child: CupertinoAlertDialog(
-        title: widget.title != null ? Text(widget.title!, style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w600)) : null,
+        title: widget.title != null ? Text(widget.title!, style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w600)) : null,
         content: widget.message != null ? Text(widget.message!, style: Theme.of(context).textTheme.bodyLarge) : null,
         actions: widget.actions
             .map((e) => CupertinoDialogAction(

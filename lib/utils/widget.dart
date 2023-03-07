@@ -75,7 +75,7 @@ class WidgetUtils {
         children: [
           AppCard(
             constraints: const BoxConstraints(minHeight: 100, minWidth: 100),
-            color: Theme.of(context).colorScheme.surface.withOpacity(0.9),
+            color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
             padding: EdgeInsets.all(AppDimensions.instance.padding),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +85,7 @@ class WidgetUtils {
                 SizedBox(height: AppDimensions.instance.padding),
                 Text(
                   S.of(context).pleaseWaitAMoment, 
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).colorScheme.onSurface),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),
               ],
             ),

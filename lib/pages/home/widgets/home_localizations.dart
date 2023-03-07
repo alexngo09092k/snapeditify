@@ -11,34 +11,39 @@ class HomeLocalizations extends StatelessWidget {
 
   _onSelectedLocale(BuildContext context, Locale locale) {
     final provider = ManagerProvider.of<IThemeProvider>();
+    provider.changeLocale(locale);
     Navigator.of(context).pop();
-    return provider.changeLocale(locale);
   }
 
   _showLocalizationsSelections(BuildContext context) {
     Map<String, String> languageNames = {
       'en': S.of(context).english,
       'vi': S.of(context).vietnamese,
-      'cn': S.of(context).chinese,
+      'zh': S.of(context).chinese,
     };
     showCupertinoModalPopup<void>(
       context: context,
       builder: (_) => CupertinoBlock(
         child: CupertinoActionSheet(
-          title: Text('Languages', style: Theme.of(context).textTheme.bodyLarge),
-          message: Text('Choose favorite language', style: Theme.of(context).textTheme.bodyMedium),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            Icon(Icons.language, color: Theme.of(context).textTheme.titleLarge!.color,),
+            SizedBox(width: AppDimensions.instance.paddingX(0.5)),
+            Text('Languages', style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w600)),
+          ],),
           actions: <CupertinoActionSheetAction>[
             ...S.delegate.supportedLocales.map(
               (locale) => CupertinoActionSheetAction(
                   onPressed: () => _onSelectedLocale(context, locale),
-                  child: PropConsumer<IThemeProvider, Locale>(
-                    select: (_) => _.locale,
+                  child: PropConsumer<IThemeProvider, String>(
+                    select: (_) => _.locale.languageCode,
                     builder: (_, __, p, ___) => Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: AwesomeAppState.screen.width * 1/3,
+                          width: AwesomeAppState.screen.width * 1.5/3,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [

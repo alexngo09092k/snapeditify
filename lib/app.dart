@@ -24,6 +24,7 @@ class _AppState extends AwesomeAppState<App> {
       builder: (_, __, provider) {
         Debug.log("===== START APP =====");
         Debug.log("===== THEME MODE: ${provider.themeMode} =====");
+        Debug.log("===== LOCALE: ${provider.locale} =====");
         final light = getLightTheme(context, scale: scale);
         final dark = getDarkTheme(context, scale: scale);
         return MaterialApp(
@@ -36,12 +37,13 @@ class _AppState extends AwesomeAppState<App> {
           onGenerateRoute: AppRoutes.instance.onGenerateRoute,
           navigatorObservers: [AwesomeApp.observer],
           routes: AppRoutes.instance.routes,
-          localeResolutionCallback: provider.onChangeLocale,
+          locale: provider.locale,
+          // localeResolutionCallback: provider.onChangeLocale,
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
         );
