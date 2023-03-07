@@ -1,7 +1,5 @@
 {
   "@@locale": "en",
-  "languageFlag": "",
-  "languageName": "English",
   "english": "English",
   "vietnamese": "Vietnamese",
   "chinese": "Chinese",
@@ -50,8 +48,6 @@
   "youHaveReachedTheLimitOfSavedImagePleaseUpgrade": "You have reached the limit of saved image, please upgrade premium version or contact",
   "teamToSupport": "Team to support.",
   "allChangesWillBeLostAreYouSureYouWant": "All changes will be lost. Are you sure you want to leave without saving?",
-  "somethingWrongs": "Something wrongs",
-  "somethingsWrongPleaseTryAgain": "Somethings wrong, please try again.",
   "retry": "Retry",
   "youAreCurrentlyOffline": "You are currently offline!",
   "looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd": "Looks like your comnnection is interrupted. Check network connection and try again.",

@@ -22,126 +22,100 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "accurate": MessageLookupByLibrary.simpleMessage("% accurate"),
-        "after": MessageLookupByLibrary.simpleMessage("After"),
+        "accurate": MessageLookupByLibrary.simpleMessage("% 准确"),
+        "after": MessageLookupByLibrary.simpleMessage("之后"),
         "ai": MessageLookupByLibrary.simpleMessage("AI"),
-        "aiDetection": MessageLookupByLibrary.simpleMessage("AI Detection"),
-        "albums": MessageLookupByLibrary.simpleMessage("Albums"),
+        "aiDetection": MessageLookupByLibrary.simpleMessage("AI检测"),
+        "albums": MessageLookupByLibrary.simpleMessage("相册"),
         "allChangesWillBeLostAreYouSureYouWant":
-            MessageLookupByLibrary.simpleMessage(
-                "All changes will be lost. Are you sure you want to leave without saving?"),
+            MessageLookupByLibrary.simpleMessage("所有更改将丢失。您确定要离开而不保存吗？"),
         "allChangesWillBeLostYourImageWillBeReverted":
-            MessageLookupByLibrary.simpleMessage(
-                "All changes will be lost. Your image will be reverted to its original states."),
-        "allow": MessageLookupByLibrary.simpleMessage("Allow"),
-        "animeAi": MessageLookupByLibrary.simpleMessage("Anime AI"),
-        "areYouHappyWith":
-            MessageLookupByLibrary.simpleMessage("Are you happy with\n"),
-        "artEffect": MessageLookupByLibrary.simpleMessage("Art Effect"),
-        "auto": MessageLookupByLibrary.simpleMessage("Auto"),
-        "before": MessageLookupByLibrary.simpleMessage("Before"),
-        "brush": MessageLookupByLibrary.simpleMessage("Brush"),
-        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
-        "createNanimeAvatar":
-            MessageLookupByLibrary.simpleMessage("Create\nAnime avatar"),
+            MessageLookupByLibrary.simpleMessage("所有更改将被丢失。您的图像将恢复到原始状态。"),
+        "allow": MessageLookupByLibrary.simpleMessage("允许"),
+        "animeAi": MessageLookupByLibrary.simpleMessage("动漫AI"),
+        "areYouHappyWith": MessageLookupByLibrary.simpleMessage("您对此是否满意\n"),
+        "artEffect": MessageLookupByLibrary.simpleMessage("艺术效果"),
+        "auto": MessageLookupByLibrary.simpleMessage("自动"),
+        "before": MessageLookupByLibrary.simpleMessage("之前"),
+        "brush": MessageLookupByLibrary.simpleMessage("画笔"),
+        "cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "chinese": MessageLookupByLibrary.simpleMessage("中文"),
+        "createNanimeAvatar": MessageLookupByLibrary.simpleMessage("创建动漫头像"),
         "discardChangesAndRevert":
-            MessageLookupByLibrary.simpleMessage("Discard changes and revert?"),
-        "english": MessageLookupByLibrary.simpleMessage("English"),
-        "enhance": MessageLookupByLibrary.simpleMessage("Enhance"),
-        "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),
-        "enhanceNimageQuality":
-            MessageLookupByLibrary.simpleMessage("Enhance\nimage quality"),
+            MessageLookupByLibrary.simpleMessage("放弃更改并还原？"),
+        "english": MessageLookupByLibrary.simpleMessage("英文"),
+        "enhance": MessageLookupByLibrary.simpleMessage("增强"),
+        "enhanceImage": MessageLookupByLibrary.simpleMessage("增强图像"),
+        "enhanceNimageQuality": MessageLookupByLibrary.simpleMessage("提高图像质量"),
         "failedToChangeStylePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to change style, please try again!"),
+            MessageLookupByLibrary.simpleMessage("更改样式失败，请重试！"),
         "failedToDetectObjectPleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to detect object, please try again!"),
+            MessageLookupByLibrary.simpleMessage("无法检测物体，请重试！"),
         "failedToEnhanceImagePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to enhance image, please try again!"),
+            MessageLookupByLibrary.simpleMessage("增强图像失败，请重试！"),
         "failedToOpenBrowserPleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to open browser, please try again"),
-        "failedToOpenMailPleaseTryGain": MessageLookupByLibrary.simpleMessage(
-            "Failed to open mail, please try gain!"),
+            MessageLookupByLibrary.simpleMessage("无法打开浏览器，请重试"),
+        "failedToOpenMailPleaseTryGain":
+            MessageLookupByLibrary.simpleMessage("无法打开邮件，请重试！"),
         "failedToRemoveObjectsPleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to remove objects, please try again!"),
-        "failedToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage(
-            "Failed to save image, please try again!"),
+            MessageLookupByLibrary.simpleMessage("无法移除物体，请重试！"),
+        "failedToSaveImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("保存图像失败，请重试！"),
         "failedToStyleImagePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to style image, please try again!"),
-        "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
-        "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
-        "languageFlag": MessageLookupByLibrary.simpleMessage(""),
-        "languageName": MessageLookupByLibrary.simpleMessage("Chinese"),
+            MessageLookupByLibrary.simpleMessage("样式化图像失败，请重试！"),
+        "feedback": MessageLookupByLibrary.simpleMessage("反馈"),
+        "feedbackTo": MessageLookupByLibrary.simpleMessage("反馈给"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
-                "Let\'s share one of the best photo editing app with your friends, family and community"),
+                "让我们与您的朋友、家人和社区分享最佳的照片编辑应用程序之一"),
         "looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd":
-            MessageLookupByLibrary.simpleMessage(
-                "Looks like your comnnection is interrupted. Check network connection and try again."),
-        "newImage": MessageLookupByLibrary.simpleMessage("New Image"),
+            MessageLookupByLibrary.simpleMessage("似乎您的连接被中断了。检查网络连接并重试。"),
+        "newImage": MessageLookupByLibrary.simpleMessage("新图像"),
         "noAdsBestImageQuality":
-            MessageLookupByLibrary.simpleMessage("No ads & Best image quality"),
+            MessageLookupByLibrary.simpleMessage("无广告&最佳图像质量"),
         "noPotentialObjectHasBeenDetected":
-            MessageLookupByLibrary.simpleMessage(
-                "No potential object has been detected."),
-        "notFoundImages":
-            MessageLookupByLibrary.simpleMessage("Not found images"),
-        "objects": MessageLookupByLibrary.simpleMessage("Objects"),
-        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
-        "openApp": MessageLookupByLibrary.simpleMessage("Open app"),
-        "openBrowser": MessageLookupByLibrary.simpleMessage("Open browser"),
-        "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
-        "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
-            "Please try again or open the app again!"),
-        "pleaseWaitAMoment":
-            MessageLookupByLibrary.simpleMessage("Please wait a moment!"),
-        "remove": MessageLookupByLibrary.simpleMessage("Remove"),
-        "removeObjects": MessageLookupByLibrary.simpleMessage("Remove Objects"),
+            MessageLookupByLibrary.simpleMessage("未检测到潜在物体。"),
+        "notFoundImages": MessageLookupByLibrary.simpleMessage("未找到图像"),
+        "objects": MessageLookupByLibrary.simpleMessage("物体"),
+        "ok": MessageLookupByLibrary.simpleMessage("确定"),
+        "openApp": MessageLookupByLibrary.simpleMessage("打开应用程序"),
+        "openBrowser": MessageLookupByLibrary.simpleMessage("打开浏览器"),
+        "openSettings": MessageLookupByLibrary.simpleMessage("打开设置"),
+        "pleaseTryAgainOrOpenTheAppAgain":
+            MessageLookupByLibrary.simpleMessage("请重试或重新打开应用程序！"),
+        "pleaseWaitAMoment": MessageLookupByLibrary.simpleMessage("请稍等片刻！"),
+        "remove": MessageLookupByLibrary.simpleMessage("删除"),
+        "removeObjects": MessageLookupByLibrary.simpleMessage("移除物体"),
         "removeThingsNfromImage":
-            MessageLookupByLibrary.simpleMessage("Remove things\nfrom image"),
-        "restyleImage": MessageLookupByLibrary.simpleMessage("Restyle Image"),
-        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
-        "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),
-        "saveImageLimit":
-            MessageLookupByLibrary.simpleMessage("Save Image Limit"),
-        "savedImage": MessageLookupByLibrary.simpleMessage("Saved Image"),
-        "send": MessageLookupByLibrary.simpleMessage("Send"),
-        "setting": MessageLookupByLibrary.simpleMessage("Setting"),
-        "share": MessageLookupByLibrary.simpleMessage("Share"),
-        "somethingWrongs":
-            MessageLookupByLibrary.simpleMessage("Something wrongs"),
-        "somethingsWrongPleaseTryAgain": MessageLookupByLibrary.simpleMessage(
-            "Somethings wrong, please try again."),
-        "suggested": MessageLookupByLibrary.simpleMessage("Suggested"),
-        "team": MessageLookupByLibrary.simpleMessage("Team"),
-        "teamToSupport":
-            MessageLookupByLibrary.simpleMessage("Team to support."),
+            MessageLookupByLibrary.simpleMessage("从图像中移除物体"),
+        "restyleImage": MessageLookupByLibrary.simpleMessage("重新设计图像"),
+        "retry": MessageLookupByLibrary.simpleMessage("重试"),
+        "saveImage": MessageLookupByLibrary.simpleMessage("保存图片"),
+        "saveImageLimit": MessageLookupByLibrary.simpleMessage("保存图片限制"),
+        "savedImage": MessageLookupByLibrary.simpleMessage("已保存的图像"),
+        "send": MessageLookupByLibrary.simpleMessage("发送"),
+        "setting": MessageLookupByLibrary.simpleMessage("设置"),
+        "share": MessageLookupByLibrary.simpleMessage("分享"),
+        "suggested": MessageLookupByLibrary.simpleMessage("建议的"),
+        "team": MessageLookupByLibrary.simpleMessage("团队"),
+        "teamToSupport": MessageLookupByLibrary.simpleMessage("支持团队。"),
         "toAccessPhotosOnYourDeviceToEditOrShare":
-            MessageLookupByLibrary.simpleMessage(
-                "to access photos on your device to edit or share image."),
-        "tryItNow": MessageLookupByLibrary.simpleMessage("Try it now"),
+            MessageLookupByLibrary.simpleMessage("以编辑或分享图像的方式访问您设备上的照片。"),
+        "tryItNow": MessageLookupByLibrary.simpleMessage("立即试用"),
         "turnYourNimageNintoArt":
-            MessageLookupByLibrary.simpleMessage("Turn your\nimage\ninto Art"),
+            MessageLookupByLibrary.simpleMessage("将您的图像变成艺术品"),
         "unlockSnapeditifyPremium":
-            MessageLookupByLibrary.simpleMessage("Unlock SnapEditify Premium"),
-        "version": MessageLookupByLibrary.simpleMessage("Version"),
-        "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
-        "withText": MessageLookupByLibrary.simpleMessage("with"),
-        "wouldLikeToAccessYourPhotos": MessageLookupByLibrary.simpleMessage(
-            "Would like to access your photos"),
+            MessageLookupByLibrary.simpleMessage("解锁SnapEditify高级版"),
+        "version": MessageLookupByLibrary.simpleMessage("版本"),
+        "vietnamese": MessageLookupByLibrary.simpleMessage("越南语"),
+        "withText": MessageLookupByLibrary.simpleMessage("与"),
+        "wouldLikeToAccessYourPhotos":
+            MessageLookupByLibrary.simpleMessage("想要访问您的照片"),
         "youAreCurrentlyOffline":
-            MessageLookupByLibrary.simpleMessage("You are currently offline!"),
+            MessageLookupByLibrary.simpleMessage("您当前处于离线状态！"),
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":
-            MessageLookupByLibrary.simpleMessage(
-                "You have reached the limit of saved image, please upgrade premium version or contact"),
+            MessageLookupByLibrary.simpleMessage("您已达到保存图片的限制，请升级到高级版或联系支持团队。"),
         "yourFeedbackOfTheAppAndProvideABetterExperience":
-            MessageLookupByLibrary.simpleMessage(
-                "Your feedback of the app and provide a better experience")
+            MessageLookupByLibrary.simpleMessage("提供您对应用的反馈，以提供更好的体验")
       };
 }

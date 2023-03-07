@@ -22,126 +22,122 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "accurate": MessageLookupByLibrary.simpleMessage("% accurate"),
+        "accurate": MessageLookupByLibrary.simpleMessage("% chính xác"),
         "after": MessageLookupByLibrary.simpleMessage("Sau"),
         "ai": MessageLookupByLibrary.simpleMessage("AI"),
-        "aiDetection": MessageLookupByLibrary.simpleMessage("AI Detection"),
+        "aiDetection": MessageLookupByLibrary.simpleMessage("Phát hiện AI"),
         "albums": MessageLookupByLibrary.simpleMessage("Albums"),
         "allChangesWillBeLostAreYouSureYouWant":
             MessageLookupByLibrary.simpleMessage(
-                "All changes will be lost. Are you sure you want to leave without saving?"),
+                "Tất cả các thay đổi sẽ bị mất. Bạn có chắc là mình muốn rời đi mà không lưu lại không?"),
         "allChangesWillBeLostYourImageWillBeReverted":
             MessageLookupByLibrary.simpleMessage(
-                "All changes will be lost. Your image will be reverted to its original states."),
-        "allow": MessageLookupByLibrary.simpleMessage("Allow"),
+                "Tất cả các thay đổi sẽ bị mất. Hình ảnh của bạn sẽ được hoàn nguyên về trạng thái ban đầu."),
+        "allow": MessageLookupByLibrary.simpleMessage("Cho phép"),
         "animeAi": MessageLookupByLibrary.simpleMessage("Anime AI"),
         "areYouHappyWith":
-            MessageLookupByLibrary.simpleMessage("Are you happy with\n"),
-        "artEffect": MessageLookupByLibrary.simpleMessage("Art Effect"),
-        "auto": MessageLookupByLibrary.simpleMessage("Auto"),
+            MessageLookupByLibrary.simpleMessage("Bạn có hài lòng với\n"),
+        "artEffect": MessageLookupByLibrary.simpleMessage("Hiệu ứng"),
+        "auto": MessageLookupByLibrary.simpleMessage("Tự động"),
         "before": MessageLookupByLibrary.simpleMessage("Trước"),
-        "brush": MessageLookupByLibrary.simpleMessage("Brush"),
-        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "brush": MessageLookupByLibrary.simpleMessage("Vẽ"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
         "chinese": MessageLookupByLibrary.simpleMessage("Tiếng Trung Quốc"),
         "createNanimeAvatar":
-            MessageLookupByLibrary.simpleMessage("Create\nAnime avatar"),
-        "discardChangesAndRevert":
-            MessageLookupByLibrary.simpleMessage("Discard changes and revert?"),
+            MessageLookupByLibrary.simpleMessage("Tạo\nHình đại diện Anime"),
+        "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage(
+            "Hủy các thay đổi và hoàn nguyên?"),
         "english": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "enhance": MessageLookupByLibrary.simpleMessage("Làm nét"),
-        "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),
-        "enhanceNimageQuality":
-            MessageLookupByLibrary.simpleMessage("Enhance\nimage quality"),
+        "enhanceImage":
+            MessageLookupByLibrary.simpleMessage("Nâng cao hình ảnh"),
+        "enhanceNimageQuality": MessageLookupByLibrary.simpleMessage(
+            "Nâng cao\nchất lượng hình ảnh"),
         "failedToChangeStylePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to change style, please try again!"),
+                "Không thể thay đổi kiểu, vui lòng thử lại!"),
         "failedToDetectObjectPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to detect object, please try again!"),
+                "Không thể phát hiện đối tượng, vui lòng thử lại!"),
         "failedToEnhanceImagePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to enhance image, please try again!"),
+                "Không thể cải thiện hình ảnh, vui lòng thử lại!"),
         "failedToOpenBrowserPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to open browser, please try again"),
+                "Không thể mở trình duyệt, vui lòng thử lại!"),
         "failedToOpenMailPleaseTryGain": MessageLookupByLibrary.simpleMessage(
-            "Failed to open mail, please try gain!"),
+            "Không thể mở Mail, vui lòng thử đạt được!"),
         "failedToRemoveObjectsPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to remove objects, please try again!"),
+                "Không xóa được đối tượng, vui lòng thử lại!"),
         "failedToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage(
-            "Failed to save image, please try again!"),
+            "Không thể lưu hình ảnh, vui lòng thử lại!"),
         "failedToStyleImagePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to style image, please try again!"),
-        "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
-        "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
-        "languageFlag": MessageLookupByLibrary.simpleMessage(""),
-        "languageName": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+                "Không thể tạo kiểu cho hình ảnh, vui lòng thử lại!"),
+        "feedback": MessageLookupByLibrary.simpleMessage("Nhận xét"),
+        "feedbackTo": MessageLookupByLibrary.simpleMessage("Phản hồi cho"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
-                "Let\'s share one of the best photo editing app with your friends, family and community"),
+                "Hãy chia sẻ một trong những ứng dụng chỉnh sửa ảnh tốt nhất với bạn bè, gia đình và cộng đồng của bạn"),
         "looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd":
             MessageLookupByLibrary.simpleMessage(
-                "Looks like your comnnection is interrupted. Check network connection and try again."),
-        "newImage": MessageLookupByLibrary.simpleMessage("New Image"),
-        "noAdsBestImageQuality":
-            MessageLookupByLibrary.simpleMessage("No ads & Best image quality"),
+                "Có vẻ như kết nối của bạn bị gián đoạn. Kiểm tra kết nối mạng và thử lại."),
+        "newImage": MessageLookupByLibrary.simpleMessage("Hình ảnh mới"),
+        "noAdsBestImageQuality": MessageLookupByLibrary.simpleMessage(
+            "Không có quảng cáo & Chất lượng hình ảnh tốt nhất"),
         "noPotentialObjectHasBeenDetected":
             MessageLookupByLibrary.simpleMessage(
-                "No potential object has been detected."),
+                "Không có đối tượng đã được phát hiện."),
         "notFoundImages":
-            MessageLookupByLibrary.simpleMessage("Not found images"),
-        "objects": MessageLookupByLibrary.simpleMessage("Objects"),
-        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
-        "openApp": MessageLookupByLibrary.simpleMessage("Open app"),
-        "openBrowser": MessageLookupByLibrary.simpleMessage("Open browser"),
-        "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
+            MessageLookupByLibrary.simpleMessage("Không tìm thấy hình ảnh"),
+        "objects": MessageLookupByLibrary.simpleMessage("Đối tượng"),
+        "ok": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
+        "openApp": MessageLookupByLibrary.simpleMessage("Khởi động ứng dụng"),
+        "openBrowser": MessageLookupByLibrary.simpleMessage("Mở trình duyệt"),
+        "openSettings": MessageLookupByLibrary.simpleMessage("Mở cài đặt"),
         "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
-            "Please try again or open the app again!"),
+            "Vui lòng thử lại hoặc mở lại ứng dụng!"),
         "pleaseWaitAMoment":
-            MessageLookupByLibrary.simpleMessage("Please wait a moment!"),
-        "remove": MessageLookupByLibrary.simpleMessage("Remove"),
-        "removeObjects": MessageLookupByLibrary.simpleMessage("Remove Objects"),
+            MessageLookupByLibrary.simpleMessage("Xin vui lòng chờ!"),
+        "remove": MessageLookupByLibrary.simpleMessage("Xoá"),
+        "removeObjects": MessageLookupByLibrary.simpleMessage("Xóa đối tượng"),
         "removeThingsNfromImage":
-            MessageLookupByLibrary.simpleMessage("Xoá mọi thứ khỏi ảnh"),
-        "restyleImage": MessageLookupByLibrary.simpleMessage("Restyle Image"),
-        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
-        "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),
+            MessageLookupByLibrary.simpleMessage("Xóa mọi thứ khỏi\nhình ảnh"),
+        "restyleImage":
+            MessageLookupByLibrary.simpleMessage("Định kiểu hình ảnh"),
+        "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
+        "saveImage": MessageLookupByLibrary.simpleMessage("Lưu hình ảnh"),
         "saveImageLimit":
-            MessageLookupByLibrary.simpleMessage("Save Image Limit"),
-        "savedImage": MessageLookupByLibrary.simpleMessage("Saved Image"),
-        "send": MessageLookupByLibrary.simpleMessage("Send"),
-        "setting": MessageLookupByLibrary.simpleMessage("Setting"),
-        "share": MessageLookupByLibrary.simpleMessage("Share"),
-        "somethingWrongs":
-            MessageLookupByLibrary.simpleMessage("Something wrongs"),
-        "somethingsWrongPleaseTryAgain": MessageLookupByLibrary.simpleMessage(
-            "Somethings wrong, please try again."),
-        "suggested": MessageLookupByLibrary.simpleMessage("Suggested"),
-        "team": MessageLookupByLibrary.simpleMessage("Team"),
+            MessageLookupByLibrary.simpleMessage("Lưu hình ảnh giới hạn"),
+        "savedImage": MessageLookupByLibrary.simpleMessage("Hình ảnh đã lưu"),
+        "send": MessageLookupByLibrary.simpleMessage("Gửi"),
+        "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+        "share": MessageLookupByLibrary.simpleMessage("Chia sẻ"),
+        "suggested": MessageLookupByLibrary.simpleMessage("Đề nghị"),
+        "team": MessageLookupByLibrary.simpleMessage("Nhóm"),
         "teamToSupport":
-            MessageLookupByLibrary.simpleMessage("Team to support."),
+            MessageLookupByLibrary.simpleMessage("Đội để được hỗ trợ."),
         "toAccessPhotosOnYourDeviceToEditOrShare":
             MessageLookupByLibrary.simpleMessage(
-                "to access photos on your device to edit or share image."),
+                "để truy cập ảnh trên thiết bị của bạn để chỉnh sửa hoặc chia sẻ ảnh."),
         "tryItNow": MessageLookupByLibrary.simpleMessage("Thử ngay"),
-        "turnYourNimageNintoArt":
-            MessageLookupByLibrary.simpleMessage("Turn your\nimage\ninto Art"),
+        "turnYourNimageNintoArt": MessageLookupByLibrary.simpleMessage(
+            "Biến hình ảnh\ncủa bạn thành\nNghệ thuật"),
         "unlockSnapeditifyPremium":
-            MessageLookupByLibrary.simpleMessage("Unlock SnapEditify Premium"),
-        "version": MessageLookupByLibrary.simpleMessage("Version"),
+            MessageLookupByLibrary.simpleMessage("Mở khóa SnapEditify cao cấp"),
+        "version": MessageLookupByLibrary.simpleMessage("Phiên bản"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
-        "withText": MessageLookupByLibrary.simpleMessage("with"),
-        "wouldLikeToAccessYourPhotos": MessageLookupByLibrary.simpleMessage(
-            "Would like to access your photos"),
+        "withText": MessageLookupByLibrary.simpleMessage("với"),
+        "wouldLikeToAccessYourPhotos":
+            MessageLookupByLibrary.simpleMessage("muốn truy cập ảnh của bạn"),
         "youAreCurrentlyOffline":
-            MessageLookupByLibrary.simpleMessage("You are currently offline!"),
+            MessageLookupByLibrary.simpleMessage("Bạn hiện đang ngoại tuyến!"),
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":
             MessageLookupByLibrary.simpleMessage(
-                "You have reached the limit of saved image, please upgrade premium version or contact"),
+                "Bạn đã đạt đến giới hạn của hình ảnh được lưu, vui lòng nâng cấp phiên bản cao cấp hoặc liên hệ"),
         "yourFeedbackOfTheAppAndProvideABetterExperience":
             MessageLookupByLibrary.simpleMessage(
-                "Your feedback of the app and provide a better experience")
+                "Phản hồi của bạn về ứng dụng và cung cấp trải nghiệm tốt hơn")
       };
 }

@@ -76,8 +76,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Failed to style image, please try again!"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
-        "languageFlag": MessageLookupByLibrary.simpleMessage(""),
-        "languageName": MessageLookupByLibrary.simpleMessage("English"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
                 "Let\'s share one of the best photo editing app with your friends, family and community"),
@@ -114,10 +112,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
-        "somethingWrongs":
-            MessageLookupByLibrary.simpleMessage("Something wrongs"),
-        "somethingsWrongPleaseTryAgain": MessageLookupByLibrary.simpleMessage(
-            "Somethings wrong, please try again."),
         "suggested": MessageLookupByLibrary.simpleMessage("Suggested"),
         "team": MessageLookupByLibrary.simpleMessage("Team"),
         "teamToSupport":

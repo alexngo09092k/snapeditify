@@ -10,7 +10,7 @@ extension MPermissionStore on IUserPermission {
       permission: permission,
       onNoPermisson: () {
         WidgetUtils.instance.showRequestPermissionPopup(
-          title: S.of(context).wouldLikeToAccessYourPhotos,
+          title:'${Configuration.instance.business.appName} ${S.of(context).wouldLikeToAccessYourPhotos}',
           message: '${S.of(context).allow} ${Configuration.instance.business.appName} ${S.of(context).toAccessPhotosOnYourDeviceToEditOrShare}',
           onForeground: () {
             requestPermission(

@@ -22,7 +22,7 @@ void main() {
   
   AwesomeApp(
     app: const App(),
-    inAppReview: const InAppReviewConfig(enable: true),
+    inAppReview: const InAppReviewConfig(enable: false),
     providers: [
       AwesomeAdvertisement.instance,
       AwesomeIAP.instance,

@@ -50,26 +50,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// ``
-  String get languageFlag {
-    return Intl.message(
-      '',
-      name: 'languageFlag',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `English`
-  String get languageName {
-    return Intl.message(
-      'English',
-      name: 'languageName',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `English`
   String get english {
     return Intl.message(
@@ -545,26 +525,6 @@ class S {
     return Intl.message(
       'All changes will be lost. Are you sure you want to leave without saving?',
       name: 'allChangesWillBeLostAreYouSureYouWant',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Something wrongs`
-  String get somethingWrongs {
-    return Intl.message(
-      'Something wrongs',
-      name: 'somethingWrongs',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Somethings wrong, please try again.`
-  String get somethingsWrongPleaseTryAgain {
-    return Intl.message(
-      'Somethings wrong, please try again.',
-      name: 'somethingsWrongPleaseTryAgain',
       desc: '',
       args: [],
     );

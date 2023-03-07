@@ -63,8 +63,9 @@ class HomeLocalizations extends StatelessWidget {
                         )
                       ],
                     ),
-                  )),
-            )
+                  ),
+                ),
+            ),
           ],
         ),
       ),
