@@ -44,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
         "chinese": MessageLookupByLibrary.simpleMessage("Tiếng Trung Quốc"),
         "createNanimeAvatar":
-            MessageLookupByLibrary.simpleMessage("Tạo\nHình đại diện Anime"),
+            MessageLookupByLibrary.simpleMessage("Tạo hình đại diện\nAnime"),
         "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage(
             "Hủy các thay đổi và hoàn nguyên?"),
         "english": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
@@ -52,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enhanceImage":
             MessageLookupByLibrary.simpleMessage("Nâng cao hình ảnh"),
         "enhanceNimageQuality": MessageLookupByLibrary.simpleMessage(
-            "Nâng cao\nchất lượng hình ảnh"),
+            "Nâng cao\nchất lượng\nhình ảnh"),
         "failedToChangeStylePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Không thể thay đổi kiểu, vui lòng thử lại!"),
@@ -123,7 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "để truy cập ảnh trên thiết bị của bạn để chỉnh sửa hoặc chia sẻ ảnh."),
         "tryItNow": MessageLookupByLibrary.simpleMessage("Thử ngay"),
         "turnYourNimageNintoArt": MessageLookupByLibrary.simpleMessage(
-            "Biến hình ảnh\ncủa bạn thành\nNghệ thuật"),
+            "Biến hình ảnh\ncủa bạn thành\nnghệ thuật"),
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("Mở khóa SnapEditify cao cấp"),
         "version": MessageLookupByLibrary.simpleMessage("Phiên bản"),

@@ -91,7 +91,11 @@ const enviroment = {
     /// Share app
     'shareApp': {
       'message': 'SnapEditify AI Photo Editor Pro',
-      'links': {'android': '', 'ios': '', 'huawei': ''},
+      'links': {
+        'android': 'https://appgallery.huawei.com/app/C107645049', 
+        'ios': 'https://appgallery.huawei.com/app/C107645049', 
+        'huawei': 'https://appgallery.huawei.com/app/C107645049',
+      },
     },
 
     'moreApps': []

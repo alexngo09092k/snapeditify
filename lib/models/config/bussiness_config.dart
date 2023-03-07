@@ -57,9 +57,9 @@ class BusinessConfig {
       contact: "contact.snapeditify@gmail.com",
       shareApp: ShareApp(
         links: {
-          AppPlatform.android: '',
-          AppPlatform.ios: '',
-          AppPlatform.huawei: '',
+          AppPlatform.android: 'https://appgallery.huawei.com/app/C107645049',
+          AppPlatform.ios: 'https://appgallery.huawei.com/app/C107645049',
+          AppPlatform.huawei: 'https://appgallery.huawei.com/app/C107645049',
         },
         message: "SnapEditify AI Photo Editor",
       ),
