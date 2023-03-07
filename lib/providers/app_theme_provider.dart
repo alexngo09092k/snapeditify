@@ -17,8 +17,6 @@ class AppThemeProvider extends ThemeProvider {
           SystemUiOverlayStyle.dark.copyWith(
             systemNavigationBarColor: AppColors.instance.lightBackground,
             statusBarColor: Colors.transparent,
-            statusBarBrightness: brightness,
-            systemNavigationBarIconBrightness: brightness,
           ),
         );
         break;
@@ -27,8 +25,6 @@ class AppThemeProvider extends ThemeProvider {
           SystemUiOverlayStyle.light.copyWith(
             systemNavigationBarColor: AppColors.instance.darkBackground,
             statusBarColor: Colors.transparent,
-            statusBarBrightness: brightness,
-            systemNavigationBarIconBrightness: brightness,
           ),
         );
         break;
