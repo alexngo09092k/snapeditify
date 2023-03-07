@@ -38,6 +38,7 @@ class UnlockPremium extends StatelessWidget {
                 SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                 Text(
                   S.of(context).noAdsBestImageQuality,
+                  maxLines: 1,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                 ),
               ],
