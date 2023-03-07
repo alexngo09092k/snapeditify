@@ -56,7 +56,10 @@ class AlbumItem extends StatelessWidget {
                           ),
                         ),
                       )
-                    : CustomImage(image: AppAssets.instance.icImagePlaceholder),
+                    : ImagePlaceholder(
+                      width: width, 
+                      height: height,
+                    ),
               ),
             ],
           ),

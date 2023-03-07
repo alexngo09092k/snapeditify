@@ -9,9 +9,6 @@ class AppAssets {
 
   AppAssets._internal();
 
-  /// Flags
-  static const String flagPath = 'assets/flags';
-
   /// Lotties
   static const String lottiePath = 'assets/lotties';
 
@@ -30,6 +27,7 @@ class AppAssets {
   /// Images
   static const String imagePath = 'assets/images';
 
+  final String imagePlaceholder = "$imagePath/ic_image_place_holder.png";
   final String logo = "$imagePath/logo.png";
 
   /// Suggest images
@@ -49,6 +47,10 @@ class AppAssets {
   final String animeDemo2 = "$imagePath/anime_demo_2.jpeg";
   final String animeDemo3 = "$imagePath/anime_demo_3.jpeg";
 
+
+  /// Flags
+  static const String flagPath = '$imagePath/flags';
+
   /// Icons
   static const String iconPath = '$imagePath/icons';
 
@@ -66,7 +68,6 @@ class AppAssets {
   final String icColor = "$iconPath/ic_color.png";
   final String icBrush = "$iconPath/ic_brush.png";
   final String icAI = "$iconPath/ic_ai.png";
-  final String icImagePlaceholder = "$iconPath/ic_image_place_holder.png";
   final String icAnimeAI = "$iconPath/ic_anime_ai.png";
   final String icFeedback = "$iconPath/ic_feedback.png";
   final String icSeekbarThumb = "$iconPath/ic_seekbar_thumb.png";

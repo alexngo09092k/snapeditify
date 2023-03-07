@@ -27,11 +27,13 @@ class CustomImage extends StatelessWidget {
             height: height,
             color: color,
             fit: fit,
-            placeholder: (context, url) => Image.asset(
-              AppAssets.instance.icImagePlaceholder,
+            placeholder: (_, __) => ImagePlaceholder(
               width: width,
               height: height,
-              fit: fit,
+            ),
+            errorWidget: (_, __, ___) => ImagePlaceholder(
+              width: width,
+              height: height,
             ),
           )
         : Image.asset(
@@ -41,5 +43,21 @@ class CustomImage extends StatelessWidget {
             color: color,
             fit: fit,
           );
+  }
+}
+
+class ImagePlaceholder extends StatelessWidget {
+  const ImagePlaceholder({super.key, this.width, this.height});
+  final double? width;
+  final double? height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      AppAssets.instance.imagePlaceholder,
+      width: width,
+      height: height,
+      fit: BoxFit.fill,
+    );
   }
 }
