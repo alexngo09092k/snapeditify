@@ -158,7 +158,7 @@ const enviroment = {
 
   //! ====================================== IAP ==============================================
   "iap": {
-    "enable": true,
+    "enable": false,
     "providers": [],
     "products": [
       // {
