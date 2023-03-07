@@ -15,9 +15,12 @@ import 'package:snapeditify/view_models/face_vm.dart';
 import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
+  @override
+  EnhanceState get state;
+
   Future<bool> enhanceImage(BuildContext context);
 
-  bool showEnhanceGuide(BuildContext context);
+  bool showEnhanceGuide();
 }
 
 class EnhanceProvider extends IEnhanceProvider {
@@ -55,7 +58,7 @@ class EnhanceProvider extends IEnhanceProvider {
     renewSavedFile();
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+    WidgetUtils.instance.showLoadingPopup();
 
     /// SHOW ADS
     adProvider.handleAd();
@@ -85,19 +88,23 @@ class EnhanceProvider extends IEnhanceProvider {
       _state.faces = faces;
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.hideLoadingPopup();
+      WidgetUtils.instance.dimiss();
 
       /// SHOW GUIDE
-      showEnhanceGuide(context);
+      showEnhanceGuide();
 
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.hideLoadingPopup();
+    WidgetUtils.instance.dimiss();
 
     if (!res.status) {
-      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).enhanceImage, message: S.of(context).failedToEnhanceImagePleaseTryAgain, retry: (_) => enhanceImage(context));
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).enhanceImage, 
+        message: S.of(context).failedToEnhanceImagePleaseTryAgain, 
+        retry: (_) => enhanceImage(context),
+      );
       Debug.log('===== ENAHNCE IMAGE ${res.message} =====');
     }
 
@@ -105,11 +112,11 @@ class EnhanceProvider extends IEnhanceProvider {
   }
 
   @override
-  bool showEnhanceGuide(BuildContext context) {
+  bool showEnhanceGuide() {
     int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.enhanceGuide);
     if (num != null && num > 1) return false;
 
-    showDialog(context: context, builder: (_) => const EnhanceGuide());
+    WidgetUtils.instance.showDialog(builder: (_) => const EnhanceGuide());
     AsyncStorage.instance.setInt(AsyncStorageKey.instance.autoAIGuide, num == null ? 1 : num + 1);
     return true;
   }

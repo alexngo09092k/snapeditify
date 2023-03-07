@@ -7,22 +7,21 @@ import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
 class RestyleImage extends StatelessWidget {
-  const RestyleImage({Key? key, required this.provider}) : super(key: key);
-  final RestyleProvider provider;
+  const RestyleImage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final IRestyleProvider provider = ManagerProvider.of<IRestyleProvider>();
     return BaseImageEditor(
       builder: (width, height) => Stack(
         children: [
           /// PAINT
           Center(
-            child: AspectRatio(
-              aspectRatio: provider.state.image.ratio,
-              child: BasePropConsumer<RestyleProvider, PainterController>(
-                listenable: provider,
-                select: (p) => p.state.paint,
-                builder: (_, __, ___, paint) => FlutterPainter(controller: paint),
+            child: PropConsumer<IRestyleProvider, PainterController>(
+              select: (p) => p.state.paint,
+              builder: (_, __, p, paint) => AspectRatio(
+                aspectRatio: p.state.image.ratio,
+                child: FlutterPainter(controller: paint),
               ),
             ),
           ),
@@ -34,8 +33,7 @@ class RestyleImage extends StatelessWidget {
             child: GestureDetector(
               onTapDown: (_) => provider.compare(context),
               onTapUp: (_) => provider.compare(context),
-              child: BasePropConsumer<RestyleProvider, bool>(
-                listenable: provider,
+              child: PropConsumer<IRestyleProvider, bool>(
                 select: (p) => p.canCompare,
                 builder: (_, __, ___, canCompare) => CustomIcon.defaultStyle(
                   context,

@@ -9,16 +9,15 @@ import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/painter/painter_pure.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
 
-class RemoveObjectImage extends StatelessWidget {
-  const RemoveObjectImage({Key? key, required this.provider, this.onStartDraw, this.onEndDraw}) : super(key: key);
-  final RemoveObjectProvider provider;
+class RemoveObjectImage extends ProviderStateless<IRemoveObjectProvider>  {
+  RemoveObjectImage({super.key, this.onStartDraw, this.onEndDraw});
   final Function()? onStartDraw;
   final Function()? onEndDraw;
 
   _showColorPopup<T>(BuildContext context) {
     return AwesomeAppState.dialog<T>(
       builder: (_) => Dialog(
-        backgroundColor: Theme.of(context).cardColor,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.all(AppDimensions.instance.padding),
@@ -42,8 +41,7 @@ class RemoveObjectImage extends StatelessWidget {
                 Center(
                   child: AspectRatio(
                     aspectRatio: provider.state.image.ratio,
-                    child: BasePropConsumer<RemoveObjectProvider, PainterController>(
-                      listenable: provider,
+                    child: PropConsumer<IRemoveObjectProvider, PainterController>(
                       select: (p) => p.state.paint,
                       builder: (_, __, ___, paint) => FlutterPainter(
                         controller: paint,
@@ -60,8 +58,7 @@ class RemoveObjectImage extends StatelessWidget {
 
                 /// STROKE WIDTH
                 Center(
-                  child: BasePropConsumer<RemoveObjectProvider, bool>(
-                    listenable: provider,
+                  child: PropConsumer<IRemoveObjectProvider, bool>(
                     select: (p) => p.strokeWidthIsChanged,
                     builder: (_, __, ___, strokeWidthIsChanged) => strokeWidthIsChanged
                         ? AwesomeAnimation<double>.tweenSequence(
@@ -69,8 +66,7 @@ class RemoveObjectImage extends StatelessWidget {
                             items: [TweenSequenceItem(tween: Tween(begin: 0, end: 1), weight: 1)],
                             builder: (_, __, animation, ___) => Opacity(
                               opacity: animation.value,
-                              child: BasePropConsumer<RemoveObjectProvider, double>(
-                                listenable: provider,
+                              child: PropConsumer<IRemoveObjectProvider, double>(
                                 select: (p) => p.state.strokeWidth,
                                 builder: (_, __, ___, strokeWidth) => Container(
                                   width: strokeWidth,
@@ -100,8 +96,7 @@ class RemoveObjectImage extends StatelessWidget {
                             /// UNDO BUTTON
                             GestureDetector(
                               onTap: provider.undo,
-                              child: BasePropConsumer<RemoveObjectProvider, bool>(
-                                listenable: provider,
+                              child: PropConsumer<IRemoveObjectProvider, bool>(
                                 select: (p) => p.canUndo,
                                 builder: (_, __, ___, canUndo) => CustomIcon.defaultStyle(
                                   context,
@@ -115,7 +110,7 @@ class RemoveObjectImage extends StatelessWidget {
                             /// REDO BUTTON
                             GestureDetector(
                               onTap: provider.redo,
-                              child: PropConsumer<RemoveObjectProvider, bool>(
+                              child: PropConsumer<IRemoveObjectProvider, bool>(
                                 select: (p) => p.canRedo,
                                 builder: (_, __, ___, canRedo) => CustomIcon.defaultStyle(
                                   context,
@@ -128,7 +123,7 @@ class RemoveObjectImage extends StatelessWidget {
                         ),
 
                         ///REMOVE BUTTON
-                        PropConsumer<RemoveObjectProvider, bool>(
+                        PropConsumer<IRemoveObjectProvider, bool>(
                           select: (p) => p.canRemove,
                           builder: (_, __, ___, canRemove) => canRemove
                               ? CustomButton(
@@ -163,8 +158,7 @@ class RemoveObjectImage extends StatelessWidget {
                             GestureDetector(
                               onTapDown: (_) => provider.compare(),
                               onTapUp: (_) => provider.compare(),
-                              child: BasePropConsumer<RemoveObjectProvider, bool>(
-                                listenable: provider,
+                              child: PropConsumer<IRemoveObjectProvider, bool>(
                                 select: (p) => p.canCompare,
                                 builder: (_, __, ___, canCompare) => CustomIcon.defaultStyle(
                                   context,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
 import 'package:snapeditify/services/snap_edit/snap_edit.dart';
 import 'package:snapeditify/utils/image.dart';
@@ -139,7 +138,7 @@ class DetectedObjectVM extends DetectedObject {
 
       var paint = Paint()
         ..strokeWidth = 0.5
-        ..color = AppColors.instance.primaryColor
+        ..color = Colors.blue
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round;
 

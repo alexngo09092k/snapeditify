@@ -18,11 +18,14 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IAnimeAIProvider extends EditImageProvider with StorageProvider {
+  @override
+  AnimeAIState get state;
+
   List<AnimeStyle> get styles;
 
   List<String> get categories;
 
-  String? get category;
+  String? category;
 
   bool get canRevert;
   bool get canCompare;
@@ -62,6 +65,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   String? _category;
   @override
   String? get category => _category;
+  @override
   set category(String? val) {
     if (_category != val) {
       _category = val;
@@ -114,7 +118,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+    WidgetUtils.instance.showLoadingPopup();
 
     /// CALL API
     AnimeAIImageBody body = AnimeAIImageBody(style: styleId, inputImage: originalImage.imageBytes);
@@ -126,15 +130,19 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.hideLoadingPopup();
+      WidgetUtils.instance.dimiss();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.hideLoadingPopup();
+    WidgetUtils.instance.dimiss();
 
     if (!res.status) {
-      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, message: S.of(context).failedToStyleImagePleaseTryAgain, retry: (_) => restyleImage(context, styleId));
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).restyleImage, 
+        message: S.of(context).failedToStyleImagePleaseTryAgain, 
+        retry: (_) => restyleImage(context, styleId),
+      );
       Debug.log('====== RESTYLE IMAGE ${res.message} ======');
     }
     return false;
@@ -147,7 +155,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     if (!result) return false;
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+    WidgetUtils.instance.showLoadingPopup();
 
     /// SHOW ADS
     adProvider.handleAd();
@@ -163,15 +171,19 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
     if (res.data != null) {
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.hideLoadingPopup();
+      WidgetUtils.instance.dimiss();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.hideLoadingPopup();
+    WidgetUtils.instance.dimiss();
 
     if (!res.status) {
-      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, message: S.of(context).failedToStyleImagePleaseTryAgain, retry: (_) => videoEffect(context, styleId));
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).restyleImage, 
+        message: S.of(context).failedToStyleImagePleaseTryAgain, 
+        retry: (_) => videoEffect(context, styleId),
+      );
       Debug.log('====== RESTYLE IMAGE ${res.message} ======');
     }
 

@@ -33,7 +33,7 @@ class SlidingControl<T> extends StatelessWidget {
           ),
         ),
       ),
-      color: Theme.of(context).cardColor,
+      color: Theme.of(context).colorScheme.surface,
       background: Theme.of(context).disabledColor.withOpacity(0.1),
       onValueChanged: onValueChanged,
     );

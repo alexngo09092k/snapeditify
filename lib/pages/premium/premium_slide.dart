@@ -44,8 +44,8 @@ class PremiumSlide extends StatelessWidget {
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
                 colors: [
-                  AppColors.instance.white,
-                  AppColors.instance.white.withOpacity(0.1),
+                  Theme.of(context).colorScheme.background,
+                  Theme.of(context).colorScheme.background.withOpacity(0.1),
                 ],
               ),
             ),
@@ -59,7 +59,7 @@ class PremiumSlide extends StatelessWidget {
                 padding: EdgeInsets.all(AppDimensions.instance.padding),
                 child: CustomIcon(
                   CupertinoIcons.back,
-                  color: AppColors.instance.black,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
               ),
             ),

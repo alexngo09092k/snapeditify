@@ -6,33 +6,31 @@ import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
 class EnhanceAfter extends StatelessWidget {
-  const EnhanceAfter({Key? key, required this.provider}) : super(key: key);
-  final EnhanceProvider provider;
-
+  const EnhanceAfter({super.key});
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: AspectRatio(
-        aspectRatio: provider.state.image.ratio,
-        child: Stack(
-          children: [
-            BasePropConsumer<EnhanceProvider, PainterController>(
-              listenable: provider,
-              select: (p) => p.state.paintAfter,
-              builder: (_, __, ___, paint) => FlutterPainter(controller: paint),
-            ),
-            Positioned(
-              right: AppDimensions.instance.padding,
-              top: AppDimensions.instance.padding,
-              child: Text(
-                S.of(context).after,
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.instance.white,
-                    ),
-              ),
-            ),
-          ],
+      child: PropConsumer<IEnhanceProvider, PainterController>(
+        select: (p) => p.state.paintAfter,
+        child: Positioned(
+          right: AppDimensions.instance.padding,
+          top: AppDimensions.instance.padding,
+          child: Text(
+            S.of(context).after,
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.instance.white,
+                ),
+          ),
+        ),
+        builder: (_, child, p, paint) => AspectRatio(
+          aspectRatio: p.state.image.ratio,
+          child: Stack(
+            children: [
+              FlutterPainter(controller: paint),
+              child ?? const SizedBox(),
+            ],
+          ),
         ),
       ),
     );

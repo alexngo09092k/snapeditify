@@ -12,15 +12,14 @@ import 'package:snapeditify/view_models/album_vm.dart';
 import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 
 class ImageList extends StatefulWidget {
-  const ImageList({super.key, required this.album, required this.provider});
+  const ImageList({super.key, required this.album});
   final AlbumVM album;
-  final GalleryProvider provider;
 
   @override
   _ImageListState createState() => _ImageListState();
 }
 
-class _ImageListState extends State<ImageList> {
+class _ImageListState extends ProviderStateful<ImageList, IGalleryProvider> {
   List<AssetEntity>? _images;
   int _page = 0;
   bool _isLoadingMore = false;
@@ -35,7 +34,7 @@ class _ImageListState extends State<ImageList> {
   Future<void> _requestAssets() async {
     final List<AssetEntity> entities = await widget.album.entityPath.getAssetListPaged(
       page: 0,
-      size: widget.provider.config.countInPage,
+      size: provider.config.countInPage,
     );
     if (!mounted) {
       return;
@@ -49,7 +48,7 @@ class _ImageListState extends State<ImageList> {
   Future<void> _loadMoreAsset() async {
     final List<AssetEntity> entities = await widget.album.entityPath.getAssetListPaged(
       page: _page + 1,
-      size: widget.provider.config.countInPage,
+      size: provider.config.countInPage,
     );
     if (!mounted) {
       return;

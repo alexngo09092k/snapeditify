@@ -14,6 +14,9 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
+  @override
+  RestyleState get state;
+  
   List<Style> get styles;
 
   bool get canRevert;
@@ -99,7 +102,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+    WidgetUtils.instance.showLoadingPopup();
 
     /// SHOW ADS
     adProvider.handleAd();
@@ -114,15 +117,19 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.hideLoadingPopup();
+      WidgetUtils.instance.dimiss();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.hideLoadingPopup();
+    WidgetUtils.instance.dimiss();
 
     if (!res.status) {
-      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).restyleImage, message: S.of(context).failedToChangeStylePleaseTryAgain, retry: (_) => restyleImage(context, styleId));
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).restyleImage, 
+        message: S.of(context).failedToChangeStylePleaseTryAgain, 
+        retry: (_) => restyleImage(context, styleId),
+      );
       Debug.log('====== RESTYLE IMAGE ${res.message} ======');
     }
 

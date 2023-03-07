@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "allChangesWillBeLostYourImageWillBeReverted":
             MessageLookupByLibrary.simpleMessage(
                 "All changes will be lost. Your image will be reverted to its original states."),
+        "allow": MessageLookupByLibrary.simpleMessage("Allow"),
         "animeAi": MessageLookupByLibrary.simpleMessage("Anime AI"),
         "areYouHappyWith":
             MessageLookupByLibrary.simpleMessage("Are you happy with\n"),
@@ -41,10 +42,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "before": MessageLookupByLibrary.simpleMessage("Before"),
         "brush": MessageLookupByLibrary.simpleMessage("Brush"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
         "createNanimeAvatar":
             MessageLookupByLibrary.simpleMessage("Create\nAnime avatar"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("Discard changes and revert?"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
         "enhance": MessageLookupByLibrary.simpleMessage("Enhance"),
         "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),
         "enhanceNimageQuality":
@@ -58,14 +61,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedToEnhanceImagePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Failed to enhance image, please try again!"),
+        "failedToOpenBrowserPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Failed to open browser, please try again"),
+        "failedToOpenMailPleaseTryGain": MessageLookupByLibrary.simpleMessage(
+            "Failed to open mail, please try gain!"),
         "failedToRemoveObjectsPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Failed to remove objects, please try again!"),
+        "failedToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage(
+            "Failed to save image, please try again!"),
         "failedToStyleImagePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Failed to style image, please try again!"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
+        "languageFlag": MessageLookupByLibrary.simpleMessage(""),
+        "languageName": MessageLookupByLibrary.simpleMessage("English"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
                 "Let\'s share one of the best photo editing app with your friends, family and community"),
@@ -83,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "objects": MessageLookupByLibrary.simpleMessage("Objects"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "openApp": MessageLookupByLibrary.simpleMessage("Open app"),
+        "openBrowser": MessageLookupByLibrary.simpleMessage("Open browser"),
         "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
         "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
             "Please try again or open the app again!"),
@@ -110,13 +123,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "team": MessageLookupByLibrary.simpleMessage("Team"),
         "teamToSupport":
             MessageLookupByLibrary.simpleMessage("Team to support."),
+        "toAccessPhotosOnYourDeviceToEditOrShare":
+            MessageLookupByLibrary.simpleMessage(
+                "to access photos on your device to edit or share image."),
         "tryItNow": MessageLookupByLibrary.simpleMessage("Try it now"),
         "turnYourNimageNintoArt":
             MessageLookupByLibrary.simpleMessage("Turn your\nimage\ninto Art"),
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("Unlock SnapEditify Premium"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
+        "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "withText": MessageLookupByLibrary.simpleMessage("with"),
+        "wouldLikeToAccessYourPhotos": MessageLookupByLibrary.simpleMessage(
+            "Would like to access your photos"),
         "youAreCurrentlyOffline":
             MessageLookupByLibrary.simpleMessage("You are currently offline!"),
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":

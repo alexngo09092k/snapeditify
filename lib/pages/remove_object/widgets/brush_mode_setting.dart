@@ -6,8 +6,7 @@ import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class BrushModeSetting extends StatelessWidget {
-  const BrushModeSetting({Key? key, required this.provider}) : super(key: key);
-  final RemoveObjectProvider provider;
+  const BrushModeSetting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,23 +15,23 @@ class BrushModeSetting extends StatelessWidget {
         SizedBox(width: AppDimensions.instance.padding),
 
         /// BRUSH BUTTON
-        GestureDetector(
-          onTap: () => provider.toBrush(context),
-          child: BasePropConsumer<RemoveObjectProvider, bool>(
-            listenable: provider,
-            select: (p) => p.state.mode == RemoveObjectMode.brush,
-            builder: (_, __, ___, isBrush) => CustomIcon.defaultStyle(
+        PropConsumer<IRemoveObjectProvider, bool>(
+          select: (p) => p.state.mode == RemoveObjectMode.brush,
+          builder: (_, __, p, isBrush) => GestureDetector(
+            onTap: () => p.toBrush(context),
+            child: CustomIcon.defaultStyle(
               context,
               icon: AppAssets.instance.icHand,
-              color: isBrush ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+              color: isBrush
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).disabledColor,
             ),
           ),
         ),
 
         /// STROKE WIDTH SLIDER
         Expanded(
-          child: BasePropConsumer<RemoveObjectProvider, double>(
-            listenable: provider,
+          child: PropConsumer<RemoveObjectProvider, double>(
             select: (p) => p.state.strokeWidth,
             builder: (_, __, p, strokeWidth) => Slider(
               min: p.config.removeObject.strokeWidth.min.toDouble(),
@@ -48,15 +47,16 @@ class BrushModeSetting extends StatelessWidget {
         ),
 
         /// ERASE BUTTON
-        GestureDetector(
-          onTap: () => provider.toErase(context),
-          child: BasePropConsumer<RemoveObjectProvider, bool>(
-            listenable: provider,
-            select: (p) => p.state.mode == RemoveObjectMode.erase,
-            builder: (_, __, ___, isEraser) => CustomIcon.defaultStyle(
+        PropConsumer<IRemoveObjectProvider, bool>(
+          select: (p) => p.state.mode == RemoveObjectMode.erase,
+          builder: (_, __, p, isEraser) => GestureDetector(
+            onTap: () => p.toErase(context),
+            child: CustomIcon.defaultStyle(
               context,
               icon: AppAssets.instance.icEraser,
-              color:isEraser ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+              color: isEraser
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).disabledColor,
             ),
           ),
         ),

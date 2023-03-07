@@ -11,11 +11,10 @@ import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
 
 class AlbumItem extends StatelessWidget {
-  const AlbumItem({super.key, required this.album, this.width, this.height, required this.provider});
+  const AlbumItem({super.key, required this.album, this.width, this.height});
   final AlbumVM album;
   final double? width;
   final double? height;
-  final GalleryProvider provider;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +45,7 @@ class AlbumItem extends StatelessWidget {
                 child: album.thumnail != null
                     ? ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                        child: BasePropConsumer<GalleryProvider, AssetEntity?>(
-                          listenable: provider,
+                        child: PropConsumer<IGalleryProvider, AssetEntity?>(
                           select: (_) => _.albumList[album.entityPath.id]!.thumnail,
                           builder: (_, __, ___, thumnail) => AssetEntityImage(
                             width: width,
@@ -63,8 +61,7 @@ class AlbumItem extends StatelessWidget {
             ],
           ),
           SizedBox(height: AppDimensions.instance.paddingX(1.5)),
-          BasePropConsumer<GalleryProvider, int>(
-            listenable: provider,
+          PropConsumer<IGalleryProvider, int>(
             select: (_) => _.albumList[album.entityPath.id]!.count,
             builder: (_, __, ___, length) => Text(
               '${album.entityPath.name} ($length)',

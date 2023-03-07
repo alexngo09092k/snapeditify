@@ -10,22 +10,20 @@ import 'package:snapeditify/widgets/app_use/ai_icon.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class RemoveObjectControl extends StatelessWidget {
-  const RemoveObjectControl({super.key, required this.provider});
-  final RemoveObjectProvider provider;
+  const RemoveObjectControl({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: AwesomeAppState.screen.height * 1.2 / 5,
-      child: BasePropConsumer<RemoveObjectProvider, RemoveObjectMode>(
-        listenable: provider,
+      child: PropConsumer<IRemoveObjectProvider, RemoveObjectMode>(
         select: (p) => p.state.mode,
-        builder: (_, __, ___, mode) => Column(
+        builder: (_, __, p, mode) => Column(
           children: [
             SizedBox(height: AppDimensions.instance.padding),
 
             /// BRUSH SETTING
-            if (mode != RemoveObjectMode.ai) BrushModeSetting(provider: provider),
+            if (mode != RemoveObjectMode.ai) const BrushModeSetting(),
 
             /// DETECTED OBJECT LIST
             if (mode == RemoveObjectMode.ai) const AIModeResult(),
@@ -39,7 +37,7 @@ class RemoveObjectControl extends StatelessWidget {
                   children: [
                     /// AI BUTTON
                     GestureDetector(
-                      onTap: () => provider.toAI(context),
+                      onTap: () => p.toAI(context),
                       child: Column(
                         children: [
                           CustomIcon(AppAssets.instance.icAI),
@@ -57,7 +55,7 @@ class RemoveObjectControl extends StatelessWidget {
 
                     /// BRUSH BUTTON
                     GestureDetector(
-                      onTap: () => provider.toBrush(context),
+                      onTap: () => p.toBrush(context),
                       child: Column(
                         children: [
                           CustomIcon(

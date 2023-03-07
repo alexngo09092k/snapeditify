@@ -7,8 +7,7 @@ import 'package:snapeditify/view_models/face_vm.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 
 class EnhanceFaceItem extends StatelessWidget {
-  const EnhanceFaceItem({super.key, required this.provider, required this.face, required this.onFace});
-  final EnhanceProvider provider;
+  const EnhanceFaceItem({super.key, required this.face, required this.onFace});
   final FaceVM face;
   final Function(FaceVM) onFace;
 
@@ -19,8 +18,7 @@ class EnhanceFaceItem extends StatelessWidget {
       child: Container(
         child: Column(
           children: [
-            BasePropConsumer<EnhanceProvider, int>(
-              listenable: provider,
+            PropConsumer<IEnhanceProvider, int>(
               select: (p) => p.state.enhancedImageIndex,
               builder: (_, __, ___, index) => ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),

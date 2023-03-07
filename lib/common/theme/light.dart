@@ -14,23 +14,23 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     brightness: Brightness.dark,
 
     textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.textColor,
-      displayColor: AppColors.instance.textColor,
-      decorationColor: AppColors.instance.textColor,
+      bodyColor: AppColors.instance.lightOnBackground,
+      displayColor:  AppColors.instance.lightOnBackground,
+      decorationColor: AppColors.instance.lightOnBackground,
     ),
 
     primaryTextTheme: buildTextTheme(base.primaryTextTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.primaryColor,
-      displayColor: AppColors.instance.primaryColor,
-      decorationColor: AppColors.instance.primaryColor,
+      bodyColor: AppColors.instance.lightOnBackground,
+      displayColor:  AppColors.instance.lightOnBackground,
+      decorationColor: AppColors.instance.lightOnBackground,
     ),
 
-    primaryColor: AppColors.instance.primaryColor,
+    primaryColor: AppColors.instance.lightPrimary,
 
     secondaryHeaderColor: base.secondaryHeaderColor,
 
     /// ================== CARD =====================
-    cardColor: AppColors.instance.white,
+    cardColor: AppColors.instance.lightSurface,
 
     textButtonTheme: base.textButtonTheme,
 
@@ -38,8 +38,18 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
 
     /// =================== COLOR SCHEME ====================
     colorScheme: base.colorScheme.copyWith(
-      primary: AppColors.instance.primaryColor,
-      secondary: AppColors.instance.secondaryColor,
+      primary: AppColors.instance.lightPrimary,
+      onPrimary: AppColors.instance.lightOnPrimary,
+      onPrimaryContainer: AppColors.instance.lightOnPrimary,
+      secondary: AppColors.instance.lightSecondary,
+      onSecondary: AppColors.instance.lightOnSecondary,
+      onSecondaryContainer: AppColors.instance.lightOnSecondary,
+      background: AppColors.instance.lightBackground,
+      onBackground: AppColors.instance.lightOnBackground,
+      surface: AppColors.instance.lightSurface,
+      onSurface: AppColors.instance.lightOnSurface,
+      error: AppColors.instance.lightError,
+      onError: AppColors.instance.lightOnError,
     ),
 
     /// ====================== TEXT SELECTION THEME ======================
@@ -59,9 +69,9 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     primaryColorLight: base.primaryColorLight,
 
     /// ====================== BACKGROUND AND DIALOG ======================
-    splashColor: AppColors.instance.white,
-    dialogBackgroundColor: AppColors.instance.white,
-    scaffoldBackgroundColor: AppColors.instance.white,
+    splashColor: AppColors.instance.lightBackground,
+    dialogBackgroundColor: AppColors.instance.lightSurface,
+    scaffoldBackgroundColor: AppColors.instance.lightBackground,
 
     /// ====================== STATUS BAR ======================
     appBarTheme: base.appBarTheme,
@@ -71,13 +81,16 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     tabBarTheme: base.tabBarTheme,
 
     /// ====================== DISABLED ====================
-    disabledColor: AppColors.instance.textColor.withOpacity(0.5),
+    disabledColor: base.disabledColor,
 
     /// ======================= CARD =======================
     cardTheme: base.cardTheme,
 
     /// ======================== ICON =======================
-    iconTheme: base.iconTheme.copyWith(color: AppColors.instance.textColor),
+    iconTheme: base.iconTheme.copyWith(
+      color: AppColors.instance.lightOnBackground, 
+      size: AppDimensions.instance.icon,
+    ),
 
     primaryIconTheme: base.primaryIconTheme,
 
@@ -85,6 +98,6 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     inputDecorationTheme: base.inputDecorationTheme,
 
     /// ========================= DIVIDER ========================
-    dividerColor: AppColors.instance.textColor.withOpacity(0.1),
+    dividerColor: base.dividerColor,
   );
 }

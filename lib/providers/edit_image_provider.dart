@@ -87,13 +87,13 @@ abstract class EditImageProvider extends Provider {
 
       if (_savedFile == null) {
         /// SHOW LOADING
-        WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+        WidgetUtils.instance.showLoadingPopup();
 
         /// SAVE IMAGE
         _savedFile = await provider.saveImage(editedImage.imageBytes);
 
         /// HIDE LOADING
-        WidgetUtils.instance.hideLoadingPopup();
+        WidgetUtils.instance.dimiss();
       }
 
       if (_savedFile != null) {
@@ -121,14 +121,17 @@ abstract class EditImageProvider extends Provider {
       }
 
       /// SHOW ALERT
-      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).saveImage, retry: saveImage);
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).saveImage, 
+        message: S.of(context).failedToSaveImagePleaseTryAgain, 
+        retry: saveImage,
+      );
       return false;
     }, () {
       /// MAX COUNT DOWNLOAD IMAGE
       /// SHOW ALERT
 
-      WidgetUtils.instance.showErrorPopup(
-        context,
+      WidgetUtils.instance.showWarningPopup(
         title: S.of(context).saveImageLimit,
         message: '${S.of(context).youHaveReachedTheLimitOfSavedImagePleaseUpgrade} ${Configuration.instance.business.appName} ${S.of(context).teamToSupport}',
         retry: saveImage,
@@ -139,7 +142,7 @@ abstract class EditImageProvider extends Provider {
   Future<bool> checkEnviroment(BuildContext context, {void Function(BuildContext)? retry}) async {
     final result = await ClientHttp.instance.safeEnvironment();
     if (!result) {
-      WidgetUtils.instance.showNoInternetPopup(context, retry: retry);
+      WidgetUtils.instance.showNoInternetPopup(retry: retry);
     }
     return result;
   }

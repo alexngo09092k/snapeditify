@@ -13,37 +13,60 @@ class WidgetUtils {
 
   WidgetUtils._internal();
 
-  Future<T?> showErrorPopup<T>(
-    BuildContext context, {
-    String? title,
-    String? message,
+  Future<T?> showDialog<T>({
+    required Widget Function(BuildContext) builder,
+    bool barrierDismissible = true,
+    Color? barrierColor = Colors.black54,
+    String? barrierLabel,
+    bool useSafeArea = true,
+    bool useRootNavigator = true,
+    RouteSettings? routeSettings,
+    Offset? anchorPoint,
+  }) {
+    return AwesomeAppState.dialog<T>(
+      builder: builder,
+      barrierDismissible: barrierDismissible,
+      barrierColor: barrierColor,
+      barrierLabel: barrierLabel,
+      useSafeArea: useSafeArea,
+      useRootNavigator: useRootNavigator,
+      routeSettings: routeSettings,
+      anchorPoint: anchorPoint,
+    );
+  }
+
+  Future<T?> showWarningPopup<T>({
+    required String title,
+    required message,
     Function(BuildContext)? retry,
     void Function()? onBackground,
     void Function()? onForeground,
   }) {
-    return alert<T>(
-      context,
-      title: title ?? S.of(context).somethingWrongs,
-      message: message ?? S.of(context).somethingsWrongPleaseTryAgain,
-      onBackground: onBackground,
-      onForeground: onForeground,
-      actions: [
-        AlertAction(title: S.of(context).cancel, onPressed: Navigator.of(context).pop),
-        if (retry != null)
-          AlertAction(
-            title: S.of(context).retry,
-            isDestructiveAction: true,
-            onPressed: () {
-              Navigator.of(context).pop();
-              retry(context);
-            },
-          ),
-      ],
-    );
+    return AwesomeAppState.useContext<T>(callback: (BuildContext context) {
+      return alert<T>(
+        context,
+        title: title,
+        message: message,
+        onBackground: onBackground,
+        onForeground: onForeground,
+        actions: [
+          AlertAction(title: S.of(context).cancel, onPressed: Navigator.of(context).pop),
+          if (retry != null)
+            AlertAction(
+              title: S.of(context).retry,
+              isDestructiveAction: true,
+              onPressed: () {
+                dimiss();
+                retry(context);
+              },
+            ),
+        ],
+      );
+    });
   }
 
-  Future<T?> showLoadingPopup<T>(BuildContext context, {String? message}) {
-    return AwesomeAppState.dialog<T>(
+  Future<T?> showLoadingPopup<T>() {
+    return showDialog<T>(
       barrierDismissible: false,
       useSafeArea: false,
       builder: (BuildContext context) => Column(
@@ -52,25 +75,18 @@ class WidgetUtils {
         children: [
           AppCard(
             constraints: const BoxConstraints(minHeight: 100, minWidth: 100),
-            color: AppColors.instance.black.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.surface.withOpacity(0.9),
             padding: EdgeInsets.all(AppDimensions.instance.padding),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CupertinoActivityIndicator(
-                  color: AppColors.instance.white,
+                CupertinoActivityIndicator(color: Theme.of(context).colorScheme.onSurface),
+                SizedBox(height: AppDimensions.instance.padding),
+                Text(
+                  S.of(context).pleaseWaitAMoment, 
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),
-                if (message != null)
-                  SizedBox(height: AppDimensions.instance.padding),
-                if (message != null)
-                  Text(
-                    message,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: AppColors.instance.white),
-                  ),
               ],
             ),
           )
@@ -79,8 +95,69 @@ class WidgetUtils {
     );
   }
 
-  void hideLoadingPopup() {
-    AwesomeAppState.dimiss();
+  Future<T?> showNoInternetPopup<T>({void Function(BuildContext)? retry}) {
+    return AwesomeAppState.useContext<T>(callback: (BuildContext context) {
+      return alert<T>(
+        context,
+        barrierDismissible: false,
+        title: S.of(context).youAreCurrentlyOffline,
+        message: S.of(context).looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
+        onForeground: retry != null ? () => retry(context) : null,
+        actions: [
+          AlertAction(title: S.of(context).openSettings, onPressed: openAppSettings),
+          if (retry != null)
+            AlertAction(
+              title: S.of(context).retry,
+              onPressed: () {
+                dimiss();
+                retry(context);
+              },
+            ),
+        ],
+      );
+    });
+  }
+
+  Future<T?> showRequestPermissionPopup<T>({
+    required String title,
+    required String message,
+    void Function()? onBackground,
+    void Function()? onForeground,
+  }) {
+    return AwesomeAppState.useContext<T>(callback: (BuildContext context) {
+      return alert<T>(
+        context,
+        title: title,
+        message: message,
+        onBackground: onBackground,
+        onForeground: onForeground,
+        actions: <AlertAction>[
+          AlertAction(
+            isDefaultAction: true,
+            onPressed: dimiss,
+            title: S.of(context).cancel,
+          ),
+          AlertAction(
+            isDefaultAction: true,
+            onPressed: openAppSettings,
+            title: S.of(context).openSettings,
+          ),
+        ],
+      );
+    });
+  }
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? snack({required String message}) {
+    return AwesomeAppState.snack(
+      builder: (BuildContext context) => SnackBar(
+        margin: EdgeInsets.all(AppDimensions.instance.padding),
+        padding: EdgeInsets.all(AppDimensions.instance.padding),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius))),
+        content: Text(message, style: Theme.of(context).textTheme.bodyLarge),
+      ),
+    );
   }
 
   Future<T?> alert<T>(
@@ -105,80 +182,7 @@ class WidgetUtils {
     );
   }
 
-  Future<T?> showNoInternetPopup<T>(
-    BuildContext context, {
-    void Function(BuildContext)? retry,
-  }) {
-    return alert<T>(
-      context,
-      title: S.of(context).youAreCurrentlyOffline,
-      message: S
-          .of(context)
-          .looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
-      onForeground: () {
-        Navigator.of(context).pop();
-        if (retry != null) retry(context);
-      },
-      actions: [
-        AlertAction(
-            title: S.of(context).openSettings, onPressed: openAppSettings),
-        if (retry != null)
-          AlertAction(
-            title: S.of(context).retry,
-            onPressed: () {
-              Navigator.of(context).pop();
-              retry(context);
-            },
-          ),
-      ],
-    );
-  }
-
-  Future<T?> showRequestPermissionPopup<T>(
-    BuildContext context, {
-    required String title,
-    required String message,
-    void Function()? onBackground,
-    void Function()? onForeground,
-  }) {
-    return alert<T>(
-      context,
-      title: title,
-      message: message,
-      onBackground: onBackground,
-      onForeground: onForeground,
-      actions: <AlertAction>[
-        AlertAction(
-          isDefaultAction: true,
-          onPressed: Navigator.of(context).pop,
-          title: S.of(context).cancel,
-        ),
-        AlertAction(
-          isDefaultAction: true,
-          onPressed: openAppSettings,
-          title: S.of(context).openSettings,
-        ),
-      ],
-    );
-  }
-
-  snack(BuildContext context, {required String message}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        margin: EdgeInsets.all(AppDimensions.instance.padding),
-        padding: EdgeInsets.all(AppDimensions.instance.padding),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(AppDimensions.instance.radius),
-          ),
-        ),
-        content: Text(
-          message,
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-      ),
-    );
+  void dimiss() {
+    AwesomeAppState.dimiss();
   }
 }

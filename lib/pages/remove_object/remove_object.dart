@@ -4,20 +4,21 @@ import 'package:snapeditify/pages/remove_object/widgets/remove_object_image.dart
 import 'package:snapeditify/pages/remove_object/widgets/remove_object_control.dart';
 import 'package:snapeditify/pages/remove_object/widgets/remove_object_revert.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
-import 'package:snapeditify/widgets/base/app_layout.dart';
+import 'package:snapeditify/widgets/app_use/app_layout.dart';
 import 'package:snapeditify/widgets/app_use/save_button.dart';
 
 class RemoveObjectPage extends StatefulWidget {
-  const RemoveObjectPage({Key? key}) : super(key: key);
+  const RemoveObjectPage({super.key});
 
   @override
   State<RemoveObjectPage> createState() => _RemoveObjectPageState();
 }
 
-class _RemoveObjectPageState extends ProviderStateObserver<RemoveObjectPage, RemoveObjectProvider> {
-  @override
+class _RemoveObjectPageState extends ProviderStateObserver<RemoveObjectPage, IRemoveObjectProvider>{
+
+   @override
   void onNextFrame(Duration timestamp) {
-    provider.showBrushGuide(context);
+    provider.showBrushGuide();
     super.onNextFrame(timestamp);
   }
 
@@ -26,11 +27,11 @@ class _RemoveObjectPageState extends ProviderStateObserver<RemoveObjectPage, Rem
     return AppLayout(
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
-      center: RemoveObjectRevert(provider: provider),
-      action: SaveButton(provider: provider),
+      center: RemoveObjectRevert(),
+      action: const SaveButton<IRemoveObjectProvider>(),
       children: [
-        RemoveObjectImage(provider: provider),
-        RemoveObjectControl(provider: provider),
+        RemoveObjectImage(),
+       const RemoveObjectControl(),
       ],
     );
   }

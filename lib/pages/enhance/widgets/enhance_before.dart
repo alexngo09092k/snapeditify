@@ -6,33 +6,31 @@ import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
 class EnhanceBefore extends StatelessWidget {
-  const EnhanceBefore({Key? key, required this.provider}) : super(key: key);
-  final EnhanceProvider provider;
-
+  const EnhanceBefore({super.key});
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: AspectRatio(
-        aspectRatio: provider.state.image.ratio,
-        child: Stack(
-          children: [
-            BasePropConsumer<EnhanceProvider, PainterController>(
-              listenable: provider,
-              select: (p) => p.state.paintBefore,
-              builder: (_, __, ___, paint) => FlutterPainter(controller: paint),
-            ),
-            Positioned(
-              left: AppDimensions.instance.padding,
-              top: AppDimensions.instance.padding,
-              child: Text(
-                S.of(context).before,
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.instance.white,
-                    ),
-              ),
-            ),
-          ],
+      child: PropConsumer<IEnhanceProvider, PainterController>(
+        child: Positioned(
+          left: AppDimensions.instance.padding,
+          top: AppDimensions.instance.padding,
+          child: Text(
+            S.of(context).before,
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.instance.white,
+                ),
+          ),
+        ),
+        select: (p) => p.state.paintBefore,
+        builder: (_, child, p, paint) => AspectRatio(
+          aspectRatio: p.state.image.ratio,
+          child: Stack(
+            children: [
+              FlutterPainter(controller: paint),
+              child ?? const SizedBox(),
+            ],
+          ),
         ),
       ),
     );

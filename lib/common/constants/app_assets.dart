@@ -9,6 +9,9 @@ class AppAssets {
 
   AppAssets._internal();
 
+  /// Flags
+  static const String flagPath = 'assets/flags';
+
   /// Lotties
   static const String lottiePath = 'assets/lotties';
 
@@ -27,7 +30,6 @@ class AppAssets {
   /// Images
   static const String imagePath = 'assets/images';
 
-  final String pageBackground = "$imagePath/page_background.png";
   final String logo = "$imagePath/logo.png";
 
   /// Suggest images

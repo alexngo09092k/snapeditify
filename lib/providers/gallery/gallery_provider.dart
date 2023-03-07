@@ -165,11 +165,12 @@ class GalleryProvider extends IGalleryProvider {
 
     for (var entityPath in entityPaths) {
       final entities = (await entityPath.getAssetListPaged(page: 0, size: 1));
-      final acount = await entityPath.assetCountAsync;
+      final count = await entityPath.assetCountAsync;
+      if(count < 1) continue;
       _albumList[entityPath.id] = AlbumVM(
         entityPath: entityPath,
         thumnail: entities.isNotEmpty ? entities.first : null,
-        count: acount,
+        count: count,
       );
     }
 

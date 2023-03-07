@@ -1,7 +1,7 @@
 part of '../theme.dart';
 
 ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
-  final base = ThemeData.light().copyWith(
+  final base = ThemeData.dark().copyWith(
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
@@ -11,26 +11,26 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
   );
 
   return base.copyWith(
-    brightness: Brightness.dark,
+    brightness: Brightness.light,
 
     textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.textColor,
-      displayColor: AppColors.instance.textColor,
-      decorationColor: AppColors.instance.textColor,
+      bodyColor: AppColors.instance.darkOnBackground,
+      displayColor:  AppColors.instance.darkOnBackground,
+      decorationColor: AppColors.instance.darkOnBackground,
     ),
 
     primaryTextTheme: buildTextTheme(base.primaryTextTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.primaryColor,
-      displayColor: AppColors.instance.primaryColor,
-      decorationColor: AppColors.instance.primaryColor,
+      bodyColor: AppColors.instance.darkOnBackground,
+      displayColor:  AppColors.instance.darkOnBackground,
+      decorationColor: AppColors.instance.darkOnBackground,
     ),
 
-    primaryColor: AppColors.instance.primaryColor,
+    primaryColor: AppColors.instance.darkPrimary,
 
     secondaryHeaderColor: base.secondaryHeaderColor,
 
     /// ================== CARD =====================
-    cardColor: AppColors.instance.white,
+    cardColor: AppColors.instance.darkSurface,
 
     textButtonTheme: base.textButtonTheme,
 
@@ -38,8 +38,18 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
 
     /// =================== COLOR SCHEME ====================
     colorScheme: base.colorScheme.copyWith(
-      primary: AppColors.instance.primaryColor,
-      secondary: AppColors.instance.secondaryColor,
+      primary: AppColors.instance.darkPrimary,
+      onPrimary: AppColors.instance.darkOnPrimary,
+      onPrimaryContainer: AppColors.instance.darkOnPrimary,
+      secondary: AppColors.instance.darkSecondary,
+      onSecondary: AppColors.instance.darkOnSecondary,
+      onSecondaryContainer: AppColors.instance.darkOnSecondary,
+      background: AppColors.instance.darkBackground,
+      onBackground: AppColors.instance.darkOnBackground,
+      surface: AppColors.instance.darkSurface,
+      onSurface: AppColors.instance.darkOnSurface,
+      error: AppColors.instance.darkError,
+      onError: AppColors.instance.darkOnError,
     ),
 
     /// ====================== TEXT SELECTION THEME ======================
@@ -59,9 +69,9 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     primaryColorLight: base.primaryColorLight,
 
     /// ====================== BACKGROUND AND DIALOG ======================
-    splashColor: AppColors.instance.white,
-    dialogBackgroundColor: AppColors.instance.white,
-    scaffoldBackgroundColor: AppColors.instance.white,
+    splashColor: AppColors.instance.darkBackground,
+    dialogBackgroundColor: AppColors.instance.darkSurface,
+    scaffoldBackgroundColor: AppColors.instance.darkBackground,
 
     /// ====================== STATUS BAR ======================
     appBarTheme: base.appBarTheme,
@@ -71,13 +81,16 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     tabBarTheme: base.tabBarTheme,
 
     /// ====================== DISABLED ====================
-    disabledColor: AppColors.instance.textColor.withOpacity(0.5),
+    disabledColor: base.disabledColor,
 
     /// ======================= CARD =======================
     cardTheme: base.cardTheme,
 
     /// ======================== ICON =======================
-    iconTheme: base.iconTheme.copyWith(color: AppColors.instance.textColor),
+    iconTheme: base.iconTheme.copyWith(
+      color: AppColors.instance.darkOnBackground, 
+      size: AppDimensions.instance.icon,
+    ),
 
     primaryIconTheme: base.primaryIconTheme,
 
@@ -85,6 +98,6 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     inputDecorationTheme: base.inputDecorationTheme,
 
     /// ========================= DIVIDER ========================
-    dividerColor: AppColors.instance.textColor.withOpacity(0.1),
+    dividerColor: base.dividerColor,
   );
 }

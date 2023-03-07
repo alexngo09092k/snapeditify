@@ -1,20 +1,22 @@
-import 'package:snapeditify/common/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:snapeditify/common/constants.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
-      {Key? key,
-      this.gradient,
-      this.titleColor,
-      this.titleSize = 14,
-      this.color,
-      this.width,
-      this.height,
-      this.onTap,
-      this.child,
-      this.icon,
-      this.title})
-      : super(key: key);
+  const CustomButton({
+    Key? key,
+    this.gradient,
+    this.titleColor,
+    this.titleSize = 14,
+    this.color,
+    this.width,
+    this.height,
+    this.onTap,
+    this.child,
+    this.icon,
+    this.title,
+    this.isLoading = false,
+  }) : super(key: key);
 
   final Gradient? gradient;
   final String? title;
@@ -25,6 +27,7 @@ class CustomButton extends StatelessWidget {
   final double? titleSize;
   final Widget? child;
   final Widget? icon;
+  final bool isLoading;
   final void Function()? onTap;
 
   @override
@@ -39,29 +42,32 @@ class CustomButton extends StatelessWidget {
           vertical: AppDimensions.instance.paddingX(0.5),
         ),
         decoration: BoxDecoration(
-          color: color ?? Theme.of(context).primaryColor,
+          color: color ?? Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(3))),
           gradient: gradient,
           boxShadow: [AppColors.instance.boxShadow],
         ),
-        child: child ??
-            Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  icon ?? const SizedBox(),
-                  icon != null ? SizedBox(width: AppDimensions.instance.paddingX(0.5)) : const SizedBox(),
-                  Text(
-                    title ?? '',
-                    style: TextStyle(
-                      color: titleColor ?? AppColors.instance.white,
-                      fontSize: titleSize,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              ),
-            ),
+        child: isLoading
+            ? CupertinoActivityIndicator(color: titleColor ?? Theme.of(context).colorScheme.onPrimary)
+            : child ??
+                Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      icon ?? const SizedBox(),
+                      icon != null? SizedBox(width: AppDimensions.instance.paddingX(0.5)): const SizedBox(),
+                      if (title != null)
+                        Text(
+                          title!,
+                          style: TextStyle(
+                            color: titleColor ?? Theme.of(context).colorScheme.onPrimary,
+                            fontSize: titleSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                    ],
+                  ),
+                ),
       ),
     );
   }

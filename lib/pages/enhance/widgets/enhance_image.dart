@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_after.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_before.dart';
-import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/before_after/before_after.dart';
 
 class EnhanceImage extends StatelessWidget {
-  const EnhanceImage({Key? key, required this.provider}) : super(key: key);
-  final EnhanceProvider provider;
+  const EnhanceImage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BaseImageEditor(
-      background: Colors.transparent,
       builder: (width, height) => BeforeAfter(
-        beforeImage: EnhanceBefore(provider: provider),
-        afterImage: EnhanceAfter(provider: provider),
+        beforeImage: const EnhanceBefore(),
+        afterImage: const EnhanceAfter(),
         imageWidth: width,
         imageHeight: height,
         thumbImage: Image.asset(AppAssets.instance.icSeekbarThumb).image,

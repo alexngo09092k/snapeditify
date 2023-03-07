@@ -80,8 +80,7 @@ class _AIModeResultState extends ProviderStateObserver<AIModeResult, RemoveObjec
                       onTap: () => provider.toBrush(context),
                       child: const CustomIcon(CupertinoIcons.back),
                     ),
-                    BasePropConsumer<RemoveObjectProvider, int>(
-                      listenable: provider,
+                    PropConsumer<IRemoveObjectProvider, int>(
                       select: (p) => p.state.detectedObjects.length,
                       builder: (_, __, ___, count) => Text(
                         '$count ${S.of(context).objects}',

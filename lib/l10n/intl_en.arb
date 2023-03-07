@@ -1,5 +1,7 @@
 {
   "@@locale": "en",
+  "languageFlag": "",
+  "languageName": "English",
   "sugessted": "Sugessted",
   "albums": "Albums",
   "animeAi": "Anime AI",
@@ -62,5 +64,15 @@
   "failedToEnhanceImagePleaseTryAgain": "Failed to enhance image, please try again!",
   "failedToStyleImagePleaseTryAgain": "Failed to style image, please try again!",
   "pleaseTryAgainOrOpenTheAppAgain": "Please try again or open the app again!",
-  "openApp": "Open app"
+  "openApp": "Open app",
+  "wouldLikeToAccessYourPhotos": "Would like to access your photos",
+  "toAccessPhotosOnYourDeviceToEditOrShare": "to access photos on your device to edit or share image.",
+  "allow": "Allow",
+  "failedToOpenMailPleaseTryGain": "Failed to open mail, please try gain!",
+  "openBrowser": "Open browser",
+  "failedToOpenBrowserPleaseTryAgain": "Failed to open browser, please try again",
+  "english": "English",
+  "vietnamese": "Vietnamese",
+  "chinese": "Chinese",
+  "failedToSaveImagePleaseTryAgain": "Failed to save image, please try again!"
 }

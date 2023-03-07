@@ -32,6 +32,7 @@ class SavedImagePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
+      color: Theme.of(context).colorScheme.background,
       height: AwesomeAppState.screen.height * 2 / 3,
       child: SafeArea(
         child: Padding(
@@ -76,6 +77,7 @@ class SavedImagePreview extends StatelessWidget {
                   onNewEditImage(_);
                 },
               ),
+              SizedBox(height: AppDimensions.instance.padding),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -83,8 +85,8 @@ class SavedImagePreview extends StatelessWidget {
                     title: S.of(context).newImage,
                     width: 150,
                     height: 40,
-                    color: AppColors.instance.white,
-                    titleColor: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.surface,
+                    titleColor: Theme.of(context).colorScheme.onSurface,
                     onTap: () {
                       Navigator.of(context).pop();
                       onNewImage();
@@ -140,7 +142,7 @@ class _Options extends StatelessWidget {
                       children: [
                         CustomIcon(e.icon),
                         SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                        Text(e.title, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600))
+                        Text(e.title, style: Theme.of(context).textTheme.bodyLarge)
                       ],
                     ),
                   ),

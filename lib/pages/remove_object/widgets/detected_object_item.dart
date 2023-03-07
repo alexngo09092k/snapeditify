@@ -10,11 +10,10 @@ import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/tile_row.dart';
 
-class DetectedObjectItem extends StatelessWidget {
-  const DetectedObjectItem({Key? key, required this.maskId, required this.provider}) : super(key: key);
+class DetectedObjectItem extends ProviderStateless<IRemoveObjectProvider> {
+  DetectedObjectItem({super.key, required this.maskId});
   final int maskId;
-  final RemoveObjectProvider provider;
-
+  
   DetectedObjectVM get detectedObject => provider.state.detectedObjects[maskId]!;
 
   @override
@@ -30,8 +29,7 @@ class DetectedObjectItem extends StatelessWidget {
         ),
       ),
     );
-    final actionWidget = BasePropConsumer<RemoveObjectProvider, bool>(
-      listenable: provider,
+    final actionWidget = PropConsumer<IRemoveObjectProvider, bool>(
       select: (p) => detectedObject.isSelected,
       builder: (_, __, ___, isSelected) => Container(
         alignment: Alignment.center,
@@ -51,8 +49,7 @@ class DetectedObjectItem extends StatelessWidget {
       detectedObject.objectDescription,
       style: Theme.of(context).textTheme.titleMedium,
     );
-    final removeText = BasePropConsumer<RemoveObjectProvider, bool>(
-      listenable: provider,
+    final removeText = PropConsumer<IRemoveObjectProvider, bool>(
       select: (p) => detectedObject.isRemoved,
       builder: (_, __, ___, isRemoved) => isRemoved
           ? Padding(

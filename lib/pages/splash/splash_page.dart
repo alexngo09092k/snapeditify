@@ -33,18 +33,14 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
           Future.delayed(Duration(milliseconds: (time - ((end - start)))), _goTo);
         }
       } else {
-        WidgetUtils.instance.showErrorPopup(
-          context,
+        WidgetUtils.instance.showWarningPopup(
           title: S.of(context).openApp,
           message: S.of(context).pleaseTryAgainOrOpenTheAppAgain,
           retry: (_) => AwesomeApp.instance?.restart(),
         );
       }
     } else {
-      WidgetUtils.instance.showNoInternetPopup(
-        context,
-        retry: (_) => onSplash(resultOnWillSplash),
-      );
+      WidgetUtils.instance.showNoInternetPopup(retry: (_) => onSplash(resultOnWillSplash));
     }
   }
 

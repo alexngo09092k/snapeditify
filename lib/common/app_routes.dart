@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
@@ -57,12 +56,12 @@ class AppRoutes extends IAppRoutes {
     splashPage: (context) => const SplashPage(),
     maintenancePage: (context) => const MaintenancePage(),
     homePage: (context) => const HomePage(),
-    removeObjectPage: (context) => const RemoveObjectPage(),
-    enhanceImagePage: (context) => const EnhancePage(),
     settingPage: (context) => const SettingPage(),
     premiumPage: (context) => const PremiumPage(),
-    applyArtEffectPage: (context) => const RestylePage(),
     albumsPage: (context) => const AlbumsPage(),
+    removeObjectPage: (context) => const RemoveObjectPage(),
+    enhanceImagePage: (context) => const EnhancePage(),
+    applyArtEffectPage: (context) => const RestylePage(),
   };
 
   @override
@@ -82,18 +81,18 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const MaintenancePage(), settings);
       case homePage:
         return buildRoute(const HomePage(), settings);
-      case removeObjectPage:
-        return buildRoute(const RemoveObjectPage(), settings);
-      case enhanceImagePage:
-        return buildRoute(const EnhancePage(), settings);
       case settingPage:
         return buildRoute(const SettingPage(), settings);
       case premiumPage:
         return buildRoute(const PremiumPage(), settings);
-      case applyArtEffectPage:
-        return buildRoute(const RestylePage(), settings);
       case albumsPage:
         return buildRoute(const AlbumsPage(), settings);
+      case removeObjectPage:
+        return buildRoute(const RemoveObjectPage(), settings);
+      case enhanceImagePage:
+        return buildRoute(const EnhancePage(), settings);
+      case applyArtEffectPage:
+        return buildRoute(const RestylePage(), settings);
       case photosPage:
         return buildRoute(PhotosPage(albumId: (settings.arguments as String?)), settings);
       case animeAIPage:
@@ -112,13 +111,13 @@ extension AppRoutesUtils on IAppRoutes {
     provider.editImageType = editImageType;
     UserPermission.instance.requestStoragePermission(context, onHasPermisson: () async {
       /// SHOW LOADING POPUP
-      WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+      WidgetUtils.instance.showLoadingPopup();
 
       await provider.listenPhotos();
       await provider.refreshGalleryList(true);
 
       /// HIDE LOADING
-      WidgetUtils.instance.hideLoadingPopup();
+      WidgetUtils.instance.dimiss();
 
       Navigator.pushNamed(context, AppRoutes.albumsPage);
     });
@@ -147,7 +146,7 @@ extension AppRoutesUtils on IAppRoutes {
         late final String target;
 
         /// SHOW LOADING POPUP
-        WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+        WidgetUtils.instance.showLoadingPopup();
 
         switch (current) {
           case EditImageType.applyArtEffect:
@@ -171,7 +170,7 @@ extension AppRoutesUtils on IAppRoutes {
         }
 
         /// HIDE LOADING
-        WidgetUtils.instance.hideLoadingPopup();
+        WidgetUtils.instance.dimiss();
 
         if (res) {
           if (editImageType != null) {

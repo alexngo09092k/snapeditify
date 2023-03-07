@@ -15,8 +15,7 @@ class DetectedObjectList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasePropConsumer<RemoveObjectProvider, int>(
-      listenable: provider,
+    return PropConsumer<IRemoveObjectProvider, int>(
       select: (p) => p.state.detectedObjects.length,
       builder: (_, __, p, ___) {
         final data = p.state.detectedObjects.values.where((detectedObject) => detectedObject.objectType == type);
@@ -24,9 +23,8 @@ class DetectedObjectList extends StatelessWidget {
             ? ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (_, index) => DetectedObjectItem(
-                  key: Key('$index'),
-                 maskId: data.elementAt(index).maskId,
-                  provider: provider,
+                  key: Key('$index'), 
+                  maskId: data.elementAt(index).maskId,
                 ),
               )
             : SingleChildScrollView(

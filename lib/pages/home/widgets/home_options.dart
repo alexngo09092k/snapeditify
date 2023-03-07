@@ -27,9 +27,9 @@ class HomeOptions extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CustomIcon(e.icon),
+                        CustomIcon(e.icon, size: AppDimensions.instance.icon),
                         SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                        Text(e.title, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600))
+                        Text(e.title, style: Theme.of(context).textTheme.bodyLarge)
                       ],
                     ),
                   ),

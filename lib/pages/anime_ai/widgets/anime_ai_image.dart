@@ -7,8 +7,7 @@ import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
 class AnimeAIImage extends StatelessWidget {
-  const AnimeAIImage({super.key, required this.provider});
-  final AnimeAIProvider provider;
+  const AnimeAIImage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +16,11 @@ class AnimeAIImage extends StatelessWidget {
         children: [
           /// PAINT
           Center(
-            child: AspectRatio(
-              aspectRatio: provider.state.image.ratio,
-              child: BasePropConsumer<AnimeAIProvider, PainterController>(
-                listenable: provider,
-                select: (p) => p.state.paint,
-                builder: (_, __, ___, paint) => FlutterPainter(controller: paint),
+            child: PropConsumer<IAnimeAIProvider, PainterController>(
+              select: (p) => p.state.paint,
+              builder: (_, __, p, paint) => AspectRatio(
+                aspectRatio: p.state.image.ratio,
+                child: FlutterPainter(controller: paint),
               ),
             ),
           ),
@@ -31,13 +29,12 @@ class AnimeAIImage extends StatelessWidget {
           Positioned(
             right: AppDimensions.instance.padding,
             bottom: AppDimensions.instance.padding,
-            child: GestureDetector(
-              onTapDown: (_) => provider.compare(),
-              onTapUp: (_) => provider.compare(),
-              child: BasePropConsumer<AnimeAIProvider, bool>(
-                listenable: provider,
-                select: (p) => p.canCompare,
-                builder: (_, __, ___, canCompare) => CustomIcon.defaultStyle(
+            child: PropConsumer<IAnimeAIProvider, bool>(
+              select: (p) => p.canCompare,
+              builder: (_, __, p, canCompare) => GestureDetector(
+                onTapDown: (_) => p.compare(),
+                onTapUp: (_) => p.compare(),
+                child: CustomIcon.defaultStyle(
                   context,
                   icon: AppAssets.instance.icCompare,
                   color: canCompare ? Theme.of(context).primaryColor : null,

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:fluttering/utils/logs.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
@@ -11,7 +10,7 @@ import 'package:snapeditify/pages/setting/widgets/unlock_premium.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/ad_view.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
-import 'package:snapeditify/widgets/base/app_layout.dart';
+import 'package:snapeditify/widgets/app_use/app_layout.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 import 'package:snapeditify/widgets/base/lottie_viewer.dart';
 import 'package:snapeditify/widgets/base/separated_list_view.dart';
@@ -36,11 +35,19 @@ class SettingPage extends StatelessWidget {
           }),
         );
         if (!await launchUrl(emailLaunchUri)) {
-          WidgetUtils.instance.showErrorPopup(context, retry: mail);
+          WidgetUtils.instance.showWarningPopup(
+            title: S.of(context).feedback, 
+            message: S.of(context).failedToOpenMailPleaseTryGain, 
+            retry: mail,
+          );
         }
       } catch (error) {
         Debug.log('feedback $error');
-        WidgetUtils.instance.showErrorPopup(context, retry: mail);
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).feedback, 
+          message: S.of(context).failedToOpenMailPleaseTryGain, 
+          retry: mail,
+        );
       }
     }
 
@@ -83,7 +90,7 @@ class SettingPage extends StatelessWidget {
             if (Configuration.instance.business.shareApp.link != null) {
               Share.share(
                 Configuration.instance.business.shareApp.link!,
-                subject: Configuration.instance.business.appName,
+                subject: '${Configuration.instance.business.appName} - ${Configuration.instance.business.appBio}',
               );
             }
           },
@@ -95,11 +102,19 @@ class SettingPage extends StatelessWidget {
   _launchUrlInApp(BuildContext context, String url) async {
     try {
       if (!await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView)) {
-        WidgetUtils.instance.showErrorPopup(context, retry: (_) => _launchUrlInApp(context, url));
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).openBrowser, 
+          message: S.of(context).failedToOpenBrowserPleaseTryAgain, 
+          retry: (_) => _launchUrlInApp(context, url),
+        );
       }
     } catch (error) {
       Debug.log('launchUrlInApp $error');
-      WidgetUtils.instance.showErrorPopup(context, retry: (_) => _launchUrlInApp(context, url));
+      WidgetUtils.instance.showWarningPopup( 
+        title: S.of(context).openBrowser, 
+        message: S.of(context).failedToOpenBrowserPleaseTryAgain, 
+        retry: (_) => _launchUrlInApp(context, url),
+      );
     }
   }
 

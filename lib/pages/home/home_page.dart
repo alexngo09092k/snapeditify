@@ -3,12 +3,14 @@ import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/home/widgets/home_base_banner.dart';
+import 'package:snapeditify/pages/home/widgets/home_light_dark.dart';
+import 'package:snapeditify/pages/home/widgets/home_localizations.dart';
 import 'package:snapeditify/pages/home/widgets/home_logo.dart';
 import 'package:snapeditify/pages/home/widgets/home_options.dart';
+import 'package:snapeditify/pages/home/widgets/home_settings_button.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/widgets/base/ad_view.dart';
-import 'package:snapeditify/widgets/base/app_layout.dart';
-import 'package:snapeditify/widgets/base/custom_icon.dart';
+import 'package:snapeditify/widgets/app_use/app_layout.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,25 +23,19 @@ class HomePage extends StatelessWidget {
       appBar: true,
       scroll: true,
       leading: const HomeLogo(),
-      action: Padding(
-        padding: EdgeInsets.only(right: AppDimensions.instance.padding),
-        child: Row(
-          children: [
-            GestureDetector(
-              onTap: () => AppRoutes.instance.goSettingPage(context),
-              child: const CustomIcon(CupertinoIcons.square_grid_2x2),
-            ),
-          ],
-        ),
+      action: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
+          const HomeLocalizations(),
+          const HomeLightDarkButton(), 
+          const HomeSettingsButton(),
+          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
+        ],
       ),
       before: const HomeOptions(),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppAssets.instance.pageBackground),
-          fit: BoxFit.cover,
-        ),
-      ),
       children: [
+        SizedBox(height: AppDimensions.instance.padding),
         HomeBaseBanner(
           banner: AppAssets.instance.homeAnimeAIBanner,
           title: S.of(context).createNanimeAvatar,

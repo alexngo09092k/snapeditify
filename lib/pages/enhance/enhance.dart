@@ -3,7 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_image.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
-import 'package:snapeditify/widgets/base/app_layout.dart';
+import 'package:snapeditify/widgets/app_use/app_layout.dart';
 import 'package:snapeditify/widgets/app_use/save_button.dart';
 
 class EnhancePage extends StatefulWidget {
@@ -13,8 +13,8 @@ class EnhancePage extends StatefulWidget {
   State<EnhancePage> createState() => _EnhancePageState();
 }
 
-class _EnhancePageState extends ProviderStateObserver<EnhancePage, EnhanceProvider> {
-
+class _EnhancePageState
+    extends ProviderStateObserver<EnhancePage, IEnhanceProvider> {
   @override
   void onNextFrame(Duration timestamp) {
     provider.enhanceImage(context);
@@ -27,10 +27,8 @@ class _EnhancePageState extends ProviderStateObserver<EnhancePage, EnhanceProvid
       screen: S.of(context).enhance,
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
-      action: SaveButton(provider: provider),
-      children: [
-        EnhanceImage(provider: provider),
-      ],
+      action: const SaveButton<IEnhanceProvider>(),
+      children: const [EnhanceImage()],
     );
   }
 }

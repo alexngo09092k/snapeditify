@@ -9,18 +9,15 @@ import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
 
 class AnimeAIStyleList extends StatelessWidget {
-  const AnimeAIStyleList({super.key, required this.provider});
-  final AnimeAIProvider provider;
+  const AnimeAIStyleList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: AwesomeAppState.screen.height * 1.2 / 5,
-      child: BasePropConsumer<AnimeAIProvider, String?>(
-        listenable: provider,
+      child: PropConsumer<IAnimeAIProvider, String?>(
         select: (_) => _.category,
-        builder: (_, __, p, ___) => BasePropConsumer<AnimeAIProvider, List<AnimeStyle>>(
-          listenable: provider,
+        builder: (_, __, p, ___) => PropConsumer<IAnimeAIProvider, List<AnimeStyle>>(
           select: (_) => _.styles.where((element) => element.category == p.category).toList(),
           builder: (_, __, ___, styles) {
             return ListView.builder(
@@ -30,9 +27,8 @@ class AnimeAIStyleList extends StatelessWidget {
                 padding: EdgeInsets.only(left: AppDimensions.instance.padding),
                 child: AnimeStyleItem(
                   key: Key('$index'),
-                  provider: provider,
                   style: styles[index],
-                  onStyle: (style) => provider.restyleImage(context, style.styleId),
+                  onStyle: (style) => p.restyleImage(context, style.styleId),
                 ),
               ),
             );
@@ -44,8 +40,7 @@ class AnimeAIStyleList extends StatelessWidget {
 }
 
 class AnimeStyleItem extends StatelessWidget {
-  const AnimeStyleItem({super.key, required this.provider, required this.style, required this.onStyle});
-  final AnimeAIProvider provider;
+  const AnimeStyleItem({super.key, required this.style, required this.onStyle});
   final AnimeStyle style;
   final Function(AnimeStyle) onStyle;
 
@@ -68,8 +63,7 @@ class AnimeStyleItem extends StatelessWidget {
                   ),
                   Positioned(
                     right: 0,
-                    child: BasePropConsumer<AnimeAIProvider, String?>(
-                      listenable: provider,
+                    child: PropConsumer<IAnimeAIProvider, String?>(
                       select: (_) => _.state.styleId,
                       builder: (_, __, ___, styleId) => styleId == style.styleId
                           ? Padding(

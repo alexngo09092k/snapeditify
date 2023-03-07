@@ -20,6 +20,9 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
+  @override
+  RemoveObjectState get state;
+
   bool get canRemove;
   bool get canUndo;
   bool get canRedo;
@@ -47,9 +50,9 @@ abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvi
 
   bool changeStrokeColor(BuildContext context, Color strokeColor);
 
-  bool showAutoAIGuide(BuildContext context);
+  bool showAutoAIGuide();
 
-  bool showBrushGuide(BuildContext context);
+  bool showBrushGuide();
 }
 
 class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
@@ -162,21 +165,21 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   }
 
   @override
-  bool showAutoAIGuide(BuildContext context) {
+  bool showAutoAIGuide() {
     int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.autoAIGuide);
     if (num != null && num > 1) return false;
 
-    showDialog(context: context, builder: (_) => const AIGuide());
+    WidgetUtils.instance.showDialog(builder: (_) => const AIGuide());
     AsyncStorage.instance.setInt(AsyncStorageKey.instance.autoAIGuide, num == null ? 1 : num + 1);
     return true;
   }
 
   @override
-  bool showBrushGuide(BuildContext context) {
+  bool showBrushGuide() {
     int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.brushGuide);
     if (num != null && num > 1) return false;
 
-    showDialog(context: context, builder: (_) => const BrushGuide());
+    WidgetUtils.instance.showDialog(builder: (_) => const BrushGuide());
     AsyncStorage.instance.setInt(AsyncStorageKey.instance.brushGuide, num == null ? 1 : num + 1);
     return true;
   }
@@ -205,7 +208,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     adProvider.handleAd();
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+    WidgetUtils.instance.showLoadingPopup();
 
     /// CALL API
     AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
@@ -229,19 +232,23 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       _state.mode = RemoveObjectMode.ai;
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.hideLoadingPopup();
+      WidgetUtils.instance.dimiss();
 
       /// SHOW GUIDE
-      showAutoAIGuide(context);
+      showAutoAIGuide();
 
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.hideLoadingPopup();
+    WidgetUtils.instance.dimiss();
 
     if (!res.status) {
-      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).aiDetection, message: S.of(context).failedToDetectObjectPleaseTryAgain, retry: (_) => toAI(context));
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).aiDetection, 
+        message: S.of(context).failedToDetectObjectPleaseTryAgain, 
+        retry: (_) => toAI(context),
+      );
       Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
     }
 
@@ -290,14 +297,14 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!canRemove) return false;
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup(context, message: S.of(context).pleaseWaitAMoment);
+    WidgetUtils.instance.showLoadingPopup();
 
     /// CALL API
     ui.Image mask = await _state.paint.renderMask(originalImage.size);
     String? maskBase64 = await ImageUtils.instance.imageUIToBase64(mask);
     if (maskBase64 == null) {
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.hideLoadingPopup();
+      WidgetUtils.instance.dimiss();
       return false;
     }
 
@@ -320,15 +327,19 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.hideLoadingPopup();
+      WidgetUtils.instance.dimiss();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.hideLoadingPopup();
+    WidgetUtils.instance.dimiss();
 
     if (!res.status) {
-      WidgetUtils.instance.showErrorPopup(context, title: S.of(context).removeObjects, message: S.of(context).failedToRemoveObjectsPleaseTryAgain, retry: (_) => removeObjects(context));
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).removeObjects, 
+        message: S.of(context).failedToRemoveObjectsPleaseTryAgain, 
+        retry: (_) => removeObjects(context),
+      );
       Debug.log("===== REMOVE OBJECTS ${res.message} =====");
     }
 

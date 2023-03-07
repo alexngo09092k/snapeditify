@@ -7,10 +7,8 @@ import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
-class RemoveObjectRevert extends StatelessWidget {
-  const RemoveObjectRevert({super.key, required this.provider});
-  final RemoveObjectProvider provider;
-
+class RemoveObjectRevert extends ProviderStateless<IRemoveObjectProvider> {
+  RemoveObjectRevert({super.key});
   _revert(BuildContext context) {
     WidgetUtils.instance.alert(
       context,
@@ -35,8 +33,7 @@ class RemoveObjectRevert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasePropConsumer<RemoveObjectProvider, bool>(
-      listenable: provider,
+    return PropConsumer<IRemoveObjectProvider, bool>(
       select: (p) => p.canRevert,
       builder: (_, __, ___, canRevert) => GestureDetector(
         onTap: canRevert ? () => _revert(context) : null,

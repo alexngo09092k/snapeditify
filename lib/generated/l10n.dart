@@ -50,6 +50,26 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// ``
+  String get languageFlag {
+    return Intl.message(
+      '',
+      name: 'languageFlag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get languageName {
+    return Intl.message(
+      'English',
+      name: 'languageName',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sugessted`
   String get sugessted {
     return Intl.message(
@@ -679,6 +699,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Would like to access your photos`
+  String get wouldLikeToAccessYourPhotos {
+    return Intl.message(
+      'Would like to access your photos',
+      name: 'wouldLikeToAccessYourPhotos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to access photos on your device to edit or share image.`
+  String get toAccessPhotosOnYourDeviceToEditOrShare {
+    return Intl.message(
+      'to access photos on your device to edit or share image.',
+      name: 'toAccessPhotosOnYourDeviceToEditOrShare',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow`
+  String get allow {
+    return Intl.message(
+      'Allow',
+      name: 'allow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to open mail, please try gain!`
+  String get failedToOpenMailPleaseTryGain {
+    return Intl.message(
+      'Failed to open mail, please try gain!',
+      name: 'failedToOpenMailPleaseTryGain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open browser`
+  String get openBrowser {
+    return Intl.message(
+      'Open browser',
+      name: 'openBrowser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to open browser, please try again`
+  String get failedToOpenBrowserPleaseTryAgain {
+    return Intl.message(
+      'Failed to open browser, please try again',
+      name: 'failedToOpenBrowserPleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vietnamese`
+  String get vietnamese {
+    return Intl.message(
+      'Vietnamese',
+      name: 'vietnamese',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chinese`
+  String get chinese {
+    return Intl.message(
+      'Chinese',
+      name: 'chinese',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to save image, please try again!`
+  String get failedToSaveImagePleaseTryAgain {
+    return Intl.message(
+      'Failed to save image, please try again!',
+      name: 'failedToSaveImagePleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -687,6 +807,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'cn'),
       Locale.fromSubtags(languageCode: 'vi'),
     ];
   }

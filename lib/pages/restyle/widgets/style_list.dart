@@ -9,24 +9,22 @@ import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
 
 class StyleList extends StatelessWidget {
-  const StyleList({super.key, required this.provider});
-  final RestyleProvider provider;
+  const StyleList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: AwesomeAppState.screen.height * 1.2 / 5,
       padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
-      child: BasePropConsumer<RestyleProvider, List<Style>>(
-        listenable: provider,
+      child: PropConsumer<IRestyleProvider, List<Style>>(
         select: (_) => _.styles,
-        builder: (_, __, ___, styles) => ListView.builder(
+        builder: (_, __, p, styles) => ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: styles.length,
           itemBuilder: (_, index) => StyleItem(
             key: Key('$index'),
-            provider: provider,
             style: styles[index],
+            onSelect: (_) => p.restyleImage(context, _.styleId),
           ),
         ),
       ),
@@ -35,14 +33,14 @@ class StyleList extends StatelessWidget {
 }
 
 class StyleItem extends StatelessWidget {
-  const StyleItem({super.key, required this.provider, required this.style});
-  final RestyleProvider provider;
+  const StyleItem({super.key, required this.style, required this.onSelect});
   final Style style;
+  final Function(Style) onSelect;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => provider.restyleImage(context, style.styleId),
+      onTap: () => onSelect(style),
       child: AppCard(
         margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
         width: (AwesomeAppState.screen.height * 1.2 / 5) * 3 / 6.5,
@@ -53,13 +51,10 @@ class StyleItem extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
               child: Stack(
                 children: [
-                  CustomImage(
-                    image: style.thumbnailUrl,
-                  ),
+                  CustomImage(image: style.thumbnailUrl),
                   Positioned(
                     right: 0,
-                    child: BasePropConsumer<RestyleProvider, String?>(
-                      listenable: provider,
+                    child: PropConsumer<IRestyleProvider, String?>(
                       select: (_) => _.state.styleId,
                       builder: (_, __, ___, styleId) => styleId == style.styleId
                           ? Padding(
