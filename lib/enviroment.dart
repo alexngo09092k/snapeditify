@@ -25,7 +25,7 @@ const enviroment = {
     'appName': 'SnapEditify',
 
     /// Version
-    'version': '1.0.1',
+    'version': '1.0.2',
 
     /// Logo is used in splash screen and app ui
     'appLogo': 'assets/images/logo.png',

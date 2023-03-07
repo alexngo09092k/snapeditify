@@ -112,7 +112,7 @@ class BusinessConfig {
         'message': "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
       }),
       moreApps: [],
-      version: '1.0.0',
+      version: '1.0.2',
       appMode: AppMode.production,
     );
   }
