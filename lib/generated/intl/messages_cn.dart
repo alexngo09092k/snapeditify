@@ -118,7 +118,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Something wrongs"),
         "somethingsWrongPleaseTryAgain": MessageLookupByLibrary.simpleMessage(
             "Somethings wrong, please try again."),
-        "sugessted": MessageLookupByLibrary.simpleMessage("Sugessted"),
         "suggested": MessageLookupByLibrary.simpleMessage("Suggested"),
         "team": MessageLookupByLibrary.simpleMessage("Team"),
         "teamToSupport":

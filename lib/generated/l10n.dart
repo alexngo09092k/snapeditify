@@ -70,16 +70,6 @@ class S {
     );
   }
 
-  /// `Sugessted`
-  String get sugessted {
-    return Intl.message(
-      'Sugessted',
-      name: 'sugessted',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Albums`
   String get albums {
     return Intl.message(

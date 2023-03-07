@@ -23,7 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% accurate"),
-        "after": MessageLookupByLibrary.simpleMessage("After"),
+        "after": MessageLookupByLibrary.simpleMessage("Sau"),
         "ai": MessageLookupByLibrary.simpleMessage("AI"),
         "aiDetection": MessageLookupByLibrary.simpleMessage("AI Detection"),
         "albums": MessageLookupByLibrary.simpleMessage("Albums"),
@@ -39,16 +39,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Are you happy with\n"),
         "artEffect": MessageLookupByLibrary.simpleMessage("Art Effect"),
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
-        "before": MessageLookupByLibrary.simpleMessage("Before"),
+        "before": MessageLookupByLibrary.simpleMessage("Trước"),
         "brush": MessageLookupByLibrary.simpleMessage("Brush"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
+        "chinese": MessageLookupByLibrary.simpleMessage("Tiếng Trung Quốc"),
         "createNanimeAvatar":
             MessageLookupByLibrary.simpleMessage("Create\nAnime avatar"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("Discard changes and revert?"),
-        "english": MessageLookupByLibrary.simpleMessage("English"),
-        "enhance": MessageLookupByLibrary.simpleMessage("Enhance"),
+        "english": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
+        "enhance": MessageLookupByLibrary.simpleMessage("Làm nét"),
         "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),
         "enhanceNimageQuality":
             MessageLookupByLibrary.simpleMessage("Enhance\nimage quality"),
@@ -104,7 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Remove Objects"),
         "removeThingsNfromImage":
-            MessageLookupByLibrary.simpleMessage("Remove things\nfrom image"),
+            MessageLookupByLibrary.simpleMessage("Xoá mọi thứ khỏi ảnh"),
         "restyleImage": MessageLookupByLibrary.simpleMessage("Restyle Image"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),
@@ -118,7 +118,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Something wrongs"),
         "somethingsWrongPleaseTryAgain": MessageLookupByLibrary.simpleMessage(
             "Somethings wrong, please try again."),
-        "sugessted": MessageLookupByLibrary.simpleMessage("Sugessted"),
         "suggested": MessageLookupByLibrary.simpleMessage("Suggested"),
         "team": MessageLookupByLibrary.simpleMessage("Team"),
         "teamToSupport":
@@ -126,13 +125,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "toAccessPhotosOnYourDeviceToEditOrShare":
             MessageLookupByLibrary.simpleMessage(
                 "to access photos on your device to edit or share image."),
-        "tryItNow": MessageLookupByLibrary.simpleMessage("Try it now"),
+        "tryItNow": MessageLookupByLibrary.simpleMessage("Thử ngay"),
         "turnYourNimageNintoArt":
             MessageLookupByLibrary.simpleMessage("Turn your\nimage\ninto Art"),
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("Unlock SnapEditify Premium"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
-        "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "withText": MessageLookupByLibrary.simpleMessage("with"),
         "wouldLikeToAccessYourPhotos": MessageLookupByLibrary.simpleMessage(
             "Would like to access your photos"),

@@ -53,7 +53,7 @@ class SuggestedItem extends StatelessWidget {
           ),
           SizedBox(height: AppDimensions.instance.paddingX(1.5)),
           Text(
-            '${S.of(context).sugessted} ($total)',
+            '${S.of(context).suggested} ($total)',
             style: Theme.of(context).textTheme.bodyLarge!,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
