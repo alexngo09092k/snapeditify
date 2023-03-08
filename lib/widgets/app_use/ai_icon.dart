@@ -11,12 +11,16 @@ class AIIcon extends StatelessWidget {
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(0.5))),
+        borderRadius: BorderRadius.all(
+          Radius.circular(AppDimensions.instance.radiusX(0.5)),
+        ),
         gradient: AppColors.instance.gradient,
       ),
       child: Text(
         S.of(context).ai,
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.instance.white),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
       ),
     );
   }
