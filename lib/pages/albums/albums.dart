@@ -5,7 +5,6 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/albums/widgets/album_list.dart';
 import 'package:snapeditify/widgets/app_use/app_layout.dart';
 import 'package:snapeditify/widgets/app_use/camera_picker.dart';
-import 'package:snapeditify/widgets/base/ad_view.dart';
 
 class AlbumsPage extends StatelessWidget {
   const AlbumsPage({super.key});
@@ -15,7 +14,7 @@ class AlbumsPage extends StatelessWidget {
     return AppLayout(
       screen: S.of(context).albums,
       action: const CameraPicker(),
-      children: const [AlbumList(), AdView()],
+      children: const [AlbumList()],
     );
   }
 }

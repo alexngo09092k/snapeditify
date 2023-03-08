@@ -35,7 +35,6 @@ class PhotosPage extends StatelessWidget {
               ? ImageList(album: album)
               : const SuggestedImageList(),
         ),
-        const AdView(),
       ],
     );
   }
