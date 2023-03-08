@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttering_iap/fluttering_iap.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/models/config/bussiness_config.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
@@ -11,6 +13,9 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:snapeditify/models/config/gallery_config.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:fluttering_remote_config/fluttering_remote_config.dart';
+import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/widgets/base/custom_alert.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Configuration {
   static final Configuration _instance = Configuration._internal();
@@ -276,15 +281,47 @@ extension NetworkExtension on Configuration {
 }
 
 extension UpdateAppExtension on Configuration {
-  Future<String?> getUpdateVersionLink() async {
+
+  Future<T?> checkAppUpdate<T>() async {
+    final bool isUpdated = await _hasNewVersion();
+    if(isUpdated && InternetConnection.instance.hasConnection && business.updateApp.link != null)  {
+      return AwesomeAppState.useContext<T>(callback: (BuildContext context) {
+        return WidgetUtils.instance.alert<T>(
+          context,
+          barrierDismissible: false,
+          title: S.of(context).yourAppIsOutdated,
+          message: S.of(context).yourAppVersionIsNoLongerSupportedYoureMissingOut,
+          actions: [
+            if(!business.updateApp.required) AlertAction(
+              title: S.of(context).later, 
+              onPressed: WidgetUtils.instance.dimiss,
+              isDestructiveAction: true,
+            ),
+            AlertAction(
+              title: S.of(context).update,
+              onPressed: () async {
+                try {
+                  await launchUrl(Uri.parse( business.updateApp.link!));
+                }catch(error) {
+                  Debug.log('UPDATE APP ERRROR $error');
+                }finally {
+                  WidgetUtils.instance.dimiss();
+                }
+              },
+            ),
+          ],
+        );
+      });
+    }
+    return null;
+  }
+
+  Future<bool> _hasNewVersion() async {
     final PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
     // String v1 = '1.2.3', v2 = '1.2.11';
     int v1Number = _getExtendedVersionNumber(packageInfo.version); // return 10020003
     int v2Number = _getExtendedVersionNumber(business.updateApp.version); // return 10020011
-    if(v2Number > v1Number) {
-      return Configuration.instance.business.updateApp.link;
-    }
-    return null;
+    return v2Number > v1Number;
   }
 
   int _getExtendedVersionNumber(String version) {

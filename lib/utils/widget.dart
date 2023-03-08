@@ -162,37 +162,6 @@ class WidgetUtils {
     );
   }
 
-  Future<T?> checkAppUpdate<T>() async {
-    final String? updateVersionLink = await Configuration.instance.getUpdateVersionLink();
-    Debug.log("CHECK OUT APP VERSION $updateVersionLink");
-    if(updateVersionLink != null)  {
-      return AwesomeAppState.useContext<T>(callback: (BuildContext context) {
-        return alert<T>(
-          context,
-          barrierDismissible: false,
-          title: S.of(context).yourAppIsOutdated,
-          message: S.of(context).yourAppVersionIsNoLongerSupportedYoureMissingOut,
-          actions: [
-            AlertAction(title: S.of(context).later, onPressed: dimiss),
-            AlertAction(
-              title: S.of(context).update,
-              onPressed: () async {
-                try {
-                  await launchUrl(Uri.parse(updateVersionLink));
-                }catch(error) {
-                  Debug.log('UPDATE APP ERRROR $error');
-                }finally {
-                  dimiss();
-                }
-              },
-            ),
-          ],
-        );
-      });
-    }
-    return null;
-  }
-
   Future<T?> alert<T>(
     BuildContext context, {
     String? title,

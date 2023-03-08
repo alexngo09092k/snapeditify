@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:snapeditify/common/app_routes.dart';
+import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/home/widgets/home_base_banner.dart';
@@ -12,8 +13,20 @@ import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/widgets/base/ad_view.dart';
 import 'package:snapeditify/widgets/app_use/app_layout.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  
+  @override
+  void initState() {
+    super.initState();
+    Configuration.instance.checkAppUpdate();
+  }
 
   @override
   Widget build(BuildContext context) {

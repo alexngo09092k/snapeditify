@@ -5,8 +5,6 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:snapeditify/utils/widget.dart';
-
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
@@ -15,12 +13,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends AwesomeAppState<App> {
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetUtils.instance.checkAppUpdate();
-  }
 
   @override
   Widget build(BuildContext context) {
