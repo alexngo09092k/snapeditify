@@ -51,7 +51,7 @@ class BusinessConfig {
 
   factory BusinessConfig.defaultValue() {
     return BusinessConfig(
-      appName: "SnapEditify AI Photo Editor Pro",
+      appName: "SnapEditify",
       appLogo: "assets/images/logo.png",
       appBio: "Make your life beautiful",
       protocols: ['https://', 'http://', 'data:'],
@@ -120,7 +120,7 @@ class BusinessConfig {
       }),
       moreApps: [],
       version: '1.0.2',
-      appMode: AppMode.production,
+      appMode: kDebugMode? AppMode.debug: AppMode.production,
     );
   }
 
