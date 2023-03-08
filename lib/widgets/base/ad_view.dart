@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
+import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/more_apps.dart';
@@ -9,20 +10,31 @@ class AdView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final lottieWidth = screenWidth - AppDimensions.instance.paddingX(2);
-    return AdBuilder(
-      width: lottieWidth,
-      height: lottieWidth * 1 / 3,
-      errorBuilder: (_) => MoreApps(height:  lottieWidth * 1 / 3),
-      successBuilder: (_, ad) => Padding(
-        padding: EdgeInsets.only(bottom: AppDimensions.instance.padding),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-          child: AppCard(child: ad),
-        ),
+    final contentMaxWidth = AppDimensions.instance.contentMaxWidth;
+    final apps = Configuration.instance.business.moreApps;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding).copyWith(
+        top: AppDimensions.instance.padding,
       ),
-      borderRadius: BorderRadius.zero,
+      child: AdBuilder(
+        height: contentMaxWidth * 1 / 3 + AppDimensions.instance.padding, /// PADDING BOTTOM
+        errorBuilder: apps.isNotEmpty?  (_) => Padding(
+          padding: EdgeInsets.only(bottom: AppDimensions.instance.padding),
+          child: MoreApps(apps: apps, height: contentMaxWidth * 1 / 3),
+        ): null,
+        successBuilder: (_, ad) => Padding(
+          padding: EdgeInsets.only(bottom: AppDimensions.instance.padding),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+            child: AppCard(
+              // width: contentMaxWidth,
+              // height: contentMaxWidth * 1 / 3,
+              child: ad,
+            ),
+          ),
+        ),
+        borderRadius: BorderRadius.zero,
+      ),
     );
   }
 }

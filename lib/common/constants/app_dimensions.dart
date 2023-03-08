@@ -37,5 +37,5 @@ class AppDimensions {
         (AwesomeAppState.screen.width - gridDelegate.crossAxisSpacing * 3) / gridDelegate.crossAxisCount,
       );
 
-  double get bannerWidth => AwesomeAppState.screen.width - padding * 2;
+  double get contentMaxWidth => AwesomeAppState.screen.width - padding * 2;
 }

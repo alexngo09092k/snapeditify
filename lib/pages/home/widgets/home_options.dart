@@ -10,8 +10,8 @@ class HomeOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lottieWidth = AppDimensions.instance.bannerWidth;
-    final itemWidth = lottieWidth / 4 - AppDimensions.instance.padding;
+    final contentMaxWidth = AppDimensions.instance.contentMaxWidth;
+    final itemWidth = contentMaxWidth / 4 - AppDimensions.instance.padding;
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.padding)),
       child: Row(

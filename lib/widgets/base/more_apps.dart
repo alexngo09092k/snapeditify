@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/models/config/more_app.dart';
@@ -14,8 +13,9 @@ import 'package:snapeditify/widgets/slideshow/image_slideshow.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MoreApps extends StatelessWidget {
-  const MoreApps({super.key, required this.height});
+  const MoreApps({super.key, required this.height, required this.apps});
   final double height;
+  final List<MoreApp> apps;
 
   _launchApp(BuildContext context, MoreApp app) async {
     try {
@@ -39,7 +39,6 @@ class MoreApps extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final apps = Configuration.instance.business.moreApps;
     if(apps.isEmpty) return const SizedBox();
     return AppCard(
       height: height,
@@ -73,23 +72,29 @@ class MoreApps extends StatelessWidget {
                             padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.5)),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  e.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.titleMedium!.copyWith(color:Theme.of(context).colorScheme.onSurface),
-                                ),
-                                SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                                Text(
-                                  e.desc,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Theme.of(context).colorScheme.onSurface),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      e.name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.titleMedium!.copyWith(color:Theme.of(context).colorScheme.onSurface),
+                                    ),
+                                    SizedBox(height: AppDimensions.instance.paddingX(0.5)),
+                                    Text(
+                                      e.desc,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Theme.of(context).colorScheme.onSurface),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                                 CustomButton(
-                                  title: '', 
+                                  title: S.of(context).downloadNow, 
                                   onTap: () => _launchApp(context, e), 
                                   gradient: AppColors.instance.gradient,
                                 ),

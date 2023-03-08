@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
           buttonTitle: S.of(context).tryItNow,
           action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.animeAI),
         ),
-        SizedBox(height: AppDimensions.instance.padding),
+        const AdView(),
         HomeBaseBanner(
           banner: AppAssets.instance.homeEnhanceBanner,
           title: S.of(context).enhanceNimageQuality,
@@ -56,8 +56,7 @@ class HomePage extends StatelessWidget {
           buttonTitle: S.of(context).tryItNow,
           action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.removeObject),
         ),
-        SizedBox(height: AppDimensions.instance.padding),
-        const AdView(),
+       const AdView(),
         HomeBaseBanner(
           banner: AppAssets.instance.homeArtEffectBanner,
           title: S.of(context).turnYourNimageNintoArt,

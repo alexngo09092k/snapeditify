@@ -23,70 +23,72 @@ class HomeBaseBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lottieWidth = AppDimensions.instance.bannerWidth;
-    final heightWidth = lottieWidth * 1.7 / 3;
+    final contentMaxWidth = AppDimensions.instance.contentMaxWidth;
+    final heightWidth = contentMaxWidth * 1.7 / 3;
     return GestureDetector(
       onTap: action,
-      child: AppCard(
-        width: lottieWidth,
-        height: heightWidth,
-        child: Stack(
-          children: [
-            LottieViewer(
-              lottie: banner,
-              width: lottieWidth,
-              height: heightWidth,
-              borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: Padding(
-                padding: EdgeInsets.all(AppDimensions.instance.padding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          '$title ${S.of(context).withText} ',
-                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                color: AppColors.instance.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                        const AIIcon(),
-                      ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimensions.instance.padding,
-                        vertical: AppDimensions.instance.paddingX(0.5),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
+        child: AppCard(
+          height: heightWidth,
+          child: Stack(
+            children: [
+              LottieViewer(
+                lottie: banner,
+                width: contentMaxWidth,
+                height: heightWidth,
+                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: Padding(
+                  padding: EdgeInsets.all(AppDimensions.instance.padding),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '$title ${S.of(context).withText} ',
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                  color: AppColors.instance.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
+                          const AIIcon(),
+                        ],
                       ),
-                      decoration: BoxDecoration(
-                        color: AppColors.instance.white.withOpacity(0.3),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(AppDimensions.instance.radiusX(2)),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppDimensions.instance.padding,
+                          vertical: AppDimensions.instance.paddingX(0.5),
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.instance.white.withOpacity(0.3),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(AppDimensions.instance.radiusX(2)),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            buttonTitle,
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                  color: AppColors.instance.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
                         ),
                       ),
-                      child: Center(
-                        child: Text(
-                          buttonTitle,
-                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                color: AppColors.instance.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

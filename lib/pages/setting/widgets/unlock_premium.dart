@@ -15,7 +15,7 @@ class UnlockPremium extends StatelessWidget {
     return GestureDetector(
       onTap: () => AppRoutes.instance.goPremiumProPage(context),
       child: AppCard(
-        margin: EdgeInsets.only(bottom: AppDimensions.instance.padding),
+        margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
         padding: EdgeInsets.all(AppDimensions.instance.padding),
         child: Row(
           children: [

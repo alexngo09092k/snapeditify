@@ -122,7 +122,6 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppLayout(
       screen: S.of(context).setting,
-      padding: EdgeInsets.all(AppDimensions.instance.padding),
       scroll: true,
       after: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -144,8 +143,10 @@ class SettingPage extends StatelessWidget {
       ),
       children: [
         if (Configuration.instance.iap.enable) const UnlockPremium(),
+        if (Configuration.instance.iap.enable) SizedBox(height: AppDimensions.instance.padding),
         if (Configuration.instance.business.webLinks.isNotEmpty)
           AppCard(
+            margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
             child: SeparatedListView.withList(
               separator: Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
@@ -165,6 +166,7 @@ class SettingPage extends StatelessWidget {
           ),
         if (Configuration.instance.business.webLinks.isNotEmpty) SizedBox(height: AppDimensions.instance.padding),
         AppCard(
+          margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
           child: SeparatedListView.withList(
             separator: Padding(
               padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
@@ -189,6 +191,7 @@ class SettingPage extends StatelessWidget {
         SizedBox(height: AppDimensions.instance.padding),
         if (Configuration.instance.business.socialNetworks.isNotEmpty)
           AppCard(
+            margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
             child: SeparatedListView.withList(
               separator: Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
