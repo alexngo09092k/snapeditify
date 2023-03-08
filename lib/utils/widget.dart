@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
@@ -162,9 +163,9 @@ class WidgetUtils {
   }
 
   Future<T?> checkAppUpdate<T>() async {
-    final UpdateVersion? updateVersion = await InAppUpdateVersion.instance.checkUpdateVersion();
-    Debug.log("CHECK OUT APP VERSION $updateVersion");
-    if(updateVersion != null && updateVersion.storeVersion != updateVersion.localVersion)  {
+    final String? updateVersionLink = await Configuration.instance.getUpdateVersionLink();
+    Debug.log("CHECK OUT APP VERSION $updateVersionLink");
+    if(updateVersionLink != null)  {
       return AwesomeAppState.useContext<T>(callback: (BuildContext context) {
         return alert<T>(
           context,
@@ -177,7 +178,7 @@ class WidgetUtils {
               title: S.of(context).update,
               onPressed: () async {
                 try {
-                  await launchUrl(Uri.parse(updateVersion.updateLink));
+                  await launchUrl(Uri.parse(updateVersionLink));
                 }catch(error) {
                   Debug.log('UPDATE APP ERRROR $error');
                 }finally {

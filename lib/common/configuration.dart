@@ -274,3 +274,22 @@ extension NetworkExtension on Configuration {
     return false;
   }
 }
+
+extension UpdateAppExtension on Configuration {
+  Future<String?> getUpdateVersionLink() async {
+    final PackageInfo packageInfo = await PackageInfoExtesnion.getPackageInfo();
+    // String v1 = '1.2.3', v2 = '1.2.11';
+    int v1Number = _getExtendedVersionNumber(packageInfo.version); // return 10020003
+    int v2Number = _getExtendedVersionNumber(business.updateApp.version); // return 10020011
+    if(v2Number > v1Number) {
+      return Configuration.instance.business.updateApp.link;
+    }
+    return null;
+  }
+
+  int _getExtendedVersionNumber(String version) {
+    List versionCells = version.split('.');
+    versionCells = versionCells.map((i) => int.parse(i)).toList();
+    return versionCells[0] * 100000 + versionCells[1] * 1000 + versionCells[2];
+  }
+}

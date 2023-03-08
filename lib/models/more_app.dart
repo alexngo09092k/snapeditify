@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/models/config/app_platform.dart';
+import 'app_platform.dart';
 
 class MoreApp {
   final String name;
@@ -58,7 +58,7 @@ class MoreApp {
       'logo': logo,
       'banner': banner,
       'desc': desc,
-      'links': links,
+      'links': links.map((key, value) => MapEntry(key.name, value)),
     };
   }
 
