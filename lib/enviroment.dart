@@ -149,6 +149,12 @@ const enviroment = {
     "ads": [
       /// HUAWEI
       {
+        "type": "native",
+        "provider": "huawei",
+        "iosId": "l28y76h1or",
+        "androidId": "h2bea5p6f4",
+      },
+      {
         "type": "roll",
         "provider": "huawei",
         "iosId": "h2bea5p6f4",
