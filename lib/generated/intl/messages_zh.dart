@@ -43,30 +43,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "createNanimeAvatar": MessageLookupByLibrary.simpleMessage("创建动漫头像"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("放弃更改并还原？"),
-        "downloadNow": MessageLookupByLibrary.simpleMessage("Download now"),
+        "downloadNow": MessageLookupByLibrary.simpleMessage("立即下载"),
         "english": MessageLookupByLibrary.simpleMessage("英文"),
         "enhance": MessageLookupByLibrary.simpleMessage("增强"),
         "enhanceImage": MessageLookupByLibrary.simpleMessage("增强图像"),
         "enhanceNimageQuality": MessageLookupByLibrary.simpleMessage("提高图像质量"),
         "failedToChangeStylePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage("更改样式失败，请重试！"),
+            MessageLookupByLibrary.simpleMessage("更改样式失败，请重试。"),
         "failedToDetectObjectPleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage("无法检测物体，请重试！"),
+            MessageLookupByLibrary.simpleMessage("无法检测物体，请重试。"),
         "failedToEnhanceImagePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage("增强图像失败，请重试！"),
+            MessageLookupByLibrary.simpleMessage("增强图像失败，请重试。"),
         "failedToOpenBrowserPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage("无法打开浏览器，请重试"),
         "failedToOpenMailPleaseTryGain":
-            MessageLookupByLibrary.simpleMessage("无法打开邮件，请重试！"),
+            MessageLookupByLibrary.simpleMessage("无法打开邮件，请重试。"),
         "failedToRemoveObjectsPleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage("无法移除物体，请重试！"),
+            MessageLookupByLibrary.simpleMessage("无法移除物体，请重试。"),
         "failedToSaveImagePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage("保存图像失败，请重试！"),
+            MessageLookupByLibrary.simpleMessage("保存图像失败，请重试。"),
         "failedToStyleImagePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage("样式化图像失败，请重试！"),
+            MessageLookupByLibrary.simpleMessage("样式化图像失败，请重试。"),
         "feedback": MessageLookupByLibrary.simpleMessage("反馈"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("反馈给"),
-        "later": MessageLookupByLibrary.simpleMessage("Later"),
+        "later": MessageLookupByLibrary.simpleMessage("稍后"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
                 "让我们与您的朋友、家人和社区分享最佳的照片编辑应用程序之一"),
@@ -84,8 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "openBrowser": MessageLookupByLibrary.simpleMessage("打开浏览器"),
         "openSettings": MessageLookupByLibrary.simpleMessage("打开设置"),
         "pleaseTryAgainOrOpenTheAppAgain":
-            MessageLookupByLibrary.simpleMessage("请重试或重新打开应用程序！"),
-        "pleaseWaitAMoment": MessageLookupByLibrary.simpleMessage("请稍等片刻！"),
+            MessageLookupByLibrary.simpleMessage("请重试或重新打开应用程序。"),
+        "pleaseWaitAMoment": MessageLookupByLibrary.simpleMessage("请稍等片刻。"),
         "remove": MessageLookupByLibrary.simpleMessage("删除"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("移除物体"),
         "removeThingsNfromImage":
@@ -108,21 +108,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("将您的图像变成艺术品"),
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("解锁SnapEditify高级版"),
-        "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "update": MessageLookupByLibrary.simpleMessage("更新"),
         "version": MessageLookupByLibrary.simpleMessage("版本"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("越南语"),
         "withText": MessageLookupByLibrary.simpleMessage("与"),
         "wouldLikeToAccessYourPhotos":
             MessageLookupByLibrary.simpleMessage("想要访问您的照片"),
         "youAreCurrentlyOffline":
-            MessageLookupByLibrary.simpleMessage("您当前处于离线状态！"),
+            MessageLookupByLibrary.simpleMessage("您当前处于离线状态。"),
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":
             MessageLookupByLibrary.simpleMessage("您已达到保存图片的限制，请升级到高级版或联系支持团队。"),
-        "yourAppIsOutdated":
-            MessageLookupByLibrary.simpleMessage("Your app is outdated!"),
+        "yourAppIsOutdated": MessageLookupByLibrary.simpleMessage("您的应用已过时。"),
         "yourAppVersionIsNoLongerSupportedYoureMissingOut":
             MessageLookupByLibrary.simpleMessage(
-                "Your app version is no longer supported. You\'re missing out on new features and critical fixes. Please update today."),
+                "您的应用版本已不受支持。您错过了新功能和重要修复。请立即更新。"),
         "yourFeedbackOfTheAppAndProvideABetterExperience":
             MessageLookupByLibrary.simpleMessage("提供您对应用的反馈，以提供更好的体验")
       };

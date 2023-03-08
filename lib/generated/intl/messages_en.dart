@@ -55,26 +55,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enhance\nimage quality"),
         "failedToChangeStylePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to change style, please try again!"),
+                "Failed to change style, please try again."),
         "failedToDetectObjectPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to detect object, please try again!"),
+                "Failed to detect object, please try again."),
         "failedToEnhanceImagePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to enhance image, please try again!"),
+                "Failed to enhance image, please try again."),
         "failedToOpenBrowserPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Failed to open browser, please try again"),
         "failedToOpenMailPleaseTryGain": MessageLookupByLibrary.simpleMessage(
-            "Failed to open mail, please try gain!"),
+            "Failed to open mail, please try gain."),
         "failedToRemoveObjectsPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to remove objects, please try again!"),
+                "Failed to remove objects, please try again."),
         "failedToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage(
-            "Failed to save image, please try again!"),
+            "Failed to save image, please try again."),
         "failedToStyleImagePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Failed to style image, please try again!"),
+                "Failed to style image, please try again."),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
         "later": MessageLookupByLibrary.simpleMessage("Later"),
@@ -98,9 +98,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "openBrowser": MessageLookupByLibrary.simpleMessage("Open browser"),
         "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
         "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
-            "Please try again or open the app again!"),
+            "Please try again or open the app again."),
         "pleaseWaitAMoment":
-            MessageLookupByLibrary.simpleMessage("Please wait a moment!"),
+            MessageLookupByLibrary.simpleMessage("Please wait a moment."),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Remove Objects"),
         "removeThingsNfromImage":
@@ -133,12 +133,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "wouldLikeToAccessYourPhotos": MessageLookupByLibrary.simpleMessage(
             "Would like to access your photos"),
         "youAreCurrentlyOffline":
-            MessageLookupByLibrary.simpleMessage("You are currently offline!"),
+            MessageLookupByLibrary.simpleMessage("You are currently offline."),
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":
             MessageLookupByLibrary.simpleMessage(
                 "You have reached the limit of saved image, please upgrade premium version or contact"),
         "yourAppIsOutdated":
-            MessageLookupByLibrary.simpleMessage("Your app is outdated!"),
+            MessageLookupByLibrary.simpleMessage("Your app is outdated."),
         "yourAppVersionIsNoLongerSupportedYoureMissingOut":
             MessageLookupByLibrary.simpleMessage(
                 "Your app version is no longer supported. You\'re missing out on new features and critical fixes. Please update today."),

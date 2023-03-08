@@ -430,10 +430,10 @@ class S {
     );
   }
 
-  /// `Please wait a moment!`
+  /// `Please wait a moment.`
   String get pleaseWaitAMoment {
     return Intl.message(
-      'Please wait a moment!',
+      'Please wait a moment.',
       name: 'pleaseWaitAMoment',
       desc: '',
       args: [],
@@ -540,10 +540,10 @@ class S {
     );
   }
 
-  /// `You are currently offline!`
+  /// `You are currently offline.`
   String get youAreCurrentlyOffline {
     return Intl.message(
-      'You are currently offline!',
+      'You are currently offline.',
       name: 'youAreCurrentlyOffline',
       desc: '',
       args: [],
@@ -610,60 +610,60 @@ class S {
     );
   }
 
-  /// `Failed to change style, please try again!`
+  /// `Failed to change style, please try again.`
   String get failedToChangeStylePleaseTryAgain {
     return Intl.message(
-      'Failed to change style, please try again!',
+      'Failed to change style, please try again.',
       name: 'failedToChangeStylePleaseTryAgain',
       desc: '',
       args: [],
     );
   }
 
-  /// `Failed to remove objects, please try again!`
+  /// `Failed to remove objects, please try again.`
   String get failedToRemoveObjectsPleaseTryAgain {
     return Intl.message(
-      'Failed to remove objects, please try again!',
+      'Failed to remove objects, please try again.',
       name: 'failedToRemoveObjectsPleaseTryAgain',
       desc: '',
       args: [],
     );
   }
 
-  /// `Failed to detect object, please try again!`
+  /// `Failed to detect object, please try again.`
   String get failedToDetectObjectPleaseTryAgain {
     return Intl.message(
-      'Failed to detect object, please try again!',
+      'Failed to detect object, please try again.',
       name: 'failedToDetectObjectPleaseTryAgain',
       desc: '',
       args: [],
     );
   }
 
-  /// `Failed to enhance image, please try again!`
+  /// `Failed to enhance image, please try again.`
   String get failedToEnhanceImagePleaseTryAgain {
     return Intl.message(
-      'Failed to enhance image, please try again!',
+      'Failed to enhance image, please try again.',
       name: 'failedToEnhanceImagePleaseTryAgain',
       desc: '',
       args: [],
     );
   }
 
-  /// `Failed to style image, please try again!`
+  /// `Failed to style image, please try again.`
   String get failedToStyleImagePleaseTryAgain {
     return Intl.message(
-      'Failed to style image, please try again!',
+      'Failed to style image, please try again.',
       name: 'failedToStyleImagePleaseTryAgain',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please try again or open the app again!`
+  /// `Please try again or open the app again.`
   String get pleaseTryAgainOrOpenTheAppAgain {
     return Intl.message(
-      'Please try again or open the app again!',
+      'Please try again or open the app again.',
       name: 'pleaseTryAgainOrOpenTheAppAgain',
       desc: '',
       args: [],
@@ -710,10 +710,10 @@ class S {
     );
   }
 
-  /// `Failed to open mail, please try gain!`
+  /// `Failed to open mail, please try gain.`
   String get failedToOpenMailPleaseTryGain {
     return Intl.message(
-      'Failed to open mail, please try gain!',
+      'Failed to open mail, please try gain.',
       name: 'failedToOpenMailPleaseTryGain',
       desc: '',
       args: [],
@@ -740,10 +740,10 @@ class S {
     );
   }
 
-  /// `Failed to save image, please try again!`
+  /// `Failed to save image, please try again.`
   String get failedToSaveImagePleaseTryAgain {
     return Intl.message(
-      'Failed to save image, please try again!',
+      'Failed to save image, please try again.',
       name: 'failedToSaveImagePleaseTryAgain',
       desc: '',
       args: [],
@@ -760,10 +760,10 @@ class S {
     );
   }
 
-  /// `Your app is outdated!`
+  /// `Your app is outdated.`
   String get yourAppIsOutdated {
     return Intl.message(
-      'Your app is outdated!',
+      'Your app is outdated.',
       name: 'yourAppIsOutdated',
       desc: '',
       args: [],

@@ -56,29 +56,29 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nâng cao\nchất lượng\nhình ảnh"),
         "failedToChangeStylePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Không thể thay đổi kiểu, vui lòng thử lại!"),
+                "Không thể thay đổi kiểu, vui lòng thử lại."),
         "failedToDetectObjectPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Không thể phát hiện đối tượng, vui lòng thử lại!"),
+                "Không thể phát hiện đối tượng, vui lòng thử lại."),
         "failedToEnhanceImagePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Không thể cải thiện hình ảnh, vui lòng thử lại!"),
+                "Không thể cải thiện hình ảnh, vui lòng thử lại."),
         "failedToOpenBrowserPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Không thể mở trình duyệt, vui lòng thử lại!"),
+                "Không thể mở trình duyệt, vui lòng thử lại."),
         "failedToOpenMailPleaseTryGain": MessageLookupByLibrary.simpleMessage(
-            "Không thể mở Mail, vui lòng thử đạt được!"),
+            "Không thể mở Mail, vui lòng thử đạt được."),
         "failedToRemoveObjectsPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Không xóa được đối tượng, vui lòng thử lại!"),
+                "Không xóa được đối tượng, vui lòng thử lại."),
         "failedToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage(
-            "Không thể lưu hình ảnh, vui lòng thử lại!"),
+            "Không thể lưu hình ảnh, vui lòng thử lại."),
         "failedToStyleImagePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
-                "Không thể tạo kiểu cho hình ảnh, vui lòng thử lại!"),
+                "Không thể tạo kiểu cho hình ảnh, vui lòng thử lại."),
         "feedback": MessageLookupByLibrary.simpleMessage("Nhận xét"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Phản hồi cho"),
-        "later": MessageLookupByLibrary.simpleMessage("Later"),
+        "later": MessageLookupByLibrary.simpleMessage("Lần sau"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
                 "Hãy chia sẻ một trong những ứng dụng chỉnh sửa ảnh tốt nhất với bạn bè, gia đình và cộng đồng của bạn"),
@@ -99,9 +99,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "openBrowser": MessageLookupByLibrary.simpleMessage("Mở trình duyệt"),
         "openSettings": MessageLookupByLibrary.simpleMessage("Mở cài đặt"),
         "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
-            "Vui lòng thử lại hoặc mở lại ứng dụng!"),
+            "Vui lòng thử lại hoặc mở lại ứng dụng."),
         "pleaseWaitAMoment":
-            MessageLookupByLibrary.simpleMessage("Xin vui lòng chờ!"),
+            MessageLookupByLibrary.simpleMessage("Xin vui lòng chờ."),
         "remove": MessageLookupByLibrary.simpleMessage("Xoá"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Xóa đối tượng"),
         "removeThingsNfromImage":
@@ -128,22 +128,22 @@ class MessageLookup extends MessageLookupByLibrary {
             "Biến hình ảnh\ncủa bạn thành\nnghệ thuật"),
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("Mở khóa SnapEditify cao cấp"),
-        "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "version": MessageLookupByLibrary.simpleMessage("Phiên bản"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "withText": MessageLookupByLibrary.simpleMessage("với"),
         "wouldLikeToAccessYourPhotos":
             MessageLookupByLibrary.simpleMessage("muốn truy cập ảnh của bạn"),
         "youAreCurrentlyOffline":
-            MessageLookupByLibrary.simpleMessage("Bạn hiện đang ngoại tuyến!"),
+            MessageLookupByLibrary.simpleMessage("Bạn hiện đang ngoại tuyến."),
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":
             MessageLookupByLibrary.simpleMessage(
                 "Bạn đã đạt đến giới hạn của hình ảnh được lưu, vui lòng nâng cấp phiên bản cao cấp hoặc liên hệ"),
-        "yourAppIsOutdated":
-            MessageLookupByLibrary.simpleMessage("Your app is outdated!"),
+        "yourAppIsOutdated": MessageLookupByLibrary.simpleMessage(
+            "Ứng dụng của bạn đã lỗi thời."),
         "yourAppVersionIsNoLongerSupportedYoureMissingOut":
             MessageLookupByLibrary.simpleMessage(
-                "Your app version is no longer supported. You\'re missing out on new features and critical fixes. Please update today."),
+                "Phiên bản ứng dụng của bạn không còn được hỗ trợ. Bạn đang bỏ lỡ các tính năng mới và các bản sửa lỗi quan trọng. Vui lòng cập nhật ngay hôm nay."),
         "yourFeedbackOfTheAppAndProvideABetterExperience":
             MessageLookupByLibrary.simpleMessage(
                 "Phản hồi của bạn về ứng dụng và cung cấp trải nghiệm tốt hơn")
