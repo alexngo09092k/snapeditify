@@ -759,6 +759,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Your app is outdated!`
+  String get yourAppIsOutdated {
+    return Intl.message(
+      'Your app is outdated!',
+      name: 'yourAppIsOutdated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your app version is no longer supported. You're missing out on new features and critical fixes. Please update today.`
+  String get yourAppVersionIsNoLongerSupportedYoureMissingOut {
+    return Intl.message(
+      'Your app version is no longer supported. You\'re missing out on new features and critical fixes. Please update today.',
+      name: 'yourAppVersionIsNoLongerSupportedYoureMissingOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Later`
+  String get later {
+    return Intl.message(
+      'Later',
+      name: 'later',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

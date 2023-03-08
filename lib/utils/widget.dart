@@ -5,6 +5,7 @@ import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WidgetUtils {
   static final WidgetUtils _instance = WidgetUtils._internal();
@@ -158,6 +159,37 @@ class WidgetUtils {
         content: Text(message, style: Theme.of(context).textTheme.bodyLarge),
       ),
     );
+  }
+
+  Future<T?> checkAppUpdate<T>() async {
+    final UpdateVersion? updateVersion = await InAppUpdateVersion.instance.checkUpdateVersion();
+    Debug.log("CHECK OUT APP VERSION $updateVersion");
+    if(updateVersion != null && updateVersion.storeVersion != updateVersion.localVersion)  {
+      return AwesomeAppState.useContext<T>(callback: (BuildContext context) {
+        return alert<T>(
+          context,
+          barrierDismissible: false,
+          title: S.of(context).yourAppIsOutdated,
+          message: S.of(context).yourAppVersionIsNoLongerSupportedYoureMissingOut,
+          actions: [
+            AlertAction(title: S.of(context).later, onPressed: dimiss),
+            AlertAction(
+              title: S.of(context).update,
+              onPressed: () async {
+                try {
+                  await launchUrl(Uri.parse(updateVersion.updateLink));
+                }catch(error) {
+                  Debug.log('UPDATE APP ERRROR $error');
+                }finally {
+                  dimiss();
+                }
+              },
+            ),
+          ],
+        );
+      });
+    }
+    return null;
   }
 
   Future<T?> alert<T>(

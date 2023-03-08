@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Không thể tạo kiểu cho hình ảnh, vui lòng thử lại!"),
         "feedback": MessageLookupByLibrary.simpleMessage("Nhận xét"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Phản hồi cho"),
+        "later": MessageLookupByLibrary.simpleMessage("Later"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
                 "Hãy chia sẻ một trong những ứng dụng chỉnh sửa ảnh tốt nhất với bạn bè, gia đình và cộng đồng của bạn"),
@@ -127,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Biến hình ảnh\ncủa bạn thành\nnghệ thuật"),
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("Mở khóa SnapEditify cao cấp"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
         "version": MessageLookupByLibrary.simpleMessage("Phiên bản"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "withText": MessageLookupByLibrary.simpleMessage("với"),
@@ -137,6 +139,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":
             MessageLookupByLibrary.simpleMessage(
                 "Bạn đã đạt đến giới hạn của hình ảnh được lưu, vui lòng nâng cấp phiên bản cao cấp hoặc liên hệ"),
+        "yourAppIsOutdated":
+            MessageLookupByLibrary.simpleMessage("Your app is outdated!"),
+        "yourAppVersionIsNoLongerSupportedYoureMissingOut":
+            MessageLookupByLibrary.simpleMessage(
+                "Your app version is no longer supported. You\'re missing out on new features and critical fixes. Please update today."),
         "yourFeedbackOfTheAppAndProvideABetterExperience":
             MessageLookupByLibrary.simpleMessage(
                 "Phản hồi của bạn về ứng dụng và cung cấp trải nghiệm tốt hơn")

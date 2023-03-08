@@ -77,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Failed to style image, please try again!"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
+        "later": MessageLookupByLibrary.simpleMessage("Later"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
                 "Let\'s share one of the best photo editing app with your friends, family and community"),
@@ -125,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Turn your\nimage\ninto Art"),
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("Unlock SnapEditify Premium"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "withText": MessageLookupByLibrary.simpleMessage("with"),
@@ -135,6 +137,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":
             MessageLookupByLibrary.simpleMessage(
                 "You have reached the limit of saved image, please upgrade premium version or contact"),
+        "yourAppIsOutdated":
+            MessageLookupByLibrary.simpleMessage("Your app is outdated!"),
+        "yourAppVersionIsNoLongerSupportedYoureMissingOut":
+            MessageLookupByLibrary.simpleMessage(
+                "Your app version is no longer supported. You\'re missing out on new features and critical fixes. Please update today."),
         "yourFeedbackOfTheAppAndProvideABetterExperience":
             MessageLookupByLibrary.simpleMessage(
                 "Your feedback of the app and provide a better experience")

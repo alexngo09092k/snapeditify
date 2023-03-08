@@ -70,5 +70,9 @@
   "openBrowser": "Mở trình duyệt",
   "failedToOpenBrowserPleaseTryAgain": "Không thể mở trình duyệt, vui lòng thử lại!",
   "failedToSaveImagePleaseTryAgain": "Không thể lưu hình ảnh, vui lòng thử lại!",
-  "downloadNow": "Tải ngay"
+  "downloadNow": "Tải ngay",
+  "yourAppIsOutdated": "Your app is outdated!",
+  "yourAppVersionIsNoLongerSupportedYoureMissingOut": "Your app version is no longer supported. You're missing out on new features and critical fixes. Please update today.",
+  "later": "Later",
+  "update": "Update"
 }

@@ -347,7 +347,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: ea756c2ca6b4f90b4f90143badc8ff1231bdacd5
+      resolved-ref: "0baa39d164653bf6bbe9f7101c527bb412f4dafd"
       url: "git@github.com:brennan992k/fluttering.git"
     source: git
     version: "1.0.2"

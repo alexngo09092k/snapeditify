@@ -70,5 +70,9 @@
   "openBrowser": "打开浏览器",
   "failedToOpenBrowserPleaseTryAgain": "无法打开浏览器，请重试",
   "failedToSaveImagePleaseTryAgain": "保存图像失败，请重试！",
-  "downloadNow": "Download now"
+  "downloadNow": "Download now",
+  "yourAppIsOutdated": "Your app is outdated!",
+  "yourAppVersionIsNoLongerSupportedYoureMissingOut": "Your app version is no longer supported. You're missing out on new features and critical fixes. Please update today.",
+  "later": "Later",
+  "update": "Update"
 }
