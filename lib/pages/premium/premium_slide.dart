@@ -20,7 +20,7 @@ class PremiumSlide extends StatelessWidget {
             child: ImageSlideshow(
               height: height - 5,
               indicatorColor: Theme.of(context).primaryColor,
-              autoPlayInterval: 3000,
+              autoPlayInterval: 2000,
               isLoop: true,
               children: [
                 Image.asset(

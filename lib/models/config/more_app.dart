@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -7,11 +8,15 @@ import 'package:snapeditify/models/config/app_platform.dart';
 class MoreApp {
   final String name;
   final String logo;
+  final String? banner;
+  final String desc;
   final Map<AppPlatform, String> links;
 
-  MoreApp({
+  const MoreApp({
     required this.name,
     required this.logo,
+    this.banner,
+    required this.desc,
     required this.links,
   });
 
@@ -34,11 +39,15 @@ class MoreApp {
   MoreApp copyWith({
     String? name,
     String? logo,
+    String? banner,
+    String? desc,
     Map<AppPlatform, String>? links,
   }) {
     return MoreApp(
       name: name ?? this.name,
       logo: logo ?? this.logo,
+      banner: banner ?? this.banner,
+      desc: desc ?? this.desc,
       links: links ?? this.links,
     );
   }
@@ -47,7 +56,9 @@ class MoreApp {
     return <String, dynamic>{
       'name': name,
       'logo': logo,
-      'links': links.map((key, value) => MapEntry(key.name, value)),
+      'banner': banner,
+      'desc': desc,
+      'links': links,
     };
   }
 
@@ -55,6 +66,8 @@ class MoreApp {
     return MoreApp(
       name: map['name'] as String,
       logo: map['logo'] as String,
+      banner: map['banner'],
+      desc: map['desc'] as String,
       links: map['links'].map<AppPlatform, String>(
         (key, value) => MapEntry(
           AppPlatform.values.firstWhere((element) => element.name == key),
@@ -70,7 +83,9 @@ class MoreApp {
       MoreApp.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'MoreApp(name: $name, logo: $logo, links: $links)';
+  String toString() {
+    return 'MoreApp(name: $name, logo: $logo, banner: $banner, desc: $desc, links: $links)';
+  }
 
   @override
   bool operator ==(covariant MoreApp other) {
@@ -78,9 +93,17 @@ class MoreApp {
 
     return other.name == name &&
         other.logo == logo &&
+        other.banner == banner &&
+        other.desc == desc &&
         mapEquals(other.links, links);
   }
 
   @override
-  int get hashCode => name.hashCode ^ logo.hashCode ^ links.hashCode;
+  int get hashCode {
+    return name.hashCode ^
+        logo.hashCode ^
+        banner.hashCode ^
+        desc.hashCode ^
+        links.hashCode;
+  }
 }

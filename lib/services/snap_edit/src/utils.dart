@@ -20,7 +20,7 @@ Future<File?> uint8ListToFile(
     }
     throw 'Can not create image file';
   } catch (error) {
-    Debug.log(error);
+    Debug.log("UNIT8LIST TO FILE ERROR $error");
     return null;
   }
 }

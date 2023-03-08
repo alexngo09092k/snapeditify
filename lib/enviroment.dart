@@ -1,7 +1,7 @@
 const enviroment = {
   //! ====================================== REMOTE CONFIG ==============================================
   "remoteConfig": {
-    "enable": true,
+    "enable": false,
     "providers": ["huawei"],
     'fetchTimeout': 60000, // 1 minutes
     'minimumFetchInterval': 60000, // 1 minutes
@@ -11,13 +11,12 @@ const enviroment = {
   "business": {
     /// App mode
     /// production, debug, maintenance
-    'appMode': 'production',
+    'appMode': 'debug',
 
     /// Maintenance mode
     'maintenanceMode': {
       'title': "We'll be back soon",
-      'message':
-          "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
+      'message': "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
       'link': 'https://snapeditify.netlify.app',
     },
 
@@ -98,7 +97,18 @@ const enviroment = {
       },
     },
 
-    'moreApps': []
+    'moreApps': [
+      {
+      'name': 'Stick War: Legacy',
+      'logo': 'https://play-lh.googleusercontent.com/sITxnGaUxYVzTDkVAjRSKM8JKehWTuseE4hF8937sWVattKHEAirl7uZw93gqad_fQg6=s128-rw',
+      'desc': 'Play the game Stick War, one of the biggest, most fun, challenging and addicting stick figure games. Control your army in formations or play each unit, you have total control of every stickman. Build units, mine gold, learn the way of the Sword, Spear, Archer, Mage, and even Giant. Destroy the enemy statue, and capture all Territories!',
+      'links': {
+        'android': 'https://appgallery.huawei.com/app/C107645049', 
+        'ios': 'https://appgallery.huawei.com/app/C107645049', 
+        'huawei': 'https://appgallery.huawei.com/app/C107645049',
+      },
+    }
+    ]
   },
 
   //! ====================================== GALLERY ==============================================
@@ -177,18 +187,6 @@ const enviroment = {
       //     "currency": "USD",
       //   }
       // },
-      // {
-      //   "type": "nonConsumables",
-      //   "provider": "huawei",
-      //   "id": "test2",
-      //   "info": {
-      //     "name": "",
-      //     "description": "",
-      //     "price": "\$1000",
-      //     "rawPrice": 1000,
-      //     "currency": "USD",
-      //   }
-      // }
     ],
   },
 

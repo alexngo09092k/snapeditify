@@ -52,7 +52,7 @@ extension EnimeAI on SnapEdit {
 
       return handleResponse<AnimeImageResponse?>(response, (p0) {
         if (p0 is Map<String, dynamic>) return AnimeImageResponse.fromMap(p0);
-        Debug.log("animeRestyle No response");
+        Debug.log("ANIME IMAGE NO RESPONSE");
         return null;
       });
     } catch (error) {
@@ -77,7 +77,7 @@ extension EnimeAI on SnapEdit {
 
       return handleResponse<AnimeVideoResponse?>(response, (p0) {
         if (p0 is Map<String, dynamic>) return AnimeVideoResponse.fromMap(p0);
-        Debug.log("animeVideoEffect No response");
+        Debug.log("ANIME VIDEO NO RESPONSE");
         return null;
       });
     } catch (error) {

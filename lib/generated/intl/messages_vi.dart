@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tạo hình đại diện\nAnime"),
         "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage(
             "Hủy các thay đổi và hoàn nguyên?"),
+        "downloadNow": MessageLookupByLibrary.simpleMessage("Tải ngay"),
         "english": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "enhance": MessageLookupByLibrary.simpleMessage("Làm nét"),
         "enhanceImage":

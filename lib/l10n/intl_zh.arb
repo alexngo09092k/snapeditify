@@ -69,5 +69,6 @@
   "failedToOpenMailPleaseTryGain": "无法打开邮件，请重试！",
   "openBrowser": "打开浏览器",
   "failedToOpenBrowserPleaseTryAgain": "无法打开浏览器，请重试",
-  "failedToSaveImagePleaseTryAgain": "保存图像失败，请重试！"
+  "failedToSaveImagePleaseTryAgain": "保存图像失败，请重试！",
+  "downloadNow": "Download now"
 }

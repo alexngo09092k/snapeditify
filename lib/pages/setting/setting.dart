@@ -42,7 +42,7 @@ class SettingPage extends StatelessWidget {
           );
         }
       } catch (error) {
-        Debug.log('feedback $error');
+        Debug.log('FEEDBACK ERROR $error');
         WidgetUtils.instance.showWarningPopup(
           title: S.of(context).feedback, 
           message: S.of(context).failedToOpenMailPleaseTryGain, 
@@ -109,7 +109,7 @@ class SettingPage extends StatelessWidget {
         );
       }
     } catch (error) {
-      Debug.log('launchUrlInApp $error');
+      Debug.log('LUANCH URL ERROR $error');
       WidgetUtils.instance.showWarningPopup( 
         title: S.of(context).openBrowser, 
         message: S.of(context).failedToOpenBrowserPleaseTryAgain, 

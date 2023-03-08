@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createNanimeAvatar": MessageLookupByLibrary.simpleMessage("创建动漫头像"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("放弃更改并还原？"),
+        "downloadNow": MessageLookupByLibrary.simpleMessage("Download now"),
         "english": MessageLookupByLibrary.simpleMessage("英文"),
         "enhance": MessageLookupByLibrary.simpleMessage("增强"),
         "enhanceImage": MessageLookupByLibrary.simpleMessage("增强图像"),

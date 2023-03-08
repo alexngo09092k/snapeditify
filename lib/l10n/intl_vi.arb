@@ -69,5 +69,6 @@
   "failedToOpenMailPleaseTryGain": "Không thể mở Mail, vui lòng thử đạt được!",
   "openBrowser": "Mở trình duyệt",
   "failedToOpenBrowserPleaseTryAgain": "Không thể mở trình duyệt, vui lòng thử lại!",
-  "failedToSaveImagePleaseTryAgain": "Không thể lưu hình ảnh, vui lòng thử lại!"
+  "failedToSaveImagePleaseTryAgain": "Không thể lưu hình ảnh, vui lòng thử lại!",
+  "downloadNow": "Tải ngay"
 }

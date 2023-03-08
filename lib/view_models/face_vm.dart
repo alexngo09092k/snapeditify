@@ -50,8 +50,7 @@ class FaceVM extends Face with Provider {
         double ratioX = state.image.size.width / enhancedImageBase64.imageUI!.width;
         double ratioY = state.image.size.height / enhancedImageBase64.imageUI!.height;
 
-        Debug.log(ratioX);
-        Debug.log(ratioY);
+        Debug.log('PAIN PARSE RATIO x: $ratioX, y: $ratioY');
 
         final faceImage = ImageUtils.instance.cropImageBase64(
           state.image.imageBase64,

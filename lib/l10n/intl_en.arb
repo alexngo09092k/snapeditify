@@ -69,5 +69,6 @@
   "failedToOpenMailPleaseTryGain": "Failed to open mail, please try gain!",
   "openBrowser": "Open browser",
   "failedToOpenBrowserPleaseTryAgain": "Failed to open browser, please try again",
-  "failedToSaveImagePleaseTryAgain": "Failed to save image, please try again!"
+  "failedToSaveImagePleaseTryAgain": "Failed to save image, please try again!",
+  "downloadNow": "Download now"
 }

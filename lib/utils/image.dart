@@ -32,7 +32,7 @@ class ImageUtils {
         return image;
       }
     } catch (error) {
-      Debug.log(error);
+      Debug.log('PICK IMAGE ERROR $error');
     }
     return null;
   }

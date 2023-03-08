@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/more_apps.dart';
 
 class AdView extends StatelessWidget {
   const AdView({super.key});
@@ -13,7 +14,7 @@ class AdView extends StatelessWidget {
     return AdBuilder(
       width: lottieWidth,
       height: lottieWidth * 1 / 3,
-      errorBuilder: (_) => const _AdViewNotFound(),
+      errorBuilder: (_) => MoreApps(height:  lottieWidth * 1 / 3),
       successBuilder: (_, ad) => Padding(
         padding: EdgeInsets.only(bottom: AppDimensions.instance.padding),
         child: ClipRRect(
@@ -23,14 +24,5 @@ class AdView extends StatelessWidget {
       ),
       borderRadius: BorderRadius.zero,
     );
-  }
-}
-
-class _AdViewNotFound extends StatelessWidget {
-  const _AdViewNotFound();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create\nAnime avatar"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("Discard changes and revert?"),
+        "downloadNow": MessageLookupByLibrary.simpleMessage("Download now"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "enhance": MessageLookupByLibrary.simpleMessage("Enhance"),
         "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),

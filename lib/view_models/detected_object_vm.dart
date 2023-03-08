@@ -133,8 +133,7 @@ class DetectedObjectVM extends DetectedObject {
         realBoxPosition.dy * ratioX + size.height / 2,
       );
 
-      Debug.log('paintParse $position');
-      Debug.log('paintParse $size');
+      Debug.log('PAINT PARSE POSITION: $position, SIZE: $size');
 
       var paint = Paint()
         ..strokeWidth = 0.5

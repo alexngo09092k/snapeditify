@@ -66,7 +66,7 @@ abstract class EditImageProvider extends Provider {
     void Function()? canNotSave,
   ]) async {
     int saveCount = AsyncStorage.instance.getInt(AsyncStorageKey.instance.saveCount) ?? 0;
-    Debug.log("Checkout save image count $saveCount");
+    Debug.log("CHECK OUT SAVE IMAGE COUNT $saveCount");
     if (saveCount > config.maxFreeDownloadCount && canNotSave != null) {
       canNotSave();
       return false;
