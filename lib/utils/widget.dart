@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class WidgetUtils {
   static final WidgetUtils _instance = WidgetUtils._internal();
