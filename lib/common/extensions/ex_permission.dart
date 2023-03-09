@@ -6,6 +6,7 @@ extension MPermissionStore on IUserPermission {
     Function? onNoPermisson,
   }) async {
     final permission = [Permission.storage];
+    bool called = false; /// FIX GOBACK
     requestPermission(
       permission: permission,
       onNoPermisson: () {
@@ -15,7 +16,12 @@ extension MPermissionStore on IUserPermission {
           onForeground: () {
             requestPermission(
               permission: permission,
-              onHasPermisson: WidgetUtils.instance.dimiss,
+              onHasPermisson: () {
+                if(!called) {
+                  called = true;
+                  WidgetUtils.instance.dimiss();
+                }
+              },
             );
           },
         );
