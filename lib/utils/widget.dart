@@ -102,7 +102,7 @@ class WidgetUtils {
         barrierDismissible: false,
         title: S.of(context).youAreCurrentlyOffline,
         message: S.of(context).looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
-        onForeground: retry != null ? () => retry(context) : null,
+        // onForeground: retry != null ? () => retry(context) : null,
         actions: [
           AlertAction(title: S.of(context).openSettings, onPressed: openAppSettings),
           if (retry != null)
