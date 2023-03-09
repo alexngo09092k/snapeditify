@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "removeObjects": MessageLookupByLibrary.simpleMessage("Remove Objects"),
         "removeThingsNfromImage":
             MessageLookupByLibrary.simpleMessage("Remove things\nfrom image"),
+        "removed": MessageLookupByLibrary.simpleMessage("Removed"),
         "restyleImage": MessageLookupByLibrary.simpleMessage("Restyle Image"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),

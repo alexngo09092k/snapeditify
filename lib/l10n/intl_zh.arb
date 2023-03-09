@@ -19,6 +19,7 @@
   "objects": "物体",
   "accurate": "% 准确",
   "remove": "删除",
+  "removed": "删除",
   "noPotentialObjectHasBeenDetected": "未检测到潜在物体。",
   "auto": "自动",
   "brush": "画笔",

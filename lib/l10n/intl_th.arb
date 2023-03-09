@@ -19,6 +19,7 @@
   "objects": "วัตถุ",
   "accurate": "แม่นยำ",
   "remove": "ลบ",
+  "removed": "ลบ",
   "noPotentialObjectHasBeenDetected": "ไม่พบวัตถุที่เป็นไปได้",
   "auto": "อัตโนมัติ",
   "brush": "แปรง",

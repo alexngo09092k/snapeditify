@@ -19,6 +19,7 @@
   "objects": "Objects",
   "accurate": "% accurate",
   "remove": "Remove",
+  "removed": "Removed",
   "noPotentialObjectHasBeenDetected": "No potential object has been detected.",
   "auto": "Auto",
   "brush": "Brush",

@@ -61,7 +61,7 @@ class DetectedObjectItem extends ProviderStateless<IRemoveObjectProvider> {
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                 ),
                 child: Text(
-                  S.of(context).remove,
+                  S.of(context).removed,
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).colorScheme.error),
                 ),
               ),

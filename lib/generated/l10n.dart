@@ -240,6 +240,16 @@ class S {
     );
   }
 
+  /// `Removed`
+  String get removed {
+    return Intl.message(
+      'Removed',
+      name: 'removed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No potential object has been detected.`
   String get noPotentialObjectHasBeenDetected {
     return Intl.message(

@@ -107,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "removeObjects": MessageLookupByLibrary.simpleMessage("Xóa đối tượng"),
         "removeThingsNfromImage":
             MessageLookupByLibrary.simpleMessage("Xóa mọi thứ khỏi\nhình ảnh"),
+        "removed": MessageLookupByLibrary.simpleMessage("Đã xoá"),
         "restyleImage":
             MessageLookupByLibrary.simpleMessage("Định kiểu hình ảnh"),
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),

@@ -19,6 +19,7 @@
   "objects": "Đối tượng",
   "accurate": "% chính xác",
   "remove": "Xoá",
+  "removed": "Đã xoá",
   "noPotentialObjectHasBeenDetected": "Không có đối tượng đã được phát hiện.",
   "auto": "Tự động",
   "brush": "Vẽ",
