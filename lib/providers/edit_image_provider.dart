@@ -80,14 +80,15 @@ abstract class EditImageProvider extends Provider {
   Future<bool> saveImage(BuildContext context) async {
     if (!canSave) return false;
     return checkoutSaveImage(context, () async {
-      /// SHOW ADS
-      // adProvider.handleAd();
 
       final provider = ManagerProvider.of<GalleryProvider>();
 
       if (_savedFile == null) {
         /// SHOW LOADING
         WidgetUtils.instance.showLoadingPopup();
+        
+        /// SHOW ADS
+        adProvider.handleAd();
 
         /// SAVE IMAGE
         _savedFile = await provider.saveImage(editedImage.imageBytes);

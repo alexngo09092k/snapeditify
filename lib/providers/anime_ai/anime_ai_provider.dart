@@ -120,6 +120,9 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     WidgetUtils.instance.showLoadingPopup();
 
+    /// SHOW ADS
+    adProvider.handleAd();
+
     /// CALL API
     AnimeAIImageBody body = AnimeAIImageBody(style: styleId, inputImage: originalImage.imageBytes);
     SnapEditResponse<AnimeImageResponse?> res = await Services.instance.snapEdit.animeRestyle(body);

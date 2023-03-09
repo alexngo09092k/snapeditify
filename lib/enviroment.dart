@@ -172,12 +172,12 @@ const enviroment = {
         "iosId": "h7s9d468ol",
         "androidId": "h7s9d468ol",
       },
-      {
-        "type": "splash",
-        "provider": "huawei",
-        "iosId": "t17z7pus7m",
-        "androidId": "t17z7pus7m",
-      },
+      // {
+      //   "type": "splash",
+      //   "provider": "huawei",
+      //   "iosId": "t17z7pus7m",
+      //   "androidId": "t17z7pus7m",
+      // },
       {
         "type": "banner",
         "provider": "huawei",
