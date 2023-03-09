@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:snapeditify/models/update_app.dart';
+import '../update_app.dart';
 import '../app_platform.dart';
 import '../maintenance_mode.dart';
 import '../more_app.dart';
