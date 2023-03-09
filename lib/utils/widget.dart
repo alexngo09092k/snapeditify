@@ -54,7 +54,7 @@ class WidgetUtils {
           if (retry != null)
             AlertAction(
               title: S.of(context).retry,
-              isDestructiveAction: true,
+              // isDestructiveAction: true,
               onPressed: () {
                 dimiss();
                 retry(context);
