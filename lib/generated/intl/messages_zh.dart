@@ -101,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "suggested": MessageLookupByLibrary.simpleMessage("建议的"),
         "team": MessageLookupByLibrary.simpleMessage("团队"),
         "teamToSupport": MessageLookupByLibrary.simpleMessage("支持团队。"),
+        "thailand": MessageLookupByLibrary.simpleMessage("泰国"),
         "toAccessPhotosOnYourDeviceToEditOrShare":
             MessageLookupByLibrary.simpleMessage("以编辑或分享图像的方式访问您设备上的照片。"),
         "tryItNow": MessageLookupByLibrary.simpleMessage("立即试用"),

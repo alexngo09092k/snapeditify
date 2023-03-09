@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Thailand`
+  String get thailand {
+    return Intl.message(
+      'Thailand',
+      name: 'thailand',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Albums`
   String get albums {
     return Intl.message(
@@ -807,6 +817,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'th'),
       Locale.fromSubtags(languageCode: 'vi'),
       Locale.fromSubtags(languageCode: 'zh'),
     ];

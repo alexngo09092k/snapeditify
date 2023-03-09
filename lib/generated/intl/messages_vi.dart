@@ -120,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "team": MessageLookupByLibrary.simpleMessage("Nhóm"),
         "teamToSupport":
             MessageLookupByLibrary.simpleMessage("Đội để được hỗ trợ."),
+        "thailand": MessageLookupByLibrary.simpleMessage("Thái Lan"),
         "toAccessPhotosOnYourDeviceToEditOrShare":
             MessageLookupByLibrary.simpleMessage(
                 "để truy cập ảnh trên thiết bị của bạn để chỉnh sửa hoặc chia sẻ ảnh."),
