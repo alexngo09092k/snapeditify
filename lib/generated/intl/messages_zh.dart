@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("样式化图像失败，请重试。"),
         "feedback": MessageLookupByLibrary.simpleMessage("反馈"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("反馈给"),
+        "languages": MessageLookupByLibrary.simpleMessage("语言"),
         "later": MessageLookupByLibrary.simpleMessage("稍后"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(

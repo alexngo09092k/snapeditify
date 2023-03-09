@@ -20,6 +20,7 @@ class HomeLocalizations extends StatelessWidget {
       'en': S.of(context).english,
       'vi': S.of(context).vietnamese,
       'zh': S.of(context).chinese,
+      'th': S.of(context).thailand,
     };
     showCupertinoModalPopup<void>(
       context: context,
@@ -30,7 +31,7 @@ class HomeLocalizations extends StatelessWidget {
             children: [
             Icon(Icons.language, color: Theme.of(context).textTheme.titleLarge!.color,),
             SizedBox(width: AppDimensions.instance.paddingX(0.5)),
-            Text('Languages', style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w600)),
+            Text(S.of(context).languages, style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w600)),
           ],),
           actions: <CupertinoActionSheetAction>[
             ...S.delegate.supportedLocales.map(

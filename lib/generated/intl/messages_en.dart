@@ -77,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Failed to style image, please try again."),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
+        "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "later": MessageLookupByLibrary.simpleMessage("Later"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(

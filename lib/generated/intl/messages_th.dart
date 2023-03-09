@@ -77,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "ไม่สามารถปรับรูปแบบรูปภาพได้ โปรดลองอีกครั้ง"),
         "feedback": MessageLookupByLibrary.simpleMessage("ความคิดเห็น"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("คำติชมถึง"),
+        "languages": MessageLookupByLibrary.simpleMessage("ภาษา"),
         "later": MessageLookupByLibrary.simpleMessage("หลัง"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(

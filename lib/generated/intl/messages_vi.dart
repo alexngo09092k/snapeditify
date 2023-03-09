@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Không thể tạo kiểu cho hình ảnh, vui lòng thử lại."),
         "feedback": MessageLookupByLibrary.simpleMessage("Nhận xét"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Phản hồi cho"),
+        "languages": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "later": MessageLookupByLibrary.simpleMessage("Lần sau"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
