@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/models/more_app.dart';
+import 'package:snapeditify/models/config/bussiness_config/more_app.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';

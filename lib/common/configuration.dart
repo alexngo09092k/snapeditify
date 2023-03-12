@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/models/config/bussiness_config.dart';
+import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';

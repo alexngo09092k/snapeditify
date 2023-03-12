@@ -6,7 +6,7 @@ import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/models/config/bussiness_config.dart';
+import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
 

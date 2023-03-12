@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import '../update_app.dart';
-import '../app_platform.dart';
-import '../maintenance_mode.dart';
-import '../more_app.dart';
-import '../share_app.dart';
-import '../social_network.dart';
-import '../web_link.dart';
+import 'update_app.dart';
+import 'app_platform.dart';
+import 'maintenance_mode.dart';
+import 'more_app.dart';
+import 'share_app.dart';
+import 'social_network.dart';
+import 'web_link.dart';
 
 enum AppMode {
   production,

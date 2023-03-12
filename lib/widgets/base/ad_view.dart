@@ -6,7 +6,9 @@ import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/more_apps.dart';
 
 class AdView extends StatelessWidget {
-  const AdView({super.key});
+  const AdView({super.key, this.width, this.height});
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,8 @@ class AdView extends StatelessWidget {
         top: AppDimensions.instance.padding,
       ),
       child: AdBuilder(
-        height: contentMaxWidth * 1 / 3 + AppDimensions.instance.padding, /// PADDING BOTTOM
+        width: width,
+        height: height ?? contentMaxWidth * 1 / 3 + AppDimensions.instance.padding, /// PADDING BOTTOM
         errorBuilder: apps.isNotEmpty?  (_) => Padding(
           padding: EdgeInsets.only(bottom: AppDimensions.instance.padding),
           child: MoreApps(apps: apps, height: contentMaxWidth * 1 / 3),

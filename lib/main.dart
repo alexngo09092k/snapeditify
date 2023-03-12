@@ -8,7 +8,7 @@ import 'package:snapeditify/app.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/enviroment.dart';
 import 'package:snapeditify/firebase_options.dart';
-import 'package:snapeditify/models/config/bussiness_config.dart';
+import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/app_theme_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
