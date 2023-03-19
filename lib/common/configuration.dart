@@ -172,7 +172,7 @@ abstract class DefaultConfig {
   static IAPConfig iap = const IAPConfig(
     enable: kDebugMode,
     products: [],
-    providers: [],
+    providers: [IAPProvider.google, IAPProvider.huawei],
   );
 }
 

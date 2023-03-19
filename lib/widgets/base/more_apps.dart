@@ -7,7 +7,6 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/models/config/bussiness_config/more_app.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
-import 'package:snapeditify/widgets/base/custom_button.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
 import 'package:snapeditify/widgets/slideshow/image_slideshow.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,7 +18,7 @@ class MoreApps extends StatelessWidget {
 
   _launchApp(BuildContext context, MoreApp app) async {
     try {
-      if(app.link == null) return;
+      if(app.link == null || !await canLaunchUrl(Uri.parse(app.link!))) throw ErrorDescription('Can not launch link');
       if (!await launchUrl(Uri.parse(app.link!))) {
         WidgetUtils.instance.showWarningPopup(
           title: S.of(context).openBrowser,
@@ -55,21 +54,22 @@ class MoreApps extends StatelessWidget {
                 child: Stack(
                   children: [
                    if(e.banner != null) CustomImage(image: e.banner!, height: height, fit: BoxFit.fill),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                          child: CustomImage(
-                            image: e.logo,
-                            fit: BoxFit.cover,
-                            height: height,
-                            width: height,
+                    Padding(
+                      padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.5)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+                            child: CustomImage(
+                              image: e.logo,
+                              fit: BoxFit.cover,
+                              height: height - AppDimensions.instance.padding,
+                              width: height - AppDimensions.instance.padding,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.5)),
+                          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,23 +86,25 @@ class MoreApps extends StatelessWidget {
                                     SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                                     Text(
                                       e.desc,
-                                      maxLines: 2,
+                                      maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Theme.of(context).colorScheme.onSurface),
                                     ),
                                   ],
                                 ),
                                 SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                                CustomButton(
-                                  title: S.of(context).downloadNow, 
-                                  onTap: () => _launchApp(context, e), 
-                                  gradient: AppColors.instance.gradient,
-                                ),
+                                GestureDetector(
+                                  child: Text(
+                                    S.of(context).downloadNow, 
+                                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Theme.of(context).colorScheme.primary),
+                                  ), 
+                                  onTap: () => _launchApp(context, e),
+                                )
                               ],
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
