@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/providers/sky/sky_provider.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
+import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
+import 'package:snapeditify/widgets/painter/painter_pure.dart';
+
+class SkyImage extends StatelessWidget {
+  const SkyImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseImageEditor(
+      builder: (width, height) => Stack(
+        children: [
+          /// PAINT
+          Center(
+            child: PropConsumer<ISkyProvider, PainterController>(
+              select: (p) => p.state.paint,
+              builder: (_, __, p, paint) => AspectRatio(
+                aspectRatio: p.state.image.ratio,
+                child: FlutterPainter(controller: paint),
+              ),
+            ),
+          ),
+
+          /// COMPARE BUTTON
+          Positioned(
+            right: AppDimensions.instance.padding,
+            bottom: AppDimensions.instance.padding,
+            child: PropConsumer<ISkyProvider, bool>(
+              select: (p) => p.canCompare,
+              builder: (_, __, p, canCompare) => GestureDetector(
+                onTapDown: (_) => p.compare(context),
+                onTapUp: (_) => p.compare(context),
+                child: CustomIcon.defaultStyle(
+                  context,
+                  icon: AppAssets.instance.icCompare,
+                  color: canCompare ? Theme.of(context).primaryColor : null,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
