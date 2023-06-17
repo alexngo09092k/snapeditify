@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:fluttering/fluttering.dart';
-
 class Effect {
   final String category;
   final bool premium;

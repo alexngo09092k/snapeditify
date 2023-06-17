@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/services/snap_edit/src/models/response/effect.dart';
 
 class RestyleEffectsResponse {

@@ -15,7 +15,6 @@ import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
-import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/painter/painter.dart';
 
@@ -183,7 +182,6 @@ class EditBackgroundProvider extends IEditBackgroundProvider with ProviderDelega
     return _state.setImage(originalImage.imageBase64);
   }
 
-  @override
   Future<bool> toAI(BuildContext context) async {
     /// CHECKING ENVIROMENT
     final result = await checkEnviroment(context, retry: (_) => toAI(context));
@@ -233,7 +231,6 @@ class EditBackgroundProvider extends IEditBackgroundProvider with ProviderDelega
     return false;
   }
 
-  @override
   bool toBrush(BuildContext context) {
     if (_state.mode == RemoveObjectMode.brush) return true;
 
@@ -243,7 +240,6 @@ class EditBackgroundProvider extends IEditBackgroundProvider with ProviderDelega
     return true;
   }
 
-  @override
   bool toErase(BuildContext context) {
     if (_state.mode == RemoveObjectMode.erase) return true;
 
@@ -254,7 +250,6 @@ class EditBackgroundProvider extends IEditBackgroundProvider with ProviderDelega
     return true;
   }
 
-  @override
   Future<bool> removeObjects(BuildContext context) async {
     /// CHECKING ENVIROMENT
     final result = await checkEnviroment(context, retry: (_) => removeObjects(context));
