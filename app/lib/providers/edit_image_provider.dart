@@ -99,11 +99,8 @@ abstract class EditImageProvider extends Provider {
 
       if (_savedFile != null) {
         /// SHOW SAVED IMAGE
-        await showModalBottomSheet<bool>(
+        await showDialog<bool>(
           context: context,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
-          ),
           builder: (_) => SavedImagePreview(
             editedImage: editedImage,
             editImageType: provider.editImageType,

@@ -172,9 +172,15 @@ class SettingPage extends StatelessWidget {
               child: const Divider(height: 0),
             ),
             list: [
-              TileRow.defaultStyle(
+                 TileRow.defaultStyle(
+                  context,
+                  title: S.of(context).feedback,
+                  image: AppAssets.instance.icFeedback,
+                  onTap: _feedback,
+                ),
+                TileRow.defaultStyle(
                 context,
-                title: S.of(context).feedback,
+                title: 'Rate SnapEditify',
                 image: AppAssets.instance.icFeedback,
                 onTap: _feedback,
               ),
