@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
@@ -21,21 +21,36 @@ class CustomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Configuration.instance.isNetwork(image)
-        ? CachedNetworkImage(
-            imageUrl: image,
+        ? Image.network(
+            image,
             width: width,
             height: height,
             color: color,
             fit: fit,
-            placeholder: (_, __) => ImagePlaceholder(
+            loadingBuilder: (_, __, ___) => ImagePlaceholder(
               width: width,
               height: height,
             ),
-            errorWidget: (_, __, ___) => ImagePlaceholder(
+            errorBuilder: (_, __, ___) => ImagePlaceholder(
               width: width,
               height: height,
             ),
           )
+        // ? CachedNetworkImage(
+        //     imageUrl: image,
+        //     width: width,
+        //     height: height,
+        //     color: color,
+        //     fit: fit,
+        //     placeholder: (_, __) => ImagePlaceholder(
+        //       width: width,
+        //       height: height,
+        //     ),
+        //     errorWidget: (_, __, ___) => ImagePlaceholder(
+        //       width: width,
+        //       height: height,
+        //     ),
+        //   )
         : Image.asset(
             image,
             width: width,
