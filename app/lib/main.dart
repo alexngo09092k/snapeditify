@@ -8,6 +8,7 @@ import 'package:snapeditify/app.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/enviroment.dart';
 import 'package:snapeditify/firebase_options.dart';
+import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/app_theme_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
@@ -51,9 +52,9 @@ void main() {
       return true;
     },
     onDidInitialize: () async {
-      // await Configuration.instance.loadRemoteConfig();
+      await Configuration.instance.loadRemoteConfig();
 
-      // Debug.debugMode = Configuration.instance.business.appMode == AppMode.debug;
+      Debug.debugMode = Configuration.instance.business.appMode == AppMode.debug;
 
       AwesomeAdvertisement.instance.initial(Configuration.instance.advertisement);
       AwesomeIAP.instance.initial(Configuration.instance.iap);
