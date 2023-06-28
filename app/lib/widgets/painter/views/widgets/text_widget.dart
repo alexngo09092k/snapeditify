@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 part of 'flutter_painter.dart';
 
 /// Flutter widget to detect user input and request drawing [FreeStyleDrawable]s.

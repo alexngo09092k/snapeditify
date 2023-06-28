@@ -4,6 +4,7 @@ import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/home/widgets/home_base_banner.dart';
+import 'package:snapeditify/pages/home/widgets/home_base_tools.dart';
 import 'package:snapeditify/pages/home/widgets/home_light_dark.dart';
 import 'package:snapeditify/pages/home/widgets/home_localizations.dart';
 import 'package:snapeditify/pages/home/widgets/home_logo.dart';
@@ -22,7 +23,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   @override
   void initState() {
     super.initState();
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           SizedBox(width: AppDimensions.instance.paddingX(0.5)),
           const HomeLocalizations(),
-          const HomeLightDarkButton(), 
+          const HomeLightDarkButton(),
           const HomeSettingsButton(),
           SizedBox(width: AppDimensions.instance.paddingX(0.5)),
         ],
@@ -50,33 +50,16 @@ class _HomePageState extends State<HomePage> {
       before: const HomeOptions(),
       children: [
         SizedBox(height: AppDimensions.instance.padding),
-        HomeBaseBanner(
-          banner: AppAssets.instance.homeAnimeAIBanner,
-          title: S.of(context).createNanimeAvatar,
-          buttonTitle: S.of(context).tryItNow,
-          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.animeAI),
+        /// REMOVE OBJECTS TOOLS
+        const HomeBaseTools(
+          editImageTypes: [EditImageType.remover, EditImageType.oneTouch],
         ),
-        const UnlockPremium(),
-        HomeBaseBanner(
-          banner: AppAssets.instance.homeEnhanceBanner,
-          title: S.of(context).enhanceNimageQuality,
-          buttonTitle: S.of(context).tryItNow,
-          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.enhance),
+        /// REMOVE OBJECTS TOOLS
+        const HomeBaseTools(
+          editImageTypes: [EditImageType.remover, EditImageType.oneTouch],
         ),
         SizedBox(height: AppDimensions.instance.padding),
-        HomeBaseBanner(
-          banner: AppAssets.instance.homeRemoveObjectBanner,
-          title: S.of(context).removeThingsNfromImage,
-          buttonTitle: S.of(context).tryItNow,
-          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.remover),
-        ),
-       const AdView(),
-        HomeBaseBanner(
-          banner: AppAssets.instance.homeArtEffectBanner,
-          title: S.of(context).turnYourNimageNintoArt,
-          buttonTitle: S.of(context).tryItNow,
-          action: () => AppRoutes.instance.goAlbumsPage(context, EditImageType.artEffect),
-        ),
+        const AdView(),
         SizedBox(height: bottomPadding),
       ],
     );

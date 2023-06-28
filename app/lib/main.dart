@@ -20,8 +20,6 @@ import 'package:snapeditify/providers/sky/sky_provider.dart';
 import 'package:snapeditify/services/services.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  
   AwesomeApp(
     app: const App(),
     inAppReview: const InAppReviewConfig(enable: false),
