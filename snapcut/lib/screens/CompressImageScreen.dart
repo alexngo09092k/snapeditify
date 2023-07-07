@@ -6,7 +6,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../services/FileService.dart';
 import '../../utils/Colors.dart';
 import '../components/AppBarComponent.dart';
-import '../main.dart';
+import '../app.dart';
 import '../utils/AppPermissionHandler.dart';
 import '../utils/Common.dart';
 import 'DashboardScreen.dart';
@@ -66,11 +66,6 @@ class CompressImageScreenState extends State<CompressImageScreen> {
       log(e.toString());
     });
     save(compressedFile!.path);
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
   }
 
   @override

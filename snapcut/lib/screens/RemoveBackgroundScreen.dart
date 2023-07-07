@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../main.dart';
+import '../../app.dart';
 import '../../services/FileService.dart';
 import '../../utils/Colors.dart';
 import '../../utils/Constants.dart';
@@ -30,11 +30,6 @@ class RemoveBackgroundScreenState extends State<RemoveBackgroundScreen> {
 
   init() async {
     originalFile = widget.file;
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
   }
 
   @override

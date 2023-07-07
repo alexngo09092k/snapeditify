@@ -23,11 +23,6 @@ class FilterSelectionWidget extends StatefulWidget {
 class FilterSelectionWidgetState extends State<FilterSelectionWidget> {
 
   @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: Axis.horizontal,

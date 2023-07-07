@@ -1,7 +1,5 @@
-import 'package:facebook_audience_network/ad/ad_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../components/AdsComponent.dart';
 import '../../components/LastEditedListWidget.dart';
@@ -9,7 +7,7 @@ import '../../services/FileService.dart';
 import '../../utils/AdConfigurationConstants.dart';
 import '../../utils/Colors.dart';
 
-import '../main.dart';
+import '../app.dart';
 
 class LastEditedPictureScreen extends StatefulWidget {
   @override
@@ -17,7 +15,6 @@ class LastEditedPictureScreen extends StatefulWidget {
 }
 
 class LastEditedPictureScreenState extends State<LastEditedPictureScreen> {
-  BannerAd? myBanner;
 
   @override
   void initState() {
@@ -27,7 +24,7 @@ class LastEditedPictureScreenState extends State<LastEditedPictureScreen> {
 
   Future<void> init() async {
     if (!disableAdMob && isAds == isGoogleAds) {
-      myBanner = buildBannerAd()..load();
+      // myBanner = buildBannerAd()..load();
     }
     if (!disableAdMob && isAds == isFacebookAds) {
       loadFaceBookInterstitialAd();
@@ -35,41 +32,36 @@ class LastEditedPictureScreenState extends State<LastEditedPictureScreen> {
     }
   }
 
-  BannerAd buildBannerAd() {
-    return BannerAd(
-      size: AdSize.banner,
-      request: AdRequest(),
-      adUnitId: mAdMobBannerId,
-      listener: BannerAdListener(
-        onAdLoaded: (Ad ad) {
-          log('${ad.runtimeType} loaded.');
-          myBanner = ad as BannerAd;
-          myBanner!.load();
-        },
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          log('${ad.runtimeType} failed to load: $error.');
-          ad.dispose();
-          bannerReady = true;
-        },
-        onAdOpened: (Ad ad) {
-          log('${ad.runtimeType} onAdOpened.');
-        },
-        onAdClosed: (Ad ad) {
-          log('${ad.runtimeType} closed.');
-          ad.dispose();
-        },
-      ),
-    );
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
+  // BannerAd buildBannerAd() {
+  //   return BannerAd(
+  //     size: AdSize.banner,
+  //     request: AdRequest(),
+  //     adUnitId: mAdMobBannerId,
+  //     listener: BannerAdListener(
+  //       onAdLoaded: (Ad ad) {
+  //         log('${ad.runtimeType} loaded.');
+  //         myBanner = ad as BannerAd;
+  //         myBanner!.load();
+  //       },
+  //       onAdFailedToLoad: (Ad ad, LoadAdError error) {
+  //         log('${ad.runtimeType} failed to load: $error.');
+  //         ad.dispose();
+  //         bannerReady = true;
+  //       },
+  //       onAdOpened: (Ad ad) {
+  //         log('${ad.runtimeType} onAdOpened.');
+  //       },
+  //       onAdClosed: (Ad ad) {
+  //         log('${ad.runtimeType} closed.');
+  //         ad.dispose();
+  //       },
+  //     ),
+  //   );
+  // }
 
   @override
   void dispose() {
-    myBanner?.dispose();
+    // myBanner?.dispose();
     super.dispose();
   }
 
@@ -120,21 +112,21 @@ class LastEditedPictureScreenState extends State<LastEditedPictureScreen> {
             alignment: Alignment.bottomCenter,
             children: [
               SingleChildScrollView(padding: EdgeInsets.only(bottom: 50), child: LastEditedListWidget(isDashboard: false)),
-              if (isAds == isGoogleAds && myBanner != null)
-                Positioned(
-                  child: Container(child: myBanner != null ? AdWidget(ad: myBanner!) : SizedBox(), color: Color(0xFFEEF6FD)),
-                  bottom: 0,
-                  height: AdSize.banner.height.toDouble(),
-                  width: context.width(),
-                ),
-              if (isAds == isFacebookAds)
-                FacebookBannerAd(
-                  placementId: faceBookBannerPlacementId,
-                  bannerSize: BannerSize.STANDARD,
-                  listener: (result, value) {
-                    print("Banner Ad: $result -->  $value");
-                  },
-                ),
+              // if (isAds == isGoogleAds && myBanner != null)
+              //   Positioned(
+              //     child: Container(child: myBanner != null ? AdWidget(ad: myBanner!) : SizedBox(), color: Color(0xFFEEF6FD)),
+              //     bottom: 0,
+              //     height: AdSize.banner.height.toDouble(),
+              //     width: context.width(),
+              //   ),
+              // if (isAds == isFacebookAds)
+              //   FacebookBannerAd(
+              //     placementId: faceBookBannerPlacementId,
+              //     bannerSize: BannerSize.STANDARD,
+              //     listener: (result, value) {
+              //       print("Banner Ad: $result -->  $value");
+              //     },
+              //   ),
             ],
           ),
         ),

@@ -3,7 +3,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../utils/Constants.dart';
 import 'package:photo_view/photo_view.dart';
 
-import '../main.dart';
+import '../app.dart';
 
 class CollegeMakerLayoutWidget extends StatefulWidget {
   final List<int>? columnCountList;

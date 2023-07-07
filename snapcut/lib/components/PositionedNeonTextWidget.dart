@@ -27,11 +27,6 @@ class PositionedTextViewWidgetState extends State<PositionedNeonTextWidget> with
   }
 
   @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Positioned(
       left: widget.left,

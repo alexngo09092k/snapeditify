@@ -24,11 +24,6 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Image.asset('images/app_logo.png', height: 120).center(),

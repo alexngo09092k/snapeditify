@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../utils/DataProvider.dart';
 
-import '../main.dart';
+import '../app.dart';
 
 class EmojiPickerBottomSheet extends StatefulWidget {
   static String tag = '/EmojiPickerBottomSheet';
@@ -20,11 +20,6 @@ class EmojiPickerBottomSheetState extends State<EmojiPickerBottomSheet> {
 
   Future<void> init() async {
     afterBuildCreated(() => appStore.setLoading(false));
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
   }
 
   @override

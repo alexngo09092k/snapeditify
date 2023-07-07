@@ -15,11 +15,6 @@ class FrameSelectionWidget extends StatefulWidget {
 class FrameSelectionWidgetState extends State<FrameSelectionWidget> {
 
   @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: Axis.horizontal,

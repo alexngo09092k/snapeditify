@@ -6,7 +6,7 @@ import '/../utils/AppPermissionHandler.dart';
 import '../../components/AdsComponent.dart';
 import '../../components/CollegeMakerLayoutWidget.dart';
 import '../../components/ColorSelectorBottomSheet.dart';
-import '../../main.dart';
+import '../../app.dart';
 import '../../models/CollegeMakerModel.dart';
 import '../../services/FileService.dart';
 import '../../utils/AdConfigurationConstants.dart';
@@ -166,18 +166,18 @@ class CollegeMakerScreenState extends State<CollegeMakerScreen> {
       toast('Saved');
       mIsImageSaved = true;
       if (!disableAdMob) {
-        if (isAds == isGoogleAds) {
-          if (myInterstitial != null) {
-            myInterstitial!.show().then((value) {
-              myInterstitial?.dispose();
-            });
-          } else {
-            showInterstitialAd(context);
-          }
-        }
-        if (isAds == isFacebookAds) {
-          showFacebookInterstitialAd();
-        }
+        // if (isAds == isGoogleAds) {
+        //   // if (myInterstitial != null) {
+        //   //   myInterstitial!.show().then((value) {
+        //   //     myInterstitial?.dispose();
+        //   //   });
+        //   // } else {
+        //   //   showInterstitialAd(context);
+        //   // }
+        // }
+        // if (isAds == isFacebookAds) {
+        //   showFacebookInterstitialAd();
+        // }
       }
     }).catchError((e) {
       log(e);
@@ -188,11 +188,6 @@ class CollegeMakerScreenState extends State<CollegeMakerScreen> {
 
     await 1.seconds.delay;
     pop();
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
   }
 
   @override

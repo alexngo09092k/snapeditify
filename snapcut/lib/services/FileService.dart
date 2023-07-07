@@ -155,7 +155,7 @@ Future<File?> getResizeFile(BuildContext context, File? file, double sliderValue
 Future<void> cropImage({bool isFreePhoto = false, String? networkImage, File? imageFile, Function(File)? onDone}) async {
   ImageCropper imageCropper = ImageCropper();
   if (!isFreePhoto) {
-    File? file = await imageCropper.cropImage(
+    CroppedFile? file = await imageCropper.cropImage(
       sourcePath: imageFile!.path,
       aspectRatioPresets: Platform.isAndroid
           ? [
@@ -175,21 +175,21 @@ Future<void> cropImage({bool isFreePhoto = false, String? networkImage, File? im
               CropAspectRatioPreset.ratio7x5,
               CropAspectRatioPreset.ratio16x9
             ],
-      androidUiSettings: AndroidUiSettings(
-        toolbarTitle: 'Crop Image',
-        toolbarColor: colorPrimary,
-        toolbarWidgetColor: Colors.white,
-        initAspectRatio: CropAspectRatioPreset.original,
-        lockAspectRatio: false,
-        activeControlsWidgetColor: colorPrimary,
-      ),
-      iosUiSettings: IOSUiSettings(
-        title: 'Crop Image',
-      ),
+      // androidUiSettings: AndroidUiSettings(
+      //   toolbarTitle: 'Crop Image',
+      //   toolbarColor: colorPrimary,
+      //   toolbarWidgetColor: Colors.white,
+      //   initAspectRatio: CropAspectRatioPreset.original,
+      //   lockAspectRatio: false,
+      //   activeControlsWidgetColor: colorPrimary,
+      // ),
+      // iosUiSettings: IOSUiSettings(
+      //   title: 'Crop Image',
+      // ),
     );
     if (file != null) {
       print(file);
-      onDone?.call(file);
+      onDone?.call(File(file.path));
     }
   }
 }

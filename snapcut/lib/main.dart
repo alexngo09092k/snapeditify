@@ -1,74 +1,52 @@
+
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:fluttering_ads/fluttering_ads.dart';
+import 'package:fluttering_iap/iap/index.dart';
+import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../AppTheme.dart';
-import '../../screens/SplashScreen.dart';
-import '../../store/AppStore.dart';
-import '../../utils/Constants.dart';
+import 'package:snapcut/app.dart';
+import 'package:snapcut/common/configuration.dart';
+import 'package:snapcut/enviroment.dart';
+import 'package:snapcut/firebase_options.dart';
+import 'package:snapcut/models/config/bussiness_config/bussiness_config.dart';
+import 'package:snapcut/providers/app_theme_provider.dart';
 
-AppStore appStore = AppStore();
+void main() {
+  AwesomeApp(
+    app: App(),
+    inAppReview: const InAppReviewConfig(enable: false),
+    providers: [
+      AwesomeAdvertisement.instance,
+      AwesomeIAP.instance,
+      AwesomeRemoteConfig.instance,
+      AppThemeProvider(themeMode: ThemeMode.light, locale: const Locale('en')),
+    ],
+    lazyProviders: [
+    ],
+    onWillInitialize: () async {
+      await initialize();
 
-bool bannerReady = false;
-bool interstitialReady = false;
-bool isRewardedAdReady = false;
-bool rewarded = false;
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
 
-InterstitialAd? myInterstitial;
+      await Configuration.instance.loadLocalConfig(enviroment);
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+      AwesomeRemoteConfig.instance.initial(Configuration.instance.remoteConfig);
 
-  defaultSpreadRadius = 0.5;
-  defaultBlurRadius = 3.0;
-  appButtonBackgroundColorGlobal = Colors.white;
+      return true;
+    },
+    onDidInitialize: () async {
+      await Configuration.instance.loadRemoteConfig();
 
-  await initialize();
+      Debug.debugMode = Configuration.instance.business.appMode == AppMode.debug;
 
-  await Firebase.initializeApp().then((value) {
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    MobileAds.instance.initialize();
-  });
+      AwesomeAdvertisement.instance.initial(Configuration.instance.advertisement);
+      AwesomeIAP.instance.initial(Configuration.instance.iap);
 
-  RequestConfiguration configuration = RequestConfiguration(testDeviceIds: ['E46609DD331AF2754D38B3DCE3ED011B']);
-  MobileAds.instance.updateRequestConfiguration(configuration);
-
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void setState(VoidCallback fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: mAppName,
-      navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      home: SplashScreen(),
-      scrollBehavior: MyBehavior(),
-    );
-  }
-}
-
-class MyBehavior extends ScrollBehavior {
-  @override
-  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
-    return child;
-  }
+      return true;
+    },
+  ).run();
 }

@@ -39,11 +39,6 @@ class LastEditedListWidgetState extends State<LastEditedListWidget> {
   }
 
   @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
   void dispose() {
     LiveStream().dispose('refresh');
     super.dispose();

@@ -49,12 +49,12 @@ class CropImageScreenState extends State<CropImageScreen> {
 
           imageFile = await saveToDirectory(file);
           if (!disableAdMob) {
-            if (isAds == isGoogleAds) {
-              if (myInterstitial != null) showInterstitialAd(context);
-            }
-            if (isAds == isFacebookAds) {
-              showFacebookInterstitialAd();
-            }
+            // if (isAds == isGoogleAds) {
+            //   if (myInterstitial != null) showInterstitialAd(context);
+            // }
+            // if (isAds == isFacebookAds) {
+            //   showFacebookInterstitialAd();
+            // }
           }
           setState(() {});
           await 1.seconds.delay;
@@ -76,16 +76,6 @@ class CropImageScreenState extends State<CropImageScreen> {
     } else {
       title = '';
     }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
   }
 
   Future<void> save(String path) async {

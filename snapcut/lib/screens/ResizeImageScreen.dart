@@ -9,7 +9,7 @@ import '../../services/FileService.dart';
 import '../../utils/Colors.dart';
 
 import '../components/AppBarComponent.dart';
-import '../main.dart';
+import '../app.dart';
 import '../utils/AppPermissionHandler.dart';
 import '../utils/Common.dart';
 
@@ -51,11 +51,6 @@ class ResizeImageScreenState extends State<ResizeImageScreen> {
 
       setState(() {});
     });
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
   }
 
   @override

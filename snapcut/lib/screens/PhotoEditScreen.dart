@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -30,7 +29,7 @@ import '../../utils/Constants.dart';
 import '../../utils/SignatureLibWidget.dart';
 import 'package:screenshot/screenshot.dart';
 import '../components/TextTemplatePickerBottomSheet.dart';
-import '../main.dart';
+import '../app.dart';
 import '../models/BorderModel.dart';
 import '../models/UndoModel.dart';
 import '../utils/AppPermissionHandler.dart';
@@ -57,9 +56,9 @@ class PhotoEditScreenState extends State<PhotoEditScreen> {
 
   DateTime? currentBackPressTime;
 
-  /// Google Ads
-  RewardedAd? rewardedAd;
-  InterstitialAd? myInterstitial;
+  // /// Google Ads
+  // RewardedAd? rewardedAd;
+  // InterstitialAd? myInterstitial;
   bool mIsImageSaved = false;
 
   /// Used to save edited image on storage
@@ -224,13 +223,13 @@ class PhotoEditScreenState extends State<PhotoEditScreen> {
       mIsImageSaved = true;
 
       if (!disableAdMob && isAds == isGoogleAds) {
-        if (myInterstitial != null) {
-          myInterstitial!.show().then((value) {
-            myInterstitial?.dispose();
-          });
-        } else {
-          showInterstitialAd(context);
-        }
+        // if (myInterstitial != null) {
+        //   myInterstitial!.show().then((value) {
+        //     myInterstitial?.dispose();
+        //   });
+        // } else {
+        //   showInterstitialAd(context);
+        // }
       }
       if (!disableAdMob && isAds == isFacebookAds) {
         showFacebookInterstitialAd();
@@ -670,13 +669,8 @@ class PhotoEditScreenState extends State<PhotoEditScreen> {
     super.dispose();
     signatureController.dispose();
     scrollController.dispose();
-    rewardedAd?.dispose();
-    myInterstitial?.dispose();
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
+    // rewardedAd?.dispose();
+    // myInterstitial?.dispose();
   }
 
   @override

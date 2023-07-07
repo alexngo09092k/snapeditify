@@ -14,7 +14,7 @@ import '../../screens/TrimVideoScreen.dart';
 import '../../services/FileService.dart';
 import '../../utils/Colors.dart';
 
-import '../main.dart';
+import '../app.dart';
 import 'HomeItemWidget.dart';
 
 class HomeItemListWidget extends StatefulWidget {

@@ -32,11 +32,6 @@ class _PhotoViewerWidgetState extends State<PhotoViewerWidget> {
   }
 
   @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
   void dispose() {
     super.dispose();
   }

@@ -52,11 +52,6 @@ class FreePhotosHorizontalListWidgetState extends State<FreePhotosHorizontalList
   }
 
   @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return isInternetAvailable
         ? Column(
