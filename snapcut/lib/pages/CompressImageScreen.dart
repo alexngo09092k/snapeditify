@@ -5,7 +5,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../services/FileService.dart';
 import '../../utils/Colors.dart';
-import '../components/AppBarComponent.dart';
+import '../widgets/AppBarComponent.dart';
 import '../app.dart';
 import '../utils/AppPermissionHandler.dart';
 import '../utils/Common.dart';

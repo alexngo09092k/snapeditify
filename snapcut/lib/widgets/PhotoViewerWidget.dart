@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/../components/AppBarComponent.dart';
-import '../../screens/PhotoEditScreen.dart';
+import '/../widgets/AppBarComponent.dart';
+import '../pages/PhotoEditScreen.dart';
 import '../../utils/Colors.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:share/share.dart';

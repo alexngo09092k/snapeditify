@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../screens/PhotoEditScreen.dart';
-import '../../screens/ViewAllFreePhotos.dart';
+import '../pages/PhotoEditScreen.dart';
+import '../pages/ViewAllFreePhotos.dart';
 import '../../utils/Colors.dart';
 import '../../utils/Common.dart';
 import '../../utils/Images.dart';
-import '../../components/AdsComponent.dart';
+import '../../widgets/AdsComponent.dart';
 import '../utils/AdConfigurationConstants.dart';
 
 class FreePhotosHorizontalListWidget extends StatefulWidget {

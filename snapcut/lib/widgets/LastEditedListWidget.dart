@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../components/AdsComponent.dart';
-import '../../screens/LastEditedPictureScreen.dart';
+import '../../widgets/AdsComponent.dart';
+import '../pages/LastEditedPictureScreen.dart';
 import '../../services/FileService.dart';
 import '../../utils/AdConfigurationConstants.dart';
 import 'PhotoViewerWidget.dart';

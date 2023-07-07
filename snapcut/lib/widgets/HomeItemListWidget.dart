@@ -5,12 +5,12 @@ import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../screens/CollegeMakerScreen.dart';
-import '../../screens/CompressImageScreen.dart';
-import '../../screens/CropImageScreen.dart';
-import '../../screens/PhotoEditScreen.dart';
-import '../../screens/ResizeImageScreen.dart';
-import '../../screens/TrimVideoScreen.dart';
+import '../pages/CollegeMakerScreen.dart';
+import '../pages/CompressImageScreen.dart';
+import '../pages/CropImageScreen.dart';
+import '../pages/PhotoEditScreen.dart';
+import '../pages/ResizeImageScreen.dart';
+import '../pages/TrimVideoScreen.dart';
 import '../../services/FileService.dart';
 import '../../utils/Colors.dart';
 

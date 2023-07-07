@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../components/AdsComponent.dart';
-import '../../components/LastEditedListWidget.dart';
+import '../widgets/AdsComponent.dart';
+import '../widgets/LastEditedListWidget.dart';
 import '../../services/FileService.dart';
 import '../../utils/AdConfigurationConstants.dart';
 import '../../utils/Colors.dart';

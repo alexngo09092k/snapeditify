@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '/../utils/AppPermissionHandler.dart';
-import '../../components/AdsComponent.dart';
-import '../../components/FreePhotosHorizontalListWidget.dart';
-import '../../components/HomeItemListWidget.dart';
-import '../../components/LastEditedListWidget.dart';
+import '../widgets/AdsComponent.dart';
+import '../widgets/FreePhotosHorizontalListWidget.dart';
+import '../widgets/HomeItemListWidget.dart';
+import '../widgets/LastEditedListWidget.dart';
 import '../../main.dart';
 import '../../utils/AdConfigurationConstants.dart';
 import '../../utils/Colors.dart';

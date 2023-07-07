@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../components/AdsComponent.dart';
-import '../../screens/NoInternetScreen.dart';
-import '../../screens/PhotoEditScreen.dart';
+import '../widgets/AdsComponent.dart';
+import 'NoInternetScreen.dart';
+import 'PhotoEditScreen.dart';
 import '../../utils/AdConfigurationConstants.dart';
 import '../../utils/Colors.dart';
 import '../../utils/Common.dart';
 import '../../utils/Images.dart';
-import '../components/AppBarComponent.dart';
+import '../widgets/AppBarComponent.dart';
 
 class ViewAllFreePhotosScreen extends StatefulWidget {
   @override

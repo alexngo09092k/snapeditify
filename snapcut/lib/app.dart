@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../AppTheme.dart';
-import '../../screens/SplashScreen.dart';
+import 'pages/SplashScreen.dart';
 import '../../store/AppStore.dart';
 import '../../utils/Constants.dart';
 

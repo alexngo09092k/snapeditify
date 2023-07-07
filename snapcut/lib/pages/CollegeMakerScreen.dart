@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '/../utils/AppPermissionHandler.dart';
-import '../../components/AdsComponent.dart';
-import '../../components/CollegeMakerLayoutWidget.dart';
-import '../../components/ColorSelectorBottomSheet.dart';
+import '../widgets/AdsComponent.dart';
+import '../widgets/CollegeMakerLayoutWidget.dart';
+import '../widgets/ColorSelectorBottomSheet.dart';
 import '../../app.dart';
 import '../../models/CollegeMakerModel.dart';
 import '../../services/FileService.dart';
@@ -15,7 +15,7 @@ import '../../utils/Constants.dart';
 import '../../utils/DataProvider.dart';
 import 'package:screenshot/screenshot.dart';
 
-import '../components/AppBarComponent.dart';
+import '../widgets/AppBarComponent.dart';
 import '../utils/Common.dart';
 
 class CollegeMakerScreen extends StatefulWidget {
