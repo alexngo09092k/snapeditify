@@ -15,7 +15,7 @@ import 'package:snapcut/providers/app_theme_provider.dart';
 
 void main() {
   AwesomeApp(
-    app: App(),
+    app: const App(),
     inAppReview: const InAppReviewConfig(enable: false),
     providers: [
       AwesomeAdvertisement.instance,

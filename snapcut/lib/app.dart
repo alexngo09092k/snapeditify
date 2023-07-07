@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nb_utils/nb_utils.dart';
-import '../../AppTheme.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:snapcut/common/app_routes.dart';
+import 'package:snapcut/common/configuration.dart';
+import 'package:snapcut/common/theme.dart';
 import 'pages/SplashScreen.dart';
 import '../../store/AppStore.dart';
-import '../../utils/Constants.dart';
 
 AppStore appStore = AppStore();
 
@@ -13,33 +14,47 @@ bool isRewardedAdReady = false;
 bool rewarded = false;
 
 class App extends StatefulWidget {
+  const App({super.key});
+
   @override
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class _AppState extends AwesomeAppState<App> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: mAppName,
-      navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      home: SplashScreen(),
-      scrollBehavior: MyBehavior(),
-    );
-  }
-}
+    double scale = AwesomeAppState.screen.width < 300 ? 0.8 : (AwesomeAppState.screen.width < 365 ? 0.9 : 1);
+    Debug.log("============= SCALE $scale =============");
 
-class MyBehavior extends ScrollBehavior {
-  @override
-  Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
-    return child;
+    return Consumer<IThemeProvider>(
+      builder: (_, __, provider) {
+        Debug.log("===== START APP =====");
+        Debug.log("===== THEME MODE: ${provider.themeMode} =====");
+        Debug.log("===== LOCALE: ${provider.locale} =====");
+        final light = getLightTheme(context, scale: scale);
+        final dark = getDarkTheme(context, scale: scale);
+        return MaterialApp(
+          title: Configuration.instance.business.appName,
+          navigatorKey: AwesomeAppState.navigatorKey,
+          theme: light,
+          darkTheme: dark,
+          themeMode: provider.themeMode,
+          initialRoute: AppRoutes.instance.initialRoute,
+          onGenerateRoute: AppRoutes.instance.onGenerateRoute,
+          navigatorObservers: [AwesomeApp.observer],
+          routes: AppRoutes.instance.routes,
+          locale: provider.locale,
+          home: SplashScreen(),
+          // localeResolutionCallback: provider.onChangeLocale,
+          // localizationsDelegates: const [
+          //   S.delegate,
+          //   GlobalMaterialLocalizations.delegate,
+          //   GlobalCupertinoLocalizations.delegate,
+          //   GlobalWidgetsLocalizations.delegate,
+          // ],
+          // supportedLocales: S.delegate.supportedLocales,
+        );
+      },
+    );
   }
 }
