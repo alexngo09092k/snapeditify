@@ -23,18 +23,18 @@ class PremiumSlide extends StatelessWidget {
               autoPlayInterval: 2000,
               isLoop: true,
               children: [
-                Image.asset(
-                  AppAssets.instance.animeDemo1,
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  AppAssets.instance.animeDemo2,
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  AppAssets.instance.animeDemo3,
-                  fit: BoxFit.cover,
-                ),
+                // Image.asset(
+                //   AppAssets.instance.animeDemo1,
+                //   fit: BoxFit.cover,
+                // ),
+                // Image.asset(
+                //   AppAssets.instance.animeDemo2,
+                //   fit: BoxFit.cover,
+                // ),
+                // Image.asset(
+                //   AppAssets.instance.animeDemo3,
+                //   fit: BoxFit.cover,
+                // ),
               ],
             ),
           ),

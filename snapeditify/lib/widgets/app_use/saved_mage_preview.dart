@@ -16,16 +16,16 @@ class SavedImagePreview extends StatelessWidget {
   const SavedImagePreview({
     super.key,
     required this.editedImage,
-    required this.editImageType,
+    required this.imageTool,
     required this.onNewEditImage,
     required this.savedFile,
     required this.onShare,
     required this.onNewImage,
   });
   final EditedImageVM editedImage;
-  final EditImageType editImageType;
+  final ImageTool imageTool;
   final File savedFile;
-  final Function(EditImageType) onNewEditImage;
+  final Function(ImageTool) onNewEditImage;
   final Function() onShare;
   final Function() onNewImage;
 
@@ -78,13 +78,13 @@ class SavedImagePreview extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppDimensions.instance.padding),
-              _Options(
-                current: editImageType,
-                onOptions: (_) {
-                  Navigator.of(context).pop();
-                  onNewEditImage(_);
-                },
-              ),
+              // _Options(
+              //   current: editImageType,
+              //   onOptions: (_) {
+              //     Navigator.of(context).pop();
+              //     onNewEditImage(_);
+              //   },
+              // ),
               SizedBox(height: AppDimensions.instance.padding),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
@@ -125,10 +125,10 @@ class SavedImagePreview extends StatelessWidget {
 
 class _Options extends StatelessWidget {
   const _Options({this.current, required this.onOptions});
-  final EditImageType? current;
-  final Function(EditImageType) onOptions;
+  final ImageTool? current;
+  final Function(ImageTool) onOptions;
 
-  void _onOptions(EditImageType editImageType) {
+  void _onOptions(ImageTool editImageType) {
     if (editImageType != current) {
       onOptions(editImageType);
     }
@@ -140,7 +140,7 @@ class _Options extends StatelessWidget {
     final itemWidth = contentMaxWidth / 4 -
         AppDimensions.instance.gridDelegate.mainAxisSpacing * 2;
     return Wrap(
-      children: EditImageType.values
+      children: ImageTool.values
           .map((e) => GestureDetector(
                 onTap: () => _onOptions(e),
                 child: AppCard(
@@ -151,7 +151,7 @@ class _Options extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CustomIcon(e.icon),
+                      // CustomIcon(e.icon),
                       SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                       Text(e.title,
                           style: Theme.of(context).textTheme.bodyLarge)

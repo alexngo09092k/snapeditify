@@ -79,7 +79,7 @@ class ResizeImageScreenState extends State<ResizeImageScreen> {
           alignment: Alignment.bottomCenter,
           children: [
             ListView(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

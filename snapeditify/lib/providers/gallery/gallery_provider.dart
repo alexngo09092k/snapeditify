@@ -6,90 +6,86 @@ import 'package:fluttering/fluttering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:snapeditify/common/configuration.dart';
-import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
-import 'package:snapeditify/providers/edit_image_provider.dart';
-import 'package:snapeditify/providers/enhance/enhance_provider.dart';
-import 'package:snapeditify/providers/remover/remover_provider.dart';
-import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/models/config/gallery_config.dart';
-import 'package:snapeditify/providers/sky/sky_provider.dart';
 import 'package:snapeditify/view_models/album_vm.dart';
 
-enum EditImageType {
-  remover,
-  oneTouch,
-  enhance,
-  removeBackground,
-  animeAI,
-  artEffect,
-  restore,
-  sky,
+enum ImageTool {
+  removePeople,
+  oneTouchRemoveAll,
+
+  enhancePortrait,
+  upscaleImage,
+  restoreOldPhoto,
+
+  makeIDPassportPhoto,
+  productPhoto,
+  changeBackground,
+
+  createAnimeAI,
+  applyArtEffect,
+  changeYourSky,
 }
 
-extension EditImageTypeEX on EditImageType {
-  String get icon {
-    switch (this) {
-      case EditImageType.remover:
-        return AppAssets.instance.icRemoveObject;
-      case EditImageType.oneTouch:
-        return AppAssets.instance.icRemoveObject;
-      case EditImageType.enhance:
-        return AppAssets.instance.icEnhence;
-      case EditImageType.removeBackground:
-        return AppAssets.instance.icEnhence;
-      case EditImageType.animeAI:
-        return AppAssets.instance.icAnimeAI;
-      case EditImageType.artEffect:
-        return AppAssets.instance.icArtEffect;
-      case EditImageType.restore:
-        return AppAssets.instance.icArtEffect;
-      case EditImageType.sky:
-        return AppAssets.instance.icArtEffect; 
-      default:
-        throw 'Edit Image Type Not Found';
-    }
-  }
-
+extension ImageToolEX on ImageTool {
   String get title {
     switch (this) {
-      case EditImageType.remover:
-        return 'Remover';
-      case EditImageType.oneTouch:
-        return '1 Touch';
-      case EditImageType.enhance:
-        return 'Enhance';
-      case EditImageType.removeBackground:
-        return 'Remove BG';
-      case EditImageType.animeAI:
-        return 'Anime AI';
-      case EditImageType.artEffect:
-        return 'Art Effect';
-      case EditImageType.restore:
-        return 'Restore';
-      case EditImageType.sky:
-        return 'Sky';
+      case ImageTool.removePeople:
+        return 'Remove People';
+      case ImageTool.oneTouchRemoveAll:
+        return '1-Touch Remove All';
+      case ImageTool.enhancePortrait:
+        return 'Enhance Portrait';
+      case ImageTool.upscaleImage:
+        return 'Upscale Image';
+      case ImageTool.restoreOldPhoto:
+        return 'Restore Old Photo';
+      case ImageTool.makeIDPassportPhoto:
+        return 'Make ID Passport Photo';
+      case ImageTool.productPhoto:
+        return 'Product Photo';
+      case ImageTool.changeBackground:
+        return 'Change Background';
+      case ImageTool.createAnimeAI:
+        return 'Create Anime AI';
+      case ImageTool.applyArtEffect:
+        return 'Apply Art Effect';
+      case ImageTool.changeYourSky:
+        return 'Change Sky';
       default:
-        throw 'Edit Image Type Not Found';
+        throw 'Image Tool Not Found';
     }
   }
+}
 
-  EditImageProvider get provider {
+extension ImageToolEX2 on ImageTool {
+  String get image {
     switch (this) {
-      case EditImageType.remover:
-      case EditImageType.oneTouch:
-        return ManagerProvider.of<RemoverProvider>();
-      case EditImageType.enhance:
-        return ManagerProvider.of<EnhanceProvider>();
-      case EditImageType.animeAI:
-        return ManagerProvider.of<AnimeAIProvider>();
-      case EditImageType.artEffect:
-        return ManagerProvider.of<RestyleProvider>();
-      case EditImageType.sky:
-        return ManagerProvider.of<SkyProvider>();
+      case ImageTool.removePeople:
+        return AppAssets.instance.removePeople;
+      case ImageTool.oneTouchRemoveAll:
+        return AppAssets.instance.oneTouchRemoveAll;
+      case ImageTool.enhancePortrait:
+        return AppAssets.instance.enhancePortrait;
+      case ImageTool.upscaleImage:
+        return AppAssets.instance.upscaleImage;
+      case ImageTool.restoreOldPhoto:
+        return AppAssets.instance.restorePhoto;
+      case ImageTool.makeIDPassportPhoto:
+        return AppAssets.instance.makeIDPassport;
+      case ImageTool.productPhoto:
+        return AppAssets.instance.productPhoto;
+      case ImageTool.changeBackground:
+        return AppAssets.instance.changeBackground;
+      case ImageTool.createAnimeAI:
+        return AppAssets.instance.createAnimeAI;
+      case ImageTool.applyArtEffect:
+        return AppAssets.instance.applyEffect;
+      case ImageTool.changeYourSky:
+        return AppAssets.instance.changeYourSky;
       default:
-        throw 'Edit Image Type Not Found';
+        throw 'Image Tool Not Found';
     }
   }
 }
@@ -100,9 +96,7 @@ abstract class IGalleryProvider extends Provider with ProviderDelegate {
 
   GalleryConfig get config;
 
-  EditImageType editImageType = EditImageType.remover;
-
-  List<String> get suggestedPhotos;
+  ImageTool imageTool = ImageTool.removePeople;
 
   Future<bool> initial(GalleryConfig config);
 
@@ -132,55 +126,18 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Map<String, AlbumVM> get albumList => _albumList;
 
-  EditImageType _editImageType = EditImageType.remover;
+  ImageTool _imageTool = ImageTool.removePeople;
 
   @override
-  EditImageType get editImageType => _editImageType;
+  ImageTool get imageTool => _imageTool;
 
   @override
-  set editImageType(EditImageType value) {
-    if (_editImageType != value) {
-      _editImageType = value;
+  set imageTool(ImageTool value) {
+    if (_imageTool != value) {
+      _imageTool = value;
       notifyListeners();
     }
   }
-
-  Map<EditImageType, List<String>> suggestedPhotosStore = {
-    EditImageType.artEffect: [
-      AppAssets.instance.restyleDemo1,
-      AppAssets.instance.restyleDemo2,
-      AppAssets.instance.restyleDemo3,
-    ],
-    EditImageType.enhance: [
-      AppAssets.instance.enhanceDemo1,
-      AppAssets.instance.enhanceDemo2,
-      AppAssets.instance.enhanceDemo3,
-    ],
-    EditImageType.remover: [
-      AppAssets.instance.removeObjectDemo1,
-      AppAssets.instance.removeObjectDemo2,
-      AppAssets.instance.removeObjectDemo3,
-    ],
-    EditImageType.animeAI: [
-      AppAssets.instance.animeDemo1,
-      AppAssets.instance.animeDemo2,
-      AppAssets.instance.animeDemo3,
-    ],
-    EditImageType.sky: [
-      AppAssets.instance.animeDemo1,
-      AppAssets.instance.animeDemo2,
-      AppAssets.instance.animeDemo3,
-    ],
-    EditImageType.restore: [
-      AppAssets.instance.animeDemo1,
-      AppAssets.instance.animeDemo2,
-      AppAssets.instance.animeDemo3,
-    ],
-  };
-
-  @override
-  List<String> get suggestedPhotos =>
-      suggestedPhotosStore[_editImageType] ?? [];
 
   late final StreamController<dynamic> _controller;
 
@@ -245,8 +202,7 @@ class GalleryProvider extends IGalleryProvider {
       } else {
         AssetEntity? asset = await PhotoManager.editor.saveImage(
           data,
-          title:
-              '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
+          title: '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
         );
         return asset?.file;
       }

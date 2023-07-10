@@ -118,9 +118,9 @@ class AppRoutes extends IAppRoutes {
 }
 
 extension AppRoutesUtils on IAppRoutes {
-  goAlbumsPage(BuildContext context, EditImageType editImageType) {
+  goAlbumsPage(BuildContext context, ImageTool imageTool) {
     final provider = ManagerProvider.of<GalleryProvider>();
-    provider.editImageType = editImageType;
+    provider.imageTool = imageTool;
     UserPermission.instance.requestStoragePermission(context, onHasPermisson: () async {
       /// SHOW LOADING POPUP
       WidgetUtils.instance.showLoadingPopup();
@@ -147,13 +147,13 @@ extension AppRoutesUtils on IAppRoutes {
     Navigator.pushNamed(context, AppRoutes.settingPage);
   }
 
-  goEditImagePage(BuildContext context, {required Uint8List bytes, EditImageType? editImageType}) {
+  goEditImagePage(BuildContext context, {required Uint8List bytes, ImageTool? imageTool}) {
     final provider = ManagerProvider.of<GalleryProvider>();
-    if (editImageType != null) provider.editImageType = editImageType;
+    if (imageTool != null) provider.imageTool = imageTool;
     UserPermission.instance.requestStoragePermission(
       context,
       onHasPermisson: () async {
-        final EditImageType current = provider.editImageType;
+        final ImageTool current = provider.imageTool;
         late final bool res;
         late final String target;
 
@@ -161,31 +161,32 @@ extension AppRoutesUtils on IAppRoutes {
         WidgetUtils.instance.showLoadingPopup();
 
         switch (current) {
-          case EditImageType.artEffect:
-            res = await ManagerProvider.of<RestyleProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.applyArtEffectPage;
-            break;
-          case EditImageType.enhance:
-            res = await ManagerProvider.of<EnhanceProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.enhanceImagePage;
-            break;
-          case EditImageType.remover:
-          case EditImageType.oneTouch:
+          case ImageTool.removePeople:
+          case ImageTool.oneTouchRemoveAll:
             res = await ManagerProvider.of<RemoverProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.removeObjectPage;
             break;
-          case EditImageType.animeAI:
-            res = await ManagerProvider.of<AnimeAIProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.animeAIPage;
+          case ImageTool.applyArtEffect:
+            res = await ManagerProvider.of<RestyleProvider>().setImage(context, bytes: bytes);
+            target = AppRoutes.applyArtEffectPage;
             break;
-          case EditImageType.sky:
-            res = await ManagerProvider.of<SkyProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.skyPage;
+          case ImageTool.enhancePortrait:
+            res = await ManagerProvider.of<EnhanceProvider>().setImage(context, bytes: bytes);
+            target = AppRoutes.enhanceImagePage;
             break;
-          case EditImageType.restore:
+          case ImageTool.restoreOldPhoto:
             res = await ManagerProvider.of<RestoreProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.restorePage;
             break;
+          case ImageTool.createAnimeAI:
+            res = await ManagerProvider.of<AnimeAIProvider>().setImage(context, bytes: bytes);
+            target = AppRoutes.animeAIPage;
+            break;
+          case ImageTool.changeYourSky:
+            res = await ManagerProvider.of<SkyProvider>().setImage(context, bytes: bytes);
+            target = AppRoutes.skyPage;
+            break;
+         
           default:
             throw ErrorDescription("Not support action");
         }
@@ -194,7 +195,7 @@ extension AppRoutesUtils on IAppRoutes {
         WidgetUtils.instance.dimiss();
 
         if (res) {
-          if (editImageType != null) {
+          if (imageTool != null) {
             Navigator.pushReplacementNamed(context, target);
           } else {
             Navigator.pushNamed(context, target);
