@@ -27,7 +27,7 @@ class HomeBottomNavigation extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () => onChange(e),
                   child: Container(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme.of(context).cardColor,
                     padding: EdgeInsets.symmetric(
                       vertical: AppDimensions.instance.paddingX(0.5),
                     ),

@@ -2,13 +2,13 @@ import 'package:qr_scanner/common/constants.dart';
 
 enum HomeNavigation {
   scan,
-  history,
   generate,
+  history,
   settings,
 }
 
 extension HomeNavigationEx on HomeNavigation {
-  dynamic get icon {
+  String get icon {
     switch (this) {
       case HomeNavigation.scan:
         return AppAssets.instance.icScanner;
