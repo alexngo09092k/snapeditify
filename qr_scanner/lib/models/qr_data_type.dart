@@ -1,0 +1,4 @@
+enum QRDataType {
+  isScanned,
+  isGenerated,
+}
