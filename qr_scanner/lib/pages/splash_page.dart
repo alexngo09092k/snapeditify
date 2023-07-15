@@ -6,7 +6,7 @@ import 'package:qr_scanner/common/app_routes.dart';
 import 'package:qr_scanner/common/configuration.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/config/bussiness_config/bussiness_config.dart';
-import 'package:qr_scanner/utils/widget.dart';
+// import 'package:qr_scanner/utils/widget.dart';
 import 'package:qr_scanner/widgets/base/custom_image.dart';
 
 class SplashPage extends StatefulWidget {
@@ -22,25 +22,25 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
 
   @override
   void onSplash(bool resultOnWillSplash) async {
-    final start = DateTime.now().millisecondsSinceEpoch;
-    if (await ClientHttp.instance.safeEnvironment()) {
-      if (resultOnWillSplash) {
-        final end = DateTime.now().millisecondsSinceEpoch;
-        if ((end - start) >= time) {
+    // final start = DateTime.now().millisecondsSinceEpoch;
+    // if (await ClientHttp.instance.safeEnvironment()) {
+      // if (resultOnWillSplash) {
+      //   final end = DateTime.now().millisecondsSinceEpoch;
+      //   if ((end - start) >= time) {
           _goTo();
-        } else {
-          Future.delayed(Duration(milliseconds: (time - ((end - start)))), _goTo);
-        }
-      } else {
-        WidgetUtils.instance.showWarningPopup(
-          title: "Open App",
-          message: "Please try again or open the app again!",
-          retry: (_) => AwesomeApp.instance?.restart(),
-        );
-      }
-    } else {
-      WidgetUtils.instance.showNoInternetPopup(retry: (_) => onSplash(resultOnWillSplash));
-    }
+      //   } else {
+      //     Future.delayed(Duration(milliseconds: (time - ((end - start)))), _goTo);
+      //   }
+      // } else {
+      //   WidgetUtils.instance.showWarningPopup(
+      //     title: "Open App",
+      //     message: "Please try again or open the app again!",
+      //     retry: (_) => AwesomeApp.instance?.restart(),
+      //   );
+      // }
+    // } else {
+    //   WidgetUtils.instance.showNoInternetPopup(retry: (_) => onSplash(resultOnWillSplash));
+    // }
   }
 
   _goTo() {

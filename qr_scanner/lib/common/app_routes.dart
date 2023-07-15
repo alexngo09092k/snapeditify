@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/models/qr_data.dart';
 import 'package:qr_scanner/pages/generate/generate_page.dart';
 import 'package:qr_scanner/pages/history/history_page.dart';
 import 'package:qr_scanner/pages/home/home_page.dart';
@@ -9,6 +10,7 @@ import 'package:qr_scanner/pages/premium_page.dart';
 import 'package:qr_scanner/pages/scanner/scanner_page.dart';
 import 'package:qr_scanner/pages/settings/settings_page.dart';
 import 'package:qr_scanner/pages/splash_page.dart';
+import 'package:qr_scanner/pages/viewer_page.dart';
 
 abstract class IAppRoutes {
   String get initialRoute;
@@ -33,7 +35,7 @@ class AppRoutes extends IAppRoutes {
   static const String generatePage = 'generate_page';
   static const String historyPage = 'history_page';
   static const String scannerPage = 'scanner_page';
-
+  static const String viewerPage = 'viewer_page';
 
   static final IAppRoutes _instance = AppRoutes._internal();
 
@@ -74,6 +76,9 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const HistoryPage(), settings);
       case scannerPage:
         return buildRoute(const ScannerPage(), settings);
+      case viewerPage:
+        final QRData qrData = settings.arguments as QRData;
+        return buildRoute(ViewerPage(qrData), settings);
       default:
         throw ErrorDescription("Not found page");
     }

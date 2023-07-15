@@ -154,15 +154,15 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
 extension ScannerProviderEx on ScannerProvider {
   QRType? checkQRType(Barcode barcode) {
-    if(barcode.contactInfo != null) return QRType.contacts;
-    if(barcode.email != null) return QRType.mail;
-    if(barcode.calendarEvent != null) return QRType.calendar;
+    if(barcode.contactInfo != null) return QRType.contact;
+    if(barcode.email != null) return QRType.email;
+    if(barcode.calendarEvent != null) return QRType.event;
     if(barcode.phone != null) return QRType.tel;
-    if(barcode.url != null) return QRType.website;
+    if(barcode.url != null) return QRType.link;
     if(barcode.sms != null) return QRType.sms;
     if(barcode.wifi != null) return QRType.wifi;
-    // if(barcode.geoPoint != null) return QRType. 
-    // if(barcode.driverLicense != null) return QRType.
+    if(barcode.geoPoint != null) return QRType.maps; 
+    if(barcode.driverLicense != null) return QRType.vcard;
     return null;
   }
 }

@@ -25,6 +25,30 @@ class AppAssets {
   final String imagePlaceholder = "$imagePath/image_place_holder.png";
   final String logo = "$imagePath/logo.png";
   final String placeholder = "$imagePath/placeholder.png";
+  final String gAudio = "$imagePath/audio.png";
+  final String gCrypto = "$imagePath/crypto.png";
+  final String gEmail = "$imagePath/email.png";
+  final String gFacebook = "$imagePath/facebook.png";
+  final String gImage = "$imagePath/image.png";
+  final String gInstagram = "$imagePath/instagram.png";
+  final String gLinkList = "$imagePath/link-list.png";
+  final String gLink = "$imagePath/link.png";
+  final String gMaps = "$imagePath/maps.png";
+  final String gMenu = "$imagePath/menu.png";
+  final String gMutilUrl = "$imagePath/multiurl.png";
+  final String gPCR = "$imagePath/pcr.png";
+  final String gPDF = "$imagePath/pdf.png";
+  final String gPPTX = "$imagePath/pptx.png";
+  final String gSnapChat = "$imagePath/snapchat.png";
+  final String gStore = "$imagePath/store.png";
+  final String gTelegram = "$imagePath/telegram.png";
+  final String gText = "$imagePath/text.png";
+  final String gTiktok = "$imagePath/tiktok.png";
+  final String gTwitter = "$imagePath/twitter.png";
+  final String gVCard = "$imagePath/vcard.png";
+  final String gWhatsapp = "$imagePath/whatsapp.png";
+  final String gWifi = "$imagePath/wi-fi.png";
+  final String gYoutube = "$imagePath/youtube.png";
 
   /// Flags
   static const String flagPath = '$imagePath/flags';
