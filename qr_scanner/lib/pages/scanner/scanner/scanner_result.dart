@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:qr_scanner/common/constants.dart';
+// import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/providers/scanner_provider.dart';
 
 class ScannerResult extends StatefulWidget {
