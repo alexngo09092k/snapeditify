@@ -64,3 +64,54 @@ enum QRFormat {
   /// Interleaved 2 of 5 (ITF)
   Itf,
 }
+
+extension QRFormatEx on QRFormat {
+  String get label {
+    switch (this) {
+      case QRFormat.Aztec:
+        return "Aztec Code";
+      case QRFormat.Codabar:
+        return "Codabar Code";
+      case QRFormat.Code128:
+        return "Code 128";
+      case QRFormat.Code39:
+        return "Code 39";
+      case QRFormat.Code93:
+        return "Code 93";
+      case QRFormat.CodeEAN13:
+        return "EAN-13 Code";
+      case QRFormat.CodeEAN2:
+        return "EAN-2 Code";
+      case QRFormat.CodeEAN5:
+        return "EAN-5 Code";
+      case QRFormat.CodeEAN8:
+        return "EAN-8 Code";
+      case QRFormat.CodeISBN:
+        return "ISBN Code";
+      case QRFormat.CodeITF14:
+        return "ITF-14 Code";
+      case QRFormat.CodeITF16:
+        return "ITF-16 Code";
+      case QRFormat.CodeUPCA:
+        return "UPCA Code";
+      case QRFormat.CodeUPCE:
+        return "UPCE Code";
+      case QRFormat.DataMatrix:
+        return "Data Matrix Code";
+      case QRFormat.GS128:
+        return "GS-128 Code";
+      case QRFormat.Itf:
+        return "ITF Code";
+      case QRFormat.PDF417:
+        return "PDF-417 Code";
+      case QRFormat.QrCode:
+        return "QR Code";
+      case QRFormat.Rm4scc:
+        return "RM4SCC Code";
+      case QRFormat.Telepen:
+        return "Telepen Code";
+      default:
+        return "QR Code";
+    }
+  }
+}

@@ -27,7 +27,7 @@ class BaseForm extends StatefulWidget {
 }
 
 class _BaseFormState extends State<BaseForm> {
-  final ValueNotifier<QRFormat> barcodeType = ValueNotifier(QRFormat.QrCode);
+  final ValueNotifier<QRFormat> format = ValueNotifier(QRFormat.QrCode);
 
   void onGenerate() {
     final String? data = widget.onData();
@@ -38,6 +38,7 @@ class _BaseFormState extends State<BaseForm> {
       type: widget.qrType,
       source: QRSource.isGenerated,
       lastModified: DateTime.now(),
+      format: format.value,
     );
 
     HistoryProvider.instance.addQR(qr);
@@ -80,17 +81,39 @@ class _BaseFormState extends State<BaseForm> {
             ),
             SizedBox(height: AppDimensions.instance.padding),
             widget.child,
-              AnimatedBuilder(
-                animation: barcodeType,
-                builder: (_, __) => Column(
-                  children: [
-                    SizedBox(height: AppDimensions.instance.padding),
-
-                    /// Toogle Barcode
-                    /// Barcode Type
-                  ],
-                ),
+            AnimatedBuilder(
+              animation: format,
+              builder: (_, __) => Column(
+                children: [
+                  SizedBox(height: AppDimensions.instance.padding),
+                  SizedBox(
+                    height: 100,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: QRFormat.values.length,
+                      itemBuilder: (_, __) => GestureDetector(
+                        onTap: () => format.value = QRFormat.values[__],
+                        child: Padding(
+                          padding:
+                              EdgeInsets.all(AppDimensions.instance.padding),
+                          child: Text(
+                            QRFormat.values[__].label,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                  color: format.value == QRFormat.values[__]
+                                      ? Theme.of(context).colorScheme.primary
+                                      : null,
+                                ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
+            ),
             SizedBox(height: AppDimensions.instance.padding),
             widget.isDisabled != null
                 ? AnimatedBuilder(

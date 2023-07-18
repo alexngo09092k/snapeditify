@@ -40,14 +40,14 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
   bool isExists(QR qr) {
     switch (qr.source) {
       case QRSource.isScanned:
-        List<QR> list = _scanHistory.where((element) => element.rawData == qr.rawData).toList();
+        List<QR> list = _scanHistory.where((element) => element.rawData == qr.rawData && element.format == qr.format).toList();
         if(list.isNotEmpty) {
           list.first.lastModified = qr.lastModified;
           syncToStorage(true);
         }
         return list.isNotEmpty;
       case QRSource.isGenerated:
-        List<QR> list = _generateHistory.where((element) => element.rawData == qr.rawData).toList();
+        List<QR> list = _generateHistory.where((element) => element.rawData == qr.rawData && element.format == qr.format).toList();
         if(list.isNotEmpty) {
           list.first.lastModified = qr.lastModified;
           syncToStorage(true);
@@ -82,11 +82,11 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
     bool changed = false;
     switch (qr.source) {
       case QRSource.isScanned:
-        _scanHistory.removeWhere((element) => element.rawData == qr.rawData);
+        _scanHistory.removeWhere((element) => element.rawData == qr.rawData && element.format == qr.format);
         changed = true;
         break;
       case QRSource.isGenerated:
-        _generateHistory.removeWhere((element) => element.rawData == qr.rawData);
+        _generateHistory.removeWhere((element) => element.rawData == qr.rawData && element.format == qr.format);
         changed = true;
         break;
       default:
