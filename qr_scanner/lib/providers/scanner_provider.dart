@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr.dart';
@@ -13,6 +14,8 @@ abstract class IScannerProvider extends StorageProvider with Provider {
   MobileScannerController get controller;
 
   ScannerSettings get settings;
+
+  ValueNotifier<BarcodeCapture?> get barcodeCapture;
 
   void onDetect(BarcodeCapture capture);
 
@@ -31,11 +34,16 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   late MobileScannerController _controller;
   late ScannerSettings _settings;
 
+  final ValueNotifier<BarcodeCapture?> _barcodeCapture = ValueNotifier(null);
+
   @override
   MobileScannerController get controller => _controller;
 
   @override
   ScannerSettings get settings => _settings;
+
+  @override
+  ValueNotifier<BarcodeCapture?> get barcodeCapture => _barcodeCapture;
 
   @override
   void onDetect(BarcodeCapture capture) async {
@@ -48,11 +56,16 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
         type: type, 
         source: QRSource.isScanned, 
         lastModified: DateTime.now(), 
-        image: capture.image,
       );
+
+      await Vibration.vibrate();
+
       if(HistoryProvider.instance.isExists(qr)) break;
       HistoryProvider.instance.addQR(qr);
-      await Vibration.vibrate();
+    }
+
+    if(capture.barcodes.isNotEmpty) {
+      _barcodeCapture.value = capture;
     }
   }
 

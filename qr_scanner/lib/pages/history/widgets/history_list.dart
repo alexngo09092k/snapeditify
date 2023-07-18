@@ -42,7 +42,7 @@ class _HistoryListState extends State<HistoryList> {
       builder: (_, __, ___, list) => StickyGroupedListView<QR, DateTime>(
         elements: list,
         itemScrollController: itemScrollController,
-        order: StickyGroupedListOrder.DESC,
+        order: StickyGroupedListOrder.ASC,
         padding: const EdgeInsets.only(bottom: 100),
         groupBy: (QR element) => DateTime(
           element.lastModified.year,
@@ -50,7 +50,7 @@ class _HistoryListState extends State<HistoryList> {
           element.lastModified.day,
         ),
         groupComparator: (DateTime value1, DateTime value2) => value2.compareTo(value1),
-        itemComparator: (QR element1, QR element2) => element1.lastModified.compareTo(element2.lastModified),
+        itemComparator: (QR element1, QR element2) => element2.lastModified.compareTo(element1.lastModified),
         floatingHeader: true,
         groupSeparatorBuilder:(_) => _getGroupSeparator(context, _),
         itemBuilder: (_, qr) => HistoryItem(qr: qr),

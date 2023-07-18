@@ -9,7 +9,7 @@ class ScannerSettings {
   int detectionTimeoutMs;
   bool torchEnabled;
   List<BarcodeFormat> formats = [];
-  bool returnImage = false;
+  bool returnImage = true;
   bool autoStart = true;
 
   ScannerSettings({
@@ -18,7 +18,7 @@ class ScannerSettings {
     this.detectionTimeoutMs = 250,
     this.torchEnabled = false,
     this.formats = BarcodeFormat.values,
-    this.returnImage = false,
+    this.returnImage = true,
     this.autoStart = true,
   });
 

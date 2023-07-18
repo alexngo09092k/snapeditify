@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/pages/scanner/scanner/scanner_result.dart';
 import 'package:qr_scanner/pages/scanner/scanner/scanner_settings.dart';
 import 'package:qr_scanner/providers/scanner_provider.dart';
 import 'package:qr_scanner/widgets/app_use/scanning_effect/scanning_effect.dart';
@@ -27,6 +28,11 @@ class Scanner extends StatelessWidget {
           ),
         ),
         ScanningEffect(scanWindow: scanWindow),
+        Positioned(
+          top: AppDimensions.instance.padding,
+          right: AppDimensions.instance.padding,
+          child: const ScannerResult(),
+        ),
         Positioned(
           top: center.dy + size / 2 + AppDimensions.instance.paddingX(2),
           child: ScannerSettings(width: size),

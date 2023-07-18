@@ -9,14 +9,12 @@ class QR {
   final QRType type;
   final QRSource source;
   DateTime lastModified;
-  final Uint8List? image;
 
   QR({
     required this.rawData,
     required this.type,
     required this.source,
     required this.lastModified,
-    this.image,
   });
 
   QR copyWith({
@@ -31,7 +29,6 @@ class QR {
       type: type ?? this.type,
       source: source ?? this.source,
       lastModified: lastModified ?? this.lastModified,
-      image: image ?? this.image,
     );
   }
 
@@ -41,7 +38,6 @@ class QR {
       'type': type.name,
       'source': source.name,
       'lastModified': lastModified.millisecondsSinceEpoch,
-      'image': image?.toList(),
     };
   }
 
@@ -51,7 +47,6 @@ class QR {
       type: QRType.values.firstWhere((element) => element.name == map['type']),
       source: QRSource.values.firstWhere((element) => element.name == map['source']),
       lastModified: DateTime.fromMillisecondsSinceEpoch(map['lastModified'] as int),
-      image:map['image'] != null? Uint8List.fromList(map['image']): null,
     );
   }
 
@@ -61,7 +56,7 @@ class QR {
 
   @override
   String toString() {
-    return 'QR(rawData: $rawData, type: $type, source: $source, lastModified: $lastModified, image: $image)';
+    return 'QR(rawData: $rawData, type: $type, source: $source, lastModified: $lastModified)';
   }
 
   @override
@@ -72,8 +67,7 @@ class QR {
       other.rawData == rawData &&
       other.type == type &&
       other.source == source &&
-      other.lastModified == lastModified &&
-      other.image == image;
+      other.lastModified == lastModified;
   }
 
   @override
@@ -81,7 +75,6 @@ class QR {
     return rawData.hashCode ^
       type.hashCode ^
       source.hashCode ^
-      lastModified.hashCode ^
-      image.hashCode;
+      lastModified.hashCode;
   }
 }
