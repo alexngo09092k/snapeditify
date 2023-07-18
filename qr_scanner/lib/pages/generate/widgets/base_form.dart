@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/app_routes.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr.dart';
+import 'package:qr_scanner/models/qr_format.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/providers/history_provider.dart';
@@ -26,6 +27,8 @@ class BaseForm extends StatefulWidget {
 }
 
 class _BaseFormState extends State<BaseForm> {
+  final ValueNotifier<QRFormat> barcodeType = ValueNotifier(QRFormat.QrCode);
+
   void onGenerate() {
     final String? data = widget.onData();
     if (data == null) return;
@@ -77,6 +80,17 @@ class _BaseFormState extends State<BaseForm> {
             ),
             SizedBox(height: AppDimensions.instance.padding),
             widget.child,
+              AnimatedBuilder(
+                animation: barcodeType,
+                builder: (_, __) => Column(
+                  children: [
+                    SizedBox(height: AppDimensions.instance.padding),
+
+                    /// Toogle Barcode
+                    /// Barcode Type
+                  ],
+                ),
+              ),
             SizedBox(height: AppDimensions.instance.padding),
             widget.isDisabled != null
                 ? AnimatedBuilder(

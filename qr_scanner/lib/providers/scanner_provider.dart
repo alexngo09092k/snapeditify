@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr.dart';
+import 'package:qr_scanner/models/qr_format.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/models/scanner_settings.dart';
@@ -49,22 +50,26 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   void onDetect(BarcodeCapture capture) async {
     final List<Barcode> barcodes = capture.barcodes;
     for (final barcode in barcodes) {
-      if(barcode.rawValue == null) continue;
+      if (barcode.rawValue == null) continue;
       final QRType type = checkQRType(barcode);
+      final QRFormat? format = checkQRFormat(barcode);
+      Debug.log(format);
+      if(format == null) continue;
       final QR qr = QR(
-        rawData: barcode.rawValue!, 
-        type: type, 
-        source: QRSource.isScanned, 
-        lastModified: DateTime.now(), 
+        rawData: barcode.rawValue!,
+        type: type,
+        source: QRSource.isScanned,
+        lastModified: DateTime.now(),
+        format: format,
       );
 
       await Vibration.vibrate();
 
-      if(HistoryProvider.instance.isExists(qr)) break;
+      if (HistoryProvider.instance.isExists(qr)) break;
       HistoryProvider.instance.addQR(qr);
     }
 
-    if(capture.barcodes.isNotEmpty) {
+    if (capture.barcodes.isNotEmpty) {
       _barcodeCapture.value = capture;
     }
   }
@@ -142,7 +147,8 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
   @override
   Future<void> syncToStorage([bool notify = false]) {
-    return AsyncStorage.instance.setString(AsyncStorageKey.instance.scannerSettings, _settings.toJson());
+    return AsyncStorage.instance.setString(
+        AsyncStorageKey.instance.scannerSettings, _settings.toJson());
   }
 
   void _onSettingsChanged() {
@@ -168,15 +174,48 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
 extension ScannerProviderEx on ScannerProvider {
   QRType checkQRType(Barcode barcode) {
-    if(barcode.contactInfo != null) return QRType.contact;
-    if(barcode.email != null) return QRType.email;
-    if(barcode.calendarEvent != null) return QRType.event;
-    if(barcode.phone != null) return QRType.tel;
-    if(barcode.url != null) return QRType.link;
-    if(barcode.sms != null) return QRType.sms;
-    if(barcode.wifi != null) return QRType.wifi;
-    if(barcode.geoPoint != null) return QRType.maps; 
-    if(barcode.driverLicense != null) return QRType.vcard;
+    if (barcode.contactInfo != null) return QRType.contact;
+    if (barcode.email != null) return QRType.email;
+    if (barcode.calendarEvent != null) return QRType.event;
+    if (barcode.phone != null) return QRType.tel;
+    if (barcode.url != null) return QRType.link;
+    if (barcode.sms != null) return QRType.sms;
+    if (barcode.wifi != null) return QRType.wifi;
+    if (barcode.geoPoint != null) return QRType.maps;
+    if (barcode.driverLicense != null) return QRType.vcard;
     return QRType.text;
+  }
+
+  QRFormat? checkQRFormat(Barcode barcode) {
+    switch (barcode.format) {
+      case BarcodeFormat.aztec:
+        return QRFormat.Aztec;
+      case BarcodeFormat.code128:
+        return QRFormat.Code128;
+      case BarcodeFormat.code39:
+        return QRFormat.Code39;
+      case BarcodeFormat.code93:
+        return QRFormat.Code93;
+      case BarcodeFormat.ean13:
+        return QRFormat.CodeEAN13;
+      case BarcodeFormat.ean8:
+        return QRFormat.CodeEAN8;
+      case BarcodeFormat.upcA:
+        return QRFormat.CodeUPCA;
+      case BarcodeFormat.upcE:
+        return QRFormat.CodeUPCE;
+      case BarcodeFormat.qrCode:
+        return QRFormat.QrCode;
+      case BarcodeFormat.itf:
+        return QRFormat.Itf;
+      case BarcodeFormat.pdf417:
+        return QRFormat.PDF417;
+      case BarcodeFormat.dataMatrix:
+        return QRFormat.DataMatrix;
+      case BarcodeFormat.codebar:
+        return QRFormat.Codabar;
+      default:
+        return null;
+    }
   }
 }
