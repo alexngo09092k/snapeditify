@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
-import 'package:qr_scanner/models/qr_data_type.dart';
+import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/widgets/base/custom_icon.dart';
 import 'package:qr_scanner/widgets/base/sliding_control.dart';
 
@@ -10,10 +10,10 @@ class HistoryTab extends StatelessWidget {
     required this.tab,
     required this.onChanged,
   });
-  final ValueNotifier<QRDataType> tab;
-  final Function(QRDataType) onChanged;
+  final ValueNotifier<QRSource> tab;
+  final Function(QRSource) onChanged;
 
-  void _onChangedTab(QRDataType? type) {
+  void _onChangedTab(QRSource? type) {
     if (type == null) return;
     onChanged(type);
   }
@@ -23,11 +23,11 @@ class HistoryTab extends StatelessWidget {
     return Center(
       child: AnimatedBuilder(
         animation: tab,
-        builder: (_, __) => SlidingControl<QRDataType>(
+        builder: (_, __) => SlidingControl<QRSource>(
           value: tab.value,
           color: Theme.of(context).colorScheme.surface,
           background: Theme.of(context).disabledColor.withOpacity(0.1),
-          children: QRDataType.values.asMap().map(
+          children: QRSource.values.asMap().map(
                 (_, e) => MapEntry(
                   e,
                   Padding(

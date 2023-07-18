@@ -6,10 +6,14 @@ import 'package:qr_scanner/widgets/app_use/input.dart';
 class TextForm extends StatelessWidget {
   const TextForm({super.key});
 
+  String onData() {
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseForm(
-      onGenerate: () => {},
+      onData: onData,
       qrType: QRType.text,
       child: const Column(
         mainAxisSize: MainAxisSize.min,

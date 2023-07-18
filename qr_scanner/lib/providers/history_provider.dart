@@ -2,18 +2,20 @@ import 'dart:convert';
 
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
-import 'package:qr_scanner/models/qr_data.dart';
-import 'package:qr_scanner/models/qr_data_type.dart';
+import 'package:qr_scanner/models/qr.dart';
+import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/providers/storage_provider.dart';
 
 abstract class IHistoryProvider extends StorageProvider with Provider {
-  List<QRData> get scanHistory;
+  List<QR> get scanHistory;
 
-  List<QRData> get generateHistory;
+  List<QR> get generateHistory;
 
-  void addQRData(QRData qrData);
+  void addQR(QR qr);
 
-  bool isExists(QRDataType type, String qrData);
+  void deleteQR(QR qr);
+
+  bool isExists(QR qr);
 }
 
 class HistoryProvider extends IHistoryProvider with ProviderDelegate {
@@ -25,29 +27,29 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
   HistoryProvider._internal();
 
 
-  final List<QRData> _generateHistory = [];
-  final List<QRData> _scanHistory = [];
+  final List<QR> _generateHistory = [];
+  final List<QR> _scanHistory = [];
 
   @override
-  List<QRData> get generateHistory => _generateHistory;
+  List<QR> get generateHistory => _generateHistory;
   
   @override
-  List<QRData> get scanHistory => _scanHistory;
+  List<QR> get scanHistory => _scanHistory;
 
   @override
-  bool isExists(QRDataType type, String qrData) {
-    switch (type) {
-      case QRDataType.isScanned:
-        List<QRData> list = _scanHistory.where((element) => element.qrData == qrData).toList();
+  bool isExists(QR qr) {
+    switch (qr.source) {
+      case QRSource.isScanned:
+        List<QR> list = _scanHistory.where((element) => element.rawData == qr.rawData).toList();
         if(list.isNotEmpty) {
-          list.first.lastModified = DateTime.now();
+          list.first.lastModified = qr.lastModified;
           syncToStorage(true);
         }
         return list.isNotEmpty;
-      case QRDataType.isGenerated:
-        List<QRData> list = _generateHistory.where((element) => element.qrData == qrData).toList();
+      case QRSource.isGenerated:
+        List<QR> list = _generateHistory.where((element) => element.rawData == qr.rawData).toList();
         if(list.isNotEmpty) {
-          list.first.lastModified = DateTime.now();
+          list.first.lastModified = qr.lastModified;
           syncToStorage(true);
         }
         return list.isNotEmpty;
@@ -57,16 +59,34 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
   }
 
   @override
-  void addQRData(QRData qrData) {
-    if(isExists(qrData.type, qrData.qrData)) return;
+  void addQR(QR qr) {
+    if(isExists(qr)) return;
     bool changed = false;
-    switch (qrData.type) {
-      case QRDataType.isScanned:
-        _scanHistory.add(qrData);
+    switch (qr.source) {
+      case QRSource.isScanned:
+        _scanHistory.add(qr);
         changed = true;
         break;
-      case QRDataType.isGenerated:
-        _generateHistory.add(qrData);
+      case QRSource.isGenerated:
+        _generateHistory.add(qr);
+        changed = true;
+        break;
+      default:
+        break;
+    }
+    syncToStorage(changed);
+  }
+
+  @override
+  void deleteQR(QR qr) {
+    bool changed = false;
+    switch (qr.source) {
+      case QRSource.isScanned:
+        _scanHistory.removeWhere((element) => element.rawData == qr.rawData);
+        changed = true;
+        break;
+      case QRSource.isGenerated:
+        _generateHistory.removeWhere((element) => element.rawData == qr.rawData);
         changed = true;
         break;
       default:
@@ -101,14 +121,14 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
     String? scanHistoryString = AsyncStorage.instance.getString(AsyncStorageKey.instance.scanHistory);
     if(scanHistoryString != null) {
       Debug.log("============= SCAN HISTORY $scanHistoryString ============");
-      _scanHistory.addAll(jsonDecode(scanHistoryString).map<QRData>((_) => QRData.fromJson(_)));
+      _scanHistory.addAll(jsonDecode(scanHistoryString).map<QR>((_) => QR.fromJson(_)));
     }
 
     /// GENERATE HISTORY
     String? generateHistoryString = AsyncStorage.instance.getString(AsyncStorageKey.instance.generateHistory);
     if(generateHistoryString != null) {
       Debug.log("============= GENERATE HISTORY $generateHistoryString ============");
-      _generateHistory.addAll(jsonDecode(generateHistoryString).map<QRData>((_) => QRData.fromJson(_)));
+      _generateHistory.addAll(jsonDecode(generateHistoryString).map<QR>((_) => QR.fromJson(_)));
     }
   }
 

@@ -1,12 +1,13 @@
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
-import 'package:qr_scanner/models/qr_data.dart';
-import 'package:qr_scanner/models/qr_data_type.dart';
+import 'package:qr_scanner/models/qr.dart';
+import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/models/scanner_settings.dart';
 import 'package:qr_scanner/providers/history_provider.dart';
 import 'package:qr_scanner/providers/storage_provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:vibration/vibration.dart';
 
 abstract class IScannerProvider extends StorageProvider with Provider {
   MobileScannerController get controller;
@@ -37,21 +38,21 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   ScannerSettings get settings => _settings;
 
   @override
-  void onDetect(BarcodeCapture capture) {
+  void onDetect(BarcodeCapture capture) async {
     final List<Barcode> barcodes = capture.barcodes;
     for (final barcode in barcodes) {
       if(barcode.rawValue == null) continue;
-      if(HistoryProvider.instance.isExists(QRDataType.isScanned, barcode.rawValue!)) break;
-      final QRType? type = checkQRType(barcode);
-      if(type == null) continue;
-      final QRData qrData = QRData(
-        qrData: barcode.rawValue!, 
-        qrType: type, 
-        type: QRDataType.isScanned, 
+      final QRType type = checkQRType(barcode);
+      final QR qr = QR(
+        rawData: barcode.rawValue!, 
+        type: type, 
+        source: QRSource.isScanned, 
         lastModified: DateTime.now(), 
         image: capture.image,
       );
-      HistoryProvider.instance.addQRData(qrData);
+      if(HistoryProvider.instance.isExists(qr)) break;
+      HistoryProvider.instance.addQR(qr);
+      await Vibration.vibrate();
     }
   }
 
@@ -153,7 +154,7 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 }
 
 extension ScannerProviderEx on ScannerProvider {
-  QRType? checkQRType(Barcode barcode) {
+  QRType checkQRType(Barcode barcode) {
     if(barcode.contactInfo != null) return QRType.contact;
     if(barcode.email != null) return QRType.email;
     if(barcode.calendarEvent != null) return QRType.event;
@@ -163,6 +164,6 @@ extension ScannerProviderEx on ScannerProvider {
     if(barcode.wifi != null) return QRType.wifi;
     if(barcode.geoPoint != null) return QRType.maps; 
     if(barcode.driverLicense != null) return QRType.vcard;
-    return null;
+    return QRType.text;
   }
 }

@@ -5,11 +5,15 @@ import 'package:qr_scanner/widgets/app_use/input.dart';
 
 class MapForm extends StatelessWidget {
   const MapForm({super.key});
+  
+  String onData() {
+    return "";
+  }
 
   @override
   Widget build(BuildContext context) {
     return BaseForm(
-      onGenerate: () => {},
+      onData: onData,
       qrType: QRType.store,
       child: const Column(
         mainAxisSize: MainAxisSize.min,

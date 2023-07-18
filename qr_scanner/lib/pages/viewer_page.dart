@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:qr_scanner/models/qr_data.dart';
+import 'package:fluttering/fluttering.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:qr_scanner/models/qr.dart';
 
 class ViewerPage extends StatelessWidget {
-  const ViewerPage(this.qrData, {super.key});
-  final QRData qrData;
+  const ViewerPage(this.qr, {super.key});
+  final QR qr;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      appBar: AppBar(),
+      body: Center(
+        child: QrImageView(
+          size: AwesomeAppState.screen.width * 2 / 3,
+          data: qr.rawData,
+        ),
+      ),
     );
   }
 }

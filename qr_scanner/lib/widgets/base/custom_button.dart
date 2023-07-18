@@ -16,6 +16,7 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.title,
     this.isLoading = false,
+    this.isDisabled = false,
   }) : super(key: key);
 
   final Gradient? gradient;
@@ -28,46 +29,52 @@ class CustomButton extends StatelessWidget {
   final Widget? child;
   final Widget? icon;
   final bool isLoading;
+  final bool isDisabled;
   final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: height,
-        width: width,
-        padding: EdgeInsets.symmetric(
-          horizontal: AppDimensions.instance.padding,
-          vertical: AppDimensions.instance.paddingX(0.5),
-        ),
-        decoration: BoxDecoration(
-          color: color ?? Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(3))),
-          gradient: gradient,
-          boxShadow: [AppColors.instance.boxShadow],
-        ),
-        child: isLoading
-            ? CupertinoActivityIndicator(color: titleColor ?? Theme.of(context).colorScheme.onPrimary)
-            : child ??
-                Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      icon ?? const SizedBox(),
-                      icon != null? SizedBox(width: AppDimensions.instance.paddingX(0.5)): const SizedBox(),
-                      if (title != null)
-                        Text(
-                          title!,
-                          style: TextStyle(
-                            color: titleColor ?? Theme.of(context).colorScheme.onPrimary,
-                            fontSize: titleSize,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                    ],
+      onTap: isDisabled ? null : onTap,
+      child: Opacity(
+        opacity: isDisabled ? 0.5 : 1,
+        child: Container(
+          height: height,
+          width: width,
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimensions.instance.padding,
+            vertical: AppDimensions.instance.paddingX(0.8),
+          ),
+          decoration: BoxDecoration(
+            color: color ?? Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(3))),
+            gradient: gradient,
+            boxShadow: [AppColors.instance.boxShadow],
+          ),
+          child: isLoading
+              ? CupertinoActivityIndicator(color: titleColor ?? Theme.of(context).colorScheme.onPrimary)
+              : child ??
+                  Center(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        icon ?? const SizedBox(),
+                        icon != null
+                            ? SizedBox(width: AppDimensions.instance.paddingX(0.5))
+                            : const SizedBox(),
+                        if (title != null)
+                          Text(
+                            title!,
+                            style: TextStyle(
+                              color: titleColor ?? Theme.of(context).colorScheme.onPrimary,
+                              fontSize: titleSize,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                      ],
+                    ),
                   ),
-                ),
+        ),
       ),
     );
   }

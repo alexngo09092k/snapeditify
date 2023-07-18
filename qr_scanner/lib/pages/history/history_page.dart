@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
-import 'package:qr_scanner/models/qr_data_type.dart';
+import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/pages/history/widgets/history_list.dart';
 import 'package:qr_scanner/pages/history/widgets/history_tab.dart';
 
@@ -12,7 +12,7 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  final ValueNotifier<QRDataType> _tab = ValueNotifier(QRDataType.isScanned);
+  final ValueNotifier<QRSource> _tab = ValueNotifier(QRSource.isScanned);
   late final PageController _controller;
 
   @override
@@ -21,7 +21,7 @@ class _HistoryPageState extends State<HistoryPage> {
     _controller.addListener(() {
       if (_controller.page == null) return;
       if (_tab.value.index != _controller.page!.round()) {
-        _tab.value = QRDataType.values[_controller.page!.round()];
+        _tab.value = QRSource.values[_controller.page!.round()];
       }
     });
     super.initState();
@@ -46,7 +46,7 @@ class _HistoryPageState extends State<HistoryPage> {
             Expanded(
               child: PageView(
                 controller: _controller,
-                children: QRDataType.values.map((e) => HistoryList(e)).toList(),
+                children: QRSource.values.map((e) => HistoryList(e)).toList(),
               ),
             )
           ],

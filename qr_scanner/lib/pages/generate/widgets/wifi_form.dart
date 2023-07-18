@@ -6,9 +6,14 @@ import 'package:qr_scanner/widgets/app_use/input.dart';
 class WifiForm extends StatelessWidget {
   const WifiForm({super.key});
 
+  String onData() {
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseForm(
+      onData: onData,
       qrType: QRType.wifi,
       child: const Column(
         mainAxisSize: MainAxisSize.min,
@@ -18,7 +23,6 @@ class WifiForm extends StatelessWidget {
           Input(hintText: "Password"),
         ],
       ),
-      onGenerate: () => {},
     );
   }
 }

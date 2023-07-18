@@ -8,8 +8,12 @@ class InstagramForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String onData() {
+      return "";
+    }
+
     return BaseForm(
-      onGenerate: () => {},
+      onData: onData,
       qrType: QRType.store,
       child: const Column(
         mainAxisSize: MainAxisSize.min,
