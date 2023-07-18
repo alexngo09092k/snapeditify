@@ -28,7 +28,6 @@ class HistoryItem extends StatelessWidget {
           children: [
             CustomIcon(
               qr.type.icon, 
-              normal: true, 
               size: AppDimensions.instance.iconX(1.5), 
               color: Theme.of(context).colorScheme.primary,
             ),
