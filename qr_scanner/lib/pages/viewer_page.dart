@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/models/qr.dart';
 import 'package:qr_scanner/models/qr_format.dart';
+import 'package:qr_scanner/widgets/app_use/app_layout.dart';
 
 class ViewerPage extends StatelessWidget {
   const ViewerPage(this.qr, {super.key});
@@ -10,10 +11,11 @@ class ViewerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: BarcodeWidget(
+    return AppLayout(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        BarcodeWidget(
           width: AwesomeAppState.screen.width * 2 / 3,
           height: qr.format == QRFormat.QrCode
               ? AwesomeAppState.screen.width * 2 / 3
@@ -21,7 +23,7 @@ class ViewerPage extends StatelessWidget {
           data: qr.rawData,
           barcode: qr.barcode,
         ),
-      ),
+      ],
     );
   }
 }

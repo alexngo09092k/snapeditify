@@ -20,6 +20,7 @@ import 'package:qr_scanner/pages/generate/widgets/vcard_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/wifi_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/youtube_form.dart';
 import 'package:qr_scanner/utils/widget.dart';
+import 'package:qr_scanner/widgets/app_use/app_layout.dart';
 
 class GeneratePage extends StatelessWidget {
   const GeneratePage({super.key});
@@ -73,28 +74,27 @@ class GeneratePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: Column(
-          children: [
-            Expanded(
-              child: GridView.builder(
-                padding: EdgeInsets.only(
-                  bottom: 100,
-                  left: AppDimensions.instance.padding,
-                  right: AppDimensions.instance.padding,
-                ),
-                gridDelegate: AppDimensions.instance.gridDelegate,
-                itemCount: QRType.values.length,
-                itemBuilder: (_, __) => GenerateItem(
-                  type: QRType.values[__],
-                  onQRType: (_) => _onQRType(context, _),
-                ),
-              ),
+    return AppLayout(
+      screen: "Generate",
+      appBar: true,
+      back: false,
+      children: [
+        Expanded(
+          child: GridView.builder(
+            padding: EdgeInsets.only(
+              bottom: 100,
+              left: AppDimensions.instance.padding,
+              right: AppDimensions.instance.padding,
             ),
-          ],
+            gridDelegate: AppDimensions.instance.gridDelegate,
+            itemCount: QRType.values.length,
+            itemBuilder: (_, __) => GenerateItem(
+              type: QRType.values[__],
+              onQRType: (_) => _onQRType(context, _),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
