@@ -38,7 +38,7 @@ class _HistoryListState extends State<HistoryList> {
   @override
   Widget build(BuildContext context) {
     return PropConsumer<HistoryProvider, List<QR>>(
-      select: (_) => (widget.type == QRSource.isGenerated ? _.generateHistory : _.scanHistory),
+      select: (_) => (widget.type == QRSource.generate ? _.generateHistory : _.scanHistory),
       builder: (_, __, ___, list) => StickyGroupedListView<QR, DateTime>(
         elements: list,
         itemScrollController: itemScrollController,

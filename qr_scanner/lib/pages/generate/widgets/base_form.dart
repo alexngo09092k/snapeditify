@@ -75,7 +75,7 @@ class _BaseFormState extends State<BaseForm> {
     final QR qr = QR(
       rawData: data,
       type: widget.qrType,
-      source: QRSource.isGenerated,
+      source: QRSource.generate,
       lastModified: DateTime.now(),
       format: format.value,
     );

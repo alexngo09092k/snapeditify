@@ -1,16 +1,16 @@
 import 'package:qr_scanner/common/constants.dart';
 
 enum QRSource {
-  isScanned,
-  isGenerated,
+  scan,
+  generate,
 }
 
 extension QRSourceEx on QRSource {
   String get icon {
     switch (this) {
-      case QRSource.isGenerated:
+      case QRSource.generate:
         return AppAssets.instance.icGenerate;
-      case QRSource.isScanned:
+      case QRSource.scan:
         return AppAssets.instance.icScanner;
       default:
         throw 'Not found Icon for QRSource';
@@ -19,10 +19,10 @@ extension QRSourceEx on QRSource {
 
   String get label {
     switch (this) {
-      case QRSource.isGenerated:
-        return "Generated QR";
-      case QRSource.isScanned:
-        return "Scanned QR";
+      case QRSource.scan:
+        return "Generate";
+      case QRSource.generate:
+        return "Scan";
       default:
         throw 'Not found Icon for QRSource';
     }

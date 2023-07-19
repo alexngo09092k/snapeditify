@@ -16,7 +16,7 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState
     extends ProviderStateObserver<HistoryPage, HistoryProvider> {
-  final ValueNotifier<QRSource> _tab = ValueNotifier(QRSource.isScanned);
+  final ValueNotifier<QRSource> _tab = ValueNotifier(QRSource.scan);
   late final PageController _controller;
 
   @override
@@ -34,15 +34,18 @@ class _HistoryPageState
   @override
   void onNextFrame(Duration timestamp) {
     if (provider.scanHistory.isEmpty && provider.generateHistory.isNotEmpty) {
-      _onChanged(QRSource.isGenerated);
+      _onChanged(QRSource.generate);
     }
     super.onNextFrame(timestamp);
   }
 
   void _onChanged(tab) {
     _tab.value = tab;
-    _controller.animateToPage(tab.index,
-        duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+    _controller.animateToPage(
+      tab.index,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override

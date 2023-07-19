@@ -60,7 +60,7 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
       final QR qr = QR(
         rawData: barcode.rawValue!,
         type: type,
-        source: QRSource.isScanned,
+        source: QRSource.scan,
         lastModified: DateTime.now(),
         format: format,
       );

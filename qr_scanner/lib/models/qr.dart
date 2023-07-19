@@ -50,7 +50,7 @@ class QR {
     return QR(
         rawData: map['rawData'] as String,
         type: QRType.values.firstWhere((element) => element.name == map['type'], orElse: () => QRType.text),
-        source: QRSource.values.firstWhere((element) => element.name == map['source'], orElse: () => QRSource.isScanned),
+        source: QRSource.values.firstWhere((element) => element.name == map['source'], orElse: () => QRSource.scan),
         lastModified: DateTime.fromMillisecondsSinceEpoch(map['lastModified'] as int),
         format: QRFormat.values.firstWhere((element) => element.name == map['format'], orElse: () => QRFormat.QrCode),
       );
