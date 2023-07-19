@@ -22,7 +22,7 @@ class GenerateItem extends StatelessWidget {
             CustomIcon(
               type.icon,
               size: AppDimensions.instance.iconX(2),
-              color: Colors.lightBlue,
+              color: Theme.of(context).colorScheme.primary,
             ),
             SizedBox(height: AppDimensions.instance.paddingX(0.5)),
             Text(

@@ -9,16 +9,27 @@ class AppColors extends FlutteringColors {
   AppColors._internal();
 
   @override
-  Color get lightPrimary => Colors.lightBlue; /// theme mode (button, title)
-  @override
-  Color get lightSecondary => Colors.lightBlue; /// theme mode (button, title)
+  Color get lightPrimary => Colors.lightBlue;
 
   @override
-  Color get darkOnPrimary => white; /// text on theme mode
+  Color get lightSecondary => Colors.lightBlueAccent;
+
   @override
-  Color get darkOnSecondary => white; /// text on theme mode
+  Color get darkPrimary => Colors.lightBlue;
+
+  @override
+  Color get darkSecondary => Colors.lightBlueAccent;
+
+  @override
+  Color get darkOnPrimary => white;
+
+  @override
+  Color get darkOnSecondary => white;
 
   LinearGradient get gradient => LinearGradient(colors: [lightPrimary, lightSecondary]);
 
-  BoxShadow get boxShadow => BoxShadow(color: black.withOpacity(0.1), offset: const Offset(0, 8), blurRadius: 10);
+  BoxShadow get boxShadow => BoxShadow(
+      color: black.withOpacity(0.1),
+      offset: const Offset(0, 8),
+      blurRadius: 10);
 }

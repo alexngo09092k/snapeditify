@@ -92,8 +92,8 @@ class _ZooomSlider extends StatelessWidget {
           animation: zoomState,
           builder: (_, __) => SliderTheme(
             data: SliderThemeData(
-              thumbColor: Colors.lightBlue,
-              activeTrackColor: Colors.lightBlue,
+              thumbColor: Theme.of(context).colorScheme.primary,
+              activeTrackColor: Theme.of(context).colorScheme.primary,
               trackHeight: 2,
               thumbShape: RoundSliderThumbShape(
                 enabledThumbRadius: AppDimensions.instance.radiusX(0.7),

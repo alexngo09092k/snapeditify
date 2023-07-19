@@ -13,8 +13,10 @@ class Scanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double size = AwesomeAppState.screen.width * 2.3 / 3;
-    final Offset center = Offset(AwesomeAppState.screen.width / 2, AwesomeAppState.screen.height / 2.6);
-    final scanWindow = Rect.fromCenter(center: center, width: size, height: size);
+    final Offset center = Offset(
+        AwesomeAppState.screen.width / 2, AwesomeAppState.screen.height / 2.6);
+    final scanWindow =
+        Rect.fromCenter(center: center, width: size, height: size);
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -27,7 +29,11 @@ class Scanner extends StatelessWidget {
             onScannerStarted: provider.onStarted,
           ),
         ),
-        ScanningEffect(scanWindow: scanWindow),
+        ScanningEffect(
+          scanWindow: scanWindow,
+          scanningColor: Theme.of(context).colorScheme.primary,
+          borderLineColor: Theme.of(context).colorScheme.primary,
+        ),
         Positioned(
           top: AppDimensions.instance.padding,
           right: AppDimensions.instance.padding,
