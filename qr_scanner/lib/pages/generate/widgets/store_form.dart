@@ -18,11 +18,13 @@ class StoreForm extends StatelessWidget {
       child: const Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Divider(),
           Input(hintText: "Link for App Store"),
           Divider(),
           Input(hintText: "Link for Google Play"),
           Divider(),
           Input(hintText: "Link for other devices"),
+          Divider(),
         ],
       ),
     );

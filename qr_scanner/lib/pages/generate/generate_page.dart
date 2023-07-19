@@ -18,37 +18,41 @@ import 'package:qr_scanner/utils/widget.dart';
 class GeneratePage extends StatelessWidget {
   const GeneratePage({super.key});
 
-  void _onQRType(QRType type) {
-    WidgetUtils.instance.showDialog(builder: (_) {
-      switch (type) {
-        case QRType.link:
-          return const URLForm();
-        case QRType.wifi:
-          return const WifiForm();
-        case QRType.email:
-          return const EmailForm();
-        case QRType.text:
-          return const TextForm();
-        case QRType.store:
-          return const StoreForm();
-        case QRType.instagram:
-          return const InstagramForm();
-        case QRType.facebook:
-          return const FacebookForm();
-        case QRType.tiktok:
-          return const FacebookForm();
-        case QRType.snapchat:
-          return const SnapchatForm();
-        case QRType.telegram:
-          return const TelegramForm();
-        case QRType.maps:
-          return const MapForm();
-        case QRType.crypto:
-          return const CryptoForm();
-        default:
-          return const SizedBox();
-      }
-    });
+  void _onQRType(BuildContext context, QRType type) {
+    WidgetUtils.instance.showDialog(
+      barrierDismissible: false,
+      barrierColor: Theme.of(context).colorScheme.background,
+      builder: (_) {
+        switch (type) {
+          case QRType.link:
+            return const URLForm();
+          case QRType.wifi:
+            return const WifiForm();
+          case QRType.email:
+            return const EmailForm();
+          case QRType.text:
+            return const TextForm();
+          case QRType.store:
+            return const StoreForm();
+          case QRType.instagram:
+            return const InstagramForm();
+          case QRType.facebook:
+            return const FacebookForm();
+          case QRType.tiktok:
+            return const FacebookForm();
+          case QRType.snapchat:
+            return const SnapchatForm();
+          case QRType.telegram:
+            return const TelegramForm();
+          case QRType.maps:
+            return const MapForm();
+          case QRType.crypto:
+            return const CryptoForm();
+          default:
+            return const SizedBox();
+        }
+      },
+    );
   }
 
   @override
@@ -68,7 +72,7 @@ class GeneratePage extends StatelessWidget {
                 itemCount: QRType.values.length,
                 itemBuilder: (_, __) => GenerateItem(
                   type: QRType.values[__],
-                  onQRType: _onQRType,
+                  onQRType: (_) => _onQRType(context, _),
                 ),
               ),
             ),

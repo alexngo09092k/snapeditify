@@ -91,10 +91,8 @@ extension QRTypeEx on QRType {
         return AppAssets.instance.gEmail;
       case QRType.tel:
         return AppAssets.instance.gEmail;
-       case QRType.event:
+      case QRType.event:
         return AppAssets.instance.gEmail;
-      default:
-        throw 'Not found Icon of QR Type';
     }
   }
 
@@ -156,10 +154,8 @@ extension QRTypeEx on QRType {
         return "Contact";
       case QRType.tel:
         return "Phone";
-       case QRType.event:
+      case QRType.event:
         return "Event";
-      default:
-        throw 'Not found Label of QR Type';
     }
   }
 }

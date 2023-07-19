@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/pages/history/widgets/history_list.dart';
 import 'package:qr_scanner/pages/history/widgets/history_tab.dart';
+import 'package:qr_scanner/providers/history_provider.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -11,7 +13,7 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {
+class _HistoryPageState extends ProviderStateObserver<HistoryPage, HistoryProvider> {
   final ValueNotifier<QRSource> _tab = ValueNotifier(QRSource.isScanned);
   late final PageController _controller;
 
@@ -25,6 +27,14 @@ class _HistoryPageState extends State<HistoryPage> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void onNextFrame(Duration timestamp) {
+    if(provider.scanHistory.isEmpty && provider.generateHistory.isNotEmpty) {
+      _onChanged(QRSource.isGenerated);
+    }
+    super.onNextFrame(timestamp);
   }
 
   void _onChanged(tab) {
