@@ -3,16 +3,22 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/crypto_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/email_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/event_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/facebook_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/generate_item.dart';
 import 'package:qr_scanner/pages/generate/widgets/instagram_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/map_form.dart';
-import 'package:qr_scanner/pages/generate/widgets/snapchat.dart';
-import 'package:qr_scanner/pages/generate/widgets/store_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/phone_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/sms_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/snapchat_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/telegram_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/text_form.dart';
-import 'package:qr_scanner/pages/generate/widgets/url_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/link_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/tiktok_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/twitter_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/vcard_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/wifi_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/youtube_form.dart';
 import 'package:qr_scanner/utils/widget.dart';
 
 class GeneratePage extends StatelessWidget {
@@ -25,27 +31,37 @@ class GeneratePage extends StatelessWidget {
       builder: (_) {
         switch (type) {
           case QRType.link:
-            return const URLForm();
-          case QRType.wifi:
-            return const WifiForm();
-          case QRType.email:
-            return const EmailForm();
+            return const LinkForm();
           case QRType.text:
             return const TextForm();
-          case QRType.store:
-            return const StoreForm();
-          case QRType.instagram:
-            return const InstagramForm();
-          case QRType.facebook:
-            return const FacebookForm();
-          case QRType.tiktok:
-            return const FacebookForm();
-          case QRType.snapchat:
-            return const SnapchatForm();
-          case QRType.telegram:
-            return const TelegramForm();
+          case QRType.email:
+            return const EmailForm();
+          case QRType.tel:
+            return const PhoneForm();
+          case QRType.sms:
+            return const SMSForm();
+          case QRType.vcard:
+            return const VCardForm();
           case QRType.maps:
             return const MapForm();
+          case QRType.facebook:
+            return const FacebookForm();
+          case QRType.twitter:
+            return const TwitterForm();
+          case QRType.youtube:
+            return const YoutubeForm();
+          case QRType.instagram:
+            return const InstagramForm();
+          case QRType.snapchat:
+            return const SnapChatForm();
+          case QRType.telegram:
+            return const TelegramForm();
+          case QRType.tiktok:
+            return const TikTokForm();
+          case QRType.wifi:
+            return const WifiForm();
+          case QRType.event:
+            return const EventForm();
           case QRType.crypto:
             return const CryptoForm();
           default:

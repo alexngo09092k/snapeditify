@@ -33,22 +33,13 @@ class _BaseFormState extends State<BaseForm> {
 
   bool get canChangeFormat {
     switch (widget.qrType) {
-      case QRType.audio:
-      case QRType.store:
       case QRType.crypto:
       case QRType.email:
       case QRType.facebook:
-      case QRType.image:
       case QRType.instagram:
       case QRType.vcard:
-      case QRType.linkList:
       case QRType.link:
       case QRType.maps:
-      case QRType.menu:
-      case QRType.mutilurl:
-      case QRType.pcr:
-      case QRType.pdf:
-      case QRType.pptx:
       case QRType.snapchat:
       case QRType.telegram:
       case QRType.tiktok:
@@ -58,9 +49,19 @@ class _BaseFormState extends State<BaseForm> {
       case QRType.wifi:
       case QRType.youtube:
       case QRType.sms:
-      case QRType.contact:
       case QRType.tel:
       case QRType.event:
+        // case QRType.menu:
+        // case QRType.mutilurl:
+        // case QRType.pcr:
+        // case QRType.pdf:
+        // case QRType.pptx:
+        //  case QRType.image:
+        // case QRType.audio:
+        // case QRType.store:
+        // case QRType.linkList:
+        // case QRType.contact:
+
         return false;
       case QRType.text:
         return true;
@@ -80,6 +81,8 @@ class _BaseFormState extends State<BaseForm> {
     );
 
     HistoryProvider.instance.addQR(qr);
+
+    AwesomeAppState.dimiss();
 
     Navigator.of(context).pushNamed(AppRoutes.viewerPage, arguments: qr);
   }
@@ -127,41 +130,53 @@ class _BaseFormState extends State<BaseForm> {
               ],
             ),
             SizedBox(height: AppDimensions.instance.padding),
-            widget.child,
-            if (canChangeFormat)
-              AnimatedBuilder(
-                animation: format,
-                builder: (_, __) => Column(
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    SizedBox(height: AppDimensions.instance.padding),
-                    SizedBox(
-                      height: 100,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: QRFormat.values.length,
-                        itemBuilder: (_, __) => GestureDetector(
-                          onTap: () => format.value = QRFormat.values[__],
-                          child: Padding(
-                            padding:
-                                EdgeInsets.all(AppDimensions.instance.padding),
-                            child: Text(
-                              QRFormat.values[__].label,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    color: format.value == QRFormat.values[__]
-                                        ? Theme.of(context).colorScheme.primary
-                                        : null,
+                    widget.child,
+                    if (canChangeFormat)
+                      AnimatedBuilder(
+                        animation: format,
+                        builder: (_, __) => Column(
+                          children: [
+                            SizedBox(height: AppDimensions.instance.padding),
+                            SizedBox(
+                              height: 100,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: QRFormat.values.length,
+                                itemBuilder: (_, __) => GestureDetector(
+                                  onTap: () =>
+                                      format.value = QRFormat.values[__],
+                                  child: Padding(
+                                    padding: EdgeInsets.all(
+                                        AppDimensions.instance.padding),
+                                    child: Text(
+                                      QRFormat.values[__].label,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .copyWith(
+                                            color: format.value ==
+                                                    QRFormat.values[__]
+                                                ? Theme.of(context)
+                                                    .colorScheme
+                                                    .primary
+                                                : null,
+                                          ),
+                                    ),
                                   ),
-                            ),
-                          ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                    )
                   ],
                 ),
               ),
+            ),
             SizedBox(height: AppDimensions.instance.paddingX(2)),
             widget.isDisabled != null
                 ? AnimatedBuilder(

@@ -19,6 +19,7 @@ class AppAssets {
   final String notFound = "$lottiePath/not_found.json";
   final String confetti = "$lottiePath/confetti.json";
 
+
   /// Images
   static const String imagePath = 'assets/images';
 
@@ -49,6 +50,15 @@ class AppAssets {
   final String gWhatsapp = "$imagePath/whatsapp.png";
   final String gWifi = "$imagePath/wi-fi.png";
   final String gYoutube = "$imagePath/youtube.png";
+
+  /// Coins
+  final String bitcoin = "$imagePath/bitcoin.png";
+  final String bitcoincash = "$imagePath/bitcoincash.png";
+  final String ether = "$imagePath/ether.png";
+  final String litecoin = "$imagePath/litecoin.png";
+  final String dash = "$imagePath/dash.png";
+  final String bnb = "$imagePath/bnb.png";
+  final String usdt = "$imagePath/usdt.png";
 
   /// Flags
   static const String flagPath = '$imagePath/flags';

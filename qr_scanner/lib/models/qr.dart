@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:flutter/material.dart';
 import 'package:qr_scanner/models/qr_format.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/models/qr_type.dart';
@@ -52,7 +53,8 @@ class QR {
         type: QRType.values.firstWhere((element) => element.name == map['type'], orElse: () => QRType.text),
         source: QRSource.values.firstWhere((element) => element.name == map['source'], orElse: () => QRSource.isScanned),
         lastModified: DateTime.fromMillisecondsSinceEpoch(map['lastModified'] as int),
-        format: QRFormat.values.firstWhere((element) => element.name == map['format'], orElse: () => QRFormat.QrCode));
+        format: QRFormat.values.firstWhere((element) => element.name == map['format'], orElse: () => QRFormat.QrCode),
+      );
   }
 
   String toJson() => json.encode(toMap());

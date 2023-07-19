@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/models/qr_forms/qr_link_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
-import 'package:qr_scanner/utils/qr.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
-class URLForm extends StatefulWidget {
-  const URLForm({super.key});
+class LinkForm extends StatefulWidget {
+  const LinkForm({super.key});
 
   @override
-  State<URLForm> createState() => _URLFormState();
+  State<LinkForm> createState() => _LinkFormState();
 }
 
-class _URLFormState extends State<URLForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(false);
-  final ValueNotifier<String?> _qr = ValueNotifier(null);
+class _LinkFormState extends State<LinkForm> {
+  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
+  final QRLinkForm _form = QRLinkForm();
 
-  String? onData() => _qr.value!;
+  @override
+  void initState() {
+    _isDisabled.value = !_form.validate();
+    super.initState();
+  }
+
+  String? onData() => _form.buildQRRawData();
 
   void _onChanged(String _) {
-    _qr.value = QRUtils.instance.buildRawData(QRType.link, _);
-    _isDisabled.value = _qr.value == null || _qr.value!.isEmpty;
+    _form.url = _;
+
+    _isDisabled.value = !_form.validate();
   }
 
   @override
@@ -32,7 +39,7 @@ class _URLFormState extends State<URLForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Input(
-            hintText: "http or https://",
+            hintText: "Your URL",
             onChanged: _onChanged,
           ),
         ],

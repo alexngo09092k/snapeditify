@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
@@ -51,9 +53,9 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
     final List<Barcode> barcodes = capture.barcodes;
     for (final barcode in barcodes) {
       if (barcode.rawValue == null) continue;
+      Debug.log(jsonEncode(barcode.rawValue));
       final QRType type = checkQRType(barcode);
       final QRFormat? format = checkQRFormat(barcode);
-      Debug.log(format);
       if(format == null) continue;
       final QR qr = QR(
         rawData: barcode.rawValue!,
@@ -174,7 +176,6 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
 extension ScannerProviderEx on ScannerProvider {
   QRType checkQRType(Barcode barcode) {
-    if (barcode.contactInfo != null) return QRType.contact;
     if (barcode.email != null) return QRType.email;
     if (barcode.calendarEvent != null) return QRType.event;
     if (barcode.phone != null) return QRType.tel;

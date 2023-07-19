@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class URLForm extends StatelessWidget {
-  const URLForm({super.key});
+class LinkForm extends StatelessWidget {
+  const LinkForm({super.key});
 
   @override
   Widget build(BuildContext context) {

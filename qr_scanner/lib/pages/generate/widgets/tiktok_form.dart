@@ -1,26 +1,136 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/models/qr_forms/qr_tiktok_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
-class TiktokForm extends StatelessWidget {
-  const TiktokForm({super.key});
+enum _TikTokField {
+  type,
+  username,
+  tweet,
+}
 
-  String onData() {
-    return "";
+class TikTokForm extends StatefulWidget {
+  const TikTokForm({super.key});
+
+  @override
+  State<TikTokForm> createState() => _TikTokFormState();
+}
+
+class _TikTokFormState extends State<TikTokForm> {
+  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
+  final QRTikTokForm _form = QRTikTokForm();
+
+  @override
+  void initState() {
+    _isDisabled.value = !_form.validate();
+    super.initState();
+  }
+
+  String? onData() => _form.buildQRRawData();
+
+  void _onChanged(_TikTokField field, dynamic _) {
+    switch (field) {
+      case _TikTokField.type:
+        _form.type = _;
+        break;
+      case _TikTokField.tweet:
+        _form.tweet = _;
+        break;
+      case _TikTokField.username:
+        _form.username = _;
+        break;
+    }
+
+    _isDisabled.value = !_form.validate();
   }
 
   @override
   Widget build(BuildContext context) {
     return BaseForm(
       onData: onData,
-      qrType: QRType.store,
-      child: const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Input(hintText: "Tiktok Link"),
-        ],
+      qrType: QRType.email,
+      isDisabled: _isDisabled,
+      child: _QRTikTokTypeSelect(
+        value: _form.type,
+        onChanged: (_) => _onChanged(_TikTokField.type, _),
+        builder: (_, type) => type == QRTikTokType.profile
+            ? Input(
+                hintText: "@username",
+                onChanged: (_) => _onChanged(_TikTokField.username, _),
+              )
+            : Input(
+                hintText: "Compose your tweet",
+                onChanged: (_) => _onChanged(_TikTokField.tweet, _),
+              ),
       ),
+    );
+  }
+}
+
+class _QRTikTokTypeSelect extends StatefulWidget {
+  const _QRTikTokTypeSelect({
+    required this.value,
+    required this.onChanged,
+    required this.builder,
+  });
+  final QRTikTokType value;
+  final Function(QRTikTokType) onChanged;
+  final Widget Function(BuildContext context, QRTikTokType) builder;
+
+  @override
+  State<_QRTikTokTypeSelect> createState() => __QRTikTokTypeSelectState();
+}
+
+class __QRTikTokTypeSelectState extends State<_QRTikTokTypeSelect> {
+  QRTikTokType type = QRTikTokType.profile;
+
+  @override
+  void initState() {
+    type = widget.value;
+    super.initState();
+  }
+
+  void _onChanged(QRTikTokType? _) {
+    if (_ == null) return;
+    setState(() {
+      type = _;
+    });
+    widget.onChanged(_);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: QRTikTokType.values
+              .map(
+                (_) => Container(
+                  margin: EdgeInsets.only(
+                    right: AppDimensions.instance.padding,
+                  ),
+                  child: Row(
+                    children: [
+                      Radio<QRTikTokType>(
+                        value: _,
+                        groupValue: type,
+                        onChanged: _onChanged,
+                      ),
+                      Text(
+                        _.label,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      )
+                    ],
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+        widget.builder(context, type),
+      ],
     );
   }
 }
