@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:qr_scanner/models/qr_format.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/models/qr_type.dart';
