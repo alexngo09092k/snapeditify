@@ -9,6 +9,11 @@ class AppColors extends FlutteringColors {
   AppColors._internal();
 
   @override
+  Color get lightPrimary => Colors.lightBlue; /// theme mode (button, title)
+  @override
+  Color get lightSecondary => Colors.lightBlue; /// theme mode (button, title)
+
+  @override
   Color get darkOnPrimary => white; /// text on theme mode
   @override
   Color get darkOnSecondary => white; /// text on theme mode
