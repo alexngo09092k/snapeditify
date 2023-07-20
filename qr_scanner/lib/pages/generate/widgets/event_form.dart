@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_scanner/models/qr_forms/qr_event_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _EventField {
@@ -18,38 +19,31 @@ class EventForm extends StatefulWidget {
   State<EventForm> createState() => _EventFormState();
 }
 
-class _EventFormState extends State<EventForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QREventForm _form =
-      QREventForm(start: DateTime.now(), end: DateTime.now());
-
+class _EventFormState extends BaseFormState<EventForm, QREventForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QREventForm(start: DateTime.now(), end: DateTime.now());
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_EventField field, dynamic _) {
     switch (field) {
       case _EventField.title:
-        _form.title = _;
+        form.title = _;
         break;
       case _EventField.location:
-        _form.location = _;
+        form.location = _;
         break;
       case _EventField.start:
-        _form.start = _;
+        form.start = _;
         break;
       case _EventField.end:
-        _form.end = _;
+        form.end = _;
         break;
       default:
         break;
     }
-
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override

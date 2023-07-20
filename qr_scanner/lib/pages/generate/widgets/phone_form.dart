@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_scanner/models/qr_forms/qr_phone_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 class PhoneForm extends StatefulWidget {
@@ -11,22 +12,16 @@ class PhoneForm extends StatefulWidget {
   State<PhoneForm> createState() => _PhoneFormState();
 }
 
-class _PhoneFormState extends State<PhoneForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRPhoneForm _form = QRPhoneForm();
-
+class _PhoneFormState extends BaseFormState<PhoneForm, QRPhoneForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRPhoneForm();
     super.initState();
   }
 
-  String? onData() => _form.buildQRRawData();
-
   void _onChanged(String _) {
-    _form.phone = _;
-
-    _isDisabled.value = !_form.validate();
+    form.phone = _;
+    checkDisabled();
   }
 
   @override
@@ -34,7 +29,7 @@ class _PhoneFormState extends State<PhoneForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.tel,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

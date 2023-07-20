@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_crypto_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 import 'package:qr_scanner/widgets/base/custom_icon.dart';
 
@@ -20,37 +21,31 @@ class CryptoForm extends StatefulWidget {
   State<CryptoForm> createState() => _CryptoFormState();
 }
 
-class _CryptoFormState extends State<CryptoForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRCryptoForm _form = QRCryptoForm();
-
+class _CryptoFormState extends BaseFormState<CryptoForm, QRCryptoForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRCryptoForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_CryptoField field, dynamic _) {
     switch (field) {
       case _CryptoField.amount:
-        _form.amount = int.tryParse(_) ?? 0;
+        form.amount = int.tryParse(_) ?? 0;
         break;
       case _CryptoField.cryptocurrency:
-        _form.cryptocurrency = _ ?? Cryptocurrency.bitcoin;
+        form.cryptocurrency = _ ?? Cryptocurrency.bitcoin;
         break;
       case _CryptoField.receiver:
-        _form.receiver = _;
+        form.receiver = _;
         break;
       case _CryptoField.message:
-        _form.message = _;
+        form.message = _;
         break;
       default:
         break;
     }
-    
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -58,7 +53,7 @@ class _CryptoFormState extends State<CryptoForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.crypto,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -75,7 +70,7 @@ class _CryptoFormState extends State<CryptoForm> {
             onChanged: (_) => _onChanged(_CryptoField.message, _),
           ),
           _CryptoSelect(
-            value: _form.cryptocurrency,
+            value: form.cryptocurrency,
             onChanged: (_) => _onChanged(_CryptoField.cryptocurrency, _),
           ),
         ],
@@ -148,7 +143,11 @@ class __CryptoSelectState extends State<_CryptoSelect> {
                 SizedBox(width: AppDimensions.instance.paddingX(0.5)),
                 Text(
                   Cryptocurrency.values[__].label,
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: currency == Cryptocurrency.values[__]
+                            ? Theme.of(context).colorScheme.primary
+                            : null,
+                      ),
                 )
               ],
             ),

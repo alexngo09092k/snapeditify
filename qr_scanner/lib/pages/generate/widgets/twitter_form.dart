@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_twitter_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _TwitterField {
@@ -18,32 +19,26 @@ class TwitterForm extends StatefulWidget {
   State<TwitterForm> createState() => _TwitterFormState();
 }
 
-class _TwitterFormState extends State<TwitterForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRTwitterForm _form = QRTwitterForm();
-
+class _TwitterFormState extends BaseFormState<TwitterForm, QRTwitterForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRTwitterForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_TwitterField field, dynamic _) {
     switch (field) {
       case _TwitterField.type:
-        _form.type = _;
+        form.type = _;
         break;
       case _TwitterField.tweet:
-        _form.tweet = _;
+        form.tweet = _;
         break;
       case _TwitterField.username:
-        _form.username = _;
+        form.username = _;
         break;
     }
-
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -51,9 +46,9 @@ class _TwitterFormState extends State<TwitterForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.email,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: _QRTwitterTypeSelect(
-        value: _form.type,
+        value: form.type,
         onChanged: (_) => _onChanged(_TwitterField.type, _),
         builder: (_, type) => type == QRTwitterType.profile
             ? Input(

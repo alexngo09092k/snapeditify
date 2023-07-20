@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_wifi_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _WifiField {
@@ -19,37 +20,31 @@ class WifiForm extends StatefulWidget {
   State<WifiForm> createState() => _WifiFormState();
 }
 
-class _WifiFormState extends State<WifiForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRWifiForm _form = QRWifiForm();
-
+class _WifiFormState extends BaseFormState<WifiForm, QRWifiForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRWifiForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_WifiField field, dynamic _) {
     switch (field) {
       case _WifiField.ssid:
-        _form.ssid = _;
+        form.ssid = _;
         break;
       case _WifiField.encryption:
-        _form.encryption = _;
+        form.encryption = _;
         break;
       case _WifiField.hidden:
-        _form.hidden = _;
+        form.hidden = _;
         break;
       case _WifiField.password:
-        _form.password = _;
+        form.password = _;
         break;
       default:
         break;
     }
-    
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -74,13 +69,13 @@ class _WifiFormState extends State<WifiForm> {
                 ),
               ),
               _HiddenCheckBox(
-                value: _form.hidden,
+                value: form.hidden,
                 onChanged: (_) => _onChanged(_WifiField.hidden, _),
               ),
             ],
           ),
           _EncryptionSelect(
-            value: _form.encryption,
+            value: form.encryption,
             onChanged: (_) => _onChanged(_WifiField.encryption, _),
           ),
         ],

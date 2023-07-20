@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_scanner/models/qr_forms/qr_map_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _MapField {
@@ -16,29 +17,23 @@ class MapForm extends StatefulWidget {
   State<MapForm> createState() => _MapFormState();
 }
 
-class _MapFormState extends State<MapForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRMapForm _form = QRMapForm();
-
+class _MapFormState extends BaseFormState<MapForm, QRMapForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRMapForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_MapField field, dynamic _) {
     switch (field) {
       case _MapField.latitude:
-        _form.latitude = double.tryParse(_) ?? 0.0;
+        form.latitude = double.tryParse(_) ?? 0.0;
         break;
       case _MapField.longitude:
-        _form.longitude = double.tryParse(_) ?? 0.0;
+        form.longitude = double.tryParse(_) ?? 0.0;
         break;
     }
-
-    _isDisabled.value = !_form.validate();
+   checkDisabled();
   }
 
   @override
@@ -46,7 +41,7 @@ class _MapFormState extends State<MapForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.email,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

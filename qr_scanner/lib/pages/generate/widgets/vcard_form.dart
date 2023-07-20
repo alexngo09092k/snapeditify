@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_scanner/models/qr_forms/qr_vcard_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _FieldVCard {
@@ -28,66 +29,60 @@ class VCardForm extends StatefulWidget {
   State<VCardForm> createState() => _VCardFormState();
 }
 
-class _VCardFormState extends State<VCardForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(false);
-  final QRVCardForm _form = QRVCardForm();
-
+class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRVCardForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_FieldVCard field, dynamic _) {
     if (_ == null) return;
     switch (field) {
       case _FieldVCard.firstName:
-        _form.firstName = _;
+        form.firstName = _;
         break;
       case _FieldVCard.lastName:
-        _form.lastName = _;
+        form.lastName = _;
         break;
       case _FieldVCard.company:
-        _form.company = _;
+        form.company = _;
         break;
       case _FieldVCard.job:
-        _form.job = _;
+        form.job = _;
         break;
       case _FieldVCard.street:
-        _form.street = _;
+        form.street = _;
         break;
       case _FieldVCard.city:
-        _form.city = _;
+        form.city = _;
         break;
       case _FieldVCard.state:
-        _form.state = _;
+        form.state = _;
         break;
       case _FieldVCard.zip:
-        _form.zip = int.tryParse(_) ?? 0;
+        form.zip = int.tryParse(_) ?? 0;
         break;
       case _FieldVCard.country:
-        _form.country = _;
+        form.country = _;
         break;
       case _FieldVCard.phone:
-        _form.phone = _;
+        form.phone = _;
         break;
       case _FieldVCard.mobile:
-        _form.mobile = _;
+        form.mobile = _;
         break;
       case _FieldVCard.fax:
-        _form.fax = _;
+        form.fax = _;
         break;
       case _FieldVCard.email:
-        _form.email = _;
+        form.email = _;
         break;
       case _FieldVCard.website:
-        _form.website = _;
+        form.website = _;
         break;
     }
-
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -95,7 +90,7 @@ class _VCardFormState extends State<VCardForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.vcard,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -17,11 +17,13 @@ class BaseForm extends StatefulWidget {
     required this.child,
     required this.onData,
     this.isDisabled,
+    this.onQRFormat,
   });
 
   final QRType qrType;
   final Widget child;
   final String? Function() onData;
+  final Function(QRFormat)? onQRFormat;
   final ValueNotifier<bool>? isDisabled;
 
   @override
@@ -91,6 +93,11 @@ class _BaseFormState extends State<BaseForm> {
     AwesomeAppState.dimiss();
   }
 
+  void onFormatChanged(QRFormat _) {
+    format.value = _;
+    if(widget.onQRFormat != null) widget.onQRFormat!(format.value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -142,24 +149,38 @@ class _BaseFormState extends State<BaseForm> {
                           children: [
                             SizedBox(height: AppDimensions.instance.padding),
                             SizedBox(
-                              height: 100,
+                              height: 60,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: QRFormat.values.length,
                                 itemBuilder: (_, __) => GestureDetector(
-                                  onTap: () =>
-                                      format.value = QRFormat.values[__],
-                                  child: Padding(
-                                    padding: EdgeInsets.all(
-                                        AppDimensions.instance.padding),
+                                  onTap: () => onFormatChanged(QRFormat.values[__]),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).scaffoldBackgroundColor,
+                                      borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+                                      border: Border.all(
+                                        width: 3,
+                                        color: format.value == QRFormat.values[__]
+                                            ? Theme.of(context).colorScheme.primary
+                                            : Theme.of(context).disabledColor,
+                                      ),
+                                    ),
+                                    margin: EdgeInsets.symmetric(
+                                      vertical: AppDimensions.instance.padding,
+                                      horizontal: AppDimensions.instance.paddingX(0.5),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: AppDimensions.instance.padding,
+                                      vertical: AppDimensions.instance.paddingX(0.5),
+                                    ),
                                     child: Text(
                                       QRFormat.values[__].label,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyLarge!
                                           .copyWith(
-                                            color: format.value ==
-                                                    QRFormat.values[__]
+                                            color: format.value == QRFormat.values[__]
                                                 ? Theme.of(context)
                                                     .colorScheme
                                                     .primary

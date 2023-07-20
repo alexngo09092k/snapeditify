@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_facebook_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _FacebookField {
@@ -18,32 +19,26 @@ class FacebookForm extends StatefulWidget {
   State<FacebookForm> createState() => _FacebookFormState();
 }
 
-class _FacebookFormState extends State<FacebookForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRFacebookForm _form = QRFacebookForm();
-
+class _FacebookFormState extends BaseFormState<FacebookForm, QRFacebookForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRFacebookForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_FacebookField field, dynamic _) {
     switch (field) {
       case _FacebookField.type:
-        _form.type = _;
+        form.type = _;
         break;
       case _FacebookField.share:
-        _form.shareURL = _;
+        form.shareURL = _;
         break;
       case _FacebookField.username:
-        _form.username = _;
+        form.username = _;
         break;
     }
-
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -51,9 +46,9 @@ class _FacebookFormState extends State<FacebookForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.email,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: _QRFacebookTypeSelect(
-        value: _form.type,
+        value: form.type,
         onChanged: (_) => _onChanged(_FacebookField.type, _),
         builder: (_, type) => type == QRFacebookType.profile
             ? Input(

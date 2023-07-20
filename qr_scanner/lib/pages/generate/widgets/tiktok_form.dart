@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_tiktok_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _TikTokField {
@@ -18,32 +19,26 @@ class TikTokForm extends StatefulWidget {
   State<TikTokForm> createState() => _TikTokFormState();
 }
 
-class _TikTokFormState extends State<TikTokForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRTikTokForm _form = QRTikTokForm();
-
+class _TikTokFormState extends BaseFormState<TikTokForm, QRTikTokForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRTikTokForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_TikTokField field, dynamic _) {
     switch (field) {
       case _TikTokField.type:
-        _form.type = _;
+        form.type = _;
         break;
       case _TikTokField.tweet:
-        _form.tweet = _;
+        form.tweet = _;
         break;
       case _TikTokField.username:
-        _form.username = _;
+        form.username = _;
         break;
     }
-
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -51,9 +46,9 @@ class _TikTokFormState extends State<TikTokForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.email,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: _QRTikTokTypeSelect(
-        value: _form.type,
+        value: form.type,
         onChanged: (_) => _onChanged(_TikTokField.type, _),
         builder: (_, type) => type == QRTikTokType.profile
             ? Input(

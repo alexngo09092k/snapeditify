@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_scanner/models/qr_forms/qr_email.form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _EmailField {
@@ -17,32 +18,26 @@ class EmailForm extends StatefulWidget {
   State<EmailForm> createState() => _EmailFormState();
 }
 
-class _EmailFormState extends State<EmailForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QREmailForm _form = QREmailForm();
-
+class _EmailFormState extends BaseFormState<EmailForm, QREmailForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QREmailForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_EmailField field, String _) {
     switch (field) {
       case _EmailField.email:
-        _form.email = _;
+        form.email = _;
         break;
       case _EmailField.message:
-        _form.message = _;
+        form.message = _;
         break;
       case _EmailField.subject:
-        _form.subject = _;
+        form.subject = _;
         break;
     }
-
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -50,7 +45,7 @@ class _EmailFormState extends State<EmailForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.email,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

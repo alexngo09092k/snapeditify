@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_douyin_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _DouyinField {
@@ -18,32 +19,26 @@ class DouyinForm extends StatefulWidget {
   State<DouyinForm> createState() => _DouyinFormState();
 }
 
-class _DouyinFormState extends State<DouyinForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRDouyinForm _form = QRDouyinForm();
-
+class _DouyinFormState extends BaseFormState<DouyinForm, QRDouyinForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRDouyinForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_DouyinField field, dynamic _) {
     switch (field) {
       case _DouyinField.type:
-        _form.type = _;
+        form.type = _;
         break;
       case _DouyinField.tweet:
-        _form.tweet = _;
+        form.tweet = _;
         break;
       case _DouyinField.username:
-        _form.username = _;
+        form.username = _;
         break;
     }
-
-    _isDisabled.value = !_form.validate();
+   checkDisabled();
   }
 
   @override
@@ -51,9 +46,9 @@ class _DouyinFormState extends State<DouyinForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.email,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: _QRDouyinTypeSelect(
-        value: _form.type,
+        value: form.type,
         onChanged: (_) => _onChanged(_DouyinField.type, _),
         builder: (_, type) => type == QRDouyinType.profile
             ? Input(

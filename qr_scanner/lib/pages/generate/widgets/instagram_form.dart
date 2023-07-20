@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_instagram_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _InstagramField {
@@ -18,32 +19,29 @@ class InstagramForm extends StatefulWidget {
   State<InstagramForm> createState() => _InstagramFormState();
 }
 
-class _InstagramFormState extends State<InstagramForm> {
+class _InstagramFormState extends BaseFormState<InstagramForm, QRInstagramForm> {
   final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRInstagramForm _form = QRInstagramForm();
 
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRInstagramForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_InstagramField field, dynamic _) {
     switch (field) {
       case _InstagramField.type:
-        _form.type = _;
+        form.type = _;
         break;
       case _InstagramField.share:
-        _form.shareURL = _;
+        form.shareURL = _;
         break;
       case _InstagramField.username:
-        _form.username = _;
+        form.username = _;
         break;
     }
 
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -51,9 +49,9 @@ class _InstagramFormState extends State<InstagramForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.email,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: _QRInstagramTypeSelect(
-        value: _form.type,
+        value: form.type,
         onChanged: (_) => _onChanged(_InstagramField.type, _),
         builder: (_, type) => type == QRInstagramType.profile
             ? Input(

@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_youtube_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _YoutubeField {
@@ -18,32 +19,27 @@ class YoutubeForm extends StatefulWidget {
   State<YoutubeForm> createState() => _YoutubeFormState();
 }
 
-class _YoutubeFormState extends State<YoutubeForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRYoutubeForm _form = QRYoutubeForm();
-
+class _YoutubeFormState extends BaseFormState<YoutubeForm, QRYoutubeForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRYoutubeForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_YoutubeField field, dynamic _) {
     switch (field) {
       case _YoutubeField.type:
-        _form.type = _;
+        form.type = _;
         break;
       case _YoutubeField.tweet:
-        _form.tweet = _;
+        form.tweet = _;
         break;
       case _YoutubeField.username:
-        _form.username = _;
+        form.username = _;
         break;
     }
 
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -51,9 +47,9 @@ class _YoutubeFormState extends State<YoutubeForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.email,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: _QRYoutubeTypeSelect(
-        value: _form.type,
+        value: form.type,
         onChanged: (_) => _onChanged(_YoutubeField.type, _),
         builder: (_, type) => type == QRYoutubeType.profile
             ? Input(

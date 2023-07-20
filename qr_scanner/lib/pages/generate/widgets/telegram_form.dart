@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_telegram_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _TelegramField {
@@ -18,32 +19,26 @@ class TelegramForm extends StatefulWidget {
   State<TelegramForm> createState() => _TelegramFormState();
 }
 
-class _TelegramFormState extends State<TelegramForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-  final QRTelegramForm _form = QRTelegramForm();
-
+class _TelegramFormState extends BaseFormState<TelegramForm, QRTelegramForm> {
   @override
   void initState() {
-    _isDisabled.value = !_form.validate();
+    form = QRTelegramForm();
     super.initState();
   }
-
-  String? onData() => _form.buildQRRawData();
 
   void _onChanged(_TelegramField field, dynamic _) {
     switch (field) {
       case _TelegramField.type:
-        _form.type = _;
+        form.type = _;
         break;
       case _TelegramField.tweet:
-        _form.tweet = _;
+        form.tweet = _;
         break;
       case _TelegramField.username:
-        _form.username = _;
+        form.username = _;
         break;
     }
-
-    _isDisabled.value = !_form.validate();
+    checkDisabled();
   }
 
   @override
@@ -51,9 +46,9 @@ class _TelegramFormState extends State<TelegramForm> {
     return BaseForm(
       onData: onData,
       qrType: QRType.email,
-      isDisabled: _isDisabled,
+      isDisabled: isDisabled,
       child: _QRTelegramTypeSelect(
-        value: _form.type,
+        value: form.type,
         onChanged: (_) => _onChanged(_TelegramField.type, _),
         builder: (_, type) => type == QRTelegramType.profile
             ? Input(

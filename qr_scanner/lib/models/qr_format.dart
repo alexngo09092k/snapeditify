@@ -1,6 +1,11 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:barcode_widget/barcode_widget.dart';
+
 enum QRFormat {
+  /// QR Code
+  QrCode,
+
   /// ITF16 Barcode
   CodeITF16,
 
@@ -42,9 +47,6 @@ enum QRFormat {
 
   /// Telepen Barcode
   Telepen,
-
-  /// QR Code
-  QrCode,
 
   /// Codabar
   Codabar,
@@ -112,6 +114,51 @@ extension QRFormatEx on QRFormat {
         return "Telepen Code";
       default:
         return "QR Code";
+    }
+  }
+
+  Barcode get barcode {
+    switch (this) {
+      case QRFormat.CodeUPCA:
+        return Barcode.upcA();
+      case QRFormat.CodeUPCE:
+        return Barcode.upcE();
+      case QRFormat.Code128:
+        return Barcode.code128();
+      case QRFormat.Code39:
+        return Barcode.code39();
+      case QRFormat.Code93:
+        return Barcode.code93();
+      case QRFormat.CodeEAN13:
+        return Barcode.ean13();
+      case QRFormat.CodeEAN2:
+        return Barcode.ean2();
+      case QRFormat.CodeEAN5:
+        return Barcode.ean5();
+      case QRFormat.CodeEAN8:
+        return Barcode.ean8();
+      case QRFormat.Codabar:
+        return Barcode.codabar();
+      case QRFormat.Aztec:
+        return Barcode.aztec();
+      case QRFormat.CodeITF14:
+        return Barcode.itf14();
+      case QRFormat.CodeITF16:
+        return Barcode.itf16();
+      case QRFormat.DataMatrix:
+        return Barcode.dataMatrix();
+      case QRFormat.Itf:
+        return Barcode.itf();
+      case QRFormat.PDF417:
+        return Barcode.pdf417();
+      case QRFormat.GS128:
+        return Barcode.gs128();
+      case QRFormat.Rm4scc:
+        return Barcode.rm4scc();
+      case QRFormat.Telepen:
+        return Barcode.telepen();
+      default:
+        return Barcode.qrCode();
     }
   }
 }
