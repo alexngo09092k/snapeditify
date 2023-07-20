@@ -53,4 +53,12 @@ class QRVCardForm extends QRFormBase {
         (email.isEmpty || QRUtils.instance.isEmail(email) &&
         (website.isEmpty || QRUtils.instance.isURL(website)));
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'begin:vcard',
+    ];
+    return checkList.any((element) => check.startsWith(element));
+  }
 }

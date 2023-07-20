@@ -32,8 +32,7 @@ class SettingsPage extends StatelessWidget {
           scheme: 'mailto',
           path: Configuration.instance.business.contact,
           query: _encodeQueryParameters({
-            'subject':
-                'Feedback to ${Configuration.instance.business.appName} Team',
+            'subject': 'Feedback to ${Configuration.instance.business.appName} Team',
           }),
         );
         if (!await launchUrl(emailLaunchUri)) {
@@ -150,12 +149,10 @@ class SettingsPage extends StatelessWidget {
       children: [
         if (Configuration.instance.business.webLinks.isNotEmpty)
           AppCard(
-            margin: EdgeInsets.symmetric(
-                horizontal: AppDimensions.instance.padding),
+            margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
             child: SeparatedListView.withList(
               separator: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: AppDimensions.instance.padding),
+                padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
                 child: const Divider(height: 0),
               ),
               list: Configuration.instance.business.webLinks
@@ -170,11 +167,9 @@ class SettingsPage extends StatelessWidget {
                   .toList(),
             ),
           ),
-        if (Configuration.instance.business.webLinks.isNotEmpty)
-          SizedBox(height: AppDimensions.instance.padding),
+        if (Configuration.instance.business.webLinks.isNotEmpty) SizedBox(height: AppDimensions.instance.padding),
         AppCard(
-          margin:
-              EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
+          margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
           child: SeparatedListView.withList(
             separator: Padding(
               padding: EdgeInsets.symmetric(
@@ -206,12 +201,10 @@ class SettingsPage extends StatelessWidget {
         SizedBox(height: AppDimensions.instance.padding),
         if (Configuration.instance.business.socialNetworks.isNotEmpty)
           AppCard(
-            margin: EdgeInsets.symmetric(
-                horizontal: AppDimensions.instance.padding),
+            margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
             child: SeparatedListView.withList(
               separator: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: AppDimensions.instance.padding),
+                padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
                 child: const Divider(height: 0),
               ),
               list: Configuration.instance.business.socialNetworks

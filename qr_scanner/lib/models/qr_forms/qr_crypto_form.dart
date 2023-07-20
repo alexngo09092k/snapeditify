@@ -25,6 +25,12 @@ class QRCryptoForm extends QRFormBase {
   bool validate() {
     return QRUtils.instance.isWalletAddress(receiver) && amount > 0;
   }
+  
+  static bool isQR(String rawData) {
+    final String check = rawData.toLowerCase().trim();
+    const List<Cryptocurrency> checkList = Cryptocurrency.values;
+    return checkList.any((element) => check.startsWith('${element.name}:'));
+  }
 }
 
 enum Cryptocurrency {

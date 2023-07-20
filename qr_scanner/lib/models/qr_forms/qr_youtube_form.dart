@@ -37,6 +37,18 @@ class QRYoutubeForm extends QRFormBase {
         return tweet.isNotEmpty;
     }
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'https://youtube.com',
+      'https://www.youtube.com',
+      'http://youtube.com',
+      'http://www.youtube.com',
+      'youtube:',
+    ];
+    return checkList.any((element) => check.startsWith(element));
+  }
 }
 
 extension QRYoutubeTypeEx on QRYoutubeType {

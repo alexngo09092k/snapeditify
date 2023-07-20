@@ -22,9 +22,9 @@ class QRTikTokForm extends QRFormBase {
     if (!validate()) return null;
     switch (type) {
       case QRTikTokType.profile:
-        return "https://twitter.com/$username";
+        return "https://tiktok.com/$username";
       case QRTikTokType.tweet:
-        return "https://twitter.com/intent/tweet?text=$tweet";
+        return "https://tiktok.com/intent/tweet?text=$tweet";
     }
   }
 
@@ -36,6 +36,18 @@ class QRTikTokForm extends QRFormBase {
       case QRTikTokType.tweet:
         return tweet.isNotEmpty;
     }
+  }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'https://tiktok.com',
+      'https://www.tiktok.com',
+      'http://www.tiktok.com',
+      'http://tiktok.com',
+      'tiktok:'
+    ];
+    return checkList.any((element) => check.startsWith(element));
   }
 }
 

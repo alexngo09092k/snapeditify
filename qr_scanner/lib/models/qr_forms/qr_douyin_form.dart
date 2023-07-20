@@ -22,9 +22,9 @@ class QRDouyinForm extends QRFormBase {
     if (!validate()) return null;
     switch (type) {
       case QRDouyinType.profile:
-        return "https://twitter.com/$username";
+        return "https://www.douyin.com/$username";
       case QRDouyinType.tweet:
-        return "https://twitter.com/intent/tweet?text=$tweet";
+        return "https://www.douyin.com/intent/tweet?text=$tweet";
     }
   }
 
@@ -37,12 +37,23 @@ class QRDouyinForm extends QRFormBase {
         return tweet.isNotEmpty;
     }
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'https://www.douyin.com',
+      'https://douyin.com',
+      'http://douyin.com',
+      'douyin:',
+    ];
+    return checkList.any((element) => check.startsWith(element));
+  }
 }
 
 extension QRDouyinTypeEx on QRDouyinType {
   String get label {
     switch (this) {
-     case QRDouyinType.profile:
+      case QRDouyinType.profile:
         return "Link to your profile";
       case QRDouyinType.tweet:
         return "Post a tweet";

@@ -24,4 +24,12 @@ class QREventForm extends QRFormBase {
   bool validate() {
     return title.isNotEmpty && location.isNotEmpty;
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'begin:vevent',
+    ];
+    return checkList.any((element) => check.startsWith(element));
+  }
 }

@@ -37,12 +37,24 @@ class QRTwitterForm extends QRFormBase {
         return tweet.isNotEmpty;
     }
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'https://twitter.com',
+      'https://www.twitter.com',
+      'http://www.twitter.com',
+      'http://twitter.com',
+      'twitter:'
+    ];
+    return checkList.any((element) => check.startsWith(element));
+  }
 }
 
 extension QRTwitterTypeEx on QRTwitterType {
   String get label {
     switch (this) {
-     case QRTwitterType.profile:
+      case QRTwitterType.profile:
         return "Link to your profile";
       case QRTwitterType.tweet:
         return "Post a tweet";

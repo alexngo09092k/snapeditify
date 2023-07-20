@@ -5,6 +5,23 @@ import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr.dart';
 import 'package:qr_scanner/models/qr_format.dart';
+import 'package:qr_scanner/models/qr_forms/qr_crypto_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_douyin_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_email.form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_event_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_facebook_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_instagram_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_link_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_map_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_phone_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_sms_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_snapchat_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_telegram_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_tiktok_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_twitter_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_vcard_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_wifi_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_youtube_form.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/models/scanner_settings.dart';
@@ -56,7 +73,7 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
       Debug.log(jsonEncode(barcode.rawValue));
       final QRType type = checkQRType(barcode);
       final QRFormat? format = checkQRFormat(barcode);
-      if(format == null) continue;
+      if (format == null) continue;
       final QR qr = QR(
         rawData: barcode.rawValue!,
         type: type,
@@ -121,7 +138,8 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
-    return AsyncStorage.instance.remove(AsyncStorageKey.instance.scannerSettings);
+    return AsyncStorage.instance
+        .remove(AsyncStorageKey.instance.scannerSettings);
   }
 
   @override
@@ -129,9 +147,13 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? scannerSettingsString = AsyncStorage.instance.getString(AsyncStorageKey.instance.scannerSettings);
-    Debug.log("============= SCANNER SETTINGS $scannerSettingsString ============");
-    _settings = scannerSettingsString != null? ScannerSettings.fromJson(scannerSettingsString): ScannerSettings();
+    String? scannerSettingsString = AsyncStorage.instance
+        .getString(AsyncStorageKey.instance.scannerSettings);
+    Debug.log(
+        "============= SCANNER SETTINGS $scannerSettingsString ============");
+    _settings = scannerSettingsString != null
+        ? ScannerSettings.fromJson(scannerSettingsString)
+        : ScannerSettings();
     _controller = MobileScannerController(
       facing: _settings.facing,
       detectionSpeed: _settings.detectionSpeed,
@@ -184,6 +206,32 @@ extension ScannerProviderEx on ScannerProvider {
     if (barcode.wifi != null) return QRType.wifi;
     if (barcode.geoPoint != null) return QRType.maps;
     if (barcode.driverLicense != null) return QRType.vcard;
+    if (barcode.rawValue == null) return QRType.text;
+
+    if (QRCryptoForm.isQR(barcode.rawValue!)) return QRType.crypto;
+    if (QRDouyinForm.isQR(barcode.rawValue!)) return QRType.douyin;
+    if (QREmailForm.isQR(barcode.rawValue!)) return QRType.email;
+    if (QREventForm.isQR(barcode.rawValue!)) return QRType.event;
+    if (QRFacebookForm.isQR(barcode.rawValue!)) return QRType.facebook;
+    if (QRInstagramForm.isQR(barcode.rawValue!)) return QRType.instagram;
+    if (QRMapForm.isQR(barcode.rawValue!)) return QRType.maps;
+    if (QRPhoneForm.isQR(barcode.rawValue!)) return QRType.tel;
+    if (QRSMSForm.isQR(barcode.rawValue!)) return QRType.sms;
+    if (QRSnapChatForm.isQR(barcode.rawValue!)) return QRType.snapchat;
+    if (QRTelegramForm.isQR(barcode.rawValue!)) return QRType.telegram;
+    if (QRTikTokForm.isQR(barcode.rawValue!)) return QRType.tiktok;
+    if (QRTwitterForm.isQR(barcode.rawValue!)) return QRType.twitter;
+    if (QRVCardForm.isQR(barcode.rawValue!)) return QRType.vcard;
+    if (QRWifiForm.isQR(barcode.rawValue!)) return QRType.wifi;
+    if (QRYoutubeForm.isQR(barcode.rawValue!)) return QRType.youtube;
+
+    ///
+    ///
+    /// GET ALL QR CHECK HERE
+    ///
+    ///
+    if (QRLinkForm.isQR(barcode.rawValue!)) return QRType.link;
+
     return QRType.text;
   }
 

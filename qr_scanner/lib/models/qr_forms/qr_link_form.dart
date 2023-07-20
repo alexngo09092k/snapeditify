@@ -16,4 +16,9 @@ class QRLinkForm extends QRFormBase {
   bool validate() {
     return QRUtils.instance.isURL(url);
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    return QRUtils.instance.isURL(check);
+  }
 }

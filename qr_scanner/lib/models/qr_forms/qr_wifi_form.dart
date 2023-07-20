@@ -23,6 +23,14 @@ class QRWifiForm extends QRFormBase {
   bool validate() {
     return ssid.isNotEmpty;
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'wifi:t:',
+    ];
+    return checkList.any((element) => check.startsWith(element));
+  }
 }
 
 enum Encryption {

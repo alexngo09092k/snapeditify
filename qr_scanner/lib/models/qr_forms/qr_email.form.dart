@@ -23,4 +23,12 @@ class QREmailForm extends QRFormBase {
   bool validate() {
     return QRUtils.instance.isEmail(email) && message.isNotEmpty;
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'matmsg:to',
+    ];
+    return checkList.any((element) => check.startsWith(element));
+  }
 }

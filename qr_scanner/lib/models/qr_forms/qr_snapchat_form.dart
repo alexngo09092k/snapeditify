@@ -37,6 +37,14 @@ class QRSnapChatForm extends QRFormBase {
         return tweet.isNotEmpty;
     }
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'smsto:',
+    ];
+    return checkList.any((element) => check.startsWith(element));
+  }
 }
 
 extension QRSnapChatTypeEx on QRSnapChatType {

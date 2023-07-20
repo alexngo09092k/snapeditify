@@ -22,7 +22,7 @@ class QRInstagramForm extends QRFormBase {
     if (!validate()) return null;
     switch (type) {
       case QRInstagramType.profile:
-        return "http://facebook.com/$username";
+        return "https://instagram.com/$username";
       case QRInstagramType.share:
         return "https://www.facebook.com/sharer/sharer.php?u=$shareURL";
     }
@@ -37,12 +37,24 @@ class QRInstagramForm extends QRFormBase {
         return shareURL.isNotEmpty;
     }
   }
+
+  static bool isQR(String rawData) {
+    final check = rawData.toLowerCase().trim();
+    final List<String> checkList = [
+      'https://instagram.com',
+      'https://www.instagram.com',
+      'http://instagram.com',
+      'http://www.instagram.com',
+      'instagram:',
+    ];
+    return checkList.any((element) => check.startsWith(element));
+  }
 }
 
 extension QRInstagramTypeEx on QRInstagramType {
   String get label {
     switch (this) {
-     case QRInstagramType.profile:
+      case QRInstagramType.profile:
         return "Link to your profile";
       case QRInstagramType.share:
         return "Share your URL on Instagram";
