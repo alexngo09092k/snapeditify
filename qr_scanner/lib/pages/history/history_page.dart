@@ -14,8 +14,7 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
-class _HistoryPageState
-    extends ProviderStateObserver<HistoryPage, HistoryProvider> {
+class _HistoryPageState extends ProviderStateObserver<HistoryPage, HistoryProvider> {
   final ValueNotifier<QRSource> _tab = ValueNotifier(QRSource.scan);
   late final PageController _controller;
 

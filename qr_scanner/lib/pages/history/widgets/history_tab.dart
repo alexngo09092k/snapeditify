@@ -20,32 +20,41 @@ class HistoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: EdgeInsets.all(AppDimensions.instance.padding),
       child: AnimatedBuilder(
         animation: tab,
-        builder: (_, __) => SlidingControl<QRSource>(
-          value: tab.value,
-          color: Theme.of(context).colorScheme.surface,
-          background: Theme.of(context).disabledColor.withOpacity(0.1),
-          children: QRSource.values.asMap().map(
-                (_, e) => MapEntry(
-                  e,
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppDimensions.instance.padding,
-                      vertical: AppDimensions.instance.paddingX(0.5),
-                    ),
-                    child: Row(
-                      children: [
-                        CustomIcon(e.icon),
-                        SizedBox(width: AppDimensions.instance.paddingX(0.5)),
-                        Text(e.label, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600)),
-                      ],
+        builder: (_, __) => SizedBox(
+          width: double.infinity,
+          child: SlidingControl<QRSource>(
+            value: tab.value,
+            color: Theme.of(context).colorScheme.surface,
+            background: Theme.of(context).disabledColor.withOpacity(0.1),
+            children: QRSource.values.asMap().map(
+                  (_, e) => MapEntry(
+                    e,
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimensions.instance.padding,
+                        vertical: AppDimensions.instance.paddingX(0.5),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomIcon(e.icon),
+                          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
+                          Text(e.label,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(fontWeight: FontWeight.w600)),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-          onValueChanged: _onChangedTab,
+            onValueChanged: _onChangedTab,
+          ),
         ),
       ),
     );

@@ -12,19 +12,15 @@ extension QRSourceEx on QRSource {
         return AppAssets.instance.icGenerate;
       case QRSource.scan:
         return AppAssets.instance.icScanner;
-      default:
-        throw 'Not found Icon for QRSource';
     }
   }
 
   String get label {
     switch (this) {
-      case QRSource.scan:
-        return "Generate";
       case QRSource.generate:
+        return "Generate";
+      case QRSource.scan:
         return "Scan";
-      default:
-        throw 'Not found Icon for QRSource';
     }
   }
 }

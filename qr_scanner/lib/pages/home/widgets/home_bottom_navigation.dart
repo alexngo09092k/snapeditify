@@ -34,7 +34,7 @@ class HomeBottomNavigation extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        CustomIcon(e.icon),
+                        CustomIcon(e.icon, color: Theme.of(context).colorScheme.primary,),
                         SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                         Text(
                           e.label,
