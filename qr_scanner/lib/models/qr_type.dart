@@ -104,7 +104,7 @@ extension QRTypeEx on QRType {
   String get label {
     switch (this) {
       case QRType.crypto:
-        return "Crypto Payment";
+        return "Crypto";
       case QRType.email:
         return "E-mail";
       case QRType.facebook:
@@ -116,7 +116,7 @@ extension QRTypeEx on QRType {
       case QRType.link:
         return "URL";
       case QRType.maps:
-        return "Google Maps";
+        return "Maps";
       case QRType.snapchat:
         return "Snapchat";
       case QRType.telegram:

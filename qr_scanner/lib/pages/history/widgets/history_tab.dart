@@ -28,7 +28,7 @@ class HistoryTab extends StatelessWidget {
           width: double.infinity,
           child: SlidingControl<QRSource>(
             value: tab.value,
-            color: Theme.of(context).colorScheme.surface,
+            color: Theme.of(context).colorScheme.primary,
             background: Theme.of(context).disabledColor.withOpacity(0.1),
             children: QRSource.values.asMap().map(
                   (_, e) => MapEntry(
@@ -41,13 +41,22 @@ class HistoryTab extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CustomIcon(e.icon),
+                          CustomIcon(e.icon,
+                              color: e == tab.value
+                                  ? AppColors.instance.white
+                                  : null),
                           SizedBox(width: AppDimensions.instance.paddingX(0.5)),
-                          Text(e.label,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(fontWeight: FontWeight.w600)),
+                          Text(
+                            e.label,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: e == tab.value
+                                        ? AppColors.instance.white
+                                        : null),
+                          ),
                         ],
                       ),
                     ),

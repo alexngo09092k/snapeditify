@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: HomeBottomNavigation(
         navigation: _navigation,
         onChange: _onItemTapped,
+        current: _navigation,
       ),
     );
   }

@@ -51,27 +51,27 @@ class BusinessConfig {
 
   factory BusinessConfig.defaultValue() {
     return BusinessConfig(
-      appName: "SnapEditify",
+      appName: "QR Scanner & Barcode Lookup",
       appLogo: "assets/images/logo.png",
-      appBio: "Make your life beautiful",
+      appBio: "Extremely fast QR & barcode scanner that supports all QR & barcode formats!",
       protocols: ['https://', 'http://', 'data:'],
       prefix: "com.snapeditify.scanner.",
       contact: "contact.snapeditify@gmail.com",
       shareApp: ShareApp(
         links: {
-          AppPlatform.android: 'https://appgallery.huawei.com/app/C107645049',
-          AppPlatform.ios: 'https://appgallery.huawei.com/app/C107645049',
-          AppPlatform.huawei: 'https://appgallery.huawei.com/app/C107645049',
+          AppPlatform.android: 'https://appgallery.huawei.com/app/C108714985',
+          AppPlatform.ios: 'https://appgallery.huawei.com/app/C108714985',
+          AppPlatform.huawei: 'https://appgallery.huawei.com/app/C108714985',
         },
-        message: "SnapEditify AI Photo Editor",
+        message: "QR Scanner & Barcode Lookup. Extremely fast QR & barcode scanner that supports all QR & barcode formats!",
       ),
       updateApp: UpdateApp(
-        version: '1.0.2',
+        version: '1.0.0',
         required: false,
         links: {
-          AppPlatform.android: 'https://appgallery.huawei.com/app/C107645049',
-          AppPlatform.ios: 'https://appgallery.huawei.com/app/C107645049',
-          AppPlatform.huawei: 'https://appgallery.huawei.com/app/C107645049',
+          AppPlatform.android: 'https://appgallery.huawei.com/app/C108714985',
+          AppPlatform.ios: 'https://appgallery.huawei.com/app/C108714985',
+          AppPlatform.huawei: 'https://appgallery.huawei.com/app/C108714985',
         },
       ),
       socialNetworks: [

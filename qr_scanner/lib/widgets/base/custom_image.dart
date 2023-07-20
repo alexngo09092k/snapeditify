@@ -1,4 +1,4 @@
-// import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/configuration.dart';
 import 'package:qr_scanner/common/constants.dart';
@@ -21,36 +21,21 @@ class CustomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Configuration.instance.isNetwork(image)
-        ? Image.network(
-            image,
+        ? CachedNetworkImage(
+            imageUrl: image,
             width: width,
             height: height,
             color: color,
             fit: fit,
-            loadingBuilder: (_, __, ___) => ImagePlaceholder(
+            placeholder: (_, __) => ImagePlaceholder(
               width: width,
               height: height,
             ),
-            errorBuilder: (_, __, ___) => ImagePlaceholder(
+            errorWidget: (_, __, ___) => ImagePlaceholder(
               width: width,
               height: height,
             ),
           )
-        // ? CachedNetworkImage(
-        //     imageUrl: image,
-        //     width: width,
-        //     height: height,
-        //     color: color,
-        //     fit: fit,
-        //     placeholder: (_, __) => ImagePlaceholder(
-        //       width: width,
-        //       height: height,
-        //     ),
-        //     errorWidget: (_, __, ___) => ImagePlaceholder(
-        //       width: width,
-        //       height: height,
-        //     ),
-        //   )
         : Image.asset(
             image,
             width: width,

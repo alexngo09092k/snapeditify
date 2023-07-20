@@ -8,9 +8,11 @@ class HomeBottomNavigation extends StatelessWidget {
     super.key,
     required this.navigation,
     required this.onChange,
+    required this.current,
   });
   final HomeNavigation navigation;
   final Function(HomeNavigation) onChange;
+  final HomeNavigation current;
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +36,22 @@ class HomeBottomNavigation extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        CustomIcon(e.icon, color: Theme.of(context).colorScheme.primary,),
+                        CustomIcon(
+                          e.icon,
+                          color: current == e
+                              ? Theme.of(context).colorScheme.primary
+                              : null,
+                        ),
                         SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                         Text(
                           e.label,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(fontWeight: FontWeight.w600),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: current == e
+                                        ? Theme.of(context).colorScheme.primary
+                                        : null,
+                                  ),
                         ),
                       ],
                     ),

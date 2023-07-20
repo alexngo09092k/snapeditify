@@ -95,15 +95,15 @@
 		{
 			"package_name":"app.snapeditify.studio",
 			"client":{
-				"app_id":"107645049"
+				"app_id":"108714985"
 			},
 			"app_info":{
 				"package_name":"app.snapeditify.studio",
-				"app_id":"107645049"
+				"app_id":"108714985"
 			},
 			"oauth_client":{
 				"client_type":1,
-				"client_id":"107645049"
+				"client_id":"108714985"
 			}
 		}
 	]

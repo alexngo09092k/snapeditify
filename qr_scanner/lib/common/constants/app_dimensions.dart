@@ -26,10 +26,10 @@ class AppDimensions {
   double iconX(double x) => icon * x;
 
   /// GRID DELEGATE
-  final gridDelegate = const SliverGridDelegateWithFixedCrossAxisCount(
+  SliverGridDelegateWithFixedCrossAxisCount get gridDelegate => SliverGridDelegateWithFixedCrossAxisCount(
     crossAxisCount: 3,
-    crossAxisSpacing: 3.0,
-    mainAxisSpacing: 3.0,
+    crossAxisSpacing: padding,
+    mainAxisSpacing: padding,
   );
 
   Size get gridItemSize => Size(

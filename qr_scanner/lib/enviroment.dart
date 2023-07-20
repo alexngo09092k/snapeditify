@@ -21,7 +21,7 @@ const enviroment = {
     },
 
     /// Display name is used in app
-    'appName': 'QR Code & Barcode Scanner',
+    'appName': 'QR Scanner & Barcode Lookup',
 
     /// Version
     'version': '1.0.0',
@@ -29,7 +29,7 @@ const enviroment = {
     /// Logo is used in splash screen and app ui
     'appLogo': 'assets/images/logo.png',
 
-    'appBio': 'Make your life beautiful',
+    'appBio': 'Extremely fast QR & barcode scanner that supports all QR & barcode formats!',
 
     /// Protocols is use to check
     'protocols': ['https://', 'http://', 'data:'],
@@ -45,14 +45,12 @@ const enviroment = {
       {
         'brand': 'Facebook',
         'link': 'https://www.facebook.com/snapeditify/',
-        'image':
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
+        'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
       },
       {
         'brand': 'Tiktok',
         'link': 'https://www.tiktok.com/@snapeditify',
-        'image':
-            'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
+        'image': 'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
       },
       {
         'brand': 'Youtube',
@@ -63,8 +61,7 @@ const enviroment = {
       {
         'brand': 'Telegram',
         'link': 'https://t.me/+GPyDosamyKA2OGVl',
-        'image':
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
+        'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
       },
     ],
 
@@ -89,11 +86,11 @@ const enviroment = {
 
     /// Share app
     'shareApp': {
-      'message': 'SnapEditify AI Photo Editor Pro',
+      'message': 'QR Scanner & Barcode Lookup. Extremely fast QR & barcode scanner that supports all QR & barcode formats!',
       'links': {
-        'android': 'https://appgallery.huawei.com/app/C107645049', 
-        'ios': 'https://appgallery.huawei.com/app/C107645049', 
-        'huawei': 'https://appgallery.huawei.com/app/C107645049',
+        'android': 'https://appgallery.huawei.com/app/C108714985', 
+        'ios': 'https://appgallery.huawei.com/app/C108714985', 
+        'huawei': 'https://appgallery.huawei.com/app/C108714985',
       },
     },
 
@@ -102,23 +99,23 @@ const enviroment = {
       'version': '1.0.2',
       'required': false,
       'links': {
-        'android': 'https://appgallery.huawei.com/app/C107645049', 
-        'ios': 'https://appgallery.huawei.com/app/C107645049', 
-        'huawei': 'https://appgallery.huawei.com/app/C107645049',
+        'android': 'https://appgallery.huawei.com/app/C108714985', 
+        'ios': 'https://appgallery.huawei.com/app/C108714985', 
+        'huawei': 'https://appgallery.huawei.com/app/C108714985',
       },
     },
 
     'moreApps': [
-       {
-         'name': 'TikOk',
-         'logo': 'https://play-lh.googleusercontent.com/sITxnGaUxYVzTDkVAjRSKM8JKehWTuseE4hF8937sWVattKHEAirl7uZw93gqad_fQg6=s128-rw',
-         'desc': 'Play the game Stick War, one of the biggest, most fun, challenging and addicting stick figure games. Control your army in formations or play each unit, you have total control of every stickman. Build units, mine gold, learn the way of the Sword, Spear, Archer, Mage, and even Giant. Destroy the enemy statue, and capture all Territories!',
-         'links': {
-           'android': 'https://appgallery.huawei.com/app/C107645049', 
-           'ios': 'https://appgallery.huawei.com/app/C107645049', 
-           'huawei': 'https://appgallery.huawei.com/app/C107645049',
-         },
-       }
+      //  {
+      //    'name': 'TikOk',
+      //    'logo': 'https://play-lh.googleusercontent.com/sITxnGaUxYVzTDkVAjRSKM8JKehWTuseE4hF8937sWVattKHEAirl7uZw93gqad_fQg6=s128-rw',
+      //    'desc': 'Play the game Stick War, one of the biggest, most fun, challenging and addicting stick figure games. Control your army in formations or play each unit, you have total control of every stickman. Build units, mine gold, learn the way of the Sword, Spear, Archer, Mage, and even Giant. Destroy the enemy statue, and capture all Territories!',
+      //    'links': {
+      //      'android': 'https://appgallery.huawei.com/app/C108714985', 
+      //      'ios': 'https://appgallery.huawei.com/app/C108714985', 
+      //      'huawei': 'https://appgallery.huawei.com/app/C108714985',
+      //    },
+      //  }
     ]
   },
 
