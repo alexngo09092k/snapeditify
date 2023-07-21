@@ -94,6 +94,7 @@ class GeneratePage extends StatelessWidget {
               bottom: 100,
               left: AppDimensions.instance.padding,
               right: AppDimensions.instance.padding,
+              top: AppDimensions.instance.padding,
             ),
             gridDelegate: AppDimensions.instance.gridDelegate,
             itemCount: QRType.values.length,
