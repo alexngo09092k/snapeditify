@@ -9,6 +9,9 @@ class AppColors extends FlutteringColors {
   AppColors._internal();
 
   @override
+  Color get lightBackground =>const Color.fromRGBO(245, 246, 250, 1);/// background
+
+  @override
   Color get lightPrimary => Colors.lightBlue;
 
   @override
