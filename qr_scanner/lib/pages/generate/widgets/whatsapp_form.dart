@@ -1,40 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
-import 'package:qr_scanner/models/qr_forms/qr_twitter_form.dart';
+import 'package:qr_scanner/models/qr_forms/qr_whatsapp_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
-enum _TwitterField {
+enum _WhatsAppField {
   type,
   username,
   tweet,
 }
 
-class TwitterForm extends StatefulWidget {
-  const TwitterForm({super.key});
+class WhatsAppForm extends StatefulWidget {
+  const WhatsAppForm({super.key});
 
   @override
-  State<TwitterForm> createState() => _TwitterFormState();
+  State<WhatsAppForm> createState() => _WhatsAppFormState();
 }
 
-class _TwitterFormState extends BaseFormState<TwitterForm, QRTwitterForm> {
+class _WhatsAppFormState extends BaseFormState<WhatsAppForm, QRWhatsAppForm> {
   @override
   void initState() {
-    form = QRTwitterForm();
+    form = QRWhatsAppForm();
     super.initState();
   }
 
-  void _onChanged(_TwitterField field, dynamic _) {
+  void _onChanged(_WhatsAppField field, dynamic _) {
     switch (field) {
-      case _TwitterField.type:
+      case _WhatsAppField.type:
         form.type = _;
         break;
-      case _TwitterField.tweet:
+      case _WhatsAppField.tweet:
         form.tweet = _;
         break;
-      case _TwitterField.username:
+      case _WhatsAppField.username:
         form.username = _;
         break;
     }
@@ -47,39 +47,39 @@ class _TwitterFormState extends BaseFormState<TwitterForm, QRTwitterForm> {
       onData: onData,
       qrType: QRType.email,
       isDisabled: isDisabled,
-      child: _QRTwitterTypeSelect(
+      child: _QRWhatsAppTypeSelect(
         value: form.type,
-        onChanged: (_) => _onChanged(_TwitterField.type, _),
-        builder: (_, type) => type == QRTwitterType.profile
+        onChanged: (_) => _onChanged(_WhatsAppField.type, _),
+        builder: (_, type) => type == QRWhatsAppType.profile
             ? Input(
                 hintText: "@username",
-                onChanged: (_) => _onChanged(_TwitterField.username, _),
+                onChanged: (_) => _onChanged(_WhatsAppField.username, _),
               )
             : Input(
                 hintText: "Compose your tweet",
-                onChanged: (_) => _onChanged(_TwitterField.tweet, _),
+                onChanged: (_) => _onChanged(_WhatsAppField.tweet, _),
               ),
       ),
     );
   }
 }
 
-class _QRTwitterTypeSelect extends StatefulWidget {
-  const _QRTwitterTypeSelect({
+class _QRWhatsAppTypeSelect extends StatefulWidget {
+  const _QRWhatsAppTypeSelect({
     required this.value,
     required this.onChanged,
     required this.builder,
   });
-  final QRTwitterType value;
-  final Function(QRTwitterType) onChanged;
-  final Widget Function(BuildContext context, QRTwitterType) builder;
+  final QRWhatsAppType value;
+  final Function(QRWhatsAppType) onChanged;
+  final Widget Function(BuildContext context, QRWhatsAppType) builder;
 
   @override
-  State<_QRTwitterTypeSelect> createState() => __QRTwitterTypeSelectState();
+  State<_QRWhatsAppTypeSelect> createState() => __QRWhatsAppTypeSelectState();
 }
 
-class __QRTwitterTypeSelectState extends State<_QRTwitterTypeSelect> {
-  QRTwitterType type = QRTwitterType.profile;
+class __QRWhatsAppTypeSelectState extends State<_QRWhatsAppTypeSelect> {
+  QRWhatsAppType type = QRWhatsAppType.profile;
 
   @override
   void initState() {
@@ -87,7 +87,7 @@ class __QRTwitterTypeSelectState extends State<_QRTwitterTypeSelect> {
     super.initState();
   }
 
-  void _onChanged(QRTwitterType? _) {
+  void _onChanged(QRWhatsAppType? _) {
     if (_ == null) return;
     setState(() {
       type = _;
@@ -101,7 +101,7 @@ class __QRTwitterTypeSelectState extends State<_QRTwitterTypeSelect> {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: QRTwitterType.values
+          children: QRWhatsAppType.values
               .map(
                 (_) => Container(
                   margin: EdgeInsets.only(
@@ -109,7 +109,7 @@ class __QRTwitterTypeSelectState extends State<_QRTwitterTypeSelect> {
                   ),
                   child: Row(
                     children: [
-                      Radio<QRTwitterType>(
+                      Radio<QRWhatsAppType>(
                         value: _,
                         groupValue: type,
                         onChanged: _onChanged,

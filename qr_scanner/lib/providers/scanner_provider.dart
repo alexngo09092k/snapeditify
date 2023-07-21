@@ -71,9 +71,10 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
     for (final barcode in barcodes) {
       if (barcode.rawValue == null) continue;
       Debug.log(jsonEncode(barcode.rawValue));
-      final QRType type = checkQRType(barcode);
-      final QRFormat? format = checkQRFormat(barcode);
+      QRType type = checkQRType(barcode);
+      QRFormat? format = checkQRFormat(barcode);
       if (format == null) continue;
+      if(format != QRFormat.QrCode) type = QRType.product;
       final QR qr = QR(
         rawData: barcode.rawValue!,
         type: type,
@@ -147,13 +148,9 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? scannerSettingsString = AsyncStorage.instance
-        .getString(AsyncStorageKey.instance.scannerSettings);
-    Debug.log(
-        "============= SCANNER SETTINGS $scannerSettingsString ============");
-    _settings = scannerSettingsString != null
-        ? ScannerSettings.fromJson(scannerSettingsString)
-        : ScannerSettings();
+    String? scannerSettingsString = AsyncStorage.instance.getString(AsyncStorageKey.instance.scannerSettings);
+    Debug.log("============= SCANNER SETTINGS $scannerSettingsString ============");
+    _settings = scannerSettingsString != null? ScannerSettings.fromJson(scannerSettingsString): ScannerSettings();
     _controller = MobileScannerController(
       facing: _settings.facing,
       detectionSpeed: _settings.detectionSpeed,
@@ -224,7 +221,6 @@ extension ScannerProviderEx on ScannerProvider {
     if (QRVCardForm.isQR(barcode.rawValue!)) return QRType.vcard;
     if (QRWifiForm.isQR(barcode.rawValue!)) return QRType.wifi;
     if (QRYoutubeForm.isQR(barcode.rawValue!)) return QRType.youtube;
-
     ///
     ///
     /// GET ALL QR CHECK HERE

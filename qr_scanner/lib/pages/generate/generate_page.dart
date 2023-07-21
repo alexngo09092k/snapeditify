@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/crypto_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/douyin_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/email_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/event_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/facebook_form.dart';
@@ -9,6 +10,7 @@ import 'package:qr_scanner/pages/generate/widgets/generate_item.dart';
 import 'package:qr_scanner/pages/generate/widgets/instagram_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/map_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/phone_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/product_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/sms_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/snapchat_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/telegram_form.dart';
@@ -17,6 +19,7 @@ import 'package:qr_scanner/pages/generate/widgets/link_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/tiktok_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/twitter_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/vcard_form.dart';
+import 'package:qr_scanner/pages/generate/widgets/whatsapp_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/wifi_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/youtube_form.dart';
 import 'package:qr_scanner/utils/widget.dart';
@@ -59,12 +62,18 @@ class GeneratePage extends StatelessWidget {
             return const TelegramForm();
           case QRType.tiktok:
             return const TikTokForm();
+          case QRType.douyin:
+            return const DouyinForm();
           case QRType.wifi:
             return const WifiForm();
           case QRType.event:
             return const EventForm();
           case QRType.crypto:
             return const CryptoForm();
+          case QRType.product:
+            return const ProductForm();
+          case QRType.whatsapp:
+            return const WhatsAppForm();
           default:
             return const SizedBox();
         }

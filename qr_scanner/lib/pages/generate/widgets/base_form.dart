@@ -53,6 +53,7 @@ class _BaseFormState extends State<BaseForm> {
       case QRType.sms:
       case QRType.tel:
       case QRType.event:
+      case QRType.text:
         // case QRType.menu:
         // case QRType.mutilurl:
         // case QRType.pcr:
@@ -65,7 +66,7 @@ class _BaseFormState extends State<BaseForm> {
         // case QRType.contact:
 
         return false;
-      case QRType.text:
+      case QRType.product:
         return true;
     }
   }

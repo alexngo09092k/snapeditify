@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qr_scanner/models/qr_format.dart';
 import 'package:qr_scanner/models/qr_forms/qr_text_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';

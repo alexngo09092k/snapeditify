@@ -3,6 +3,7 @@ import 'package:qr_scanner/common/constants.dart';
 enum QRType {
   link,
   text,
+  product,
   email,
   tel,
   sms,
@@ -37,24 +38,22 @@ extension QRTypeEx on QRType {
     switch (this) {
       case QRType.crypto:
         return AppAssets.instance.gCrypto;
+      case QRType.product:
+        return AppAssets.instance.gProduct;
       case QRType.email:
         return AppAssets.instance.gEmail;
       case QRType.facebook:
         return AppAssets.instance.gFacebook;
-
       case QRType.instagram:
         return AppAssets.instance.gInstagram;
       case QRType.vcard:
         return AppAssets.instance.gVCard;
-
       case QRType.link:
         return AppAssets.instance.gLink;
       case QRType.maps:
         return AppAssets.instance.gMaps;
-
       case QRType.snapchat:
         return AppAssets.instance.gSnapChat;
-
       case QRType.telegram:
         return AppAssets.instance.gTelegram;
       case QRType.text:
@@ -105,6 +104,8 @@ extension QRTypeEx on QRType {
     switch (this) {
       case QRType.crypto:
         return "Crypto";
+      case QRType.product:
+        return "Product";
       case QRType.email:
         return "E-mail";
       case QRType.facebook:

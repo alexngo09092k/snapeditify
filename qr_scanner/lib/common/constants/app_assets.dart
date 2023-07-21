@@ -50,6 +50,7 @@ class AppAssets {
   final String gWhatsapp = "$imagePath/whatsapp.png";
   final String gWifi = "$imagePath/wi-fi.png";
   final String gYoutube = "$imagePath/youtube.png";
+  final String gProduct = "$imagePath/product.png";
 
   /// Coins
   final String bitcoin = "$imagePath/bitcoin.png";

@@ -20,8 +20,6 @@ class InstagramForm extends StatefulWidget {
 }
 
 class _InstagramFormState extends BaseFormState<InstagramForm, QRInstagramForm> {
-  final ValueNotifier<bool> _isDisabled = ValueNotifier(true);
-
   @override
   void initState() {
     form = QRInstagramForm();
