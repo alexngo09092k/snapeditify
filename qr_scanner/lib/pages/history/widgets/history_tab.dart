@@ -29,7 +29,7 @@ class HistoryTab extends StatelessWidget {
           child: SlidingControl<QRSource>(
             value: tab.value,
             color: Theme.of(context).colorScheme.primary,
-            background: Theme.of(context).disabledColor.withOpacity(0.1),
+            background: Theme.of(context).cardColor,
             children: QRSource.values.asMap().map(
                   (_, e) => MapEntry(
                     e,
