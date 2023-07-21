@@ -77,6 +77,10 @@ class AppAssets {
   final String icSettings = "$iconPath/settings.png";
   final String icZoomIn = "$iconPath/zoom-in.png";
   final String icZoomOut = "$iconPath/zoom-out.png";
-  final String icFeedback = "$iconPath/zoom-out.png";
-  final String icShare = "$iconPath/zoom-out.png";
+  final String icFeedback = "$iconPath/feedback.png";
+  final String icShare = "$iconPath/share.png";
+  final String icRate = "$iconPath/rate.png";
+  final String icFAQ = "$iconPath/faq.png";
+  final String icPrivacy = "$iconPath/privacy.png";
+  final String icTerms = "$iconPath/privacy.png";
 }

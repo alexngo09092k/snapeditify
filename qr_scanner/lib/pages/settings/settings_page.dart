@@ -186,7 +186,7 @@ class SettingsPage extends StatelessWidget {
               TileRow.defaultStyle(
                 context,
                 title: 'Rate SnapEditify',
-                image: AppAssets.instance.icFeedback,
+                image: AppAssets.instance.icRate,
                 onTap: _feedback,
               ),
               TileRow.defaultStyle(

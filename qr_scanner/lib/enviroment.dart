@@ -70,17 +70,17 @@ const enviroment = {
       {
         'title': 'Terms of service',
         'link': 'https://snapeditify.netlify.app/terms-of-service',
-        'image': 'assets/images/icons/ic_term.png',
+        'image': 'assets/images/icons/pricacy.png',
       },
       {
         'title': 'Privacy policy',
         'link': 'https://snapeditify.netlify.app/privacy-policy/',
-        'image': 'assets/images/icons/ic_term.png',
+        'image': 'assets/images/icons/privacy.png',
       },
       {
         'title': 'FAQ',
         'link': 'https://snapeditify.netlify.app/faq',
-        'image': 'assets/images/icons/ic_faq.png',
+        'image': 'assets/images/icons/faq.png',
       },
     ],
 

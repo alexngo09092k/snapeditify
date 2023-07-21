@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:qr_scanner/common/constants.dart';
 import 'update_app.dart';
 import 'app_platform.dart';
 import 'maintenance_mode.dart';
@@ -100,17 +101,17 @@ class BusinessConfig {
         WebLink.fromMap({
           'title': 'Terms of service',
           'link': 'https://snapeditify.netlify.app/terms-of-service/',
-          'image': 'assets/images/icons/ic_term.png',
+          'image': AppAssets.instance.icTerms,
         }),
         WebLink.fromMap({
           'title': 'Privacy policy',
           'link': 'https://snapeditify.netlify.app/privacy-policy/',
-          'image': 'assets/images/icons/ic_term.png',
+          'image': AppAssets.instance.icPrivacy,
         }),
         WebLink.fromMap({
           'title': 'FAQ',
           'link': 'https://snapeditify.netlify.app/faq/',
-          'image': 'assets/images/icons/ic_faq.png',
+          'image': AppAssets.instance.icFAQ,
         })
       ],
       maintenanceMode: MaintenanceMode.fromMap({

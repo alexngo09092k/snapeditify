@@ -18,6 +18,7 @@ class BaseForm extends StatefulWidget {
     required this.onData,
     this.isDisabled,
     this.onQRFormat,
+    this.disableQRFormats = const [],
   });
 
   final QRType qrType;
@@ -25,6 +26,7 @@ class BaseForm extends StatefulWidget {
   final String? Function() onData;
   final Function(QRFormat)? onQRFormat;
   final ValueNotifier<bool>? isDisabled;
+  final List<QRFormat> disableQRFormats;
 
   @override
   State<BaseForm> createState() => _BaseFormState();
@@ -101,6 +103,7 @@ class _BaseFormState extends State<BaseForm> {
 
   @override
   Widget build(BuildContext context) {
+    final formatList = QRFormat.values.where((element) => !widget.disableQRFormats.contains(element)).toList();
     return Dialog(
       alignment: Alignment.center,
       insetPadding: EdgeInsets.zero,
@@ -153,16 +156,16 @@ class _BaseFormState extends State<BaseForm> {
                               height: 60,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: QRFormat.values.length,
+                                itemCount: formatList.length,
                                 itemBuilder: (_, __) => GestureDetector(
-                                  onTap: () => onFormatChanged(QRFormat.values[__]),
+                                  onTap: () => onFormatChanged(formatList[__]),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: Theme.of(context).scaffoldBackgroundColor,
                                       borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                                       border: Border.all(
                                         width: 3,
-                                        color: format.value == QRFormat.values[__]
+                                        color: format.value == formatList[__]
                                             ? Theme.of(context).colorScheme.primary
                                             : Theme.of(context).disabledColor,
                                       ),
@@ -176,12 +179,12 @@ class _BaseFormState extends State<BaseForm> {
                                       vertical: AppDimensions.instance.paddingX(0.5),
                                     ),
                                     child: Text(
-                                      QRFormat.values[__].label,
+                                      formatList[__].label,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyLarge!
                                           .copyWith(
-                                            color: format.value == QRFormat.values[__]
+                                            color: format.value == formatList[__]
                                                 ? Theme.of(context)
                                                     .colorScheme
                                                     .primary
