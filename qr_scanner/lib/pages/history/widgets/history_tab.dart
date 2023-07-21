@@ -41,10 +41,7 @@ class HistoryTab extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CustomIcon(e.icon,
-                              color: e == tab.value
-                                  ? AppColors.instance.white
-                                  : null),
+                          CustomIcon(e.icon, color: e == tab.value? AppColors.instance.white: null),
                           SizedBox(width: AppDimensions.instance.paddingX(0.5)),
                           Text(
                             e.label,
@@ -52,10 +49,9 @@ class HistoryTab extends StatelessWidget {
                                 .textTheme
                                 .bodyLarge!
                                 .copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: e == tab.value
-                                        ? AppColors.instance.white
-                                        : null),
+                                  fontWeight: FontWeight.w600,
+                                  color: e == tab.value? AppColors.instance.white: null,
+                                ),
                           ),
                         ],
                       ),

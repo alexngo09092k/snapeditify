@@ -23,12 +23,16 @@ class _HistoryListState extends State<HistoryList> {
       height: 50,
       child: Align(
         alignment: Alignment.center,
-        child: Padding(
-          padding: EdgeInsets.all(AppDimensions.instance.padding),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding, vertical: AppDimensions.instance.paddingX(0.5)),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius))
+          ),
           child: Text(
             '${element.lastModified.day} - ${element.lastModified.month} - ${element.lastModified.year}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onPrimary),
           ),
         ),
       ),

@@ -96,7 +96,7 @@ class _ZooomSlider extends StatelessWidget {
               activeTrackColor: Theme.of(context).colorScheme.primary,
               trackHeight: 2,
               thumbShape: RoundSliderThumbShape(
-                enabledThumbRadius: AppDimensions.instance.radiusX(0.7),
+                enabledThumbRadius: AppDimensions.instance.radius,
               ),
               trackShape: CustomTrackShape(),
             ),

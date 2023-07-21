@@ -18,7 +18,7 @@ class AppDimensions {
 
   /// RADIUS
 
-  final double radius = 10;
+  final double radius = 20;
   double radiusX(double x) => radius * x;
 
   /// ICON
