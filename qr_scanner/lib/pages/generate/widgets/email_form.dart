@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_email.form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
+import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _EmailField {
@@ -50,14 +52,19 @@ class _EmailFormState extends BaseFormState<EmailForm, QREmailForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Input(
+            prefixIcon: PrefixIcon(icon: AppAssets.instance.gEmail),
             hintText: "Your email",
             onChanged: (_) => _onChanged(_EmailField.email, _),
           ),
+          SizedBox(height: AppDimensions.instance.padding),
           Input(
+            prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
             hintText: "Subject",
             onChanged: (_) => _onChanged(_EmailField.subject, _),
           ),
+          SizedBox(height: AppDimensions.instance.padding),
           Input(
+            prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
             hintText: "Message",
             onChanged: (_) => _onChanged(_EmailField.message, _),
           ),

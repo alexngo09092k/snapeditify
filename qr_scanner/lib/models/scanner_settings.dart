@@ -60,7 +60,7 @@ class ScannerSettings {
       detectionSpeed: DetectionSpeed.values.firstWhere((element) => element.name == map['detectionSpeed'], orElse: () => DetectionSpeed.normal),
       detectionTimeoutMs: map['detectionTimeoutMs'],
       torchEnabled: map['torchEnabled'],
-      formats: map['formats']?.map((element) => BarcodeFormat.values.firstWhere((i) => element == i.name, orElse: () => BarcodeFormat.all),).toList(),
+      formats: map['formats']?.map<BarcodeFormat>((element) => BarcodeFormat.values.firstWhere((i) => element == i.name, orElse: () => BarcodeFormat.all),).toList(),
       returnImage: map['returnImage'],
       autoStart: map['autoStart'],
     );

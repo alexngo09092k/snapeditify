@@ -41,7 +41,7 @@ class Input extends StatelessWidget {
           horizontal: AppDimensions.instance.padding,
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
           borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
         ),
         hintText: hintText,

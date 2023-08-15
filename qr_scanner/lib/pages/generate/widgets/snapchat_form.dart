@@ -4,6 +4,7 @@ import 'package:qr_scanner/models/qr_forms/qr_snapchat_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
+import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _SnapChatField {
@@ -45,17 +46,19 @@ class _SnapChatFormState extends BaseFormState<SnapChatForm, QRSnapChatForm> {
   Widget build(BuildContext context) {
     return BaseForm(
       onData: onData,
-      qrType: QRType.email,
+      qrType: QRType.snapchat,
       isDisabled: isDisabled,
       child: _QRSnapChatTypeSelect(
         value: form.type,
         onChanged: (_) => _onChanged(_SnapChatField.type, _),
         builder: (_, type) => type == QRSnapChatType.profile
             ? Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gSnapChat),
                 hintText: "@username",
                 onChanged: (_) => _onChanged(_SnapChatField.username, _),
               )
             : Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
                 hintText: "Compose your tweet",
                 onChanged: (_) => _onChanged(_SnapChatField.tweet, _),
               ),
@@ -99,31 +102,24 @@ class __QRSnapChatTypeSelectState extends State<_QRSnapChatTypeSelect> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: QRSnapChatType.values
-              .map(
-                (_) => Container(
-                  margin: EdgeInsets.only(
-                    right: AppDimensions.instance.padding,
+        ...QRSnapChatType.values
+            .map(
+              (_) => Row(
+                children: [
+                  Radio<QRSnapChatType>(
+                    value: _,
+                    groupValue: type,
+                    onChanged: _onChanged,
                   ),
-                  child: Row(
-                    children: [
-                      Radio<QRSnapChatType>(
-                        value: _,
-                        groupValue: type,
-                        onChanged: _onChanged,
-                      ),
-                      Text(
-                        _.label,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      )
-                    ],
-                  ),
-                ),
-              )
-              .toList(),
-        ),
+                  Text(
+                    _.label,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  )
+                ],
+              ),
+            )
+            .toList(),
+        SizedBox(height: AppDimensions.instance.padding),
         widget.builder(context, type),
       ],
     );

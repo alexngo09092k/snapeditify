@@ -28,13 +28,16 @@ class Scanner extends StatelessWidget {
       children: [
         PropConsumer<ScannerProvider, MobileScannerController>(
           select: (_) => _.controller,
-          builder: (_, __, provider, controller) => MobileScanner(
+          builder: (_, __, provider, controller) {
+            Debug.log("Hello=================>");
+            return MobileScanner(
             scanWindow: scanWindow,
             controller: controller,
             onDetect: provider.onDetect,
             onScannerStarted: provider.onStarted,
             errorBuilder: (_, error, __) => ScannerError(error: error),
-          ),
+          );
+          }
         ),
         ScanningEffect(
           scanWindow: scanWindow,

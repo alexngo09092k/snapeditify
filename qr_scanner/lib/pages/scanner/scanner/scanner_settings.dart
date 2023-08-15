@@ -82,20 +82,20 @@ class _ZooomSlider extends StatelessWidget {
           AppAssets.instance.icZoomIn,
           color: AppColors.instance.white,
         ),
-        AnimatedBuilder(
-          animation: zoomState,
-          builder: (_, __) => SliderTheme(
+        ValueListenableBuilder(
+          valueListenable: zoomState,
+          builder: (_, state, __) => SliderTheme(
             data: SliderThemeData(
               thumbColor: Theme.of(context).colorScheme.primary,
               activeTrackColor: Theme.of(context).colorScheme.primary,
               trackHeight: 2,
               thumbShape: RoundSliderThumbShape(
-                enabledThumbRadius: AppDimensions.instance.radius,
+                enabledThumbRadius: AppDimensions.instance.radiusX(0.5),
               ),
               trackShape: CustomTrackShape(),
             ),
             child: Slider(
-              value: zoomState.value * 100,
+              value: state * 100,
               min: 0,
               max: 100,
               divisions: 100,

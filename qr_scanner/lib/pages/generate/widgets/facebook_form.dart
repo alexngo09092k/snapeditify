@@ -4,6 +4,7 @@ import 'package:qr_scanner/models/qr_forms/qr_facebook_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
+import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _FacebookField {
@@ -52,10 +53,12 @@ class _FacebookFormState extends BaseFormState<FacebookForm, QRFacebookForm> {
         onChanged: (_) => _onChanged(_FacebookField.type, _),
         builder: (_, type) => type == QRFacebookType.profile
             ? Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gFacebook),
                 hintText: "@username",
                 onChanged: (_) => _onChanged(_FacebookField.username, _),
               )
             : Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gLink),
                 hintText: "Your URL",
                 onChanged: (_) => _onChanged(_FacebookField.share, _),
               ),
@@ -99,31 +102,24 @@ class __QRFacebookTypeSelectState extends State<_QRFacebookTypeSelect> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: QRFacebookType.values
-              .map(
-                (_) => Container(
-                  margin: EdgeInsets.only(
-                    right: AppDimensions.instance.padding,
+        ...QRFacebookType.values
+            .map(
+              (_) => Row(
+                children: [
+                  Radio<QRFacebookType>(
+                    value: _,
+                    groupValue: type,
+                    onChanged: _onChanged,
                   ),
-                  child: Row(
-                    children: [
-                      Radio<QRFacebookType>(
-                        value: _,
-                        groupValue: type,
-                        onChanged: _onChanged,
-                      ),
-                      Text(
-                        _.label,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      )
-                    ],
-                  ),
-                ),
-              )
-              .toList(),
-        ),
+                  Text(
+                    _.label,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  )
+                ],
+              ),
+            )
+            .toList(),
+        SizedBox(height: AppDimensions.instance.padding),
         widget.builder(context, type),
       ],
     );

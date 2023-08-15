@@ -4,6 +4,7 @@ import 'package:qr_scanner/models/qr_forms/qr_twitter_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
+import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _TwitterField {
@@ -45,17 +46,19 @@ class _TwitterFormState extends BaseFormState<TwitterForm, QRTwitterForm> {
   Widget build(BuildContext context) {
     return BaseForm(
       onData: onData,
-      qrType: QRType.email,
+      qrType: QRType.twitter,
       isDisabled: isDisabled,
       child: _QRTwitterTypeSelect(
         value: form.type,
         onChanged: (_) => _onChanged(_TwitterField.type, _),
         builder: (_, type) => type == QRTwitterType.profile
             ? Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gTwitter),
                 hintText: "@username",
                 onChanged: (_) => _onChanged(_TwitterField.username, _),
               )
             : Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
                 hintText: "Compose your tweet",
                 onChanged: (_) => _onChanged(_TwitterField.tweet, _),
               ),
@@ -99,31 +102,24 @@ class __QRTwitterTypeSelectState extends State<_QRTwitterTypeSelect> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: QRTwitterType.values
-              .map(
-                (_) => Container(
-                  margin: EdgeInsets.only(
-                    right: AppDimensions.instance.padding,
+        ...QRTwitterType.values
+            .map(
+              (_) => Row(
+                children: [
+                  Radio<QRTwitterType>(
+                    value: _,
+                    groupValue: type,
+                    onChanged: _onChanged,
                   ),
-                  child: Row(
-                    children: [
-                      Radio<QRTwitterType>(
-                        value: _,
-                        groupValue: type,
-                        onChanged: _onChanged,
-                      ),
-                      Text(
-                        _.label,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      )
-                    ],
-                  ),
-                ),
-              )
-              .toList(),
-        ),
+                  Text(
+                    _.label,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  )
+                ],
+              ),
+            )
+            .toList(),
+        SizedBox(height: AppDimensions.instance.padding),
         widget.builder(context, type),
       ],
     );

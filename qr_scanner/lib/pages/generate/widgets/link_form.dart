@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_link_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
+import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 class LinkForm extends StatefulWidget {
@@ -35,6 +37,7 @@ class _LinkFormState extends BaseFormState<LinkForm, QRLinkForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Input(
+            prefixIcon: PrefixIcon(icon: AppAssets.instance.gLink),
             hintText: "Your URL",
             onChanged: _onChanged,
           ),

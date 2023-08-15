@@ -144,56 +144,51 @@ class _BaseFormState extends State<BaseForm> {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     widget.child,
                     if (canChangeFormat)
-                      AnimatedBuilder(
-                        animation: format,
-                        builder: (_, __) => Column(
+                      ValueListenableBuilder(
+                        valueListenable: format,
+                        builder: (_, value, __) => Column(
                           children: [
                             SizedBox(height: AppDimensions.instance.padding),
-                            SizedBox(
-                              height: 60,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: formatList.length,
-                                itemBuilder: (_, __) => GestureDetector(
-                                  onTap: () => onFormatChanged(formatList[__]),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).scaffoldBackgroundColor,
-                                      borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                                      border: Border.all(
-                                        width: 3,
-                                        color: format.value == formatList[__]
-                                            ? Theme.of(context).colorScheme.primary
-                                            : Theme.of(context).disabledColor,
-                                      ),
-                                    ),
-                                    margin: EdgeInsets.symmetric(
-                                      vertical: AppDimensions.instance.padding,
-                                      horizontal: AppDimensions.instance.paddingX(0.5),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: AppDimensions.instance.padding,
-                                      vertical: AppDimensions.instance.paddingX(0.5),
-                                    ),
-                                    child: Text(
-                                      formatList[__].label,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge!
-                                          .copyWith(
-                                            color: format.value == formatList[__]
-                                                ? Theme.of(context)
-                                                    .colorScheme
-                                                    .primary
-                                                : null,
-                                          ),
+                            Wrap(
+                              children: formatList.map((_) => GestureDetector(
+                                onTap: () => onFormatChanged(_),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: value == _
+                                          ? Theme.of(context).colorScheme.primary
+                                          : Theme.of(context).disabledColor,
                                     ),
                                   ),
+                                  margin: EdgeInsets.symmetric(
+                                    vertical: AppDimensions.instance.paddingX(0.5),
+                                    horizontal: AppDimensions.instance.paddingX(0.5),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: AppDimensions.instance.padding,
+                                    vertical: AppDimensions.instance.paddingX(0.5),
+                                  ),
+                                  child: Text(
+                                    _.label,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                          color: value == _
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                              : null,
+                                        ),
+                                  ),
                                 ),
-                              ),
+                              ),).toList()
                             )
                           ],
                         ),
@@ -204,13 +199,13 @@ class _BaseFormState extends State<BaseForm> {
             ),
             SizedBox(height: AppDimensions.instance.paddingX(2)),
             widget.isDisabled != null
-                ? AnimatedBuilder(
-                    animation: widget.isDisabled!,
-                    builder: (_, __) => CustomButton(
+                ? ValueListenableBuilder(
+                    valueListenable: widget.isDisabled!,
+                    builder: (_, value, __) => CustomButton(
                       title: "Generate",
                       onTap: onGenerate,
                       height: 50,
-                      isDisabled: widget.isDisabled!.value,
+                      isDisabled: value,
                     ),
                   )
                 : CustomButton(

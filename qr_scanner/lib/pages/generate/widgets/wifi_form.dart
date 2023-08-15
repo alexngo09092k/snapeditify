@@ -4,6 +4,7 @@ import 'package:qr_scanner/models/qr_forms/qr_wifi_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
+import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _WifiField {
@@ -56,14 +57,17 @@ class _WifiFormState extends BaseFormState<WifiForm, QRWifiForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Input(
+            prefixIcon: PrefixIcon(icon: AppAssets.instance.gWifi),
             hintText: "Network Name (Wifi SSID)",
             onChanged: (_) => _onChanged(_WifiField.ssid, _),
           ),
+          SizedBox(height: AppDimensions.instance.padding),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Input(
+                  prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
                   hintText: "Password",
                   onChanged: (_) => _onChanged(_WifiField.password, _),
                 ),
@@ -74,6 +78,7 @@ class _WifiFormState extends BaseFormState<WifiForm, QRWifiForm> {
               ),
             ],
           ),
+          SizedBox(height: AppDimensions.instance.padding),
           _EncryptionSelect(
             value: form.encryption,
             onChanged: (_) => _onChanged(_WifiField.encryption, _),
@@ -119,7 +124,6 @@ class __HiddenCheckBoxState extends State<_HiddenCheckBox> {
           value: hidden,
           onChanged: _onChanged,
         ),
-        SizedBox(width: AppDimensions.instance.paddingX(0.5)),
         Text("Hidden", style: Theme.of(context).textTheme.bodyLarge)
       ],
     );

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_map_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
+import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _MapField {
@@ -33,7 +35,7 @@ class _MapFormState extends BaseFormState<MapForm, QRMapForm> {
         form.longitude = double.tryParse(_) ?? 0.0;
         break;
     }
-   checkDisabled();
+    checkDisabled();
   }
 
   @override
@@ -46,10 +48,13 @@ class _MapFormState extends BaseFormState<MapForm, QRMapForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Input(
+            prefixIcon: PrefixIcon(icon: AppAssets.instance.gMaps),
             hintText: "Latitude",
             onChanged: (_) => _onChanged(_MapField.latitude, _),
           ),
+          SizedBox(height: AppDimensions.instance.padding),
           Input(
+            prefixIcon: PrefixIcon(icon: AppAssets.instance.gMaps),
             hintText: "Longitude",
             onChanged: (_) => _onChanged(_MapField.longitude, _),
           ),

@@ -22,12 +22,12 @@ class HistoryTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(AppDimensions.instance.padding),
-      child: AnimatedBuilder(
-        animation: tab,
-        builder: (_, __) => SizedBox(
+      child: ValueListenableBuilder(
+        valueListenable: tab,
+        builder: (_, value, __) => SizedBox(
           width: double.infinity,
           child: SlidingControl<QRSource>(
-            value: tab.value,
+            value: value,
             color: Theme.of(context).colorScheme.primary,
             background: Theme.of(context).cardColor,
             children: QRSource.values.asMap().map(
@@ -41,7 +41,7 @@ class HistoryTab extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CustomIcon(e.icon, color: e == tab.value? AppColors.instance.white: null),
+                          CustomIcon(e.icon, color: e == value? AppColors.instance.white: null),
                           SizedBox(width: AppDimensions.instance.paddingX(0.5)),
                           Text(
                             e.label,
@@ -50,7 +50,7 @@ class HistoryTab extends StatelessWidget {
                                 .bodyLarge!
                                 .copyWith(
                                   fontWeight: FontWeight.w600,
-                                  color: e == tab.value? AppColors.instance.white: null,
+                                  color: e == value? AppColors.instance.white: null,
                                 ),
                           ),
                         ],

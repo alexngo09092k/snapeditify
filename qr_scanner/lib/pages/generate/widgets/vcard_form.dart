@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_vcard_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
@@ -94,7 +95,6 @@ class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Divider(),
           Row(
             children: [
               Expanded(
@@ -103,6 +103,7 @@ class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
                   onChanged: (_) => _onChanged(_FieldVCard.firstName, _),
                 ),
               ),
+              SizedBox(width: AppDimensions.instance.padding),
               Expanded(
                 child: Input(
                   hintText: "Last name",
@@ -111,12 +112,12 @@ class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
               )
             ],
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
           Input(
             hintText: "Phone number (Mobile)",
             onChanged: (_) => _onChanged(_FieldVCard.mobile, _),
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
           Row(
             children: [
               Expanded(
@@ -125,6 +126,7 @@ class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
                   onChanged: (_) => _onChanged(_FieldVCard.phone, _),
                 ),
               ),
+              SizedBox(width: AppDimensions.instance.padding),
               Expanded(
                 child: Input(
                   hintText: "Fax",
@@ -133,12 +135,12 @@ class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
               ),
             ],
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
           Input(
             hintText: "your@gmail.com",
             onChanged: (_) => _onChanged(_FieldVCard.email, _),
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
           Row(
             children: [
               Expanded(
@@ -147,6 +149,7 @@ class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
                   onChanged: (_) => _onChanged(_FieldVCard.company, _),
                 ),
               ),
+              SizedBox(width: AppDimensions.instance.padding),
               Expanded(
                 child: Input(
                   hintText: "Your Job",
@@ -155,12 +158,12 @@ class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
               ),
             ],
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
           Input(
             hintText: "Street",
             onChanged: (_) => _onChanged(_FieldVCard.street, _),
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
           Row(
             children: [
               Expanded(
@@ -170,6 +173,7 @@ class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
                   onChanged: (_) => _onChanged(_FieldVCard.city, _),
                 ),
               ),
+              SizedBox(width: AppDimensions.instance.padding),
               Expanded(
                 flex: 1,
                 child: Input(
@@ -179,22 +183,22 @@ class _VCardFormState extends BaseFormState<VCardForm, QRVCardForm> {
               ),
             ],
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
           Input(
             hintText: "State",
             onChanged: (_) => _onChanged(_FieldVCard.state, _),
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
           Input(
             hintText: "Country",
             onChanged: (_) => _onChanged(_FieldVCard.country, _),
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
           Input(
             hintText: "Your website",
             onChanged: (_) => _onChanged(_FieldVCard.website, _),
           ),
-          const Divider(),
+          SizedBox(height: AppDimensions.instance.padding),
         ],
       ),
     );

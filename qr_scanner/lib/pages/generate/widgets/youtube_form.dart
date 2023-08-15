@@ -4,6 +4,7 @@ import 'package:qr_scanner/models/qr_forms/qr_youtube_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
+import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _YoutubeField {
@@ -46,17 +47,19 @@ class _YoutubeFormState extends BaseFormState<YoutubeForm, QRYoutubeForm> {
   Widget build(BuildContext context) {
     return BaseForm(
       onData: onData,
-      qrType: QRType.email,
+      qrType: QRType.youtube,
       isDisabled: isDisabled,
       child: _QRYoutubeTypeSelect(
         value: form.type,
         onChanged: (_) => _onChanged(_YoutubeField.type, _),
         builder: (_, type) => type == QRYoutubeType.profile
             ? Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gYoutube),
                 hintText: "@username",
                 onChanged: (_) => _onChanged(_YoutubeField.username, _),
               )
             : Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
                 hintText: "Compose your tweet",
                 onChanged: (_) => _onChanged(_YoutubeField.tweet, _),
               ),
@@ -100,31 +103,29 @@ class __QRYoutubeTypeSelectState extends State<_QRYoutubeTypeSelect> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: QRYoutubeType.values
-              .map(
-                (_) => Container(
-                  margin: EdgeInsets.only(
-                    right: AppDimensions.instance.padding,
-                  ),
-                  child: Row(
-                    children: [
-                      Radio<QRYoutubeType>(
-                        value: _,
-                        groupValue: type,
-                        onChanged: _onChanged,
-                      ),
-                      Text(
-                        _.label,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      )
-                    ],
-                  ),
+        ...QRYoutubeType.values
+            .map(
+              (_) => Container(
+                margin: EdgeInsets.only(
+                  right: AppDimensions.instance.padding,
                 ),
-              )
-              .toList(),
-        ),
+                child: Row(
+                  children: [
+                    Radio<QRYoutubeType>(
+                      value: _,
+                      groupValue: type,
+                      onChanged: _onChanged,
+                    ),
+                    Text(
+                      _.label,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    )
+                  ],
+                ),
+              ),
+            )
+            .toList(),
+        SizedBox(height: AppDimensions.instance.padding),
         widget.builder(context, type),
       ],
     );

@@ -4,6 +4,7 @@ import 'package:qr_scanner/models/qr_forms/qr_instagram_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
+import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _InstagramField {
@@ -19,7 +20,8 @@ class InstagramForm extends StatefulWidget {
   State<InstagramForm> createState() => _InstagramFormState();
 }
 
-class _InstagramFormState extends BaseFormState<InstagramForm, QRInstagramForm> {
+class _InstagramFormState
+    extends BaseFormState<InstagramForm, QRInstagramForm> {
   @override
   void initState() {
     form = QRInstagramForm();
@@ -46,17 +48,19 @@ class _InstagramFormState extends BaseFormState<InstagramForm, QRInstagramForm> 
   Widget build(BuildContext context) {
     return BaseForm(
       onData: onData,
-      qrType: QRType.email,
+      qrType: QRType.instagram,
       isDisabled: isDisabled,
       child: _QRInstagramTypeSelect(
         value: form.type,
         onChanged: (_) => _onChanged(_InstagramField.type, _),
         builder: (_, type) => type == QRInstagramType.profile
             ? Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gInstagram),
                 hintText: "@username",
                 onChanged: (_) => _onChanged(_InstagramField.username, _),
               )
             : Input(
+                prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
                 hintText: "Compose your tweet",
                 onChanged: (_) => _onChanged(_InstagramField.share, _),
               ),
@@ -100,31 +104,24 @@ class __QRInstagramTypeSelectState extends State<_QRInstagramTypeSelect> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: QRInstagramType.values
-              .map(
-                (_) => Container(
-                  margin: EdgeInsets.only(
-                    right: AppDimensions.instance.padding,
+        ...QRInstagramType.values
+            .map(
+              (_) => Row(
+                children: [
+                  Radio<QRInstagramType>(
+                    value: _,
+                    groupValue: type,
+                    onChanged: _onChanged,
                   ),
-                  child: Row(
-                    children: [
-                      Radio<QRInstagramType>(
-                        value: _,
-                        groupValue: type,
-                        onChanged: _onChanged,
-                      ),
-                      Text(
-                        _.label,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      )
-                    ],
-                  ),
-                ),
-              )
-              .toList(),
-        ),
+                  Text(
+                    _.label,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  )
+                ],
+              ),
+            )
+            .toList(),
+        SizedBox(height: AppDimensions.instance.padding),
         widget.builder(context, type),
       ],
     );
