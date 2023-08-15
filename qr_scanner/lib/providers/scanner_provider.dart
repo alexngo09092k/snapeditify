@@ -163,8 +163,7 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
-    return AsyncStorage.instance
-        .remove(AsyncStorageKey.instance.scannerSettings);
+    return AsyncStorage.instance.remove(AsyncStorageKey.instance.scannerSettings);
   }
 
   @override
@@ -172,13 +171,9 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? scannerSettingsString = AsyncStorage.instance
-        .getString(AsyncStorageKey.instance.scannerSettings);
-    Debug.log(
-        "============= SCANNER SETTINGS $scannerSettingsString ============");
-    _settings = scannerSettingsString != null
-        ? ScannerSettings.fromJson(scannerSettingsString)
-        : ScannerSettings();
+    String? scannerSettingsString = AsyncStorage.instance.getString(AsyncStorageKey.instance.scannerSettings);
+    Debug.log("============= SCANNER SETTINGS $scannerSettingsString ============");
+    _settings = scannerSettingsString != null? ScannerSettings.fromJson(scannerSettingsString): ScannerSettings();
     _controller = MobileScannerController(
       facing: _settings.facing,
       detectionSpeed: _settings.detectionSpeed,
@@ -196,14 +191,13 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
   @override
   Future<void> syncToStorage([bool notify = false]) {
-    return AsyncStorage.instance.setString(
-        AsyncStorageKey.instance.scannerSettings, _settings.toJson());
+    return AsyncStorage.instance.setString(AsyncStorageKey.instance.scannerSettings, _settings.toJson());
   }
 
   void _onSettingsChanged() {
     _settings.torchEnabled = _controller.torchEnabled;
     _settings.facing = _controller.facing;
-    syncFromStorage();
+    syncToStorage();
   }
 
   @override

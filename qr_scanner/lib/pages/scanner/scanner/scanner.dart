@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/pages/scanner/scanner/scanner_error.dart';
 import 'package:qr_scanner/pages/scanner/scanner/scanner_result.dart';
 import 'package:qr_scanner/pages/scanner/scanner/scanner_settings.dart';
 import 'package:qr_scanner/providers/scanner_provider.dart';
@@ -13,8 +14,15 @@ class Scanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double size = AwesomeAppState.screen.width * 2.3 / 3;
-    final Offset center = Offset(AwesomeAppState.screen.width / 2, AwesomeAppState.screen.height / 2.6);
-    final scanWindow = Rect.fromCenter(center: center, width: size, height: size);
+    final Offset center = Offset(
+      AwesomeAppState.screen.width / 2,
+      AwesomeAppState.screen.height / 2.6,
+    );
+    final scanWindow = Rect.fromCenter(
+      center: center,
+      width: size,
+      height: size,
+    );
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -25,6 +33,7 @@ class Scanner extends StatelessWidget {
             controller: controller,
             onDetect: provider.onDetect,
             onScannerStarted: provider.onStarted,
+            errorBuilder: (_, error, __) => ScannerError(error: error),
           ),
         ),
         ScanningEffect(
