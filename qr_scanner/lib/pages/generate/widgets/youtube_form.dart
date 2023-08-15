@@ -9,8 +9,9 @@ import 'package:qr_scanner/widgets/app_use/input.dart';
 
 enum _YoutubeField {
   type,
-  username,
-  tweet,
+  videoId,
+  chanelId,
+  url,
 }
 
 class YoutubeForm extends StatefulWidget {
@@ -32,11 +33,14 @@ class _YoutubeFormState extends BaseFormState<YoutubeForm, QRYoutubeForm> {
       case _YoutubeField.type:
         form.type = _;
         break;
-      case _YoutubeField.tweet:
-        form.tweet = _;
+      case _YoutubeField.chanelId:
+        form.chanelId = _;
         break;
-      case _YoutubeField.username:
-        form.username = _;
+      case _YoutubeField.videoId:
+        form.videoId = _;
+        break;
+      case _YoutubeField.url:
+        form.url = _;
         break;
     }
 
@@ -52,17 +56,23 @@ class _YoutubeFormState extends BaseFormState<YoutubeForm, QRYoutubeForm> {
       child: _QRYoutubeTypeSelect(
         value: form.type,
         onChanged: (_) => _onChanged(_YoutubeField.type, _),
-        builder: (_, type) => type == QRYoutubeType.profile
+        builder: (_, type) => type == QRYoutubeType.url
             ? Input(
                 prefixIcon: PrefixIcon(icon: AppAssets.instance.gYoutube),
-                hintText: "@username",
-                onChanged: (_) => _onChanged(_YoutubeField.username, _),
+                hintText: "URL",
+                onChanged: (_) => _onChanged(_YoutubeField.url, _),
               )
-            : Input(
-                prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
-                hintText: "Compose your tweet",
-                onChanged: (_) => _onChanged(_YoutubeField.tweet, _),
-              ),
+            : (type == QRYoutubeType.videoId
+                ? Input(
+                    prefixIcon: PrefixIcon(icon: AppAssets.instance.gYoutube),
+                    hintText: "Video ID",
+                    onChanged: (_) => _onChanged(_YoutubeField.videoId, _),
+                  )
+                : Input(
+                    prefixIcon: PrefixIcon(icon: AppAssets.instance.gYoutube),
+                    hintText: "",
+                    onChanged: (_) => _onChanged(_YoutubeField.chanelId, _),
+                  )),
       ),
     );
   }
@@ -83,7 +93,7 @@ class _QRYoutubeTypeSelect extends StatefulWidget {
 }
 
 class __QRYoutubeTypeSelectState extends State<_QRYoutubeTypeSelect> {
-  QRYoutubeType type = QRYoutubeType.profile;
+  QRYoutubeType type = QRYoutubeType.url;
 
   @override
   void initState() {

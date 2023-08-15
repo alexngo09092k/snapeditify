@@ -9,7 +9,7 @@ class QRPhoneForm extends QRFormBase {
   @override
   String? buildQRRawData() {
     if (!validate()) return null;
-    return phone;
+    return "tel:$phone";
   }
 
   @override
@@ -20,10 +20,7 @@ class QRPhoneForm extends QRFormBase {
   static bool isQR(String rawData) {
     final check = rawData.toLowerCase().trim();
     final List<String> checkList = [
-      'https://maps.google.com',
-      'https://www.maps.google.com',
-      'http://maps.google.com',
-      'http://www.maps.google.com/',
+      'tel:',
     ];
     return checkList.any((element) => check.startsWith(element));
   }

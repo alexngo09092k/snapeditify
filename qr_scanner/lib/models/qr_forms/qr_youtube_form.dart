@@ -1,40 +1,48 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:qr_scanner/models/qr_forms/qr_form_base.dart';
+import 'package:qr_scanner/utils/qr.dart';
 
 enum QRYoutubeType {
-  profile,
-  tweet,
+  url,
+  videoId,
+  chanelId,
 }
 
 class QRYoutubeForm extends QRFormBase {
-  String username;
-  String tweet;
+  String videoId;
+  String chanelId;
+  String url;
   QRYoutubeType type;
 
   QRYoutubeForm({
-    this.username = "",
-    this.tweet = "",
-    this.type = QRYoutubeType.profile,
+    this.videoId = "",
+    this.chanelId = "",
+    this.url = "",
+    this.type = QRYoutubeType.url,
   });
 
   @override
   String? buildQRRawData() {
     if (!validate()) return null;
     switch (type) {
-      case QRYoutubeType.profile:
-        return "https://youtube.com/$username";
-      case QRYoutubeType.tweet:
-        return "https://twitter.com/intent/tweet?text=$tweet";
+      case QRYoutubeType.url:
+        return url;
+      case QRYoutubeType.videoId:
+        return "https://youtube.com/watch?v=$videoId";
+      case QRYoutubeType.chanelId:
+        return "https://twitter.com/intent/chanelId?text=$chanelId";
     }
   }
 
   @override
   bool validate() {
     switch (type) {
-      case QRYoutubeType.profile:
-        return username.isNotEmpty;
-      case QRYoutubeType.tweet:
-        return tweet.isNotEmpty;
+      case QRYoutubeType.url:
+        return QRUtils.instance.isURL(url);
+      case QRYoutubeType.videoId:
+        return videoId.isNotEmpty;
+      case QRYoutubeType.chanelId:
+        return chanelId.isNotEmpty;
     }
   }
 
@@ -54,10 +62,12 @@ class QRYoutubeForm extends QRFormBase {
 extension QRYoutubeTypeEx on QRYoutubeType {
   String get label {
     switch (this) {
-     case QRYoutubeType.profile:
-        return "Link to your profile";
-      case QRYoutubeType.tweet:
-        return "Post a tweet";
+      case QRYoutubeType.url:
+        return "URL";
+      case QRYoutubeType.videoId:
+        return "Video ID";
+      case QRYoutubeType.chanelId:
+        return "Chanel ID";
     }
   }
 }

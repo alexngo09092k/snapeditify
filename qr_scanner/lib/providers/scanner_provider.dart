@@ -128,13 +128,12 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
           Barcode barcode = Barcode(rawValue: rawData);
           QRType type = checkQRType(barcode);
           QRFormat? format = checkQRFormat(barcode);
-          if (format != QRFormat.QrCode) type = QRType.product;
           final QR qr = QR(
             rawData: barcode.rawValue!,
             type: type,
             source: QRSource.scan,
             lastModified: DateTime.now(),
-            format: format!,
+            format: format ?? QRFormat.QrCode,
           );
     
           await Vibration.vibrate();
