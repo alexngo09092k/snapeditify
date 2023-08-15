@@ -53,7 +53,7 @@ class _EmailFormState extends BaseFormState<EmailForm, QREmailForm> {
         children: [
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gEmail),
-            hintText: "Your email",
+            hintText: "E-mail recipient",
             onChanged: (_) => _onChanged(_EmailField.email, _),
           ),
           SizedBox(height: AppDimensions.instance.padding),

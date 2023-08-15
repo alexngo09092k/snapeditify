@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:barcode_finder/barcode_finder.dart' as barfinder;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
@@ -119,19 +120,29 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
     );
     if (image != null) {
       if (await controller.analyzeImage(image.path)) {
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   const SnackBar(
-        //     content: Text('Barcode found!'),
-        //     backgroundColor: Colors.green,
-        //   ),
-        // );
-      } else {
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   const SnackBar(
-        //     content: Text('No barcode found!'),
-        //     backgroundColor: Colors.red,
-        //   ),
-        // );
+        String? rawData = await barfinder.BarcodeFinder.scanFile(
+          path: image.path, 
+          formats: barfinder.BarcodeFormat.values,
+        );
+        if(rawData != null) {
+          Barcode barcode = Barcode(rawValue: rawData);
+          QRType type = checkQRType(barcode);
+          QRFormat? format = checkQRFormat(barcode);
+          if (format != QRFormat.QrCode) type = QRType.product;
+          final QR qr = QR(
+            rawData: barcode.rawValue!,
+            type: type,
+            source: QRSource.scan,
+            lastModified: DateTime.now(),
+            format: format!,
+          );
+    
+          await Vibration.vibrate();
+    
+          if (!HistoryProvider.instance.isExists(qr)) {
+            HistoryProvider.instance.addQR(qr);
+          }
+        }
       }
     }
   }

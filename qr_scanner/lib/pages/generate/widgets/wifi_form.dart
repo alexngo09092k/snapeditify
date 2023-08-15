@@ -58,7 +58,7 @@ class _WifiFormState extends BaseFormState<WifiForm, QRWifiForm> {
         children: [
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gWifi),
-            hintText: "Network Name (Wifi SSID)",
+            hintText: "Network SSID (Name)",
             onChanged: (_) => _onChanged(_WifiField.ssid, _),
           ),
           SizedBox(height: AppDimensions.instance.padding),

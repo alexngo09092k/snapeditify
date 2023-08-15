@@ -70,6 +70,7 @@ dependencies:
   cached_network_image: ^3.2.3
   mobile_scanner: ^3.4.1
   image_picker: ^1.0.2
+  barcode_finder: ^0.0.5
 
 dev_dependencies:
   flutter_test:

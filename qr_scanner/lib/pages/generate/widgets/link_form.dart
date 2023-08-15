@@ -38,7 +38,7 @@ class _LinkFormState extends BaseFormState<LinkForm, QRLinkForm> {
         children: [
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gLink),
-            hintText: "Your URL",
+            hintText: "Put your link here",
             onChanged: _onChanged,
           ),
         ],
