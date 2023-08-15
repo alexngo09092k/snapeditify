@@ -190,7 +190,7 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   }
 
   @override
-  Future<void> syncToStorage([bool notify = false]) {
+  Future<void> syncToStorage() {
     return AsyncStorage.instance.setString(AsyncStorageKey.instance.scannerSettings, _settings.toJson());
   }
 

@@ -3,7 +3,7 @@ abstract class StorageProvider {
 
   Future<void> syncFromServer([bool notify = false]);
 
-  Future<void> syncToStorage([bool notify = false]);
+  Future<void> syncToStorage();
 
   Future<bool> cleanToStorage([bool notify = false]);
 

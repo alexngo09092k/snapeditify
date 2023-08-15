@@ -43,14 +43,16 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
         List<QR> list = _scanHistory.where((element) => element.rawData == qr.rawData && element.format == qr.format).toList();
         if(list.isNotEmpty) {
           list.first.lastModified = qr.lastModified;
-          syncToStorage(true);
+          notifyListeners();
+          syncToStorage();
         }
         return list.isNotEmpty;
       case QRSource.generate:
         List<QR> list = _generateHistory.where((element) => element.rawData == qr.rawData && element.format == qr.format).toList();
         if(list.isNotEmpty) {
           list.first.lastModified = qr.lastModified;
-          syncToStorage(true);
+          notifyListeners();
+          syncToStorage();
         }
         return list.isNotEmpty;
       default:
@@ -74,7 +76,8 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
       default:
         break;
     }
-    syncToStorage(changed);
+    if(changed) notifyListeners();
+    syncToStorage();
   }
 
   @override
@@ -92,7 +95,8 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
       default:
         break;
     }
-    syncToStorage(changed);
+    if(changed) notifyListeners();
+    syncToStorage();
   }
 
   @override
@@ -133,7 +137,7 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
   }
 
   @override
-  Future<void> syncToStorage([bool notify = false]) async {
+  Future<void> syncToStorage() async {
     AsyncStorage.instance.setString(AsyncStorageKey.instance.scanHistory, jsonEncode(_scanHistory));
     AsyncStorage.instance.setString(AsyncStorageKey.instance.generateHistory, jsonEncode(_generateHistory));
   }
