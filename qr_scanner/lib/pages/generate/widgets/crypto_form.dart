@@ -4,7 +4,7 @@ import 'package:qr_scanner/models/qr_forms/qr_crypto_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/base_form_state.dart';
-import 'package:qr_scanner/pages/generate/widgets/pefix_icon.dart';
+import 'package:qr_scanner/pages/generate/widgets/prefix_icon.dart';
 import 'package:qr_scanner/widgets/app_use/input.dart';
 import 'package:qr_scanner/widgets/base/custom_icon.dart';
 
