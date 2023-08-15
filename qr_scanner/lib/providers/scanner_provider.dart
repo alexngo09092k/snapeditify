@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr.dart';
 import 'package:qr_scanner/models/qr_format.dart';
@@ -74,7 +76,7 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
       QRType type = checkQRType(barcode);
       QRFormat? format = checkQRFormat(barcode);
       if (format == null) continue;
-      if(format != QRFormat.QrCode) type = QRType.product;
+      if (format != QRFormat.QrCode) type = QRType.product;
       final QR qr = QR(
         rawData: barcode.rawValue!,
         type: type,
@@ -110,7 +112,29 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   }
 
   @override
-  void onGallery() {}
+  void onGallery() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (image != null) {
+      if (await controller.analyzeImage(image.path)) {
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   const SnackBar(
+        //     content: Text('Barcode found!'),
+        //     backgroundColor: Colors.green,
+        //   ),
+        // );
+      } else {
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   const SnackBar(
+        //     content: Text('No barcode found!'),
+        //     backgroundColor: Colors.red,
+        //   ),
+        // );
+      }
+    }
+  }
 
   @override
   void onStarted(MobileScannerArguments? arguments) {}
@@ -148,9 +172,13 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? scannerSettingsString = AsyncStorage.instance.getString(AsyncStorageKey.instance.scannerSettings);
-    Debug.log("============= SCANNER SETTINGS $scannerSettingsString ============");
-    _settings = scannerSettingsString != null? ScannerSettings.fromJson(scannerSettingsString): ScannerSettings();
+    String? scannerSettingsString = AsyncStorage.instance
+        .getString(AsyncStorageKey.instance.scannerSettings);
+    Debug.log(
+        "============= SCANNER SETTINGS $scannerSettingsString ============");
+    _settings = scannerSettingsString != null
+        ? ScannerSettings.fromJson(scannerSettingsString)
+        : ScannerSettings();
     _controller = MobileScannerController(
       facing: _settings.facing,
       detectionSpeed: _settings.detectionSpeed,
@@ -221,6 +249,7 @@ extension ScannerProviderEx on ScannerProvider {
     if (QRVCardForm.isQR(barcode.rawValue!)) return QRType.vcard;
     if (QRWifiForm.isQR(barcode.rawValue!)) return QRType.wifi;
     if (QRYoutubeForm.isQR(barcode.rawValue!)) return QRType.youtube;
+
     ///
     ///
     /// GET ALL QR CHECK HERE

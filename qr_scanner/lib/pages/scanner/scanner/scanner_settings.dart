@@ -12,10 +12,6 @@ class ScannerSettings extends ProviderStateless<ScannerProvider> {
 
   final double width;
 
-  void onGallery() {}
-
-  void onBatch() {}
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -42,26 +38,24 @@ class ScannerSettings extends ProviderStateless<ScannerProvider> {
                 _SettingButton(
                   'Gallery',
                   icon: AppAssets.instance.icGallery,
-                  onPressed: onGallery,
+                  onPressed: provider.onGallery,
                 ),
-                AnimatedBuilder(
-                  animation: provider.controller.torchState,
-                  builder: (_, __) => _SettingButton(
+                ValueListenableBuilder(
+                  valueListenable: provider.controller.torchState,
+                  builder: (_, state, __) => _SettingButton(
                     'Flashlight',
                     icon: AppAssets.instance.icFlashOn,
                     onPressed: provider.onFlashlight,
-                    active:
-                        provider.controller.torchState.value == TorchState.on,
+                    active: state == TorchState.on,
                   ),
                 ),
-                AnimatedBuilder(
-                  animation: provider.controller.cameraFacingState,
-                  builder: (_, __) => _SettingButton(
+                ValueListenableBuilder(
+                  valueListenable: provider.controller.cameraFacingState,
+                  builder: (_, state, __) => _SettingButton(
                     'Camera',
                     icon: AppAssets.instance.icFlipCamera,
                     onPressed: provider.onCameraFacing,
-                    active: provider.controller.cameraFacingState.value ==
-                        CameraFacing.front,
+                    active: state == CameraFacing.front,
                   ),
                 ),
               ],
