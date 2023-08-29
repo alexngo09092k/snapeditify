@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "brush": MessageLookupByLibrary.simpleMessage("Vẽ"),
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
         "chinese": MessageLookupByLibrary.simpleMessage("Tiếng Trung Quốc"),
+        "createIdPhoto":
+            MessageLookupByLibrary.simpleMessage("Create ID Photo"),
         "createNanimeAvatar":
             MessageLookupByLibrary.simpleMessage("Tạo hình đại diện\nAnime"),
         "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage(
@@ -78,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Không thể tạo kiểu cho hình ảnh, vui lòng thử lại."),
         "feedback": MessageLookupByLibrary.simpleMessage("Nhận xét"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Phản hồi cho"),
+        "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "languages": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "later": MessageLookupByLibrary.simpleMessage("Lần sau"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
@@ -103,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vui lòng thử lại hoặc mở lại ứng dụng."),
         "pleaseWaitAMoment":
             MessageLookupByLibrary.simpleMessage("Xin vui lòng chờ."),
+        "rateSnapeditify":
+            MessageLookupByLibrary.simpleMessage("Rate SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("Xoá"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Xóa đối tượng"),
         "removeThingsNfromImage":

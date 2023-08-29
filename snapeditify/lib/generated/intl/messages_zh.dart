@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "brush": MessageLookupByLibrary.simpleMessage("画笔"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "chinese": MessageLookupByLibrary.simpleMessage("中文"),
+        "createIdPhoto":
+            MessageLookupByLibrary.simpleMessage("Create ID Photo"),
         "createNanimeAvatar": MessageLookupByLibrary.simpleMessage("创建动漫头像"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("放弃更改并还原？"),
@@ -66,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("样式化图像失败，请重试。"),
         "feedback": MessageLookupByLibrary.simpleMessage("反馈"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("反馈给"),
+        "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "languages": MessageLookupByLibrary.simpleMessage("语言"),
         "later": MessageLookupByLibrary.simpleMessage("稍后"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
@@ -87,6 +90,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleaseTryAgainOrOpenTheAppAgain":
             MessageLookupByLibrary.simpleMessage("请重试或重新打开应用程序。"),
         "pleaseWaitAMoment": MessageLookupByLibrary.simpleMessage("请稍等片刻。"),
+        "rateSnapeditify":
+            MessageLookupByLibrary.simpleMessage("Rate SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("删除"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("移除物体"),
         "removeThingsNfromImage":

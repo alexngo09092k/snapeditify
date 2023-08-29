@@ -12,7 +12,7 @@ import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/view_models/enhanced_vm.dart';
 import 'package:snapeditify/view_models/face_vm.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   @override

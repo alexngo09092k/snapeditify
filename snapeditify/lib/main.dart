@@ -11,6 +11,7 @@ import 'package:snapeditify/firebase_options.dart';
 import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/app_theme_provider.dart';
+import 'package:snapeditify/providers/create_id_photo/create_id_photo_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/remover/remover_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
@@ -37,21 +38,23 @@ void main() {
       () => AnimeAIProvider.instance,
       () => SkyProvider.instance,
       () => RestoreProvider.instance,
+      /// Features
+      () => CreateIDPhotoProvider.instance,
     ],
     onWillInitialize: () async {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
 
-      await Configuration.instance.loadLocalConfig(enviroment);
+      // await Configuration.instance.loadLocalConfig(enviroment);
 
       AwesomeRemoteConfig.instance.initial(Configuration.instance.remoteConfig);
 
       return true;
     },
     onDidInitialize: () async {
-      await Configuration.instance.loadRemoteConfig();
-
+      // await Configuration.instance.loadRemoteConfig();
+      
       Debug.debugMode = Configuration.instance.business.appMode == AppMode.debug;
 
       AwesomeAdvertisement.instance.initial(Configuration.instance.advertisement);

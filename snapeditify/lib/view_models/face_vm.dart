@@ -3,7 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/providers/enhance/enhance_state.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/image.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'dart:ui' as ui;
 
 class FaceVM extends AdditionFace with ChangeNotifier {

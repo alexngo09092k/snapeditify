@@ -15,7 +15,7 @@ class LottieViewer extends StatelessWidget {
   final String lottie;
   final double? width;
   final double? height;
-  final BorderRadiusGeometry? borderRadius;
+  final BorderRadiusGeometry borderRadius;
   final bool? repeat;
 
   @override

@@ -10,6 +10,7 @@ class SaveButton<T extends EditImageProvider> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SizedBox();
     return PropConsumer<T, bool>(
       select: (p) => p.canSave,
       builder: (_, __, p, ___) => GestureDetector(

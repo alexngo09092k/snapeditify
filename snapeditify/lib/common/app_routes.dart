@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/pages/create_id_photo/create_id_photo.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
@@ -17,6 +18,7 @@ import 'package:snapeditify/pages/setting/setting.dart';
 import 'package:snapeditify/pages/sky/sky.dart';
 import 'package:snapeditify/pages/splash/splash_page.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
+import 'package:snapeditify/providers/create_id_photo/create_id_photo_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/remover/remover_provider.dart';
@@ -55,6 +57,9 @@ class AppRoutes extends IAppRoutes {
   static const String skyPage = 'sky_page';
   static const String restorePage = 'restore_page';
 
+  /// Features
+  static const String createIDPhoto = 'create_id_photo_page';
+
   static final IAppRoutes _instance = AppRoutes._internal();
 
   @override
@@ -70,6 +75,9 @@ class AppRoutes extends IAppRoutes {
     applyArtEffectPage: (_) => const RestylePage(),
     restorePage: (_) => const RestorePage(),
     skyPage: (_) => const SkyPage(),
+
+    /// Features
+    createIDPhoto: (_) => const CreateIDPhotoPage(),
   };
 
   @override
@@ -109,6 +117,10 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const RestorePage(), settings);
       case skyPage:
         return buildRoute(const SkyPage(), settings);
+
+      /// Features
+      case createIDPhoto: 
+        return buildRoute(const CreateIDPhotoPage(), settings);
       default:
         throw ErrorDescription("Not found page");
     }
@@ -185,6 +197,10 @@ extension AppRoutesUtils on IAppRoutes {
           case ImageTool.changeYourSky:
             res = await ManagerProvider.of<SkyProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.skyPage;
+            break;
+          case ImageTool.makeIDPassportPhoto:
+            res = await ManagerProvider.of<CreateIDPhotoProvider>().setImage(context, bytes: bytes);
+            target = AppRoutes.createIDPhoto;
             break;
          
           default:

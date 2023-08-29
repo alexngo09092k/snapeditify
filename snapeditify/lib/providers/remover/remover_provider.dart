@@ -17,7 +17,7 @@ import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 
 abstract class IRemoverProvider extends EditImageProvider with StorageProvider {
   @override

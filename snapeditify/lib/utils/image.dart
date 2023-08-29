@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:image/image.dart' as imagepkg;
-import 'package:snapeditify/widgets/painter/extensions/extensions.dart';
+import 'package:snapeditify/widgets/app_use/painter/extensions/extensions.dart';
 
 class ImageUtils {
   static final ImageUtils _instance = ImageUtils._internal();

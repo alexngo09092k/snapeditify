@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
@@ -50,7 +53,9 @@ class WidgetUtils {
         onBackground: onBackground,
         onForeground: onForeground,
         actions: [
-          AlertAction(title: S.of(context).cancel, onPressed: Navigator.of(context).pop),
+          AlertAction(
+              title: S.of(context).cancel,
+              onPressed: Navigator.of(context).pop),
           if (retry != null)
             AlertAction(
               title: S.of(context).retry,
@@ -81,11 +86,15 @@ class WidgetUtils {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CupertinoActivityIndicator(color: Theme.of(context).colorScheme.onSurface),
+                CupertinoActivityIndicator(
+                    color: Theme.of(context).colorScheme.onSurface),
                 SizedBox(height: AppDimensions.instance.padding),
                 Text(
-                  S.of(context).pleaseWaitAMoment, 
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurface),
+                  S.of(context).pleaseWaitAMoment,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),
               ],
             ),
@@ -101,10 +110,13 @@ class WidgetUtils {
         context,
         barrierDismissible: false,
         title: S.of(context).youAreCurrentlyOffline,
-        message: S.of(context).looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
+        message: S
+            .of(context)
+            .looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd,
         // onForeground: retry != null ? () => retry(context) : null,
         actions: [
-          AlertAction(title: S.of(context).openSettings, onPressed: openAppSettings),
+          AlertAction(
+              title: S.of(context).openSettings, onPressed: openAppSettings),
           if (retry != null)
             AlertAction(
               title: S.of(context).retry,
@@ -147,14 +159,17 @@ class WidgetUtils {
     });
   }
 
-  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? snack({required String message}) {
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? snack(
+      {required String message}) {
     return AwesomeAppState.snack(
       builder: (BuildContext context) => SnackBar(
         margin: EdgeInsets.all(AppDimensions.instance.padding),
         padding: EdgeInsets.all(AppDimensions.instance.padding),
         backgroundColor: Theme.of(context).colorScheme.primary,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius))),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+                Radius.circular(AppDimensions.instance.radius))),
         content: Text(message, style: Theme.of(context).textTheme.bodyLarge),
       ),
     );

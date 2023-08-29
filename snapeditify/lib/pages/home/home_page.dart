@@ -46,22 +46,38 @@ class _HomePageState extends State<HomePage> {
         SizedBox(height: AppDimensions.instance.padding),
 
         /// REMOVE OBJECTS
-        const HomeBaseTools(title: 'Remove Objects', [ImageTool.removePeople, ImageTool.oneTouchRemoveAll]),
+        const HomeBaseTools(
+          title: 'Remove Objects',
+          [ImageTool.removePeople, ImageTool.oneTouchRemoveAll],
+          hot: true,
+        ),
 
         SizedBox(height: AppDimensions.instance.padding),
 
         /// ENHANCE PHOTO
-        const HomeBaseTools(title: 'Enhance Photo', [ImageTool.enhancePortrait, ImageTool.upscaleImage, ImageTool.restoreOldPhoto]),
+        const HomeBaseTools(title: 'Enhance Photo', [
+          ImageTool.enhancePortrait,
+          ImageTool.upscaleImage,
+          ImageTool.restoreOldPhoto
+        ]),
 
         SizedBox(height: AppDimensions.instance.padding),
 
         /// CUTOUT OBJECT
-        const HomeBaseTools(title: 'Cutout Object', [ImageTool.makeIDPassportPhoto, ImageTool.productPhoto, ImageTool.changeBackground]),
-        
+        const HomeBaseTools(title: 'Cutout Object', [
+          ImageTool.makeIDPassportPhoto,
+          ImageTool.productPhoto,
+          ImageTool.changeBackground
+        ]),
+
         SizedBox(height: AppDimensions.instance.padding),
-        
+
         /// ART EFFECT
-        const HomeBaseTools(title: 'Art Effect', [ImageTool.changeYourSky, ImageTool.applyArtEffect, ImageTool.createAnimeAI]),
+        const HomeBaseTools(title: 'Art Effect', [
+          ImageTool.changeYourSky,
+          ImageTool.applyArtEffect,
+          ImageTool.createAnimeAI
+        ]),
 
         SizedBox(height: AppDimensions.instance.padding),
         const AdView(),

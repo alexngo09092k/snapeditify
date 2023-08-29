@@ -8,7 +8,7 @@ import 'package:snapeditify/models/config/bussiness_config/more_app.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
-import 'package:snapeditify/widgets/slideshow/image_slideshow.dart';
+import 'package:snapeditify/widgets/base/slideshow/image_slideshow.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MoreApps extends StatelessWidget {

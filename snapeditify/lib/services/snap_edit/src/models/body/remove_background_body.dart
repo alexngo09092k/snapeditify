@@ -6,6 +6,6 @@ class RemoveBackgroundBody {
 
   const RemoveBackgroundBody({
     required this.inputImage,
-    required this.imageId,
+    this.imageId,
   });
 }

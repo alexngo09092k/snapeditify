@@ -4,7 +4,7 @@ import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
-import 'package:snapeditify/widgets/painter/painter_pure.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 
 class RestoreImage extends StatelessWidget {
   const RestoreImage({super.key});

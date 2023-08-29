@@ -96,8 +96,7 @@ extension DetectedImage on SnapEdit {
         if (file1 == null) {
           return SnapEditResponse<RemoveObjectResponse?>(message: 'Original Preview Image is not valid.');
         }
-        parts.add(
-            MultipartBody<File>(key: 'original_preview_image', data: file1));
+        parts.add(MultipartBody<File>(key: 'original_preview_image', data: file1));
       }
 
       File? file2;

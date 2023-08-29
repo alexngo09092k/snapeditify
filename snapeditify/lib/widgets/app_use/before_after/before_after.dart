@@ -1,9 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:snapeditify/widgets/before_after/rect_clipper.dart';
+import 'rect_clipper.dart';
 import 'dart:ui' as ui;
-import 'package:snapeditify/widgets/painter/painter.dart';
+import '../painter/painter.dart';
 
 class BeforeAfter extends StatefulWidget {
   final Widget beforeImage;
@@ -62,7 +62,9 @@ class _BeforeAfterState extends State<BeforeAfter> {
           widget.imageCornerRadius,
         ),
         ClipPath(
-          clipper: widget.isVertical ? RectClipperVertical(_clipFactor) : RectClipper(_clipFactor),
+          clipper: widget.isVertical
+              ? RectClipperVertical(_clipFactor)
+              : RectClipper(_clipFactor),
           child: SizedImage(
             widget.beforeImage,
             widget.imageHeight,
@@ -75,19 +77,22 @@ class _BeforeAfterState extends State<BeforeAfter> {
             data: SliderThemeData(
               trackHeight: 0.0,
               overlayColor: widget.overlayColor,
-              thumbShape: CustomThumbShape(widget.thumbRadius, widget.thumbColor, _thumbImage, widget.slideWidth),
+              thumbShape: CustomThumbShape(widget.thumbRadius,
+                  widget.thumbColor, _thumbImage, widget.slideWidth),
             ),
             child: widget.isVertical
                 ? RotatedBox(
                     quarterTurns: 1,
                     child: Slider(
                       value: _clipFactor,
-                      onChanged: (double factor) => setState(() => _clipFactor = factor),
+                      onChanged: (double factor) =>
+                          setState(() => _clipFactor = factor),
                     ),
                   )
                 : Slider(
                     value: _clipFactor,
-                    onChanged: (double factor) => setState(() => _clipFactor = factor),
+                    onChanged: (double factor) =>
+                        setState(() => _clipFactor = factor),
                   ),
           ),
         ),
@@ -100,7 +105,10 @@ class SizedImage extends StatelessWidget {
   final Widget _image;
   final double? _height, _width, _imageCornerRadius;
 
-  const SizedImage(this._image, this._height, this._width, this._imageCornerRadius, {Key? key}) : super(key: key);
+  const SizedImage(
+      this._image, this._height, this._width, this._imageCornerRadius,
+      {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +129,8 @@ class CustomThumbShape extends SliderComponentShape {
   final ui.Image? _thumbImage;
   final double _thumbWidth;
 
-  CustomThumbShape(this._thumbRadius, this._thumbColor, this._thumbImage, this._thumbWidth);
+  CustomThumbShape(
+      this._thumbRadius, this._thumbColor, this._thumbImage, this._thumbWidth);
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
@@ -161,9 +170,16 @@ class CustomThumbShape extends SliderComponentShape {
     );
 
     if (_thumbImage != null) {
-      canvas.drawImage(_thumbImage!, Offset(center.dx - _thumbImage!.width / 2, center.dy - _thumbImage!.height / 2), paint);
+      canvas.drawImage(
+          _thumbImage!,
+          Offset(center.dx - _thumbImage!.width / 2,
+              center.dy - _thumbImage!.height / 2),
+          paint);
     }
 
-    canvas.drawRect(Rect.fromCenter(center: center, width: _thumbWidth, height: parentBox.size.height), paint);
+    canvas.drawRect(
+        Rect.fromCenter(
+            center: center, width: _thumbWidth, height: parentBox.size.height),
+        paint);
   }
 }

@@ -829,6 +829,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Rate SnapEditify`
+  String get rateSnapeditify {
+    return Intl.message(
+      'Rate SnapEditify',
+      name: 'rateSnapeditify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HOT`
+  String get hot {
+    return Intl.message(
+      'HOT',
+      name: 'hot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create ID Photo`
+  String get createIdPhoto {
+    return Intl.message(
+      'Create ID Photo',
+      name: 'createIdPhoto',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
