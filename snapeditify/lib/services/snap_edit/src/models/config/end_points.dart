@@ -38,7 +38,7 @@ class EndPoints {
 
   factory EndPoints.defaultValue() {
     return const EndPoints(
-      removeObject: "api/object_removal/v5/erase",
+      removeObject: "api/v6/erase",
       removeOneTouch: "api/object_removal/v5/onetouch_suggest",
       scanObject: "api/v6/ai_detection",
       enhanceImage: "api/v2/pro/enhance",

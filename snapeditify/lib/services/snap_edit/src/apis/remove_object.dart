@@ -60,8 +60,7 @@ extension DetectedImage on SnapEdit {
         if (file1 == null) {
           return SnapEditResponse<OneTouchSuggestionResponse?>(message: 'Original Preview Image is not valid.');
         }
-        parts.add(
-            MultipartBody<File>(key: 'original_preview_image', data: file1));
+        parts.add(MultipartBody<File>(key: 'original_preview_image', data: file1));
       }
 
       ClientResponse response = await ClientHttp.instance.postMultipart<Map<String, dynamic>>(

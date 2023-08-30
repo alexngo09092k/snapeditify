@@ -47,6 +47,8 @@ abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvi
 
   Future<bool> toAI(BuildContext context);
 
+  Future<bool> toAIOneTouchSuggest(BuildContext context);
+
   bool changeStrokeWidth(BuildContext context, double strokeWidth);
 
   bool changeStrokeColor(BuildContext context, Color strokeColor);
@@ -195,12 +197,74 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   }
 
   @override
+  Future<bool> toAIOneTouchSuggest(BuildContext context) async {
+    if (_state.mode == RemoveObjectMode.ai) return true;
+
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => toAIOneTouchSuggest(context));
+    if (!result) return false;
+
+    /// SHOW ADS
+    adProvider.handleAd();
+  
+    /// SHOW LOADING POPUP
+    LoadingPopup.show(S.of(context).pleaseWaitAMoment);
+
+    /// CALL API
+    OneTouchSuggestionBody body = OneTouchSuggestionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
+    SnapEditResponse<OneTouchSuggestionResponse?> res = await Services.instance.snapEdit.removeOneTouch(body);
+
+    /// DETECTED OBJECT
+    LoadingPopup.setMessage("Detecting object");
+
+    if (res.data != null) {
+      /// DETECTED OBJECT VM
+      Map<int, DetectedObjectVM> detectedObjectVMs = {};
+      for (var detectedObject in res.data!.detectedObjects) {
+        final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
+        await vm.paintParse();
+        detectedObjectVMs[vm.maskId] = vm;
+      }
+      _state.detectedObjects = detectedObjectVMs;
+
+      /// SET NEW SESSION ID
+      _state.sessionId = res.data!.sessionId;
+
+      /// AI MODE
+      Debug.log("===== TO AI MODE ====");
+      _state.mode = RemoveObjectMode.ai;
+
+      /// HIDE LOADING POPUP
+      LoadingPopup.hide();
+
+      /// SHOW GUIDE
+      showAutoAIGuide();
+
+      return true;
+    }
+
+    /// HIDE LOADING POPUP
+    LoadingPopup.hide();
+
+    if (!res.status) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).aiDetection, 
+        message: S.of(context).failedToDetectObjectPleaseTryAgain, 
+        retry: (_) => toAI(context),
+      );
+      Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
+    }
+
+    return false;
+  }
+
+  @override
   Future<bool> toAI(BuildContext context) async {
+    if (_state.mode == RemoveObjectMode.ai) return true;
+
     /// CHECKING ENVIROMENT
     final result = await checkEnviroment(context, retry: (_) => toAI(context));
     if (!result) return false;
-
-    if (_state.mode == RemoveObjectMode.ai) return true;
 
     /// SHOW ADS
     adProvider.handleAd();
