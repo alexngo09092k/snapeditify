@@ -46,35 +46,38 @@ class ImageToolItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: imageTool.color,
-        borderRadius: BorderRadius.all(
-          Radius.circular(AppDimensions.instance.radius),
-        ),
-      ),
-      padding: EdgeInsets.all(AppDimensions.instance.padding),
-      child: Row(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomIcon(
-                imageTool.icon,
-                size: AppDimensions.instance.iconX(1.5),
-                color: ThemeData.light().iconTheme.color,
-              ),
-              SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-              Text(
-                imageTool.title,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: ThemeData.light().textTheme.bodyLarge!.color,
-                    ),
-              )
-            ],
+    return GestureDetector(
+      onTap: () => onTool(imageTool),
+      child: Container(
+        decoration: BoxDecoration(
+          color: imageTool.color,
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppDimensions.instance.radius),
           ),
-        ],
+        ),
+        padding: EdgeInsets.all(AppDimensions.instance.padding),
+        child: Row(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomIcon(
+                  imageTool.icon,
+                  size: AppDimensions.instance.iconX(1.5),
+                  color: ThemeData.light().iconTheme.color,
+                ),
+                SizedBox(height: AppDimensions.instance.paddingX(0.5)),
+                Text(
+                  imageTool.title,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: ThemeData.light().textTheme.bodyLarge!.color,
+                      ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

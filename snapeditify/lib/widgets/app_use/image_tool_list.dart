@@ -10,9 +10,12 @@ class ImageToolList extends StatelessWidget {
   final Function(ImageTool) onTool;
 
   void showMoreTools(BuildContext context) async {
-    showDialog(
+    return showDialog(
       context: context,
-      builder: (_) => MoreToolsPopup(onTool: onTool),
+      builder: (_) => MoreToolsPopup(onTool: (_) {
+        Navigator.of(context).pop();
+        onTool(_);
+      }),
     );
   }
 
