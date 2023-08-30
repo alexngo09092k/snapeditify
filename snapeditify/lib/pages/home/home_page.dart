@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
@@ -6,6 +7,7 @@ import 'package:snapeditify/pages/home/widgets/home_base_tools.dart';
 import 'package:snapeditify/pages/home/widgets/home_light_dark.dart';
 import 'package:snapeditify/pages/home/widgets/home_localizations.dart';
 import 'package:snapeditify/pages/home/widgets/home_logo.dart';
+import 'package:snapeditify/widgets/app_use/image_tool_list.dart';
 import 'package:snapeditify/pages/home/widgets/home_settings_button.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/widgets/base/ad_view.dart';
@@ -43,6 +45,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(width: AppDimensions.instance.paddingX(0.5)),
         ],
       ),
+      before: ImageToolList(onTool:(e) => AppRoutes.instance.goAlbumsPage(context, e)),
       children: [
         SizedBox(height: AppDimensions.instance.padding),
 
@@ -50,7 +53,7 @@ class _HomePageState extends State<HomePage> {
         HomeBaseTools(
           title: S.of(context).removeObjects,
           const [
-            ImageTool.removePeople,
+            ImageTool.removeObject,
             ImageTool.oneTouchRemoveAll,
           ],
           hot: true,
@@ -60,7 +63,7 @@ class _HomePageState extends State<HomePage> {
 
         /// ENHANCE PHOTO
         HomeBaseTools(title: S.of(context).enhancePhoto, const [
-          ImageTool.enhancePortrait,
+          ImageTool.enhanceImage,
           ImageTool.upscaleImage,
           ImageTool.restoreOldPhoto
         ]),

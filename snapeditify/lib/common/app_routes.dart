@@ -175,7 +175,7 @@ extension AppRoutesUtils on IAppRoutes {
 
         /// CHECK TARGET PAGE
         switch (current) {
-          case ImageTool.removePeople:
+          case ImageTool.removeObject:
           case ImageTool.oneTouchRemoveAll:
             res = await ManagerProvider.of<RemoveObjectProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.removeObjectPage;
@@ -184,7 +184,7 @@ extension AppRoutesUtils on IAppRoutes {
             res = await ManagerProvider.of<RestyleProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.applyArtEffectPage;
             break;
-          case ImageTool.enhancePortrait:
+          case ImageTool.enhanceImage:
             res = await ManagerProvider.of<EnhanceProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.enhanceImagePage;
             break;

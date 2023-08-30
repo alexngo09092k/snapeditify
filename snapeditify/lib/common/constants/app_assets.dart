@@ -57,10 +57,40 @@ class AppAssets {
   final String changeBackground = "$imagePath/tools/ChangeBackground.png";
   final String changeYourSky = "$imagePath/tools/ChangeYourSky.png";
   final String createAnimeAI = "$imagePath/tools/CreateAnimeAI.png";
-  final String enhancePortrait = "$imagePath/tools/EnhancePortrait.png";
+  final String enhanceImage = "$imagePath/tools/EnhancePortrait.png";
   final String makeIDPassport = "$imagePath/tools/MakeIDPassport.png";
   final String productPhoto = "$imagePath/tools/ProductPhoto.png";
-  final String removePeople = "$imagePath/tools/RemovePeople.png";
+  final String removeObject = "$imagePath/tools/RemoveObject.png";
   final String restorePhoto = "$imagePath/tools/RestorePhoto.png";
   final String upscaleImage = "$imagePath/tools/UpscaleImage.png";
+
+  /// Suggest images demo
+  /// Remove objects
+  final String rmb1 = "$imagePath/suggest_demos/rmb1.jpeg";
+  final String rmb2 = "$imagePath/suggest_demos/rmb2.jpeg";
+  final String rmb3 = "$imagePath/suggest_demos/rmb3.jpeg";
+
+  final String rmots1 = "$imagePath/suggest_demos/rmots1.jpeg";
+  final String rmots2 = "$imagePath/suggest_demos/rmots2.jpg";
+  final String rmots3 = "$imagePath/suggest_demos/rmots3.jpg";
+
+  /// Enhance photos
+  final String e1 = "$imagePath/suggest_demos/e1.jpeg";
+  final String e2 = "$imagePath/suggest_demos/e2.jpg";
+  final String e3 = "$imagePath/suggest_demos/e3.jpg";
+
+  final String rs1 = "$imagePath/suggest_demos/rs1.jpg";
+  final String rs2 = "$imagePath/suggest_demos/rs2.jpeg";
+  final String rs3 = "$imagePath/suggest_demos/rs3.jpeg";
+
+  /// Cutout objects
+  final String rmbg1 = "$imagePath/suggest_demos/rmbg1.jpeg";
+  final String rmbg2 = "$imagePath/suggest_demos/rmbg2.jpeg";
+  final String rmbg3= "$imagePath/suggest_demos/rmbg3.jpeg";
+
+
+  /// Apply effects
+  final String csk1 = "$imagePath/suggest_demos/csk1.png";
+  final String csk2 = "$imagePath/suggest_demos/csk2.png";
+  final String csk3 = "$imagePath/suggest_demos/csk3.png";
 }

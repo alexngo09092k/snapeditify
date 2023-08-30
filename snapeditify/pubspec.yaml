@@ -79,6 +79,7 @@ dependencies:
   image_gallery_saver: ^2.0.2
   path_provider: ^2.0.15
   corsac_jwt: ^1.0.0-nullsafety.1
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:
@@ -109,6 +110,7 @@ flutter:
     - assets/images/icons/
     - assets/images/tools/
     - assets/images/flags/
+    - assets/images/suggest_demos/
     - assets/lotties/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
