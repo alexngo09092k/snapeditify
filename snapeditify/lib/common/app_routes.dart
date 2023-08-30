@@ -3,30 +3,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/create_id_photo/create_id_photo.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
+import 'package:snapeditify/pages/remove_object/remove_object.dart';
 import 'package:snapeditify/pages/restore/restore.dart';
 import 'package:snapeditify/pages/restyle/restyle.dart';
 import 'package:snapeditify/pages/enhance/enhance.dart';
 import 'package:snapeditify/pages/albums/albums.dart';
-import 'package:snapeditify/pages/remover/remover.dart';
 import 'package:snapeditify/pages/home/home_page.dart';
 import 'package:snapeditify/pages/maintenance/maintenance_page.dart';
 import 'package:snapeditify/pages/setting/setting.dart';
 import 'package:snapeditify/pages/sky/sky.dart';
 import 'package:snapeditify/pages/splash/splash_page.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
-import 'package:snapeditify/providers/create_id_photo/create_id_photo_provider.dart';
+import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
-import 'package:snapeditify/providers/remover/remover_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:snapeditify/providers/sky/sky_provider.dart';
-import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/common/extensions.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IAppRoutes {
   String get initialRoute;
@@ -70,13 +71,13 @@ class AppRoutes extends IAppRoutes {
     settingPage: (_) => const SettingPage(),
     premiumPage: (_) => const PremiumPage(),
     albumsPage: (_) => const AlbumsPage(),
-    removeObjectPage: (_) => const RemoverPage(),
     enhanceImagePage: (_) => const EnhancePage(),
     applyArtEffectPage: (_) => const RestylePage(),
     restorePage: (_) => const RestorePage(),
     skyPage: (_) => const SkyPage(),
 
     /// Features
+    removeObjectPage: (_) => const RemoveObjectPage(),
     createIDPhoto: (_) => const CreateIDPhotoPage(),
   };
 
@@ -103,24 +104,22 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const PremiumPage(), settings);
       case albumsPage:
         return buildRoute(const AlbumsPage(), settings);
-      case removeObjectPage:
-        return buildRoute(const RemoverPage(), settings);
-      case enhanceImagePage:
-        return buildRoute(const EnhancePage(), settings);
-      case applyArtEffectPage:
-        return buildRoute(const RestylePage(), settings);
       case photosPage:
         return buildRoute(PhotosPage(albumId: (settings.arguments as String?)), settings);
-      case animeAIPage:
-        return buildRoute(const AnimeAIPage(), settings);
+      case removeObjectPage:
+        return buildRoute(const RemoveObjectPage(), settings);
+      case enhanceImagePage:
+        return buildRoute(const EnhancePage(), settings);
       case restorePage: 
         return buildRoute(const RestorePage(), settings);
-      case skyPage:
-        return buildRoute(const SkyPage(), settings);
-
-      /// Features
       case createIDPhoto: 
         return buildRoute(const CreateIDPhotoPage(), settings);
+      case animeAIPage:
+        return buildRoute(const AnimeAIPage(), settings);
+      case skyPage:
+        return buildRoute(const SkyPage(), settings);
+      case applyArtEffectPage:
+        return buildRoute(const RestylePage(), settings);
       default:
         throw ErrorDescription("Not found page");
     }
@@ -130,36 +129,38 @@ class AppRoutes extends IAppRoutes {
 }
 
 extension AppRoutesUtils on IAppRoutes {
-  goAlbumsPage(BuildContext context, ImageTool imageTool) {
+  void goAlbumsPage(BuildContext context, ImageTool imageTool) {
     final provider = ManagerProvider.of<GalleryProvider>();
     provider.imageTool = imageTool;
     UserPermission.instance.requestStoragePermission(context, onHasPermisson: () async {
       /// SHOW LOADING POPUP
-      WidgetUtils.instance.showLoadingPopup();
+      LoadingPopup.show(S.of(context).pleaseWaitAMoment);
 
+      /// LISTEN PHOTOS AND REFRESH GALLERY
       await provider.listenPhotos();
       await provider.refreshGalleryList(true);
 
       /// HIDE LOADING
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
 
+      /// GO TO ALBUM PAGE
       Navigator.pushNamed(context, AppRoutes.albumsPage);
     });
   }
 
-  goPhotosPage(BuildContext context, {String? albumId}) {
+  void goPhotosPage(BuildContext context, {String? albumId}) {
     Navigator.pushNamed(context, AppRoutes.photosPage, arguments: albumId);
   }
 
-  goPremiumProPage(BuildContext context) {
+  void goPremiumProPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.premiumPage);
   }
 
-  goSettingPage(BuildContext context) {
+  void goSettingPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.settingPage);
   }
 
-  goEditImagePage(BuildContext context, {required Uint8List bytes, ImageTool? imageTool}) {
+  void goEditImagePage(BuildContext context, {required Uint8List bytes, ImageTool? imageTool}) {
     final provider = ManagerProvider.of<GalleryProvider>();
     if (imageTool != null) provider.imageTool = imageTool;
     UserPermission.instance.requestStoragePermission(
@@ -170,12 +171,13 @@ extension AppRoutesUtils on IAppRoutes {
         late final String target;
 
         /// SHOW LOADING POPUP
-        WidgetUtils.instance.showLoadingPopup();
+        LoadingPopup.show(S.of(context).pleaseWaitAMoment);
 
+        /// CHECK TARGET PAGE
         switch (current) {
           case ImageTool.removePeople:
           case ImageTool.oneTouchRemoveAll:
-            res = await ManagerProvider.of<RemoverProvider>().setImage(context, bytes: bytes);
+            res = await ManagerProvider.of<RemoveObjectProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.removeObjectPage;
             break;
           case ImageTool.applyArtEffect:
@@ -199,16 +201,15 @@ extension AppRoutesUtils on IAppRoutes {
             target = AppRoutes.skyPage;
             break;
           case ImageTool.makeIDPassportPhoto:
-            res = await ManagerProvider.of<CreateIDPhotoProvider>().setImage(context, bytes: bytes);
+            res = await ManagerProvider.of<EditBackgroundProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.createIDPhoto;
             break;
-         
           default:
-            throw ErrorDescription("Not support action");
+            break;
         }
 
         /// HIDE LOADING
-        WidgetUtils.instance.dimiss();
+        LoadingPopup.hide();
 
         if (res) {
           if (imageTool != null) {

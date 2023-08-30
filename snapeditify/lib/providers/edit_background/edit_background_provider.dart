@@ -1,57 +1,40 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:async';
 import 'dart:convert';
-import 'dart:ui' as ui;
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/pages/remover/widgets/ai_guide.dart';
-import 'package:snapeditify/pages/remover/widgets/brush_guide.dart';
 import 'package:snapeditify/providers/edit_background/edit_background_state.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
-import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
-abstract class IEditBackgroundProvider extends EditImageProvider with StorageProvider {
+abstract class IEditBackgroundProvider extends EditImageProvider {
   @override
   EditBackgroundState get state;
 
-  bool get canRemove;
-  bool get canUndo;
-  bool get canRedo;
-  bool get canCompare;
-  bool get canRevert;
-  bool get strokeWidthIsChanged;
+  WidgetsToImageController get widgetsToImageController;
 
-  bool undo();
+  Future<bool> removeBackground(BuildContext context);
 
-  bool redo();
+  void changeBackgroundColor(Color color);
 
-  Future<bool> revert();
-
-  Future<bool> compare();
-
-  bool changeStrokeWidth(BuildContext context, double strokeWidth);
-
-  bool changeStrokeColor(BuildContext context, Color strokeColor);
-
-  bool showAutoAIGuide();
-
-  bool showBrushGuide();
+  void changeRatio(double ratio);
 }
 
-class EditBackgroundProvider extends IEditBackgroundProvider with ProviderDelegate {
+class EditBackgroundProvider extends IEditBackgroundProvider {
   static final IEditBackgroundProvider _instance = EditBackgroundProvider.internal();
 
   static IEditBackgroundProvider get instance => _instance;
 
   EditBackgroundProvider.internal() {
+    _widgetsToImageController = WidgetsToImageController();
     _state = EditBackgroundState();
     _state.addListener(notifyListeners);
   }
@@ -60,237 +43,61 @@ class EditBackgroundProvider extends IEditBackgroundProvider with ProviderDelega
   @override
   EditBackgroundState get state => _state;
 
+  late WidgetsToImageController _widgetsToImageController;
   @override
-  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBase64, _state.image.imageUI);
+  WidgetsToImageController get widgetsToImageController => _widgetsToImageController;
+
+  EditedImageVM? _editedImage;
+  @override
+  EditedImageVM? get editedImage => _editedImage;
 
   @override
-  bool get canUndo => _state.prev != null || _state.paint.canUndo;
+  bool get canSave => _state.mask.isNotEmpty;
 
   @override
-  bool get canRedo => _state.next != null || _state.paint.canRedo;
-
-  @override
-  bool get canRemove {
-    return false;
+  void changeRatio(double ratio) {
+    _state.ratio = ratio;
   }
 
   @override
-  bool get canCompare => _state.prev != null;
+  void changeBackgroundColor(Color color) {
+    _state.color = color;
+  }
 
-  bool _compared = false;
   @override
-  Future<bool> compare() async {
-    if (canCompare) {
-      Debug.log("===== COMPARE ====");
-      if (!_compared) {
-        Debug.log("===== COMPARE ORIGINAL BACKGROUND====");
-        _state.paint.background = originalImage.imageUI.backgroundDrawable;
-        _compared = true;
-      } else {
-        Debug.log("===== COMPARE CURRENT BACKGROUND====");
-        _state.paint.background = _state.image.imageUI.backgroundDrawable;
-        _compared = false;
-      }
-      return true;
+  Future<bool> saveImage(BuildContext context) async {
+    final Uint8List? image = await _widgetsToImageController.capture();
+    if(image != null) {
+      final imageUI = await ImageUtils.instance.base64ToImageUI(base64.encode(image));
+      _editedImage = EditedImageVM(base64.encode(image), imageUI);
     }
-    return false;
+    return super.saveImage(context);
   }
 
   @override
-  bool get canSave => _state.prev != null;
-
-  @override
-  bool get canRevert => _state.prev != null;
-
-  bool _strokeChanged = false;
-
-  @override
-  bool get strokeWidthIsChanged => _strokeChanged;
-
-  set strokeWidthIsChanged(bool value) {
-    if (_strokeChanged != value) {
-      _strokeChanged = value;
-      notifyListeners();
-    }
-  }
-
-  @override
-  bool redo() {
-    if (_state.paint.canRedo) {
-      /// REDO PAINT
-      Debug.log("===== PAINT REDO ====");
-      _state.paint.redo();
-      return true;
-    } else if (_state.next != null) {
-      /// REDO STATE
-      Debug.log("===== STATE REDO ====");
-      _state.removeListener(notifyListeners);
-      _state = _state.next!..prev = _state;
-      notifyListeners();
-      return true;
-    }
-    return false;
-  }
-
-  @override
-  bool undo() {
-    if (_state.paint.canUndo) {
-      /// UNDO PAINT
-      Debug.log("===== PAINT UNDO ====");
-      _state.paint.undo();
-      return true;
-    } else if (_state.prev != null) {
-      /// UNDO STATE
-      Debug.log("===== STATE UNDO ====");
-      _state.removeListener(notifyListeners);
-      _state = _state.prev!..next = _state;
-      notifyListeners();
-      return true;
-    }
-    return false;
-  }
-
-  @override
-  bool showAutoAIGuide() {
-    int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.autoAIGuide);
-    if (num != null && num > 1) return false;
-
-    WidgetUtils.instance.showDialog(builder: (_) => const AIGuide());
-    AsyncStorage.instance.setInt(AsyncStorageKey.instance.autoAIGuide, num == null ? 1 : num + 1);
-    return true;
-  }
-
-  @override
-  bool showBrushGuide() {
-    int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.brushGuide);
-    if (num != null && num > 1) return false;
-
-    WidgetUtils.instance.showDialog(builder: (_) => const BrushGuide());
-    AsyncStorage.instance.setInt(AsyncStorageKey.instance.brushGuide, num == null ? 1 : num + 1);
-    return true;
-  }
-
-  @override
-  Future<bool> revert() {
-    Debug.log("===== REVERT ====");
-    _state.removeListener(notifyListeners);
-    _state = EditBackgroundState(
-      strokeColor: _state.strokeColor,
-      strokeWidth: _state.strokeWidth,
-    );
-    _state.addListener(notifyListeners);
-    return _state.setImage(originalImage.imageBase64);
-  }
-
-  Future<bool> toAI(BuildContext context) async {
+  Future<bool> removeBackground(BuildContext context) async {
     /// CHECKING ENVIROMENT
-    final result = await checkEnviroment(context, retry: (_) => toAI(context));
-    if (!result) return false;
-
-    if (_state.mode == RemoveObjectMode.ai) return true;
-
-    /// SHOW ADS
-    adProvider.handleAd();
-
-    /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
-
-    /// CALL API
-   ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
-    SnapEditResponse<ScanObjectResponse?> res = await Services.instance.snapEdit.scanObject(body);
-
-    if (res.data != null) {
-      /// SET NEW SESSION ID
-      // _state.sessionId = res.data!.sessionId;
-
-      /// AI MODE
-      Debug.log("===== TO AI MODE ====");
-      _state.mode = RemoveObjectMode.ai;
-
-      /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
-
-      /// SHOW GUIDE
-      showAutoAIGuide();
-
-      return true;
-    }
-
-    /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).aiDetection, 
-        message: S.of(context).failedToDetectObjectPleaseTryAgain, 
-        retry: (_) => toAI(context),
-      );
-      Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
-    }
-
-    return false;
-  }
-
-  bool toBrush(BuildContext context) {
-    if (_state.mode == RemoveObjectMode.brush) return true;
-
-    /// BACK TO BRUSH MODE
-    _state.mode = RemoveObjectMode.brush;
-    Debug.log("===== TO BRUSH MODE ====");
-    return true;
-  }
-
-  bool toErase(BuildContext context) {
-    if (_state.mode == RemoveObjectMode.erase) return true;
-
-    /// BACK TO ERASE MODE
-    _state.mode = RemoveObjectMode.erase;
-    Debug.log("===== TO ERASE MODE ====");
-
-    return true;
-  }
-
-  Future<bool> removeObjects(BuildContext context) async {
-    /// CHECKING ENVIROMENT
-    final result = await checkEnviroment(context, retry: (_) => removeObjects(context));
+    final result = await checkEnviroment(context, retry: (_) => removeBackground(context));
     if (!result) return false;
 
     renewSavedFile();
 
-    if (!canRemove) return false;
-
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
+    LoadingPopup.show("Please wait amoment!");
+
+    /// SHOW ADS
+    adProvider.handleAd();
 
     /// CALL API
-    ui.Image mask = await _state.paint.renderMask(originalImage.size);
-    String? maskBase64 = await ImageUtils.instance.imageUIToBase64(mask);
-    if (maskBase64 == null) {
-      /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
-      return false;
-    }
-
-    RemoveObjectBody body = RemoveObjectBody(originalPreviewImage: _state.image.imageBytes, maskBrush: base64.decode(maskBase64), sessionId: _state.sessionId);
-    SnapEditResponse<RemoveObjectResponse?> res = await Services.instance.snapEdit.removeObject(body);
-
+    RemoveBackgroundBody body = RemoveBackgroundBody(inputImage: _state.image.imageBytes, imageId: null);
+    final SnapEditResponse<RemoveBackgroundResponse?> res = await Services.instance.snapEdit.removeBackground(body);
     if (res.data != null) {
-      Debug.log("===== REMOVE OBJECTS ${res.data} =====");
-
-      /// CREATE NEW STATE WITH SET SESSION ID TO USED FOR NEXT STATE
-      _state.next = _state.copyWith(prev: _state, drawables: []);
-
-      /// MUST CALL SET IMAGE BEFORE SET FOR CURRENT STATE
-      await _state.next!.setImage(res.data!.editedImage.image);
-
-      /// AFTER NEXT STATE SETTED IMAGE
-      _state.removeListener(notifyListeners);
-      _state = _state.next!;
-      _state.addListener(notifyListeners);
-      notifyListeners();
+      /// REMOVED BACKGROUND IMAGE
+      _state.mask = base64.decode(res.data!.output);
 
       /// HIDE LOADING POPUP
       WidgetUtils.instance.dimiss();
+
       return true;
     }
 
@@ -299,83 +106,22 @@ class EditBackgroundProvider extends IEditBackgroundProvider with ProviderDelega
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).removeObjects, 
-        message: S.of(context).failedToRemoveObjectsPleaseTryAgain, 
-        retry: (_) => removeObjects(context),
+        title: S.of(context).createIdPhoto,
+        message: "",
+        retry: (_) => removeBackground(context),
       );
-      Debug.log("===== REMOVE OBJECTS ${res.message} =====");
+      Debug.log('===== REMOVE BACKGROUND IMAGE ${res.message} =====');
     }
 
     return false;
   }
 
   @override
-  bool changeStrokeWidth(BuildContext context, double strokeWidth) {
-    _state.strokeWidth = strokeWidth;
-
-    /// CACHE LOCAL STORAGE
-    AsyncStorage.instance.setDouble(AsyncStorageKey.instance.strokeWidth, _state.strokeWidth);
-    return true;
-  }
-
-  @override
-  bool changeStrokeColor(BuildContext context, Color strokeColor) {
-    _state.strokeColor = strokeColor;
-
-    /// CACHE LOCAL STORAGE
-    AsyncStorage.instance.setInt(AsyncStorageKey.instance.strokeColor, _state.strokeColor.value);
-    return true;
-  }
-
-  @override
   Future<bool> refresh(BuildContext context) async {
-    _compared = false;
-    _strokeChanged = false;
     _state.removeListener(notifyListeners);
-    _state = EditBackgroundState(strokeColor: _state.strokeColor, strokeWidth: _state.strokeWidth);
+    _state.dispose();
+    _state = EditBackgroundState();
     _state.addListener(notifyListeners);
     return super.refresh(context);
-  }
-
-  @override
-  Future<bool> registered() {
-    syncFromStorage();
-    return super.registered();
-  }
-
-  @override
-  void clean([bool notify = false]) {
-    _compared = false;
-    _strokeChanged = false;
-    _state = EditBackgroundState();
-    if (notify) notifyListeners();
-  }
-
-  @override
-  Future<bool> cleanToStorage([bool notify = false]) async {
-    clean(notify);
-    AsyncStorage.instance.remove(AsyncStorageKey.instance.strokeColor);
-    AsyncStorage.instance.remove(AsyncStorageKey.instance.strokeWidth);
-    return true;
-  }
-
-  @override
-  Future<void> syncFromServer([bool notify = false]) async {
-    return;
-  }
-
-  @override
-  void syncFromStorage([bool notify = false]) {
-    int? strokeColor = AsyncStorage.instance.getInt(AsyncStorageKey.instance.strokeColor);
-    if (strokeColor != null) {
-      _state.strokeColor = Color(strokeColor);
-    }
-
-    double? strokeWidth = AsyncStorage.instance.getDouble(AsyncStorageKey.instance.strokeWidth);
-    if (strokeWidth != null) {
-      _state.strokeWidth = strokeWidth;
-    }
-
-    if (notify) notifyListeners();
   }
 }

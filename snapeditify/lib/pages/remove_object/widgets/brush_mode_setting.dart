@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/providers/remover/remover_provider.dart';
-import 'package:snapeditify/providers/remover/remover_state.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class BrushModeSetting extends StatelessWidget {
@@ -15,7 +15,7 @@ class BrushModeSetting extends StatelessWidget {
         SizedBox(width: AppDimensions.instance.padding),
 
         /// BRUSH BUTTON
-        PropConsumer<IRemoverProvider, bool>(
+        PropConsumer<IRemoveObjectProvider, bool>(
           select: (p) => p.state.mode == RemoveObjectMode.brush,
           builder: (_, __, p, isBrush) => GestureDetector(
             onTap: () => p.toBrush(context),
@@ -31,7 +31,7 @@ class BrushModeSetting extends StatelessWidget {
 
         /// STROKE WIDTH SLIDER
         Expanded(
-          child: PropConsumer<RemoverProvider, double>(
+          child: PropConsumer<RemoveObjectProvider, double>(
             select: (p) => p.state.strokeWidth,
             builder: (_, __, p, strokeWidth) => Slider(
               min: 10,
@@ -47,7 +47,7 @@ class BrushModeSetting extends StatelessWidget {
         ),
 
         /// ERASE BUTTON
-        PropConsumer<IRemoverProvider, bool>(
+        PropConsumer<IRemoveObjectProvider, bool>(
           select: (p) => p.state.mode == RemoveObjectMode.erase,
           builder: (_, __, p, isEraser) => GestureDetector(
             onTap: () => p.toErase(context),

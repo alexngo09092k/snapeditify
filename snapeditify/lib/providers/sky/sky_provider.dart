@@ -11,6 +11,7 @@ import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class ISkyProvider extends EditImageProvider with StorageProvider {
   @override
@@ -124,7 +125,7 @@ class SkyProvider extends ISkyProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
+    LoadingPopup.show("Please wait amoment!");
 
     /// SHOW ADS
     adProvider.handleAd();
@@ -139,7 +140,7 @@ class SkyProvider extends ISkyProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
       return true;
     }
 

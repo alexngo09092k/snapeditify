@@ -20,6 +20,7 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/view_models/editing_image_vm.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 import 'package:snapeditify/widgets/app_use/saved_mage_preview.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;
@@ -29,7 +30,7 @@ abstract class EditImageProvider extends Provider {
 
   SnapEditConfig get config => Configuration.instance.snapEdit;
 
-  EditedImageVM get editedImage;
+  EditedImageVM? get editedImage;
 
   bool get canSave;
 
@@ -83,18 +84,18 @@ abstract class EditImageProvider extends Provider {
 
       final provider = ManagerProvider.of<GalleryProvider>();
 
-      if (_savedFile == null) {
+      if (_savedFile == null && editedImage != null) {
         /// SHOW LOADING
-        WidgetUtils.instance.showLoadingPopup();
+        LoadingPopup.show("Please wait amoment!");
         
         /// SHOW ADS
         adProvider.handleAd();
 
         /// SAVE IMAGE
-        _savedFile = await provider.saveImage(editedImage.imageBytes);
+        _savedFile = await provider.saveImage(editedImage!.imageBytes);
 
         /// HIDE LOADING
-        WidgetUtils.instance.dimiss();
+        LoadingPopup.hide();
       }
 
       if (_savedFile != null) {
@@ -102,9 +103,9 @@ abstract class EditImageProvider extends Provider {
         await showDialog<bool>(
           context: context,
           builder: (_) => SavedImagePreview(
-            editedImage: editedImage,
+            editedImage: editedImage!,
             imageTool: provider.imageTool,
-            onNewEditImage: (__) => AppRoutes.instance.goEditImagePage(context, bytes: editedImage.imageBytes, imageTool: __),
+            onNewEditImage: (__) => AppRoutes.instance.goEditImagePage(context, bytes: editedImage!.imageBytes, imageTool: __),
             savedFile: _savedFile!,
             onShare: () => Share.shareXFiles(
               [XFile(savedFile!.path)],

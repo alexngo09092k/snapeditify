@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/pages/remover/widgets/ai_guide.dart';
-import 'package:snapeditify/pages/remover/widgets/brush_guide.dart';
+import 'package:snapeditify/pages/remove_object/widgets/ai_guide.dart';
+import 'package:snapeditify/pages/remove_object/widgets/brush_guide.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
-import 'package:snapeditify/providers/remover/remover_state.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/image.dart';
@@ -18,10 +18,11 @@ import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
-abstract class IRemoverProvider extends EditImageProvider with StorageProvider {
+abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
   @override
-  RemoverState get state;
+  RemoveObjectState get state;
 
   bool get canRemove;
   bool get canUndo;
@@ -55,19 +56,19 @@ abstract class IRemoverProvider extends EditImageProvider with StorageProvider {
   bool showBrushGuide();
 }
 
-class RemoverProvider extends IRemoverProvider with ProviderDelegate {
-  static final IRemoverProvider _instance = RemoverProvider.internal();
+class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
+  static final IRemoveObjectProvider _instance = RemoveObjectProvider.internal();
 
-  static IRemoverProvider get instance => _instance;
+  static IRemoveObjectProvider get instance => _instance;
 
-  RemoverProvider.internal() {
-    _state = RemoverState();
+  RemoveObjectProvider.internal() {
+    _state = RemoveObjectState();
     _state.addListener(notifyListeners);
   }
 
-  late RemoverState _state;
+  late RemoveObjectState _state;
   @override
-  RemoverState get state => _state;
+  RemoveObjectState get state => _state;
 
   @override
   EditedImageVM get editedImage => EditedImageVM(_state.image.imageBase64, _state.image.imageUI);
@@ -185,7 +186,7 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
   Future<bool> revert() {
     Debug.log("===== REVERT ====");
     _state.removeListener(notifyListeners);
-    _state = RemoverState(
+    _state = RemoveObjectState(
       strokeColor: _state.strokeColor,
       strokeWidth: _state.strokeWidth,
     );
@@ -205,11 +206,14 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
     adProvider.handleAd();
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
+    LoadingPopup.show(S.of(context).pleaseWaitAMoment);
 
     /// CALL API
-   ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
+    ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
     SnapEditResponse<ScanObjectResponse?> res = await Services.instance.snapEdit.scanObject(body);
+
+    /// DETECTED OBJECT
+    LoadingPopup.setMessage("Detecting object");
 
     if (res.data != null) {
       /// DETECTED OBJECT VM
@@ -222,14 +226,14 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
       _state.detectedObjects = detectedObjectVMs;
 
       /// SET NEW SESSION ID
-      // _state.sessionId = res.data!.sessionId;
+      _state.sessionId = res.data!.sessionId;
 
       /// AI MODE
       Debug.log("===== TO AI MODE ====");
       _state.mode = RemoveObjectMode.ai;
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
 
       /// SHOW GUIDE
       showAutoAIGuide();
@@ -238,7 +242,7 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    LoadingPopup.hide();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
@@ -294,14 +298,14 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
     if (!canRemove) return false;
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
+    LoadingPopup.show(S.of(context).pleaseWaitAMoment);
 
     /// CALL API
     ui.Image mask = await _state.paint.renderMask(originalImage.size);
     String? maskBase64 = await ImageUtils.instance.imageUIToBase64(mask);
     if (maskBase64 == null) {
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
       return false;
     }
 
@@ -309,8 +313,6 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
     SnapEditResponse<RemoveObjectResponse?> res = await Services.instance.snapEdit.removeObject(body);
 
     if (res.data != null) {
-      Debug.log("===== REMOVE OBJECTS ${res.data} =====");
-
       /// CREATE NEW STATE WITH SET SESSION ID TO USED FOR NEXT STATE
       _state.next = _state.copyWith(prev: _state, drawables: []);
 
@@ -324,12 +326,12 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    LoadingPopup.hide();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
@@ -337,7 +339,6 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
         message: S.of(context).failedToRemoveObjectsPleaseTryAgain, 
         retry: (_) => removeObjects(context),
       );
-      Debug.log("===== REMOVE OBJECTS ${res.message} =====");
     }
 
     return false;
@@ -366,7 +367,7 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
     _compared = false;
     _strokeChanged = false;
     _state.removeListener(notifyListeners);
-    _state = RemoverState(strokeColor: _state.strokeColor, strokeWidth: _state.strokeWidth);
+    _state = RemoveObjectState(strokeColor: _state.strokeColor, strokeWidth: _state.strokeWidth);
     _state.addListener(notifyListeners);
     return super.refresh(context);
   }
@@ -381,7 +382,7 @@ class RemoverProvider extends IRemoverProvider with ProviderDelegate {
   void clean([bool notify = false]) {
     _compared = false;
     _strokeChanged = false;
-    _state = RemoverState();
+    _state = RemoveObjectState();
     if (notify) notifyListeners();
   }
 

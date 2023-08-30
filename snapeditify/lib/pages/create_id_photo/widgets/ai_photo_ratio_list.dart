@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/providers/create_id_photo/create_id_photo_provider.dart';
+import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
 
 class AIPhotoRatioList extends StatelessWidget {
   const AIPhotoRatioList({super.key});
@@ -44,7 +44,7 @@ class RatioItem extends StatelessWidget {
         horizontal: AppDimensions.instance.paddingX(0.5),
         vertical: AppDimensions.instance.padding,
       ),
-      child: PropConsumer<ICreateIDPhotoProvider, double>(
+      child: PropConsumer<IEditBackgroundProvider, double>(
         select: (_) => _.state.ratio,
         builder: (_, __, p, c) {
           return GestureDetector(

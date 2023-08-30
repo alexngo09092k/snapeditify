@@ -3,7 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/create_id_photo/widgets/id_photo.dart';
 import 'package:snapeditify/pages/create_id_photo/widgets/id_photo_control.dart';
-import 'package:snapeditify/providers/create_id_photo/create_id_photo_provider.dart';
+import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
 import 'package:snapeditify/widgets/app_use/app_layout.dart';
 import 'package:snapeditify/widgets/app_use/save_button.dart';
 
@@ -14,7 +14,7 @@ class CreateIDPhotoPage extends StatefulWidget {
   State<CreateIDPhotoPage> createState() => _CreateIDPhotoPageState();
 }
 
-class _CreateIDPhotoPageState extends ProviderStateObserver<CreateIDPhotoPage, CreateIDPhotoProvider> {
+class _CreateIDPhotoPageState extends ProviderStateObserver<CreateIDPhotoPage, EditBackgroundProvider> {
   @override
   void onNextFrame(Duration timestamp) {
     provider.removeBackground(context);
@@ -27,7 +27,7 @@ class _CreateIDPhotoPageState extends ProviderStateObserver<CreateIDPhotoPage, C
       screen: S.of(context).createIdPhoto,
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
-      action: const SaveButton<ICreateIDPhotoProvider>(),
+      action: const SaveButton<IEditBackgroundProvider>(),
       children: const [
         IDPhoto(),
         AIPhotoSizeControl(),

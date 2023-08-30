@@ -1,12 +1,8 @@
-import 'dart:typed_data';
-import 'dart:ui' as ui;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 
 class WidgetUtils {
@@ -68,40 +64,6 @@ class WidgetUtils {
         ],
       );
     });
-  }
-
-  Future<T?> showLoadingPopup<T>() {
-    return showDialog<T>(
-      barrierDismissible: false,
-      useSafeArea: false,
-      builder: (BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AppCard(
-            constraints: const BoxConstraints(minHeight: 100, minWidth: 100),
-            color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
-            padding: EdgeInsets.all(AppDimensions.instance.padding),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CupertinoActivityIndicator(
-                    color: Theme.of(context).colorScheme.onSurface),
-                SizedBox(height: AppDimensions.instance.padding),
-                Text(
-                  S.of(context).pleaseWaitAMoment,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
   }
 
   Future<T?> showNoInternetPopup<T>({void Function(BuildContext)? retry}) {
@@ -168,8 +130,12 @@ class WidgetUtils {
         backgroundColor: Theme.of(context).colorScheme.primary,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-                Radius.circular(AppDimensions.instance.radius))),
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              AppDimensions.instance.radius,
+            ),
+          ),
+        ),
         content: Text(message, style: Theme.of(context).textTheme.bodyLarge),
       ),
     );

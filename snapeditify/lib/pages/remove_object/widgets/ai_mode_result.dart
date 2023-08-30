@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/pages/remover/widgets/detected_object_list.dart';
-import 'package:snapeditify/providers/remover/remover_provider.dart';
+import 'package:snapeditify/pages/remove_object/widgets/detected_object_list.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/sliding_control.dart';
@@ -17,7 +17,7 @@ class AIModeResult extends StatefulWidget {
 }
 
 class _AIModeResultState
-    extends ProviderStateObserver<AIModeResult, RemoverProvider> {
+    extends ProviderStateObserver<AIModeResult, RemoveObjectProvider> {
   final ValueNotifier<int> _indexTab = ValueNotifier(0);
 
   late final PageController _controller;
@@ -79,7 +79,7 @@ class _AIModeResultState
                   child: Row(
                     children: [
                       const CustomIcon(CupertinoIcons.back),
-                      PropConsumer<IRemoverProvider, int>(
+                      PropConsumer<IRemoveObjectProvider, int>(
                         select: (p) => p.state.detectedObjects.length,
                         builder: (_, __, ___, count) => Text(
                           '$count ${S.of(context).objects}',

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/providers/create_id_photo/create_id_photo_provider.dart';
+import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class AIPhotoColorList extends StatefulWidget {
@@ -12,7 +12,7 @@ class AIPhotoColorList extends StatefulWidget {
   State<AIPhotoColorList> createState() => _AIPhotoColorListState();
 }
 
-class _AIPhotoColorListState extends ProviderStateful<AIPhotoColorList, CreateIDPhotoProvider> {
+class _AIPhotoColorListState extends ProviderStateful<AIPhotoColorList, EditBackgroundProvider> {
   Future _showColorPopup<T>(BuildContext context) {
     return AwesomeAppState.dialog<T>(
       builder: (_) => Dialog(

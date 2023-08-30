@@ -10,6 +10,7 @@ import 'package:snapeditify/services/snap_edit/src/apis/restore.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IRestoreProvider extends EditImageProvider {
   @override
@@ -73,7 +74,7 @@ class RestoreProvider extends IRestoreProvider {
     renewSavedFile();
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
+    LoadingPopup.show("Please wait amoment!");
 
     /// SHOW ADS
     adProvider.handleAd();
@@ -86,12 +87,12 @@ class RestoreProvider extends IRestoreProvider {
       notifyListeners();
       
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    LoadingPopup.hide();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(

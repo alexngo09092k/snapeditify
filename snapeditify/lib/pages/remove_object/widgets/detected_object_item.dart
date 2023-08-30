@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/providers/remover/remover_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/tile_row.dart';
 
-class DetectedObjectItem extends ProviderStateless<IRemoverProvider> {
+class DetectedObjectItem extends ProviderStateless<IRemoveObjectProvider> {
   DetectedObjectItem({super.key, required this.maskId});
   final int maskId;
   
@@ -29,7 +29,7 @@ class DetectedObjectItem extends ProviderStateless<IRemoverProvider> {
         ),
       ),
     );
-    final actionWidget = PropConsumer<IRemoverProvider, bool>(
+    final actionWidget = PropConsumer<IRemoveObjectProvider, bool>(
       select: (p) => detectedObject.isSelected,
       builder: (_, __, ___, isSelected) => Container(
         alignment: Alignment.center,
@@ -49,7 +49,7 @@ class DetectedObjectItem extends ProviderStateless<IRemoverProvider> {
       detectedObject.objectDescription,
       style: Theme.of(context).textTheme.titleMedium,
     );
-    final removeText = PropConsumer<IRemoverProvider, bool>(
+    final removeText = PropConsumer<IRemoveObjectProvider, bool>(
       select: (p) => detectedObject.isRemoved,
       builder: (_, __, ___, isRemoved) => isRemoved
           ? Padding(

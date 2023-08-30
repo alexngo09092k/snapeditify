@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/providers/remover/remover_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
-class RemoveObjectRevert extends ProviderStateless<IRemoverProvider> {
+class RemoveObjectRevert extends ProviderStateless<IRemoveObjectProvider> {
   RemoveObjectRevert({super.key});
   _revert(BuildContext context) {
     WidgetUtils.instance.alert(
@@ -33,7 +33,7 @@ class RemoveObjectRevert extends ProviderStateless<IRemoverProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return PropConsumer<IRemoverProvider, bool>(
+    return PropConsumer<IRemoveObjectProvider, bool>(
       select: (p) => p.canRevert,
       builder: (_, __, ___, canRevert) => GestureDetector(
         onTap: canRevert ? () => _revert(context) : null,

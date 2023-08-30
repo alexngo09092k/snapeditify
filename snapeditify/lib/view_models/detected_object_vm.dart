@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/providers/remover/remover_state.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
 import 'package:snapeditify/services/snap_edit/snap_edit.dart';
 import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
@@ -40,9 +40,9 @@ class DetectedObjectVM extends DetectedObject {
     }
   }
 
-  RemoverState state;
+  RemoveObjectState state;
 
-  factory DetectedObjectVM.fromDetectedObject(DetectedObject detectedObject, RemoverState state) {
+  factory DetectedObjectVM.fromDetectedObject(DetectedObject detectedObject, RemoveObjectState state) {
     return DetectedObjectVM(
       accuracy: detectedObject.accuracy,
       box: detectedObject.box,
@@ -68,7 +68,7 @@ class DetectedObjectVM extends DetectedObject {
     String? image,
     bool? isRemoved,
     bool? isSelected,
-    RemoverState? state,
+    RemoveObjectState? state,
   }) {
     final other = DetectedObjectVM(
       box: box ?? this.box,

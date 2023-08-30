@@ -11,8 +11,8 @@ enum RemoveObjectMode {
   erase,
 }
 
-class RemoverState extends EditImageState {
-  RemoverState({
+class RemoveObjectState extends EditImageState {
+  RemoveObjectState({
     RemoveObjectMode mode = RemoveObjectMode.brush,
     Color strokeColor = Colors.red,
     double strokeWidth = 40,
@@ -46,17 +46,17 @@ class RemoverState extends EditImageState {
     _paint.addListener(notifyState);
   }
 
-  RemoverState copyWith({
+  RemoveObjectState copyWith({
     RemoveObjectMode? mode,
     Color? strokeColor,
     double? strokeWidth,
     List<Drawable>? drawables,
     String? sessionId,
     Map<int, DetectedObjectVM>? detectedObjects,
-    RemoverState? prev,
-    RemoverState? next,
+    RemoveObjectState? prev,
+    RemoveObjectState? next,
   }) {
-    final other = RemoverState(
+    final other = RemoveObjectState(
       mode: mode ?? this.mode,
       strokeWidth: strokeWidth ?? this.strokeWidth,
       strokeColor: strokeColor ?? this.strokeColor,
@@ -155,9 +155,9 @@ class RemoverState extends EditImageState {
   }
 
   /// PREV STATE
-  RemoverState? _prev;
-  RemoverState? get prev => _prev;
-  set prev(RemoverState? value) {
+  RemoveObjectState? _prev;
+  RemoveObjectState? get prev => _prev;
+  set prev(RemoveObjectState? value) {
     if (_prev != value) {
       _prev = value;
       notifyState();
@@ -165,9 +165,9 @@ class RemoverState extends EditImageState {
   }
 
   /// NEXT STATE
-  RemoverState? _next;
-  RemoverState? get next => _next;
-  set next(RemoverState? value) {
+  RemoveObjectState? _next;
+  RemoveObjectState? get next => _next;
+  set next(RemoveObjectState? value) {
     if (_next != value) {
       _next = value;
       notifyState();
@@ -182,7 +182,7 @@ class RemoverState extends EditImageState {
 }
 
 /// AI DETECTED OBECTS HANDLER
-extension DetectedObjectEx on RemoverState {
+extension DetectedObjectEx on RemoveObjectState {
   _addAllBoxMask() {
     List<RectangleDrawable> drawables = [];
     for (var detectedObject in _detectedObjects.values) {

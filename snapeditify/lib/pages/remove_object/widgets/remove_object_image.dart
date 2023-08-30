@@ -3,13 +3,13 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/providers/remover/remover_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
 
-class RemoveObjectImage extends ProviderStateless<IRemoverProvider>  {
+class RemoveObjectImage extends ProviderStateless<IRemoveObjectProvider>  {
   RemoveObjectImage({super.key, this.onStartDraw, this.onEndDraw});
   final Function()? onStartDraw;
   final Function()? onEndDraw;
@@ -41,7 +41,7 @@ class RemoveObjectImage extends ProviderStateless<IRemoverProvider>  {
                 Center(
                   child: AspectRatio(
                     aspectRatio: provider.state.image.ratio,
-                    child: PropConsumer<IRemoverProvider, PainterController>(
+                    child: PropConsumer<IRemoveObjectProvider, PainterController>(
                       select: (p) => p.state.paint,
                       builder: (_, __, ___, paint) => FlutterPainter(
                         controller: paint,
@@ -58,7 +58,7 @@ class RemoveObjectImage extends ProviderStateless<IRemoverProvider>  {
 
                 /// STROKE WIDTH
                 Center(
-                  child: PropConsumer<IRemoverProvider, bool>(
+                  child: PropConsumer<IRemoveObjectProvider, bool>(
                     select: (p) => p.strokeWidthIsChanged,
                     builder: (_, __, ___, strokeWidthIsChanged) => strokeWidthIsChanged
                         ? AwesomeAnimation<double>.tweenSequence(
@@ -66,7 +66,7 @@ class RemoveObjectImage extends ProviderStateless<IRemoverProvider>  {
                             items: [TweenSequenceItem(tween: Tween(begin: 0, end: 1), weight: 1)],
                             builder: (_, __, animation, ___) => Opacity(
                               opacity: animation.value,
-                              child: PropConsumer<IRemoverProvider, double>(
+                              child: PropConsumer<IRemoveObjectProvider, double>(
                                 select: (p) => p.state.strokeWidth,
                                 builder: (_, __, ___, strokeWidth) => Container(
                                   width: strokeWidth,
@@ -96,7 +96,7 @@ class RemoveObjectImage extends ProviderStateless<IRemoverProvider>  {
                             /// UNDO BUTTON
                             GestureDetector(
                               onTap: provider.undo,
-                              child: PropConsumer<IRemoverProvider, bool>(
+                              child: PropConsumer<IRemoveObjectProvider, bool>(
                                 select: (p) => p.canUndo,
                                 builder: (_, __, ___, canUndo) => CustomIcon.defaultStyle(
                                   context,
@@ -110,7 +110,7 @@ class RemoveObjectImage extends ProviderStateless<IRemoverProvider>  {
                             /// REDO BUTTON
                             GestureDetector(
                               onTap: provider.redo,
-                              child: PropConsumer<IRemoverProvider, bool>(
+                              child: PropConsumer<IRemoveObjectProvider, bool>(
                                 select: (p) => p.canRedo,
                                 builder: (_, __, ___, canRedo) => CustomIcon.defaultStyle(
                                   context,
@@ -123,7 +123,7 @@ class RemoveObjectImage extends ProviderStateless<IRemoverProvider>  {
                         ),
 
                         ///REMOVE BUTTON
-                        PropConsumer<IRemoverProvider, bool>(
+                        PropConsumer<IRemoveObjectProvider, bool>(
                           select: (p) => p.canRemove,
                           builder: (_, __, ___, canRemove) => canRemove
                               ? CustomButton(
@@ -158,7 +158,7 @@ class RemoveObjectImage extends ProviderStateless<IRemoverProvider>  {
                             GestureDetector(
                               onTapDown: (_) => provider.compare(),
                               onTapUp: (_) => provider.compare(),
-                              child: PropConsumer<IRemoverProvider, bool>(
+                              child: PropConsumer<IRemoveObjectProvider, bool>(
                                 select: (p) => p.canCompare,
                                 builder: (_, __, ___, canCompare) => CustomIcon.defaultStyle(
                                   context,

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
+import 'package:fluttering_analytics/analytics/index.dart';
 import 'package:fluttering_iap/iap/iap.dart';
 import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 import 'package:snapeditify/app.dart';
@@ -11,9 +12,9 @@ import 'package:snapeditify/firebase_options.dart';
 import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/app_theme_provider.dart';
-import 'package:snapeditify/providers/create_id_photo/create_id_photo_provider.dart';
+import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
-import 'package:snapeditify/providers/remover/remover_provider.dart';
+import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
@@ -28,18 +29,18 @@ void main() {
       AwesomeAdvertisement.instance,
       AwesomeIAP.instance,
       AwesomeRemoteConfig.instance,
+      AwesomeAnalytics.instance,
       AppThemeProvider(themeMode: ThemeMode.light, locale: const Locale('en')),
     ],
     lazyProviders: [
       () => GalleryProvider.instance,
-      () => RemoverProvider.instance,
+      () => RemoveObjectProvider.instance,
       () => EnhanceProvider.instance,
+      () => RestoreProvider.instance,
+      () => EditBackgroundProvider.instance,
+      () => SkyProvider.instance,
       () => RestyleProvider.instance,
       () => AnimeAIProvider.instance,
-      () => SkyProvider.instance,
-      () => RestoreProvider.instance,
-      /// Features
-      () => CreateIDPhotoProvider.instance,
     ],
     onWillInitialize: () async {
       await Firebase.initializeApp(
