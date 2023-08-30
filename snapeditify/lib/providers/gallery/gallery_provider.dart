@@ -175,8 +175,7 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Future<File?> saveImage(Uint8List data) async {
     try {
-      final String name =
-          '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
+      final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
       if (CurrentPlatform.instance.isHuawei) {
         final result = await ImageGallerySaver.saveImage(
           data,
@@ -191,9 +190,7 @@ class GalleryProvider extends IGalleryProvider {
         final File imageFile = File('${cacheDirectory.path}/$name.jpg');
         imageFile.writeAsBytesSync(data);
 
-        if (result != null &&
-            result['filePath'] != null &&
-            await imageFile.exists()) {
+        if (result != null && result['filePath'] != null && await imageFile.exists()) {
           /// REFRESH IMAGE
           await refreshGalleryList(true);
 

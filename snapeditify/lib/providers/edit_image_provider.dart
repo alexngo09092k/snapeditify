@@ -15,6 +15,7 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/view_models/editing_image_vm.dart';
@@ -49,7 +50,11 @@ abstract class EditImageProvider extends Provider {
     /// RENEW STATE
     if (refesh) await refresh(context);
 
-    _originalImage = EditingImageVM(base64.encode(bytes));
+    /// CONVERT TO JPG
+    String imageBase64 = base64.encode(bytes);
+    imageBase64 = await ImageUtils.instance.imageBase64ToJPG(imageBase64);
+
+    _originalImage = EditingImageVM(imageBase64);
     await _originalImage.paintParse();
 
     /// SET IMAGE FOR STATE

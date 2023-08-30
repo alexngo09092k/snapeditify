@@ -38,7 +38,8 @@ class EndPoints {
 
   factory EndPoints.defaultValue() {
     return const EndPoints(
-      removeObject: "api/v6/erase",
+      removeObject: "api/object_removal/v5/erase",
+      removeOneTouch: "api/object_removal/v5/onetouch_suggest",
       scanObject: "api/v6/ai_detection",
       enhanceImage: "api/v2/pro/enhance",
       restyleEffects: "https://assets.snapedit.app/restyle/styles.json",
@@ -48,7 +49,6 @@ class EndPoints {
       generateVideo: "api/video/v1/generate",
       removeBackground: "api/rmbg/v1",
       backgroundEffects: "https://assets.snapedit.app/removebg/backgrounds.json",
-      removeOneTouch: "api/object_removal/v5/onetouch_suggest",
       saveImagelarge: "api/v6/save_large_image",
       skyImage: "api/sky/v1",
       skyEffects: "https://assets.snapedit.app/skywizard/backgrounds.json",

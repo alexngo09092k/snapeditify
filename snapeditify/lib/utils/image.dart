@@ -63,6 +63,19 @@ class ImageUtils {
       height: size.height.toInt(),
     );
 
-    return base64.encode(imagepkg.encodePng(destImage));
+    return base64.encode(imagepkg.encodeJpg(destImage));
   }
+
+  Future<String> imageBase64ToJPG(String imageBase64) async {
+    Uint8List imageBytes = base64.decode(imageBase64);
+    imagepkg.Image? src = imagepkg.decodeImage(imageBytes);
+    return base64.encode(imagepkg.encodeJpg(src!));
+  }
+
+  Future<String> imageBase64ToPNG(String imageBase64) async {
+    Uint8List imageBytes = base64.decode(imageBase64);
+    imagepkg.Image? src = imagepkg.decodeImage(imageBytes);
+    return base64.encode(imagepkg.encodePng(src!));
+  }
+
 }
