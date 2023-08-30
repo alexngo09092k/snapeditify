@@ -859,6 +859,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Apply effects`
+  String get applyEffects {
+    return Intl.message(
+      'Apply effects',
+      name: 'applyEffects',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cutout objects`
+  String get cutoutObjects {
+    return Intl.message(
+      'Cutout objects',
+      name: 'cutoutObjects',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enhance photo`
+  String get enhancePhoto {
+    return Intl.message(
+      'Enhance photo',
+      name: 'enhancePhoto',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/home/widgets/home_base_tools.dart';
 import 'package:snapeditify/pages/home/widgets/home_light_dark.dart';
 import 'package:snapeditify/pages/home/widgets/home_localizations.dart';
@@ -46,16 +47,19 @@ class _HomePageState extends State<HomePage> {
         SizedBox(height: AppDimensions.instance.padding),
 
         /// REMOVE OBJECTS
-        const HomeBaseTools(
-          title: 'Remove Objects',
-          [ImageTool.removePeople, ImageTool.oneTouchRemoveAll],
+        HomeBaseTools(
+          title: S.of(context).removeObjects,
+          const [
+            ImageTool.removePeople,
+            ImageTool.oneTouchRemoveAll,
+          ],
           hot: true,
         ),
 
         SizedBox(height: AppDimensions.instance.padding),
 
         /// ENHANCE PHOTO
-        const HomeBaseTools(title: 'Enhance Photo', [
+        HomeBaseTools(title: S.of(context).enhancePhoto, const [
           ImageTool.enhancePortrait,
           ImageTool.upscaleImage,
           ImageTool.restoreOldPhoto
@@ -63,8 +67,8 @@ class _HomePageState extends State<HomePage> {
 
         SizedBox(height: AppDimensions.instance.padding),
 
-        /// CUTOUT OBJECT
-        const HomeBaseTools(title: 'Cutout Object', [
+        /// CUTOUT OBJECTS
+        HomeBaseTools(title: S.of(context).cutoutObjects, const [
           ImageTool.makeIDPassportPhoto,
           ImageTool.productPhoto,
           ImageTool.changeBackground
@@ -72,8 +76,8 @@ class _HomePageState extends State<HomePage> {
 
         SizedBox(height: AppDimensions.instance.padding),
 
-        /// ART EFFECT
-        const HomeBaseTools(title: 'Art Effect', [
+        /// APPLY EFFECTS
+        HomeBaseTools(title: S.of(context).applyEffects, const [
           ImageTool.changeYourSky,
           ImageTool.applyArtEffect,
           ImageTool.createAnimeAI

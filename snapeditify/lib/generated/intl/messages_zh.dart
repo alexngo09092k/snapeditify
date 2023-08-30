@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("所有更改将被丢失。您的图像将恢复到原始状态。"),
         "allow": MessageLookupByLibrary.simpleMessage("允许"),
         "animeAi": MessageLookupByLibrary.simpleMessage("动漫AI"),
+        "applyEffects": MessageLookupByLibrary.simpleMessage("Apply effects"),
         "areYouHappyWith": MessageLookupByLibrary.simpleMessage("您对此是否满意\n"),
         "artEffect": MessageLookupByLibrary.simpleMessage("艺术效果"),
         "auto": MessageLookupByLibrary.simpleMessage("自动"),
@@ -43,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createIdPhoto":
             MessageLookupByLibrary.simpleMessage("Create ID Photo"),
         "createNanimeAvatar": MessageLookupByLibrary.simpleMessage("创建动漫头像"),
+        "cutoutObjects": MessageLookupByLibrary.simpleMessage("Cutout objects"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("放弃更改并还原？"),
         "downloadNow": MessageLookupByLibrary.simpleMessage("立即下载"),
@@ -50,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enhance": MessageLookupByLibrary.simpleMessage("增强"),
         "enhanceImage": MessageLookupByLibrary.simpleMessage("增强图像"),
         "enhanceNimageQuality": MessageLookupByLibrary.simpleMessage("提高图像质量"),
+        "enhancePhoto": MessageLookupByLibrary.simpleMessage("Enhance photo"),
         "failedToChangeStylePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage("更改样式失败，请重试。"),
         "failedToDetectObjectPleaseTryAgain":

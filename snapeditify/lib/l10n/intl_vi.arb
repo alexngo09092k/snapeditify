@@ -80,5 +80,8 @@
   "languages": "Ngôn ngữ",
   "rateSnapeditify": "Rate SnapEditify",
   "hot": "HOT",
-  "createIdPhoto": "Create ID Photo"
+  "createIdPhoto": "Create ID Photo",
+  "applyEffects": "Apply effects",
+  "cutoutObjects": "Cutout objects",
+  "enhancePhoto": "Enhance photo"
 }
