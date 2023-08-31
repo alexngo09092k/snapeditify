@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/pages/create_id_photo/widgets/ai_photo_color_list.dart';
-import 'package:snapeditify/pages/create_id_photo/widgets/ai_photo_ratio_list.dart';
+import 'package:snapeditify/pages/generate_id_photo/widgets/ai_photo_color_list.dart';
+import 'package:snapeditify/pages/generate_id_photo/widgets/ai_photo_ratio_list.dart';
 
 class AIPhotoSizeControl extends StatelessWidget {
   const AIPhotoSizeControl({super.key});

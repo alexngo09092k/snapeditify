@@ -14,6 +14,7 @@ import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/app_theme_provider.dart';
 import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
+import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
@@ -41,6 +42,7 @@ void main() {
       () => SkyProvider.instance,
       () => RestyleProvider.instance,
       () => AnimeAIProvider.instance,
+      () => FastEditorProvider.instance,
     ],
     onWillInitialize: () async {
       await Firebase.initializeApp(

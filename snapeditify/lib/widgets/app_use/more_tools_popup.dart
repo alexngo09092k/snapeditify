@@ -72,6 +72,7 @@ class ImageToolItem extends StatelessWidget {
                   imageTool.title,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: ThemeData.light().textTheme.bodyLarge!.color,
+                        fontWeight: FontWeight.w700,
                       ),
                 )
               ],

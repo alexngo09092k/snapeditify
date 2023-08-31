@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/pages/create_id_photo/create_id_photo.dart';
+import 'package:snapeditify/pages/fast_editor/fast_editor.dart';
+import 'package:snapeditify/pages/generate_id_photo/generate_id_photo.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
@@ -13,14 +14,15 @@ import 'package:snapeditify/pages/restore/restore.dart';
 import 'package:snapeditify/pages/restyle/restyle.dart';
 import 'package:snapeditify/pages/enhance/enhance.dart';
 import 'package:snapeditify/pages/albums/albums.dart';
-import 'package:snapeditify/pages/home/home_page.dart';
-import 'package:snapeditify/pages/maintenance/maintenance_page.dart';
+import 'package:snapeditify/pages/home/home.dart';
+import 'package:snapeditify/pages/maintenance/maintenance.dart';
 import 'package:snapeditify/pages/setting/setting.dart';
 import 'package:snapeditify/pages/sky/sky.dart';
 import 'package:snapeditify/pages/splash/splash_page.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
+import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
@@ -57,9 +59,10 @@ class AppRoutes extends IAppRoutes {
   static const String splashPage = 'splash_page';
   static const String skyPage = 'sky_page';
   static const String restorePage = 'restore_page';
+  static const String fastEditor = 'fastEditor';
 
   /// Features
-  static const String createIDPhoto = 'create_id_photo_page';
+  static const String generateIDPhoto = 'create_id_photo_page';
 
   static final IAppRoutes _instance = AppRoutes._internal();
 
@@ -71,14 +74,13 @@ class AppRoutes extends IAppRoutes {
     settingPage: (_) => const SettingPage(),
     premiumPage: (_) => const PremiumPage(),
     albumsPage: (_) => const AlbumsPage(),
-    enhanceImagePage: (_) => const EnhancePage(),
-    applyArtEffectPage: (_) => const RestylePage(),
-    restorePage: (_) => const RestorePage(),
-    skyPage: (_) => const SkyPage(),
-
-    /// Features
     removeObjectPage: (_) => const RemoveObjectPage(),
-    createIDPhoto: (_) => const CreateIDPhotoPage(),
+    enhanceImagePage: (_) => const EnhancePage(),
+    restorePage: (_) => const RestorePage(),
+    generateIDPhoto: (_) => const GenerateIDPhotoPage(),
+    applyArtEffectPage: (_) => const RestylePage(),
+    skyPage: (_) => const SkyPage(),
+    fastEditor: (_) => const FastEditor(),
   };
 
   @override
@@ -112,14 +114,16 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const EnhancePage(), settings);
       case restorePage: 
         return buildRoute(const RestorePage(), settings);
-      case createIDPhoto: 
-        return buildRoute(const CreateIDPhotoPage(), settings);
+      case generateIDPhoto: 
+        return buildRoute(const GenerateIDPhotoPage(), settings);
       case animeAIPage:
         return buildRoute(const AnimeAIPage(), settings);
       case skyPage:
         return buildRoute(const SkyPage(), settings);
       case applyArtEffectPage:
         return buildRoute(const RestylePage(), settings);
+      case fastEditor:
+        return buildRoute(const FastEditor(), settings);
       default:
         throw ErrorDescription("Not found page");
     }
@@ -202,7 +206,11 @@ extension AppRoutesUtils on IAppRoutes {
             break;
           case ImageTool.makeIDPassportPhoto:
             res = await ManagerProvider.of<EditBackgroundProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.createIDPhoto;
+            target = AppRoutes.generateIDPhoto;
+            break;
+          case ImageTool.fastEditor:
+            res = await ManagerProvider.of<FastEditorProvider>().setImage(context, bytes: bytes);
+            target = AppRoutes.fastEditor;
             break;
           default:
             break;

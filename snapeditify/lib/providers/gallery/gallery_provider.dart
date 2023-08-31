@@ -27,6 +27,8 @@ enum ImageTool {
   generateAnimeAI,
   applyArtEffect,
   changeYourSky,
+
+  fastEditor,
 }
 
 extension ImageToolEX on ImageTool {
@@ -54,6 +56,8 @@ extension ImageToolEX on ImageTool {
         return 'Apply Art Effect';
       case ImageTool.changeYourSky:
         return 'Change Sky';
+      case ImageTool.fastEditor:
+        return 'Fast Editor';
     }
   }
 
@@ -81,6 +85,8 @@ extension ImageToolEX on ImageTool {
         return 'Art Effect';
       case ImageTool.changeYourSky:
         return 'Sky';
+      case ImageTool.fastEditor:
+        return 'Editor';
     }
   }
 
@@ -108,6 +114,8 @@ extension ImageToolEX on ImageTool {
         return AppAssets.instance.applyEffect;
       case ImageTool.changeYourSky:
         return AppAssets.instance.changeYourSky;
+      default:
+        return AppAssets.instance.imagePlaceholder;
     }
   }
 
@@ -135,6 +143,8 @@ extension ImageToolEX on ImageTool {
         return AppAssets.instance.icArtEffect;
       case ImageTool.changeYourSky:
         return AppAssets.instance.icSky;
+      case ImageTool.fastEditor:
+      return AppAssets.instance.icEditor;
     }
   }
 
@@ -162,6 +172,8 @@ extension ImageToolEX on ImageTool {
         return const Color.fromRGBO(252, 245, 230, 1);
       case ImageTool.changeYourSky:
         return const Color.fromRGBO(214, 241, 247, 1);
+      case ImageTool.fastEditor:
+        return const Color.fromRGBO(223, 244, 234, 1);
     }
   }
 }
