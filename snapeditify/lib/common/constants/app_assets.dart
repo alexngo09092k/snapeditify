@@ -25,6 +25,7 @@ class AppAssets {
   final String imagePlaceholder = "$imagePath/image_place_holder.png";
   final String logo = "$imagePath/logo.png";
   final String placeholder = "$imagePath/placeholder.png";
+  final String animePlaceholder = "$imagePath/anime.png";
 
   /// Flags
   static const String flagPath = '$imagePath/flags';
@@ -66,31 +67,42 @@ class AppAssets {
 
   /// Suggest images demo
   /// Remove objects
-  final String rmb1 = "$imagePath/suggest_demos/rmb1.jpeg";
-  final String rmb2 = "$imagePath/suggest_demos/rmb2.jpeg";
-  final String rmb3 = "$imagePath/suggest_demos/rmb3.jpeg";
-
-  final String rmots1 = "$imagePath/suggest_demos/rmots1.jpeg";
-  final String rmots2 = "$imagePath/suggest_demos/rmots2.jpg";
-  final String rmots3 = "$imagePath/suggest_demos/rmots3.jpg";
+  final String removeObject1 = "$imagePath/suggest_demos/remove_object1.webp";
+  final String removeObject2 = "$imagePath/suggest_demos/remove_object2.webp";
+  final String removeObject3 = "$imagePath/suggest_demos/remove_object3.webp";
 
   /// Enhance photos
-  final String e1 = "$imagePath/suggest_demos/e1.jpeg";
-  final String e2 = "$imagePath/suggest_demos/e2.jpg";
-  final String e3 = "$imagePath/suggest_demos/e3.jpg";
+  final String enhance1 = "$imagePath/suggest_demos/enhance1.webp";
+  final String enhance2 = "$imagePath/suggest_demos/enhance2.webp";
+  final String enhance3 = "$imagePath/suggest_demos/enhance3.webp";
 
-  final String rs1 = "$imagePath/suggest_demos/rs1.jpg";
-  final String rs2 = "$imagePath/suggest_demos/rs2.jpeg";
-  final String rs3 = "$imagePath/suggest_demos/rs3.jpeg";
+  /// Passport Maker
+  final String passportMaker1 = "$imagePath/suggest_demos/passport_maker1.webp";
+  final String passportMaker2 = "$imagePath/suggest_demos/passport_maker2.webp";
+  final String passportMaker3 = "$imagePath/suggest_demos/passport_maker3.webp";
 
-  /// Cutout objects
-  final String rmbg1 = "$imagePath/suggest_demos/rmbg1.jpeg";
-  final String rmbg2 = "$imagePath/suggest_demos/rmbg2.jpeg";
-  final String rmbg3= "$imagePath/suggest_demos/rmbg3.jpeg";
+  /// Restore
+  final String restore1 = "$imagePath/suggest_demos/restore1.webp";
+  final String restore2 = "$imagePath/suggest_demos/restore2.webp";
+  final String restore3 = "$imagePath/suggest_demos/restore3.webp";
 
+  /// Sky
+  final String sky1 = "$imagePath/suggest_demos/sky1.webp";
+  final String sky2 = "$imagePath/suggest_demos/sky2.webp";
+  final String sky3 = "$imagePath/suggest_demos/sky3.webp";
 
-  /// Apply effects
-  final String csk1 = "$imagePath/suggest_demos/csk1.png";
-  final String csk2 = "$imagePath/suggest_demos/csk2.png";
-  final String csk3 = "$imagePath/suggest_demos/csk3.png";
+  /// Anime AI
+  final String anime1 = "$imagePath/suggest_demos/anime1.jpg";
+  final String anime2 = "$imagePath/suggest_demos/anime2.webp";
+  final String anime3 = "$imagePath/suggest_demos/anime3.jpg";
+
+  /// Restyle
+  final String restyle1 = "$imagePath/suggest_demos/restyle1.webp";
+  final String restyle2 = "$imagePath/suggest_demos/restyle2.jpeg";
+  final String restyle3 = "$imagePath/suggest_demos/restyle3.webp";
+
+  /// Remove Background
+  final String removeBG1 = "$imagePath/suggest_demos/remove_bg1.webp";
+  final String removeBG2 = "$imagePath/suggest_demos/remove_bg2.webp";
+  final String removeBG3 = "$imagePath/suggest_demos/remove_bg3.webp";
 }

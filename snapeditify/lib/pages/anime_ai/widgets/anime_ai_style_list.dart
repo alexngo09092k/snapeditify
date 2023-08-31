@@ -60,6 +60,7 @@ class AnimeStyleItem extends StatelessWidget {
                 children: [
                   CustomImage(
                     image: style.thumbnailUrl,
+                    placeholder: AppAssets.instance.animePlaceholder,
                   ),
                   Positioned(
                     right: 0,
