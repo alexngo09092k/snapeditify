@@ -116,25 +116,25 @@ extension ImageToolEX on ImageTool {
       case ImageTool.removeObject:
         return AppAssets.instance.icRemoveObject;
       case ImageTool.oneTouchRemoveAll:
-        return AppAssets.instance.icAI;
+        return AppAssets.instance.icOneTouch;
       case ImageTool.enhanceImage:
-        return AppAssets.instance.icEnhence;
+        return AppAssets.instance.icEnhance;
       case ImageTool.upscaleImage:
-        return AppAssets.instance.icEnhence;
+        return AppAssets.instance.icEnhance;
       case ImageTool.restoreOldPhoto:
-        return AppAssets.instance.icEnhence;
+        return AppAssets.instance.icRestoration;
       case ImageTool.makeIDPassportPhoto:
-        return AppAssets.instance.icEnhence;
+        return AppAssets.instance.icEnhance;
       case ImageTool.productPhoto:
-        return AppAssets.instance.icAI;
+        return AppAssets.instance.icRemoveBG;
       case ImageTool.changeBackground:
-        return AppAssets.instance.icAI;
+        return AppAssets.instance.icRemoveBG;
       case ImageTool.generateAnimeAI:
-        return AppAssets.instance.icAI;
+        return AppAssets.instance.icAnimeAI;
       case ImageTool.applyArtEffect:
-        return AppAssets.instance.icAI;
+        return AppAssets.instance.icArtEffect;
       case ImageTool.changeYourSky:
-        return AppAssets.instance.icAI;
+        return AppAssets.instance.icSky;
     }
   }
 
@@ -314,8 +314,7 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Future<File?> saveImage(Uint8List data) async {
     try {
-      final String name =
-          '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
+      final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
       if (CurrentPlatform.instance.isHuawei) {
         final result = await ImageGallerySaver.saveImage(
           data,

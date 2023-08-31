@@ -33,9 +33,15 @@ class AppAssets {
   /// Icons
   static const String iconPath = '$imagePath/icons';
 
-  final String icEnhence = "$iconPath/ic_enhance.png";
+  final String icEnhance = "$iconPath/ic_enhance.png";
   final String icArtEffect = "$iconPath/ic_art_effect.png";
   final String icRemoveObject = "$iconPath/ic_remove_object.png";
+  final String icRemoveBG = "$iconPath/ic_remove_bg.png";
+  final String icRestoration = "$iconPath/ic_restoration.png";
+  final String icOneTouch = "$iconPath/ic_one_touch.png";
+  final String icRestyle = "$iconPath/ic_restyle.png";
+  final String icEditor = "$iconPath/ic_editor.png";
+  final String icSky = "$iconPath/ic_sky.png";
   final String icShare = "$iconPath/ic_share.png";
   final String icTerm = "$iconPath/ic_term.png";
   final String icFAQ = "$iconPath/ic_faq.png";
