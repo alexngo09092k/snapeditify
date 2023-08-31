@@ -192,7 +192,7 @@ extension AppRoutesUtils on IAppRoutes {
             res = await ManagerProvider.of<RestoreProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.restorePage;
             break;
-          case ImageTool.createAnimeAI:
+          case ImageTool.generateAnimeAI:
             res = await ManagerProvider.of<AnimeAIProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.animeAIPage;
             break;

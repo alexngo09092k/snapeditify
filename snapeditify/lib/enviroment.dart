@@ -201,30 +201,4 @@ const enviroment = {
       },
     ],
   },
-
-  //! ====================================== SNAPEDIT ==============================================
-  "snapEdit": {
-    'baseUrl': "https://be-prod-1.snapedit.app/",
-    // 'apiKey': "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
-    'apiKey': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoiMy4xLjAiLCJleHAiOjE3Njk2MjI0MDEsInN1YiI6Imlnbm9yZSIsInBsYXRmb3JtIjoiYW5kcm9pZCJ9.OufJuEzKvN2RVCw-Ofy1oY6d9oRuOnM_Vxmt6aqLWAk",
-    'version': "3.8.0",
-    'endPoints': {
-      'removeObject': "api/v6/erase",
-      'scanObject': "api/v6/ai_detection",
-      'enhanceImage': "api/v2/pro/enhance",
-      'restyleEffects': "https://assets.snapedit.app/restyle/styles.json",
-      'restyleImage': "api/v1/restyle",
-      'animeEffects': "https://assets.snapedit.app/imagen/styles.json",
-      'animeImage': "api/imagen/v1",
-      'generateVideo': "api/video/v1/generate",
-      'removeBackground': "api/rmbg/v1",
-      'backgroundEffects': "https://assets.snapedit.app/removebg/backgrounds.json",
-      'removeOneTouch': "api/object_removal/v5/onetouch_suggest",
-      'saveImagelarge': "api/v6/save_large_image",
-      'skyImage': "api/sky/v1",
-      'skyEffects': "https://assets.snapedit.app/skywizard/backgrounds.json",
-      'restoreImage': "api/restore/v1",
-    },
-    'maxFreeDownloadCount': 100,
-  },
 };

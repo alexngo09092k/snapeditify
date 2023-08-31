@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
         HomeBaseTools(title: S.of(context).applyEffects, const [
           ImageTool.changeYourSky,
           ImageTool.applyArtEffect,
-          ImageTool.createAnimeAI
+          ImageTool.generateAnimeAI
         ]),
 
         SizedBox(height: AppDimensions.instance.padding),

@@ -24,7 +24,7 @@ enum ImageTool {
   productPhoto,
   changeBackground,
 
-  createAnimeAI,
+  generateAnimeAI,
   applyArtEffect,
   changeYourSky,
 }
@@ -48,12 +48,39 @@ extension ImageToolEX on ImageTool {
         return 'Product Photo';
       case ImageTool.changeBackground:
         return 'Change Background';
-      case ImageTool.createAnimeAI:
-        return 'Create Anime AI';
+      case ImageTool.generateAnimeAI:
+        return 'Generate Anime AI';
       case ImageTool.applyArtEffect:
         return 'Apply Art Effect';
       case ImageTool.changeYourSky:
         return 'Change Sky';
+    }
+  }
+
+  String get shortTitle {
+    switch (this) {
+      case ImageTool.removeObject:
+        return 'Remover';
+      case ImageTool.oneTouchRemoveAll:
+        return '1-Touch';
+      case ImageTool.enhanceImage:
+        return 'Enhance';
+      case ImageTool.upscaleImage:
+        return 'Upscale';
+      case ImageTool.restoreOldPhoto:
+        return 'Restore';
+      case ImageTool.makeIDPassportPhoto:
+        return 'Make ID';
+      case ImageTool.productPhoto:
+        return 'Product';
+      case ImageTool.changeBackground:
+        return 'Change BG';
+      case ImageTool.generateAnimeAI:
+        return 'Anime AI';
+      case ImageTool.applyArtEffect:
+        return 'Art Effect';
+      case ImageTool.changeYourSky:
+        return 'Sky';
     }
   }
 
@@ -75,8 +102,8 @@ extension ImageToolEX on ImageTool {
         return AppAssets.instance.productPhoto;
       case ImageTool.changeBackground:
         return AppAssets.instance.changeBackground;
-      case ImageTool.createAnimeAI:
-        return AppAssets.instance.createAnimeAI;
+      case ImageTool.generateAnimeAI:
+        return AppAssets.instance.generateAnimeAI;
       case ImageTool.applyArtEffect:
         return AppAssets.instance.applyEffect;
       case ImageTool.changeYourSky:
@@ -102,7 +129,7 @@ extension ImageToolEX on ImageTool {
         return AppAssets.instance.icAI;
       case ImageTool.changeBackground:
         return AppAssets.instance.icAI;
-      case ImageTool.createAnimeAI:
+      case ImageTool.generateAnimeAI:
         return AppAssets.instance.icAI;
       case ImageTool.applyArtEffect:
         return AppAssets.instance.icAI;
@@ -129,7 +156,7 @@ extension ImageToolEX on ImageTool {
         return const Color.fromRGBO(252, 240, 245, 1);
       case ImageTool.changeBackground:
         return const Color.fromRGBO(241, 224, 165, 1);
-      case ImageTool.createAnimeAI:
+      case ImageTool.generateAnimeAI:
         return const Color.fromRGBO(206, 250, 220, 1); 
       case ImageTool.applyArtEffect:
         return const Color.fromRGBO(252, 245, 230, 1);
@@ -231,7 +258,7 @@ class GalleryProvider extends IGalleryProvider {
       AppAssets.instance.csk2,
       AppAssets.instance.csk3,
     ],
-    ImageTool.createAnimeAI: [
+    ImageTool.generateAnimeAI: [
       AppAssets.instance.csk1,
       AppAssets.instance.csk2,
       AppAssets.instance.csk3,

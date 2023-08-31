@@ -17,6 +17,9 @@ class EndPoints {
   final String skyImage;
   final String skyEffects;
   final String restoreImage;
+  final String passportMaker;
+  final String stickers;
+  final String inpaintSd;
 
   const EndPoints({
     required this.removeObject,
@@ -34,14 +37,17 @@ class EndPoints {
     required this.skyImage,
     required this.skyEffects,
     required this.restoreImage,
+    required this.passportMaker,
+    required this.stickers,
+    required this.inpaintSd,
   });
 
   factory EndPoints.defaultValue() {
     return const EndPoints(
-      removeObject: "api/v6/erase",
-      removeOneTouch: "api/object_removal/v5/onetouch_suggest",
+      removeObject: "api/object_removal/v6/erase",
+      removeOneTouch: "api/object_removal/v7/auto_suggest",
       scanObject: "api/v6/ai_detection",
-      enhanceImage: "api/v2/pro/enhance",
+      enhanceImage: "api/enhance/v2/pro",
       restyleEffects: "https://assets.snapedit.app/restyle/styles.json",
       restyleImage: "api/v1/restyle",
       animeEffects: "https://assets.snapedit.app/imagen/styles.json",
@@ -51,8 +57,11 @@ class EndPoints {
       backgroundEffects: "https://assets.snapedit.app/removebg/backgrounds.json",
       saveImagelarge: "api/v6/save_large_image",
       skyImage: "api/sky/v1",
+      passportMaker: "api/passport/v1",
       skyEffects: "https://assets.snapedit.app/skywizard/backgrounds.json",
       restoreImage: "api/restore/v1",
+      stickers: "https://assets.snapedit.app/stickers/stickers.json",
+      inpaintSd: "api/inpaintSD/v1",
     );
   }
 
@@ -73,6 +82,9 @@ class EndPoints {
       skyImage: map['skyImage'] as String,
       skyEffects: map['skyEffects'] as String,
       restoreImage: map['restoreImage'] as String,
+      passportMaker: map['passportMaker'] as String,
+      stickers: map['stickers'] as String,
+      inpaintSd: map['inpaintSd'] as String,
     );
   }
 
@@ -82,7 +94,7 @@ class EndPoints {
 
   @override
   String toString() {
-    return 'EndPoints(removeObject: $removeObject, scanObject: $scanObject, enhanceImage: $enhanceImage, restyleImage: $restyleImage, restyleEffects: $restyleEffects, animeImage: $animeImage, animeEffects: $animeEffects, generateVideo: $generateVideo, removeBackground: $removeBackground, backgroundEffects: $backgroundEffects, removeOneTouch: $removeOneTouch, saveImagelarge: $saveImagelarge, skyImage: $skyImage, skyEffects: $skyEffects, restoreImage: $restoreImage)';
+    return 'EndPoints(removeObject: $removeObject, scanObject: $scanObject, enhanceImage: $enhanceImage, restyleImage: $restyleImage, restyleEffects: $restyleEffects, animeImage: $animeImage, animeEffects: $animeEffects, generateVideo: $generateVideo, removeBackground: $removeBackground, backgroundEffects: $backgroundEffects, removeOneTouch: $removeOneTouch, saveImagelarge: $saveImagelarge, skyImage: $skyImage, skyEffects: $skyEffects, restoreImage: $restoreImage, passportMaker: $passportMaker, stickers: $stickers, inpaintSd: $inpaintSd)';
   }
 
   @override
@@ -104,7 +116,10 @@ class EndPoints {
       other.saveImagelarge == saveImagelarge &&
       other.skyImage == skyImage &&
       other.skyEffects == skyEffects &&
-      other.restoreImage == restoreImage;
+      other.restoreImage == restoreImage &&
+      other.passportMaker == passportMaker &&
+      other.stickers == stickers &&
+      other.inpaintSd == inpaintSd;
   }
 
   EndPoints copyWith({
@@ -123,6 +138,9 @@ class EndPoints {
     String? skyImage,
     String? skyEffects,
     String? restoreImage,
+    String? passportMaker,
+    String? stickers,
+    String? inpaintSd,
   }) {
     return EndPoints(
       removeObject: removeObject ?? this.removeObject,
@@ -140,6 +158,9 @@ class EndPoints {
       skyImage: skyImage ?? this.skyImage,
       skyEffects: skyEffects ?? this.skyEffects,
       restoreImage: restoreImage ?? this.restoreImage,
+      passportMaker: passportMaker ?? this.passportMaker,
+      stickers: stickers ?? this.stickers,
+      inpaintSd: inpaintSd ?? this.inpaintSd,
     );
   }
 
@@ -160,6 +181,9 @@ class EndPoints {
       'skyImage': skyImage,
       'skyEffects': skyEffects,
       'restoreImage': restoreImage,
+      'passportMaker': passportMaker,
+      'stickers': stickers,
+      'inpaintSd': inpaintSd,
     };
   }
 
@@ -179,6 +203,9 @@ class EndPoints {
       saveImagelarge.hashCode ^
       skyImage.hashCode ^
       skyEffects.hashCode ^
-      restoreImage.hashCode;
+      restoreImage.hashCode ^
+      passportMaker.hashCode ^ 
+      stickers.hashCode ^
+      inpaintSd.hashCode;
   }
 }

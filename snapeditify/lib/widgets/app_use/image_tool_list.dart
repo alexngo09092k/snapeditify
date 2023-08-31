@@ -22,8 +22,7 @@ class ImageToolList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final contentMaxWidth = AppDimensions.instance.contentMaxWidth;
-    final itemWidth = contentMaxWidth / 4 -
-        AppDimensions.instance.gridDelegate.mainAxisSpacing * 2;
+    final itemWidth = contentMaxWidth / 4 - AppDimensions.instance.gridDelegate.mainAxisSpacing * 2;
     return Padding(
       padding: EdgeInsets.only(bottom: AppDimensions.instance.paddingX(0.5)),
       child: Wrap(
@@ -34,11 +33,7 @@ class ImageToolList extends StatelessWidget {
             ...[
               ImageTool.removeObject,
               ImageTool.enhanceImage,
-              ImageTool.restoreOldPhoto,
-              ImageTool.applyArtEffect,
-              ImageTool.createAnimeAI,
-              ImageTool.changeBackground,
-              ImageTool.changeYourSky,
+              ImageTool.generateAnimeAI,
             ].map((e) {
               return GestureDetector(
                 onTap: () => onTool(e),
@@ -50,11 +45,18 @@ class ImageToolList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CustomIcon(e.icon, size: AppDimensions.instance.icon),
+                      CustomIcon(
+                        e.icon, 
+                        size: AppDimensions.instance.icon,
+                      ),
                       SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                      Text(e.title,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyLarge)
+                      Text(
+                        e.shortTitle,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.w700
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -70,11 +72,7 @@ class ImageToolList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CustomIcon(AppAssets.instance.icAI,
-                        size: AppDimensions.instance.icon),
-                    SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                    Text("More Tools",
-                        style: Theme.of(context).textTheme.bodyLarge)
+                    CustomIcon(AppAssets.instance.icAI, size: AppDimensions.instance.icon),
                   ],
                 ),
               ),

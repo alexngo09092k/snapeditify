@@ -56,7 +56,7 @@ class AppAssets {
   final String applyEffect = "$imagePath/tools/ApplyEffect.png";
   final String changeBackground = "$imagePath/tools/ChangeBackground.png";
   final String changeYourSky = "$imagePath/tools/ChangeYourSky.png";
-  final String createAnimeAI = "$imagePath/tools/CreateAnimeAI.png";
+  final String generateAnimeAI = "$imagePath/tools/CreateAnimeAI.png";
   final String enhanceImage = "$imagePath/tools/EnhancePortrait.png";
   final String makeIDPassport = "$imagePath/tools/MakeIDPassport.png";
   final String productPhoto = "$imagePath/tools/ProductPhoto.png";
