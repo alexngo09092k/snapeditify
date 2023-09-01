@@ -190,7 +190,7 @@ abstract class IGalleryProvider extends Provider with ProviderDelegate {
 
   Future<bool> initial(GalleryConfig config);
 
-  Future<bool> refreshGalleryList();
+  Future<bool> refreshGalleryList([bool notify = true]);
 
   Future<File?> saveImage(Uint8List data);
 

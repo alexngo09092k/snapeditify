@@ -7,6 +7,7 @@ import 'package:snapeditify/utils/image.dart';
 class EditingImageVM {
   EditingImageVM(Uint8List imageBytes) {
     _imageBytes = imageBytes;
+    _imageBase64 = base64.encode(_imageBytes);
   }
 
   late ui.Image _imageUI;
@@ -15,7 +16,8 @@ class EditingImageVM {
   late Uint8List _imageBytes;
   Uint8List get imageBytes => _imageBytes;
 
-  String get imageBase64 => base64.encode(_imageBytes);
+  late String _imageBase64;
+  String get imageBase64 => _imageBase64;
 
   Future<void> paintParse() async {
     _imageUI = await ImageUtils.instance.toImageUI(imageBytes);

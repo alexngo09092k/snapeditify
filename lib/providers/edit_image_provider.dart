@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +51,7 @@ abstract class EditImageProvider extends Provider {
     if (refesh) await refresh(context);
 
     /// CONVERT TO JPG
-    final imageBytes = await ImageUtils.instance.toJPG(bytes);
+    final imageBytes = ImageUtils.instance.toJPG(bytes);
 
     _originalImage = EditingImageVM(imageBytes);
     await _originalImage.paintParse();

@@ -16,9 +16,13 @@ class EnhancedVM {
     required this.index,
     required this.imageBase64,
     required this.state,
-  });
+  }) {
+    _imageBytes =  base64.decode(imageBase64);
+  }
 
-  Uint8List get imageBytes => base64.decode(imageBase64);
+  late Uint8List _imageBytes;
+  Uint8List get imageBytes => _imageBytes;
+  
   ui.Image? _imageUI;
   ui.Image? get imageUI => _imageUI;
 

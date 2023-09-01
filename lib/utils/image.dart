@@ -19,7 +19,8 @@ class ImageUtils {
   late ImagePicker _imagePicker;
 
   /// Pick image from camera or gallery
-  Future<File?> pickImage(ImageSource from, {int? quality, Function(File)? onImage}) async {
+  Future<File?> pickImage(ImageSource from,
+      {int? quality, Function(File)? onImage}) async {
     try {
       XFile? pickedFile = await _imagePicker.pickImage(
         source: from,
@@ -47,7 +48,8 @@ class ImageUtils {
     return imageBytes;
   }
 
-  Future<Uint8List> cropImage(Uint8List imageBytes, {required ui.Size size, required ui.Offset position}) async {
+  Future<Uint8List> cropImage(Uint8List imageBytes,
+      {required ui.Size size, required ui.Offset position}) async {
     imagepkg.Image? src = imagepkg.decodeImage(imageBytes);
     imagepkg.Image destImage = imagepkg.copyCrop(
       src!,
@@ -60,12 +62,12 @@ class ImageUtils {
     return imagepkg.encodePng(destImage);
   }
 
-  Future<Uint8List> toJPG(Uint8List imageBytes) async {
+  Uint8List toJPG(Uint8List imageBytes) {
     imagepkg.Image? src = imagepkg.decodeImage(imageBytes);
     return imagepkg.encodeJpg(src!);
   }
 
-  Future<Uint8List> toPNG(Uint8List imageBytes) async {
+  Uint8List toPNG(Uint8List imageBytes) {
     imagepkg.Image? src = imagepkg.decodeImage(imageBytes);
     return imagepkg.encodePng(src!);
   }

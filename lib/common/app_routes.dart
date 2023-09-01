@@ -21,6 +21,7 @@ import 'package:snapeditify/pages/sky/sky.dart';
 import 'package:snapeditify/pages/splash/splash_page.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
+import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
@@ -107,14 +108,15 @@ class AppRoutes extends IAppRoutes {
       case albumsPage:
         return buildRoute(const AlbumsPage(), settings);
       case photosPage:
-        return buildRoute(PhotosPage(albumId: (settings.arguments as String?)), settings);
+        return buildRoute(
+            PhotosPage(albumId: (settings.arguments as String?)), settings);
       case removeObjectPage:
         return buildRoute(const RemoveObjectPage(), settings);
       case enhanceImagePage:
         return buildRoute(const EnhancePage(), settings);
-      case restorePage: 
+      case restorePage:
         return buildRoute(const RestorePage(), settings);
-      case generateIDPhoto: 
+      case generateIDPhoto:
         return buildRoute(const GenerateIDPhotoPage(), settings);
       case animeAIPage:
         return buildRoute(const AnimeAIPage(), settings);
@@ -136,7 +138,8 @@ extension AppRoutesUtils on IAppRoutes {
   void goAlbumsPage(BuildContext context, ImageTool imageTool) {
     final provider = ManagerProvider.of<GalleryProvider>();
     provider.imageTool = imageTool;
-    UserPermission.instance.requestStoragePermission(context, onHasPermisson: () async {
+    UserPermission.instance.requestStoragePermission(context,
+        onHasPermisson: () async {
       /// SHOW LOADING POPUP
       LoadingPopup.show(S.of(context).pleaseWaitAMoment);
 
@@ -164,14 +167,15 @@ extension AppRoutesUtils on IAppRoutes {
     Navigator.pushNamed(context, AppRoutes.settingPage);
   }
 
-  void goEditImagePage(BuildContext context, {required Uint8List bytes, ImageTool? imageTool}) {
-    final provider = ManagerProvider.of<GalleryProvider>();
-    if (imageTool != null) provider.imageTool = imageTool;
+  void goEditImagePage(BuildContext context,
+      {required Uint8List bytes, ImageTool? imageTool}) {
+    final gProvider = ManagerProvider.of<GalleryProvider>();
+    if (imageTool != null) gProvider.imageTool = imageTool;
     UserPermission.instance.requestStoragePermission(
       context,
       onHasPermisson: () async {
-        final ImageTool current = provider.imageTool;
-        late final bool res;
+        final ImageTool current = gProvider.imageTool;
+        late final EditImageProvider provider;
         late final String target;
 
         /// SHOW LOADING POPUP
@@ -181,51 +185,53 @@ extension AppRoutesUtils on IAppRoutes {
         switch (current) {
           case ImageTool.removeObject:
           case ImageTool.oneTouchRemoveAll:
-            res = await ManagerProvider.of<RemoveObjectProvider>().setImage(context, bytes: bytes);
+            provider = ManagerProvider.of<RemoveObjectProvider>();
             target = AppRoutes.removeObjectPage;
             break;
           case ImageTool.applyArtEffect:
-            res = await ManagerProvider.of<RestyleProvider>().setImage(context, bytes: bytes);
+            provider = ManagerProvider.of<RestyleProvider>();
             target = AppRoutes.applyArtEffectPage;
             break;
           case ImageTool.enhanceImage:
-            res = await ManagerProvider.of<EnhanceProvider>().setImage(context, bytes: bytes);
+            provider = ManagerProvider.of<EnhanceProvider>();
             target = AppRoutes.enhanceImagePage;
             break;
           case ImageTool.restoreOldPhoto:
-            res = await ManagerProvider.of<RestoreProvider>().setImage(context, bytes: bytes);
+            provider = ManagerProvider.of<RestoreProvider>();
             target = AppRoutes.restorePage;
             break;
           case ImageTool.generateAnimeAI:
-            res = await ManagerProvider.of<AnimeAIProvider>().setImage(context, bytes: bytes);
+            provider = ManagerProvider.of<AnimeAIProvider>();
             target = AppRoutes.animeAIPage;
             break;
           case ImageTool.changeYourSky:
-            res = await ManagerProvider.of<SkyProvider>().setImage(context, bytes: bytes);
+            provider = ManagerProvider.of<SkyProvider>();
             target = AppRoutes.skyPage;
             break;
           case ImageTool.makeIDPassportPhoto:
-            res = await ManagerProvider.of<EditBackgroundProvider>().setImage(context, bytes: bytes);
+            provider = ManagerProvider.of<EditBackgroundProvider>();
             target = AppRoutes.generateIDPhoto;
             break;
           case ImageTool.fastEditor:
-            res = await ManagerProvider.of<FastEditorProvider>().setImage(context, bytes: bytes);
+            provider = ManagerProvider.of<FastEditorProvider>();
             target = AppRoutes.fastEditor;
             break;
           default:
             break;
         }
 
-        /// HIDE LOADING
-        LoadingPopup.hide();
+        provider.setImage(context, bytes: bytes).then((ok) {
+          /// HIDE LOADING
+          LoadingPopup.hide();
 
-        if (res) {
+          if (!ok) return;
+
           if (imageTool != null) {
             Navigator.pushReplacementNamed(context, target);
           } else {
             Navigator.pushNamed(context, target);
           }
-        }
+        });
       },
     );
   }
