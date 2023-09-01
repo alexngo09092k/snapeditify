@@ -6,7 +6,8 @@ import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class ImageToolList extends StatelessWidget {
-  const ImageToolList({super.key, required this.onTool});
+  const ImageToolList({super.key, required this.onTool, this.currentTool});
+  final ImageTool? currentTool;
   final Function(ImageTool) onTool;
 
   void showMoreTools(BuildContext context) async {
@@ -21,8 +22,15 @@ class ImageToolList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contentMaxWidth = AppDimensions.instance.contentMaxWidth;
-    final itemWidth = contentMaxWidth / 4 - AppDimensions.instance.gridDelegate.mainAxisSpacing * 2;
+    double contentMaxWidth = AppDimensions.instance.contentMaxWidth;
+    double itemWidth = contentMaxWidth / 4 - AppDimensions.instance.gridDelegate.mainAxisSpacing * 2;
+    List<ImageTool> tools = [
+      ImageTool.removeObject,
+      ImageTool.enhanceImage,
+      ImageTool.generateAnimeAI
+    ];
+    tools = tools.where((item) => item != currentTool).toList();
+    if (tools.length < 3) tools.add(ImageTool.applyArtEffect);
     return Padding(
       padding: EdgeInsets.only(bottom: AppDimensions.instance.paddingX(0.5)),
       child: Wrap(
@@ -30,11 +38,7 @@ class ImageToolList extends StatelessWidget {
           spacing: AppDimensions.instance.gridDelegate.mainAxisSpacing,
           runSpacing: AppDimensions.instance.gridDelegate.crossAxisSpacing,
           children: [
-            ...[
-              ImageTool.removeObject,
-              ImageTool.enhanceImage,
-              ImageTool.generateAnimeAI,
-            ].map((e) {
+            ...tools.map((e) {
               return GestureDetector(
                 onTap: () => onTool(e),
                 child: AppCard(
@@ -74,11 +78,19 @@ class ImageToolList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomIcon(
-                      Icons.menu,
+                      Icons.widgets_outlined,
                       size: AppDimensions.instance.icon,
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     SizedBox(height: AppDimensions.instance.paddingX(0.5)),
+                    Text(
+                      "See All",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                    )
                   ],
                 ),
               ),
