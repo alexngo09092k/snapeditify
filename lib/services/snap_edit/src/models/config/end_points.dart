@@ -2,89 +2,156 @@
 import 'dart:convert';
 
 class EndPoints {
-  final String removeObject;
-  final String scanObject;
-  final String enhanceImage;
-  final String restyleImage;
-  final String restyleEffects;
-  final String animeImage;
-  final String animeEffects;
-  final String generateVideo;
-  final String removeBackground;
-  final String backgroundEffects;
-  final String removeOneTouch;
-  final String saveImagelarge;
-  final String skyImage;
-  final String skyEffects;
-  final String restoreImage;
-  final String passportMaker;
-  final String stickers;
-  final String inpaintSd;
+  /// Remove Objects
+  /// Erase Image
+  final String erase;
+  final String erasePro;
 
-  const EndPoints({
-    required this.removeObject,
-    required this.scanObject,
-    required this.enhanceImage,
-    required this.restyleImage,
-    required this.restyleEffects,
-    required this.animeImage,
-    required this.animeEffects,
-    required this.generateVideo,
-    required this.removeBackground,
-    required this.backgroundEffects,
-    required this.removeOneTouch,
-    required this.saveImagelarge,
-    required this.skyImage,
-    required this.skyEffects,
-    required this.restoreImage,
-    required this.passportMaker,
-    required this.stickers,
-    required this.inpaintSd,
+  /// Erase Image With AI
+  final String ai;
+  final String aiPro;
+
+  /// Enhance Image
+  final String enhance;
+  final String enhancePro;
+
+  /// Restyle Image
+  final String restyle;
+  final String restylePro;
+
+  /// Styles Image List
+  final String styles;
+  final String stylesPro;
+
+  /// Anime Styles Image List
+  final String animeStyles;
+  final String animeStylesPro;
+
+  /// Anime AI Image
+  final String animeImageAI;
+  final String animeImageAIPro;
+
+  /// Anime AI Image
+  final String animeVideoAI;
+  final String animeVideoAIPro;
+
+  EndPoints({
+    required this.erase,
+    required this.erasePro,
+    required this.ai,
+    required this.aiPro,
+    required this.enhance,
+    required this.enhancePro,
+    required this.restyle,
+    required this.restylePro,
+    required this.styles,
+    required this.stylesPro,
+    required this.animeStyles,
+    required this.animeStylesPro,
+    required this.animeImageAI,
+    required this.animeImageAIPro,
+    required this.animeVideoAI,
+    required this.animeVideoAIPro,
   });
 
   factory EndPoints.defaultValue() {
-    return const EndPoints(
-      removeObject: "api/object_removal/v6/erase",
-      removeOneTouch: "api/object_removal/v7/auto_suggest",
-      scanObject: "api/v6/ai_detection",
-      enhanceImage: "api/enhance/v2/pro",
-      restyleEffects: "https://assets.snapedit.app/restyle/styles.json",
-      restyleImage: "api/v1/restyle",
-      animeEffects: "https://assets.snapedit.app/imagen/styles.json",
-      animeImage: "api/imagen/v1",
-      generateVideo: "api/video/v1/generate",
-      removeBackground: "api/rmbg/v1",
-      backgroundEffects: "https://assets.snapedit.app/removebg/backgrounds.json",
-      saveImagelarge: "api/v6/save_large_image",
-      skyImage: "api/sky/v1",
-      passportMaker: "api/passport/v1",
-      skyEffects: "https://assets.snapedit.app/skywizard/backgrounds.json",
-      restoreImage: "api/restore/v1",
-      stickers: "https://assets.snapedit.app/stickers/stickers.json",
-      inpaintSd: "api/inpaintSD/v1",
+    return EndPoints(
+      erase: "api/v6/erase",
+      erasePro: "api/v6/erase",
+      ai: "api/v6/ai_detection",
+      aiPro: "api/v6/ai_detection",
+      enhance: "api/v2/enhance",
+      enhancePro: "api/v2/pro/enhance",
+      restyle: "api/v1/restyle",
+      restylePro: "api/v1/restyle",
+      styles: "api/v1/restyle/styles",
+      stylesPro: "api/v1/restyle/styles",
+      animeStyles: "api/imagen/v1/styles",
+      animeStylesPro: "api/imagen/v1/styles",
+      animeImageAI: "api/imagen/v1",
+      animeImageAIPro: "api/imagen/v1",
+      animeVideoAI: "api/imagen/v1/video",
+      animeVideoAIPro: "api/imagen/v1/video",
     );
   }
 
-  factory EndPoints.fromMap(Map<String, dynamic> map) {
+  EndPoints copyWith({
+    String? erase,
+    String? erasePro,
+    String? ai,
+    String? aiPro,
+    String? enhance,
+    String? enhancePro,
+    String? restyle,
+    String? restylePro,
+    String? styles,
+    String? stylesPro,
+    String? animeStyles,
+    String? animeStylesPro,
+    String? animeImageAI,
+    String? animeImageAIPro,
+    String? animeVideoAI,
+    String? animeVideoAIPro,
+  }) {
     return EndPoints(
-      removeObject: map['removeObject'] as String,
-      scanObject: map['scanObject'] as String,
-      enhanceImage: map['enhanceImage'] as String,
-      restyleImage: map['restyleImage'] as String,
-      restyleEffects: map['restyleEffects'] as String,
-      animeImage: map['animeImage'] as String,
-      animeEffects: map['animeEffects'] as String,
-      generateVideo: map['generateVideo'] as String,
-      removeBackground: map['removeBackground'] as String,
-      backgroundEffects: map['backgroundEffects'] as String,
-      removeOneTouch: map['removeOneTouch'] as String,
-      saveImagelarge: map['saveImagelarge'] as String,
-      skyImage: map['skyImage'] as String,
-      skyEffects: map['skyEffects'] as String,
-      restoreImage: map['restoreImage'] as String,
-      passportMaker: map['passportMaker'] as String,
-      stickers: map['stickers'] as String,
-      inpaintSd: map['inpaintSd'] as String,
+      erase: erase ?? this.erase,
+      erasePro: erasePro ?? this.erasePro,
+      ai: ai ?? this.ai,
+      aiPro: aiPro ?? this.aiPro,
+      enhance: enhance ?? this.enhance,
+      enhancePro: enhancePro ?? this.enhancePro,
+      restyle: restyle ?? this.restyle,
+      restylePro: restylePro ?? this.restylePro,
+      styles: styles ?? this.styles,
+      stylesPro: stylesPro ?? this.stylesPro,
+      animeStyles: animeStyles ?? this.animeStyles,
+      animeStylesPro: animeStylesPro ?? this.animeStylesPro,
+      animeImageAI: animeImageAI ?? this.animeImageAI,
+      animeImageAIPro: animeImageAIPro ?? this.animeImageAIPro,
+      animeVideoAI: animeVideoAI ?? this.animeVideoAI,
+      animeVideoAIPro: animeVideoAIPro ?? this.animeVideoAIPro,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'erase': erase,
+      'erasePro': erasePro,
+      'ai': ai,
+      'aiPro': aiPro,
+      'enhance': enhance,
+      'enhancePro': enhancePro,
+      'restyle': restyle,
+      'restylePro': restylePro,
+      'styles': styles,
+      'stylesPro': stylesPro,
+      'animeStyles': animeStyles,
+      'animeStylesPro': animeStylesPro,
+      'animeImageAI': animeImageAI,
+      'animeImageAIPro': animeImageAIPro,
+      'animeVideoAI': animeVideoAI,
+      'animeVideoAIPro': animeVideoAIPro,
+    };
+  }
+
+  factory EndPoints.fromMap(Map<String, dynamic> map) {
+    return EndPoints.defaultValue().copyWith(
+      erase: map['erase'],
+      erasePro: map['erasePro'],
+      ai: map['ai'],
+      aiPro: map['aiPro'],
+      enhance: map['enhance'],
+      enhancePro: map['enhancePro'],
+      restyle: map['restyle'],
+      restylePro: map['restylePro'],
+      styles: map['styles'],
+      stylesPro: map['stylesPro'],
+      animeStyles: map['animeStyles'],
+      animeStylesPro: map['animeStylesPro'],
+      animeImageAI: map['animeImageAI'],
+      animeImageAIPro: map['animeImageAIPro'],
+      animeVideoAI: map['animeVideoAI'],
+      animeVideoAIPro: map['animeVideoAIPro'],
     );
   }
 
@@ -94,118 +161,48 @@ class EndPoints {
 
   @override
   String toString() {
-    return 'EndPoints(removeObject: $removeObject, scanObject: $scanObject, enhanceImage: $enhanceImage, restyleImage: $restyleImage, restyleEffects: $restyleEffects, animeImage: $animeImage, animeEffects: $animeEffects, generateVideo: $generateVideo, removeBackground: $removeBackground, backgroundEffects: $backgroundEffects, removeOneTouch: $removeOneTouch, saveImagelarge: $saveImagelarge, skyImage: $skyImage, skyEffects: $skyEffects, restoreImage: $restoreImage, passportMaker: $passportMaker, stickers: $stickers, inpaintSd: $inpaintSd)';
+    return 'EndPoints(erase: $erase, erasePro: $erasePro, ai: $ai, aiPro: $aiPro, enhance: $enhance, enhancePro: $enhancePro, restyle: $restyle, restylePro: $restylePro, styles: $styles, stylesPro: $stylesPro, animeStyles: $animeStyles, animeStylesPro: $animeStylesPro, animeImageAI: $animeImageAI, animeImageAIPro: $animeImageAIPro, animeVideoAI: $animeVideoAI, animeVideoAIPro: $animeVideoAIPro)';
   }
 
   @override
   bool operator ==(covariant EndPoints other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.removeObject == removeObject &&
-      other.scanObject == scanObject &&
-      other.enhanceImage == enhanceImage &&
-      other.restyleImage == restyleImage &&
-      other.restyleEffects == restyleEffects &&
-      other.animeImage == animeImage &&
-      other.animeEffects == animeEffects &&
-      other.generateVideo == generateVideo &&
-      other.removeBackground == removeBackground &&
-      other.backgroundEffects == backgroundEffects &&
-      other.removeOneTouch == removeOneTouch &&
-      other.saveImagelarge == saveImagelarge &&
-      other.skyImage == skyImage &&
-      other.skyEffects == skyEffects &&
-      other.restoreImage == restoreImage &&
-      other.passportMaker == passportMaker &&
-      other.stickers == stickers &&
-      other.inpaintSd == inpaintSd;
-  }
 
-  EndPoints copyWith({
-    String? removeObject,
-    String? scanObject,
-    String? enhanceImage,
-    String? restyleImage,
-    String? restyleEffects,
-    String? animeImage,
-    String? animeEffects,
-    String? generateVideo,
-    String? removeBackground,
-    String? backgroundEffects,
-    String? removeOneTouch,
-    String? saveImagelarge,
-    String? skyImage,
-    String? skyEffects,
-    String? restoreImage,
-    String? passportMaker,
-    String? stickers,
-    String? inpaintSd,
-  }) {
-    return EndPoints(
-      removeObject: removeObject ?? this.removeObject,
-      scanObject: scanObject ?? this.scanObject,
-      enhanceImage: enhanceImage ?? this.enhanceImage,
-      restyleImage: restyleImage ?? this.restyleImage,
-      restyleEffects: restyleEffects ?? this.restyleEffects,
-      animeImage: animeImage ?? this.animeImage,
-      animeEffects: animeEffects ?? this.animeEffects,
-      generateVideo: generateVideo ?? this.generateVideo,
-      removeBackground: removeBackground ?? this.removeBackground,
-      backgroundEffects: backgroundEffects ?? this.backgroundEffects,
-      removeOneTouch: removeOneTouch ?? this.removeOneTouch,
-      saveImagelarge: saveImagelarge ?? this.saveImagelarge,
-      skyImage: skyImage ?? this.skyImage,
-      skyEffects: skyEffects ?? this.skyEffects,
-      restoreImage: restoreImage ?? this.restoreImage,
-      passportMaker: passportMaker ?? this.passportMaker,
-      stickers: stickers ?? this.stickers,
-      inpaintSd: inpaintSd ?? this.inpaintSd,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'removeObject': removeObject,
-      'scanObject': scanObject,
-      'enhanceImage': enhanceImage,
-      'restyleImage': restyleImage,
-      'restyleEffects': restyleEffects,
-      'animeImage': animeImage,
-      'animeEffects': animeEffects,
-      'generateVideo': generateVideo,
-      'removeBackground': removeBackground,
-      'backgroundEffects': backgroundEffects,
-      'removeOneTouch': removeOneTouch,
-      'saveImagelarge': saveImagelarge,
-      'skyImage': skyImage,
-      'skyEffects': skyEffects,
-      'restoreImage': restoreImage,
-      'passportMaker': passportMaker,
-      'stickers': stickers,
-      'inpaintSd': inpaintSd,
-    };
+    return other.erase == erase &&
+        other.erasePro == erasePro &&
+        other.ai == ai &&
+        other.aiPro == aiPro &&
+        other.enhance == enhance &&
+        other.enhancePro == enhancePro &&
+        other.restyle == restyle &&
+        other.restylePro == restylePro &&
+        other.styles == styles &&
+        other.stylesPro == stylesPro &&
+        other.animeStyles == animeStyles &&
+        other.animeStylesPro == animeStylesPro &&
+        other.animeImageAI == animeImageAI &&
+        other.animeImageAIPro == animeImageAIPro &&
+        other.animeVideoAI == animeVideoAI &&
+        other.animeVideoAIPro == animeVideoAIPro;
   }
 
   @override
   int get hashCode {
-    return removeObject.hashCode ^
-      scanObject.hashCode ^
-      enhanceImage.hashCode ^
-      restyleImage.hashCode ^
-      restyleEffects.hashCode ^
-      animeImage.hashCode ^
-      animeEffects.hashCode ^
-      generateVideo.hashCode ^
-      removeBackground.hashCode ^
-      backgroundEffects.hashCode ^
-      removeOneTouch.hashCode ^
-      saveImagelarge.hashCode ^
-      skyImage.hashCode ^
-      skyEffects.hashCode ^
-      restoreImage.hashCode ^
-      passportMaker.hashCode ^ 
-      stickers.hashCode ^
-      inpaintSd.hashCode;
+    return erase.hashCode ^
+        erasePro.hashCode ^
+        ai.hashCode ^
+        aiPro.hashCode ^
+        enhance.hashCode ^
+        enhancePro.hashCode ^
+        restyle.hashCode ^
+        restylePro.hashCode ^
+        styles.hashCode ^
+        stylesPro.hashCode ^
+        animeStyles.hashCode ^
+        animeStylesPro.hashCode ^
+        animeImageAI.hashCode ^
+        animeImageAIPro.hashCode ^
+        animeVideoAI.hashCode ^
+        animeVideoAIPro.hashCode;
   }
 }

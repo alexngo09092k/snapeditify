@@ -35,7 +35,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "All changes will be lost. Your image will be reverted to its original states."),
         "allow": MessageLookupByLibrary.simpleMessage("Allow"),
         "animeAi": MessageLookupByLibrary.simpleMessage("Anime AI"),
-        "applyEffects": MessageLookupByLibrary.simpleMessage("Apply effects"),
         "areYouHappyWith":
             MessageLookupByLibrary.simpleMessage("Are you happy with\n"),
         "artEffect": MessageLookupByLibrary.simpleMessage("Art Effect"),
@@ -44,11 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "brush": MessageLookupByLibrary.simpleMessage("Brush"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
-        "createIdPhoto":
-            MessageLookupByLibrary.simpleMessage("Create ID Photo"),
         "createNanimeAvatar":
             MessageLookupByLibrary.simpleMessage("Create\nAnime avatar"),
-        "cutoutObjects": MessageLookupByLibrary.simpleMessage("Cutout objects"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("Discard changes and revert?"),
         "downloadNow": MessageLookupByLibrary.simpleMessage("Download now"),
@@ -57,7 +53,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),
         "enhanceNimageQuality":
             MessageLookupByLibrary.simpleMessage("Enhance\nimage quality"),
-        "enhancePhoto": MessageLookupByLibrary.simpleMessage("Enhance photo"),
         "failedToChangeStylePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Failed to change style, please try again."),
@@ -82,7 +77,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Failed to style image, please try again."),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
-        "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "later": MessageLookupByLibrary.simpleMessage("Later"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
@@ -108,8 +102,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please try again or open the app again."),
         "pleaseWaitAMoment":
             MessageLookupByLibrary.simpleMessage("Please wait a moment."),
-        "rateSnapeditify":
-            MessageLookupByLibrary.simpleMessage("Rate SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Remove Objects"),
         "removeThingsNfromImage":

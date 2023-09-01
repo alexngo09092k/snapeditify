@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
+import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/pages/remove_object/widgets/detected_object_list.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
-import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/services/snap_edit/snap_edit.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/sliding_control.dart';
 
@@ -16,8 +17,7 @@ class AIModeResult extends StatefulWidget {
   State<AIModeResult> createState() => _AIModeResultState();
 }
 
-class _AIModeResultState
-    extends ProviderStateObserver<AIModeResult, RemoveObjectProvider> {
+class _AIModeResultState extends ProviderStateObserver<AIModeResult, RemoveObjectProvider> {
   final ValueNotifier<int> _indexTab = ValueNotifier(0);
 
   late final PageController _controller;
@@ -74,20 +74,20 @@ class _AIModeResultState
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
-                  onTap: () => provider.toBrush(context),
-                  child: Row(
-                    children: [
-                      const CustomIcon(CupertinoIcons.back),
-                      PropConsumer<IRemoveObjectProvider, int>(
-                        select: (p) => p.state.detectedObjects.length,
-                        builder: (_, __, ___, count) => Text(
-                          '$count ${S.of(context).objects}',
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => provider.toBrush(context),
+                      child: const CustomIcon(CupertinoIcons.back),
+                    ),
+                    PropConsumer<IRemoveObjectProvider, int>(
+                      select: (p) => p.state.detectedObjects.length,
+                      builder: (_, __, ___, count) => Text(
+                        '$count ${S.of(context).objects}',
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 const Expanded(flex: 1, child: SizedBox()),
                 AnimatedBuilder(
@@ -106,7 +106,12 @@ class _AIModeResultState
           Expanded(
             child: PageView(
               controller: _controller,
-              children: DetectedObjectType.values.map<Widget>((type) => DetectedObjectList(type: type, provider: provider)).toList(),
+              children: DetectedObjectType.values
+                  .map<Widget>((type) => DetectedObjectList(
+                        type: type,
+                        provider: provider,
+                      ))
+                  .toList(),
             ),
           )
         ],

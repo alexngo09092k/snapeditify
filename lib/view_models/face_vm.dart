@@ -3,10 +3,10 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/providers/enhance/enhance_state.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/image.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 import 'dart:ui' as ui;
 
-class FaceVM extends AdditionFace with ChangeNotifier {
+class FaceVM extends Face with Provider {
   FaceVM({
     required super.box,
     required super.faceId,
@@ -14,7 +14,7 @@ class FaceVM extends AdditionFace with ChangeNotifier {
     required this.state,
   });
 
-  factory FaceVM.fromFace(AdditionFace face, EnhanceState state) {
+  factory FaceVM.fromFace(Face face, EnhanceState state) {
     return FaceVM(
       box: face.box,
       faceId: face.faceId,
@@ -38,26 +38,26 @@ class FaceVM extends AdditionFace with ChangeNotifier {
       ui.Offset realBoxPosition = ui.Offset(box[0].toDouble(), box[1].toDouble());
       ui.Size realBoxSize = ui.Size((box[2]).toDouble(), (box[3]).toDouble());
 
-      for (var enhancedImageBase64 in state.enhancedImages) {
-        final faceEnhancedImage = ImageUtils.instance.cropImageBase64(
-          enhancedImageBase64.imageBase64,
+      for (var enhancedImage in state.enhancedImages) {
+        final faceEnhancedImage = ImageUtils.instance.cropImage(
+          enhancedImage.imageBytes,
           size: realBoxSize,
           position: realBoxPosition,
         );
-        final faceEnhancedImageUI = await ImageUtils.instance.base64ToImageUI(await faceEnhancedImage);
+        final faceEnhancedImageUI = await ImageUtils.instance.toImageUI(await faceEnhancedImage);
         _faceEnhancedImages.add(faceEnhancedImageUI);
 
-        double ratioX = state.image.size.width / enhancedImageBase64.imageUI!.width;
-        double ratioY = state.image.size.height / enhancedImageBase64.imageUI!.height;
+        double ratioX = state.image.size.width / enhancedImage.imageUI!.width;
+        double ratioY = state.image.size.height / enhancedImage.imageUI!.height;
 
         Debug.log('PAIN PARSE RATIO x: $ratioX, y: $ratioY');
 
-        final faceImage = ImageUtils.instance.cropImageBase64(
-          state.image.imageBase64,
+        final faceImage = ImageUtils.instance.cropImage(
+          state.image.imageBytes,
           size: Size(realBoxSize.width * ratioX, realBoxSize.height * ratioY),
           position: Offset(realBoxPosition.dx * ratioX, realBoxPosition.dy * ratioY),
         );
-        final faceImageUI = await ImageUtils.instance.base64ToImageUI(await faceImage);
+        final faceImageUI = await ImageUtils.instance.toImageUI(await faceImage);
         _faceImages.add(faceImageUI);
       }
     }

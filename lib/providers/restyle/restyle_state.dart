@@ -1,6 +1,6 @@
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 
 class RestyleState extends EditImageState {
   RestyleState() {
@@ -32,12 +32,10 @@ class RestyleState extends EditImageState {
 
   @override
   Future<bool> setImage(String imageBase64, {EditImageProvider? provider, String? styleId}) async {
-    final bool result = await super.setImage(imageBase64);
-    if(result) {
-      _styleId = styleId;
-      _paint.background = image.imageUI.backgroundDrawable;
-    }
-    return result;
+    await super.setImage(imageBase64);
+    _styleId = styleId;
+    _paint.background = image.imageUI.backgroundDrawable;
+    return true;
   }
 
   @override

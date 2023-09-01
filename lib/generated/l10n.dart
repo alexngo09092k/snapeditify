@@ -829,66 +829,6 @@ class S {
       args: [],
     );
   }
-
-  /// `Rate SnapEditify`
-  String get rateSnapeditify {
-    return Intl.message(
-      'Rate SnapEditify',
-      name: 'rateSnapeditify',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `HOT`
-  String get hot {
-    return Intl.message(
-      'HOT',
-      name: 'hot',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Create ID Photo`
-  String get createIdPhoto {
-    return Intl.message(
-      'Create ID Photo',
-      name: 'createIdPhoto',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Apply effects`
-  String get applyEffects {
-    return Intl.message(
-      'Apply effects',
-      name: 'applyEffects',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cutout objects`
-  String get cutoutObjects {
-    return Intl.message(
-      'Cutout objects',
-      name: 'cutoutObjects',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enhance photo`
-  String get enhancePhoto {
-    return Intl.message(
-      'Enhance photo',
-      name: 'enhancePhoto',
-      desc: '',
-      args: [],
-    );
-  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

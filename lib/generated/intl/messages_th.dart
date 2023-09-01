@@ -35,7 +35,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "การเปลี่ยนแปลงทั้งหมดจะสูญหาย ภาพของคุณจะกลับไปสู่สถานะเดิม"),
         "allow": MessageLookupByLibrary.simpleMessage("อนุญาต"),
         "animeAi": MessageLookupByLibrary.simpleMessage("Anime AI"),
-        "applyEffects": MessageLookupByLibrary.simpleMessage("Apply effects"),
         "areYouHappyWith": MessageLookupByLibrary.simpleMessage("คุณพอใจกับ\n"),
         "artEffect": MessageLookupByLibrary.simpleMessage("เอฟเฟกต์ศิลปะ"),
         "auto": MessageLookupByLibrary.simpleMessage("อัตโนมัติ"),
@@ -43,11 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "brush": MessageLookupByLibrary.simpleMessage("แปรง"),
         "cancel": MessageLookupByLibrary.simpleMessage("ยกเลิก"),
         "chinese": MessageLookupByLibrary.simpleMessage("จีน"),
-        "createIdPhoto":
-            MessageLookupByLibrary.simpleMessage("Create ID Photo"),
         "createNanimeAvatar":
             MessageLookupByLibrary.simpleMessage("สร้าง\nAvatar Anime"),
-        "cutoutObjects": MessageLookupByLibrary.simpleMessage("Cutout objects"),
         "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage(
             "ยกเลิกการเปลี่ยนแปลงและย้อนกลับ?"),
         "downloadNow":
@@ -57,7 +53,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "enhanceImage": MessageLookupByLibrary.simpleMessage("ปรับปรุงรูปภาพ"),
         "enhanceNimageQuality":
             MessageLookupByLibrary.simpleMessage("เพิ่มคุณภาพ\nรูปภาพ"),
-        "enhancePhoto": MessageLookupByLibrary.simpleMessage("Enhance photo"),
         "failedToChangeStylePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "ไม่สามารถเปลี่ยนสไตล์ได้ โปรดลองอีกครั้ง"),
@@ -82,7 +77,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "ไม่สามารถปรับรูปแบบรูปภาพได้ โปรดลองอีกครั้ง"),
         "feedback": MessageLookupByLibrary.simpleMessage("ความคิดเห็น"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("คำติชมถึง"),
-        "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "languages": MessageLookupByLibrary.simpleMessage("ภาษา"),
         "later": MessageLookupByLibrary.simpleMessage("หลัง"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
@@ -106,8 +100,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "โปรดลองอีกครั้งหรือเปิดแอปอีกครั้ง"),
         "pleaseWaitAMoment":
             MessageLookupByLibrary.simpleMessage("โปรดรอสักครู่"),
-        "rateSnapeditify":
-            MessageLookupByLibrary.simpleMessage("Rate SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("ลบ"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("ลบวัตถุ"),
         "removeThingsNfromImage":

@@ -1,10 +1,13 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
 import 'package:snapeditify/services/snap_edit/snap_edit.dart';
 import 'package:snapeditify/utils/image.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/painter/painter_pure.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 import 'dart:ui' as ui;
 
 class DetectedObjectVM extends DetectedObject {
@@ -20,7 +23,7 @@ class DetectedObjectVM extends DetectedObject {
 
   ImageDrawable? maskDrawable;
   RectangleDrawable? boxDrawble;
-  String? image;
+  Uint8List? imageBytes;
 
   bool _isRemoved = false;
   bool get isRemoved => _isRemoved;
@@ -65,7 +68,7 @@ class DetectedObjectVM extends DetectedObject {
     Function(ui.Offset)? onTap,
     ImageDrawable? maskDrawable,
     RectangleDrawable? boxDrawble,
-    String? image,
+    Uint8List? imageBytes,
     bool? isRemoved,
     bool? isSelected,
     RemoveObjectState? state,
@@ -79,7 +82,7 @@ class DetectedObjectVM extends DetectedObject {
       maskId: maskId ?? this.maskId,
       state: state ?? this.state,
     )
-      ..image = image ?? this.image
+      ..imageBytes = imageBytes ?? this.imageBytes
       ..isRemoved = isRemoved ?? this.isRemoved
       ..isSelected = isSelected ?? this.isSelected;
 
@@ -117,7 +120,7 @@ class DetectedObjectVM extends DetectedObject {
     if (renderBox == null) return;
     ui.Size realSize = state.image.size;
     ui.Size viewSize = renderBox.size;
-    String originalImageBase64 = state.image.imageBase64;
+    Uint8List originalImageBytes = state.image.imageBytes;
 
     /// BOX [left, top , right, bottom]
     if (box.length > 3) {
@@ -144,7 +147,7 @@ class DetectedObjectVM extends DetectedObject {
       maskDrawable = ImageDrawable.fittedToSize(
         position: position,
         size: size,
-        image: await ImageUtils.instance.base64ToImageUI(mask),
+        image: await ImageUtils.instance.toImageUI(base64.decode(mask)),
         locked: true,
         onTap: (_) => _removeMask(),
       );
@@ -157,8 +160,8 @@ class DetectedObjectVM extends DetectedObject {
         onTap: (_) => _addMask(),
       );
 
-      image = await ImageUtils.instance.cropImageBase64(
-        originalImageBase64,
+      imageBytes = await ImageUtils.instance.cropImage(
+        originalImageBytes,
         size: realBoxSize,
         position: realBoxPosition,
       );

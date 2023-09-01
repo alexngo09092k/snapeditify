@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
@@ -25,7 +23,7 @@ class DetectedObjectItem extends ProviderStateless<IRemoveObjectProvider> {
         width: AppDimensions.instance.iconX(1.5),
         height: AppDimensions.instance.iconX(1.5),
         child: Center(
-          child: detectedObject.image != null ? Image.memory(base64.decode(detectedObject.image!)) : const SizedBox(),
+          child: detectedObject.imageBytes != null ? Image.memory(detectedObject.imageBytes!) : const SizedBox(),
         ),
       ),
     );

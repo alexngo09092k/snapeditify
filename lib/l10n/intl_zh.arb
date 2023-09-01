@@ -77,11 +77,5 @@
   "yourAppVersionIsNoLongerSupportedYoureMissingOut": "您的应用版本已不受支持。您错过了新功能和重要修复。请立即更新。",
   "later": "稍后",
   "update": "更新",
-  "languages": "语言",
-  "rateSnapeditify": "Rate SnapEditify",
-  "hot": "HOT",
-  "createIdPhoto": "Create ID Photo",
-  "applyEffects": "Apply effects",
-  "cutoutObjects": "Cutout objects",
-  "enhancePhoto": "Enhance photo"
+  "languages": "语言"
 }

@@ -8,16 +8,16 @@ import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_state.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/services/snap_edit/src/models/response/styles_response.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter.dart';
-import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
   @override
   RestyleState get state;
   
-  List<Effect> get styles;
+  List<Style> get styles;
 
   bool get canRevert;
   bool get canCompare;
@@ -39,9 +39,9 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     _state.addListener(notifyListeners);
   }
 
-  final List<Effect> _styles = [];
+  final List<Style> _styles = [];
   @override
-  List<Effect> get styles {
+  List<Style> get styles {
     if(_styles.isEmpty) syncFromServer(true);
     return  _styles;
   }
@@ -102,14 +102,14 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show("Please wait amoment!");
+    WidgetUtils.instance.showLoadingPopup();
 
     /// SHOW ADS
     adProvider.handleAd();
 
     /// CALL API
     RestyleBody body = RestyleBody(styleId: styleId, inputImage: originalImage.imageBytes, imageId: _state.imageId);
-    SnapEditResponse<RestyleImageResponse?> res = await Services.instance.snapEdit.restyle(body);
+    SnapEditResponse<RestyleResponse?> res = await Services.instance.snapEdit.restyle(body);
 
     if (res.data != null) {
       await _state.setImage(res.data!.outputImage, styleId: styleId);
@@ -117,12 +117,12 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      LoadingPopup.hide();
+      WidgetUtils.instance.dimiss();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    LoadingPopup.hide();
+    WidgetUtils.instance.dimiss();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
@@ -153,22 +153,22 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
-    AsyncStorage.instance.remove(AsyncStorageKey.instance.restyleEffects);
+    AsyncStorage.instance.remove(AsyncStorageKey.instance.styles);
     return true;
   }
 
   @override
   Future<void> syncFromServer([bool notify = false]) async {
     Locale locale = ManagerProvider.of<ThemeProvider>().locale;
-    SnapEditResponse<RestyleEffectsResponse?> res = await Services.instance.snapEdit.getRestyleEffects(locale.languageCode);
+    SnapEditResponse<StylesResponse?> res = await Services.instance.snapEdit.getStyles(locale.languageCode);
 
     if (res.data != null) {
-      Debug.log("===== SYNC FROM SERVER GET RESTYLE EFFECTS ${res.data} =====");
-      AsyncStorage.instance.setString(AsyncStorageKey.instance.restyleEffects, res.data!.toJson());
+      Debug.log("===== SYNC FROM SERVER GET STYLES ${res.data} =====");
+      AsyncStorage.instance.setString(AsyncStorageKey.instance.styles, res.data!.toJson());
     }
 
     if (!res.status) {
-      Debug.log("===== SYNC FROM SERVER GET RESTYLE EFFECTS ERROR ${res.message} =====");
+      Debug.log("===== SYNC FROM SERVER GET STYLES ERROR ${res.message} =====");
     }
 
     syncFromStorage(notify);
@@ -178,10 +178,10 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? styleStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.restyleEffects);
+    String? styleStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.styles);
     if (styleStrings != null) {
       Debug.log("===== SYNC FROM STORAGE $styleStrings =====");
-      RestyleEffectsResponse data = RestyleEffectsResponse.fromJson(styleStrings);
+      StylesResponse data = StylesResponse.fromJson(styleStrings);
       _styles.clear();
       _styles.addAll(data.styles);
     }

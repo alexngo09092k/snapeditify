@@ -3,7 +3,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
+import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
 class EnhanceAfter extends StatelessWidget {
   const EnhanceAfter({super.key});

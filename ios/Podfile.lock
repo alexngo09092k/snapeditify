@@ -4,11 +4,11 @@ PODS:
   - agconnect_remote_config (0.0.1):
     - AGConnectRemoteConfig (= 1.4.0.300)
     - Flutter
-  - AGConnectABTest (1.9.0.300):
+  - AGConnectABTest (1.8.0.300):
     - AGConnectCredential (~> 1.4)
-  - AGConnectCore (1.9.0.300):
+  - AGConnectCore (1.8.0.300):
     - HMFoundation (~> 1.4)
-  - AGConnectCredential (1.9.0.300):
+  - AGConnectCredential (1.8.0.300):
     - AGConnectCore (~> 1.4)
   - AGConnectRemoteConfig (1.4.0.300):
     - AGConnectABTest (~> 1.4)
@@ -18,32 +18,32 @@ PODS:
     - ReachabilitySwift
   - device_info_plus (0.0.1):
     - Flutter
-  - Firebase/CoreOnly (10.7.0):
-    - FirebaseCore (= 10.7.0)
-  - Firebase/RemoteConfig (10.7.0):
+  - Firebase/CoreOnly (10.3.0):
+    - FirebaseCore (= 10.3.0)
+  - Firebase/RemoteConfig (10.3.0):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 10.7.0)
-  - firebase_core (2.10.0):
-    - Firebase/CoreOnly (= 10.7.0)
+    - FirebaseRemoteConfig (~> 10.3.0)
+  - firebase_core (2.7.1):
+    - Firebase/CoreOnly (= 10.3.0)
     - Flutter
-  - firebase_remote_config (4.0.1):
-    - Firebase/RemoteConfig (= 10.7.0)
+  - firebase_remote_config (3.0.14):
+    - Firebase/RemoteConfig (= 10.3.0)
     - firebase_core
     - Flutter
-  - FirebaseABTesting (10.9.0):
+  - FirebaseABTesting (10.3.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCore (10.7.0):
+  - FirebaseCore (10.3.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreInternal (10.9.0):
+  - FirebaseCoreInternal (10.3.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseInstallations (10.9.0):
+  - FirebaseInstallations (10.3.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseRemoteConfig (10.7.0):
+  - FirebaseRemoteConfig (10.3.0):
     - FirebaseABTesting (~> 10.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
@@ -55,8 +55,6 @@ PODS:
     - Mantle
     - SDWebImage
     - SDWebImageWebPCoder
-  - fluttering (0.0.1):
-    - Flutter
   - fluttering_ads (0.0.1):
     - Flutter
   - fluttering_iap (0.0.1):
@@ -69,50 +67,50 @@ PODS:
   - Google-Mobile-Ads-SDK (9.14.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
-  - google_mobile_ads (1.0.0):
+  - google_mobile_ads (0.0.1):
     - Flutter
     - Google-Mobile-Ads-SDK (~> 9.13)
-  - GoogleAppMeasurement (10.9.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.9.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement (10.3.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.3.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.9.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.9.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement/AdIdSupport (10.3.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.3.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.9.0):
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.3.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - GoogleUserMessagingPlatform (2.0.1)
-  - GoogleUtilities/AppDelegateSwizzler (7.11.1):
+  - GoogleUtilities/AppDelegateSwizzler (7.10.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.11.1):
+  - GoogleUtilities/Environment (7.10.0):
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.11.1):
+  - GoogleUtilities/Logger (7.10.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (7.11.1):
+  - GoogleUtilities/MethodSwizzler (7.10.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (7.11.1):
+  - GoogleUtilities/Network (7.10.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.11.1)"
-  - GoogleUtilities/Reachability (7.11.1):
+  - "GoogleUtilities/NSData+zlib (7.10.0)"
+  - GoogleUtilities/Reachability (7.10.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (7.11.1):
+  - GoogleUtilities/UserDefaults (7.10.0):
     - GoogleUtilities/Logger
-  - HMFoundation (1.9.0.300)
+  - HMFoundation (1.8.0.300)
   - image_gallery_saver (1.5.0):
     - Flutter
   - image_picker_ios (0.0.1):
@@ -151,14 +149,14 @@ PODS:
   - photo_manager (2.0.0):
     - Flutter
     - FlutterMacOS
-  - PromisesObjC (2.2.0)
+  - PromisesObjC (2.1.1)
   - ReachabilitySwift (5.0.0)
-  - SDWebImage (5.15.6):
-    - SDWebImage/Core (= 5.15.6)
-  - SDWebImage/Core (5.15.6)
-  - SDWebImageWebPCoder (0.11.0):
+  - SDWebImage (5.14.3):
+    - SDWebImage/Core (= 5.14.3)
+  - SDWebImage/Core (5.14.3)
+  - SDWebImageWebPCoder (0.9.1):
     - libwebp (~> 1.0)
-    - SDWebImage/Core (~> 5.15)
+    - SDWebImage/Core (~> 5.13)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -179,7 +177,6 @@ DEPENDENCIES:
   - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - Flutter (from `Flutter`)
   - flutter_image_compress (from `.symlinks/plugins/flutter_image_compress/ios`)
-  - fluttering (from `.symlinks/plugins/fluttering/ios`)
   - fluttering_ads (from `.symlinks/plugins/fluttering_ads/ios`)
   - fluttering_iap (from `.symlinks/plugins/fluttering_iap/ios`)
   - fluttering_remote_config (from `.symlinks/plugins/fluttering_remote_config/ios`)
@@ -241,8 +238,6 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_image_compress:
     :path: ".symlinks/plugins/flutter_image_compress/ios"
-  fluttering:
-    :path: ".symlinks/plugins/fluttering/ios"
   fluttering_ads:
     :path: ".symlinks/plugins/fluttering_ads/ios"
   fluttering_iap:
@@ -281,33 +276,32 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   agconnect_core: e81b9d5787637897487580e43676c93e7f63448a
   agconnect_remote_config: f147c66dcc4d1d0eb35c2c99e1e3d87b1c5c5723
-  AGConnectABTest: e08b4594173a2dbb046eca174054a5f5c138dc6a
-  AGConnectCore: f07ea0cd4aefe5c467b8336ea9fa9474c348a028
-  AGConnectCredential: 50729e5d8fe6bbee87e053ead56e8b4427e276eb
+  AGConnectABTest: cf58810de5526027ed810329716e0d50656a2cf9
+  AGConnectCore: 4d95388b97ccbc00c7eb1895d832d5429f847f9f
+  AGConnectCredential: 52b6a1846193e7ea83610b78fb4b82d516df4936
   AGConnectRemoteConfig: 3ebbc62ded035974abb4dde14a629bbc19b555fd
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
-  Firebase: 0219acf760880eeec8ce479895bd7767466d9f81
-  firebase_core: 18d44f087248303a4a8f05d0099a000c46e3c77a
-  firebase_remote_config: 857668e428b3d5403df72e6c2d5978a743f7a25e
-  FirebaseABTesting: 005b70969e2817e2a1e631e8dba29134a04c0622
-  FirebaseCore: e317665b9d744727a97e623edbbed009320afdd7
-  FirebaseCoreInternal: d2b4acb827908e72eca47a9fd896767c3053921e
-  FirebaseInstallations: c58489c9caacdbf27d1da60891a87318e20218e0
-  FirebaseRemoteConfig: d5de62211e2eaa2152d8ee85a23c301b70887a74
+  Firebase: f92fc551ead69c94168d36c2b26188263860acd9
+  firebase_core: 1ae9f9aa76e6e1edc14fb181637ad466fd6c6fa4
+  firebase_remote_config: 4788db7504c356174cbd09ffa3de344f928a8100
+  FirebaseABTesting: e6660693429b4663573c82f8d2f1041deff1753a
+  FirebaseCore: 988754646ab3bd4bdcb740f1bfe26b9f6c0d5f2a
+  FirebaseCoreInternal: 29b76f784d607df8b2a1259d73c3f04f1210137b
+  FirebaseInstallations: e2f26126089dcf41e215f7b8925af8d953c7d602
+  FirebaseRemoteConfig: c24f767c17b0440ee63c7e93380d599173556113
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_image_compress: 5a5e9aee05b6553048b8df1c3bc456d0afaac433
-  fluttering: 1a6e0390b1dfe92130945bfcac20d8519f8e2408
   fluttering_ads: c9cbf0479ad427214045e50179260f30bf8047df
   fluttering_iap: ad36ec6a5309726850dd5e8d658bfb0ec17ebdcc
   fluttering_remote_config: 61e232fa91e272b4c9b74bdb6f4eeb45860b97ae
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Google-Mobile-Ads-SDK: 4fe6304b771f8467d29978cb790ec1e56e646946
-  google_mobile_ads: 528ab4673c5b5fd36321b7e90fc585064cdbaf2b
-  GoogleAppMeasurement: 373bcbead1bb6a85be7a64d5d8f96284b762ea9c
+  google_mobile_ads: 6bfe04d9c9fd5c2a026e6f09ca2d97ae25b78f7e
+  GoogleAppMeasurement: c7d6fff39bf2d829587d74088d582e32d75133c3
   GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
-  GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
-  HMFoundation: 37a598de63a67de3ce428ced640bc6123048097b
+  GoogleUtilities: bad72cb363809015b1f7f19beb1f1cd23c589f95
+  HMFoundation: 578af8b08444653a722a62e32ec681d954775942
   image_gallery_saver: 259eab68fb271cfd57d599904f7acdc7832e7ef2
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   in_app_purchase_storekit: 4fb7ee9e824b1f09107fbfbbce8c4b276366dc43
@@ -320,10 +314,10 @@ SPEC CHECKSUMS:
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   photo_manager: 4f6810b7dfc4feb03b461ac1a70dacf91fba7604
-  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  SDWebImage: d47d81bea8a77187896b620dc79c3c528e8906b9
-  SDWebImageWebPCoder: 295a6573c512f54ad2dd58098e64e17dcf008499
+  SDWebImage: 9c36e66c8ce4620b41a7407698dda44211a96764
+  SDWebImageWebPCoder: 18503de6621dd2c420d680e33d46bf8e1d5169b0
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
@@ -331,4 +325,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.11.3

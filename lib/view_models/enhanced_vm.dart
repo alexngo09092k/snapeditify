@@ -1,5 +1,8 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:snapeditify/providers/enhance/enhance_state.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 import 'dart:ui' as ui;
 
 import 'package:snapeditify/utils/image.dart';
@@ -15,11 +18,12 @@ class EnhancedVM {
     required this.state,
   });
 
+  Uint8List get imageBytes => base64.decode(imageBase64);
   ui.Image? _imageUI;
   ui.Image? get imageUI => _imageUI;
 
   Future<bool> paintParse() async {
-    _imageUI = await ImageUtils.instance.base64ToImageUI(imageBase64);
+    _imageUI = await ImageUtils.instance.toImageUI(imageBytes);
     return true;
   }
 

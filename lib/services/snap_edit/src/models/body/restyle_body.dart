@@ -1,11 +1,12 @@
+
 import 'package:flutter/foundation.dart';
 
 class RestyleBody {
-  final Uint8List? inputImage;
-  final String? imageId;
-  final String styleId;
+  Uint8List? inputImage;
+  String? imageId;
+  String styleId;
 
-  const RestyleBody({
+  RestyleBody({
     this.imageId,
     this.inputImage,
     required this.styleId,

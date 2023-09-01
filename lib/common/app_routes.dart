@@ -3,33 +3,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/pages/fast_editor/fast_editor.dart';
-import 'package:snapeditify/pages/generate_id_photo/generate_id_photo.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
-import 'package:snapeditify/pages/remove_object/remove_object.dart';
-import 'package:snapeditify/pages/restore/restore.dart';
 import 'package:snapeditify/pages/restyle/restyle.dart';
 import 'package:snapeditify/pages/enhance/enhance.dart';
 import 'package:snapeditify/pages/albums/albums.dart';
-import 'package:snapeditify/pages/home/home.dart';
-import 'package:snapeditify/pages/maintenance/maintenance.dart';
+import 'package:snapeditify/pages/remove_object/remove_object.dart';
+import 'package:snapeditify/pages/home/home_page.dart';
+import 'package:snapeditify/pages/maintenance/maintenance_page.dart';
 import 'package:snapeditify/pages/setting/setting.dart';
-import 'package:snapeditify/pages/sky/sky.dart';
 import 'package:snapeditify/pages/splash/splash_page.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
-import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
-import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
-import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
-import 'package:snapeditify/providers/sky/sky_provider.dart';
+import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/common/extensions.dart';
-import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IAppRoutes {
   String get initialRoute;
@@ -57,30 +48,20 @@ class AppRoutes extends IAppRoutes {
   static const String animeAIPage = 'anime_ai_page';
   static const String settingPage = 'setting_page';
   static const String splashPage = 'splash_page';
-  static const String skyPage = 'sky_page';
-  static const String restorePage = 'restore_page';
-  static const String fastEditor = 'fastEditor';
-
-  /// Features
-  static const String generateIDPhoto = 'create_id_photo_page';
 
   static final IAppRoutes _instance = AppRoutes._internal();
 
   @override
   Map<String, Widget Function(BuildContext)> routes = {
-    splashPage: (_) => const SplashPage(),
-    maintenancePage: (_) => const MaintenancePage(),
-    homePage: (_) => const HomePage(),
-    settingPage: (_) => const SettingPage(),
-    premiumPage: (_) => const PremiumPage(),
-    albumsPage: (_) => const AlbumsPage(),
-    removeObjectPage: (_) => const RemoveObjectPage(),
-    enhanceImagePage: (_) => const EnhancePage(),
-    restorePage: (_) => const RestorePage(),
-    generateIDPhoto: (_) => const GenerateIDPhotoPage(),
-    applyArtEffectPage: (_) => const RestylePage(),
-    skyPage: (_) => const SkyPage(),
-    fastEditor: (_) => const FastEditor(),
+    splashPage: (context) => const SplashPage(),
+    maintenancePage: (context) => const MaintenancePage(),
+    homePage: (context) => const HomePage(),
+    settingPage: (context) => const SettingPage(),
+    premiumPage: (context) => const PremiumPage(),
+    albumsPage: (context) => const AlbumsPage(),
+    removeObjectPage: (context) => const RemoveObjectPage(),
+    enhanceImagePage: (context) => const EnhancePage(),
+    applyArtEffectPage: (context) => const RestylePage(),
   };
 
   @override
@@ -106,24 +87,16 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const PremiumPage(), settings);
       case albumsPage:
         return buildRoute(const AlbumsPage(), settings);
-      case photosPage:
-        return buildRoute(PhotosPage(albumId: (settings.arguments as String?)), settings);
       case removeObjectPage:
         return buildRoute(const RemoveObjectPage(), settings);
       case enhanceImagePage:
         return buildRoute(const EnhancePage(), settings);
-      case restorePage: 
-        return buildRoute(const RestorePage(), settings);
-      case generateIDPhoto: 
-        return buildRoute(const GenerateIDPhotoPage(), settings);
-      case animeAIPage:
-        return buildRoute(const AnimeAIPage(), settings);
-      case skyPage:
-        return buildRoute(const SkyPage(), settings);
       case applyArtEffectPage:
         return buildRoute(const RestylePage(), settings);
-      case fastEditor:
-        return buildRoute(const FastEditor(), settings);
+      case photosPage:
+        return buildRoute(PhotosPage(albumId: (settings.arguments as String?)), settings);
+      case animeAIPage:
+        return buildRoute(const AnimeAIPage(), settings);
       default:
         throw ErrorDescription("Not found page");
     }
@@ -133,94 +106,74 @@ class AppRoutes extends IAppRoutes {
 }
 
 extension AppRoutesUtils on IAppRoutes {
-  void goAlbumsPage(BuildContext context, ImageTool imageTool) {
+  goAlbumsPage(BuildContext context, EditImageType editImageType) {
     final provider = ManagerProvider.of<GalleryProvider>();
-    provider.imageTool = imageTool;
+    provider.editImageType = editImageType;
     UserPermission.instance.requestStoragePermission(context, onHasPermisson: () async {
       /// SHOW LOADING POPUP
-      LoadingPopup.show(S.of(context).pleaseWaitAMoment);
+      WidgetUtils.instance.showLoadingPopup();
 
-      /// LISTEN PHOTOS AND REFRESH GALLERY
       await provider.listenPhotos();
       await provider.refreshGalleryList(true);
 
       /// HIDE LOADING
-      LoadingPopup.hide();
+      WidgetUtils.instance.dimiss();
 
-      /// GO TO ALBUM PAGE
       Navigator.pushNamed(context, AppRoutes.albumsPage);
     });
   }
 
-  void goPhotosPage(BuildContext context, {String? albumId}) {
+  goPhotosPage(BuildContext context, {String? albumId}) {
     Navigator.pushNamed(context, AppRoutes.photosPage, arguments: albumId);
   }
 
-  void goPremiumProPage(BuildContext context) {
+  goPremiumProPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.premiumPage);
   }
 
-  void goSettingPage(BuildContext context) {
+  goSettingPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.settingPage);
   }
 
-  void goEditImagePage(BuildContext context, {required Uint8List bytes, ImageTool? imageTool}) {
+  goEditImagePage(BuildContext context, {required Uint8List bytes, EditImageType? editImageType}) {
     final provider = ManagerProvider.of<GalleryProvider>();
-    if (imageTool != null) provider.imageTool = imageTool;
+    if (editImageType != null) provider.editImageType = editImageType;
     UserPermission.instance.requestStoragePermission(
       context,
       onHasPermisson: () async {
-        final ImageTool current = provider.imageTool;
+        final EditImageType current = provider.editImageType;
         late final bool res;
         late final String target;
 
         /// SHOW LOADING POPUP
-        LoadingPopup.show(S.of(context).pleaseWaitAMoment);
+        WidgetUtils.instance.showLoadingPopup();
 
-        /// CHECK TARGET PAGE
         switch (current) {
-          case ImageTool.removeObject:
-          case ImageTool.oneTouchRemoveAll:
-            res = await ManagerProvider.of<RemoveObjectProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.removeObjectPage;
-            break;
-          case ImageTool.applyArtEffect:
+          case EditImageType.applyArtEffect:
             res = await ManagerProvider.of<RestyleProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.applyArtEffectPage;
             break;
-          case ImageTool.enhanceImage:
+          case EditImageType.enhanceImage:
             res = await ManagerProvider.of<EnhanceProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.enhanceImagePage;
             break;
-          case ImageTool.restoreOldPhoto:
-            res = await ManagerProvider.of<RestoreProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.restorePage;
+          case EditImageType.removeObject:
+            res = await ManagerProvider.of<RemoveObjectProvider>().setImage(context, bytes: bytes);
+            target = AppRoutes.removeObjectPage;
             break;
-          case ImageTool.generateAnimeAI:
+          case EditImageType.animeAI:
             res = await ManagerProvider.of<AnimeAIProvider>().setImage(context, bytes: bytes);
             target = AppRoutes.animeAIPage;
             break;
-          case ImageTool.changeYourSky:
-            res = await ManagerProvider.of<SkyProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.skyPage;
-            break;
-          case ImageTool.makeIDPassportPhoto:
-            res = await ManagerProvider.of<EditBackgroundProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.generateIDPhoto;
-            break;
-          case ImageTool.fastEditor:
-            res = await ManagerProvider.of<FastEditorProvider>().setImage(context, bytes: bytes);
-            target = AppRoutes.fastEditor;
-            break;
           default:
-            break;
+            throw ErrorDescription("Not support action");
         }
 
         /// HIDE LOADING
-        LoadingPopup.hide();
+        WidgetUtils.instance.dimiss();
 
         if (res) {
-          if (imageTool != null) {
+          if (editImageType != null) {
             Navigator.pushReplacementNamed(context, target);
           } else {
             Navigator.pushNamed(context, target);

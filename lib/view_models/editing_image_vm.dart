@@ -18,7 +18,7 @@ class EditingImageVM {
   Uint8List get imageBytes => base64.decode(_imageBase64);
 
   Future<void> paintParse() async {
-    _imageUI = await ImageUtils.instance.base64ToImageUI(imageBase64);
+    _imageUI = await ImageUtils.instance.toImageUI(imageBytes);
   }
 
   ui.Size get size => ui.Size(_imageUI.width.toDouble(), _imageUI.height.toDouble());

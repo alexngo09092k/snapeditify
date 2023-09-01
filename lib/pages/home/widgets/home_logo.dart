@@ -24,6 +24,10 @@ class HomeLogo extends StatelessWidget {
               Configuration.instance.business.appName,
               style: Theme.of(context).textTheme.headlineSmall!,
             ),
+            Text(
+              Configuration.instance.business.appBio,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
           ],
         ),
       ],

@@ -3,7 +3,7 @@ import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_after.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_before.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
-import 'package:snapeditify/widgets/app_use/before_after/before_after.dart';
+import 'package:snapeditify/widgets/before_after/before_after.dart';
 
 class EnhanceImage extends StatelessWidget {
   const EnhanceImage({Key? key}) : super(key: key);

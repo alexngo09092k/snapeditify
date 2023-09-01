@@ -13,7 +13,8 @@ class EnhancePage extends StatefulWidget {
   State<EnhancePage> createState() => _EnhancePageState();
 }
 
-class _EnhancePageState extends ProviderStateObserver<EnhancePage, IEnhanceProvider> {
+class _EnhancePageState
+    extends ProviderStateObserver<EnhancePage, IEnhanceProvider> {
   @override
   void onNextFrame(Duration timestamp) {
     provider.enhanceImage(context);

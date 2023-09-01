@@ -8,17 +8,20 @@ import 'package:snapeditify/providers/anime_ai/anime_ai_state.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
-import 'package:snapeditify/services/snap_edit/src/apis/generate_video.dart';
+import 'package:snapeditify/services/snap_edit/src/models/body/anime_ai_image_body.dart';
+import 'package:snapeditify/services/snap_edit/src/models/body/anime_ai_video_body.dart';
+import 'package:snapeditify/services/snap_edit/src/models/response/anime_image_response.dart';
+import 'package:snapeditify/services/snap_edit/src/models/response/anime_styles_response.dart';
+import 'package:snapeditify/services/snap_edit/src/models/response/anime_video_response.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter.dart';
-import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/widgets/painter/painter.dart';
 
 abstract class IAnimeAIProvider extends EditImageProvider with StorageProvider {
   @override
   AnimeAIState get state;
 
-  List<Effect> get styles;
+  List<AnimeStyle> get styles;
 
   List<String> get categories;
 
@@ -43,12 +46,9 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     _state.addListener(notifyListeners);
   }
 
-  final List<Effect> _styles = [];
+  final List<AnimeStyle> _styles = [];
   @override
-  List<Effect> get styles {
-    if(_styles.isEmpty) syncFromServer(true);
-    return  _styles;
-  }
+  List<AnimeStyle> get styles => _styles;
 
   final List<String> _categories = [];
 
@@ -57,6 +57,10 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     if(_categories.isEmpty) syncFromServer(true);
     return  _categories;
   }
+
+  late AnimeAIState _state;
+  @override
+  AnimeAIState get state => _state;
 
   String? _category;
   @override
@@ -68,10 +72,6 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
       notifyListeners();
     }
   }
-
-  late AnimeAIState _state;
-  @override
-  AnimeAIState get state => _state;
 
   @override
   EditedImageVM get editedImage => EditedImageVM(_state.image.imageBase64, _state.image.imageUI);
@@ -118,14 +118,14 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show("Please wait amoment!");
+    WidgetUtils.instance.showLoadingPopup();
 
     /// SHOW ADS
     adProvider.handleAd();
 
     /// CALL API
-    AnimeBody body = AnimeBody(style: styleId, inputImage: originalImage.imageBytes);
-    SnapEditResponse<AnimeResponse?> res = await Services.instance.snapEdit.animeImage(body);
+    AnimeAIImageBody body = AnimeAIImageBody(style: styleId, inputImage: originalImage.imageBytes);
+    SnapEditResponse<AnimeImageResponse?> res = await Services.instance.snapEdit.animeRestyle(body);
 
     if (res.data != null) {
       await _state.setImage(res.data!.outputImages.first.image, styleId: styleId);
@@ -158,18 +158,19 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     if (!result) return false;
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show("Please wait amoment!");
+    WidgetUtils.instance.showLoadingPopup();
 
     /// SHOW ADS
     adProvider.handleAd();
 
     /// CALL API
-    GenerateVideoBody body = GenerateVideoBody(
+    AnimeAIVideoBody body = AnimeAIVideoBody(
+      style: styleId,
       outputImageId: _state.styledImages[styleId]!.outputImages.first.imageId,
       imageId: _state.styledImages[styleId]!.imageId,
     );
 
-    SnapEditResponse<GenerateVideoResponse?> res = await Services.instance.snapEdit.generateVideo(body);
+    SnapEditResponse<AnimeVideoResponse?> res = await Services.instance.snapEdit.animeVideoEffect(body);
 
     if (res.data != null) {
       /// HIDE LOADING POPUP
@@ -201,15 +202,15 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   @override
   Future<void> syncFromServer([bool notify = false]) async {
     Locale locale = ManagerProvider.of<ThemeProvider>().locale;
-    SnapEditResponse<RestyleEffectsResponse?> res = await Services.instance.snapEdit.getAnimeStyles(locale.languageCode);
+    SnapEditResponse<AnimeStylesResponse?> res = await Services.instance.snapEdit.getAnimeStyles(locale.languageCode);
 
     if (res.data != null) {
-      Debug.log("===== SYNC FROM SERVER GET ANIME EFFECTS ${res.data} =====");
-      AsyncStorage.instance.setString(AsyncStorageKey.instance.animeEffects, res.data!.toJson());
+      Debug.log("===== SYNC FROM SERVER GET STYLES ${res.data} =====");
+      AsyncStorage.instance.setString(AsyncStorageKey.instance.animeStyles, res.data!.toJson());
     }
 
     if (!res.status) {
-      Debug.log("===== SYNC FROM SERVER GET ANIME EFFECTS ERROR ${res.message} =====");
+      Debug.log("===== SYNC FROM SERVER GET STYLES ERROR ${res.message} =====");
     }
 
     syncFromStorage(notify);
@@ -219,10 +220,10 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? styleStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.animeEffects);
+    String? styleStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.animeStyles);
     if (styleStrings != null) {
       Debug.log("===== SYNC FROM STORAGE $styleStrings =====");
-      RestyleEffectsResponse data = RestyleEffectsResponse.fromJson(styleStrings);
+      AnimeStylesResponse data = AnimeStylesResponse.fromJson(styleStrings);
       _styles.clear();
       _styles.addAll(data.styles);
       for (var style in _styles) {
@@ -244,7 +245,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
-    AsyncStorage.instance.remove(AsyncStorageKey.instance.animeEffects);
+    AsyncStorage.instance.remove(AsyncStorageKey.instance.animeStyles);
     return true;
   }
 

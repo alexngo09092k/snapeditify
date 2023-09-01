@@ -1,7 +1,7 @@
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
-import 'package:snapeditify/services/snap_edit/src/models/response/anime_response.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
+import 'package:snapeditify/services/snap_edit/src/models/response/anime_image_response.dart';
+import 'package:snapeditify/widgets/painter/painter_pure.dart';
 
 class AnimeAIState extends EditImageState {
   AnimeAIState() {
@@ -16,9 +16,9 @@ class AnimeAIState extends EditImageState {
   String? _styleId;
   String? get styleId => _styleId;
 
-  final Map<String, AnimeResponse> _styledImages = {};
-  Map<String, AnimeResponse> get styledImages => _styledImages;
-  set styledImages(Map<String, AnimeResponse> styledImages) {
+  final Map<String, AnimeImageResponse> _styledImages = {};
+  Map<String, AnimeImageResponse> get styledImages => _styledImages;
+  set styledImages(Map<String, AnimeImageResponse> styledImages) {
     _styledImages.clear();
     _styledImages.addAll(styledImages);
     notifyState();

@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/advertisement/advertisement.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
@@ -22,7 +21,6 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/view_models/editing_image_vm.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 import 'package:snapeditify/widgets/app_use/saved_mage_preview.dart';
-import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;
@@ -32,7 +30,7 @@ abstract class EditImageProvider extends Provider {
 
   SnapEditConfig get config => Configuration.instance.snapEdit;
 
-  EditedImageVM? get editedImage;
+  EditedImageVM get editedImage;
 
   bool get canSave;
 
@@ -52,10 +50,9 @@ abstract class EditImageProvider extends Provider {
     if (refesh) await refresh(context);
 
     /// CONVERT TO JPG
-    String imageBase64 = base64.encode(bytes);
-    imageBase64 = await ImageUtils.instance.imageBase64ToJPG(imageBase64);
+    Uint8List jpgBytes = await ImageUtils.instance.toJPG(bytes);
 
-    _originalImage = EditingImageVM(imageBase64);
+    _originalImage = EditingImageVM(base64.encode(jpgBytes));
     await _originalImage.paintParse();
 
     /// SET IMAGE FOR STATE
@@ -90,28 +87,31 @@ abstract class EditImageProvider extends Provider {
 
       final provider = ManagerProvider.of<GalleryProvider>();
 
-      if (_savedFile == null && editedImage != null) {
+      if (_savedFile == null) {
         /// SHOW LOADING
-        LoadingPopup.show("Please wait amoment!");
+        WidgetUtils.instance.showLoadingPopup();
         
         /// SHOW ADS
         adProvider.handleAd();
 
         /// SAVE IMAGE
-        _savedFile = await provider.saveImage(editedImage!.imageBytes);
+        _savedFile = await provider.saveImage(editedImage.imageBytes);
 
         /// HIDE LOADING
-        LoadingPopup.hide();
+        WidgetUtils.instance.dimiss();
       }
 
       if (_savedFile != null) {
         /// SHOW SAVED IMAGE
-        await showDialog<bool>(
+        await showModalBottomSheet<bool>(
           context: context,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+          ),
           builder: (_) => SavedImagePreview(
-            editedImage: editedImage!,
-            imageTool: provider.imageTool,
-            onNewEditImage: (__) => AppRoutes.instance.goEditImagePage(context, bytes: editedImage!.imageBytes, imageTool: __),
+            editedImage: editedImage,
+            editImageType: provider.editImageType,
+            onNewEditImage: (__) => AppRoutes.instance.goEditImagePage(context, bytes: editedImage.imageBytes, editImageType: __),
             savedFile: _savedFile!,
             onShare: () => Share.shareXFiles(
               [XFile(savedFile!.path)],
