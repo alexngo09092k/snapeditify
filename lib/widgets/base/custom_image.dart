@@ -11,12 +11,14 @@ class CustomImage extends StatelessWidget {
     this.height,
     this.color,
     this.fit = BoxFit.cover,
+    this.placeholder,
   }) : super(key: key);
   final String image;
   final double? width;
   final double? height;
   final Color? color;
   final BoxFit fit;
+  final String? placeholder;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,12 @@ class CustomImage extends StatelessWidget {
             placeholder: (_, __) => ImagePlaceholder(
               width: width,
               height: height,
+              placeHolder: placeholder,
             ),
             errorWidget: (_, __, ___) => ImagePlaceholder(
               width: width,
               height: height,
+              placeHolder: placeholder,
             ),
           )
         : Image.asset(
@@ -47,14 +51,20 @@ class CustomImage extends StatelessWidget {
 }
 
 class ImagePlaceholder extends StatelessWidget {
-  const ImagePlaceholder({super.key, this.width, this.height});
+  const ImagePlaceholder({
+    super.key,
+    this.width,
+    this.height,
+    this.placeHolder,
+  });
   final double? width;
   final double? height;
+  final String? placeHolder;
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      AppAssets.instance.imagePlaceholder,
+      placeHolder ?? AppAssets.instance.imagePlaceholder,
       width: width,
       height: height,
       fit: BoxFit.fill,

@@ -12,7 +12,8 @@ import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/view_models/enhanced_vm.dart';
 import 'package:snapeditify/view_models/face_vm.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   @override
@@ -41,7 +42,7 @@ class EnhanceProvider extends IEnhanceProvider {
   EditedImageVM get editedImage {
     final enhancedimage = _state.enhancedImages[_state.enhancedImageIndex];
     return EditedImageVM(
-      enhancedimage.imageBase64,
+      enhancedimage.imageBytes,
       enhancedimage.imageUI!,
     );
   }
@@ -58,14 +59,14 @@ class EnhanceProvider extends IEnhanceProvider {
     renewSavedFile();
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
+    LoadingPopup.show("Please wait amoment!");
 
     /// SHOW ADS
     adProvider.handleAd();
 
     /// CALL API
     EnhanceBody body = EnhanceBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
-    final SnapEditResponse<EnhanceResponse?> res = await Services.instance.snapEdit.enhance(body);
+    final SnapEditResponse<EnhanceImageResponse?> res = await Services.instance.snapEdit.enhanceImage(body);
     if (res.data != null) {
       /// ENHANCED IMAGES
       List<EnhancedVM> enhancedImages = [];

@@ -34,8 +34,8 @@ class BrushModeSetting extends StatelessWidget {
           child: PropConsumer<RemoveObjectProvider, double>(
             select: (p) => p.state.strokeWidth,
             builder: (_, __, p, strokeWidth) => Slider(
-              min: p.config.removeObject.strokeWidth.min.toDouble(),
-              max: p.config.removeObject.strokeWidth.max.toDouble(),
+              min: 10,
+              max: 100,
               value: strokeWidth,
               label: '${strokeWidth.round()}',
               divisions: 100,

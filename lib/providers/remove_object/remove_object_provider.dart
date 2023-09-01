@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvider {
   @override
@@ -46,6 +48,8 @@ abstract class IRemoveObjectProvider extends EditImageProvider with StorageProvi
 
   Future<bool> toAI(BuildContext context);
 
+  Future<bool> toAIOneTouchSuggest(BuildContext context);
+
   bool changeStrokeWidth(BuildContext context, double strokeWidth);
 
   bool changeStrokeColor(BuildContext context, Color strokeColor);
@@ -61,10 +65,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   static IRemoveObjectProvider get instance => _instance;
 
   RemoveObjectProvider.internal() {
-    _state = RemoveObjectState(
-      strokeWidth: config.removeObject.strokeWidth.init.toDouble(),
-      strokeColor: config.removeObject.strokeWidth.color,
-    );
+    _state = RemoveObjectState();
     _state.addListener(notifyListeners);
   }
 
@@ -73,7 +74,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
   RemoveObjectState get state => _state;
 
   @override
-  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBase64, _state.image.imageUI);
+  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
 
   @override
   bool get canUndo => _state.prev != null || _state.paint.canUndo;
@@ -193,26 +194,29 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       strokeWidth: _state.strokeWidth,
     );
     _state.addListener(notifyListeners);
-    return _state.setImage(originalImage.imageBase64);
+    return _state.setImage(originalImage.imageBytes);
   }
 
   @override
-  Future<bool> toAI(BuildContext context) async {
-    /// CHECKING ENVIROMENT
-    final result = await checkEnviroment(context, retry: (_) => toAI(context));
-    if (!result) return false;
-
+  Future<bool> toAIOneTouchSuggest(BuildContext context) async {
     if (_state.mode == RemoveObjectMode.ai) return true;
+
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => toAIOneTouchSuggest(context));
+    if (!result) return false;
 
     /// SHOW ADS
     adProvider.handleAd();
-
+  
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
+    LoadingPopup.show(S.of(context).pleaseWaitAMoment);
 
     /// CALL API
-    AIDetectionBody body = AIDetectionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
-    SnapEditResponse<AIDetectionResponse?> res = await Services.instance.snapEdit.detection(body);
+    OneTouchSuggestionBody body = OneTouchSuggestionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
+    SnapEditResponse<OneTouchSuggestionResponse?> res = await Services.instance.snapEdit.removeOneTouch(body);
+
+    /// DETECTED OBJECT
+    LoadingPopup.setMessage("Detecting object");
 
     if (res.data != null) {
       /// DETECTED OBJECT VM
@@ -225,14 +229,14 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       _state.detectedObjects = detectedObjectVMs;
 
       /// SET NEW SESSION ID
-      // _state.sessionId = res.data!.sessionId;
+      _state.sessionId = res.data!.sessionId;
 
       /// AI MODE
       Debug.log("===== TO AI MODE ====");
       _state.mode = RemoveObjectMode.ai;
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
 
       /// SHOW GUIDE
       showAutoAIGuide();
@@ -241,7 +245,69 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    LoadingPopup.hide();
+
+    if (!res.status) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).aiDetection, 
+        message: S.of(context).failedToDetectObjectPleaseTryAgain, 
+        retry: (_) => toAI(context),
+      );
+      Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
+    }
+
+    return false;
+  }
+
+  @override
+  Future<bool> toAI(BuildContext context) async {
+    if (_state.mode == RemoveObjectMode.ai) return true;
+
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => toAI(context));
+    if (!result) return false;
+
+    /// SHOW ADS
+    adProvider.handleAd();
+
+    /// SHOW LOADING POPUP
+    LoadingPopup.show(S.of(context).pleaseWaitAMoment);
+
+    /// CALL API
+    ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
+    SnapEditResponse<ScanObjectResponse?> res = await Services.instance.snapEdit.scanObject(body);
+
+    /// DETECTED OBJECT
+    LoadingPopup.setMessage("Detecting object");
+
+    if (res.data != null) {
+      /// DETECTED OBJECT VM
+      Map<int, DetectedObjectVM> detectedObjectVMs = {};
+      for (var detectedObject in res.data!.detectedObjects) {
+        final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
+        await vm.paintParse();
+        detectedObjectVMs[vm.maskId] = vm;
+      }
+      _state.detectedObjects = detectedObjectVMs;
+
+      /// SET NEW SESSION ID
+      _state.sessionId = res.data!.sessionId;
+
+      /// AI MODE
+      Debug.log("===== TO AI MODE ====");
+      _state.mode = RemoveObjectMode.ai;
+
+      /// HIDE LOADING POPUP
+      LoadingPopup.hide();
+
+      /// SHOW GUIDE
+      showAutoAIGuide();
+
+      return true;
+    }
+
+    /// HIDE LOADING POPUP
+    LoadingPopup.hide();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
@@ -297,28 +363,26 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!canRemove) return false;
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
+    LoadingPopup.show(S.of(context).pleaseWaitAMoment);
 
     /// CALL API
     ui.Image mask = await _state.paint.renderMask(originalImage.size);
     Uint8List? maskBytes = await ImageUtils.instance.imageUIToBytes(mask);
     if (maskBytes == null) {
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
       return false;
     }
 
-    EraseBody body = EraseBody(originalPreviewImage: _state.image.imageBytes, maskBrush: maskBytes, sessionId: _state.sessionId);
-    SnapEditResponse<EraseResponse?> res = await Services.instance.snapEdit.erase(body);
+    RemoveObjectBody body = RemoveObjectBody(originalPreviewImage: _state.image.imageBytes, maskBrush: maskBytes, sessionId: _state.sessionId);
+    SnapEditResponse<RemoveObjectResponse?> res = await Services.instance.snapEdit.removeObject(body);
 
     if (res.data != null) {
-      Debug.log("===== REMOVE OBJECTS ${res.data} =====");
-
       /// CREATE NEW STATE WITH SET SESSION ID TO USED FOR NEXT STATE
       _state.next = _state.copyWith(prev: _state, drawables: []);
 
       /// MUST CALL SET IMAGE BEFORE SET FOR CURRENT STATE
-      await _state.next!.setImage(res.data!.editedImage.image);
+      await _state.next!.setImage(base64.decode(res.data!.editedImage.image));
 
       /// AFTER NEXT STATE SETTED IMAGE
       _state.removeListener(notifyListeners);
@@ -327,12 +391,12 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    LoadingPopup.hide();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
@@ -340,7 +404,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
         message: S.of(context).failedToRemoveObjectsPleaseTryAgain, 
         retry: (_) => removeObjects(context),
       );
-      Debug.log("===== REMOVE OBJECTS ${res.message} =====");
     }
 
     return false;
@@ -385,8 +448,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     _compared = false;
     _strokeChanged = false;
     _state = RemoveObjectState();
-    _state.strokeColor = config.removeObject.strokeWidth.color;
-    _state.strokeWidth = config.removeObject.strokeWidth.init.toDouble();
     if (notify) notifyListeners();
   }
 

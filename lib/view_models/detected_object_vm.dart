@@ -6,8 +6,8 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_state.dart';
 import 'package:snapeditify/services/snap_edit/snap_edit.dart';
 import 'package:snapeditify/utils/image.dart';
-import 'package:snapeditify/widgets/painter/painter_pure.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'dart:ui' as ui;
 
 class DetectedObjectVM extends DetectedObject {

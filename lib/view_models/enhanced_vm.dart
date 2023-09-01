@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:snapeditify/providers/enhance/enhance_state.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'dart:ui' as ui;
 
 import 'package:snapeditify/utils/image.dart';

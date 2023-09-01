@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Tất cả các thay đổi sẽ bị mất. Hình ảnh của bạn sẽ được hoàn nguyên về trạng thái ban đầu."),
         "allow": MessageLookupByLibrary.simpleMessage("Cho phép"),
         "animeAi": MessageLookupByLibrary.simpleMessage("Anime AI"),
+        "applyEffects": MessageLookupByLibrary.simpleMessage("Apply effects"),
         "areYouHappyWith":
             MessageLookupByLibrary.simpleMessage("Bạn có hài lòng với\n"),
         "artEffect": MessageLookupByLibrary.simpleMessage("Hiệu ứng"),
@@ -43,8 +44,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "brush": MessageLookupByLibrary.simpleMessage("Vẽ"),
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
         "chinese": MessageLookupByLibrary.simpleMessage("Tiếng Trung Quốc"),
+        "createIdPhoto":
+            MessageLookupByLibrary.simpleMessage("Create ID Photo"),
         "createNanimeAvatar":
             MessageLookupByLibrary.simpleMessage("Tạo hình đại diện\nAnime"),
+        "cutoutObjects": MessageLookupByLibrary.simpleMessage("Cutout objects"),
         "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage(
             "Hủy các thay đổi và hoàn nguyên?"),
         "downloadNow": MessageLookupByLibrary.simpleMessage("Tải ngay"),
@@ -54,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nâng cao hình ảnh"),
         "enhanceNimageQuality": MessageLookupByLibrary.simpleMessage(
             "Nâng cao\nchất lượng\nhình ảnh"),
+        "enhancePhoto": MessageLookupByLibrary.simpleMessage("Enhance photo"),
         "failedToChangeStylePleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Không thể thay đổi kiểu, vui lòng thử lại."),
@@ -78,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Không thể tạo kiểu cho hình ảnh, vui lòng thử lại."),
         "feedback": MessageLookupByLibrary.simpleMessage("Nhận xét"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Phản hồi cho"),
+        "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "languages": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "later": MessageLookupByLibrary.simpleMessage("Lần sau"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
@@ -103,6 +109,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vui lòng thử lại hoặc mở lại ứng dụng."),
         "pleaseWaitAMoment":
             MessageLookupByLibrary.simpleMessage("Xin vui lòng chờ."),
+        "rateSnapeditify":
+            MessageLookupByLibrary.simpleMessage("Rate SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("Xoá"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Xóa đối tượng"),
         "removeThingsNfromImage":

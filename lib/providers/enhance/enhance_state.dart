@@ -1,9 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/view_models/enhanced_vm.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
 import 'package:snapeditify/view_models/face_vm.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 
 class EnhanceState extends EditImageState {
   EnhanceState() {
@@ -17,8 +19,8 @@ class EnhanceState extends EditImageState {
   }
 
   @override
-  Future<bool> setImage(String imageBase64, {EditImageProvider? provider, bool createImageFile = true}) async {
-    final bool result = await super.setImage(imageBase64);
+  Future<bool> setImage(Uint8List imageBytes, {EditImageProvider? provider, bool createImageFile = true}) async {
+    final bool result = await super.setImage(imageBytes);
     if (result) {
       _paintBefore.background = image.imageUI.backgroundDrawable;
       _paintAfter.background = image.imageUI.backgroundDrawable;

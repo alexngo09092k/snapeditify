@@ -4,11 +4,11 @@
 import 'package:flutter/services.dart';
 
 class EnhanceBody {
-  String zoomFactor;
-  Uint8List? inputImage;
-  String? imageId;
+  final String zoomFactor;
+  final Uint8List? inputImage;
+  final String? imageId;
 
-  EnhanceBody({
+  const EnhanceBody({
     this.zoomFactor = '2',
     this.inputImage,
     this.imageId,

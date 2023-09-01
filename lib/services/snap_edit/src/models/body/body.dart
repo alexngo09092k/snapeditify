@@ -1,4 +1,11 @@
-export 'ai_detection_body.dart';
+export 'scan_object_body.dart';
+export 'anime_body.dart';
 export 'enhance_body.dart';
-export 'erase_body.dart';
+export 'remove_object_body.dart';
+export 'large_image_body.dart';
+export 'one_touch_suggesstion_body.dart';
+export 'remove_background_body.dart';
+export 'restore_body.dart';
+export 'generate_video_body.dart';
 export 'restyle_body.dart';
+export 'sky_mask_body.dart';

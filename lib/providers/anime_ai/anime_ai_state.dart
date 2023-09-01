@@ -1,7 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
-import 'package:snapeditify/services/snap_edit/src/models/response/anime_image_response.dart';
-import 'package:snapeditify/widgets/painter/painter_pure.dart';
+import 'package:snapeditify/services/snap_edit/src/models/response/anime_response.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 
 class AnimeAIState extends EditImageState {
   AnimeAIState() {
@@ -16,9 +18,9 @@ class AnimeAIState extends EditImageState {
   String? _styleId;
   String? get styleId => _styleId;
 
-  final Map<String, AnimeImageResponse> _styledImages = {};
-  Map<String, AnimeImageResponse> get styledImages => _styledImages;
-  set styledImages(Map<String, AnimeImageResponse> styledImages) {
+  final Map<String, AnimeResponse> _styledImages = {};
+  Map<String, AnimeResponse> get styledImages => _styledImages;
+  set styledImages(Map<String, AnimeResponse> styledImages) {
     _styledImages.clear();
     _styledImages.addAll(styledImages);
     notifyState();
@@ -33,8 +35,8 @@ class AnimeAIState extends EditImageState {
   }
 
   @override
-  Future<bool> setImage(String imageBase64, {EditImageProvider? provider, String? styleId}) async {
-    await super.setImage(imageBase64);
+  Future<bool> setImage(Uint8List imageBytes, {EditImageProvider? provider, String? styleId}) async {
+    await super.setImage(imageBytes);
     _styleId = styleId;
     _paint.background = (image.imageUI).backgroundDrawable;
     return true;

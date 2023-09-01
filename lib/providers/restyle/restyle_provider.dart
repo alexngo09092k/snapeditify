@@ -1,5 +1,8 @@
 // ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
 
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
@@ -8,16 +11,16 @@ import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_state.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
-import 'package:snapeditify/services/snap_edit/src/models/response/styles_response.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
   @override
   RestyleState get state;
   
-  List<Style> get styles;
+  List<Effect> get styles;
 
   bool get canRevert;
   bool get canCompare;
@@ -39,9 +42,9 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     _state.addListener(notifyListeners);
   }
 
-  final List<Style> _styles = [];
+  final List<Effect> _styles = [];
   @override
-  List<Style> get styles {
+  List<Effect> get styles {
     if(_styles.isEmpty) syncFromServer(true);
     return  _styles;
   }
@@ -51,7 +54,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   RestyleState get state => _state;
 
   @override
-  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBase64, _state.image.imageUI);
+  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
 
   @override
   bool get canSave => _state.styledImages.isNotEmpty;
@@ -84,7 +87,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   @override
   Future<bool> revert(BuildContext context) async {
     Debug.log("===== REVERT ====");
-    return _state.setImage(originalImage.imageBase64, styleId: null);
+    return _state.setImage(originalImage.imageBytes, styleId: null);
   }
 
   @override
@@ -102,27 +105,28 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    WidgetUtils.instance.showLoadingPopup();
+    LoadingPopup.show("Please wait amoment!");
 
     /// SHOW ADS
     adProvider.handleAd();
 
     /// CALL API
     RestyleBody body = RestyleBody(styleId: styleId, inputImage: originalImage.imageBytes, imageId: _state.imageId);
-    SnapEditResponse<RestyleResponse?> res = await Services.instance.snapEdit.restyle(body);
+    SnapEditResponse<RestyleImageResponse?> res = await Services.instance.snapEdit.restyle(body);
 
     if (res.data != null) {
-      await _state.setImage(res.data!.outputImage, styleId: styleId);
-      _state.styledImages[styleId] = res.data!.outputImage;
+      Uint8List imagebytes = base64.decode(res.data!.outputImage);
+      await _state.setImage(imagebytes, styleId: styleId);
+      _state.styledImages[styleId] = imagebytes;
       notifyListeners();
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    LoadingPopup.hide();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
@@ -146,29 +150,29 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   void clean([bool notify = false]) {
     _styles.clear();
     _state.styledImages.clear();
-    _state.setImage(originalImage.imageBase64, styleId: null);
+    _state.setImage(originalImage.imageBytes, styleId: null);
     if (notify) notifyListeners();
   }
 
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
-    AsyncStorage.instance.remove(AsyncStorageKey.instance.styles);
+    AsyncStorage.instance.remove(AsyncStorageKey.instance.restyleEffects);
     return true;
   }
 
   @override
   Future<void> syncFromServer([bool notify = false]) async {
     Locale locale = ManagerProvider.of<ThemeProvider>().locale;
-    SnapEditResponse<StylesResponse?> res = await Services.instance.snapEdit.getStyles(locale.languageCode);
+    SnapEditResponse<RestyleEffectsResponse?> res = await Services.instance.snapEdit.getRestyleEffects(locale.languageCode);
 
     if (res.data != null) {
-      Debug.log("===== SYNC FROM SERVER GET STYLES ${res.data} =====");
-      AsyncStorage.instance.setString(AsyncStorageKey.instance.styles, res.data!.toJson());
+      Debug.log("===== SYNC FROM SERVER GET RESTYLE EFFECTS ${res.data} =====");
+      AsyncStorage.instance.setString(AsyncStorageKey.instance.restyleEffects, res.data!.toJson());
     }
 
     if (!res.status) {
-      Debug.log("===== SYNC FROM SERVER GET STYLES ERROR ${res.message} =====");
+      Debug.log("===== SYNC FROM SERVER GET RESTYLE EFFECTS ERROR ${res.message} =====");
     }
 
     syncFromStorage(notify);
@@ -178,10 +182,10 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? styleStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.styles);
+    String? styleStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.restyleEffects);
     if (styleStrings != null) {
       Debug.log("===== SYNC FROM STORAGE $styleStrings =====");
-      StylesResponse data = StylesResponse.fromJson(styleStrings);
+      RestyleEffectsResponse data = RestyleEffectsResponse.fromJson(styleStrings);
       _styles.clear();
       _styles.addAll(data.styles);
     }

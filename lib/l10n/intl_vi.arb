@@ -77,5 +77,11 @@
   "yourAppVersionIsNoLongerSupportedYoureMissingOut": "Phiên bản ứng dụng của bạn không còn được hỗ trợ. Bạn đang bỏ lỡ các tính năng mới và các bản sửa lỗi quan trọng. Vui lòng cập nhật ngay hôm nay.",
   "later": "Lần sau",
   "update": "Cập nhật",
-  "languages": "Ngôn ngữ"
+  "languages": "Ngôn ngữ",
+  "rateSnapeditify": "Rate SnapEditify",
+  "hot": "HOT",
+  "createIdPhoto": "Create ID Photo",
+  "applyEffects": "Apply effects",
+  "cutoutObjects": "Cutout objects",
+  "enhancePhoto": "Enhance photo"
 }

@@ -1,9 +1,10 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 
 enum RemoveObjectMode {
   ai,
@@ -80,8 +81,8 @@ class RemoveObjectState extends EditImageState {
   }
 
   @override
-  Future<bool> setImage(String imageBase64, {EditImageProvider? provider}) async {
-    await super.setImage(imageBase64);
+  Future<bool> setImage(Uint8List imageBytes, {EditImageProvider? provider}) async {
+    await super.setImage(imageBytes);
     _paint.background = image.imageUI.backgroundDrawable;
     return true;
   }

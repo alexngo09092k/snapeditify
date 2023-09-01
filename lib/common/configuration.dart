@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttering_analytics/fluttering_analytics.dart';
 import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
@@ -11,7 +10,6 @@ import 'package:snapeditify/common/constants.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:snapeditify/models/config/gallery_config.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 import 'package:snapeditify/utils/widget.dart';
@@ -34,17 +32,9 @@ class Configuration {
   BusinessConfig _business = DefaultConfig.business;
   BusinessConfig get business => _business;
 
-  /// GALLERY CONFIGUARATIONS
-  GalleryConfig _gallery = DefaultConfig.gallery;
-  GalleryConfig get gallery => _gallery;
-
   /// IAP CONFIGURATIONS
   IAPConfig _iap = DefaultConfig.iap;
   IAPConfig get iap => _iap;
-
-  /// ANALYTICS CONFIGURATIONS
-  AnalyticsConfig _analytics = DefaultConfig.analytics;
-  AnalyticsConfig get analytics => _analytics;
 
   /// ADS CONFIGURATIONS
   AdvertisementConfig _advertisement = DefaultConfig.advertisement;
@@ -74,10 +64,6 @@ class Configuration {
       _advertisement = AdvertisementConfig.fromMap(enviroment['advertisement']);
     }
 
-    if (enviroment['gallery'] != null) {
-      _gallery = GalleryConfig.fromMap(enviroment['gallery']);
-    }
-
     if (enviroment['snapEdit'] != null) {
       _snapEdit = SnapEditConfig.fromMap(enviroment['snapEdit']);
     }
@@ -85,19 +71,12 @@ class Configuration {
     if (enviroment['iap'] != null) {
       _iap = IAPConfig.fromMap(enviroment['iap']);
     }
-
-    if(enviroment['analytics'] != null) {
-      _analytics = AnalyticsConfig.fromMap(enviroment['analytics']);
-    }
   }
 }
 
 abstract class DefaultConfig {
   /// DEFAULT API CONFIGURATIONS
   static SnapEditConfig snapEdit = SnapEditConfig.defaultValue();
-
-  /// GALLERY CONFIGUARATIONS
-  static GalleryConfig gallery = GalleryConfig.defaultValue();
 
   /// DEFAULT CONFIGURATIONS
   static AwesomeRemoteConfigSetting remoteConfig = AwesomeRemoteConfigSetting(
@@ -182,11 +161,6 @@ abstract class DefaultConfig {
     enable: kDebugMode,
     products: [],
     providers: [IAPProvider.google, IAPProvider.huawei],
-  );
-
-  static AnalyticsConfig analytics = const AnalyticsConfig(
-    enable: kDebugMode,
-    providers: [AnalyticsProvider.google, AnalyticsProvider.huawei],
   );
 }
 

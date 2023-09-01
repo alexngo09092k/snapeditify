@@ -6,8 +6,8 @@ import 'package:share_plus/share_plus.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/pages/setting/widgets/unlock_premium.dart';
 import 'package:snapeditify/utils/widget.dart';
+import 'package:snapeditify/widgets/app_use/unlock_premium.dart';
 import 'package:snapeditify/widgets/base/ad_view.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/app_use/app_layout.dart';
@@ -142,8 +142,7 @@ class SettingPage extends StatelessWidget {
         ],
       ),
       children: [
-        if (Configuration.instance.iap.enable) const UnlockPremium(),
-        if (Configuration.instance.iap.enable) SizedBox(height: AppDimensions.instance.padding),
+        const UnlockPremium(),
         if (Configuration.instance.business.webLinks.isNotEmpty)
           AppCard(
             margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
@@ -173,9 +172,15 @@ class SettingPage extends StatelessWidget {
               child: const Divider(height: 0),
             ),
             list: [
-              TileRow.defaultStyle(
+                 TileRow.defaultStyle(
+                  context,
+                  title: S.of(context).feedback,
+                  image: AppAssets.instance.icFeedback,
+                  onTap: _feedback,
+                ),
+                TileRow.defaultStyle(
                 context,
-                title: S.of(context).feedback,
+                title: 'Rate SnapEditify',
                 image: AppAssets.instance.icFeedback,
                 onTap: _feedback,
               ),

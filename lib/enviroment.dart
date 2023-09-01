@@ -11,7 +11,7 @@ const enviroment = {
   "business": {
     /// App mode
     /// production, debug, maintenance
-    'appMode': 'production',
+    'appMode': 'debug',
 
     /// Maintenance mode
     'maintenanceMode': {
@@ -109,25 +109,26 @@ const enviroment = {
     },
 
     'moreApps': [
-      //  {
-      //    'name': 'Stick War: Legacy',
-      //    'logo': 'https://play-lh.googleusercontent.com/sITxnGaUxYVzTDkVAjRSKM8JKehWTuseE4hF8937sWVattKHEAirl7uZw93gqad_fQg6=s128-rw',
-      //    'desc': 'Play the game Stick War, one of the biggest, most fun, challenging and addicting stick figure games. Control your army in formations or play each unit, you have total control of every stickman. Build units, mine gold, learn the way of the Sword, Spear, Archer, Mage, and even Giant. Destroy the enemy statue, and capture all Territories!',
-      //    'links': {
-      //      'android': 'https://appgallery.huawei.com/app/C107645049', 
-      //      'ios': 'https://appgallery.huawei.com/app/C107645049', 
-      //      'huawei': 'https://appgallery.huawei.com/app/C107645049',
-      //    },
-      //  }
+       {
+         'name': 'TikOk',
+         'logo': 'https://play-lh.googleusercontent.com/sITxnGaUxYVzTDkVAjRSKM8JKehWTuseE4hF8937sWVattKHEAirl7uZw93gqad_fQg6=s128-rw',
+         'desc': 'Play the game Stick War, one of the biggest, most fun, challenging and addicting stick figure games. Control your army in formations or play each unit, you have total control of every stickman. Build units, mine gold, learn the way of the Sword, Spear, Archer, Mage, and even Giant. Destroy the enemy statue, and capture all Territories!',
+         'links': {
+           'android': 'https://appgallery.huawei.com/app/C107645049', 
+           'ios': 'https://appgallery.huawei.com/app/C107645049', 
+           'huawei': 'https://appgallery.huawei.com/app/C107645049',
+         },
+       }
     ]
   },
+
 
   //! ====================================== ADVERTISEMENT ==============================================
   "advertisement": {
     "enable": true,
     "adMobAppIdIos": "",
     "adMobAppIdAndroid": "",
-    "providers": ["huawei"],
+    "providers": [ "huawei"],
     "ads": [
       /// HUAWEI
       // {
@@ -171,88 +172,33 @@ const enviroment = {
 
   //! ====================================== IAP ==============================================
   "iap": {
-    "enable": false,
-    "providers": [],
-    "products": [
-      // {
-      //   "type": "subscriptions",
-      //   "provider": "huawei",
-      //   "id": "test",
-      //   "info": {
-      //     "name": "",
-      //     "description": "",
-      //     "price": "\$1000",
-      //     "rawPrice": 1000,
-      //     "currency": "USD",
-      //   }
-      // },
-    ],
-  },
-
-  //! ====================================== ANALYTICS ==============================================
-  "analytics": {
     "enable": true,
     "providers": ["huawei"],
-  },
-
-  //! ====================================== SNAPEDIT ==============================================
-  "snapEdit": {
-    'baseUrl': "https://be-prod-1.snapedit.app/",
-    // 'apiKey': "s2svtF6qSCwBCI0Xjm4MvY0fBGVrtoUCbidhNmkvrJA=",
-    'apiKey': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoiMy4xLjAiLCJleHAiOjE3Njk2MjI0MDEsInN1YiI6Imlnbm9yZSIsInBsYXRmb3JtIjoiYW5kcm9pZCJ9.OufJuEzKvN2RVCw-Ofy1oY6d9oRuOnM_Vxmt6aqLWAk",
-    'version': "3.4.1",
-    'endPoints': {
-      'erase': 'api/v6/erase',
-      'erasePro': 'api/v6/erase',
-      'ai': 'api/v6/ai_detection',
-      'aiPro': 'api/v6/ai_detection',
-      'enhance': 'api/v2/enhance',
-      'enhancePro': 'api/v2/pro/enhance',
-      'restyle': 'api/v1/restyle',
-      'restylePro': 'api/v1/restyle',
-      'styles': 'api/v1/restyle/styles',
-      'stylesPro': 'api/v1/restyle/styles',
-      'animeStyles': "api/imagen/v1/styles",
-      'animeStylesPro': "api/imagen/v1/styles",
-      'animeImageAI': "api/imagen/v1",
-      'animeImageAIPro': "api/imagen/v1",
-      'animeVideoAI': "api/imagen/v1/video",
-      'animeVideoAIPro': "api/imagen/v1/video",
-    },
-    'enhance': {
-      'suportedImageSize': {
-        'high': 1920,
-        'standard': 1920,
-        'pro': 3000,
+    "products": [
+      {
+        "type": "subscriptions",
+        "provider": "huawei",
+        "id": "app.snapeditify.studio.amonth",
+        "info": {
+          "name": "A Month",
+          "description": "This is lisence for a month use us service like. Thanks for purchase.",
+          "price": "\$2.46",
+          "rawPrice": '2',
+          "currency": "GBP",
+        }
       },
-      'uploadImageSize': {
-        'high': 1920,
-        'standard': 1920,
-        'pro': 3000,
+      {
+        "type": "subscriptions",
+        "provider": "huawei",
+        "id": "app.snapeditify.studio.oneyear",
+        "info": {
+          "name": "A Month",
+          "description": "This is lisence for a month use us service like. Thanks for purchase.",
+          "price": "\$2.46",
+          "rawPrice": '2',
+          "currency": "GBP",
+        }
       },
-      'upscaleMaxImageSize': 1000,
-    },
-    'restyle': {
-      'dimension': {
-        'high': 1920,
-        'standard': 1920,
-        'pro': 3000,
-      },
-    },
-    'removeObject': {
-      'dimension': {
-        'high': 1920,
-        'standard': 1920,
-        'pro': 3000,
-      },
-      'strokeWidth': {
-        'min': 1,
-        'max': 100,
-        'init': 30,
-        'color': [255, 255, 255, 0.5],
-      }
-    },
-    'waterMark': false,
-    'maxFreeDownloadCount': 100,
+    ],
   },
 };

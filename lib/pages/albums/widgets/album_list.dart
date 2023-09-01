@@ -22,19 +22,20 @@ class AlbumList extends StatelessWidget {
           padding: EdgeInsets.only(left: spacing, right: spacing * 2),
           childAspectRatio: itemWidth / (itemWidth + spacing * 3),
           children: [
-            SuggestedItem(
-              image: p.suggestedPhotos[0],
-              total: p.suggestedPhotos.length,
-              width: itemWidth,
-              height: itemWidth,
-            ),
+            if (p.suggestedPhotos.isNotEmpty)
+              SuggestedItem(
+                image: p.suggestedPhotos[0],
+                total: p.suggestedPhotos.length,
+                width: itemWidth,
+                height: itemWidth,
+              ),
             ...p.albumList.values
                 .map((e) => AlbumItem(
                       album: e,
                       width: itemWidth,
                       height: itemWidth,
                     ))
-                .toList(),
+                .toList()
           ],
         ),
       ),

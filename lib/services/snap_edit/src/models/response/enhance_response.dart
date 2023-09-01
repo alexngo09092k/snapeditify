@@ -1,23 +1,25 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
+import 'addition_face.dart';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-class EnhanceResponse {
-  List<Face> faces;
-  int numFaceModels;
-  int numTotalFaces;
-  List<String> outputImages;
+class EnhanceImageResponse {
+  final List<AdditionFace> faces;
+  final int numFaceModels;
+  final int numTotalFaces;
+  final List<String> outputImages;
+  final String? error;
+  
 
-  EnhanceResponse({
+  const EnhanceImageResponse({
     required this.faces,
     required this.numFaceModels,
     required this.numTotalFaces,
     required this.outputImages,
+    this.error,
   });
 
-  factory EnhanceResponse.defaultValue() {
-    return EnhanceResponse(
+  factory EnhanceImageResponse.defaultValue() {
+    return const EnhanceImageResponse(
       faces: [],
       numFaceModels: 0,
       numTotalFaces: 0,
@@ -25,124 +27,69 @@ class EnhanceResponse {
     );
   }
 
-  EnhanceResponse copyWith({
-    List<Face>? faces,
+  EnhanceImageResponse copyWith({
+    List<AdditionFace>? faces,
     int? numFaceModels,
     int? numTotalFaces,
     List<String>? outputImages,
+    String? error,
   }) {
-    return EnhanceResponse(
+    return EnhanceImageResponse(
       faces: faces ?? this.faces,
       numFaceModels: numFaceModels ?? this.numFaceModels,
       numTotalFaces: numTotalFaces ?? this.numTotalFaces,
       outputImages: outputImages ?? this.outputImages,
+      error: error ?? this.error,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'faces': faces.map((face) => face.toMap()).toList(),
+      'faces': faces.map((x) => x.toMap()).toList(),
       'num_face_models': numFaceModels,
       'num_total_faces': numTotalFaces,
       'output_images': outputImages,
+      'error': error,
     };
   }
 
-  factory EnhanceResponse.fromMap(Map<String, dynamic> map) {
-    return EnhanceResponse.defaultValue().copyWith(
-      faces: List<Face>.from((map['faces'] ?? []).map<Face>((e) => Face.fromMap(e))),
-      numFaceModels: map['num_face_models'],
-      numTotalFaces: map['num_total_faces'],
-      outputImages: List<String>.from((map['output_images'] ?? []).map<String>((e) => e.toString())),
+  factory EnhanceImageResponse.fromMap(Map<String, dynamic> map) {
+    return EnhanceImageResponse(
+      faces: List<AdditionFace>.from((map['faces']).map<AdditionFace>((x) => AdditionFace.fromMap(x))),
+      numFaceModels: map['num_face_models'] as int,
+      numTotalFaces: map['num_total_faces'] as int,
+      outputImages: List<String>.from((map['output_images'])),
+      error: map['error'] != null ? map['error'] as String : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory EnhanceResponse.fromJson(String source) => EnhanceResponse.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory EnhanceImageResponse.fromJson(String source) => EnhanceImageResponse.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'EnhanceResponse(faces: $faces, numFaceModels: $numFaceModels, numTotalFaces: $numTotalFaces, outputImages: $outputImages)';
+    return 'EnhanceImageResponse(faces: $faces, num_face_models: $numFaceModels, num_total_faces: $numTotalFaces, output_images: $outputImages, error: $error)';
   }
 
   @override
-  bool operator ==(covariant EnhanceResponse other) {
+  bool operator ==(covariant EnhanceImageResponse other) {
     if (identical(this, other)) return true;
-
-    return listEquals(other.faces, faces) &&
-        other.numFaceModels == numFaceModels &&
-        other.numTotalFaces == numTotalFaces &&
-        listEquals(other.outputImages, outputImages);
+  
+    return 
+      listEquals(other.faces, faces) &&
+      other.numFaceModels == numFaceModels &&
+      other.numTotalFaces == numTotalFaces &&
+      listEquals(other.outputImages, outputImages) &&
+      other.error == error;
   }
 
   @override
   int get hashCode {
-    return faces.hashCode ^ numFaceModels.hashCode ^ numTotalFaces.hashCode ^ outputImages.hashCode;
+    return faces.hashCode ^
+      numFaceModels.hashCode ^
+      numTotalFaces.hashCode ^
+      outputImages.hashCode ^
+      error.hashCode;
   }
-}
-
-class Face {
-  List<int> box;
-  int faceId;
-  List<String> png;
-
-  Face({
-    required this.box,
-    required this.faceId,
-    required this.png,
-  });
-
-  factory Face.defaultValue() {
-    return Face(
-      box: [],
-      faceId: 0,
-      png: [],
-    );
-  }
-
-  Face copyWith({
-    List<int>? box,
-    int? faceId,
-    List<String>? png,
-  }) {
-    return Face(
-      box: box ?? this.box,
-      faceId: faceId ?? this.faceId,
-      png: png ?? this.png,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'box': box,
-      'faceId': faceId,
-      'png': png,
-    };
-  }
-
-  factory Face.fromMap(Map<String, dynamic> map) {
-    return Face.defaultValue().copyWith(
-      box: List<int>.from(((map['box'] ?? []).map<int>((e) => int.parse(e.toString())))),
-      faceId: map['faceId'],
-      png: List<String>.from(((map['png'] ?? []).map<String>((e) => e.toString()))),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Face.fromJson(String source) => Face.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'Face(box: $box, faceId: $faceId, png: $png)';
-
-  @override
-  bool operator ==(covariant Face other) {
-    if (identical(this, other)) return true;
-
-    return listEquals(other.box, box) && other.faceId == faceId && listEquals(other.png, png);
-  }
-
-  @override
-  int get hashCode => box.hashCode ^ faceId.hashCode ^ png.hashCode;
 }

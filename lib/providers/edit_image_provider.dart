@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/advertisement/advertisement.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
@@ -21,6 +22,7 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/view_models/editing_image_vm.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 import 'package:snapeditify/widgets/app_use/saved_mage_preview.dart';
+import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;
@@ -30,7 +32,7 @@ abstract class EditImageProvider extends Provider {
 
   SnapEditConfig get config => Configuration.instance.snapEdit;
 
-  EditedImageVM get editedImage;
+  EditedImageVM? get editedImage;
 
   bool get canSave;
 
@@ -50,13 +52,13 @@ abstract class EditImageProvider extends Provider {
     if (refesh) await refresh(context);
 
     /// CONVERT TO JPG
-    Uint8List jpgBytes = await ImageUtils.instance.toJPG(bytes);
+    final imageBytes = await ImageUtils.instance.toJPG(bytes);
 
-    _originalImage = EditingImageVM(base64.encode(jpgBytes));
+    _originalImage = EditingImageVM(imageBytes);
     await _originalImage.paintParse();
 
     /// SET IMAGE FOR STATE
-    return state.setImage(_originalImage.imageBase64);
+    return state.setImage(_originalImage.imageBytes);
   }
 
   Future<bool> refresh(BuildContext context) async {
@@ -87,31 +89,28 @@ abstract class EditImageProvider extends Provider {
 
       final provider = ManagerProvider.of<GalleryProvider>();
 
-      if (_savedFile == null) {
+      if (_savedFile == null && editedImage != null) {
         /// SHOW LOADING
-        WidgetUtils.instance.showLoadingPopup();
+        LoadingPopup.show("Please wait amoment!");
         
         /// SHOW ADS
         adProvider.handleAd();
 
         /// SAVE IMAGE
-        _savedFile = await provider.saveImage(editedImage.imageBytes);
+        _savedFile = await provider.saveImage(editedImage!.imageBytes);
 
         /// HIDE LOADING
-        WidgetUtils.instance.dimiss();
+        LoadingPopup.hide();
       }
 
       if (_savedFile != null) {
         /// SHOW SAVED IMAGE
-        await showModalBottomSheet<bool>(
+        await showDialog<bool>(
           context: context,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
-          ),
           builder: (_) => SavedImagePreview(
-            editedImage: editedImage,
-            editImageType: provider.editImageType,
-            onNewEditImage: (__) => AppRoutes.instance.goEditImagePage(context, bytes: editedImage.imageBytes, editImageType: __),
+            editedImage: editedImage!,
+            imageTool: provider.imageTool,
+            onNewEditImage: (__) => AppRoutes.instance.goEditImagePage(context, bytes: editedImage!.imageBytes, imageTool: __),
             savedFile: _savedFile!,
             onShare: () => Share.shareXFiles(
               [XFile(savedFile!.path)],

@@ -77,5 +77,11 @@
   "yourAppVersionIsNoLongerSupportedYoureMissingOut": "เวอร์ชันของแอปของคุณไม่ได้รับการสนับสนุนอีกต่อไป คุณพลาดคุณสมบัติใหม่และการแก้ไขปัญหาสำคัญ โปรดอัปเดตวันนี้",
   "later": "หลัง",
   "update": "อัปเดต",
-  "languages": "ภาษา"
+  "languages": "ภาษา",
+  "rateSnapeditify": "Rate SnapEditify",
+  "hot": "HOT",
+  "createIdPhoto": "Create ID Photo",
+  "applyEffects": "Apply effects",
+  "cutoutObjects": "Cutout objects",
+  "enhancePhoto": "Enhance photo"
 }

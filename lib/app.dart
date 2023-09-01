@@ -1,4 +1,3 @@
-import 'package:fluttering_analytics/fluttering_analytics.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/theme.dart';
@@ -14,12 +13,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends AwesomeAppState<App> {
-
-  @override
-  void initState() {
-    AwesomeAnalytics.instance.sendEvent("Open App", {});
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

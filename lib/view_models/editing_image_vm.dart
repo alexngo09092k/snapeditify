@@ -5,17 +5,17 @@ import 'package:flutter/foundation.dart';
 import 'package:snapeditify/utils/image.dart';
 
 class EditingImageVM {
-  EditingImageVM(String imageBase64) {
-    _imageBase64 = imageBase64;
+  EditingImageVM(Uint8List imageBytes) {
+    _imageBytes = imageBytes;
   }
 
   late ui.Image _imageUI;
   ui.Image get imageUI => _imageUI;
 
-  late String _imageBase64;
-  String get imageBase64 => _imageBase64;
+  late Uint8List _imageBytes;
+  Uint8List get imageBytes => _imageBytes;
 
-  Uint8List get imageBytes => base64.decode(_imageBase64);
+  String get imageBase64 => base64.encode(_imageBytes);
 
   Future<void> paintParse() async {
     _imageUI = await ImageUtils.instance.toImageUI(imageBytes);

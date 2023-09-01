@@ -15,10 +15,12 @@ class AsyncStorageKey {
   String get remoteConfigExpriedDate => '${prefix}remoteConfigExpriedDate';
   String get themeMode => '${prefix}themeMode';
 
-  String get styles => '${prefix}styles';
-  String get animeStyles => '${prefix}animeStyles';
+  String get restyleEffects => '${prefix}restyleEffects';
+  String get animeEffects => '${prefix}animeEffects';
+  String get skyEffects => '${prefix}skyEffects';
+  String get backgroundEffects => '${prefix}backgroundEffects';
 
-  String get brushGuide => '${prefix}brushGuide ';
+  String get brushGuide => '${prefix}brushGuide';
   String get autoAIGuide => '${prefix}autoAIGuide';
   String get enhanceGuide => '${prefix}enhanceGuide';
 

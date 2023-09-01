@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
-import 'package:snapeditify/services/snap_edit/src/models/response/anime_styles_response.dart';
+import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
@@ -17,7 +17,7 @@ class AnimeAIStyleList extends StatelessWidget {
       height: AwesomeAppState.screen.height * 1.2 / 5,
       child: PropConsumer<IAnimeAIProvider, String?>(
         select: (_) => _.category,
-        builder: (_, __, p, ___) => PropConsumer<IAnimeAIProvider, List<AnimeStyle>>(
+        builder: (_, __, p, ___) => PropConsumer<IAnimeAIProvider, List<Effect>>(
           select: (_) => _.styles.where((element) => element.category == p.category).toList(),
           builder: (_, __, ___, styles) {
             return ListView.builder(
@@ -41,8 +41,8 @@ class AnimeAIStyleList extends StatelessWidget {
 
 class AnimeStyleItem extends StatelessWidget {
   const AnimeStyleItem({super.key, required this.style, required this.onStyle});
-  final AnimeStyle style;
-  final Function(AnimeStyle) onStyle;
+  final Effect style;
+  final Function(Effect) onStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +60,7 @@ class AnimeStyleItem extends StatelessWidget {
                 children: [
                   CustomImage(
                     image: style.thumbnailUrl,
+                    placeholder: AppAssets.instance.animePlaceholder,
                   ),
                   Positioned(
                     right: 0,

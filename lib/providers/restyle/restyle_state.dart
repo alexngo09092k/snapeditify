@@ -1,6 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
-import 'package:snapeditify/widgets/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 
 class RestyleState extends EditImageState {
   RestyleState() {
@@ -22,20 +24,22 @@ class RestyleState extends EditImageState {
   String? _styleId;
   String? get styleId => _styleId;
 
-  final Map<String, String> _styledImages = {};
-  Map<String, String> get styledImages => _styledImages;
-  set styledImages(Map<String, String> styledImages) {
+  final Map<String, Uint8List> _styledImages = {};
+  Map<String, Uint8List> get styledImages => _styledImages;
+  set styledImages(Map<String, Uint8List> styledImages) {
     _styledImages.clear();
     _styledImages.addAll(styledImages);
     notifyState();
   }
 
   @override
-  Future<bool> setImage(String imageBase64, {EditImageProvider? provider, String? styleId}) async {
-    await super.setImage(imageBase64);
-    _styleId = styleId;
-    _paint.background = image.imageUI.backgroundDrawable;
-    return true;
+  Future<bool> setImage(Uint8List imageBytes, {EditImageProvider? provider, String? styleId}) async {
+    final bool result = await super.setImage(imageBytes);
+    if(result) {
+      _styleId = styleId;
+      _paint.background = image.imageUI.backgroundDrawable;
+    }
+    return result;
   }
 
   @override

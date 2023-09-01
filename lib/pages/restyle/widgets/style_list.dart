@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
-import 'package:snapeditify/services/snap_edit/src/models/response/styles_response.dart';
+import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
@@ -16,7 +16,7 @@ class StyleList extends StatelessWidget {
     return Container(
       height: AwesomeAppState.screen.height * 1.2 / 5,
       padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5), vertical: AppDimensions.instance.padding),
-      child: PropConsumer<IRestyleProvider, List<Style>>(
+      child: PropConsumer<IRestyleProvider, List<Effect>>(
         select: (_) => _.styles,
         builder: (_, __, p, styles) => ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -34,8 +34,8 @@ class StyleList extends StatelessWidget {
 
 class StyleItem extends StatelessWidget {
   const StyleItem({super.key, required this.style, required this.onSelect});
-  final Style style;
-  final Function(Style) onSelect;
+  final Effect style;
+  final Function(Effect) onSelect;
 
   @override
   Widget build(BuildContext context) {
