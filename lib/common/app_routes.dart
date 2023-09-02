@@ -108,8 +108,7 @@ class AppRoutes extends IAppRoutes {
       case albumsPage:
         return buildRoute(const AlbumsPage(), settings);
       case photosPage:
-        return buildRoute(
-            PhotosPage(albumId: (settings.arguments as String?)), settings);
+        return buildRoute(PhotosPage(albumId: (settings.arguments as String?)), settings);
       case removeObjectPage:
         return buildRoute(const RemoveObjectPage(), settings);
       case enhanceImagePage:
@@ -167,8 +166,7 @@ extension AppRoutesUtils on IAppRoutes {
     Navigator.pushNamed(context, AppRoutes.settingPage);
   }
 
-  void goEditImagePage(BuildContext context,
-      {required Uint8List bytes, ImageTool? imageTool}) {
+  void goEditImagePage(BuildContext context, {required Uint8List bytes, ImageTool? imageTool}) {
     final gProvider = ManagerProvider.of<GalleryProvider>();
     if (imageTool != null) gProvider.imageTool = imageTool;
     UserPermission.instance.requestStoragePermission(
@@ -220,7 +218,9 @@ extension AppRoutesUtils on IAppRoutes {
             break;
         }
 
-        provider.setImage(context, bytes: bytes).then((ok) {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          /// SET EDIT IMAGE
+          provider.setImage(context, bytes: bytes).then((ok) {
           /// HIDE LOADING
           LoadingPopup.hide();
 
@@ -231,7 +231,9 @@ extension AppRoutesUtils on IAppRoutes {
           } else {
             Navigator.pushNamed(context, target);
           }
+          });
         });
+        
       },
     );
   }

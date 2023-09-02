@@ -39,7 +39,6 @@ class AppAssets {
   final String icRemoveBG = "$iconPath/ic_remove_bg.png";
   final String icRestoration = "$iconPath/ic_restoration.png";
   final String icOneTouch = "$iconPath/ic_one_touch.png";
-  final String icRestyle = "$iconPath/ic_restyle.png";
   final String icEditor = "$iconPath/ic_editor.png";
   final String icSky = "$iconPath/ic_sky.png";
   final String icShare = "$iconPath/ic_share.png";
