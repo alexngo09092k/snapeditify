@@ -18,6 +18,14 @@ class RestoreState extends EditImageState {
   String? _outputImageId;
   String? get outputImageId => _outputImageId;
 
+  String? _videoURL;
+  String? get videoURL => _videoURL;
+  set videoURL(String? url) {
+    _videoURL = url;
+    notifyState();
+  }
+
+
   @override
   Future<bool> setImage(Uint8List imageBytes, String imageBase64, {String? imageId, String? outputImageId}) async {
     final bool result = await super.setImage(imageBytes, imageBase64);

@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
@@ -55,6 +56,15 @@ class RestoreProvider extends IRestoreProvider {
   bool get canSave =>  _state.image.imageBase64 != originalImage.imageBase64;
 
   @override
+  Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
+    final result = await super.setImage(context, bytes: bytes, refesh: refesh);
+    if(result) {
+      _paintBefore.background = originalImage.imageUI.backgroundDrawable;
+    }
+    return result;
+  }
+
+  @override
   Future<bool> restoreImage(BuildContext context) async {
     /// CHECKING ENVIROMENT
     final result = await checkEnviroment(context, retry: (_) => restoreImage(context));
@@ -74,7 +84,12 @@ class RestoreProvider extends IRestoreProvider {
     if (res.data != null) {
       final imageBase64 = res.data!.outputImage.image;
       final imageBytes = base64.decode(res.data!.outputImage.image);
-      await _state.setImage(imageBytes, imageBase64);
+      await _state.setImage(
+        imageBytes, 
+        imageBase64, 
+        imageId: res.data!.imageId, 
+        outputImageId: res.data!.outputImage.imageId,
+      );
       
       /// HIDE LOADING POPUP
       LoadingPopup.hide();
@@ -103,6 +118,9 @@ class RestoreProvider extends IRestoreProvider {
 
    @override
   Future<bool> videoEffect(BuildContext context) async {
+
+    if(_state.imageId == null || _state.outputImageId == null) return false;
+
     /// CHECKING ENVIROMENT
     final result = await checkEnviroment(context, retry: (_) => videoEffect(context));
     if (!result) return false;
@@ -115,13 +133,15 @@ class RestoreProvider extends IRestoreProvider {
 
     /// CALL API
     GenerateVideoBody body = GenerateVideoBody(
-      outputImageId: "",
+      outputImageId: _state.outputImageId!,
       imageId: _state.imageId!,
     );
 
     SnapEditResponse<GenerateVideoResponse?> res = await Services.instance.snapEdit.generateVideo(body);
 
     if (res.data != null) {
+      _state.videoURL = res.data!.outputVideoUrl;
+
       /// HIDE LOADING POPUP
       WidgetUtils.instance.dimiss();
       return true;
