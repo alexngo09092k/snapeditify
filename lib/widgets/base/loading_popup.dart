@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/jumping_dots.dart';
 
 class LoadingPopup extends StatefulWidget {
   static final LoadingPopup _instance = LoadingPopup.internal();
@@ -13,8 +13,8 @@ class LoadingPopup extends StatefulWidget {
 
   late final ValueNotifier<String> _message;
 
-  static Future<T?> show<T>(String message) {
-    setMessage(message);
+  static Future<T?> show<T>([String? message]) {
+    if(message != null) setMessage(message);
     return WidgetUtils.instance.showDialog<T>(
       barrierDismissible: false,
       useSafeArea: false,
@@ -54,18 +54,24 @@ class _LoadingPopupState extends State<LoadingPopup> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CupertinoActivityIndicator(
-                color: Theme.of(context).colorScheme.onSurface,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[JumpingDots(color: Theme.of(context).colorScheme.secondary)],
               ),
-              SizedBox(height: AppDimensions.instance.padding),
               ValueListenableBuilder(
                 valueListenable: widget._message,
-                builder: (_, message, ___) => Text(
-                  message,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                ),
+                builder: (_, message, ___) => message.isNotEmpty? Column(
+                  children: [
+                    SizedBox(height: AppDimensions.instance.padding),
+                    Text(
+                      message,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                    )
+                  ],
+                ): const SizedBox(),
               )
             ],
           ),

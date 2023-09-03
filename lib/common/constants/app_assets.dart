@@ -26,6 +26,7 @@ class AppAssets {
   final String logo = "$imagePath/logo.png";
   final String placeholder = "$imagePath/placeholder.png";
   final String animePlaceholder = "$imagePath/anime.png";
+  final String bgTransparent = "$imagePath/bg-transparent.png";
 
   /// Flags
   static const String flagPath = '$imagePath/flags';

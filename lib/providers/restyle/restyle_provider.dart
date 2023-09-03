@@ -105,7 +105,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show("Please wait amoment!");
+    LoadingPopup.show();
 
     /// SHOW ADS
     adProvider.handleAd();

@@ -120,7 +120,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     }
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show("Please wait amoment!");
+    LoadingPopup.show();
 
     /// SHOW ADS
     adProvider.handleAd();
@@ -160,7 +160,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     if (!result) return false;
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show("Please wait amoment!");
+    LoadingPopup.show();
 
     /// SHOW ADS
     adProvider.handleAd();

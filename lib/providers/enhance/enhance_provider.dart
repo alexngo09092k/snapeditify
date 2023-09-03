@@ -59,7 +59,7 @@ class EnhanceProvider extends IEnhanceProvider {
     renewSavedFile();
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show("Please wait amoment!");
+    LoadingPopup.show();
 
     /// SHOW ADS
     adProvider.handleAd();

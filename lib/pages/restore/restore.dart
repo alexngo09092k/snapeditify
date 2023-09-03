@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
+import 'package:snapeditify/pages/restore/widgets/restore_control.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/widgets/app_use/app_layout.dart';
 import 'package:snapeditify/widgets/app_use/save_button.dart';
@@ -13,8 +14,7 @@ class RestorePage extends StatefulWidget {
   State<RestorePage> createState() => _RestorePageState();
 }
 
-class _RestorePageState
-    extends ProviderStateObserver<RestorePage, IRestoreProvider> {
+class _RestorePageState extends ProviderStateObserver<RestorePage, IRestoreProvider> {
   @override
   void onNextFrame(Duration timestamp) {
     provider.restoreImage(context);
@@ -24,11 +24,11 @@ class _RestorePageState
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: S.of(context).enhance,
+      screen: "Restore Image",
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       action: const SaveButton<IRestoreProvider>(),
-      children: const [RestoreImage()],
+      children: const [RestoreImage(), RestoreControl()],
     );
   }
 }

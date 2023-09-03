@@ -90,7 +90,7 @@ abstract class EditImageProvider extends Provider {
 
       if (_savedFile == null && editedImage != null) {
         /// SHOW LOADING
-        LoadingPopup.show("Please wait amoment!");
+        LoadingPopup.show();
         
         /// SHOW ADS
         adProvider.handleAd();

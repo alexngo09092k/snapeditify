@@ -15,6 +15,7 @@ import 'package:snapeditify/providers/app_theme_provider.dart';
 import 'package:snapeditify/providers/change_background/change_background_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
+import 'package:snapeditify/providers/make_passport_id/make_passport_id_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
@@ -38,6 +39,7 @@ void main() {
       () => RemoveObjectProvider.instance,
       () => EnhanceProvider.instance,
       () => RestoreProvider.instance,
+      () => MakePassportIDProvider.instance,
       () => ChangeBackgroundProvider.instance,
       () => ChangeSkyProvider.instance,
       () => RestyleProvider.instance,

@@ -209,7 +209,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     adProvider.handleAd();
   
     /// SHOW LOADING POPUP
-    LoadingPopup.show(S.of(context).pleaseWaitAMoment);
+    LoadingPopup.show();
 
     /// CALL API
     OneTouchSuggestionBody body = OneTouchSuggestionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
@@ -271,7 +271,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     adProvider.handleAd();
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show(S.of(context).pleaseWaitAMoment);
+    LoadingPopup.show();
 
     /// CALL API
     ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
@@ -363,7 +363,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!canRemove) return false;
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show(S.of(context).pleaseWaitAMoment);
+    LoadingPopup.show();
 
     /// CALL API
     ui.Image mask = await _state.paint.renderMask(originalImage.size);

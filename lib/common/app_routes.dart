@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/fast_editor/fast_editor.dart';
-import 'package:snapeditify/pages/passport_maker/passport_maker.dart';
+import 'package:snapeditify/pages/make_passport_id/make_passport_id.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
@@ -76,7 +76,7 @@ class AppRoutes extends IAppRoutes {
     removeObjectPage: (_) => const RemoveObjectPage(),
     enhanceImagePage: (_) => const EnhancePage(),
     restorePage: (_) => const RestorePage(),
-    passportMaker: (_) => const PassportMakerPage(),
+    passportMaker: (_) => const MakePassportIDPage(),
     applyArtEffectPage: (_) => const RestylePage(),
     skyPage: (_) => const ChangeSkyPage(),
     fastEditor: (_) => const FastEditor(),
@@ -114,7 +114,7 @@ class AppRoutes extends IAppRoutes {
       case restorePage:
         return buildRoute(const RestorePage(), settings);
       case passportMaker:
-        return buildRoute(const PassportMakerPage(), settings);
+        return buildRoute(const MakePassportIDPage(), settings);
       case animeAIPage:
         return buildRoute(const AnimeAIPage(), settings);
       case skyPage:
@@ -138,7 +138,7 @@ extension AppRoutesUtils on IAppRoutes {
     UserPermission.instance.requestStoragePermission(context,
         onHasPermisson: () async {
       /// SHOW LOADING POPUP
-      LoadingPopup.show(S.of(context).pleaseWaitAMoment);
+      LoadingPopup.show();
 
       /// LISTEN PHOTOS AND REFRESH GALLERY
       await provider.listenPhotos();
@@ -175,7 +175,7 @@ extension AppRoutesUtils on IAppRoutes {
         String? target;
 
         /// SHOW LOADING POPUP
-        LoadingPopup.show(S.of(context).pleaseWaitAMoment);
+        LoadingPopup.show();
 
         /// CHECK TARGET PAGE
         switch (current) {

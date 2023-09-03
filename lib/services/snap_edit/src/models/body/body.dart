@@ -9,3 +9,4 @@ export 'restore_body.dart';
 export 'generate_video_body.dart';
 export 'restyle_body.dart';
 export 'sky_mask_body.dart';
+export 'make_passport_id_body.dart';

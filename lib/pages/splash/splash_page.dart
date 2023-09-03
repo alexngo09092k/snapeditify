@@ -67,7 +67,7 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
   @override
   Widget build(BuildContext context) {
     final logoWidth = AwesomeAppState.screen.width * 1 / 4;
-    final textWidth = AwesomeAppState.screen.width * 1.2 / 3;
+    final textWidth = AwesomeAppState.screen.width * 1.5 / 3;
     final widthTotal = logoWidth + textWidth + AppDimensions.instance.padding;
     final logoAlpha = (widthTotal / 2 - logoWidth / 2);
     final textAlpha = (widthTotal / 2 - textWidth / 2);
@@ -106,12 +106,12 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
                             fit: BoxFit.fitWidth,
                             child: Text(
                               Configuration.instance.business.appName,
-                              style: Theme.of(context).textTheme.headlineMedium!,
+                              style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w700),
                             ),
                           ),
                           Text(
                             Configuration.instance.business.appBio,
-                            style: Theme.of(context).textTheme.bodyLarge!,
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
                           ),
                         ],
                       ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/pages/passport_maker/widgets/passport_bg_color_list.dart';
-import 'package:snapeditify/pages/passport_maker/widgets/passport_ratio_list.dart';
+import 'package:snapeditify/pages/make_passport_id/widgets/passport_id_bg_color_list.dart';
+import 'package:snapeditify/pages/make_passport_id/widgets/passport_id_ratio_list.dart';
 
-class PassportMakerControl extends StatelessWidget {
-  const PassportMakerControl({super.key});
+class MakePassportIDControl extends StatelessWidget {
+  const MakePassportIDControl({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,9 @@ class PassportMakerControl extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           SizedBox(height: AppDimensions.instance.padding),
-          const PassportBGColorList(),
+          const PassportIDBGColorList(),
           SizedBox(height: AppDimensions.instance.padding),
-          const PassportRatioList(),
+          const PassportIDRatioList(),
         ],
       ),
     );

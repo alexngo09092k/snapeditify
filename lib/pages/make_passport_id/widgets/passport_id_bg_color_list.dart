@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/providers/change_background/change_background_provider.dart';
+import 'package:snapeditify/providers/make_passport_id/make_passport_id_provider.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
-class PassportBGColorList extends StatefulWidget {
-  const PassportBGColorList({super.key});
+class PassportIDBGColorList extends StatefulWidget {
+  const PassportIDBGColorList({super.key});
 
   @override
-  State<PassportBGColorList> createState() => _PassportBGColorListState();
+  State<PassportIDBGColorList> createState() => _PassportIDBGColorListState();
 }
 
-class _PassportBGColorListState extends ProviderStateful<PassportBGColorList, ChangeBackgroundProvider> {
+class _PassportIDBGColorListState extends ProviderStateful<PassportIDBGColorList, MakePassportIDProvider> {
   Future _showColorPopup<T>(BuildContext context) {
     return AwesomeAppState.dialog<T>(
       builder: (_) => Dialog(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/providers/change_background/change_background_provider.dart';
+import 'package:snapeditify/providers/make_passport_id/make_passport_id_provider.dart';
 
-class PassportRatioList extends StatelessWidget {
-  const PassportRatioList({super.key});
+class PassportIDRatioList extends StatelessWidget {
+  const PassportIDRatioList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class RatioItem extends StatelessWidget {
         horizontal: AppDimensions.instance.paddingX(0.5),
         vertical: AppDimensions.instance.padding,
       ),
-      child: PropConsumer<IChangeBackgroundProvider, double>(
+      child: PropConsumer<IMakePassportIDProvider, double>(
         select: (_) => _.state.ratio,
         builder: (_, __, p, c) {
           return GestureDetector(

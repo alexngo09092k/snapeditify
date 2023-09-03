@@ -18,3 +18,4 @@ export 'restyle_effects_response.dart';
 export 'restyle_image_response.dart';
 export 'snapedit_response.dart';
 export 'sky_mask_response.dart';
+export 'make_passport_id_response.dart';
