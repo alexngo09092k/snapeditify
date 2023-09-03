@@ -32,8 +32,8 @@ class ChangeBackgroundState extends EditImageState {
   double get ratio => _ratio;
 
   @override
-  Future<bool> setImage(Uint8List imageBytes, {EditImageProvider? provider, bool createImageFile = true}) async {
-    final bool result = await super.setImage(imageBytes);
+  Future<bool> setImage(Uint8List imageBytes, String imageBase64, {EditImageProvider? provider, bool createImageFile = true}) async {
+    final bool result = await super.setImage(imageBytes, imageBase64);
     if(result) {
       ratio = image.ratio;
     }

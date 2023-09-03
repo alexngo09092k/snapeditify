@@ -1,14 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
+import 'package:snapeditify/pages/enhance/widgets/enhance_guide.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/restore/restore_state.dart';
 import 'package:snapeditify/services/services.dart';
-import 'package:snapeditify/services/snap_edit/src/apis/restore.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
@@ -18,11 +18,13 @@ abstract class IRestoreProvider extends EditImageProvider {
   @override
   RestoreState get state;
 
-  bool get canCompare;
+  PainterController get paintBefore;
 
   Future<bool> restoreImage(BuildContext context);
 
-  Future<bool> compare(BuildContext context);
+  Future<bool> videoEffect(BuildContext context);
+
+  bool showEnhanceGuide();
 }
 
 class RestoreProvider extends IRestoreProvider {
@@ -33,39 +35,24 @@ class RestoreProvider extends IRestoreProvider {
   RestoreProvider.internal() {
     _state = RestoreState();
     _state.addListener(notifyListeners);
+
+    _paintBefore = PainterController();
+    _paintBefore.addListener(notifyListeners);
   }
 
   late RestoreState _state;
   @override
   RestoreState get state => _state;
 
+  late PainterController _paintBefore;
+  @override
+  PainterController get paintBefore => _paintBefore;
+
   @override
   EditedImageVM get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
 
   @override
-  bool get canSave => true;
-
-  @override
-  bool get canCompare => true;
-
-  bool _compared = false;
-  @override
-  Future<bool> compare(BuildContext context) async {
-    if (canCompare) {
-      Debug.log("===== COMPARE ====");
-      if (!_compared) {
-        Debug.log("===== COMPARE ORIGINAL BACKGROUND====");
-        _state.paint.background = originalImage.imageUI.backgroundDrawable;
-        _compared = true;
-      } else {
-        Debug.log("===== COMPARE CURRENT BACKGROUND====");
-        _state.paint.background = _state.image.imageUI.backgroundDrawable;
-        _compared = false;
-      }
-      return true;
-    }
-    return false;
-  }
+  bool get canSave =>  _state.image.imageBase64 != originalImage.imageBase64;
 
   @override
   Future<bool> restoreImage(BuildContext context) async {
@@ -85,11 +72,17 @@ class RestoreProvider extends IRestoreProvider {
     RestoreBody body = RestoreBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
     final SnapEditResponse<RestorationResponse?> res = await Services.instance.snapEdit.restoreImage(body);
     if (res.data != null) {
-      await _state.setImage(base64.decode(res.data!.outputImage.image), provider: this, styleId: res.data!.outputImage.imageId);
-      notifyListeners();
+      final imageBase64 = res.data!.outputImage.image;
+      final imageBytes = base64.decode(res.data!.outputImage.image);
+      await _state.setImage(imageBytes, imageBase64);
       
       /// HIDE LOADING POPUP
       LoadingPopup.hide();
+
+      /// SHOW GUIDE
+      showEnhanceGuide();
+
+
       return true;
     }
 
@@ -107,6 +100,58 @@ class RestoreProvider extends IRestoreProvider {
 
     return false;
   }
+
+   @override
+  Future<bool> videoEffect(BuildContext context) async {
+    /// CHECKING ENVIROMENT
+    final result = await checkEnviroment(context, retry: (_) => videoEffect(context));
+    if (!result) return false;
+
+    /// SHOW LOADING POPUP
+    LoadingPopup.show();
+
+    /// SHOW ADS
+    adProvider.handleAd();
+
+    /// CALL API
+    GenerateVideoBody body = GenerateVideoBody(
+      outputImageId: "",
+      imageId: _state.imageId!,
+    );
+
+    SnapEditResponse<GenerateVideoResponse?> res = await Services.instance.snapEdit.generateVideo(body);
+
+    if (res.data != null) {
+      /// HIDE LOADING POPUP
+      WidgetUtils.instance.dimiss();
+      return true;
+    }
+
+    /// HIDE LOADING POPUP
+    WidgetUtils.instance.dimiss();
+
+    if (!res.status) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).restyleImage, 
+        message: S.of(context).failedToStyleImagePleaseTryAgain, 
+        retry: (_) => videoEffect(context),
+      );
+      Debug.log('====== RESTYLE IMAGE ${res.message} ======');
+    }
+
+    return false;
+  }
+
+    @override
+  bool showEnhanceGuide() {
+    int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.enhanceGuide);
+    if (num != null && num > 1) return false;
+
+    WidgetUtils.instance.showDialog(builder: (_) => const EnhanceGuide());
+    AsyncStorage.instance.setInt(AsyncStorageKey.instance.autoAIGuide, num == null ? 1 : num + 1);
+    return true;
+  }
+
 
   @override
   Future<bool> refresh(BuildContext context) async {

@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
@@ -10,14 +12,15 @@ import 'package:snapeditify/providers/enhance/enhance_state.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/view_models/enhanced_vm.dart';
-import 'package:snapeditify/view_models/face_vm.dart';
-import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/painter/controllers/drawables/drawables.dart';
+import 'package:snapeditify/widgets/app_use/painter/controllers/painter_controller.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   @override
   EnhanceState get state;
+
+  PainterController get paintBefore;
 
   Future<bool> enhanceImage(BuildContext context);
 
@@ -32,23 +35,34 @@ class EnhanceProvider extends IEnhanceProvider {
   EnhanceProvider.internal() {
     _state = EnhanceState();
     _state.addListener(notifyListeners);
+
+    _paintBefore = PainterController();
+    _paintBefore.addListener(notifyListeners);
   }
 
   late EnhanceState _state;
   @override
   EnhanceState get state => _state;
 
+  late PainterController _paintBefore;
   @override
-  EditedImageVM get editedImage {
-    final enhancedimage = _state.enhancedImages[_state.enhancedImageIndex];
-    return EditedImageVM(
-      enhancedimage.imageBytes,
-      enhancedimage.imageUI!,
-    );
-  }
+  PainterController get paintBefore => _paintBefore;
 
   @override
-  bool get canSave => _state.enhancedImages.isNotEmpty;
+  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
+
+  @override
+  bool get canSave => _state.image.imageBase64 != originalImage.imageBase64;
+
+
+  @override
+  Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
+    final result = await super.setImage(context, bytes: bytes, refesh: refesh);
+    if(result) {
+      _paintBefore.background = originalImage.imageUI.backgroundDrawable;
+    }
+    return result;
+  }
 
   @override
   Future<bool> enhanceImage(BuildContext context) async {
@@ -67,29 +81,13 @@ class EnhanceProvider extends IEnhanceProvider {
     /// CALL API
     EnhanceBody body = EnhanceBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
     final SnapEditResponse<EnhanceImageResponse?> res = await Services.instance.snapEdit.enhanceImage(body);
-    if (res.data != null) {
-      /// ENHANCED IMAGES
-      List<EnhancedVM> enhancedImages = [];
-      for (int index = 0; index < res.data!.outputImages.length; index++) {
-        final vm = EnhancedVM(index: index, imageBase64: res.data!.outputImages[index], state: state);
-        await vm.paintParse();
-        enhancedImages.add(vm);
-      }
-      _state.enhancedImages = enhancedImages;
-      _state.enhancedImageIndex = 0;
-      _state.paintAfter.background = enhancedImages[state.enhancedImageIndex].imageUI!.backgroundDrawable;
-
-      /// FACES
-      List<FaceVM> faces = [];
-      for (var e in res.data!.faces) {
-        final vm = FaceVM.fromFace(e, state);
-        await vm.paintParse();
-        faces.add(vm);
-      }
-      _state.faces = faces;
+    if (res.data != null && res.data!.outputImages.isNotEmpty) {
+      final imageBase64 = res.data!.outputImages.first;
+      final imageBytes = base64.decode(res.data!.outputImages.first);
+      await _state.setImage(imageBytes, imageBase64);
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      LoadingPopup.hide();
 
       /// SHOW GUIDE
       showEnhanceGuide();
@@ -98,7 +96,7 @@ class EnhanceProvider extends IEnhanceProvider {
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    LoadingPopup.hide();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(

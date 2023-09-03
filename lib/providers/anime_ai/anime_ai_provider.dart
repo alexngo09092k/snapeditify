@@ -10,7 +10,6 @@ import 'package:snapeditify/providers/anime_ai/anime_ai_state.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
-import 'package:snapeditify/services/snap_edit/src/apis/generate_video.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
@@ -114,7 +113,11 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
     renewSavedFile();
     if (_state.styledImages.containsKey(styleId)) {
-      _state.setImage(base64.decode(_state.styledImages[styleId]!.outputImages.first.image), styleId: styleId);
+      _state.setImage(
+        base64.decode(_state.styledImages[styleId]!.outputImages.first.image),
+        _state.styledImages[styleId]!.outputImages.first.image, 
+        styleId: styleId,
+      );
       notifyListeners();
       return true;
     }
@@ -130,7 +133,11 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     SnapEditResponse<AnimeResponse?> res = await Services.instance.snapEdit.animeImage(body);
 
     if (res.data != null) {
-      await _state.setImage(base64.decode(res.data!.outputImages.first.image), styleId: styleId);
+      await _state.setImage(
+        base64.decode(res.data!.outputImages.first.image),
+        res.data!.outputImages.first.image, 
+        styleId: styleId,
+      );
       _state.styledImages[styleId] = res.data!;
       notifyListeners();
 

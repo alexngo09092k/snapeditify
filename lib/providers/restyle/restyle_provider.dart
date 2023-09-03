@@ -87,7 +87,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   @override
   Future<bool> revert(BuildContext context) async {
     Debug.log("===== REVERT ====");
-    return _state.setImage(originalImage.imageBytes, styleId: null);
+    return _state.setImage(originalImage.imageBytes, originalImage.imageBase64, styleId: null);
   }
 
   @override
@@ -99,7 +99,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     renewSavedFile();
 
     if (_state.styledImages.containsKey(styleId)) {
-      _state.setImage(_state.styledImages[styleId]!, styleId: styleId);
+      _state.setImage(_state.styledImages[styleId]!, originalImage.imageBase64, styleId: styleId);
       notifyListeners();
       return true;
     }
@@ -116,7 +116,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
     if (res.data != null) {
       Uint8List imagebytes = base64.decode(res.data!.outputImage);
-      await _state.setImage(imagebytes, styleId: styleId);
+      await _state.setImage(imagebytes, res.data!.outputImage,  styleId: styleId);
       _state.styledImages[styleId] = imagebytes;
       notifyListeners();
 
@@ -150,7 +150,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
   void clean([bool notify = false]) {
     _styles.clear();
     _state.styledImages.clear();
-    _state.setImage(originalImage.imageBytes, styleId: null);
+    _state.setImage(originalImage.imageBytes, originalImage.imageBase64, styleId: null);
     if (notify) notifyListeners();
   }
 

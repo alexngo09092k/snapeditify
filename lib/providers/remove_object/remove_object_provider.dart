@@ -194,7 +194,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       strokeWidth: _state.strokeWidth,
     );
     _state.addListener(notifyListeners);
-    return _state.setImage(originalImage.imageBytes);
+    return _state.setImage(originalImage.imageBytes, originalImage.imageBase64);
   }
 
   @override
@@ -382,7 +382,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       _state.next = _state.copyWith(prev: _state, drawables: []);
 
       /// MUST CALL SET IMAGE BEFORE SET FOR CURRENT STATE
-      await _state.next!.setImage(base64.decode(res.data!.editedImage.image));
+      await _state.next!.setImage(base64.decode(res.data!.editedImage.image), res.data!.editedImage.image);
 
       /// AFTER NEXT STATE SETTED IMAGE
       _state.removeListener(notifyListeners);

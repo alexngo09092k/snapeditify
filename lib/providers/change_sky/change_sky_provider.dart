@@ -110,7 +110,7 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
   @override
   Future<bool> revert(BuildContext context) async {
     Debug.log("===== REVERT ====");
-    return _state.setImage(originalImage.imageBytes, styleId: null);
+    return _state.setImage(originalImage.imageBytes, originalImage.imageBase64, styleId: null);
   }
 
   @override
@@ -122,7 +122,7 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
     renewSavedFile();
 
     if (_state.styledImages.containsKey(styleId)) {
-      _state.setImage(_state.styledImages[styleId]!, styleId: styleId);
+      _state.setImage(_state.styledImages[styleId]!, base64.encode(_state.styledImages[styleId]!), styleId: styleId);
       notifyListeners();
       return true;
     }
@@ -139,7 +139,7 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
 
     if (res.data != null) {
       Uint8List imageBytes = base64.decode(res.data!.mask);
-      await _state.setImage(imageBytes, styleId: styleId);
+      await _state.setImage(imageBytes, res.data!.mask, styleId: styleId);
       _state.styledImages[styleId] = imageBytes;
       notifyListeners();
 
@@ -173,7 +173,7 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
   void clean([bool notify = false]) {
     _styles.clear();
     _state.styledImages.clear();
-    _state.setImage(originalImage.imageBytes, styleId: null);
+    _state.setImage(originalImage.imageBytes, originalImage.imageBase64, styleId: null);
     if (notify) notifyListeners();
   }
 

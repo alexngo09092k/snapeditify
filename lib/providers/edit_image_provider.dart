@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -52,12 +53,13 @@ abstract class EditImageProvider extends Provider {
 
     /// CONVERT TO JPG
     final imageBytes = ImageUtils.instance.toJPG(bytes);
+    final imageBase64 = base64.encode(imageBytes);
 
-    _originalImage = EditingImageVM(imageBytes);
+    _originalImage = EditingImageVM(imageBytes: imageBytes, imageBase64: imageBase64);
     await _originalImage.paintParse();
 
     /// SET IMAGE FOR STATE
-    return state.setImage(_originalImage.imageBytes);
+    return state.setImage(_originalImage.imageBytes, imageBase64);
   }
 
   Future<bool> refresh(BuildContext context) async {

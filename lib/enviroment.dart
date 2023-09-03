@@ -29,7 +29,7 @@ const enviroment = {
     /// Logo is used in splash screen and app ui
     'appLogo': 'assets/images/logo.png',
 
-    'appBio': 'Make your life beautiful',
+    'appBio': 'AI powered photo editor',
 
     /// Protocols is use to check
     'protocols': ['https://', 'http://', 'data:'],

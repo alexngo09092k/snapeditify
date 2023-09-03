@@ -109,8 +109,9 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
                               style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w700),
                             ),
                           ),
+                          SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                           Text(
-                            Configuration.instance.business.appBio,
+                            Configuration.instance.business.appBio.toUpperCase(),
                             style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
                           ),
                         ],

@@ -22,9 +22,9 @@ class EnhanceBefore extends StatelessWidget {
                 ),
           ),
         ),
-        select: (p) => p.state.paintBefore,
+        select: (p) => p.paintBefore,
         builder: (_, child, p, paint) => AspectRatio(
-          aspectRatio: p.state.image.ratio,
+          aspectRatio: p.originalImage.ratio,
           child: Stack(
             children: [
               FlutterPainter(controller: paint),

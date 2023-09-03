@@ -2,7 +2,7 @@ import 'package:fluttering/fluttering.dart';
 import '../models/models.dart';
 import '../snap_edit.dart';
 
-extension Restore on SnapEdit {
+extension GenerateVideo on SnapEdit {
   Future<SnapEditResponse<GenerateVideoResponse?>>generateVideo(GenerateVideoBody body) async {
     try {
       final List<MultipartBody> parts = [];

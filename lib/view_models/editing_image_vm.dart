@@ -1,13 +1,11 @@
-import 'dart:convert';
 import 'dart:ui' as ui;
-
 import 'package:flutter/foundation.dart';
 import 'package:snapeditify/utils/image.dart';
 
 class EditingImageVM {
-  EditingImageVM(Uint8List imageBytes) {
+  EditingImageVM({required Uint8List imageBytes, required String imageBase64}) {
+    _imageBase64 = imageBase64;
     _imageBytes = imageBytes;
-    _imageBase64 = base64.encode(_imageBytes);
   }
 
   late ui.Image _imageUI;

@@ -11,7 +11,7 @@ class EnhanceAfter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: PropConsumer<IEnhanceProvider, PainterController>(
-        select: (p) => p.state.paintAfter,
+        select: (p) => p.state.paint,
         child: Positioned(
           right: AppDimensions.instance.padding,
           top: AppDimensions.instance.padding,

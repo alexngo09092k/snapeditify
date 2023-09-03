@@ -5,3 +5,5 @@ export 'anime_ai.dart';
 export 'change_sky.dart';
 export 'change_background.dart';
 export 'make_passport_id.dart';
+export 'generate_video.dart';
+export 'restore.dart';
