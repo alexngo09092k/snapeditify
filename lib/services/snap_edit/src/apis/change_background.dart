@@ -4,7 +4,7 @@ import '../models/models.dart';
 import '../snap_edit.dart';
 import '../utils.dart';
 
-extension EditBackground on SnapEdit {
+extension ChangeBackground on SnapEdit {
   Future<SnapEditResponse<BackgroundResponse?>> getBackgroundEffects([String lang = 'en']) async {
     try {
       ClientResponse<String> response = await ClientHttp.instance.get<String>(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/providers/sky/sky_provider.dart';
+import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
 
 class SkyCategoryList extends StatelessWidget {
   const SkyCategoryList({super.key});
@@ -10,7 +10,7 @@ class SkyCategoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 60,
-      child: PropConsumer<ISkyProvider, int>(
+      child: PropConsumer<IChangeSkyProvider, int>(
         select: (_) => _.categories.length,
         builder: (_, __, p, count) => ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -39,7 +39,7 @@ class AnimeCategoryItem extends StatelessWidget {
         horizontal: AppDimensions.instance.paddingX(0.1),
         vertical: AppDimensions.instance.padding,
       ),
-      child: PropConsumer<ISkyProvider, String?>(
+      child: PropConsumer<IChangeSkyProvider, String?>(
         select: (_) => _.category,
         builder: (_, __, p, c) => GestureDetector(
           onTap: () => p.category = category,

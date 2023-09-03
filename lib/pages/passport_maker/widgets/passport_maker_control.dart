@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/pages/generate_id_photo/widgets/ai_photo_color_list.dart';
-import 'package:snapeditify/pages/generate_id_photo/widgets/ai_photo_ratio_list.dart';
+import 'package:snapeditify/pages/passport_maker/widgets/passport_bg_color_list.dart';
+import 'package:snapeditify/pages/passport_maker/widgets/passport_ratio_list.dart';
 
-class AIPhotoSizeControl extends StatelessWidget {
-  const AIPhotoSizeControl({super.key});
+class PassportMakerControl extends StatelessWidget {
+  const PassportMakerControl({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,9 @@ class AIPhotoSizeControl extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           SizedBox(height: AppDimensions.instance.padding),
-          const AIPhotoColorList(),
+          const PassportBGColorList(),
           SizedBox(height: AppDimensions.instance.padding),
-          const AIPhotoRatioList(),
+          const PassportRatioList(),
         ],
       ),
     );

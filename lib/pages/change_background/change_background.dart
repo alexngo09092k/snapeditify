@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EditBackgroundPage extends StatelessWidget {
-  const EditBackgroundPage({super.key});
+class ChangeBackgroundPage extends StatelessWidget {
+  const ChangeBackgroundPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/providers/edit_background/edit_background_state.dart';
+import 'package:snapeditify/providers/change_background/change_background_state.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/image.dart';
@@ -15,9 +15,9 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
-abstract class IEditBackgroundProvider extends EditImageProvider {
+abstract class IChangeBackgroundProvider extends EditImageProvider {
   @override
-  EditBackgroundState get state;
+  ChangeBackgroundState get state;
 
   WidgetsToImageController get widgetsToImageController;
 
@@ -28,20 +28,20 @@ abstract class IEditBackgroundProvider extends EditImageProvider {
   void changeRatio(double ratio);
 }
 
-class EditBackgroundProvider extends IEditBackgroundProvider {
-  static final IEditBackgroundProvider _instance = EditBackgroundProvider.internal();
+class ChangeBackgroundProvider extends IChangeBackgroundProvider {
+  static final IChangeBackgroundProvider _instance = ChangeBackgroundProvider.internal();
 
-  static IEditBackgroundProvider get instance => _instance;
+  static IChangeBackgroundProvider get instance => _instance;
 
-  EditBackgroundProvider.internal() {
+  ChangeBackgroundProvider.internal() {
     _widgetsToImageController = WidgetsToImageController();
-    _state = EditBackgroundState();
+    _state = ChangeBackgroundState();
     _state.addListener(notifyListeners);
   }
 
-  late EditBackgroundState _state;
+  late ChangeBackgroundState _state;
   @override
-  EditBackgroundState get state => _state;
+  ChangeBackgroundState get state => _state;
 
   late WidgetsToImageController _widgetsToImageController;
   @override
@@ -120,7 +120,7 @@ class EditBackgroundProvider extends IEditBackgroundProvider {
   Future<bool> refresh(BuildContext context) async {
     _state.removeListener(notifyListeners);
     _state.dispose();
-    _state = EditBackgroundState();
+    _state = ChangeBackgroundState();
     _state.addListener(notifyListeners);
     return super.refresh(context);
   }

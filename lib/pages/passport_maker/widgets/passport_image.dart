@@ -2,26 +2,26 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
+import 'package:snapeditify/providers/change_background/change_background_provider.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/masked_image.dart';
 import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 
-class IDPhoto extends StatefulWidget {
-  const IDPhoto({super.key});
+class PassportImage extends StatefulWidget {
+  const PassportImage({super.key});
 
   @override
-  State<IDPhoto> createState() => _IDPhotoState();
+  State<PassportImage> createState() => _PassportImageState();
 }
 
-class _IDPhotoState extends ProviderStateful<IDPhoto, EditBackgroundProvider> {
+class _PassportImageState extends ProviderStateful<PassportImage, ChangeBackgroundProvider> {
   @override
   Widget build(BuildContext context) {
     return BaseImageEditor(
       builder: (width, height) => Center(
         child: WidgetsToImage(
           controller: provider.widgetsToImageController,
-          child: PropConsumer<EditBackgroundProvider, double>(
+          child: PropConsumer<ChangeBackgroundProvider, double>(
             select: (_) => _.state.ratio,
             builder: (_, child, ___, ratio) {
               return AspectRatio(
@@ -29,7 +29,7 @@ class _IDPhotoState extends ProviderStateful<IDPhoto, EditBackgroundProvider> {
                 child: child,
               );
             },
-            child: PropConsumer<EditBackgroundProvider, Color>(
+            child: PropConsumer<ChangeBackgroundProvider, Color>(
               select: (_) => _.state.color,
               builder: (_, child, __, color) {
                 return Container(
@@ -38,7 +38,7 @@ class _IDPhotoState extends ProviderStateful<IDPhoto, EditBackgroundProvider> {
                 );
               },
               child: Center(
-                child: PropConsumer<EditBackgroundProvider, double>(
+                child: PropConsumer<ChangeBackgroundProvider, double>(
                   select: (_) => _.state.image.ratio,
                   builder: (_, child, __, ratio) {
                     return AspectRatio(
@@ -46,7 +46,7 @@ class _IDPhotoState extends ProviderStateful<IDPhoto, EditBackgroundProvider> {
                       child: child,
                     );
                   },
-                  child: PropConsumer<EditBackgroundProvider, Uint8List>(
+                  child: PropConsumer<ChangeBackgroundProvider, Uint8List>(
                     select: (_) => _.state.mask,
                     builder: (_, __, ___, mask) {
                       return MaskedImage(

@@ -12,14 +12,14 @@ import 'package:snapeditify/firebase_options.dart';
 import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/app_theme_provider.dart';
-import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
+import 'package:snapeditify/providers/change_background/change_background_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
-import 'package:snapeditify/providers/sky/sky_provider.dart';
+import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
 import 'package:snapeditify/services/services.dart';
 
 void main() {
@@ -38,8 +38,8 @@ void main() {
       () => RemoveObjectProvider.instance,
       () => EnhanceProvider.instance,
       () => RestoreProvider.instance,
-      () => EditBackgroundProvider.instance,
-      () => SkyProvider.instance,
+      () => ChangeBackgroundProvider.instance,
+      () => ChangeSkyProvider.instance,
       () => RestyleProvider.instance,
       () => AnimeAIProvider.instance,
       () => FastEditorProvider.instance,

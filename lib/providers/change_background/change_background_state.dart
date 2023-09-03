@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
 
-class EditBackgroundState extends EditImageState {
-  EditBackgroundState();
+class ChangeBackgroundState extends EditImageState {
+  ChangeBackgroundState();
 
   Uint8List _mask = Uint8List.fromList([]);
   set mask(Uint8List newMask) {

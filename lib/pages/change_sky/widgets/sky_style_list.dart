@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/providers/sky/sky_provider.dart';
+import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
@@ -15,9 +15,9 @@ class SkyStyleList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: AwesomeAppState.screen.height * 1 / 5,
-      child: PropConsumer<ISkyProvider, String?>(
+      child: PropConsumer<IChangeSkyProvider, String?>(
         select: (_) => _.category,
-        builder: (_, __, p, ___) => PropConsumer<ISkyProvider, List<Background>>(
+        builder: (_, __, p, ___) => PropConsumer<IChangeSkyProvider, List<Background>>(
           select: (_) => _.styles.where((element) => element.category == p.category).toList(),
           builder: (_, __, ___, styles) {
             return ListView.builder(
@@ -63,7 +63,7 @@ class SkyStyleItem extends StatelessWidget {
                   ),
                   Positioned(
                     right: 0,
-                    child: PropConsumer<ISkyProvider, String?>(
+                    child: PropConsumer<IChangeSkyProvider, String?>(
                       select: (_) => _.state.styleId,
                       builder: (_, __, ___, styleId) => styleId == style.thumbnailUrl
                           ? Padding(

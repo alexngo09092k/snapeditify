@@ -1,20 +1,20 @@
 import 'package:flutter/widgets.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/pages/generate_id_photo/widgets/id_photo.dart';
-import 'package:snapeditify/pages/generate_id_photo/widgets/id_photo_control.dart';
-import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
+import 'package:snapeditify/pages/passport_maker/widgets/passport_image.dart';
+import 'package:snapeditify/pages/passport_maker/widgets/passport_maker_control.dart';
+import 'package:snapeditify/providers/change_background/change_background_provider.dart';
 import 'package:snapeditify/widgets/app_use/app_layout.dart';
 import 'package:snapeditify/widgets/app_use/save_button.dart';
 
-class GenerateIDPhotoPage extends StatefulWidget {
-  const GenerateIDPhotoPage({super.key});
+class PassportMakerPage extends StatefulWidget {
+  const PassportMakerPage({super.key});
 
   @override
-  State<GenerateIDPhotoPage> createState() => _GenerateIDPhotoPageState();
+  State<PassportMakerPage> createState() => _PassportMakerPageState();
 }
 
-class _GenerateIDPhotoPageState extends ProviderStateObserver<GenerateIDPhotoPage, EditBackgroundProvider> {
+class _PassportMakerPageState extends ProviderStateObserver<PassportMakerPage, ChangeBackgroundProvider> {
   @override
   void onNextFrame(Duration timestamp) {
     provider.removeBackground(context);
@@ -27,10 +27,10 @@ class _GenerateIDPhotoPageState extends ProviderStateObserver<GenerateIDPhotoPag
       screen: S.of(context).createIdPhoto,
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
-      action: const SaveButton<IEditBackgroundProvider>(),
+      action: const SaveButton<IChangeBackgroundProvider>(),
       children: const [
-        IDPhoto(),
-        AIPhotoSizeControl(),
+        PassportImage(),
+        PassportMakerControl(),
       ],
     );
   }

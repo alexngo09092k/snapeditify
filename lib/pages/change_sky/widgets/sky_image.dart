@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/providers/sky/sky_provider.dart';
+import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
@@ -16,7 +16,7 @@ class SkyImage extends StatelessWidget {
         children: [
           /// PAINT
           Center(
-            child: PropConsumer<ISkyProvider, PainterController>(
+            child: PropConsumer<IChangeSkyProvider, PainterController>(
               select: (p) => p.state.paint,
               builder: (_, __, p, paint) => AspectRatio(
                 aspectRatio: p.state.image.ratio,
@@ -29,7 +29,7 @@ class SkyImage extends StatelessWidget {
           Positioned(
             right: AppDimensions.instance.padding,
             bottom: AppDimensions.instance.padding,
-            child: PropConsumer<ISkyProvider, bool>(
+            child: PropConsumer<IChangeSkyProvider, bool>(
               select: (p) => p.canCompare,
               builder: (_, __, p, canCompare) => GestureDetector(
                 onTapDown: (_) => p.compare(context),

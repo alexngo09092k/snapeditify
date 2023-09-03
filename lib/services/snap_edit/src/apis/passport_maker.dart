@@ -4,20 +4,8 @@ import '../models/models.dart';
 import '../snap_edit.dart';
 import '../utils.dart';
 
-extension Sky on SnapEdit {
-  Future<SnapEditResponse<BackgroundResponse?>> getSkyEffects([String lang = 'en']) async {
-    try {
-      ClientResponse<Map<String, dynamic>> response = await ClientHttp.instance.get<Map<String, dynamic>>(
-        '${config.endPoints.skyEffects}?lang=$lang',
-        headers: config.headers,
-      );
-      return handleResponse<BackgroundResponse>(response, (p0) => BackgroundResponse.fromMap(p0));
-    } catch (error) {
-      return SnapEditResponse<BackgroundResponse>(message: error.toString());
-    }
-  }
-
-  Future<SnapEditResponse<SkyMaskResponse?>> skyImage(SkyMaskBody body) async {
+extension PassportMaker on SnapEdit {
+  Future<SnapEditResponse<SkyMaskResponse?>> passportMaker(SkyMaskBody body) async {
     try {
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {'style_id': body.styleId};
@@ -36,7 +24,7 @@ extension Sky on SnapEdit {
       }
 
       ClientResponse response = await ClientHttp.instance.postMultipart(
-        '${config.baseUrl}${config.endPoints.skyImage}',
+        '${config.baseUrl}${config.endPoints.passportMaker}',
         data,
         parts,
         headers: config.headers,

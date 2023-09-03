@@ -8,7 +8,7 @@ import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
-import 'package:snapeditify/providers/sky/sky_state.dart';
+import 'package:snapeditify/providers/change_sky/change_sky_state.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/widget.dart';
@@ -16,9 +16,9 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
-abstract class ISkyProvider extends EditImageProvider with StorageProvider {
+abstract class IChangeSkyProvider extends EditImageProvider with StorageProvider {
   @override
-  SkyState get state;
+  ChangeSkyState get state;
   
   List<Background> get styles;
 
@@ -36,13 +36,13 @@ abstract class ISkyProvider extends EditImageProvider with StorageProvider {
   Future<bool> compare(BuildContext context);
 }
 
-class SkyProvider extends ISkyProvider with ProviderDelegate {
-  static final ISkyProvider _instance = SkyProvider.internal();
+class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
+  static final IChangeSkyProvider _instance = ChangeSkyProvider.internal();
 
-  static ISkyProvider get instance => _instance;
+  static IChangeSkyProvider get instance => _instance;
 
-  SkyProvider.internal() {
-    _state = SkyState();
+  ChangeSkyProvider.internal() {
+    _state = ChangeSkyState();
     _state.addListener(notifyListeners);
   }
 
@@ -72,9 +72,9 @@ class SkyProvider extends ISkyProvider with ProviderDelegate {
     }
   }
 
-  late SkyState _state;
+  late ChangeSkyState _state;
   @override
-  SkyState get state => _state;
+  ChangeSkyState get state => _state;
 
   @override
   EditedImageVM get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
@@ -135,7 +135,7 @@ class SkyProvider extends ISkyProvider with ProviderDelegate {
 
     /// CALL API
     SkyMaskBody body = SkyMaskBody(styleId: styleId, inputImage: originalImage.imageBytes);
-    SnapEditResponse<SkyMaskResponse?> res = await Services.instance.snapEdit.skyImage(body);
+    SnapEditResponse<SkyMaskResponse?> res = await Services.instance.snapEdit.changeSky(body);
 
     if (res.data != null) {
       Uint8List imageBytes = base64.decode(res.data!.mask);
@@ -225,7 +225,7 @@ class SkyProvider extends ISkyProvider with ProviderDelegate {
   Future<bool> refresh(BuildContext context) async {
     _state.removeListener(notifyListeners);
     _state.dispose();
-    _state = SkyState();
+    _state = ChangeSkyState();
     _state.addListener(notifyListeners);
     return true;
   }

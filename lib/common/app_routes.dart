@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/fast_editor/fast_editor.dart';
-import 'package:snapeditify/pages/generate_id_photo/generate_id_photo.dart';
+import 'package:snapeditify/pages/passport_maker/passport_maker.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
@@ -17,10 +17,10 @@ import 'package:snapeditify/pages/albums/albums.dart';
 import 'package:snapeditify/pages/home/home.dart';
 import 'package:snapeditify/pages/maintenance/maintenance.dart';
 import 'package:snapeditify/pages/setting/setting.dart';
-import 'package:snapeditify/pages/sky/sky.dart';
+import 'package:snapeditify/pages/change_sky/change_sky.dart';
 import 'package:snapeditify/pages/splash/splash_page.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
-import 'package:snapeditify/providers/edit_background/edit_background_provider.dart';
+import 'package:snapeditify/providers/change_background/change_background_provider.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
@@ -28,7 +28,7 @@ import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
-import 'package:snapeditify/providers/sky/sky_provider.dart';
+import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
 import 'package:snapeditify/common/extensions.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
@@ -48,22 +48,20 @@ class AppRoutes extends IAppRoutes {
   AppRoutes._internal();
 
   static const String premiumPage = 'premium_page';
-  static const String applyArtEffectPage = 'apply_art_effect_page';
-  static const String enhanceImagePage = 'enahnce_page';
   static const String albumsPage = 'albums_page';
   static const String photosPage = 'photos_page';
   static const String homePage = 'home_page';
   static const String maintenancePage = 'maintenance_page';
-  static const String removeObjectPage = 'remove_object_page';
-  static const String animeAIPage = 'anime_ai_page';
   static const String settingPage = 'setting_page';
   static const String splashPage = 'splash_page';
-  static const String skyPage = 'sky_page';
+  static const String removeObjectPage = 'remove_object_page';
+  static const String enhanceImagePage = 'enahnce_page';
   static const String restorePage = 'restore_page';
+  static const String passportMaker = 'passportMaker';
+  static const String skyPage = 'sky_page';
+  static const String animeAIPage = 'anime_ai_page';
+  static const String applyArtEffectPage = 'apply_art_effect_page';
   static const String fastEditor = 'fastEditor';
-
-  /// Features
-  static const String generateIDPhoto = 'create_id_photo_page';
 
   static final IAppRoutes _instance = AppRoutes._internal();
 
@@ -78,9 +76,9 @@ class AppRoutes extends IAppRoutes {
     removeObjectPage: (_) => const RemoveObjectPage(),
     enhanceImagePage: (_) => const EnhancePage(),
     restorePage: (_) => const RestorePage(),
-    generateIDPhoto: (_) => const GenerateIDPhotoPage(),
+    passportMaker: (_) => const PassportMakerPage(),
     applyArtEffectPage: (_) => const RestylePage(),
-    skyPage: (_) => const SkyPage(),
+    skyPage: (_) => const ChangeSkyPage(),
     fastEditor: (_) => const FastEditor(),
   };
 
@@ -115,12 +113,12 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const EnhancePage(), settings);
       case restorePage:
         return buildRoute(const RestorePage(), settings);
-      case generateIDPhoto:
-        return buildRoute(const GenerateIDPhotoPage(), settings);
+      case passportMaker:
+        return buildRoute(const PassportMakerPage(), settings);
       case animeAIPage:
         return buildRoute(const AnimeAIPage(), settings);
       case skyPage:
-        return buildRoute(const SkyPage(), settings);
+        return buildRoute(const ChangeSkyPage(), settings);
       case applyArtEffectPage:
         return buildRoute(const RestylePage(), settings);
       case fastEditor:
@@ -173,8 +171,8 @@ extension AppRoutesUtils on IAppRoutes {
       context,
       onHasPermisson: () async {
         final ImageTool current = gProvider.imageTool;
-        late final EditImageProvider provider;
-        late final String target;
+        EditImageProvider? provider;
+        String? target;
 
         /// SHOW LOADING POPUP
         LoadingPopup.show(S.of(context).pleaseWaitAMoment);
@@ -203,12 +201,12 @@ extension AppRoutesUtils on IAppRoutes {
             target = AppRoutes.animeAIPage;
             break;
           case ImageTool.changeYourSky:
-            provider = ManagerProvider.of<SkyProvider>();
+            provider = ManagerProvider.of<ChangeSkyProvider>();
             target = AppRoutes.skyPage;
             break;
           case ImageTool.makeIDPassportPhoto:
-            provider = ManagerProvider.of<EditBackgroundProvider>();
-            target = AppRoutes.generateIDPhoto;
+            provider = ManagerProvider.of<ChangeBackgroundProvider>();
+            target = AppRoutes.passportMaker;
             break;
           case ImageTool.fastEditor:
             provider = ManagerProvider.of<FastEditorProvider>();
@@ -219,6 +217,7 @@ extension AppRoutesUtils on IAppRoutes {
         }
 
         Future.delayed(const Duration(milliseconds: 100), () {
+          if(provider == null || target == null) return;
           /// SET EDIT IMAGE
           provider.setImage(context, bytes: bytes).then((ok) {
           /// HIDE LOADING
@@ -227,9 +226,9 @@ extension AppRoutesUtils on IAppRoutes {
           if (!ok) return;
 
           if (imageTool != null) {
-            Navigator.pushReplacementNamed(context, target);
+            Navigator.pushReplacementNamed(context, target!);
           } else {
-            Navigator.pushNamed(context, target);
+            Navigator.pushNamed(context, target!);
           }
           });
         });
