@@ -44,7 +44,7 @@ class RatioItem extends StatelessWidget {
         horizontal: AppDimensions.instance.paddingX(0.5),
         vertical: AppDimensions.instance.padding,
       ),
-      child: PropConsumer<IMakePassportIDProvider, double>(
+      child: PropConsumer<IMakeIDPassportProvider, double>(
         select: (_) => _.state.ratio,
         builder: (_, __, p, c) {
           return GestureDetector(

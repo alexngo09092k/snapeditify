@@ -15,7 +15,7 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
-abstract class IMakePassportIDProvider extends EditImageProvider {
+abstract class IMakeIDPassportProvider extends EditImageProvider {
   @override
   MakePassportIDState get state;
 
@@ -28,12 +28,12 @@ abstract class IMakePassportIDProvider extends EditImageProvider {
   void changeRatio(double ratio);
 }
 
-class MakePassportIDProvider extends IMakePassportIDProvider {
-  static final IMakePassportIDProvider _instance = MakePassportIDProvider.internal();
+class MakeIDPassportProvider extends IMakeIDPassportProvider {
+  static final IMakeIDPassportProvider _instance = MakeIDPassportProvider.internal();
 
-  static IMakePassportIDProvider get instance => _instance;
+  static IMakeIDPassportProvider get instance => _instance;
 
-  MakePassportIDProvider.internal() {
+  MakeIDPassportProvider.internal() {
     _widgetsToImageController = WidgetsToImageController();
     _state = MakePassportIDState();
     _state.addListener(notifyListeners);

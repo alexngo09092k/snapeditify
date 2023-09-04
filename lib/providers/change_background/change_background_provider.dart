@@ -9,32 +9,29 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/change_background/change_background_state.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/services/services.dart';
-import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
-abstract class IChangeBackgroundProvider extends EditImageProvider {
+abstract class IChangeBGProvider extends EditImageProvider {
   @override
   ChangeBackgroundState get state;
-
-  WidgetsToImageController get widgetsToImageController;
 
   Future<bool> removeBackground(BuildContext context);
 
   void changeBackgroundColor(Color color);
 
   void changeRatio(double ratio);
+
+  void onRemovedBGImage(Uint8List imageBytes);
 }
 
-class ChangeBackgroundProvider extends IChangeBackgroundProvider {
-  static final IChangeBackgroundProvider _instance = ChangeBackgroundProvider.internal();
+class ChangeBGProvider extends IChangeBGProvider {
+  static final IChangeBGProvider _instance = ChangeBGProvider.internal();
 
-  static IChangeBackgroundProvider get instance => _instance;
+  static IChangeBGProvider get instance => _instance;
 
-  ChangeBackgroundProvider.internal() {
-    _widgetsToImageController = WidgetsToImageController();
+  ChangeBGProvider.internal() {
     _state = ChangeBackgroundState();
     _state.addListener(notifyListeners);
   }
@@ -43,13 +40,8 @@ class ChangeBackgroundProvider extends IChangeBackgroundProvider {
   @override
   ChangeBackgroundState get state => _state;
 
-  late WidgetsToImageController _widgetsToImageController;
   @override
-  WidgetsToImageController get widgetsToImageController => _widgetsToImageController;
-
-  EditedImageVM? _editedImage;
-  @override
-  EditedImageVM? get editedImage => _editedImage;
+  EditedImageVM? get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
 
   @override
   bool get canSave => _state.mask.isNotEmpty;
@@ -62,16 +54,6 @@ class ChangeBackgroundProvider extends IChangeBackgroundProvider {
   @override
   void changeBackgroundColor(Color color) {
     _state.color = color;
-  }
-
-  @override
-  Future<bool> save(BuildContext context) async {
-    final Uint8List? imageBytes = await _widgetsToImageController.capture();
-    if(imageBytes != null) {
-      final imageUI = await ImageUtils.instance.toImageUI(imageBytes);
-      _editedImage = EditedImageVM(imageBytes, imageUI);
-    }
-    return super.save(context);
   }
 
   @override
@@ -117,11 +99,22 @@ class ChangeBackgroundProvider extends IChangeBackgroundProvider {
   }
 
   @override
+  void onRemovedBGImage(Uint8List imageBytes) {
+  }
+
+  @override
   Future<bool> refresh(BuildContext context) async {
     _state.removeListener(notifyListeners);
     _state.dispose();
     _state = ChangeBackgroundState();
     _state.addListener(notifyListeners);
     return super.refresh(context);
+  }
+
+  @override
+  void dispose() {
+    _state.removeListener(notifyListeners);
+    _state.dispose();
+    super.dispose();
   }
 }

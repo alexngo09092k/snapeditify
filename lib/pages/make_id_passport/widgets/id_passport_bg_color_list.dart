@@ -12,7 +12,7 @@ class PassportIDBGColorList extends StatefulWidget {
   State<PassportIDBGColorList> createState() => _PassportIDBGColorListState();
 }
 
-class _PassportIDBGColorListState extends ProviderStateful<PassportIDBGColorList, MakePassportIDProvider> {
+class _PassportIDBGColorListState extends ProviderStateful<PassportIDBGColorList, MakeIDPassportProvider> {
   Future _showColorPopup<T>(BuildContext context) {
     return AwesomeAppState.dialog<T>(
       builder: (_) => Dialog(

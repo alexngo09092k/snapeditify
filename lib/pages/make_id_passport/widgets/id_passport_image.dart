@@ -14,14 +14,14 @@ class PassportIDImage extends StatefulWidget {
   State<PassportIDImage> createState() => _PassportIDImageState();
 }
 
-class _PassportIDImageState extends ProviderStateful<PassportIDImage, MakePassportIDProvider> {
+class _PassportIDImageState extends ProviderStateful<PassportIDImage, MakeIDPassportProvider> {
   @override
   Widget build(BuildContext context) {
     return BaseImageEditor(
       builder: (width, height) => Center(
         child: WidgetsToImage(
           controller: provider.widgetsToImageController,
-          child: PropConsumer<MakePassportIDProvider, double>(
+          child: PropConsumer<MakeIDPassportProvider, double>(
             select: (_) => _.state.ratio,
             builder: (_, child, ___, ratio) {
               return AspectRatio(
@@ -29,7 +29,7 @@ class _PassportIDImageState extends ProviderStateful<PassportIDImage, MakePasspo
                 child: child,
               );
             },
-            child: PropConsumer<MakePassportIDProvider, Color>(
+            child: PropConsumer<MakeIDPassportProvider, Color>(
               select: (_) => _.state.color,
               builder: (_, child, __, color) {
                 return Container(
@@ -38,7 +38,7 @@ class _PassportIDImageState extends ProviderStateful<PassportIDImage, MakePasspo
                 );
               },
               child: Center(
-                child: PropConsumer<MakePassportIDProvider, double>(
+                child: PropConsumer<MakeIDPassportProvider, double>(
                   select: (_) => _.state.image.ratio,
                   builder: (_, child, __, ratio) {
                     return AspectRatio(
@@ -46,7 +46,7 @@ class _PassportIDImageState extends ProviderStateful<PassportIDImage, MakePasspo
                       child: child,
                     );
                   },
-                  child: PropConsumer<MakePassportIDProvider, Uint8List>(
+                  child: PropConsumer<MakeIDPassportProvider, Uint8List>(
                     select: (_) => _.state.mask,
                     builder: (_, __, ___, mask) {
                       return MaskedImage(

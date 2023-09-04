@@ -3,9 +3,16 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
+import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 
 class ChangeBackgroundState extends EditImageState {
-  ChangeBackgroundState();
+  ChangeBackgroundState() {
+    _paint = PainterController();
+    _paint.addListener(notifyState);
+  }
+
+  late PainterController _paint;
+  PainterController get paint => _paint;
 
   Uint8List _mask = Uint8List.fromList([]);
   set mask(Uint8List newMask) {
@@ -35,6 +42,7 @@ class ChangeBackgroundState extends EditImageState {
   Future<bool> setImage(Uint8List imageBytes, String imageBase64, {EditImageProvider? provider, bool createImageFile = true}) async {
     final bool result = await super.setImage(imageBytes, imageBase64);
     if(result) {
+      paint.addImage(ImageDrawer(image: image.imageUI));
       ratio = image.ratio;
     }
     return result;

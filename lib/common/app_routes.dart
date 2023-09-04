@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
+import 'package:snapeditify/pages/change_bg/change_bg.dart';
 import 'package:snapeditify/pages/fast_editor/fast_editor.dart';
-import 'package:snapeditify/pages/make_passport_id/make_passport_id.dart';
+import 'package:snapeditify/pages/make_id_passport/make_id_passport.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
@@ -25,6 +26,7 @@ import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
+import 'package:snapeditify/providers/make_passport_id/make_passport_id_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
@@ -57,7 +59,8 @@ class AppRoutes extends IAppRoutes {
   static const String removeObjectPage = 'remove_object_page';
   static const String enhanceImagePage = 'enahnce_page';
   static const String restorePage = 'restore_page';
-  static const String passportMaker = 'passportMaker';
+  static const String makeIDPassport = 'make_id_passport';
+  static const String changeBG = 'change_bg';
   static const String skyPage = 'sky_page';
   static const String animeAIPage = 'anime_ai_page';
   static const String applyArtEffectPage = 'apply_art_effect_page';
@@ -76,7 +79,7 @@ class AppRoutes extends IAppRoutes {
     removeObjectPage: (_) => const RemoveObjectPage(),
     enhanceImagePage: (_) => const EnhancePage(),
     restorePage: (_) => const RestorePage(),
-    passportMaker: (_) => const MakePassportIDPage(),
+    makeIDPassport: (_) => const MakeIDPassportPage(),
     applyArtEffectPage: (_) => const RestylePage(),
     skyPage: (_) => const ChangeSkyPage(),
     fastEditor: (_) => const FastEditor(),
@@ -113,8 +116,10 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const EnhancePage(), settings);
       case restorePage:
         return buildRoute(const RestorePage(), settings);
-      case passportMaker:
-        return buildRoute(const MakePassportIDPage(), settings);
+      case makeIDPassport:
+        return buildRoute(const MakeIDPassportPage(), settings);
+      case changeBG:
+        return buildRoute(const ChangeBGPage(), settings);
       case animeAIPage:
         return buildRoute(const AnimeAIPage(), settings);
       case skyPage:
@@ -188,6 +193,7 @@ extension AppRoutesUtils on IAppRoutes {
             provider = ManagerProvider.of<RestyleProvider>();
             target = AppRoutes.applyArtEffectPage;
             break;
+          case ImageTool.upscaleImage:
           case ImageTool.enhanceImage:
             provider = ManagerProvider.of<EnhanceProvider>();
             target = AppRoutes.enhanceImagePage;
@@ -205,14 +211,17 @@ extension AppRoutesUtils on IAppRoutes {
             target = AppRoutes.skyPage;
             break;
           case ImageTool.makeIDPassportPhoto:
-            provider = ManagerProvider.of<ChangeBackgroundProvider>();
-            target = AppRoutes.passportMaker;
+            provider = ManagerProvider.of<MakeIDPassportProvider>();
+            target = AppRoutes.makeIDPassport;
+            break;
+          case ImageTool.productPhoto:
+          case ImageTool.changeBackground:
+            provider = ManagerProvider.of<ChangeBGProvider>();
+            target = AppRoutes.changeBG;
             break;
           case ImageTool.fastEditor:
             provider = ManagerProvider.of<FastEditorProvider>();
             target = AppRoutes.fastEditor;
-            break;
-          default:
             break;
         }
 

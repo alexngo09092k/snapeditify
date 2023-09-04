@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/pages/make_passport_id/widgets/passport_id_bg_color_list.dart';
-import 'package:snapeditify/pages/make_passport_id/widgets/passport_id_ratio_list.dart';
+import 'package:snapeditify/pages/make_id_passport/widgets/id_passport_bg_color_list.dart';
+import 'package:snapeditify/pages/make_id_passport/widgets/id_passport_ratio_list.dart';
 
 class MakePassportIDControl extends StatelessWidget {
   const MakePassportIDControl({super.key});
