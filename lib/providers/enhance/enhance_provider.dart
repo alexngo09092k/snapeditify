@@ -128,4 +128,13 @@ class EnhanceProvider extends IEnhanceProvider {
     _state.addListener(notifyListeners);
     return super.refresh(context);
   }
+
+  @override
+  void dispose() {
+    _state.removeListener(notifyListeners);
+    _state.dispose();
+    _paintBefore.removeListener(notifyListeners);
+    _paintBefore.dispose();
+    super.dispose();
+  }
 }

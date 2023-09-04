@@ -265,4 +265,11 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     _state.addListener(notifyListeners);
     return super.refresh(context);
   }
+
+  @override
+  void dispose() {
+    _state.removeListener(notifyListeners);
+    _state.dispose();
+    super.dispose();
+  }
 }

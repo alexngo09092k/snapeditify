@@ -13,7 +13,7 @@ class SaveButton<T extends EditImageProvider> extends StatelessWidget {
     return PropConsumer<T, bool>(
       select: (p) => p.canSave,
       builder: (_, __, p, ___) => GestureDetector(
-        onTap: () => p.saveImage(context),
+        onTap: () => p.save(context),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
           child: CustomIcon(

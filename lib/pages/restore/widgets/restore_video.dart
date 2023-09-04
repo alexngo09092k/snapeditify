@@ -11,7 +11,7 @@ class RestoreVideo extends StatefulWidget {
   State<RestoreVideo> createState() => _RestoreVideoState();
 }
 
-class _RestoreVideoState  extends ProviderStateObserver<RestoreVideo, IRestoreProvider> {
+class _RestoreVideoState extends ProviderStateObserver<RestoreVideo, IRestoreProvider> {
   @override
   void onNextFrame(Duration timestamp) {
     provider.videoEffect(context);
@@ -23,14 +23,23 @@ class _RestoreVideoState  extends ProviderStateObserver<RestoreVideo, IRestorePr
     return Column(
       children: [
         Expanded(
-          child: PropConsumer<RestoreProvider, String?>(
-            select: (_) => _.state.videoURL,
-            builder: (_, __, ___, videoURL) {
-              if (videoURL == null) return const SizedBox();
-              return VideoPlayer(
-                videoURL: videoURL,
-              );
-            },
+          child: Center(
+            child: PropConsumer<IRestoreProvider, double>(
+              select: (p) => p.state.image.ratio,
+              child: PropConsumer<RestoreProvider, String?>(
+                select: (_) => _.state.videoURL,
+                builder: (_, __, ___, videoURL) {
+                  if (videoURL == null) return const SizedBox();
+                  return VideoPlayer(
+                    videoURL: videoURL,
+                  );
+                },
+              ),
+              builder: (_, child, __, ratio) => AspectRatio(
+                aspectRatio: ratio,
+                child: child,
+              ),
+            ),
           ),
         ),
       ],
@@ -52,8 +61,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
 
   @override
   void initState() {
-    videoPlayerController =
-        VideoPlayerController.networkUrl(Uri.parse(widget.videoURL))
+    videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(widget.videoURL))
           ..initialize().then((value) => setState(() {}));
     _customVideoPlayerController = CustomVideoPlayerController(
       context: context,

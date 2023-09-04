@@ -65,13 +65,13 @@ class ChangeBackgroundProvider extends IChangeBackgroundProvider {
   }
 
   @override
-  Future<bool> saveImage(BuildContext context) async {
+  Future<bool> save(BuildContext context) async {
     final Uint8List? imageBytes = await _widgetsToImageController.capture();
     if(imageBytes != null) {
       final imageUI = await ImageUtils.instance.toImageUI(imageBytes);
       _editedImage = EditedImageVM(imageBytes, imageUI);
     }
-    return super.saveImage(context);
+    return super.save(context);
   }
 
   @override

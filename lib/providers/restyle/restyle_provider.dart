@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
@@ -199,5 +198,12 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     _state = RestyleState();
     _state.addListener(notifyListeners);
     return true;
+  }
+
+  @override
+  void dispose() {
+    _state.removeListener(notifyListeners);
+    _state.dispose();
+    super.dispose();
   }
 }

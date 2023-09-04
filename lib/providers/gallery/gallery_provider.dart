@@ -194,6 +194,8 @@ abstract class IGalleryProvider extends Provider with ProviderDelegate {
 
   Future<File?> saveImage(Uint8List data);
 
+  Future<File?> saveVideo(String videoURL);
+
   Future<void> clearCache();
 
   Future<void> listenPhotos();
@@ -323,6 +325,7 @@ class GalleryProvider extends IGalleryProvider {
     return true;
   }
 
+
   @override
   Future<File?> saveImage(Uint8List data) async {
     try {
@@ -354,6 +357,42 @@ class GalleryProvider extends IGalleryProvider {
           data,
           title:
               '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
+        );
+        return asset?.file;
+      }
+    } catch (error) {
+      Debug.log(error);
+    }
+    return null;
+  }
+
+  @override
+  Future<File?> saveVideo(String videoURL) async {
+    try {
+      final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
+
+      // final Directory dataDirectory = await getApplicationDocumentsDirectory();
+      final Directory cacheDirectory = await getTemporaryDirectory();
+      String savePath = "${cacheDirectory.path}/$name.mp4";
+      File videoFile = File(savePath);
+      await Dio().download(videoURL, savePath);
+      
+      if (CurrentPlatform.instance.isHuawei) {
+        final result = await ImageGallerySaver.saveFile(
+          savePath,
+          name: '$name.mp4',
+        );
+
+        if (result != null && result['filePath'] != null && await videoFile.exists()) {
+          /// REFRESH IMAGE
+          await refreshGalleryList(true);
+
+          return videoFile;
+        }
+      } else {
+        AssetEntity? asset = await PhotoManager.editor.saveVideo(
+          videoFile,
+          title: '$name.mp4',
         );
         return asset?.file;
       }

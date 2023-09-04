@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/pages/restore/widgets/restore_image.dart';
 import 'package:snapeditify/pages/restore/widgets/restore_video.dart';
+import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/widgets/base/sliding_control.dart';
 
 class RestoreTabs extends StatefulWidget {
@@ -12,27 +14,28 @@ class RestoreTabs extends StatefulWidget {
   State<RestoreTabs> createState() => _RestoreTabsState();
 }
 
-class _RestoreTabsState extends State<RestoreTabs> {
+class _RestoreTabsState extends ProviderStateObserver<RestoreTabs, RestoreProvider> {
   final ValueNotifier<int> _indexTab = ValueNotifier(0);
 
-  late final PageController _controller;
+  PageController get controller => provider.tabController;
 
   @override
   void initState() {
-    _controller = PageController(initialPage: _indexTab.value);
-    _controller.addListener(() {
-      if (_controller.page == null) return;
-      if (_indexTab.value != _controller.page!.round()) {
-        _indexTab.value = _controller.page!.round();
-      }
-    });
     super.initState();
+    controller.addListener(_listenChange);
+  }
+
+  _listenChange() {
+    if (controller.page == null) return;
+    if (_indexTab.value != controller.page!.round()) {
+      _indexTab.value = controller.page!.round();
+    }
   }
 
   void _onChangedTab(int? index) {
     if (index == null) return;
     _indexTab.value = index;
-    _controller.animateToPage(
+    controller.animateToPage(
       _indexTab.value,
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOut,
@@ -41,7 +44,7 @@ class _RestoreTabsState extends State<RestoreTabs> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    controller.removeListener(_listenChange);
     super.dispose();
   }
 
@@ -52,7 +55,7 @@ class _RestoreTabsState extends State<RestoreTabs> {
         children: [
           Expanded(
             child: PageView(
-              controller: _controller,
+              controller: controller,
               children: const [
                 RestoreImage(),
                 RestoreVideo(),
@@ -60,25 +63,18 @@ class _RestoreTabsState extends State<RestoreTabs> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppDimensions.instance.paddingX(1),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AnimatedBuilder(
-                  animation: _indexTab,
-                  builder: (_, __) => SlidingControl<int>.defaultStyle(
-                    context,
-                    value: [0, 1].elementAt(_indexTab.value),
-                    data: const {
-                      0: "Image Only",
-                      1: "Video Effect",
-                    },
-                    onValueChanged: _onChangedTab,
-                  ),
-                ),
-              ],
+            padding: EdgeInsets.all(AppDimensions.instance.padding),
+            child: AnimatedBuilder(
+              animation: _indexTab,
+              builder: (_, __) => SlidingControl<int>.defaultStyle(
+                context,
+                value: [0, 1].elementAt(_indexTab.value),
+                data: const {
+                  0: 'Image Only',
+                  1: 'Video Effect',
+                },
+                onValueChanged: _onChangedTab,
+              ),
             ),
           ),
         ],

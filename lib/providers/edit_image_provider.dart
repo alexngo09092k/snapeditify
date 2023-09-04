@@ -84,7 +84,7 @@ abstract class EditImageProvider extends Provider {
     return false;
   }
 
-  Future<bool> saveImage(BuildContext context) async {
+  Future<bool> save(BuildContext context) async {
     if (!canSave) return false;
     return checkoutSaveImage(context, () async {
 
@@ -129,7 +129,7 @@ abstract class EditImageProvider extends Provider {
       WidgetUtils.instance.showWarningPopup(
         title: S.of(context).saveImage, 
         message: S.of(context).failedToSaveImagePleaseTryAgain, 
-        retry: saveImage,
+        retry: save,
       );
       return false;
     }, () {
@@ -139,7 +139,7 @@ abstract class EditImageProvider extends Provider {
       WidgetUtils.instance.showWarningPopup(
         title: S.of(context).saveImageLimit,
         message: '${S.of(context).youHaveReachedTheLimitOfSavedImagePleaseUpgrade} ${Configuration.instance.business.appName} ${S.of(context).teamToSupport}',
-        retry: saveImage,
+        retry: save,
       );
     });
   }

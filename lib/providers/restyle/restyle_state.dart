@@ -1,6 +1,4 @@
 import 'dart:typed_data';
-
-import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 

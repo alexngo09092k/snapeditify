@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
@@ -8,12 +9,14 @@ import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_guide.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
+import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/restore/restore_state.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/common/configuration.dart';
 
 abstract class IRestoreProvider extends EditImageProvider {
   @override
@@ -21,9 +24,13 @@ abstract class IRestoreProvider extends EditImageProvider {
 
   PainterController get paintBefore;
 
+  PageController get tabController;
+
   Future<bool> restoreImage(BuildContext context);
 
   Future<bool> videoEffect(BuildContext context);
+
+  Future<bool> saveVideo(BuildContext context);
 
   bool showEnhanceGuide();
 }
@@ -39,6 +46,8 @@ class RestoreProvider extends IRestoreProvider {
 
     _paintBefore = PainterController();
     _paintBefore.addListener(notifyListeners);
+
+    _tabController = PageController();
   }
 
   late RestoreState _state;
@@ -55,6 +64,10 @@ class RestoreProvider extends IRestoreProvider {
   @override
   bool get canSave =>  _state.image.imageBase64 != originalImage.imageBase64;
 
+  late PageController _tabController;
+  @override
+  PageController get tabController => _tabController;
+
   @override
   Future<bool> setImage(BuildContext context, {required Uint8List bytes, bool refesh = true}) async {
     final result = await super.setImage(context, bytes: bytes, refesh: refesh);
@@ -66,6 +79,9 @@ class RestoreProvider extends IRestoreProvider {
 
   @override
   Future<bool> restoreImage(BuildContext context) async {
+    /// MAKED VIDEO
+    if(canSave) return true;
+
     /// CHECKING ENVIROMENT
     final result = await checkEnviroment(context, retry: (_) => restoreImage(context));
     if (!result) return false;
@@ -118,7 +134,10 @@ class RestoreProvider extends IRestoreProvider {
 
    @override
   Future<bool> videoEffect(BuildContext context) async {
+    /// MAKED VIDEO
+    if(_state.videoURL != null) return true;
 
+    /// CHECKING RESTORED IMAGE
     if(_state.imageId == null || _state.outputImageId == null) return false;
 
     /// CHECKING ENVIROMENT
@@ -142,6 +161,7 @@ class RestoreProvider extends IRestoreProvider {
     if (res.data != null) {
       _state.videoURL = res.data!.outputVideoUrl;
 
+      await Future.delayed(const Duration(milliseconds: 500));
       /// HIDE LOADING POPUP
       WidgetUtils.instance.dimiss();
       return true;
@@ -162,7 +182,67 @@ class RestoreProvider extends IRestoreProvider {
     return false;
   }
 
-    @override
+  @override
+  Future<bool> saveVideo(BuildContext context) async {
+    if (!canSave) return false;
+    return checkoutSaveImage(context, () async {
+
+      final provider = ManagerProvider.of<GalleryProvider>();
+      File? savedFile;
+
+      if (_state.videoURL != null) {
+        /// SHOW LOADING
+        LoadingPopup.show();
+        
+        /// SHOW ADS
+        adProvider.handleAd();
+
+        /// SAVE VIDEO
+        savedFile = await provider.saveVideo(_state.videoURL!);
+
+        /// HIDE LOADING
+        LoadingPopup.hide();
+      }
+
+      if (savedFile != null) {
+        /// SHOW SAVED IMAGE
+        // await showDialog<bool>(
+        //   context: context,
+        //   builder: (_) => ,
+        // );
+        return true;
+      }
+
+      /// SHOW ALERT
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).saveImage, 
+        message: S.of(context).failedToSaveImagePleaseTryAgain, 
+        retry: save,
+      );
+      return false;
+    }, () {
+      /// MAX COUNT DOWNLOAD IMAGE
+      /// SHOW ALERT
+
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).saveImageLimit,
+        message: '${S.of(context).youHaveReachedTheLimitOfSavedImagePleaseUpgrade} ${Configuration.instance.business.appName} ${S.of(context).teamToSupport}',
+        retry: save,
+      );
+    });
+  }
+
+  @override
+  Future<bool> save(BuildContext context) {
+    if(_tabController.page == 0.0) {
+      return super.save(context);
+    }else {
+      return saveVideo(context);
+    }
+  }
+
+
+  @override
   bool showEnhanceGuide() {
     int? num = AsyncStorage.instance.getInt(AsyncStorageKey.instance.enhanceGuide);
     if (num != null && num > 1) return false;
@@ -180,5 +260,16 @@ class RestoreProvider extends IRestoreProvider {
     _state = RestoreState();
     _state.addListener(notifyListeners);
     return super.refresh(context);
+  }
+
+  @override
+  void dispose() {
+    _state.removeListener(notifyListeners);
+    _state.dispose();
+    _tabController.removeListener(notifyListeners);
+    _tabController.dispose();
+    _paintBefore.removeListener(notifyListeners);
+    _paintBefore.dispose();
+    super.dispose();
   }
 }
