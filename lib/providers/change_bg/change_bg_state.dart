@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 
@@ -22,28 +21,27 @@ class ChangeBackgroundState extends EditImageState {
   }
   Uint8List get mask => _mask;
 
-  Color _color = Colors.transparent;
-  set color(Color newColor) {
-    if(_color == newColor) return;
-    _color = newColor;
+  String? _bgImage;
+  set bgImage(String? newImage) {
+    if(_bgImage == newImage) return;
+    _bgImage = newImage;
     notifyState();
   }
-  Color get color => _color;
+  String? get bgImage => _bgImage;
 
-  double _ratio = 1;
-  set ratio(double newRatio) {
-    if(_ratio == newRatio) return;
-    _ratio = newRatio;
+  Color? _bgColor;
+  set bgColor(Color? newColor) {
+    if(_bgColor == newColor) return;
+    _bgColor = newColor;
     notifyState();
   }
-  double get ratio => _ratio;
+  Color? get bgColor => _bgColor;
 
   @override
-  Future<bool> setImage(Uint8List imageBytes, String imageBase64, {EditImageProvider? provider, bool createImageFile = true}) async {
+  Future<bool> setImage(Uint8List imageBytes, String imageBase64) async {
     final bool result = await super.setImage(imageBytes, imageBase64);
     if(result) {
-      paint.addImage(ImageDrawer(image: image.imageUI));
-      ratio = image.ratio;
+      paint.addImage(ImageDrawer(position: Offset.zero, image: image.imageUI));
     }
     return result;
   }

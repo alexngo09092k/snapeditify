@@ -83,6 +83,7 @@ class AppRoutes extends IAppRoutes {
     applyArtEffectPage: (_) => const RestylePage(),
     skyPage: (_) => const ChangeSkyPage(),
     fastEditor: (_) => const FastEditor(),
+    changeBG: (_) => const ChangeBGPage(),
   };
 
   @override

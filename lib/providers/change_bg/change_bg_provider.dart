@@ -21,9 +21,9 @@ abstract class IChangeBGProvider extends EditImageProvider {
 
   void changeBackgroundColor(Color color);
 
-  void changeRatio(double ratio);
+  void changeBackgroundImage(String imagePath);
 
-  void onRemovedBGImage(Uint8List imageBytes);
+  Future<bool> onRemovedBGImage(BuildContext context, Uint8List imageBytes);
 }
 
 class ChangeBGProvider extends IChangeBGProvider {
@@ -47,13 +47,14 @@ class ChangeBGProvider extends IChangeBGProvider {
   bool get canSave => _state.mask.isNotEmpty;
 
   @override
-  void changeRatio(double ratio) {
-    _state.ratio = ratio;
+  void changeBackgroundColor(Color color) {
+    _state.bgColor = color;
+    state.paint.background = null;
   }
 
   @override
-  void changeBackgroundColor(Color color) {
-    _state.color = color;
+  void changeBackgroundImage(String imagePath) {
+    _state.bgImage = imagePath;
   }
 
   @override
@@ -99,7 +100,8 @@ class ChangeBGProvider extends IChangeBGProvider {
   }
 
   @override
-  void onRemovedBGImage(Uint8List imageBytes) {
+  Future<bool> onRemovedBGImage(BuildContext context, Uint8List imageBytes) async {
+   return setImage(context, bytes: imageBytes);
   }
 
   @override
