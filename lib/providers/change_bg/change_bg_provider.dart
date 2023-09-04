@@ -6,7 +6,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/generated/l10n.dart';
-import 'package:snapeditify/providers/change_background/change_background_state.dart';
+import 'package:snapeditify/providers/change_bg/change_bg_state.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/widget.dart';

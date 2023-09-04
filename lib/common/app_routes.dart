@@ -21,7 +21,7 @@ import 'package:snapeditify/pages/setting/setting.dart';
 import 'package:snapeditify/pages/change_sky/change_sky.dart';
 import 'package:snapeditify/pages/splash/splash_page.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
-import 'package:snapeditify/providers/change_background/change_background_provider.dart';
+import 'package:snapeditify/providers/change_bg/change_bg_provider.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';

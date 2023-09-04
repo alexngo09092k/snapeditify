@@ -12,7 +12,7 @@ import 'package:snapeditify/firebase_options.dart';
 import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
 import 'package:snapeditify/providers/app_theme_provider.dart';
-import 'package:snapeditify/providers/change_background/change_background_provider.dart';
+import 'package:snapeditify/providers/change_bg/change_bg_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
 import 'package:snapeditify/providers/make_passport_id/make_passport_id_provider.dart';
