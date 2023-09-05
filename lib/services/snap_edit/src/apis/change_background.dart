@@ -7,12 +7,12 @@ import '../utils.dart';
 extension ChangeBackground on SnapEdit {
   Future<SnapEditResponse<BackgroundResponse?>> getBackgroundEffects([String lang = 'en']) async {
     try {
-      ClientResponse<String> response = await ClientHttp.instance.get<String>(
+      ClientResponse<Map<String, dynamic>> response = await ClientHttp.instance.get<Map<String, dynamic>>(
         '${config.endPoints.backgroundEffects}?lang=$lang',
         headers: config.headers,
       );
 
-      return handleResponse<BackgroundResponse>(response, (p0) => BackgroundResponse.fromJson(p0));
+      return handleResponse<BackgroundResponse>(response, (p0) => BackgroundResponse.fromMap(p0));
     } catch (error) {
       return SnapEditResponse<BackgroundResponse>(message: error.toString());
     }

@@ -1,7 +1,9 @@
-import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
+import 'package:flutter/services.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
+import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 
 class ChangeBackgroundState extends EditImageState {
@@ -21,13 +23,13 @@ class ChangeBackgroundState extends EditImageState {
   }
   Uint8List get mask => _mask;
 
-  String? _bgImage;
-  set bgImage(String? newImage) {
-    if(_bgImage == newImage) return;
-    _bgImage = newImage;
+  Background? _bgBG;
+  set bgBG(Background? newBG) {
+    if(_bgBG == newBG) return;
+    _bgBG = newBG;
     notifyState();
   }
-  String? get bgImage => _bgImage;
+  Background? get bgBG => _bgBG;
 
   Color? _bgColor;
   set bgColor(Color? newColor) {
@@ -38,10 +40,19 @@ class ChangeBackgroundState extends EditImageState {
   Color? get bgColor => _bgColor;
 
   @override
-  Future<bool> setImage(Uint8List imageBytes, String imageBase64) async {
+  Future<bool> setImage(Uint8List imageBytes, String imageBase64, {Size size = Size.infinite}) async {
     final bool result = await super.setImage(imageBytes, imageBase64);
     if(result) {
-      paint.addImage(ImageDrawer(position: Offset.zero, image: image.imageUI));
+      /// Clean
+      paint.clearDrawables(saveAction: false);
+
+      /// Fake Background Image
+      Uint8List noImageBytes = (await rootBundle.load(AppAssets.instance.noImage)).buffer.asUint8List();
+      ui.Image noImage = await ImageUtils.instance.toImageUI(noImageBytes);
+      paint.addDrawables([ImageDrawable.fittedToSize(position: Offset.zero, size: size, image: noImage)]);
+
+      /// Add Image
+      paint.addDrawables([ImageDrawable.fittedToSize(position: Offset.zero, size: size, image: image.imageUI)]);
     }
     return result;
   }

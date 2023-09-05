@@ -15,7 +15,7 @@ class RemoveBGPage extends StatefulWidget {
 class _RemoveBGPageState extends ProviderStateObserver<RemoveBGPage, IChangeBGProvider> {
   @override
   void onNextFrame(Duration timestamp) {
-    provider.removeBackground(context);
+    provider.removeBG(context);
     super.onNextFrame(timestamp);
   }
 

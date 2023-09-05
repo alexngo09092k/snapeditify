@@ -1,9 +1,5 @@
-import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/change_bg/change_bg_provider.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
@@ -37,18 +33,6 @@ class ChangeBGImage extends StatelessWidget {
                   alignment: Alignment.center,
                   fit: StackFit.expand,
                   children: [
-                    /// IMAGE BACKGROUND
-                   PropConsumer<IChangeBGProvider, String?>(
-                      select: (_) => _.state.bgImage,
-                      builder: (_, __, p, image) {
-                        if(image == null) return const SizedBox();
-                        if(Configuration.instance.isNetwork(image)) {
-                          return CachedNetworkImage(imageUrl: image, fit: BoxFit.fill);
-                        }
-                        return Image.file(File(image), fit: BoxFit.fill);
-                      }
-                    ),
-
                     /// COLOR BACKGROUND
                     PropConsumer<IChangeBGProvider, Color?>(
                       select: (_) => _.state.bgColor,
