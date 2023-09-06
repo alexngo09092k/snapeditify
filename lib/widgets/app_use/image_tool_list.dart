@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
+import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/app_use/more_tools_popup.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
@@ -10,11 +11,10 @@ class ImageToolList extends StatelessWidget {
   final ImageTool? currentTool;
   final Function(ImageTool) onTool;
 
-  void showMoreTools(BuildContext context) async {
-    return showDialog(
-      context: context,
+  void showMoreTools() async {
+    return WidgetUtils.instance.showDialog(
       builder: (_) => MoreToolsPopup(onTool: (_) {
-        Navigator.of(context).pop();
+        WidgetUtils.instance.dimiss();
         onTool(_);
       }),
     );
@@ -68,7 +68,7 @@ class ImageToolList extends StatelessWidget {
               );
             }).toList(),
             GestureDetector(
-              onTap: () => showMoreTools(context),
+              onTap: showMoreTools,
               child: AppCard(
                 margin: EdgeInsets.all(AppDimensions.instance.paddingX(0.25)),
                 width: itemWidth,

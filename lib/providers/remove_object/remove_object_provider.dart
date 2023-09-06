@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
@@ -215,9 +214,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     OneTouchSuggestionBody body = OneTouchSuggestionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
     SnapEditResponse<OneTouchSuggestionResponse?> res = await Services.instance.snapEdit.removeOneTouch(body);
 
-    /// DETECTED OBJECT
-    LoadingPopup.setMessage("Detecting object");
-
     if (res.data != null) {
       /// DETECTED OBJECT VM
       Map<int, DetectedObjectVM> detectedObjectVMs = {};
@@ -276,9 +272,6 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     /// CALL API
     ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
     SnapEditResponse<ScanObjectResponse?> res = await Services.instance.snapEdit.scanObject(body);
-
-    /// DETECTED OBJECT
-    LoadingPopup.setMessage("Detecting object");
 
     if (res.data != null) {
       /// DETECTED OBJECT VM

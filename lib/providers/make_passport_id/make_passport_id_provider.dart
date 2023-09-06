@@ -83,7 +83,7 @@ class MakeIDPassportProvider extends IMakeIDPassportProvider {
     renewSavedFile();
 
     /// SHOW LOADING POPUP
-    LoadingPopup.show("Please wait amoment!");
+    LoadingPopup.show();
 
     /// SHOW ADS
     adProvider.handleAd();

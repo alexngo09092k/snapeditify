@@ -51,6 +51,26 @@ class S {
   }
 
   /// `English`
+  String get en {
+    return Intl.message(
+      'English',
+      name: 'en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vietnamese`
+  String get vi {
+    return Intl.message(
+      'Vietnamese',
+      name: 'vi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
   String get english {
     return Intl.message(
       'English',
