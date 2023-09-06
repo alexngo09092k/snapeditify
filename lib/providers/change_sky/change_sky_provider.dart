@@ -186,7 +186,7 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
   
   @override
   Future<bool> registered() {
-    syncFromServer();
+    syncFromServer(true);
     return super.registered();
   }
 

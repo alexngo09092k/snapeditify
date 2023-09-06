@@ -24,6 +24,8 @@ class SkyEffectList extends StatelessWidget {
             child: SkyEffectItemItem(
               key: Key('$index'),
               effect: effects[index],
+              isStart: index == 0,
+              isEnd: index + 1 == effects.length,
               onEffect: onEffect,
             ),
           ),
@@ -34,8 +36,16 @@ class SkyEffectList extends StatelessWidget {
 }
 
 class SkyEffectItemItem extends StatelessWidget {
-  const SkyEffectItemItem({super.key, required this.effect, required this.onEffect});
+  const SkyEffectItemItem({
+    super.key, 
+    required this.effect, 
+    required this.onEffect,
+    required this.isStart,
+    required this.isEnd,
+  });
   final Background effect;
+  final bool isStart;
+  final bool isEnd;
   final Function(Background) onEffect;
 
   @override
@@ -49,7 +59,13 @@ class SkyEffectItemItem extends StatelessWidget {
           child: AppCard(
             width: width,
             height: height,
-            margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.25), vertical: AppDimensions.instance.padding),
+            margin: EdgeInsets.symmetric(
+              horizontal: AppDimensions.instance.paddingX(0.25),
+              vertical: AppDimensions.instance.padding,
+            ).copyWith(
+              left: isStart ? AppDimensions.instance.padding: null,
+              right: isEnd? AppDimensions.instance.padding: null,
+            ),
             child: PropConsumer<IChangeSkyProvider,Background?>(
               select: (_) => _.state.sky,
               builder: (_, __, ___, sky) {

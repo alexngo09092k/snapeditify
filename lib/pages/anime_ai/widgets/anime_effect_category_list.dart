@@ -28,7 +28,7 @@ class _AnimeEffectCategoryListState extends ProviderStateObserver<AnimeEffectCat
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AwesomeAppState.screen.height * 0.25,
+      height: 150,
       child: Column(
         children: [
           PropConsumer<IAnimeAIProvider, List<String>>(

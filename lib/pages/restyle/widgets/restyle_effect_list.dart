@@ -12,7 +12,7 @@ class RestyleEffectList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AwesomeAppState.screen.height * 0.2,
+      height: 100,
       child: PropConsumer<IRestyleProvider, List<Effect>>(
         select: (_) => _.effects,
         builder: (_, __, p, effects) => ListView.builder(
@@ -21,6 +21,8 @@ class RestyleEffectList extends StatelessWidget {
           itemBuilder: (_, index) => StyleItem(
             key: Key('$index'),
             effect: effects[index],
+            isStart: index == 0,
+            isEnd: index + 1 == effects.length,
             onEffect: (_) => p.restyleImage(context, _.styleId),
           ),
         ),
@@ -30,8 +32,16 @@ class RestyleEffectList extends StatelessWidget {
 }
 
 class StyleItem extends StatelessWidget {
-  const StyleItem({super.key, required this.effect, required this.onEffect});
+  const StyleItem({
+    super.key, 
+    required this.effect, 
+    required this.onEffect,
+    required this.isStart,
+    required this.isEnd,
+  });
   final Effect effect;
+  final bool isStart;
+  final bool isEnd;
   final Function(Effect) onEffect;
 
   @override
@@ -41,11 +51,14 @@ class StyleItem extends StatelessWidget {
       child: LayoutBuilder(
         builder: (_, constrains) {
           double height = constrains.maxHeight - AppDimensions.instance.paddingX(2);
-          double width = height * 2/3;
+          double width = height * 2.6/3;
           return AppCard(
             margin: EdgeInsets.symmetric(
               horizontal: AppDimensions.instance.paddingX(0.5), 
               vertical: AppDimensions.instance.padding,
+            ).copyWith(
+              left: isStart ? AppDimensions.instance.padding: null,
+              right: isEnd? AppDimensions.instance.padding: null,
             ),
             width: width,
             height: height,
@@ -71,6 +84,7 @@ class StyleItem extends StatelessWidget {
                       width: width, 
                       height: height,
                       fit: BoxFit.fill,
+                      placeholder: AppAssets.instance.animePlaceholder,
                     ),
                   ),
                 );

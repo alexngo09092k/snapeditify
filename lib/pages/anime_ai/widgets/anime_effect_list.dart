@@ -24,6 +24,8 @@ class AnimeEffectList extends StatelessWidget {
             child: BGEffectItemItem(
               key: Key('$index'),
               effect: styles[index],
+              isStart: index == 0,
+              isEnd: index + 1 == styles.length,
               onEffect: onEffect,
             ),
           ),
@@ -34,8 +36,16 @@ class AnimeEffectList extends StatelessWidget {
 }
 
 class BGEffectItemItem extends StatelessWidget {
-  const BGEffectItemItem({super.key, required this.effect, required this.onEffect});
+  const BGEffectItemItem({
+    super.key, 
+    required this.effect, 
+    required this.onEffect,
+    required this.isStart,
+    required this.isEnd,
+  });
   final Effect effect;
+  final bool isStart;
+  final bool isEnd;
   final Function(Effect) onEffect;
 
   @override
@@ -52,6 +62,9 @@ class BGEffectItemItem extends StatelessWidget {
             margin: EdgeInsets.symmetric(
               horizontal: AppDimensions.instance.paddingX(0.25), 
               vertical: AppDimensions.instance.padding,
+            ).copyWith(
+              left: isStart ? AppDimensions.instance.padding: null,
+              right: isEnd? AppDimensions.instance.padding: null,
             ),
             child: PropConsumer<IAnimeAIProvider, String?>(
               select: (_) => _.state.styleId,

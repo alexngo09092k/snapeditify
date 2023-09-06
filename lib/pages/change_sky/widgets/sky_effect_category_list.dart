@@ -26,7 +26,7 @@ class _SkyEffectCategoryListState extends ProviderStateObserver<SkyEffectCategor
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AwesomeAppState.screen.height * 0.2,
+      height: 150,
       child: Column(
         children: [
           PropConsumer<IChangeSkyProvider, List<String>>(

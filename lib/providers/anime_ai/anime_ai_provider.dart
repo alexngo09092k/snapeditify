@@ -201,7 +201,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
   @override
   Future<bool> registered() {
-    syncFromServer();
+    syncFromServer(true);
     return super.registered();
   }
 
