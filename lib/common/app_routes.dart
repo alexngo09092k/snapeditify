@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/generated/l10n.dart';
+// import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/change_bg/change_bg.dart';
 import 'package:snapeditify/pages/fast_editor/fast_editor.dart';
 import 'package:snapeditify/pages/make_id_passport/make_id_passport.dart';
@@ -22,13 +22,13 @@ import 'package:snapeditify/pages/setting/setting.dart';
 import 'package:snapeditify/pages/change_sky/change_sky.dart';
 import 'package:snapeditify/pages/splash/splash_page.dart';
 import 'package:snapeditify/providers/anime_ai/anime_ai_provider.dart';
-import 'package:snapeditify/providers/change_bg/change_bg_provider.dart';
+// import 'package:snapeditify/providers/change_bg/change_bg_provider.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
-import 'package:snapeditify/providers/make_passport_id/make_passport_id_provider.dart';
-import 'package:snapeditify/providers/remove_bg/remove_bg_provider.dart';
+// import 'package:snapeditify/providers/make_passport_id/make_passport_id_provider.dart';
+// import 'package:snapeditify/providers/remove_bg/remove_bg_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
@@ -217,15 +217,15 @@ extension AppRoutesUtils on IAppRoutes {
             provider = ManagerProvider.of<IChangeSkyProvider>();
             target = AppRoutes.skyPage;
             break;
-          case ImageTool.makeIDPassportPhoto:
-            provider = ManagerProvider.of<IMakeIDPassportProvider>();
-            target = AppRoutes.makeIDPassport;
-            break;
-          case ImageTool.productPhoto:
-          case ImageTool.changeBG:
-            provider = ManagerProvider.of<IRemoveBGProvider>();
-            target = AppRoutes.removeBG;
-            break;
+          // case ImageTool.makeIDPassportPhoto:
+          //   provider = ManagerProvider.of<IMakeIDPassportProvider>();
+          //   target = AppRoutes.makeIDPassport;
+          //   break;
+          // case ImageTool.productPhoto:
+          // case ImageTool.changeBG:
+          //   provider = ManagerProvider.of<IRemoveBGProvider>();
+          //   target = AppRoutes.removeBG;
+          //   break;
           case ImageTool.fastEditor:
             provider = ManagerProvider.of<IFastEditorProvider>();
             target = AppRoutes.fastEditor;

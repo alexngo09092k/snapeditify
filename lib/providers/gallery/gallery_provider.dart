@@ -20,9 +20,9 @@ enum ImageTool {
   upscaleImage,
   restoreOldPhoto,
 
-  makeIDPassportPhoto,
-  productPhoto,
-  changeBG,
+  // makeIDPassportPhoto,
+  // productPhoto,
+  // changeBG,
 
   generateAnimeAI,
   applyArtEffect,
@@ -44,12 +44,12 @@ extension ImageToolEX on ImageTool {
         return 'Upscale Image';
       case ImageTool.restoreOldPhoto:
         return 'Restore Old Photo';
-      case ImageTool.makeIDPassportPhoto:
-        return 'Make ID Passport';
-      case ImageTool.productPhoto:
-        return 'Product Photo';
-      case ImageTool.changeBG:
-        return 'Change Background';
+      // case ImageTool.makeIDPassportPhoto:
+      //   return 'Make ID Passport';
+      // case ImageTool.productPhoto:
+      //   return 'Product Photo';
+      // case ImageTool.changeBG:
+        // return 'Change Background';
       case ImageTool.generateAnimeAI:
         return 'Generate Anime AI';
       case ImageTool.applyArtEffect:
@@ -73,12 +73,12 @@ extension ImageToolEX on ImageTool {
         return 'Upscale';
       case ImageTool.restoreOldPhoto:
         return 'Restore';
-      case ImageTool.makeIDPassportPhoto:
-        return 'Make ID';
-      case ImageTool.productPhoto:
-        return 'Product';
-      case ImageTool.changeBG:
-        return 'Change BG';
+      // case ImageTool.makeIDPassportPhoto:
+      //   return 'Make ID';
+      // case ImageTool.productPhoto:
+      //   return 'Product';
+      // case ImageTool.changeBG:
+      //   return 'Change BG';
       case ImageTool.generateAnimeAI:
         return 'Anime AI';
       case ImageTool.applyArtEffect:
@@ -102,12 +102,12 @@ extension ImageToolEX on ImageTool {
         return AppAssets.instance.upscaleImage;
       case ImageTool.restoreOldPhoto:
         return AppAssets.instance.restorePhoto;
-      case ImageTool.makeIDPassportPhoto:
-        return AppAssets.instance.makeIDPassport;
-      case ImageTool.productPhoto:
-        return AppAssets.instance.productPhoto;
-      case ImageTool.changeBG:
-        return AppAssets.instance.changeBackground;
+      // case ImageTool.makeIDPassportPhoto:
+      //   return AppAssets.instance.makeIDPassport;
+      // case ImageTool.productPhoto:
+      //   return AppAssets.instance.productPhoto;
+      // case ImageTool.changeBG:
+      //   return AppAssets.instance.changeBackground;
       case ImageTool.generateAnimeAI:
         return AppAssets.instance.generateAnimeAI;
       case ImageTool.applyArtEffect:
@@ -131,12 +131,12 @@ extension ImageToolEX on ImageTool {
         return AppAssets.instance.icEnhance;
       case ImageTool.restoreOldPhoto:
         return AppAssets.instance.icRestoration;
-      case ImageTool.makeIDPassportPhoto:
-        return AppAssets.instance.icEnhance;
-      case ImageTool.productPhoto:
-        return AppAssets.instance.icRemoveBG;
-      case ImageTool.changeBG:
-        return AppAssets.instance.icRemoveBG;
+      // case ImageTool.makeIDPassportPhoto:
+      //   return AppAssets.instance.icEnhance;
+      // case ImageTool.productPhoto:
+      //   return AppAssets.instance.icRemoveBG;
+      // case ImageTool.changeBG:
+      //   return AppAssets.instance.icRemoveBG;
       case ImageTool.generateAnimeAI:
         return AppAssets.instance.icAnimeAI;
       case ImageTool.applyArtEffect:
@@ -160,12 +160,12 @@ extension ImageToolEX on ImageTool {
         return const Color.fromRGBO(223, 244, 234, 1);
       case ImageTool.restoreOldPhoto:
         return const Color.fromRGBO(237, 240, 202, 1);
-      case ImageTool.makeIDPassportPhoto:
-        return const Color.fromRGBO(201, 226, 236, 1);
-      case ImageTool.productPhoto:
-        return const Color.fromRGBO(252, 240, 245, 1);
-      case ImageTool.changeBG:
-        return const Color.fromRGBO(241, 224, 165, 1);
+      // case ImageTool.makeIDPassportPhoto:
+      //   return const Color.fromRGBO(201, 226, 236, 1);
+      // case ImageTool.productPhoto:
+      //   return const Color.fromRGBO(252, 240, 245, 1);
+      // case ImageTool.changeBG:
+      //   return const Color.fromRGBO(241, 224, 165, 1);
       case ImageTool.generateAnimeAI:
         return const Color.fromRGBO(206, 250, 220, 1); 
       case ImageTool.applyArtEffect:
@@ -257,21 +257,21 @@ class GalleryProvider extends IGalleryProvider {
       AppAssets.instance.restore2,
       AppAssets.instance.restore3,
     ],
-    ImageTool.makeIDPassportPhoto: [
-      AppAssets.instance.passportMaker1,
-      AppAssets.instance.passportMaker2,
-      AppAssets.instance.passportMaker3,
-    ],
-    ImageTool.productPhoto: [
-      AppAssets.instance.removeBG1,
-      AppAssets.instance.removeBG2,
-      AppAssets.instance.removeBG3,
-    ],
-    ImageTool.changeBG: [
-      AppAssets.instance.removeBG1,
-      AppAssets.instance.removeBG2,
-      AppAssets.instance.removeBG3,
-    ],
+    // ImageTool.makeIDPassportPhoto: [
+    //   AppAssets.instance.passportMaker1,
+    //   AppAssets.instance.passportMaker2,
+    //   AppAssets.instance.passportMaker3,
+    // ],
+    // ImageTool.productPhoto: [
+    //   AppAssets.instance.removeBG1,
+    //   AppAssets.instance.removeBG2,
+    //   AppAssets.instance.removeBG3,
+    // ],
+    // ImageTool.changeBG: [
+    //   AppAssets.instance.removeBG1,
+    //   AppAssets.instance.removeBG2,
+    //   AppAssets.instance.removeBG3,
+    // ],
     ImageTool.generateAnimeAI: [
       AppAssets.instance.anime1,
       AppAssets.instance.anime2,

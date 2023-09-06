@@ -69,14 +69,14 @@ class _HomePageState extends State<HomePage> {
           ImageTool.restoreOldPhoto
         ]),
 
-        SizedBox(height: AppDimensions.instance.padding),
+        // SizedBox(height: AppDimensions.instance.padding),
 
-        /// CUTOUT OBJECTS
-        HomeBaseTools(title: S.of(context).cutoutObjects, const [
-          ImageTool.makeIDPassportPhoto,
-          ImageTool.productPhoto,
-          ImageTool.changeBG,
-        ]),
+        // /// CUTOUT OBJECTS
+        // HomeBaseTools(title: S.of(context).cutoutObjects, const [
+        //   ImageTool.makeIDPassportPhoto,
+        //   ImageTool.productPhoto,
+        //   ImageTool.changeBG,
+        // ]),
 
         SizedBox(height: AppDimensions.instance.padding),
 
