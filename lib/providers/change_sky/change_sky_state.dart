@@ -1,10 +1,8 @@
 import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
-import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/edit_image_state.dart';
 import 'package:snapeditify/services/services.dart';
-import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 
 class ChangeSkyState extends EditImageState {
@@ -22,7 +20,7 @@ class ChangeSkyState extends EditImageState {
   set sky(Background? newSky) {
     if(newSky == _sky) return;
     _sky = newSky;
-    notifyListeners();
+    notifyState();
   }
 
   Uint8List _mask = Uint8List.fromList([]);

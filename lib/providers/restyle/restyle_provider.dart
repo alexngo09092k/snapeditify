@@ -99,7 +99,6 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
     if (_state.styledImages.containsKey(styleId)) {
       _state.setImage(_state.styledImages[styleId]!, originalImage.imageBase64, styleId: styleId);
-      notifyListeners();
       return true;
     }
 
@@ -115,9 +114,8 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
     if (res.data != null) {
       Uint8List imagebytes = base64.decode(res.data!.outputImage);
-      await _state.setImage(imagebytes, res.data!.outputImage,  styleId: styleId);
       _state.styledImages[styleId] = imagebytes;
-      notifyListeners();
+      await _state.setImage(imagebytes, res.data!.outputImage,  styleId: styleId);
 
       /// HIDE LOADING POPUP
       LoadingPopup.hide();
