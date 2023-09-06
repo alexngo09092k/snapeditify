@@ -10,7 +10,7 @@ extension DetectObjectTypeEx on DetectedObjectType {
   String get label {
     switch (this) {
       case DetectedObjectType.person:
-      return 'person';
+      return 'Person';
       case DetectedObjectType.other:
       return 'Other';
       default:
