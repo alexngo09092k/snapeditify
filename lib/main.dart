@@ -21,6 +21,7 @@ import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
+import 'package:snapeditify/providers/remove_bg/remove_bg_provider.dart';
 import 'package:snapeditify/services/services.dart';
 
 void main() {
@@ -40,6 +41,7 @@ void main() {
       () => EnhanceProvider.instance,
       () => RestoreProvider.instance,
       () => MakeIDPassportProvider.instance,
+      () => RemoveBGProvider.instance,
       () => ChangeBGProvider.instance,
       () => ChangeSkyProvider.instance,
       () => RestyleProvider.instance,

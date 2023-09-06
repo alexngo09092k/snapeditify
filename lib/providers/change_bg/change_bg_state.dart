@@ -6,8 +6,8 @@ import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 
-class ChangeBackgroundState extends EditImageState {
-  ChangeBackgroundState() {
+class ChangeBGState extends EditImageState {
+  ChangeBGState() {
     _paint = PainterController();
     _paint.addListener(notifyState);
   }
@@ -40,7 +40,7 @@ class ChangeBackgroundState extends EditImageState {
   Color? get bgColor => _bgColor;
 
   @override
-  Future<bool> setImage(Uint8List imageBytes, String imageBase64, {Size size = Size.infinite}) async {
+  Future<bool> setImage(Uint8List imageBytes, String imageBase64, {Size? size}) async {
     final bool result = await super.setImage(imageBytes, imageBase64);
     if(result) {
       /// Clean
@@ -49,10 +49,19 @@ class ChangeBackgroundState extends EditImageState {
       /// Fake Background Image
       Uint8List noImageBytes = (await rootBundle.load(AppAssets.instance.noImage)).buffer.asUint8List();
       ui.Image noImage = await ImageUtils.instance.toImageUI(noImageBytes);
-      paint.addDrawables([ImageDrawable.fittedToSize(position: Offset.zero, size: size, image: noImage)]);
+      late ImageDrawable noImageDrawable;
+      late ImageDrawable imageDrawable;
+
+      if(size != null) {
+        noImageDrawable = ImageDrawable.fittedToSize(position: Offset.zero, size: size, image: noImage);
+        imageDrawable = ImageDrawable.fittedToSize(position: Offset.zero, size: size, image: image.imageUI);
+      } else {
+        noImageDrawable = ImageDrawable(position: Offset.zero, image: noImage);
+        imageDrawable = ImageDrawable(position: Offset.zero, image: image.imageUI);
+      }
 
       /// Add Image
-      paint.addDrawables([ImageDrawable.fittedToSize(position: Offset.zero, size: size, image: image.imageUI)]);
+      paint.addDrawables([noImageDrawable, imageDrawable]);
     }
     return result;
   }

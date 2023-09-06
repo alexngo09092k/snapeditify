@@ -1,38 +1,29 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:convert';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/change_bg/change_bg_state.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/image.dart';
-import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/extensions/extensions.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
-import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IChangeBGProvider extends EditImageProvider with StorageProvider {
   @override
-  ChangeBackgroundState get state;
+  ChangeBGState get state;
 
-  List<Background> get backgrounds;
+  List<Background> get effects;
 
   List<String> get categories;
-
-  Future<bool> removeBG(BuildContext context);
 
   void changeBGColor(Color color);
 
   void changeBGImage(BuildContext context, Uint8List imageBytes);
-
-  Future<bool> onRemovedBGImage(BuildContext context, Uint8List imageBytes);
 }
 
 class ChangeBGProvider extends IChangeBGProvider with ProviderDelegate {
@@ -41,21 +32,21 @@ class ChangeBGProvider extends IChangeBGProvider with ProviderDelegate {
   static IChangeBGProvider get instance => _instance;
 
   ChangeBGProvider.internal() {
-    _state = ChangeBackgroundState();
+    _state = ChangeBGState();
     _state.addListener(notifyListeners);
   }
 
-  final List<Background> _backgrounds = [];
+  final List<Background> _effects = [];
   @override
-  List<Background> get backgrounds => _backgrounds;
+  List<Background> get effects => _effects;
 
   final List<String> _categories = [];
   @override
   List<String> get categories => _categories;
 
-  late ChangeBackgroundState _state;
+  late ChangeBGState _state;
   @override
-  ChangeBackgroundState get state => _state;
+  ChangeBGState get state => _state;
 
   @override
   EditedImageVM? get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
@@ -69,59 +60,16 @@ class ChangeBGProvider extends IChangeBGProvider with ProviderDelegate {
   }
 
   @override
-  void changeBGImage(BuildContext context, Uint8List imageBytes) async {
+  void changeBGImage(BuildContext context, Uint8List imageBytes, {Size? size}) async {
     ui.Image image = await ImageUtils.instance.toImageUI(imageBytes);
-    ImageDrawable newDrawable = ImageDrawable(position: Offset.zero, image: image);
+    late ImageDrawable newDrawable ;
+    if(size != null) {
+      newDrawable = ImageDrawable.fittedToSize(position: Offset.zero, image: image, size: size);
+    } else {
+      newDrawable = ImageDrawable(position: Offset.zero, image: image);
+    }
     _state.paint.replaceDrawable(_state.paint.drawables[0], newDrawable);
   }
-
-  @override
-  Future<bool> removeBG(BuildContext context) async {
-    /// CHECKING ENVIROMENT
-    final result = await checkEnviroment(context, retry: (_) => removeBG(context));
-    if (!result) return false;
-
-    renewSavedFile();
-
-    /// SHOW LOADING POPUP
-    LoadingPopup.show();
-
-    /// SHOW ADS
-    adProvider.handleAd();
-
-    /// CALL API
-    RemoveBackgroundBody body = RemoveBackgroundBody(inputImage: _state.image.imageBytes, imageId: null);
-    final SnapEditResponse<RemoveBackgroundResponse?> res = await Services.instance.snapEdit.removeBackground(body);
-    if (res.data != null) {
-      /// REMOVED BACKGROUND IMAGE
-      _state.mask = base64.decode(res.data!.output);
-
-      /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
-
-      return true;
-    }
-
-    /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).createIdPhoto,
-        message: "",
-        retry: (_) => removeBG(context),
-      );
-      Debug.log('===== REMOVE BACKGROUND IMAGE ${res.message} =====');
-    }
-
-    return false;
-  }
-
-  @override
-  Future<bool> onRemovedBGImage(BuildContext context, Uint8List imageBytes) async {
-   return setImage(context, bytes: imageBytes);
-  }
-
 
   @override
   Future<bool> registered() {
@@ -157,15 +105,15 @@ class ChangeBGProvider extends IChangeBGProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? backgroundStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.backgroundEffects);
-    if (backgroundStrings != null) {
-      Debug.log("===== SYNC FROM STORAGE $backgroundStrings =====");
-      BackgroundResponse data = BackgroundResponse.fromJson(backgroundStrings);
-      _backgrounds.clear();
-      _backgrounds.addAll(data.backgrounds);
-      for (var background in _backgrounds) {
-        if (!_categories.contains(background.category)) {
-          _categories.add(background.category);
+    String? effectStrings = AsyncStorage.instance.getString(AsyncStorageKey.instance.backgroundEffects);
+    if (effectStrings != null) {
+      Debug.log("===== SYNC FROM STORAGE $effectStrings =====");
+      BackgroundResponse data = BackgroundResponse.fromJson(effectStrings);
+      _effects.clear();
+      _effects.addAll(data.backgrounds);
+      for (var effect in _effects) {
+        if (!_categories.contains(effect.category)) {
+          _categories.add(effect.category);
         }
       }
     }
@@ -175,7 +123,7 @@ class ChangeBGProvider extends IChangeBGProvider with ProviderDelegate {
     
   @override
   void clean([bool notify = false]) {
-    _backgrounds.clear();
+    _effects.clear();
     _state.setImage(originalImage.imageBytes, originalImage.imageBase64);
     if (notify) notifyListeners();
   }
@@ -184,7 +132,7 @@ class ChangeBGProvider extends IChangeBGProvider with ProviderDelegate {
   Future<bool> refresh(BuildContext context) async {
     _state.removeListener(notifyListeners);
     _state.dispose();
-    _state = ChangeBackgroundState();
+    _state = ChangeBGState();
     _state.addListener(notifyListeners);
     return super.refresh(context);
   }

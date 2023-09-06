@@ -22,7 +22,7 @@ enum ImageTool {
 
   makeIDPassportPhoto,
   productPhoto,
-  changeBackground,
+  changeBG,
 
   generateAnimeAI,
   applyArtEffect,
@@ -48,7 +48,7 @@ extension ImageToolEX on ImageTool {
         return 'Make ID Passport';
       case ImageTool.productPhoto:
         return 'Product Photo';
-      case ImageTool.changeBackground:
+      case ImageTool.changeBG:
         return 'Change Background';
       case ImageTool.generateAnimeAI:
         return 'Generate Anime AI';
@@ -77,7 +77,7 @@ extension ImageToolEX on ImageTool {
         return 'Make ID';
       case ImageTool.productPhoto:
         return 'Product';
-      case ImageTool.changeBackground:
+      case ImageTool.changeBG:
         return 'Change BG';
       case ImageTool.generateAnimeAI:
         return 'Anime AI';
@@ -106,7 +106,7 @@ extension ImageToolEX on ImageTool {
         return AppAssets.instance.makeIDPassport;
       case ImageTool.productPhoto:
         return AppAssets.instance.productPhoto;
-      case ImageTool.changeBackground:
+      case ImageTool.changeBG:
         return AppAssets.instance.changeBackground;
       case ImageTool.generateAnimeAI:
         return AppAssets.instance.generateAnimeAI;
@@ -135,7 +135,7 @@ extension ImageToolEX on ImageTool {
         return AppAssets.instance.icEnhance;
       case ImageTool.productPhoto:
         return AppAssets.instance.icRemoveBG;
-      case ImageTool.changeBackground:
+      case ImageTool.changeBG:
         return AppAssets.instance.icRemoveBG;
       case ImageTool.generateAnimeAI:
         return AppAssets.instance.icAnimeAI;
@@ -164,7 +164,7 @@ extension ImageToolEX on ImageTool {
         return const Color.fromRGBO(201, 226, 236, 1);
       case ImageTool.productPhoto:
         return const Color.fromRGBO(252, 240, 245, 1);
-      case ImageTool.changeBackground:
+      case ImageTool.changeBG:
         return const Color.fromRGBO(241, 224, 165, 1);
       case ImageTool.generateAnimeAI:
         return const Color.fromRGBO(206, 250, 220, 1); 
@@ -267,7 +267,7 @@ class GalleryProvider extends IGalleryProvider {
       AppAssets.instance.removeBG2,
       AppAssets.instance.removeBG3,
     ],
-    ImageTool.changeBackground: [
+    ImageTool.changeBG: [
       AppAssets.instance.removeBG1,
       AppAssets.instance.removeBG2,
       AppAssets.instance.removeBG3,

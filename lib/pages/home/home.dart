@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
         HomeBaseTools(title: S.of(context).cutoutObjects, const [
           ImageTool.makeIDPassportPhoto,
           ImageTool.productPhoto,
-          ImageTool.changeBackground
+          ImageTool.changeBG,
         ]),
 
         SizedBox(height: AppDimensions.instance.padding),

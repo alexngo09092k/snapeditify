@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/pages/change_bg/widgets/remove_bg_image_result.dart';
-import 'package:snapeditify/providers/change_bg/change_bg_provider.dart';
+import 'package:snapeditify/pages/remove_bg/widgets/remove_bg_control.dart';
+import 'package:snapeditify/pages/remove_bg/widgets/remove_bg_preview.dart';
+import 'package:snapeditify/providers/remove_bg/remove_bg_provider.dart';
 import 'package:snapeditify/widgets/app_use/app_layout.dart';
 import 'package:snapeditify/widgets/app_use/save_button.dart';
 
@@ -12,7 +13,7 @@ class RemoveBGPage extends StatefulWidget {
   State<RemoveBGPage> createState() => _RemoveBGPageState();
 }
 
-class _RemoveBGPageState extends ProviderStateObserver<RemoveBGPage, IChangeBGProvider> {
+class _RemoveBGPageState extends ProviderStateObserver<RemoveBGPage, IRemoveBGProvider> {
   @override
   void onNextFrame(Duration timestamp) {
     provider.removeBG(context);
@@ -25,9 +26,10 @@ class _RemoveBGPageState extends ProviderStateObserver<RemoveBGPage, IChangeBGPr
       screen: "Remove Background",
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
-      action: const SaveButton<IChangeBGProvider>(),
+      action: const SaveButton<IRemoveBGProvider>(),
       children: const [
-        RemoveBGImageResult(),
+        RemoveBGPreview(),
+        RemoveBGControl(),
       ],
     );
   }

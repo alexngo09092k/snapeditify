@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/pages/change_sky/widgets/remove_sky_preview.dart';
 import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
-import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 
@@ -14,7 +13,7 @@ class SkyImage extends StatelessWidget {
     return BaseImageEditor(
       builder: (width, height) => Stack(
         children: [
-          /// PAINT
+          /// SKY
           Center(
             child: PropConsumer<IChangeSkyProvider, PainterController>(
               select: (p) => p.state.paint,
@@ -24,24 +23,9 @@ class SkyImage extends StatelessWidget {
               ),
             ),
           ),
-
-          /// COMPARE BUTTON
-          Positioned(
-            right: AppDimensions.instance.padding,
-            bottom: AppDimensions.instance.padding,
-            child: PropConsumer<IChangeSkyProvider, bool>(
-              select: (p) => p.canCompare,
-              builder: (_, __, p, canCompare) => GestureDetector(
-                onTapDown: (_) => p.compare(context),
-                onTapUp: (_) => p.compare(context),
-                child: CustomIcon.defaultStyle(
-                  context,
-                  icon: AppAssets.instance.icCompare,
-                  color: canCompare ? Theme.of(context).primaryColor : null,
-                ),
-              ),
-            ),
-          ),
+          
+          /// REMOVED SKY
+          const RemoveSkyPreview(),
         ],
       ),
     );

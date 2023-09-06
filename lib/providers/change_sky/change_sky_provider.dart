@@ -1,39 +1,41 @@
 // ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
-
 import 'dart:convert';
+import 'dart:io';
+import 'dart:ui' as ui;
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/change_sky/change_sky_state.dart';
 import 'package:snapeditify/providers/storage_provider.dart';
 import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IChangeSkyProvider extends EditImageProvider with StorageProvider {
   @override
   ChangeSkyState get state;
+
+  WidgetsToImageController get captureController;
   
-  List<Background> get styles;
+  List<Background> get effects;
 
   List<String> get categories;
 
   String? category;
 
-  bool get canRevert;
-  bool get canCompare;
+  Future<bool> removeSky(BuildContext context);
 
-  Future<bool> skyImage(BuildContext context, String styleId);
+  Future<bool> changeSky(BuildContext context, Background effect);
 
-  Future<bool> revert(BuildContext context);
-
-  Future<bool> compare(BuildContext context);
 }
 
 class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
@@ -42,15 +44,17 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
   static IChangeSkyProvider get instance => _instance;
 
   ChangeSkyProvider.internal() {
+    _captureController = WidgetsToImageController();
+
     _state = ChangeSkyState();
     _state.addListener(notifyListeners);
   }
 
-  final List<Background> _styles = [];
+  final List<Background> _effects = [];
   @override
-  List<Background> get styles {
-    if(_styles.isEmpty) syncFromServer(true);
-    return  _styles;
+  List<Background> get effects {
+    if(_effects.isEmpty) syncFromServer(true);
+    return  _effects;
   }
 
   final List<String> _categories = [];
@@ -80,50 +84,59 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
   EditedImageVM get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
 
   @override
-  bool get canSave => _state.styledImages.isNotEmpty;
+  bool get canSave => _state.sky != null;
+
+  late WidgetsToImageController _captureController;
+  @override
+  WidgetsToImageController get captureController => _captureController;
+
 
   @override
-  bool get canRevert => _state.styledImages.isNotEmpty;
-
-  @override
-  bool get canCompare => _state.styledImages.isNotEmpty;
-
-  bool _compared = false;
-  @override
-  Future<bool> compare(BuildContext context) async {
-    if (canCompare) {
-      Debug.log("===== COMPARE ====");
-      if (!_compared) {
-        Debug.log("===== COMPARE ORIGINAL BACKGROUND====");
-        _state.paint.background = originalImage.imageUI.backgroundDrawable;
-        _compared = true;
-      } else {
-        Debug.log("===== COMPARE CURRENT BACKGROUND====");
-        _state.paint.background = _state.image.imageUI.backgroundDrawable;
-        _compared = false;
-      }
-      return true;
-    }
-    return false;
-  }
-
-  @override
-  Future<bool> revert(BuildContext context) async {
-    Debug.log("===== REVERT ====");
-    return _state.setImage(originalImage.imageBytes, originalImage.imageBase64, styleId: null);
-  }
-
-  @override
-  Future<bool> skyImage(BuildContext context, String styleId) async {
+  Future<bool> removeSky(BuildContext context) async {
     /// CHECKING ENVIROMENT
-    final result = await checkEnviroment(context, retry: (_) => skyImage(context, styleId));
+    final result = await checkEnviroment(context, retry: (_) => removeSky(context));
     if (!result) return false;
 
     renewSavedFile();
 
-    if (_state.styledImages.containsKey(styleId)) {
-      _state.setImage(_state.styledImages[styleId]!, base64.encode(_state.styledImages[styleId]!), styleId: styleId);
-      notifyListeners();
+    /// SHOW LOADING POPUP
+    LoadingPopup.show();
+
+    /// SHOW ADS
+    adProvider.handleAd();
+
+    /// CALL API
+    SkyMaskBody body = SkyMaskBody(inputImage: originalImage.imageBytes);
+    SnapEditResponse<SkyMaskResponse?> res = await Services.instance.snapEdit.removeSky(body);
+
+    if (res.data != null) {
+      /// REMOVED SKY IMAGE
+      _state.mask = base64.decode(res.data!.mask);
+
+      /// HIDE LOADING POPUP
+      LoadingPopup.hide();
+      return true;
+    }
+
+    /// HIDE LOADING POPUP
+    LoadingPopup.hide();
+
+    if (!res.status) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).restyleImage, 
+        message: S.of(context).failedToChangeStylePleaseTryAgain, 
+        retry: (_) =>removeSky(context),
+      );
+      Debug.log('====== RESTYLE IMAGE ${res.message} ======');
+    }
+
+    return false;
+  }
+
+  @override
+  Future<bool> changeSky(BuildContext context, Background effect) async {
+    if (_state.styledImages.containsKey(effect.url)) {
+      _state.paint.background = _state.styledImages[effect.url]!.backgroundDrawable;
       return true;
     }
 
@@ -133,36 +146,32 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
     /// SHOW ADS
     adProvider.handleAd();
 
-    /// CALL API
-    SkyMaskBody body = SkyMaskBody(styleId: styleId, inputImage: originalImage.imageBytes);
-    SnapEditResponse<SkyMaskResponse?> res = await Services.instance.snapEdit.changeSky(body);
-
-    if (res.data != null) {
-      Uint8List imageBytes = base64.decode(res.data!.mask);
-      await _state.setImage(imageBytes, res.data!.mask, styleId: styleId);
-      _state.styledImages[styleId] = imageBytes;
-      notifyListeners();
-
-      /// HIDE LOADING POPUP
-      LoadingPopup.hide();
-      return true;
-    }
+    /// DOWNLOAD
+    final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
+    final Directory cacheDirectory = await getTemporaryDirectory();
+    final String savePath = "${cacheDirectory.path}/$name.jpg";
+    await Dio().downloadUri(
+      Uri.parse(effect.url),
+      savePath,
+      onReceiveProgress: (received, total) async {
+        if(received == total) {
+          _state.sky = effect;
+          Uint8List imageBytes = File(savePath).readAsBytesSync();
+          ui.Image image = await ImageUtils.instance.toImageUI(imageBytes);
+          _state.styledImages[effect.url] = image;
+          _state.paint.background = image.backgroundDrawable;
+          // late ImageDrawable newDrawable;
+          // newDrawable = ImageDrawable(position: Offset.zero, image: image);
+          // _state.paint.replaceDrawable(_state.paint.drawables[0], newDrawable);
+        }
+    });
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    LoadingPopup.hide();
 
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).restyleImage, 
-        message: S.of(context).failedToChangeStylePleaseTryAgain, 
-        retry: (_) => skyImage(context, styleId),
-      );
-      Debug.log('====== RESTYLE IMAGE ${res.message} ======');
-    }
-
-    return false;
+    return true;
   }
-
+  
   @override
   Future<bool> registered() {
     syncFromServer();
@@ -171,9 +180,8 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
 
   @override
   void clean([bool notify = false]) {
-    _styles.clear();
-    _state.styledImages.clear();
-    _state.setImage(originalImage.imageBytes, originalImage.imageBase64, styleId: null);
+    _effects.clear();
+    _state.setImage(originalImage.imageBytes, originalImage.imageBase64);
     if (notify) notifyListeners();
   }
 
@@ -209,9 +217,9 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
     if (styleStrings != null) {
       Debug.log("===== SYNC FROM STORAGE $styleStrings =====");
       BackgroundResponse data = BackgroundResponse.fromJson(styleStrings);
-      _styles.clear();
-      _styles.addAll(data.backgrounds);
-      for (var style in _styles) {
+      _effects.clear();
+      _effects.addAll(data.backgrounds);
+      for (var style in _effects) {
         if (!_categories.contains(style.category)) {
           _categories.add(style.category);
         }

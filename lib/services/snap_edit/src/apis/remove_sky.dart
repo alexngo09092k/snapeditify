@@ -17,10 +17,10 @@ extension ChangeSky on SnapEdit {
     }
   }
 
-  Future<SnapEditResponse<SkyMaskResponse?>> changeSky(SkyMaskBody body) async {
+  Future<SnapEditResponse<SkyMaskResponse?>> removeSky(SkyMaskBody body) async {
     try {
       final List<MultipartBody> parts = [];
-      final Map<String, dynamic> data = {'style_id': body.styleId};
+      final Map<String, dynamic> data = {};
 
       if (body.imageId == null && body.inputImage == null) {
         return SnapEditResponse<SkyMaskResponse?>(message: 'Input image and image id, the both are null.');

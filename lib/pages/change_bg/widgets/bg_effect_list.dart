@@ -7,27 +7,27 @@ import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
 
-class BGList extends StatelessWidget {
-  const BGList({super.key, required this.category, required this.onBG});
+class BGEffectList extends StatelessWidget {
+  const BGEffectList({super.key, required this.category, required this.onEffect});
   final String category;
-  final Function(Background) onBG;
+  final Function(Background) onEffect;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 100,
       child: PropConsumer<IChangeBGProvider, List<Background>>(
-        select: (_) => _.backgrounds.where((element) => element.category == category).toList(),
-        builder: (_, __, p, backgrounds) {
+        select: (_) => _.effects.where((element) => element.category == category).toList(),
+        builder: (_, __, p, effects) {
           return ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: backgrounds.length,
+            itemCount: effects.length,
             itemBuilder: (_, index) => Container(
               padding: EdgeInsets.only(left: AppDimensions.instance.padding),
-              child: BGItemItem(
+              child: BGEffectItemItem(
                 key: Key('$index'),
-                background: backgrounds[index],
-                onBG: onBG,
+                effect: effects[index],
+                onEffect: onEffect,
               ),
             ),
           );
@@ -37,15 +37,15 @@ class BGList extends StatelessWidget {
   }
 }
 
-class BGItemItem extends StatelessWidget {
-  const BGItemItem({super.key, required this.background, required this.onBG});
-  final Background background;
-  final Function(Background) onBG;
+class BGEffectItemItem extends StatelessWidget {
+  const BGEffectItemItem({super.key, required this.effect, required this.onEffect});
+  final Background effect;
+  final Function(Background) onEffect;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onBG(background),
+      onTap: () => onEffect(effect),
       child: AppCard(
         width: 100,
         margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.25), vertical: AppDimensions.instance.padding),
@@ -56,29 +56,11 @@ class BGItemItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                 child: CustomImage(
-                  image: background.thumbnailUrl,
+                  image: effect.thumbnailUrl,
                   placeholder: AppAssets.instance.animePlaceholder,
                   fit: BoxFit.fill,
                 ),
               ),
-              // Positioned(
-              //   right: 0,
-              //   child: PropConsumer<IChangeBGProvider, String?>(
-              //     select: (_) => _.state.bgImage,
-              //     builder: (_, __, ___, bgImage) => bgImage == background.thumbnailUrl
-              //         ? Padding(
-              //             padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.1)),
-              //             child: CustomIcon.defaultStyle(
-              //               context,
-              //               icon: CupertinoIcons.check_mark_circled_solid,
-              //               background: AppColors.instance.white,
-              //               spacing: AppDimensions.instance.paddingX(0.1),
-              //               color: Theme.of(context).colorScheme.primary,
-              //             ),
-              //           )
-              //         : const SizedBox(),
-              //   ),
-              // ),
             ],
           ),
         ),

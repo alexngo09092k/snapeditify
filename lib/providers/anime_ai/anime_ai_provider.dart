@@ -118,7 +118,6 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
         _state.styledImages[styleId]!.outputImages.first.image, 
         styleId: styleId,
       );
-      notifyListeners();
       return true;
     }
 
@@ -139,7 +138,6 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
         styleId: styleId,
       );
       _state.styledImages[styleId] = res.data!;
-      notifyListeners();
 
       /// HIDE LOADING POPUP
       WidgetUtils.instance.dimiss();

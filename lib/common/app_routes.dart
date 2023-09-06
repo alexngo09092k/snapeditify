@@ -10,6 +10,7 @@ import 'package:snapeditify/pages/make_id_passport/make_id_passport.dart';
 import 'package:snapeditify/pages/photos/photos.dart';
 import 'package:snapeditify/pages/premium/premium.dart';
 import 'package:snapeditify/pages/anime_ai/anime_ai.dart';
+import 'package:snapeditify/pages/remove_bg/remove_bg_page.dart';
 import 'package:snapeditify/pages/remove_object/remove_object.dart';
 import 'package:snapeditify/pages/restore/restore.dart';
 import 'package:snapeditify/pages/restyle/restyle.dart';
@@ -27,6 +28,7 @@ import 'package:snapeditify/providers/enhance/enhance_provider.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/providers/make_passport_id/make_passport_id_provider.dart';
+import 'package:snapeditify/providers/remove_bg/remove_bg_provider.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
@@ -60,6 +62,7 @@ class AppRoutes extends IAppRoutes {
   static const String enhanceImagePage = 'enahnce_page';
   static const String restorePage = 'restore_page';
   static const String makeIDPassport = 'make_id_passport';
+  static const String removeBG = 'remove_bg';
   static const String changeBG = 'change_bg';
   static const String skyPage = 'sky_page';
   static const String animeAIPage = 'anime_ai_page';
@@ -84,6 +87,7 @@ class AppRoutes extends IAppRoutes {
     skyPage: (_) => const ChangeSkyPage(),
     fastEditor: (_) => const FastEditor(),
     changeBG: (_) => const ChangeBGPage(),
+    removeBG: (_) => const RemoveBGPage(),
   };
 
   @override
@@ -119,6 +123,8 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const RestorePage(), settings);
       case makeIDPassport:
         return buildRoute(const MakeIDPassportPage(), settings);
+      case removeBG:
+        return buildRoute(const RemoveBGPage(), settings);
       case changeBG:
         return buildRoute(const ChangeBGPage(), settings);
       case animeAIPage:
@@ -171,7 +177,7 @@ extension AppRoutesUtils on IAppRoutes {
   }
 
   void goEditImagePage(BuildContext context, {required Uint8List bytes, ImageTool? imageTool}) {
-    final gProvider = ManagerProvider.of<GalleryProvider>();
+    final gProvider = ManagerProvider.of<IGalleryProvider>();
     if (imageTool != null) gProvider.imageTool = imageTool;
     UserPermission.instance.requestStoragePermission(
       context,
@@ -187,41 +193,41 @@ extension AppRoutesUtils on IAppRoutes {
         switch (current) {
           case ImageTool.removeObject:
           case ImageTool.oneTouchRemoveAll:
-            provider = ManagerProvider.of<RemoveObjectProvider>();
+            provider = ManagerProvider.of<IRemoveObjectProvider>();
             target = AppRoutes.removeObjectPage;
             break;
           case ImageTool.applyArtEffect:
-            provider = ManagerProvider.of<RestyleProvider>();
+            provider = ManagerProvider.of<IRestyleProvider>();
             target = AppRoutes.applyArtEffectPage;
             break;
           case ImageTool.upscaleImage:
           case ImageTool.enhanceImage:
-            provider = ManagerProvider.of<EnhanceProvider>();
+            provider = ManagerProvider.of<IEnhanceProvider>();
             target = AppRoutes.enhanceImagePage;
             break;
           case ImageTool.restoreOldPhoto:
-            provider = ManagerProvider.of<RestoreProvider>();
+            provider = ManagerProvider.of<IRestoreProvider>();
             target = AppRoutes.restorePage;
             break;
           case ImageTool.generateAnimeAI:
-            provider = ManagerProvider.of<AnimeAIProvider>();
+            provider = ManagerProvider.of<IAnimeAIProvider>();
             target = AppRoutes.animeAIPage;
             break;
           case ImageTool.changeYourSky:
-            provider = ManagerProvider.of<ChangeSkyProvider>();
+            provider = ManagerProvider.of<IChangeSkyProvider>();
             target = AppRoutes.skyPage;
             break;
           case ImageTool.makeIDPassportPhoto:
-            provider = ManagerProvider.of<MakeIDPassportProvider>();
+            provider = ManagerProvider.of<IMakeIDPassportProvider>();
             target = AppRoutes.makeIDPassport;
             break;
           case ImageTool.productPhoto:
-          case ImageTool.changeBackground:
-            provider = ManagerProvider.of<ChangeBGProvider>();
-            target = AppRoutes.changeBG;
+          case ImageTool.changeBG:
+            provider = ManagerProvider.of<IRemoveBGProvider>();
+            target = AppRoutes.removeBG;
             break;
           case ImageTool.fastEditor:
-            provider = ManagerProvider.of<FastEditorProvider>();
+            provider = ManagerProvider.of<IFastEditorProvider>();
             target = AppRoutes.fastEditor;
             break;
         }

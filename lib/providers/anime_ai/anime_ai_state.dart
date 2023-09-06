@@ -26,14 +26,6 @@ class AnimeAIState extends EditImageState {
     notifyState();
   }
 
-  final Map<String, String> _videoEffects = {};
-  Map<String, String> get videoEffects => _videoEffects;
-  set videoEffects(Map<String, String> videoEffects) {
-    _videoEffects.clear();
-    _videoEffects.addAll(videoEffects);
-    notifyState();
-  }
-
   @override
   Future<bool> setImage(Uint8List imageBytes, String imageBase64, {EditImageProvider? provider, String? styleId}) async {
     await super.setImage(imageBytes, imageBase64);

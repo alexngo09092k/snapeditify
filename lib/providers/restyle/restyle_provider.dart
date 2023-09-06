@@ -19,7 +19,7 @@ abstract class IRestyleProvider extends EditImageProvider with StorageProvider {
   @override
   RestyleState get state;
   
-  List<Effect> get styles;
+  List<Effect> get effects;
 
   bool get canRevert;
   bool get canCompare;
@@ -41,11 +41,11 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     _state.addListener(notifyListeners);
   }
 
-  final List<Effect> _styles = [];
+  final List<Effect> _effects = [];
   @override
-  List<Effect> get styles {
-    if(_styles.isEmpty) syncFromServer(true);
-    return  _styles;
+  List<Effect> get effects {
+    if(_effects.isEmpty) syncFromServer(true);
+    return  _effects;
   }
 
   late RestyleState _state;
@@ -147,7 +147,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
 
   @override
   void clean([bool notify = false]) {
-    _styles.clear();
+    _effects.clear();
     _state.styledImages.clear();
     _state.setImage(originalImage.imageBytes, originalImage.imageBase64, styleId: null);
     if (notify) notifyListeners();
@@ -185,8 +185,8 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     if (styleStrings != null) {
       Debug.log("===== SYNC FROM STORAGE $styleStrings =====");
       RestyleEffectsResponse data = RestyleEffectsResponse.fromJson(styleStrings);
-      _styles.clear();
-      _styles.addAll(data.styles);
+      _effects.clear();
+      _effects.addAll(data.styles);
     }
     if (notify) notifyListeners();
   }

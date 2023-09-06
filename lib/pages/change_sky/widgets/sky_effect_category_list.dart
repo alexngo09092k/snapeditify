@@ -1,22 +1,17 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:snapeditify/common/configuration.dart';
-import 'package:snapeditify/pages/change_bg/widgets/bg_list.dart';
-import 'package:snapeditify/providers/change_bg/change_bg_provider.dart';
+import 'package:snapeditify/pages/change_sky/widgets/sky_effect_list.dart';
+import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
 import 'package:snapeditify/services/services.dart';
 
-class ChangeBGControl extends StatefulWidget {
-  const ChangeBGControl({super.key});
+class SkyEffectCategoryList extends StatefulWidget {
+  const SkyEffectCategoryList({super.key});
 
   @override
-  State<ChangeBGControl> createState() => _ChangeBGControlState();
+  State<SkyEffectCategoryList> createState() => _SkyEffectCategoryListState();
 }
 
-class _ChangeBGControlState extends ProviderStateObserver<ChangeBGControl, IChangeBGProvider> with SingleTickerProviderStateMixin {
+class _SkyEffectCategoryListState extends ProviderStateObserver<SkyEffectCategoryList, IChangeSkyProvider> with SingleTickerProviderStateMixin {
   late TabController _controller;
   @override
   void initState() {
@@ -24,21 +19,17 @@ class _ChangeBGControlState extends ProviderStateObserver<ChangeBGControl, IChan
     _controller = TabController(length: provider.categories.length, vsync: this);
   }
 
-  void onBG(Background background) async {
-      final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
-      final Directory cacheDirectory = await getTemporaryDirectory();
-      String savePath = "${cacheDirectory.path}/$name.jpg";
-      await Dio().downloadUri(Uri.parse(background.url), savePath);
-      provider.changeBGImage(context, File(savePath).readAsBytesSync());
+  void onEffect(Background effect) async {
+    provider.changeSky(context, effect);
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130,
+      height: AwesomeAppState.screen.height * 0.25,
       child: Column(
         children: [
-          PropConsumer<IChangeBGProvider, List<String>>(
+          PropConsumer<IChangeSkyProvider, List<String>>(
             select: (_) => _.categories,
             builder: (_, __, p, categories) {
               if(categories.isEmpty) return const SizedBox();
@@ -56,14 +47,14 @@ class _ChangeBGControlState extends ProviderStateObserver<ChangeBGControl, IChan
             },
           ),
           Expanded(
-            child: PropConsumer<IChangeBGProvider, List<String>>(
+            child: PropConsumer<IChangeSkyProvider, List<String>>(
               select: (_) => _.categories,
               builder: (_, __, p, categories) {
                 if(categories.isEmpty) return const SizedBox();
                 return TabBarView(
                     controller: _controller,
                     children: categories
-                        .map((e) => BGList(category: e, onBG: onBG))
+                        .map((e) => SkyEffectList(category: e, onEffect: onEffect))
                         .toList());
               },
             ),
