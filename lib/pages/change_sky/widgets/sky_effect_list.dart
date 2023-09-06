@@ -68,28 +68,29 @@ class SkyEffectItemItem extends StatelessWidget {
             ),
             child: PropConsumer<IChangeSkyProvider,Background?>(
               select: (_) => _.state.sky,
-              builder: (_, __, ___, sky) {
+              child:ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+                child: CustomImage(
+                  image: effect.thumbnailUrl,
+                  placeholder: AppAssets.instance.animePlaceholder,
+                  width: width, 
+                  height: height,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              builder: (_, child, ___, sky) {
                 return Container(
                   decoration: BoxDecoration(
-                    border:Border.fromBorderSide(
+                    border:sky?.url == effect.url? Border.fromBorderSide(
                       BorderSide(
                         color: Theme.of(context).colorScheme.primary,
-                        width: sky?.url == effect.url ? 2: 0,
+                        width: 2,
                       )
-                    ),
+                    ): null,
                     borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                   ),
                   padding: EdgeInsets.all(sky?.url == effect.url ? 2: 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                    child: CustomImage(
-                      image: effect.thumbnailUrl,
-                      placeholder: AppAssets.instance.animePlaceholder,
-                      width: width, 
-                      height: height,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
+                  child: child,
                 );
               }
             ),

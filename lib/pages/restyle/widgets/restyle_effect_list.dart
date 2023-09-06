@@ -64,29 +64,29 @@ class StyleItem extends StatelessWidget {
             height: height,
             child: PropConsumer<IRestyleProvider, String?>(
               select: (_) => _.state.styleId,
-              builder: (_, __, ___, styleId) {
-                if(styleId != effect.styleId) return const SizedBox();
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+                child: CustomImage(
+                  image: effect.thumbnailUrl, 
+                  width: width, 
+                  height: height,
+                  fit: BoxFit.fill,
+                  placeholder: AppAssets.instance.animePlaceholder,
+                ),
+              ),
+              builder: (_, child, ___, styleId) {
                 return Container(
                   decoration: BoxDecoration(
-                    border:Border.fromBorderSide(
+                    border: styleId == effect.styleId ? Border.fromBorderSide(
                       BorderSide(
                         color: Theme.of(context).colorScheme.primary,
-                        width: styleId == effect.styleId ? 2: 0,
+                        width: 2,
                       )
-                    ),
+                    ): null,
                     borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                   ),
                   padding: EdgeInsets.all(styleId == effect.styleId ? 2: 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                    child: CustomImage(
-                      image: effect.thumbnailUrl, 
-                      width: width, 
-                      height: height,
-                      fit: BoxFit.fill,
-                      placeholder: AppAssets.instance.animePlaceholder,
-                    ),
-                  ),
+                  child: child,
                 );
               }
             ),

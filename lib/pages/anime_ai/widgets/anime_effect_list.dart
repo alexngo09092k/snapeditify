@@ -68,28 +68,29 @@ class BGEffectItemItem extends StatelessWidget {
             ),
             child: PropConsumer<IAnimeAIProvider, String?>(
               select: (_) => _.state.styleId,
-              builder: (_, __, ___, styleId) {
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+                child: CustomImage(
+                  image: effect.thumbnailUrl,
+                  placeholder: AppAssets.instance.animePlaceholder,
+                  width: width, 
+                  height: height,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              builder: (_, child, ___, styleId) {
                 return Container(
                   decoration: BoxDecoration(
-                    border:Border.fromBorderSide(
+                    border:styleId == effect.styleId? Border.fromBorderSide(
                       BorderSide(
                         color: Theme.of(context).colorScheme.primary,
-                        width: styleId == effect.styleId ? 2: 0,
+                        width: 2,
                       )
-                    ),
+                    ): null,
                     borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                   ),
-                  padding: EdgeInsets.all( styleId == effect.styleId ? 2: 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                    child: CustomImage(
-                      image: effect.thumbnailUrl,
-                      placeholder: AppAssets.instance.animePlaceholder,
-                      width: width, 
-                      height: height,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
+                  padding: EdgeInsets.all(styleId == effect.styleId ? 2: 0),
+                  child: child,
                 );
               }
             ),
