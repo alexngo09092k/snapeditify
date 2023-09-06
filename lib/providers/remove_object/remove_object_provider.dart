@@ -211,7 +211,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     LoadingPopup.show();
 
     /// CALL API
-    OneTouchSuggestionBody body = OneTouchSuggestionBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
+    OneTouchSuggestionBody body = OneTouchSuggestionBody(originalPreviewImage: _state.image.imageBytes);
     SnapEditResponse<OneTouchSuggestionResponse?> res = await Services.instance.snapEdit.removeOneTouch(body);
 
     if (res.data != null) {
@@ -270,7 +270,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     LoadingPopup.show();
 
     /// CALL API
-    ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes, sessionId: _state.sessionId);
+    ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes);
     SnapEditResponse<ScanObjectResponse?> res = await Services.instance.snapEdit.scanObject(body);
 
     if (res.data != null) {
@@ -367,7 +367,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       return false;
     }
 
-    RemoveObjectBody body = RemoveObjectBody(originalPreviewImage: _state.image.imageBytes, maskBrush: maskBytes, sessionId: _state.sessionId);
+    RemoveObjectBody body = RemoveObjectBody(originalPreviewImage: _state.image.imageBytes, maskBrush: maskBytes);
     SnapEditResponse<RemoveObjectResponse?> res = await Services.instance.snapEdit.removeObject(body);
 
     if (res.data != null) {

@@ -79,7 +79,7 @@ class SavedImagePreview extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppDimensions.instance.padding),
-              ImageToolList(onTool: onNewEditImage),
+              ImageToolList( currentTool: imageTool, onTool: onNewEditImage),
               SizedBox(height: AppDimensions.instance.padding),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),

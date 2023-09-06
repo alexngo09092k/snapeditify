@@ -131,7 +131,7 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     AnimeBody body = AnimeBody(style: styleId, inputImage: originalImage.imageBytes);
     SnapEditResponse<AnimeResponse?> res = await Services.instance.snapEdit.animeImage(body);
 
-    if (res.data != null) {
+    if (res.data != null && res.data!.outputImages.isNotEmpty) {
       await _state.setImage(
         base64.decode(res.data!.outputImages.first.image),
         res.data!.outputImages.first.image, 
