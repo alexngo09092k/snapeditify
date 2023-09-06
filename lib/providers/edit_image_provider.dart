@@ -21,7 +21,7 @@ import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/view_models/editing_image_vm.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
-import 'package:snapeditify/widgets/app_use/saved_mage_preview.dart';
+import 'package:snapeditify/widgets/app_use/saved_image_preview.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class EditImageProvider extends Provider {

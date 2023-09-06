@@ -80,8 +80,9 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
   @override
   ChangeSkyState get state => _state;
 
+  EditedImageVM? _editedImage;
   @override
-  EditedImageVM get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
+  EditedImageVM? get editedImage => _editedImage;
 
   @override
   bool get canSave => _state.sky != null;
@@ -170,6 +171,17 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
     LoadingPopup.hide();
 
     return true;
+  }
+
+  @override
+  Future<bool> save(BuildContext context) async {
+    Uint8List? imageBytes = await _captureController.capture();
+    if(imageBytes != null) {
+      ui.Image imageUI = await ImageUtils.instance.toImageUI(imageBytes);
+      _editedImage = EditedImageVM(imageBytes, imageUI);
+      return super.save(context);
+    }
+    return false;
   }
   
   @override

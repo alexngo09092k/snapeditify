@@ -14,7 +14,7 @@ class WidgetsToImageController {
           ?.findRenderObject() as RenderRepaintBoundary?;
 
       /// convert boundary to image
-      final image = await boundary!.toImage(pixelRatio: 6);
+      final image = await boundary!.toImage(pixelRatio: 10);
 
       /// set ImageByteFormat
       final byteData = await image.toByteData(format: ui.ImageByteFormat.png);

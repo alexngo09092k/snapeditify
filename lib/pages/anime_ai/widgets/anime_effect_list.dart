@@ -53,36 +53,32 @@ class BGEffectItemItem extends StatelessWidget {
               horizontal: AppDimensions.instance.paddingX(0.25), 
               vertical: AppDimensions.instance.padding,
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-              child: Stack(
-                children: [
-                  CustomImage(
-                    image: effect.thumbnailUrl,
-                    placeholder: AppAssets.instance.animePlaceholder,
-                    width: width, 
-                    height: height,
-                    fit: BoxFit.fill,
+            child: PropConsumer<IAnimeAIProvider, String?>(
+              select: (_) => _.state.styleId,
+              builder: (_, __, ___, styleId) {
+                return Container(
+                  decoration: BoxDecoration(
+                    border:Border.fromBorderSide(
+                      BorderSide(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: styleId == effect.styleId ? 2: 0,
+                      )
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                   ),
-                  PropConsumer<IAnimeAIProvider, String?>(
-                    select: (_) => _.state.styleId,
-                    builder: (_, __, ___, styleId) {
-                      if(styleId != effect.styleId) return const SizedBox();
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.4), 
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.tune_outlined, 
-                            color: AppColors.instance.white,
-                          ),
-                        ),
-                      );
-                    }
-                  )
-                ],
-              ),
+                  padding: EdgeInsets.all( styleId == effect.styleId ? 2: 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+                    child: CustomImage(
+                      image: effect.thumbnailUrl,
+                      placeholder: AppAssets.instance.animePlaceholder,
+                      width: width, 
+                      height: height,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                );
+              }
             ),
           ),
         );

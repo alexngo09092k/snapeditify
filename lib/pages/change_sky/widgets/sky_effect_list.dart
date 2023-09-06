@@ -50,36 +50,32 @@ class SkyEffectItemItem extends StatelessWidget {
             width: width,
             height: height,
             margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.25), vertical: AppDimensions.instance.padding),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-              child: Stack(
-                children: [
-                  CustomImage(
-                    image: effect.thumbnailUrl,
-                    placeholder: AppAssets.instance.animePlaceholder,
-                    width: width, 
-                    height: height,
-                    fit: BoxFit.fill,
+            child: PropConsumer<IChangeSkyProvider,Background?>(
+              select: (_) => _.state.sky,
+              builder: (_, __, ___, sky) {
+                return Container(
+                  decoration: BoxDecoration(
+                    border:Border.fromBorderSide(
+                      BorderSide(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: sky?.url == effect.url ? 2: 0,
+                      )
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                   ),
-                  PropConsumer<IChangeSkyProvider,Background?>(
-                    select: (_) => _.state.sky,
-                    builder: (_, __, ___, sky) {
-                      if(sky?.url != effect.url) return const SizedBox();
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.4), 
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.tune_outlined, 
-                            color: AppColors.instance.white,
-                          ),
-                        ),
-                      );
-                    }
-                  )
-                ],
-              ),
+                  padding: EdgeInsets.all(sky?.url == effect.url ? 2: 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
+                    child: CustomImage(
+                      image: effect.thumbnailUrl,
+                      placeholder: AppAssets.instance.animePlaceholder,
+                      width: width, 
+                      height: height,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                );
+              }
             ),
           ),
         );

@@ -4,7 +4,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/enhance/widgets/enhance_guide.dart';
@@ -15,6 +18,7 @@ import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
+import 'package:snapeditify/widgets/app_use/saved_video_preview.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 import 'package:snapeditify/common/configuration.dart';
 
@@ -188,7 +192,7 @@ class RestoreProvider extends IRestoreProvider {
     return checkoutSaveImage(context, () async {
 
       final provider = ManagerProvider.of<GalleryProvider>();
-      File? savedFile;
+      File? savedVideoFile;
 
       if (_state.videoURL != null) {
         /// SHOW LOADING
@@ -198,25 +202,36 @@ class RestoreProvider extends IRestoreProvider {
         adProvider.handleAd();
 
         /// SAVE VIDEO
-        savedFile = await provider.saveVideo(_state.videoURL!);
+        savedVideoFile = await provider.saveVideo(_state.videoURL!);
 
         /// HIDE LOADING
         LoadingPopup.hide();
       }
 
-      if (savedFile != null) {
-        /// SHOW SAVED IMAGE
-        // await showDialog<bool>(
-        //   context: context,
-        //   builder: (_) => ,
-        // );
+      if (savedVideoFile != null) {
+        /// SHOW SAVED VIDEO
+        await showDialog<bool>(
+          context: context,
+          builder: (_) => SavedVideoPreview(
+            editedImage: editedImage,
+            videoURL: _state.videoURL!,
+            savedFile: savedVideoFile!,
+            onShare: () => Share.shareXFiles(
+              [XFile(savedVideoFile!.path)],
+              subject: Configuration.instance.business.shareApp.message,
+            ),
+            onNewImage: () {
+              Navigator.of(context).popUntil((_) => _.settings.name == AppRoutes.albumsPage);
+            },
+          ),
+        );
         return true;
       }
 
       /// SHOW ALERT
       WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).saveImage, 
-        message: S.of(context).failedToSaveImagePleaseTryAgain, 
+        title: "Save Video", 
+        message: "", 
         retry: save,
       );
       return false;
