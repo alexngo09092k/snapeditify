@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/data/editor_feature.dart';
@@ -8,15 +7,14 @@ import 'utils.dart';
 class ImageEditor extends StatelessWidget {
   final Uint8List? image;
 
-  final Directory? savePath;
   final int maxLength;
   final List<EditorFeature> features;
   final List<AspectRatioOption> cropAvailableRatios;
+  final Function(Uint8List?)? onSave;
 
   const ImageEditor({
     super.key,
     this.image,
-    this.savePath,
     this.maxLength = 99,
     Color? appBar,
     this.features = EditorFeature.values,
@@ -28,6 +26,7 @@ class ImageEditor extends StatelessWidget {
       AspectRatioOption(title: '7:5', ratio: 7 / 5),
       AspectRatioOption(title: '16:9', ratio: 16 / 9),
     ],
+    this.onSave,
   });
 
   @override
@@ -38,9 +37,9 @@ class ImageEditor extends StatelessWidget {
 
     return SingleImageEditor(
       image: image,
-      savePath: savePath,
       features: features,
       cropAvailableRatios: cropAvailableRatios,
+      onSave: onSave,
     );
   }
 }

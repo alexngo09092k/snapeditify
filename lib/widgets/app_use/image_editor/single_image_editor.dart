@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,15 +26,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:screenshot/screenshot.dart';
 
 class SingleImageEditor extends StatefulWidget {
-  final Directory? savePath;
   final dynamic image;
   final List? imageList;
   final List<EditorFeature> features;
   final List<AspectRatioOption> cropAvailableRatios;
+  final Function(Uint8List?)? onSave;
 
   const SingleImageEditor({
     super.key,
-    this.savePath,
     this.image,
     this.imageList,
     this.features = EditorFeature.values,
@@ -47,6 +45,7 @@ class SingleImageEditor extends StatefulWidget {
       AspectRatioOption(title: '7:5', ratio: 7 / 5),
       AspectRatioOption(title: '16:9', ratio: 16 / 9),
     ],
+    this.onSave,
   });
 
   @override
@@ -124,10 +123,9 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
     resetTransformation();
     setState(() {});
 
-    var binaryIntList =
-        await screenshotController.capture(pixelRatio: pixelRatio);
+    Uint8List? binaryIntList = await screenshotController.capture(pixelRatio: pixelRatio);
 
-    if (mounted) Navigator.pop(context, binaryIntList);
+    if(widget.onSave != null) widget.onSave!(binaryIntList);
   }
 
   final picker = ImagePicker();
