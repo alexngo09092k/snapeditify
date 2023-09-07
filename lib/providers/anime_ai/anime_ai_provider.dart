@@ -78,13 +78,13 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
   EditedImageVM get editedImage => EditedImageVM(_state.image.imageBytes, _state.image.imageUI);
 
   @override
-  bool get canSave => _state.styledImages.isNotEmpty;
+  bool get canSave => _state.image.imageBase64 != originalImage.imageBase64;
 
   @override
-  bool get canRevert => _state.styledImages.isNotEmpty;
+  bool get canRevert => _state.image.imageBase64 != originalImage.imageBase64;
 
   @override
-  bool get canCompare => _state.styledImages.isNotEmpty;
+  bool get canCompare => _state.image.imageBase64 != originalImage.imageBase64;
 
   bool _compared = false;
   @override
