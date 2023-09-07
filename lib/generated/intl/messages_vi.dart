@@ -43,7 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "before": MessageLookupByLibrary.simpleMessage("Trước"),
         "brush": MessageLookupByLibrary.simpleMessage("Vẽ"),
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
-        "chinese": MessageLookupByLibrary.simpleMessage("Tiếng Trung Quốc"),
+        "chinese": MessageLookupByLibrary.simpleMessage("Trung Quốc"),
         "createIdPhoto":
             MessageLookupByLibrary.simpleMessage("Create ID Photo"),
         "createNanimeAvatar":

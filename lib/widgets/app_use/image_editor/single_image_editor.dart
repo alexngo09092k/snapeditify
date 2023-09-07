@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/data/editor_feature.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/image_color_filter.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_cropper.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_drawing.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
@@ -24,7 +25,6 @@ import 'modules/text.dart';
 import 'utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:screenshot/screenshot.dart';
-import 'modules/colors_picker.dart';
 
 class SingleImageEditor extends StatefulWidget {
   final Directory? savePath;
@@ -83,12 +83,14 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
     if (ImageEditorStorage.instance.layers.isEmpty) return;
 
     if (ImageEditorStorage.instance.removedLayers.isNotEmpty) {
-      ImageEditorStorage.instance.layers.add(ImageEditorStorage.instance.removedLayers.removeLast());
+      ImageEditorStorage.instance.layers
+          .add(ImageEditorStorage.instance.removedLayers.removeLast());
       setState(() {});
       return;
     }
 
-    ImageEditorStorage.instance.undoLayers.add(ImageEditorStorage.instance.layers.removeLast());
+    ImageEditorStorage.instance.undoLayers
+        .add(ImageEditorStorage.instance.layers.removeLast());
 
     setState(() {});
   }
@@ -96,7 +98,8 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
   void redo() {
     if (ImageEditorStorage.instance.undoLayers.isEmpty) return;
 
-    ImageEditorStorage.instance.layers.add(ImageEditorStorage.instance.undoLayers.removeLast());
+    ImageEditorStorage.instance.layers
+        .add(ImageEditorStorage.instance.undoLayers.removeLast());
 
     setState(() {});
   }
@@ -121,7 +124,8 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
     resetTransformation();
     setState(() {});
 
-    var binaryIntList = await screenshotController.capture(pixelRatio: pixelRatio);
+    var binaryIntList =
+        await screenshotController.capture(pixelRatio: pixelRatio);
 
     if (mounted) Navigator.pop(context, binaryIntList);
   }
@@ -133,7 +137,8 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
 
     ImageEditorStorage.instance.layers.clear();
 
-    ImageEditorStorage.instance.layers.add(BackgroundLayerData(file: currentImage));
+    ImageEditorStorage.instance.layers
+        .add(BackgroundLayerData(file: currentImage));
 
     setState(() {});
   }
@@ -157,10 +162,16 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
 
   /// obtain image Uint8List by merging layers
   Future<Uint8List?> getMergedImage() async {
-    if (ImageEditorStorage.instance.layers.length == 1 && ImageEditorStorage.instance.layers.first is BackgroundLayerData) {
-      return (ImageEditorStorage.instance.layers.first as BackgroundLayerData).file.image;
-    } else if (ImageEditorStorage.instance.layers.length == 1 && ImageEditorStorage.instance.layers.first is ImageLayerData) {
-      return (ImageEditorStorage.instance.layers.first as ImageLayerData).image.image;
+    if (ImageEditorStorage.instance.layers.length == 1 &&
+        ImageEditorStorage.instance.layers.first is BackgroundLayerData) {
+      return (ImageEditorStorage.instance.layers.first as BackgroundLayerData)
+          .file
+          .image;
+    } else if (ImageEditorStorage.instance.layers.length == 1 &&
+        ImageEditorStorage.instance.layers.first is ImageLayerData) {
+      return (ImageEditorStorage.instance.layers.first as ImageLayerData)
+          .image
+          .image;
     }
 
     return screenshotController.capture(pixelRatio: pixelRatio);
@@ -190,7 +201,8 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
   Future<void> brush() async {
     var drawing = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ImageEditorDrawing(image: currentImage)),
+      MaterialPageRoute(
+          builder: (context) => ImageEditorDrawing(image: currentImage)),
     );
 
     if (drawing != null) {
@@ -251,7 +263,10 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
   }
 
   Future<void> blur() async {
-    var blurLayer = BackgroundBlurLayerData(
+    List<BackgroundBlurLayerData> oldlist = ImageEditorStorage.instance.layers.whereType<BackgroundBlurLayerData>().toList();
+    BackgroundBlurLayerData blurLayer = oldlist.isNotEmpty ? 
+    oldlist.last
+    : BackgroundBlurLayerData(
       color: Colors.transparent,
       radius: 0.0,
       opacity: 0.0,
@@ -259,7 +274,16 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
 
     ImageEditorStorage.instance.undoLayers.clear();
     ImageEditorStorage.instance.removedLayers.clear();
-    ImageEditorStorage.instance.layers.add(blurLayer);
+    if(oldlist.isNotEmpty) {
+      ImageEditorStorage.instance.layers = ImageEditorStorage.instance.layers.map((e) {
+        if(e is BackgroundBlurLayerData) {
+          return blurLayer;
+        }
+        return e;
+      }).toList();
+    }else {
+      ImageEditorStorage.instance.layers.add(blurLayer);
+    }
     setState(() {});
 
     showModalBottomSheet(
@@ -271,138 +295,28 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
       ),
       context: context,
       builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setS) {
-            return SingleChildScrollView(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.black87,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      topLeft: Radius.circular(10)),
-                ),
-                padding: const EdgeInsets.all(20),
-                height: 400,
-                child: Column(
-                  children: [
-                    Center(
-                        child: Text(
-                      'Slider Filter Color'.toUpperCase(),
-                      style: const TextStyle(color: Colors.white),
-                    )),
-                    const Divider(),
-                    const SizedBox(height: 20.0),
-                    Text(
-                      'Slider Color',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(children: [
-                      Expanded(
-                        child: BarColorPicker(
-                          width: 300,
-                          thumbColor: Colors.white,
-                          cornerRadius: 10,
-                          pickMode: PickMode.color,
-                          colorListener: (int value) {
-                            setS(() {
-                              setState(() {
-                                blurLayer.color = Color(value);
-                              });
-                            });
-                          },
-                        ),
-                      ),
-                      TextButton(
-                        child: Text(
-                          'Reset',
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            setS(() {
-                              blurLayer.color = Colors.transparent;
-                            });
-                          });
-                        },
-                      )
-                    ]),
-                    const SizedBox(height: 5.0),
-                    Text(
-                      'Blur Radius',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Row(children: [
-                      Expanded(
-                        child: Slider(
-                          activeColor: Colors.white,
-                          inactiveColor: Colors.grey,
-                          value: blurLayer.radius,
-                          min: 0.0,
-                          max: 10.0,
-                          onChanged: (v) {
-                            setS(() {
-                              setState(() {
-                                blurLayer.radius = v;
-                              });
-                            });
-                          },
-                        ),
-                      ),
-                      TextButton(
-                        child: Text(
-                          'Reset',
-                        ),
-                        onPressed: () {
-                          setS(() {
-                            setState(() {
-                              blurLayer.color = Colors.white;
-                            });
-                          });
-                        },
-                      )
-                    ]),
-                    const SizedBox(height: 5.0),
-                    Text(
-                      'Color Opacity',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Row(children: [
-                      Expanded(
-                        child: Slider(
-                          activeColor: Colors.white,
-                          inactiveColor: Colors.grey,
-                          value: blurLayer.opacity,
-                          min: 0.00,
-                          max: 1.0,
-                          onChanged: (v) {
-                            setS(() {
-                              setState(() {
-                                blurLayer.opacity = v;
-                              });
-                            });
-                          },
-                        ),
-                      ),
-                      TextButton(
-                        child: Text(
-                          'Reset',
-                        ),
-                        onPressed: () {
-                          setS(() {
-                            setState(() {
-                              blurLayer.opacity = 0.0;
-                            });
-                          });
-                        },
-                      )
-                    ]),
-                  ],
-                ),
-              ),
-            );
-          },
+        return ImageColorFilter(
+          radius: blurLayer.radius,
+          opacity: blurLayer.opacity,
+          color: blurLayer.color,
+          onChangeColor: (_) => setState(() {
+            blurLayer.color = _;
+          }),
+          onChangeRadius: (_) => setState(() {
+            blurLayer.radius = _;
+          }),
+          onChangeOpacity: (_) => setState(() {
+            blurLayer.opacity = _;
+          }),
+          onResetColor: () => setState(() {
+            blurLayer.color = Colors.transparent;
+          }),
+          onResetOpacity: () => setState(() {
+            blurLayer.opacity = 0;
+          }),
+          onResetRadius: () => setState(() {
+            blurLayer.radius = 0;
+          }),
         );
       },
     );
@@ -417,7 +331,8 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
 
     Uint8List? filterAppliedImage = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ImageFilters(image: mergedImage!)),
+      MaterialPageRoute(
+          builder: (context) => ImageFilters(image: mergedImage!)),
     );
 
     if (filterAppliedImage == null) return;
@@ -520,8 +435,10 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
       }).toList(),
     );
 
-    widthRatio = currentImage.width / ImageEditorStorage.instance.viewportSize.width;
-    heightRatio = currentImage.height / ImageEditorStorage.instance.viewportSize.height;
+    widthRatio =
+        currentImage.width / ImageEditorStorage.instance.viewportSize.width;
+    heightRatio =
+        currentImage.height / ImageEditorStorage.instance.viewportSize.height;
     pixelRatio = math.max(heightRatio, widthRatio);
 
     return Scaffold(
@@ -546,7 +463,8 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
               child: Row(children: [
                 FeatureButton(
                   icon: Icons.undo,
-                  color: ImageEditorStorage.instance.layers.length > 1 || ImageEditorStorage.instance.removedLayers.isNotEmpty
+                  color: ImageEditorStorage.instance.layers.length > 1 ||
+                          ImageEditorStorage.instance.removedLayers.isNotEmpty
                       ? Colors.white
                       : Colors.grey,
                   onTap: undo,
@@ -596,7 +514,9 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                       // scale
                       if (details.pointerCount == 2) {
                         if (details.horizontalScale != 1) {
-                          scaleFactor = lastScaleFactor * math.min(details.horizontalScale, details.verticalScale);
+                          scaleFactor = lastScaleFactor *
+                              math.min(details.horizontalScale,
+                                  details.verticalScale);
                           setState(() {});
                         }
                       }
@@ -709,11 +629,13 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
         scrollDirection: Axis.horizontal,
         itemCount: widgets.length,
         itemBuilder: (_, index) {
-          if(index == 0 || index + 1 == widgets.length) {
+          if (index == 0 || index + 1 == widgets.length) {
             return Padding(
               padding: EdgeInsets.only(
-                left: index == 0 ? AppDimensions.instance.paddingX(0.5): 0,
-                right: index + 1 == widgets.length? AppDimensions.instance.paddingX(0.5): 0,
+                left: index == 0 ? AppDimensions.instance.paddingX(0.5) : 0,
+                right: index + 1 == widgets.length
+                    ? AppDimensions.instance.paddingX(0.5)
+                    : 0,
               ),
               child: widgets[index],
             );
