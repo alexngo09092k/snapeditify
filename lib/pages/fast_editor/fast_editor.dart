@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/pages/fast_editor/image_editor.dart';
+import 'package:snapeditify/pages/fast_editor/utils.dart';
 import 'package:snapeditify/providers/fast_editor/fast_editor_provider.dart';
-import 'package:snapeditify/widgets/app_use/image_editor/image_editor.dart';
-import 'package:snapeditify/widgets/app_use/image_editor/utils.dart';
 
 class FastEditor extends StatelessWidget {
   const FastEditor({super.key});

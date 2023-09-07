@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
@@ -30,7 +32,7 @@ class ImageToolList extends StatelessWidget {
       ImageTool.generateAnimeAI
     ];
     tools = tools.where((item) => item != currentTool).toList();
-    if (tools.length < 3) tools.add(ImageTool.applyArtEffect);
+    if (tools.length < 3) tools.add([ImageTool.fastEditor, ImageTool.applyArtEffect][Random().nextInt(2)]);
     return Padding(
       padding: EdgeInsets.only(bottom: AppDimensions.instance.paddingX(0.5)),
       child: Wrap(
