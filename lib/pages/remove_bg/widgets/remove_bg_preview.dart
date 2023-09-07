@@ -2,11 +2,11 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/providers/remove_bg/remove_bg_provider.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/masked_image.dart';
-import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 
 class RemoveBGPreview extends StatefulWidget {
   const RemoveBGPreview({super.key});
@@ -20,7 +20,7 @@ class _RemoveBGPreviewState extends ProviderStateObserver<RemoveBGPreview, IRemo
   Widget build(BuildContext context) {
     return BaseImageEditor(
       builder: (width, height) => Center(
-        child: WidgetsToImage(
+        child: Screenshot(
           controller: provider.captureController,
           child: Container(
             decoration: BoxDecoration(

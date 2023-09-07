@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/make_passport_id/make_passport_id_state.dart';
@@ -12,14 +13,13 @@ import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IMakeIDPassportProvider extends EditImageProvider {
   @override
   MakePassportIDState get state;
 
-  WidgetsToImageController get widgetsToImageController;
+  ScreenshotController get captureController;
 
   Future<bool> makePassportID(BuildContext context);
 
@@ -34,7 +34,7 @@ class MakeIDPassportProvider extends IMakeIDPassportProvider {
   static IMakeIDPassportProvider get instance => _instance;
 
   MakeIDPassportProvider.internal() {
-    _widgetsToImageController = WidgetsToImageController();
+    _captureController = ScreenshotController();
     _state = MakePassportIDState();
     _state.addListener(notifyListeners);
   }
@@ -43,9 +43,9 @@ class MakeIDPassportProvider extends IMakeIDPassportProvider {
   @override
   MakePassportIDState get state => _state;
 
-  late WidgetsToImageController _widgetsToImageController;
+  late ScreenshotController _captureController;
   @override
-  WidgetsToImageController get widgetsToImageController => _widgetsToImageController;
+  ScreenshotController get captureController => _captureController;
 
   EditedImageVM? _editedImage;
   @override
@@ -66,7 +66,7 @@ class MakeIDPassportProvider extends IMakeIDPassportProvider {
 
   @override
   Future<bool> save(BuildContext context) async {
-    final Uint8List? imageBytes = await _widgetsToImageController.capture();
+    final Uint8List? imageBytes = await _captureController.capture();
     if(imageBytes != null) {
       final imageUI = await ImageUtils.instance.toImageUI(imageBytes);
       _editedImage = EditedImageVM(imageBytes, imageUI);

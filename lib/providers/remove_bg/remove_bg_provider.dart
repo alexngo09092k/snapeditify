@@ -3,20 +3,20 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/remove_bg/remove_bg_state.dart';
 import 'package:snapeditify/services/services.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
-import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IRemoveBGProvider extends EditImageProvider {
   @override
   RemoveBGState get state;
 
-  WidgetsToImageController get captureController;
+  ScreenshotController get captureController;
 
   Future<bool> removeBG(BuildContext context);
 }
@@ -27,7 +27,7 @@ class RemoveBGProvider extends IRemoveBGProvider {
   static IRemoveBGProvider get instance => _instance;
 
   RemoveBGProvider.internal() {
-    _captureController = WidgetsToImageController();
+    _captureController = ScreenshotController();
 
     _state = RemoveBGState();
     _state.addListener(notifyListeners);
@@ -43,9 +43,9 @@ class RemoveBGProvider extends IRemoveBGProvider {
   @override
   bool get canSave => _state.mask.isNotEmpty;
 
-  late WidgetsToImageController _captureController;
+  late ScreenshotController _captureController;
   @override
-  WidgetsToImageController get captureController => _captureController;
+  ScreenshotController get captureController => _captureController;
 
   @override
   Future<bool> removeBG(BuildContext context) async {

@@ -2,10 +2,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:snapeditify/providers/make_passport_id/make_passport_id_provider.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/masked_image.dart';
-import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 
 class PassportIDImage extends StatefulWidget {
   const PassportIDImage({super.key});
@@ -19,8 +19,8 @@ class _PassportIDImageState extends ProviderStateful<PassportIDImage, MakeIDPass
   Widget build(BuildContext context) {
     return BaseImageEditor(
       builder: (width, height) => Center(
-        child: WidgetsToImage(
-          controller: provider.widgetsToImageController,
+        child: Screenshot(
+          controller: provider.captureController,
           child: PropConsumer<MakeIDPassportProvider, double>(
             select: (_) => _.state.ratio,
             builder: (_, child, ___, ratio) {

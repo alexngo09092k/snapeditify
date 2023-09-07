@@ -6,6 +6,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/generated/l10n.dart';
@@ -17,14 +18,13 @@ import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
-import 'package:snapeditify/widgets/app_use/widgets_to_image.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 
 abstract class IChangeSkyProvider extends EditImageProvider with StorageProvider {
   @override
   ChangeSkyState get state;
 
-  WidgetsToImageController get captureController;
+  ScreenshotController get captureController;
   
   List<Background> get effects;
 
@@ -44,7 +44,7 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
   static IChangeSkyProvider get instance => _instance;
 
   ChangeSkyProvider.internal() {
-    _captureController = WidgetsToImageController();
+    _captureController = ScreenshotController();
 
     _state = ChangeSkyState();
     _state.addListener(notifyListeners);
@@ -87,9 +87,9 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
   @override
   bool get canSave => _state.sky != null;
 
-  late WidgetsToImageController _captureController;
+  late ScreenshotController _captureController;
   @override
-  WidgetsToImageController get captureController => _captureController;
+  ScreenshotController get captureController => _captureController;
 
 
   @override
