@@ -48,38 +48,43 @@ class ImageToolItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => onTool(imageTool),
-      child: Container(
-        decoration: BoxDecoration(
-          color: imageTool.color,
-          borderRadius: BorderRadius.all(
-            Radius.circular(AppDimensions.instance.radius),
+      child: PropConsumer<IThemeProvider, ThemeMode>(
+          select: (_) => _.themeMode,
+          child: Row(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomIcon(
+                    imageTool.icon,
+                    size: AppDimensions.instance.iconX(1.5),
+                  ),
+                  SizedBox(height: AppDimensions.instance.paddingX(0.5)),
+                  Text(
+                    imageTool.title,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                  )
+                ],
+              ),
+            ],
           ),
-        ),
-        padding: EdgeInsets.all(AppDimensions.instance.padding),
-        child: Row(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomIcon(
-                  imageTool.icon,
-                  size: AppDimensions.instance.iconX(1.5),
-                  color: ThemeData.light().iconTheme.color,
+          builder: (_, child, p, themeMode) {
+            return Container(
+              decoration: BoxDecoration(
+                color: themeMode == ThemeMode.light
+                    ? imageTool.color
+                    : Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(AppDimensions.instance.radius),
                 ),
-                SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                Text(
-                  imageTool.title,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: ThemeData.light().textTheme.bodyLarge!.color,
-                        fontWeight: FontWeight.w700,
-                      ),
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
+              ),
+              padding: EdgeInsets.all(AppDimensions.instance.padding),
+              child: child,
+            );
+          }),
     );
   }
 }
