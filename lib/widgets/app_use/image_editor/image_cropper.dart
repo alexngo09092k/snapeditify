@@ -1,12 +1,14 @@
-
 import 'dart:async';
 import 'package:extended_image/extended_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_editor/image_editor.dart' as image_editor;
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'utils.dart';
 
-/// Crop given image with various aspect ratios
 class ImageCropper extends StatefulWidget {
   final Uint8List image;
   final List<AspectRatioOption> availableRatios;
@@ -55,154 +57,103 @@ class _ImageCropperState extends State<ImageCropper> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: Navigator.of(context).pop,
+          child: Container(
+            padding: EdgeInsets.only(
+              right: AppDimensions.instance.padding,
+              left: AppDimensions.instance.padding,
+            ),
+            color: Colors.transparent,
+            child: const CustomIcon(CupertinoIcons.back),
+          ),
+        ),
+        elevation: 0,
         actions: [
-          IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            icon: const Icon(Icons.check),
-            onPressed: () async {
-              var state = _controller.currentState;
-
+          GestureDetector(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: const Icon(Icons.check),
+            ),
+            onTap: () async {
+              ExtendedImageEditorState? state = _controller.currentState;
               if (state == null) return;
-
-              var data = await cropImageDataWithNativeLibrary(state: state);
-
+              Uint8List? data =
+                  await cropImageDataWithNativeLibrary(state: state);
               if (mounted) Navigator.pop(context, data);
             },
           ),
         ],
       ),
-      body: Container(
-        color: Colors.black,
-        child: ExtendedImage.memory(
-          widget.image,
-          cacheRawData: true,
-          fit: BoxFit.contain,
-          extendedImageEditorKey: _controller,
-          mode: ExtendedImageMode.editor,
-          initEditorConfigHandler: (state) {
-            return EditorConfig(
-              cropAspectRatio: aspectRatio,
+      body: Column(
+        children: [
+          BaseImageEditor(builder: (_, __) {
+            return ExtendedImage.memory(
+              widget.image,
+              cacheRawData: true,
+              fit: BoxFit.contain,
+              extendedImageEditorKey: _controller,
+              mode: ExtendedImageMode.editor,
+              initEditorConfigHandler: (state) {
+                return EditorConfig(
+                  cropAspectRatio: aspectRatio,
+                );
+              },
             );
-          },
-        ),
+          }),
+        ],
       ),
-      bottomNavigationBar: SafeArea(
-        child: SizedBox(
-          height: 80,
-          child: Column(
-            children: [
-              // Container(
-              //   height: 48,
-              //   decoration: const BoxDecoration(
-              //     boxShadow: [
-              //       BoxShadow(
-              //         color: black,
-              //         blurRadius: 10,
-              //       ),
-              //     ],
-              //   ),
-              //   child: ListView(
-              //     scrollDirection: Axis.horizontal,
-              //     children: <Widget>[
-              //       IconButton(
-              //         icon: Icon(
-              //           Icons.portrait,
-              //           color: isLandscape ? gray : white,
-              //         ).paddingSymmetric(horizontal: 8, vertical: 4),
-              //         onPressed: () {
-              //           isLandscape = false;
-              //           if (aspectRatioOriginal != null) {
-              //             aspectRatio = 1 / aspectRatioOriginal!;
-              //           }
-              //           setState(() {});
-              //         },
-              //       ),
-              //       IconButton(
-              //         icon: Icon(
-              //           Icons.landscape,
-              //           color: isLandscape ? white : gray,
-              //         ).paddingSymmetric(horizontal: 8, vertical: 4),
-              //         onPressed: () {
-              //           isLandscape = true;
-              //           aspectRatio = aspectRatioOriginal!;
-              //           setState(() {});
-              //         },
-              //       ),
-              //       Slider(
-              //         activeColor: Colors.white,
-              //         inactiveColor: Colors.grey,
-              //         value: rotateAngle.toDouble(),
-              //         min: 0.0,
-              //         max: 100.0,
-              //         onChangeEnd: (v) {
-              //           rotateAngle = v.toInt();
-              //           setState(() {});
-              //         },
-              //         onChanged: (v) {
-              //           rotateAngle = v.toInt();
-              //           setState(() {});
-              //         },
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              Container(
-                height: 80,
-                decoration: const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 10,
-                    ),
-                  ],
-                ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      if (aspectRatioOriginal != null &&
-                          aspectRatioOriginal != 1)
-                        IconButton(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          icon: Icon(
-                            Icons.portrait,
-                            color: isLandscape ? Colors.grey : Colors.white,
-                          ),
-                          onPressed: () {
-                            isLandscape = false;
-                            if (aspectRatioOriginal != null) {
-                              aspectRatio = 1 / aspectRatioOriginal!;
-                            }
-                            setState(() {});
-                          },
-                        ),
-                      if (aspectRatioOriginal != null &&
-                          aspectRatioOriginal != 1)
-                        IconButton(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          icon: Icon(
-                            Icons.landscape,
-                            color: isLandscape ? Colors.white : Colors.grey,
-                          ),
-                          onPressed: () {
-                            isLandscape = true;
-                            aspectRatio = aspectRatioOriginal!;
-                            setState(() {});
-                          },
-                        ),
-                      for (var ratio in widget.availableRatios)
-                        imageRatioButton(ratio.ratio, ratio.title),
-                    ],
+      bottomNavigationBar: Container(
+        height: 60 + MediaQuery.of(context).padding.bottom,
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          shape: BoxShape.rectangle,
+        ),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              if (aspectRatioOriginal != null && aspectRatioOriginal != 1)
+                IconButton(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
                   ),
+                  icon: Icon(
+                    Icons.portrait,
+                    color: isLandscape
+                        ? Theme.of(context).iconTheme.color
+                        : Theme.of(context).primaryColor,
+                  ),
+                  onPressed: () {
+                    isLandscape = false;
+                    if (aspectRatioOriginal != null) {
+                      aspectRatio = 1 / aspectRatioOriginal!;
+                    }
+                    setState(() {});
+                  },
                 ),
-              ),
+              if (aspectRatioOriginal != null && aspectRatioOriginal != 1)
+                IconButton(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  icon: Icon(
+                    Icons.landscape,
+                    color: isLandscape
+                        ? Theme.of(context).iconTheme.color
+                        : Theme.of(context).primaryColor,
+                  ),
+                  onPressed: () {
+                    isLandscape = true;
+                    aspectRatio = aspectRatioOriginal!;
+                    setState(() {});
+                  },
+                ),
+              for (var ratio in widget.availableRatios)
+                imageRatioButton(ratio.ratio, ratio.title),
             ],
           ),
         ),
@@ -235,13 +186,10 @@ class _ImageCropperState extends State<ImageCropper> {
       option.addOption(image_editor.RotateOption(rotateAngle));
     }
 
-    // final DateTime start = DateTime.now();
     final Uint8List? result = await image_editor.ImageEditor.editImage(
       image: img,
       imageEditorOption: option,
     );
-
-    // print('${DateTime.now().difference(start)} ：total time');
 
     return result;
   }
@@ -260,13 +208,19 @@ class _ImageCropperState extends State<ImageCropper> {
         setState(() {});
       },
       child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          child: Text(
-            title,
-            style: TextStyle(
-              color: aspectRatioOriginal == ratio ? Colors.white : Colors.grey,
-            ),
-          )),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppDimensions.instance.paddingX(0.5),
+        ),
+        child: Text(
+          title,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w700,
+                color: aspectRatioOriginal == ratio
+                    ? Theme.of(context).primaryColor
+                    : null,
+              ),
+        ),
+      ),
     );
   }
 }
