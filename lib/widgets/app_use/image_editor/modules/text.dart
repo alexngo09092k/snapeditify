@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import '../data/layer.dart';
 
@@ -14,14 +15,12 @@ class TextEditorImage extends StatefulWidget {
 
 class _TextEditorImageState extends State<TextEditorImage> {
   TextEditingController name = TextEditingController();
-  Color currentColor = Colors.white;
+  Color currentColor = AppColors.instance.darkPrimary;
   double slider = 32.0;
   TextAlign align = TextAlign.left;
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -37,10 +36,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.align_horizontal_left,
-                color: align == TextAlign.left
-                    ? Theme.of(context).colorScheme.primary
-                    : null),
+            icon: Icon(Icons.align_horizontal_left, color: align == TextAlign.left? Theme.of(context).colorScheme.primary: null),
             onPressed: () {
               setState(() {
                 align = TextAlign.left;
@@ -48,10 +44,10 @@ class _TextEditorImageState extends State<TextEditorImage> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.align_horizontal_center,
-                color: align == TextAlign.center
-                    ? Theme.of(context).colorScheme.primary
-                    : null),
+            icon: Icon(
+              Icons.align_horizontal_center, 
+              color: align == TextAlign.center? Theme.of(context).colorScheme.primary: null,
+            ),
             onPressed: () {
               setState(() {
                 align = TextAlign.center;
@@ -59,10 +55,10 @@ class _TextEditorImageState extends State<TextEditorImage> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.align_horizontal_right,
-                color: align == TextAlign.right
-                    ? Theme.of(context).colorScheme.primary
-                    : null),
+            icon: Icon(
+              Icons.align_horizontal_right,
+              color: align == TextAlign.right? Theme.of(context).colorScheme.primary: null,
+            ),
             onPressed: () {
               setState(() {
                 align = TextAlign.right;
@@ -83,127 +79,128 @@ class _TextEditorImageState extends State<TextEditorImage> {
                 ),
               );
             },
-            color: Colors.white,
-            padding: const EdgeInsets.all(15),
           )
         ],
+        elevation: 0,
       ),
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(children: [
-              SizedBox(
-                height: size.height / 2.2,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AppCard(
+                margin: EdgeInsets.all(AppDimensions.instance.padding),
+                padding: EdgeInsets.all(AppDimensions.instance.padding),
                 child: TextField(
                   controller: name,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
-                    contentPadding: const EdgeInsets.all(10),
                     hintText: 'Insert Your Message',
-                    hintStyle: const TextStyle(color: Colors.white),
-                    alignLabelWithHint: true,
                   ),
-                  scrollPadding: const EdgeInsets.all(20.0),
+                  scrollPadding: EdgeInsets.all(AppDimensions.instance.padding),
                   keyboardType: TextInputType.multiline,
                   minLines: 5,
                   maxLines: 99999,
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: currentColor,
                   ),
                   autofocus: true,
                 ),
               ),
-              Container(
-                color: Colors.transparent,
+              SizedBox(height: AppDimensions.instance.paddingX(2)),
+              AppCard(
+                margin: EdgeInsets.all(AppDimensions.instance.padding),
+                padding: EdgeInsets.all(AppDimensions.instance.padding),
                 child: Column(
                   children: [
-                    //   SizedBox(height: 20.0),
-                    Text(
-                      'Slider Color',
-                    ),
-                    //   SizedBox(height: 10.0),
-                    Row(children: [
-                      Expanded(
-                        child: BarColorPicker(
-                          width: 300,
-                          thumbColor: Colors.white,
-                          cornerRadius: 10,
-                          pickMode: PickMode.color,
-                          colorListener: (int value) {
-                            setState(() {
-                              currentColor = Color(value);
-                            });
-                          },
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Reset',
-                        ),
-                      ),
-                    ]),
-                    //   SizedBox(height: 20.0),
-                    Text(
-                      'Slider White Black Color',
-                    ),
-                    //   SizedBox(height: 10.0),
-                    Row(children: [
-                      Expanded(
-                        child: BarColorPicker(
-                          width: 300,
-                          thumbColor: Colors.white,
-                          cornerRadius: 10,
-                          pickMode: PickMode.grey,
-                          colorListener: (int value) {
-                            setState(() {
-                              currentColor = Color(value);
-                            });
-                          },
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Reset',
-                        ),
-                      )
-                    ]),
-                    Container(
-                      color: Colors.black,
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 10.0),
-                          Center(
-                            child: Text(
-                              'Size Adjust',
-                              style: const TextStyle(color: Colors.white),
-                            ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 80,
+                          child: Text(
+                            'Color',
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          const SizedBox(height: 10.0),
-                          Slider(
-                              activeColor: Colors.white,
-                              inactiveColor: Colors.grey,
-                              value: slider,
-                              min: 0.0,
-                              max: 100.0,
-                              onChangeEnd: (v) {
+                        ),
+                        Expanded(
+                          child: LayoutBuilder(builder: (_, constraints) {
+                            return BarColorPicker(
+                              width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                              thumbColor: AppColors.instance.white,
+                              cornerRadius: AppDimensions.instance.radius,
+                              pickMode: PickMode.color,
+                              colorListener: (int value) {
                                 setState(() {
-                                  slider = v;
+                                  currentColor = Color(value);
                                 });
                               },
-                              onChanged: (v) {
-                                setState(() {
-                                  slider = v;
-                                });
-                              }),
-                        ],
-                      ),
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppDimensions.instance.paddingX(2)),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 80,
+                          child: Text(
+                            'Black Color',
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        Expanded(
+                          child: LayoutBuilder(
+                            builder: (_, constraints) {
+                              return BarColorPicker(
+                                width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                                thumbColor: Colors.white,
+                                cornerRadius: 10,
+                                pickMode: PickMode.grey,
+                                colorListener: (int value) {
+                                  setState(() {
+                                    currentColor = Color(value);
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppDimensions.instance.padding),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 65,
+                          child: Text(
+                            'Text Size',
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        Expanded(
+                          child: Slider(
+                            value: slider,
+                            min: 0.0,
+                            max: 100.0,
+                            onChangeEnd: (v) {
+                              setState(() {
+                                slider = v;
+                              });
+                            },
+                            onChanged: (v) {
+                              setState(() {
+                                slider = v;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(width: AppDimensions.instance.paddingX(0.5)),
+                      ],
                     )
                   ],
                 ),
               ),
-            ]),
+            ],
           ),
         ),
       ),

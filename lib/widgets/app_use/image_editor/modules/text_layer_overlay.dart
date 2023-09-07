@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
+import 'package:snapeditify/widgets/base/custom_button.dart';
 import '../data/layer.dart';
 import 'colors_picker.dart';
 
@@ -23,195 +25,184 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
   double slider = 0.0;
 
   @override
-  void initState() {
-    //  slider = widget.sizevalue;
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
-      height: 450,
-      decoration: const BoxDecoration(
-        color: Colors.black87,
+      height: 350,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
         borderRadius: BorderRadius.only(
-            topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+          topRight: Radius.circular(AppDimensions.instance.radius),
+          topLeft: Radius.circular(AppDimensions.instance.radius),
+        ),
       ),
+      padding: EdgeInsets.all(AppDimensions.instance.padding),
       child: Column(
         children: [
-          const SizedBox(height: 10),
-          Center(
-            child: Text(
-              'Size Adjust',
-              style: const TextStyle(color: Colors.white),
-            ),
+          Row(
+            children: [
+              SizedBox(
+                width: 60,
+                child: Text(
+                  'Text Size',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                ),
+              ),
+              Expanded(
+                child: Slider(
+                    value: widget.layer.size,
+                    min: 0.0,
+                    max: 100.0,
+                    onChangeEnd: (v) {
+                      setState(() {
+                        widget.layer.size = v.toDouble();
+                        widget.onUpdate();
+                      });
+                    },
+                    onChanged: (v) {
+                      setState(() {
+                        slider = v;
+                        // print(v.toDouble());
+                        widget.layer.size = v.toDouble();
+                        widget.onUpdate();
+                      });
+                    }),
+              ),
+            ],
           ),
-          const Divider(),
-          Slider(
-              activeColor: Colors.white,
-              inactiveColor: Colors.grey,
-              value: widget.layer.size,
-              min: 0.0,
-              max: 100.0,
-              onChangeEnd: (v) {
-                setState(() {
-                  widget.layer.size = v.toDouble();
-                  widget.onUpdate();
-                });
-              },
-              onChanged: (v) {
-                setState(() {
-                  slider = v;
-                  // print(v.toDouble());
-                  widget.layer.size = v.toDouble();
-                  widget.onUpdate();
-                });
-              }),
-          const SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.only(left: 16),
+          Row(
+            children: [
+              SizedBox(
+                width: 80,
                 child: Text(
-                  'Color',
-                  style: const TextStyle(color: Colors.white),
+                  'Text Color',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
-              Row(children: [
-                const SizedBox(width: 8),
-                Expanded(
-                  child: BarColorPicker(
-                    width: 300,
-                    thumbColor: Colors.white,
-                    initialColor: widget.layer.color,
-                    cornerRadius: 10,
-                    pickMode: PickMode.color,
-                    colorListener: (int value) {
-                      setState(() {
-                        widget.layer.color = Color(value);
-                        widget.onUpdate();
-                      });
-                    },
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      widget.layer.color = Colors.black;
-                      widget.onUpdate();
-                    });
-                  },
-                  child: Text('Reset',
-                      style: const TextStyle(color: Colors.white)),
-                ),
-                const SizedBox(width: 16),
-              ]),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text(
-                  'Background Color',
-                  style: const TextStyle(color: Colors.white),
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (_, constraints) {
+                    return BarColorPicker(
+                      width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                      thumbColor: Theme.of(context).colorScheme.primary,
+                      initialColor: widget.layer.color,
+                      cornerRadius: 10,
+                      pickMode: PickMode.color,
+                      colorListener: (int value) {
+                        setState(() {
+                          widget.layer.color = Color(value);
+                          widget.onUpdate();
+                        });
+                      },
+                    );
+                  }
                 ),
               ),
-              Row(children: [
-                const SizedBox(width: 8),
-                Expanded(
-                  child: BarColorPicker(
-                    width: 300,
-                    initialColor: widget.layer.background,
-                    thumbColor: Colors.white,
-                    cornerRadius: 10,
-                    pickMode: PickMode.color,
-                    colorListener: (int value) {
-                      setState(() {
-                        widget.layer.background = Color(value);
-                        widget.onUpdate();
-                      });
-                    },
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      widget.layer.background = Colors.transparent;
-                      widget.onUpdate();
-                    });
-                  },
-                  child: Text(
-                    'Reset',
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-                const SizedBox(width: 16),
-              ]),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text(
-                  'Background Opacity',
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-              Row(children: [
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Slider(
-                    min: 0,
-                    max: 255,
-                    divisions: 255,
-                    value: widget.layer.backgroundOpacity.toDouble(),
-                    thumbColor: Colors.white,
-                    onChanged: (double value) {
-                      setState(() {
-                        widget.layer.backgroundOpacity = value.toInt();
-                        widget.onUpdate();
-                      });
-                    },
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      widget.layer.backgroundOpacity = 0;
-                      widget.onUpdate();
-                    });
-                  },
-                  child: Text(
-                    'Reset',
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-                const SizedBox(width: 16),
-              ]),
-            ]),
-          ),
-          const SizedBox(height: 10),
-          Row(children: [
-            Expanded(
-              child: TextButton(
+              TextButton(
                 onPressed: () {
-                  ImageEditorStorage.instance.removedLayers.add(
-                      ImageEditorStorage.instance.layers.removeAt(widget.index));
-
-                  Navigator.pop(context);
-                  widget.onUpdate();
-                  // back(context);
-                  // setState(() {});
+                  setState(() {
+                    widget.layer.color = Colors.black;
+                    widget.onUpdate();
+                  });
+                },
+                child:Text(
+                  'Reset',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: AppDimensions.instance.padding),
+          Row(
+            children: [
+              SizedBox(
+                width: 80,
+                child: Text(
+                  'BG Color',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                ),
+              ),
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (_, constraints) {
+                    return BarColorPicker(
+                      width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                      initialColor: widget.layer.background,
+                      thumbColor: Theme.of(context).colorScheme.primary,
+                      cornerRadius: 10,
+                      pickMode: PickMode.color,
+                      colorListener: (int value) {
+                        setState(() {
+                          widget.layer.background = Color(value);
+                          widget.onUpdate();
+                        });
+                      },
+                    );
+                  }
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    widget.layer.background = Colors.transparent;
+                    widget.onUpdate();
+                  });
                 },
                 child: Text(
-                  'Remove',
-                  style: const TextStyle(color: Colors.white),
+                  'Reset',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
-            ),
-          ]),
+            ],
+          ),
+          SizedBox(height: AppDimensions.instance.padding),
+          Row(
+            children: [
+              SizedBox(
+                width: 60,
+                child: Text(
+                  'BG Opacity',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                ),
+              ),
+              Expanded(
+                child: Slider(
+                  min: 0,
+                  max: 255,
+                  divisions: 255,
+                  value: widget.layer.backgroundOpacity.toDouble(),
+                  thumbColor: Colors.white,
+                  onChanged: (double value) {
+                    setState(() {
+                      widget.layer.backgroundOpacity = value.toInt();
+                      widget.onUpdate();
+                    });
+                  },
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    widget.layer.backgroundOpacity = 0;
+                    widget.onUpdate();
+                  });
+                },
+                child: Text(
+                  'Reset',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: AppDimensions.instance.padding),
+          CustomButton(
+            title: "Remove",
+            height: 45,
+            onTap: () {
+              ImageEditorStorage.instance.removedLayers.add(ImageEditorStorage.instance.layers.removeAt(widget.index));
+              Navigator.pop(context);
+              widget.onUpdate();
+            },
+          ),
         ],
       ),
     );

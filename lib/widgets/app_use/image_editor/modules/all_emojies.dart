@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapeditify/common/constants.dart';
 import '../data/data.dart';
 import '../data/layer.dart';
 
@@ -14,35 +15,27 @@ class _EmojiesState extends State<Emojies> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.all(0.0),
+        padding: EdgeInsets.all(AppDimensions.instance.padding),
         height: 400,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(32),
-            topRight: Radius.circular(32),
+            topRight: Radius.circular(AppDimensions.instance.radius),
+            topLeft: Radius.circular(AppDimensions.instance.radius),
           ),
-          color: Colors.black,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 10.9,
-              color: Color.fromRGBO(0, 0, 0, 0.1),
-            ),
-          ],
         ),
         child: Column(
           children: [
-            const SizedBox(height: 16),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(
-                'Select Emoji',
-                style: const TextStyle(color: Colors.white),
+            Center(
+              child: Text(
+                'Select Emoji'.toUpperCase(),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
-            ]),
-            const Divider(height: 1),
-            const SizedBox(height: 16),
-            Container(
-              height: 315,
-              padding: const EdgeInsets.all(0.0),
+            ),
+            SizedBox(height: AppDimensions.instance.paddingX(2)),
+            Expanded(
               child: GridView(
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),
@@ -51,27 +44,30 @@ class _EmojiesState extends State<Emojies> {
                   mainAxisSpacing: 0.0,
                   maxCrossAxisExtent: 60.0,
                 ),
-                children: emojis.map((String emoji) {
-                  return GridTile(
+                children: emojis.map(
+                  (String emoji) {
+                    return GridTile(
                       child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(
-                        context,
-                        EmojiLayerData(
-                          text: emoji,
-                          size: 32.0,
+                        onTap: () {
+                          Navigator.pop(
+                            context,
+                            EmojiLayerData(
+                              text: emoji,
+                              size: AppDimensions.instance.icon,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.zero,
+                          child: Text(
+                            emoji,
+                            style: TextStyle(fontSize: AppDimensions.instance.icon,),
+                          ),
                         ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.zero,
-                      child: Text(
-                        emoji,
-                        style: const TextStyle(fontSize: 35),
                       ),
-                    ),
-                  ));
-                }).toList(),
+                    );
+                  },
+                ).toList(),
               ),
             )
           ],
