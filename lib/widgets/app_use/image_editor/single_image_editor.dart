@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/data/editor_feature.dart';
@@ -11,6 +11,7 @@ import 'package:snapeditify/widgets/app_use/image_editor/image_cropper.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_drawing.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_filters.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'data/image_item.dart';
 import 'data/layer.dart';
 import 'layers/background_blur_layer.dart';
@@ -82,14 +83,12 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
     if (ImageEditorStorage.instance.layers.isEmpty) return;
 
     if (ImageEditorStorage.instance.removedLayers.isNotEmpty) {
-      ImageEditorStorage.instance.layers
-          .add(ImageEditorStorage.instance.removedLayers.removeLast());
+      ImageEditorStorage.instance.layers.add(ImageEditorStorage.instance.removedLayers.removeLast());
       setState(() {});
       return;
     }
 
-    ImageEditorStorage.instance.undoLayers
-        .add(ImageEditorStorage.instance.layers.removeLast());
+    ImageEditorStorage.instance.undoLayers.add(ImageEditorStorage.instance.layers.removeLast());
 
     setState(() {});
   }
@@ -97,8 +96,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
   void redo() {
     if (ImageEditorStorage.instance.undoLayers.isEmpty) return;
 
-    ImageEditorStorage.instance.layers
-        .add(ImageEditorStorage.instance.undoLayers.removeLast());
+    ImageEditorStorage.instance.layers.add(ImageEditorStorage.instance.undoLayers.removeLast());
 
     setState(() {});
   }
@@ -123,8 +121,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
     resetTransformation();
     setState(() {});
 
-    var binaryIntList =
-        await screenshotController.capture(pixelRatio: pixelRatio);
+    var binaryIntList = await screenshotController.capture(pixelRatio: pixelRatio);
 
     if (mounted) Navigator.pop(context, binaryIntList);
   }
@@ -136,9 +133,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
 
     ImageEditorStorage.instance.layers.clear();
 
-    ImageEditorStorage.instance.layers.add(BackgroundLayerData(
-      file: currentImage,
-    ));
+    ImageEditorStorage.instance.layers.add(BackgroundLayerData(file: currentImage));
 
     setState(() {});
   }
@@ -162,16 +157,10 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
 
   /// obtain image Uint8List by merging layers
   Future<Uint8List?> getMergedImage() async {
-    if (ImageEditorStorage.instance.layers.length == 1 &&
-        ImageEditorStorage.instance.layers.first is BackgroundLayerData) {
-      return (ImageEditorStorage.instance.layers.first as BackgroundLayerData)
-          .file
-          .image;
-    } else if (ImageEditorStorage.instance.layers.length == 1 &&
-        ImageEditorStorage.instance.layers.first is ImageLayerData) {
-      return (ImageEditorStorage.instance.layers.first as ImageLayerData)
-          .image
-          .image;
+    if (ImageEditorStorage.instance.layers.length == 1 && ImageEditorStorage.instance.layers.first is BackgroundLayerData) {
+      return (ImageEditorStorage.instance.layers.first as BackgroundLayerData).file.image;
+    } else if (ImageEditorStorage.instance.layers.length == 1 && ImageEditorStorage.instance.layers.first is ImageLayerData) {
+      return (ImageEditorStorage.instance.layers.first as ImageLayerData).image.image;
     }
 
     return screenshotController.capture(pixelRatio: pixelRatio);
@@ -201,11 +190,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
   Future<void> brush() async {
     var drawing = await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => ImageEditorDrawing(
-          image: currentImage,
-        ),
-      ),
+      MaterialPageRoute(builder: (context) => ImageEditorDrawing(image: currentImage)),
     );
 
     if (drawing != null) {
@@ -229,16 +214,13 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
   Future<void> addText() async {
     TextLayerData? layer = await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const TextEditorImage(),
-      ),
+      MaterialPageRoute(builder: (context) => const TextEditorImage()),
     );
 
     if (layer == null) return;
 
     ImageEditorStorage.instance.undoLayers.clear();
     ImageEditorStorage.instance.removedLayers.clear();
-
     ImageEditorStorage.instance.layers.add(layer);
 
     setState(() {});
@@ -435,11 +417,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
 
     Uint8List? filterAppliedImage = await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => ImageFilters(
-          image: mergedImage!,
-        ),
-      ),
+      MaterialPageRoute(builder: (context) => ImageFilters(image: mergedImage!)),
     );
 
     if (filterAppliedImage == null) return;
@@ -474,6 +452,12 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
     ImageEditorStorage.instance.layers.add(layer);
 
     setState(() {});
+  }
+
+  void canBack(BuildContext context) {
+    if (Navigator.of(context).canPop()) {
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -536,133 +520,133 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
       }).toList(),
     );
 
-    widthRatio =
-        currentImage.width / ImageEditorStorage.instance.viewportSize.width;
-    heightRatio =
-        currentImage.height / ImageEditorStorage.instance.viewportSize.height;
+    widthRatio = currentImage.width / ImageEditorStorage.instance.viewportSize.width;
+    heightRatio = currentImage.height / ImageEditorStorage.instance.viewportSize.height;
     pixelRatio = math.max(heightRatio, widthRatio);
 
-    return PropConsumer<IThemeProvider, ThemeMode>(
-        select: (_) => _.themeMode,
-        builder: (_, __, ___, themeMode) {
-          return Scaffold(
-            appBar: AppBar(
-              actions: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 48,
-                  child: SingleChildScrollView(
-                    reverse: true,
-                    scrollDirection: Axis.horizontal,
-                    child: Row(children: [
-                      FeatureButton(
-                        icon: Icons.undo,
-                        color: ImageEditorStorage.instance.layers.length > 1 ||
-                                ImageEditorStorage
-                                    .instance.removedLayers.isNotEmpty
-                            ? Colors.white
-                            : Colors.grey,
-                        onTap: undo,
-                      ),
-                      FeatureButton(
-                        icon: Icons.redo,
-                        color: ImageEditorStorage.instance.undoLayers.isNotEmpty
-                            ? Colors.white
-                            : Colors.grey,
-                        onTap: redo,
-                      ),
-                      if (widget.features
-                          .contains(EditorFeature.pickFromGallery))
-                        FeatureButton(
-                          icon: Icons.photo,
-                          onTap: onPhoto,
-                        ),
-                      if (widget.features
-                          .contains(EditorFeature.captureFromCamera))
-                        FeatureButton(
-                          icon: Icons.camera_alt,
-                          onTap: onCamera,
-                        ),
-                      FeatureButton(
-                        icon: Icons.check,
-                        onTap: onSave,
-                      ),
-                    ]),
-                  ),
-                ),
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () => canBack(context),
+          child: Container(
+            padding: EdgeInsets.only(
+              right: AppDimensions.instance.padding,
+              left: AppDimensions.instance.padding,
             ),
-            body: SafeArea(
-              child: BaseImageEditor(
-                builder: (_, __) => Stack(
-                  children: [
-                    GestureDetector(
-                      onScaleUpdate: (details) {
-                        // print(details);
+            color: Colors.transparent,
+            child: const CustomIcon(CupertinoIcons.back),
+          ),
+        ),
+        actions: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width - 48,
+            child: SingleChildScrollView(
+              reverse: true,
+              scrollDirection: Axis.horizontal,
+              child: Row(children: [
+                FeatureButton(
+                  icon: Icons.undo,
+                  color: ImageEditorStorage.instance.layers.length > 1 || ImageEditorStorage.instance.removedLayers.isNotEmpty
+                      ? Colors.white
+                      : Colors.grey,
+                  onTap: undo,
+                ),
+                FeatureButton(
+                  icon: Icons.redo,
+                  color: ImageEditorStorage.instance.undoLayers.isNotEmpty
+                      ? Colors.white
+                      : Colors.grey,
+                  onTap: redo,
+                ),
+                if (widget.features.contains(EditorFeature.pickFromGallery))
+                  FeatureButton(
+                    icon: Icons.photo,
+                    onTap: onPhoto,
+                  ),
+                if (widget.features.contains(EditorFeature.captureFromCamera))
+                  FeatureButton(
+                    icon: Icons.camera_alt,
+                    onTap: onCamera,
+                  ),
+                FeatureButton(
+                  icon: Icons.check,
+                  onTap: onSave,
+                ),
+              ]),
+            ),
+          ),
+        ],
+        elevation: 0,
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            BaseImageEditor(
+              builder: (_, __) => Stack(
+                children: [
+                  GestureDetector(
+                    onScaleUpdate: (details) {
+                      // move
+                      if (details.pointerCount == 1) {
+                        x += details.focalPointDelta.dx;
+                        y += details.focalPointDelta.dy;
+                        setState(() {});
+                      }
 
-                        // move
-                        if (details.pointerCount == 1) {
-                          // print(details.focalPointDelta);
-                          x += details.focalPointDelta.dx;
-                          y += details.focalPointDelta.dy;
+                      // scale
+                      if (details.pointerCount == 2) {
+                        if (details.horizontalScale != 1) {
+                          scaleFactor = lastScaleFactor * math.min(details.horizontalScale, details.verticalScale);
                           setState(() {});
                         }
-
-                        // scale
-                        if (details.pointerCount == 2) {
-                          // print([details.horizontalScale, details.verticalScale]);
-                          if (details.horizontalScale != 1) {
-                            scaleFactor = lastScaleFactor *
-                                math.min(details.horizontalScale,
-                                    details.verticalScale);
-                            setState(() {});
-                          }
-                        }
-                      },
-                      onScaleEnd: (details) {
-                        lastScaleFactor = scaleFactor;
-                      },
-                      child: Center(
-                        child: SizedBox(
-                          height: currentImage.height / pixelRatio,
-                          width: currentImage.width / pixelRatio,
-                          child: Screenshot(
-                            controller: screenshotController,
-                            child: RotatedBox(
-                              quarterTurns: rotateValue,
-                              child: Transform(
-                                transform: Matrix4(
-                                  1,
-                                  0,
-                                  0,
-                                  0,
-                                  0,
-                                  1,
-                                  0,
-                                  0,
-                                  0,
-                                  0,
-                                  1,
-                                  0,
-                                  x,
-                                  y,
-                                  0,
-                                  1 / scaleFactor,
-                                )..rotateY(flipValue),
-                                alignment: FractionalOffset.center,
-                                child: layersStack,
-                              ),
+                      }
+                    },
+                    onScaleEnd: (details) {
+                      lastScaleFactor = scaleFactor;
+                    },
+                    child: Center(
+                      child: SizedBox(
+                        height: currentImage.height / pixelRatio,
+                        width: currentImage.width / pixelRatio,
+                        child: Screenshot(
+                          controller: screenshotController,
+                          child: RotatedBox(
+                            quarterTurns: rotateValue,
+                            child: Transform(
+                              transform: Matrix4(
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                x,
+                                y,
+                                0,
+                                1 / scaleFactor,
+                              )..rotateY(flipValue),
+                              alignment: FractionalOffset.center,
+                              child: layersStack,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            bottomNavigationBar: _buildFutureButtons(context),
-          );
-        });
+          ],
+        ),
+      ),
+      bottomNavigationBar: _buildFutureButtons(context),
+    );
   }
 
   Container _buildFutureButtons(BuildContext context) {
@@ -721,12 +705,21 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
         color: Theme.of(context).scaffoldBackgroundColor,
         shape: BoxShape.rectangle,
       ),
-      child: SingleChildScrollView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: widgets,
-        ),
+        itemCount: widgets.length,
+        itemBuilder: (_, index) {
+          if(index == 0 || index + 1 == widgets.length) {
+            return Padding(
+              padding: EdgeInsets.only(
+                left: index == 0 ? AppDimensions.instance.paddingX(0.5): 0,
+                right: index + 1 == widgets.length? AppDimensions.instance.paddingX(0.5): 0,
+              ),
+              child: widgets[index],
+            );
+          }
+          return widgets[index];
+        },
       ),
     );
   }
@@ -752,7 +745,8 @@ class FeatureButton extends StatelessWidget {
       onLongPress: onLongPress,
       child: Container(
         padding: EdgeInsets.symmetric(
-            horizontal: AppDimensions.instance.paddingX(0.5)),
+          horizontal: AppDimensions.instance.paddingX(0.5),
+        ),
         child: Icon(icon, color: color),
       ),
     );

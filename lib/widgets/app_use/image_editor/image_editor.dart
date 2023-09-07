@@ -2,13 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/data/editor_feature.dart';
-import 'package:snapeditify/widgets/app_use/image_editor/mutil_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/single_image_editor.dart';
 import 'utils.dart';
 
 class ImageEditor extends StatelessWidget {
   final Uint8List? image;
-  final List? images;
 
   final Directory? savePath;
   final int maxLength;
@@ -18,7 +16,6 @@ class ImageEditor extends StatelessWidget {
   const ImageEditor({
     super.key,
     this.image,
-    this.images,
     this.savePath,
     this.maxLength = 99,
     Color? appBar,
@@ -35,25 +32,15 @@ class ImageEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (images == null && image == null && !features.contains(EditorFeature.captureFromCamera) && !features.contains(EditorFeature.pickFromGallery)) {
+    if (image == null && !features.contains(EditorFeature.captureFromCamera) && !features.contains(EditorFeature.pickFromGallery)) {
       throw Exception('No image to work with, provide an image or allow the image picker.');
     }
 
-    if (image != null) {
-      return SingleImageEditor(
-        image: image,
-        savePath: savePath,
-        features: features,
-        cropAvailableRatios: cropAvailableRatios,
-      );
-    } else {
-      return MultiImageEditor(
-        images: images ?? [],
-        savePath: savePath,
-        maxLength: maxLength,
-        features: features,
-        cropAvailableRatios: cropAvailableRatios,
-      );
-    }
+    return SingleImageEditor(
+      image: image,
+      savePath: savePath,
+      features: features,
+      cropAvailableRatios: cropAvailableRatios,
+    );
   }
 }
