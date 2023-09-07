@@ -220,7 +220,11 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
       for (var detectedObject in res.data!.detectedObjects) {
         final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
         await vm.paintParse();
+        bool isSelected = res.data!.suggestObjectIds.contains(detectedObject.maskId);
         detectedObjectVMs[vm.maskId] = vm;
+        if(isSelected) {
+          detectedObjectVMs[vm.maskId]!.toggleSelection();
+        }
       }
       _state.detectedObjects = detectedObjectVMs;
 

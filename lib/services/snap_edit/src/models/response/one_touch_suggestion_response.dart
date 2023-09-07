@@ -7,7 +7,7 @@ class OneTouchSuggestionResponse {
   final String eventId;
   final List<DetectedObject> detectedObjects;
   final String sessionId;
-  final List<String> suggestObjectIds;
+  final List<int> suggestObjectIds;
 
   const OneTouchSuggestionResponse({
     required this.eventId,
@@ -20,7 +20,7 @@ class OneTouchSuggestionResponse {
     String? eventId,
     List<DetectedObject>? detectedObjects,
     String? sessionId,
-    List<String>? suggestObjectIds,
+    List<int>? suggestObjectIds,
   }) {
     return OneTouchSuggestionResponse(
       eventId: eventId ?? this.eventId,
@@ -44,7 +44,7 @@ class OneTouchSuggestionResponse {
       eventId: map['event_id'] as String,
       detectedObjects: List<DetectedObject>.from((map['detected_objects']).map<DetectedObject>((x) => DetectedObject.fromMap(x))),
       sessionId: map['session_id'] as String,
-      suggestObjectIds: List<String>.from((map['suggest_object_ids'])),
+      suggestObjectIds: List<int>.from((map['suggest_object_ids'])),
     );
   }
 
