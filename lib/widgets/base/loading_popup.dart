@@ -57,7 +57,7 @@ class _LoadingPopupState extends State<LoadingPopup> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:[JumpingDots(color: Theme.of(context).colorScheme.secondary)],
+                children:[JumpingDots(color: Theme.of(context).colorScheme.primary)],
               ),
               ValueListenableBuilder(
                 valueListenable: widget._message,

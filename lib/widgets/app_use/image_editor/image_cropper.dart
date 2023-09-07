@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_editor/image_editor.dart' as image_editor;
@@ -51,10 +50,6 @@ class _ImageCropperState extends State<ImageCropper> {
 
   @override
   Widget build(BuildContext context) {
-    if (_controller.currentState != null) {
-      // _controller.currentState?.
-    }
-
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -65,7 +60,7 @@ class _ImageCropperState extends State<ImageCropper> {
               left: AppDimensions.instance.padding,
             ),
             color: Colors.transparent,
-            child: const CustomIcon(CupertinoIcons.back),
+            child: const CustomIcon(Icons.clear),
           ),
         ),
         elevation: 0,
@@ -85,23 +80,25 @@ class _ImageCropperState extends State<ImageCropper> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          BaseImageEditor(builder: (_, __) {
-            return ExtendedImage.memory(
-              widget.image,
-              cacheRawData: true,
-              fit: BoxFit.contain,
-              extendedImageEditorKey: _controller,
-              mode: ExtendedImageMode.editor,
-              initEditorConfigHandler: (state) {
-                return EditorConfig(
-                  cropAspectRatio: aspectRatio,
-                );
-              },
-            );
-          }),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            BaseImageEditor(builder: (_, __) {
+              return ExtendedImage.memory(
+                widget.image,
+                cacheRawData: true,
+                fit: BoxFit.contain,
+                extendedImageEditorKey: _controller,
+                mode: ExtendedImageMode.editor,
+                initEditorConfigHandler: (state) {
+                  return EditorConfig(
+                    cropAspectRatio: aspectRatio,
+                  );
+                },
+              );
+            }),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         height: 60 + MediaQuery.of(context).padding.bottom,
@@ -109,53 +106,50 @@ class _ImageCropperState extends State<ImageCropper> {
           color: Theme.of(context).scaffoldBackgroundColor,
           shape: BoxShape.rectangle,
         ),
-        child: SingleChildScrollView(
+        child: ListView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              if (aspectRatioOriginal != null && aspectRatioOriginal != 1)
-                IconButton(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  icon: Icon(
-                    Icons.portrait,
-                    color: isLandscape
-                        ? Theme.of(context).iconTheme.color
-                        : Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {
-                    isLandscape = false;
-                    if (aspectRatioOriginal != null) {
-                      aspectRatio = 1 / aspectRatioOriginal!;
-                    }
-                    setState(() {});
-                  },
+          children: [
+            if (aspectRatioOriginal != null && aspectRatioOriginal != 1)
+              IconButton(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
                 ),
-              if (aspectRatioOriginal != null && aspectRatioOriginal != 1)
-                IconButton(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  icon: Icon(
-                    Icons.landscape,
-                    color: isLandscape
-                        ? Theme.of(context).iconTheme.color
-                        : Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {
-                    isLandscape = true;
-                    aspectRatio = aspectRatioOriginal!;
-                    setState(() {});
-                  },
+                icon: Icon(
+                  Icons.portrait,
+                  color: isLandscape
+                      ? Theme.of(context).iconTheme.color
+                      : Theme.of(context).primaryColor,
                 ),
-              for (var ratio in widget.availableRatios)
-                imageRatioButton(ratio.ratio, ratio.title),
-            ],
-          ),
+                onPressed: () {
+                  isLandscape = false;
+                  if (aspectRatioOriginal != null) {
+                    aspectRatio = 1 / aspectRatioOriginal!;
+                  }
+                  setState(() {});
+                },
+              ),
+            if (aspectRatioOriginal != null && aspectRatioOriginal != 1)
+              IconButton(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                icon: Icon(
+                  Icons.landscape,
+                  color: isLandscape
+                      ? Theme.of(context).iconTheme.color
+                      : Theme.of(context).primaryColor,
+                ),
+                onPressed: () {
+                  isLandscape = true;
+                  aspectRatio = aspectRatioOriginal!;
+                  setState(() {});
+                },
+              ),
+            for (var ratio in widget.availableRatios)
+              imageRatioButton(ratio.ratio, ratio.title),
+          ],
         ),
       ),
     );
@@ -179,7 +173,9 @@ class _ImageCropperState extends State<ImageCropper> {
 
     if (action.needFlip) {
       option.addOption(image_editor.FlipOption(
-          horizontal: flipHorizontal, vertical: flipVertical));
+        horizontal: flipHorizontal,
+        vertical: flipVertical,
+      ));
     }
 
     if (action.hasRotateAngle) {

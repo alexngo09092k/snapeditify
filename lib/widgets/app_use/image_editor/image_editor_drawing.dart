@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:hand_signature/signature.dart';
-import 'package:snapeditify/widgets/app_use/image_editor/buttons.dart';
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'data/image_item.dart';
 
-/// Show image drawing surface over image
 class ImageEditorDrawing extends StatefulWidget {
   final ImageItem image;
 
@@ -67,16 +68,18 @@ class _ImageEditorDrawingState extends State<ImageEditorDrawing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            icon: const Icon(Icons.clear),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+        leading: GestureDetector(
+          onTap: Navigator.of(context).pop,
+          child: Container(
+            padding: EdgeInsets.only(
+              right: AppDimensions.instance.padding,
+              left: AppDimensions.instance.padding,
+            ),
+            color: Colors.transparent,
+            child: const CustomIcon(Icons.clear),
           ),
-          const Spacer(),
+        ),
+        actions: [
           IconButton(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             icon: Icon(
@@ -127,70 +130,110 @@ class _ImageEditorDrawingState extends State<ImageEditorDrawing> {
           ),
         ],
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: Image.memory(widget.image.image).image,
-            fit: BoxFit.contain,
-          ),
-        ),
-        child: HandSignature(
-          control: control,
-          color: currentColor,
-          width: 1.0,
-          maxWidth: 10.0,
-          type: SignatureDrawType.shape,
+      body: SafeArea(
+        child: Column(
+          children: [
+            BaseImageEditor(builder: (width, height) {
+              return Container(
+                width: width,
+                height: height,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: Image.memory(widget.image.image).image,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                child: HandSignature(
+                  control: control,
+                  color: currentColor,
+                  width: 1.0,
+                  maxWidth: 10.0,
+                  type: SignatureDrawType.shape,
+                ),
+              );
+            }),
+          ],
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          height: 80,
-          decoration: const BoxDecoration(
-            boxShadow: [
-              BoxShadow(blurRadius: 2),
-            ],
-          ),
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              ColorButton(
-                color: Colors.yellow,
-                onTap: (color) {
-                  showModalBottomSheet(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(10),
-                        topLeft: Radius.circular(10),
-                      ),
+      bottomNavigationBar: Container(
+        height: 70 + MediaQuery.of(context).padding.bottom,
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          shape: BoxShape.rectangle,
+        ),
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: <Widget>[
+            ColorButton(
+              color: Colors.yellow,
+              onTap: (color) {
+                showModalBottomSheet(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(10),
                     ),
-                    context: context,
-                    builder: (context) {
-                      return Container(
-                        color: Colors.black87,
-                        padding: const EdgeInsets.all(20),
-                        child: SingleChildScrollView(
-                          child: Container(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: HueRingPicker(
-                              pickerColor: pickerColor,
-                              onColorChanged: changeColor,
-                            ),
+                  ),
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                      color: Colors.black87,
+                      padding: const EdgeInsets.all(20),
+                      child: SingleChildScrollView(
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: HueRingPicker(
+                            pickerColor: pickerColor,
+                            onColorChanged: changeColor,
                           ),
                         ),
-                      );
-                    },
-                  );
-                },
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+            for (int i = 0; i < colorList.length; i++)
+              ColorButton(
+                color: colorList[i],
+                onTap: (color) => changeColor(color),
+                isSelected: colorList[i] == currentColor,
               ),
-              for (int i = 0; i < colorList.length; i++)
-                ColorButton(
-                  color: colorList[i],
-                  onTap: (color) => changeColor(color),
-                  isSelected: colorList[i] == currentColor,
-                ),
-            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ColorButton extends StatelessWidget {
+  final Color color;
+  final Function onTap;
+  final bool isSelected;
+
+  const ColorButton({
+    super.key,
+    required this.color,
+    required this.onTap,
+    this.isSelected = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        onTap(color);
+      },
+      child: Container(
+        height: 34,
+        width: 34,
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 23),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected ? Colors.white : Colors.white54,
+            width: isSelected ? 3 : 1,
           ),
         ),
       ),

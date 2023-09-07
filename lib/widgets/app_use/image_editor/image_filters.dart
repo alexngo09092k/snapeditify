@@ -5,12 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
 import 'package:screenshot/screenshot.dart';
 import 'package:image_editor/image_editor.dart' as image_editor;
+import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
+import 'package:snapeditify/widgets/base/app_card.dart';
+import 'package:snapeditify/widgets/base/custom_icon.dart';
 
-/// Return filter applied Uint8List image
 class ImageFilters extends StatefulWidget {
   final Uint8List image;
-
-  /// apply each filter to given image in background and cache it to improve UX
   final bool useCache;
 
   const ImageFilters({
@@ -32,17 +33,21 @@ class _ImageFiltersState extends State<ImageFilters> {
   ScreenshotController screenshotController = ScreenshotController();
 
   @override
-  void initState() {
-    // decodedImage = img.decodeImage(widget.image)!;
-    // resizedImage = img.copyResize(decodedImage, height: 64).getBytes();
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: Navigator.of(context).pop,
+          child: Container(
+            padding: EdgeInsets.only(
+              right: AppDimensions.instance.padding,
+              left: AppDimensions.instance.padding,
+            ),
+            color: Colors.transparent,
+            child: const CustomIcon(Icons.clear),
+          ),
+        ),
+        elevation: 0,
         actions: [
           IconButton(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -54,52 +59,62 @@ class _ImageFiltersState extends State<ImageFilters> {
           ),
         ],
       ),
-      body: Center(
-        child: Screenshot(
-          controller: screenshotController,
-          child: Stack(
-            children: [
-              Image.memory(
-                widget.image,
-                fit: BoxFit.cover,
-              ),
-              FilterAppliedImage(
-                image: widget.image,
-                filter: selectedFilter,
-                fit: BoxFit.cover,
-                opacity: filterOpacity,
-                onProcess: (img) {
-                  // print('processing done');
-                  filterAppliedImage = img;
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: SafeArea(
-        child: SizedBox(
-          height: 160,
-          child: Column(children: [
-            SizedBox(
-              height: 40,
-              child: selectedFilter == PresetFilters.none
-                  ? Container()
-                  : selectedFilter.build(
-                      Slider(
-                        min: 0,
-                        max: 1,
-                        divisions: 100,
-                        value: filterOpacity,
-                        onChanged: (value) {
-                          filterOpacity = value;
-                          setState(() {});
+      body: SafeArea(
+        child: Column(
+          children: [
+            BaseImageEditor(builder: (_, __) {
+              return Center(
+                child: Screenshot(
+                  controller: screenshotController,
+                  child: Stack(
+                    children: [
+                      Image.memory(
+                        widget.image,
+                        fit: BoxFit.cover,
+                      ),
+                      FilterAppliedImage(
+                        image: widget.image,
+                        filter: selectedFilter,
+                        fit: BoxFit.cover,
+                        opacity: filterOpacity,
+                        onProcess: (img) {
+                          // print('processing done');
+                          filterAppliedImage = img;
                         },
                       ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 160 + MediaQuery.of(context).padding.bottom,
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          shape: BoxShape.rectangle,
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: AppDimensions.instance.padding),
+            selectedFilter == PresetFilters.none
+                ? const SizedBox()
+                : selectedFilter.build(
+                    Slider(
+                      min: 0,
+                      max: 1,
+                      divisions: 100,
+                      value: filterOpacity,
+                      onChanged: (value) {
+                        filterOpacity = value;
+                        setState(() {});
+                      },
                     ),
-            ),
-            SizedBox(
-              height: 120,
+                  ),
+            SizedBox(height: AppDimensions.instance.padding),
+            Expanded(
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
@@ -107,55 +122,55 @@ class _ImageFiltersState extends State<ImageFilters> {
                     filterPreviewButton(
                       filter: presetFiltersList[i],
                       name: presetFiltersList[i].name,
+                      isStart: i == 0,
+                      isEnd: i + 1 == presetFiltersList.length,
                     ),
                 ],
               ),
             ),
-          ]),
+          ],
         ),
       ),
     );
   }
 
-  Widget filterPreviewButton({required filter, required String name}) {
+  Widget filterPreviewButton({
+    required filter,
+    required String name,
+    bool isStart = false,
+    bool isEnd = false,
+  }) {
     return GestureDetector(
       onTap: () {
         selectedFilter = filter;
         setState(() {});
       },
-      child: Column(children: [
-        Container(
-          height: 64,
-          width: 64,
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(48),
-            border: Border.all(
-              color: Colors.black,
-              width: 2,
-            ),
+      child: LayoutBuilder(builder: (_, constraints) {
+        return AppCard(
+          margin: EdgeInsets.symmetric(
+            horizontal: AppDimensions.instance.paddingX(0.5),
+          ).copyWith(
+            bottom: AppDimensions.instance.padding,
+            left: isStart ? AppDimensions.instance.padding : null,
+            right: isEnd ? AppDimensions.instance.padding : null,
           ),
+          width: constraints.maxHeight - AppDimensions.instance.padding,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(48),
+            borderRadius: BorderRadius.all(
+              Radius.circular(AppDimensions.instance.radius),
+            ),
             child: FilterAppliedImage(
               image: widget.image,
               filter: filter,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
-        ),
-        Text(
-          name,
-          style: const TextStyle(fontSize: 12),
-        ),
-      ]),
+        );
+      }),
     );
   }
 }
 
-
-
-/// Short form of Image.memory wrapped in ColorFiltered
 class FilterAppliedImage extends StatelessWidget {
   final Uint8List image;
   final ColorFilterGenerator filter;
@@ -171,9 +186,7 @@ class FilterAppliedImage extends StatelessWidget {
     this.onProcess,
     this.opacity = 1,
   }) {
-    // process filter in background
     if (onProcess != null) {
-      // no filter supplied
       if (filter.filters.isEmpty) {
         onProcess!(image);
         return;
@@ -191,10 +204,7 @@ class FilterAppliedImage extends StatelessWidget {
         if (result != null) {
           onProcess!(result);
         }
-      }).catchError((err, stack) {
-        // print(err);
-        // print(stack);
-      });
+      }).catchError((err, stack) {});
     }
   }
 
