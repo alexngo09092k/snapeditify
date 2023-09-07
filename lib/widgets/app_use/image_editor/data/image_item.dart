@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../image_editor.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 
 class ImageItem {
   int width = 300;
@@ -46,7 +46,7 @@ class ImageItem {
 
       height = decodedImage.height;
       width = decodedImage.width;
-      viewportRatio = viewportSize.height / height;
+      viewportRatio = ImageEditorStorage.instance.viewportSize.height / height;
 
       loader.complete(decodedImage);
     }

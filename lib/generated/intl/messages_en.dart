@@ -52,7 +52,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("Discard changes and revert?"),
         "downloadNow": MessageLookupByLibrary.simpleMessage("Download now"),
-        "en": MessageLookupByLibrary.simpleMessage("English"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "enhance": MessageLookupByLibrary.simpleMessage("Enhance"),
         "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),
@@ -140,7 +139,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Unlock SnapEditify Premium"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
-        "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "withText": MessageLookupByLibrary.simpleMessage("with"),
         "wouldLikeToAccessYourPhotos": MessageLookupByLibrary.simpleMessage(

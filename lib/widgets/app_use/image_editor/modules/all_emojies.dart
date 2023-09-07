@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/data.dart';
 import '../data/layer.dart';
-import '../image_editor.dart';
 
 class Emojies extends StatefulWidget {
   const Emojies({super.key});
@@ -35,7 +34,7 @@ class _EmojiesState extends State<Emojies> {
             const SizedBox(height: 16),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
-                i18n('Select Emoji'),
+                'Select Emoji',
                 style: const TextStyle(color: Colors.white),
               ),
             ]),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import '../data/layer.dart';
-import '../image_editor.dart';
 import 'colors_picker.dart';
 
 class TextLayerOverlay extends StatefulWidget {
@@ -43,7 +43,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
           const SizedBox(height: 10),
           Center(
             child: Text(
-              i18n('Size Adjust').toUpperCase(),
+              'Size Adjust',
               style: const TextStyle(color: Colors.white),
             ),
           ),
@@ -79,7 +79,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
               Container(
                 padding: const EdgeInsets.only(left: 16),
                 child: Text(
-                  i18n('Color'),
+                  'Color',
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
@@ -107,7 +107,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                       widget.onUpdate();
                     });
                   },
-                  child: Text(i18n('Reset'),
+                  child: Text('Reset',
                       style: const TextStyle(color: Colors.white)),
                 ),
                 const SizedBox(width: 16),
@@ -116,7 +116,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
               Container(
                 padding: const EdgeInsets.only(left: 16),
                 child: Text(
-                  i18n('Background Color'),
+                  'Background Color',
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
@@ -145,7 +145,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                     });
                   },
                   child: Text(
-                    i18n('Reset'),
+                    'Reset',
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
@@ -155,7 +155,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
               Container(
                 padding: const EdgeInsets.only(left: 16),
                 child: Text(
-                  i18n('Background Opacity'),
+                  'Background Opacity',
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
@@ -184,7 +184,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                     });
                   },
                   child: Text(
-                    i18n('Reset'),
+                    'Reset',
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
@@ -197,7 +197,8 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
             Expanded(
               child: TextButton(
                 onPressed: () {
-                  removedLayers.add(layers.removeAt(widget.index));
+                  ImageEditorStorage.instance.removedLayers.add(
+                      ImageEditorStorage.instance.layers.removeAt(widget.index));
 
                   Navigator.pop(context);
                   widget.onUpdate();
@@ -205,7 +206,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   // setState(() {});
                 },
                 child: Text(
-                  i18n('Remove'),
+                  'Remove',
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

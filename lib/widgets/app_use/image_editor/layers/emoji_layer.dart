@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import '../data/layer.dart';
-import '../image_editor.dart';
 import '../modules/emoji_layer_overlay.dart';
 
 /// Emoji layer
@@ -42,7 +42,7 @@ class _EmojiLayerState extends State<EmojiLayer> {
             context: context,
             builder: (context) {
               return EmojiLayerOverlay(
-                index: layers.indexOf(widget.layerData),
+                index: ImageEditorStorage.instance.layers.indexOf(widget.layerData),
                 layer: widget.layerData,
                 onUpdate: () {
                   if (widget.onUpdate != null) widget.onUpdate!();

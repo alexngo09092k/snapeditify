@@ -74,7 +74,9 @@ ThemeData getLightTheme(BuildContext context, {double scale = 1}) {
     scaffoldBackgroundColor: AppColors.instance.lightBackground,
 
     /// ====================== STATUS BAR ======================
-    appBarTheme: base.appBarTheme,
+    appBarTheme: base.appBarTheme.copyWith(
+      backgroundColor: AppColors.instance.lightBackground,
+    ),
 
     buttonTheme: base.buttonTheme,
 

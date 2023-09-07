@@ -74,7 +74,9 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     scaffoldBackgroundColor: AppColors.instance.darkBackground,
 
     /// ====================== STATUS BAR ======================
-    appBarTheme: base.appBarTheme,
+    appBarTheme: base.appBarTheme.copyWith(
+      backgroundColor: AppColors.instance.darkBackground,
+    ),
 
     buttonTheme: base.buttonTheme,
 

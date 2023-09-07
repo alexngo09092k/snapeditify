@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import '../data/layer.dart';
-import '../image_editor.dart';
 
 class EmojiLayerOverlay extends StatefulWidget {
   final int index;
@@ -42,7 +42,7 @@ class _EmojiLayerOverlayState extends State<EmojiLayerOverlay> {
           const SizedBox(height: 10),
           Center(
             child: Text(
-              i18n('Size Adjust').toUpperCase(),
+              'Size Adjust',
               style: const TextStyle(color: Colors.white),
             ),
           ),
@@ -72,14 +72,14 @@ class _EmojiLayerOverlayState extends State<EmojiLayerOverlay> {
             Expanded(
               child: TextButton(
                 onPressed: () {
-                  removedLayers.add(layers.removeAt(widget.index));
+                  ImageEditorStorage.instance.removedLayers.add(ImageEditorStorage.instance.layers.removeAt(widget.index));
                   Navigator.pop(context);
                   widget.onUpdate();
                   // back(context);
                   // setState(() {});
                 },
                 child: Text(
-                  i18n('Remove'),
+                  'Remove',
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

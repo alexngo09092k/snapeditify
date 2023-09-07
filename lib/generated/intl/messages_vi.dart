@@ -52,7 +52,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage(
             "Hủy các thay đổi và hoàn nguyên?"),
         "downloadNow": MessageLookupByLibrary.simpleMessage("Tải ngay"),
-        "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "english": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "enhance": MessageLookupByLibrary.simpleMessage("Làm nét"),
         "enhanceImage":
@@ -142,8 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mở khóa SnapEditify cao cấp"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "version": MessageLookupByLibrary.simpleMessage("Phiên bản"),
-        "vi": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
-        "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
+        "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "withText": MessageLookupByLibrary.simpleMessage("với"),
         "wouldLikeToAccessYourPhotos":
             MessageLookupByLibrary.simpleMessage("muốn truy cập ảnh của bạn"),
