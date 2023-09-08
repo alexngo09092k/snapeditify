@@ -14,7 +14,7 @@ enum RemoveObjectMode {
 class RemoveObjectState extends EditImageState {
   RemoveObjectState({
     RemoveObjectMode mode = RemoveObjectMode.brush,
-    Color strokeColor = Colors.red,
+    Color strokeColor = const Color.fromRGBO(239, 54, 41, 0.5),
     double strokeWidth = 40,
     List<Drawable>? drawables,
   }) {

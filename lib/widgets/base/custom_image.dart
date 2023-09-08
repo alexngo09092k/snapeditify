@@ -64,7 +64,7 @@ class ImagePlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      placeHolder ?? AppAssets.instance.placeholder,
+      placeHolder ?? AppAssets.instance.imagePlaceholder,
       width: width,
       height: height,
       fit: BoxFit.fill,

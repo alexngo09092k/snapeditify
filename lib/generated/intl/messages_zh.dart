@@ -24,7 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("％ 准确的"),
         "after": MessageLookupByLibrary.simpleMessage("后"),
-        "ai": MessageLookupByLibrary.simpleMessage("人工智能"),
+        "ai": MessageLookupByLibrary.simpleMessage("AI"),
         "aiDetection": MessageLookupByLibrary.simpleMessage("人工智能检测"),
         "albums": MessageLookupByLibrary.simpleMessage("专辑"),
         "allChangesWillBeLostAreYouSureYouWant":
@@ -61,7 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("保存图片失败，请重试。"),
         "feedback": MessageLookupByLibrary.simpleMessage("反馈"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("反馈至"),
-        "hot": MessageLookupByLibrary.simpleMessage("热的"),
+        "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "imageOnly": MessageLookupByLibrary.simpleMessage("仅图像"),
         "languages": MessageLookupByLibrary.simpleMessage("语言"),
         "later": MessageLookupByLibrary.simpleMessage("之后"),

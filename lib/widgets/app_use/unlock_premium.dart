@@ -27,7 +27,7 @@ class UnlockPremium extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
               image: DecorationImage(
-                image: AssetImage(AppAssets.instance.placeholder),
+                image: AssetImage(AppAssets.instance.premiumPlaceholder),
                 fit: BoxFit.cover,
               ),
             ),

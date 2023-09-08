@@ -57,7 +57,6 @@ class BGEffectItemItem extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
                 child: CustomImage(
                   image: effect.thumbnailUrl,
-                  placeholder: AppAssets.instance.animePlaceholder,
                   fit: BoxFit.fill,
                 ),
               ),

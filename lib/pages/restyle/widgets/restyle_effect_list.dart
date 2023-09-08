@@ -71,7 +71,6 @@ class StyleItem extends StatelessWidget {
                   width: width, 
                   height: height,
                   fit: BoxFit.fill,
-                  placeholder: AppAssets.instance.animePlaceholder,
                 ),
               ),
               builder: (_, child, ___, styleId) {

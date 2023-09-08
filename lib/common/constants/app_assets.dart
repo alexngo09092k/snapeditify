@@ -22,8 +22,8 @@ class AppAssets {
   static const String imagePath = 'assets/images';
 
   final String logo = "$imagePath/logo.png";
-  final String placeholder = "$imagePath/placeholder.png";
-  final String animePlaceholder = "$imagePath/anime.png";
+  final String premiumPlaceholder = "$imagePath/premium_placeholder.png";
+  final String imagePlaceholder = "$imagePath/image_placeholder.png";
   final String bgTransparent = "$imagePath/bg-transparent.png";
   final String noImage = "$imagePath/no_image.png";
 

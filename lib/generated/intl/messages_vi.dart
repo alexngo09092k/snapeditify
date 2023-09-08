@@ -23,8 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% chính xác"),
-        "after": MessageLookupByLibrary.simpleMessage("Sau đó"),
-        "ai": MessageLookupByLibrary.simpleMessage("trí tuệ nhân tạo"),
+        "after": MessageLookupByLibrary.simpleMessage("Sau"),
+        "ai": MessageLookupByLibrary.simpleMessage("AI"),
         "aiDetection": MessageLookupByLibrary.simpleMessage("Phát hiện AI"),
         "albums": MessageLookupByLibrary.simpleMessage("Tập ảnh"),
         "allChangesWillBeLostAreYouSureYouWant":
@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Tất cả các thay đổi sẽ bị mất. "),
         "allChangesWillBeLostYourImageWillBeReverted":
             MessageLookupByLibrary.simpleMessage(
-                "Tất cả các thay đổi sẽ bị mất. "),
+                "Tất cả các thay đổi sẽ bị mất."),
         "allow": MessageLookupByLibrary.simpleMessage("Cho phép"),
         "animeAi": MessageLookupByLibrary.simpleMessage("AI Anime"),
         "applyEffects":
@@ -43,10 +43,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hiệu ứng nghệ thuật"),
         "auto": MessageLookupByLibrary.simpleMessage("Tự động"),
         "before": MessageLookupByLibrary.simpleMessage("Trước"),
-        "brush": MessageLookupByLibrary.simpleMessage("Chải"),
+        "brush": MessageLookupByLibrary.simpleMessage("Vẽ"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy bỏ"),
         "changeSky": MessageLookupByLibrary.simpleMessage("Thay đổi bầu trời"),
-        "chinese": MessageLookupByLibrary.simpleMessage("người Trung Quốc"),
+        "chinese": MessageLookupByLibrary.simpleMessage("Trung Quốc"),
         "createIdPhoto": MessageLookupByLibrary.simpleMessage("Tạo ảnh ID"),
         "creatingVideoEffectsFailedPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
@@ -69,7 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không lưu được hình ảnh, vui lòng thử lại."),
         "feedback": MessageLookupByLibrary.simpleMessage("Nhận xét"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Phản hồi tới"),
-        "hot": MessageLookupByLibrary.simpleMessage("NÓNG"),
+        "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "imageOnly": MessageLookupByLibrary.simpleMessage("Chỉ hình ảnh"),
         "languages": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "later": MessageLookupByLibrary.simpleMessage("Sau đó"),
@@ -95,13 +95,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
             "Vui lòng thử lại hoặc mở lại ứng dụng."),
         "rateSnapeditify":
-            MessageLookupByLibrary.simpleMessage("Đánh giá SnapChỉnh sửa"),
+            MessageLookupByLibrary.simpleMessage("Đánh giá SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("Di dời"),
         "removeBackground": MessageLookupByLibrary.simpleMessage("Gỡ bỏ nền"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Xóa đối tượng"),
-        "removed": MessageLookupByLibrary.simpleMessage("LOẠI BỎ"),
+        "removed": MessageLookupByLibrary.simpleMessage("Đã xoá"),
         "restore": MessageLookupByLibrary.simpleMessage("Khôi phục"),
-        "restyle": MessageLookupByLibrary.simpleMessage("Phong cách lại"),
+        "restyle": MessageLookupByLibrary.simpleMessage("Phong cách"),
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
         "saveImage": MessageLookupByLibrary.simpleMessage("Lưu hình ảnh"),
         "saveImageLimit":
@@ -113,10 +113,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Gửi"),
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "share": MessageLookupByLibrary.simpleMessage("Chia sẻ"),
-        "suggested": MessageLookupByLibrary.simpleMessage("được đề xuất"),
+        "suggested": MessageLookupByLibrary.simpleMessage("Đề xuất"),
         "team": MessageLookupByLibrary.simpleMessage("Đội"),
         "teamToSupport": MessageLookupByLibrary.simpleMessage("Đội để hỗ trợ."),
-        "thailand": MessageLookupByLibrary.simpleMessage("nước Thái Lan"),
+        "thailand": MessageLookupByLibrary.simpleMessage("Thái Lan"),
         "toAccessPhotosOnYourDeviceToEditOrShare":
             MessageLookupByLibrary.simpleMessage(
                 "để truy cập ảnh trên thiết bị của bạn để chỉnh sửa hoặc chia sẻ hình ảnh."),

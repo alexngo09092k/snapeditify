@@ -68,7 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ไม่สามารถบันทึกภาพได้ โปรดลองอีกครั้ง"),
         "feedback": MessageLookupByLibrary.simpleMessage("ข้อเสนอแนะ"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("ข้อเสนอแนะถึง"),
-        "hot": MessageLookupByLibrary.simpleMessage("ร้อน"),
+        "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "imageOnly": MessageLookupByLibrary.simpleMessage("รูปภาพเท่านั้น"),
         "languages": MessageLookupByLibrary.simpleMessage("ภาษา"),
         "later": MessageLookupByLibrary.simpleMessage("ภายหลัง"),
