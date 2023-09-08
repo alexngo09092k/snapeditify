@@ -103,11 +103,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "radius": MessageLookupByLibrary.simpleMessage("Bán kính"),
         "rateSnapeditify":
             MessageLookupByLibrary.simpleMessage("Đánh giá SnapEditify"),
-        "remove": MessageLookupByLibrary.simpleMessage("Di dời"),
+        "remove": MessageLookupByLibrary.simpleMessage("Xoá"),
         "removeBackground": MessageLookupByLibrary.simpleMessage("Gỡ bỏ nền"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Xóa đối tượng"),
         "removed": MessageLookupByLibrary.simpleMessage("Đã xoá"),
-        "reset": MessageLookupByLibrary.simpleMessage("Cài lại"),
+        "reset": MessageLookupByLibrary.simpleMessage("Đặt lại"),
         "restore": MessageLookupByLibrary.simpleMessage("Khôi phục"),
         "restyle": MessageLookupByLibrary.simpleMessage("Phong cách"),
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
@@ -117,7 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveVideo": MessageLookupByLibrary.simpleMessage("Lưu video"),
         "savedImage": MessageLookupByLibrary.simpleMessage("Hình ảnh đã lưu"),
         "savedVideo": MessageLookupByLibrary.simpleMessage("Video đã lưu"),
-        "seeAll": MessageLookupByLibrary.simpleMessage("Nhìn thấy tất cả"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "selectBackgroundColorAndPhotoRatio":
             MessageLookupByLibrary.simpleMessage("Chọn màu nền và tỷ lệ ảnh"),
         "selectEmoji":

@@ -13,7 +13,7 @@
   "notFoundImages": "Không tìm thấy hình ảnh",
   "objects": "Các đối tượng",
   "accurate": "% chính xác",
-  "remove": "Di dời",
+  "remove": "Xoá",
   "removed": "Đã xoá",
   "noPotentialObjectHasBeenDetected": "Không có đối tượng tiềm năng đã được phát hiện.",
   "auto": "Tự động",
@@ -93,7 +93,7 @@
   "size": "Kích cỡ",
   "filterColor": "Bộ lọc màu",
   "color": "Màu sắc",
-  "reset": "Cài lại",
+  "reset": "Đặt lại",
   "radius": "Bán kính",
   "opacity": "Độ mờ",
   "textSize": "Cỡ chữ",
@@ -101,6 +101,6 @@
   "bgColor": "Màu nền",
   "bgOpacity": "Độ mờ của nền",
   "blackColor": "Màu đen",
-  "seeAll": "Nhìn thấy tất cả",
+  "seeAll": "Tất cả",
   "savedVideo": "Video đã lưu"
 }

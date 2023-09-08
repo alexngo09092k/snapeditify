@@ -34,7 +34,7 @@ class _ImageLayerOverlayState extends State<ImageLayerOverlay> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 180,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
         borderRadius: BorderRadius.only(
@@ -80,6 +80,7 @@ class _ImageLayerOverlayState extends State<ImageLayerOverlay> {
               ),
             ],
           ),
+          SizedBox(height: AppDimensions.instance.padding),
           CustomButton(
             title: S.of(context).remove,
             height: 45,

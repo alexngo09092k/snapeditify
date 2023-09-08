@@ -111,7 +111,10 @@ abstract class EditImageProvider extends Provider {
           builder: (_) => SavedImagePreview(
             editedImage: editedImage!,
             imageTool: provider.imageTool,
-            onNewEditImage: (__) => AppRoutes.instance.goEditImagePage(context, bytes: editedImage!.imageBytes, imageTool: __),
+            onNewEditImage: (__) {
+              Navigator.of(context).pop();
+              AppRoutes.instance.goEditImagePage(context, bytes: editedImage!.imageBytes, imageTool: __);
+            },
             savedFile: _savedFile!,
             onShare: () => Share.shareXFiles(
               [XFile(savedFile!.path)],
