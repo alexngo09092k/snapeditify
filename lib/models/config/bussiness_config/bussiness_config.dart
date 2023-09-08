@@ -56,7 +56,7 @@ class BusinessConfig {
       appBio: "AI powered photo editor",
       protocols: ['https://', 'http://', 'data:'],
       prefix: "app.snapeditify.studio.",
-      contact: "contact.snapeditify@gmail.com",
+      contact: "hasoft.company@gmail.com",
       shareApp: ShareApp(
         links: {
           AppPlatform.android: 'https://appgallery.huawei.com/app/C107645049',

@@ -38,7 +38,7 @@ const enviroment = {
     'prefix': 'app.snapeditify.studio.',
 
     /// Contact
-    'contact': 'contact.snapeditify@gmail.com',
+    'contact': 'hasoft.company@gmail.com',
 
     /// Social Networks
     'socialNetworks': [
