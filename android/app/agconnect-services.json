@@ -91,6 +91,20 @@
 				"client_type":1,
 				"client_id":"107645049"
 			}
+		},
+		{
+			"package_name":"com.snapeditify.scanner",
+			"client":{
+				"app_id":"108714985"
+			},
+			"app_info":{
+				"package_name":"com.snapeditify.scanner",
+				"app_id":"108714985"
+			},
+			"oauth_client":{
+				"client_type":1,
+				"client_id":"108714985"
+			}
 		}
 	]
 }
