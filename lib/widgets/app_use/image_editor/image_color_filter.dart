@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
-import 'package:snapeditify/widgets/app_use/image_editor/modules/colors_picker.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/colors_picker.dart';
 
 class ImageColorFilter extends StatefulWidget {
   const ImageColorFilter({

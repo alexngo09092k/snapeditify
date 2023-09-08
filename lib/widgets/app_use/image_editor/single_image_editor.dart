@@ -19,8 +19,8 @@ import 'layers/background_layer.dart';
 import 'layers/emoji_layer.dart';
 import 'layers/image_layer.dart';
 import 'layers/text_layer.dart';
-import 'modules/all_emojies.dart';
-import 'modules/text.dart';
+import 'all_emojies.dart';
+import 'text.dart';
 import 'utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:screenshot/screenshot.dart';
@@ -488,6 +488,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   icon: Icons.check,
                   onTap: onSave,
                 ),
+                SizedBox(width: AppDimensions.instance.paddingX(0.5)),
               ]),
             ),
           ),

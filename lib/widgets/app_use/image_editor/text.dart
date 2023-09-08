@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/single_image_editor.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
-import '../data/layer.dart';
+import 'data/layer.dart';
 
 import 'colors_picker.dart';
 
@@ -35,46 +36,42 @@ class _TextEditorImageState extends State<TextEditorImage> {
           ),
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.align_horizontal_left,
-                color: align == TextAlign.left
-                    ? Theme.of(context).colorScheme.primary
-                    : null),
-            onPressed: () {
+          FeatureButton(
+            icon: Icons.align_horizontal_left,
+            color: align == TextAlign.left
+                ? Theme.of(context).colorScheme.primary
+                : null,
+            onTap: () {
               setState(() {
                 align = TextAlign.left;
               });
             },
           ),
-          IconButton(
-            icon: Icon(
-              Icons.align_horizontal_center,
-              color: align == TextAlign.center
-                  ? Theme.of(context).colorScheme.primary
-                  : null,
-            ),
-            onPressed: () {
+          FeatureButton(
+            icon: Icons.align_horizontal_center,
+            color: align == TextAlign.center
+                ? Theme.of(context).colorScheme.primary
+                : null,
+            onTap: () {
               setState(() {
                 align = TextAlign.center;
               });
             },
           ),
-          IconButton(
-            icon: Icon(
-              Icons.align_horizontal_right,
-              color: align == TextAlign.right
-                  ? Theme.of(context).colorScheme.primary
-                  : null,
-            ),
-            onPressed: () {
+          FeatureButton(
+            icon: Icons.align_horizontal_right,
+            color: align == TextAlign.right
+                ? Theme.of(context).colorScheme.primary
+                : null,
+            onTap: () {
               setState(() {
                 align = TextAlign.right;
               });
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: () {
+          FeatureButton(
+            icon: Icons.check,
+            onTap: () {
               Navigator.pop(
                 context,
                 TextLayerData(
@@ -86,7 +83,8 @@ class _TextEditorImageState extends State<TextEditorImage> {
                 ),
               );
             },
-          )
+          ),
+          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
         ],
         elevation: 0,
       ),
@@ -134,7 +132,8 @@ class _TextEditorImageState extends State<TextEditorImage> {
                         Expanded(
                           child: LayoutBuilder(builder: (_, constraints) {
                             return BarColorPicker(
-                              width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                              width: constraints.maxWidth -
+                                  AppDimensions.instance.paddingX(2),
                               thumbColor: Theme.of(context).colorScheme.primary,
                               cornerRadius: AppDimensions.instance.radius,
                               pickMode: PickMode.color,
@@ -165,8 +164,10 @@ class _TextEditorImageState extends State<TextEditorImage> {
                           child: LayoutBuilder(
                             builder: (_, constraints) {
                               return BarColorPicker(
-                                width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
-                                thumbColor: Theme.of(context).colorScheme.primary,
+                                width: constraints.maxWidth -
+                                    AppDimensions.instance.paddingX(2),
+                                thumbColor:
+                                    Theme.of(context).colorScheme.primary,
                                 cornerRadius: 10,
                                 pickMode: PickMode.grey,
                                 colorListener: (int value) {

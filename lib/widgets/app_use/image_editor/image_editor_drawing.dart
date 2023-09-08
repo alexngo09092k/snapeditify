@@ -3,6 +3,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:hand_signature/signature.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/single_image_editor.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'data/image_item.dart';
 
@@ -80,15 +81,12 @@ class _ImageEditorDrawingState extends State<ImageEditorDrawing> {
           ),
         ),
         actions: [
-          IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            icon: Icon(
-              Icons.undo,
-              color: control.paths.isNotEmpty
-                  ? Colors.white
-                  : Colors.white.withAlpha(80),
-            ),
-            onPressed: () {
+          FeatureButton(
+            icon: Icons.undo,
+            color: control.paths.isNotEmpty
+                ? Colors.white
+                : Colors.white.withAlpha(80),
+            onTap: () {
               if (control.paths.isEmpty) return;
               skipNextEvent = true;
               undoList.add(control.paths.last);
@@ -96,25 +94,20 @@ class _ImageEditorDrawingState extends State<ImageEditorDrawing> {
               setState(() {});
             },
           ),
-          IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            icon: Icon(
-              Icons.redo,
-              color: undoList.isNotEmpty
-                  ? Colors.white
-                  : Colors.white.withAlpha(80),
-            ),
-            onPressed: () {
+          FeatureButton(
+            icon: Icons.redo,
+            color:
+                undoList.isNotEmpty ? Colors.white : Colors.white.withAlpha(80),
+            onTap: () {
               if (undoList.isEmpty) return;
 
               control.paths.add(undoList.removeLast());
               setState(() {});
             },
           ),
-          IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            icon: const Icon(Icons.check),
-            onPressed: () async {
+          FeatureButton(
+            icon: Icons.check,
+            onTap: () async {
               if (control.paths.isEmpty) return Navigator.pop(context);
 
               var data = await control.toImage(
@@ -128,6 +121,7 @@ class _ImageEditorDrawingState extends State<ImageEditorDrawing> {
               return Navigator.pop(context, data!.buffer.asUint8List());
             },
           ),
+          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
         ],
       ),
       body: SafeArea(

@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
-import '../data/data.dart';
-import '../data/layer.dart';
+import 'data/data.dart';
+import 'data/layer.dart';
 
-class Emojies extends StatefulWidget {
+class Emojies extends StatelessWidget {
   const Emojies({super.key});
 
-  @override
-  createState() => _EmojiesState();
-}
-
-class _EmojiesState extends State<Emojies> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

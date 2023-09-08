@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
-import '../data/layer.dart';
+import 'data/layer.dart';
 
 class ImageLayerOverlay extends StatefulWidget {
   final int index;

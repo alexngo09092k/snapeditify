@@ -38,18 +38,21 @@ class RemoveObjectControl extends StatelessWidget {
                     /// AI BUTTON
                     GestureDetector(
                       onTap: () => p.toAI(context),
-                      child: Column(
-                        children: [
-                          CustomIcon(AppAssets.instance.icAI),
-                          SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text('${S.of(context).auto} ', style: Theme.of(context).textTheme.bodyLarge),
-                              const AIIcon(),
-                            ],
-                          ),
-                        ],
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Column(
+                          children: [
+                            CustomIcon(AppAssets.instance.icAI),
+                            SizedBox(height: AppDimensions.instance.paddingX(0.5)),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('${S.of(context).auto} ', style: Theme.of(context).textTheme.bodyLarge),
+                                const AIIcon(),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import '../data/layer.dart';
-import '../modules/emoji_layer_overlay.dart';
+import '../emoji_layer_overlay.dart';
 
 /// Emoji layer
 class EmojiLayer extends StatefulWidget {

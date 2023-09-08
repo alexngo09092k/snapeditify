@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:image_editor/image_editor.dart' as image_editor;
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/single_image_editor.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 import 'utils.dart';
 
@@ -65,11 +66,8 @@ class _ImageCropperState extends State<ImageCropper> {
         ),
         elevation: 0,
         actions: [
-          GestureDetector(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: const Icon(Icons.check),
-            ),
+          FeatureButton(
+            icon: Icons.check,
             onTap: () async {
               ExtendedImageEditorState? state = _controller.currentState;
               if (state == null) return;
@@ -78,6 +76,7 @@ class _ImageCropperState extends State<ImageCropper> {
               if (mounted) Navigator.pop(context, data);
             },
           ),
+          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
         ],
       ),
       body: SafeArea(
@@ -110,18 +109,12 @@ class _ImageCropperState extends State<ImageCropper> {
           scrollDirection: Axis.horizontal,
           children: [
             if (aspectRatioOriginal != null && aspectRatioOriginal != 1)
-              IconButton(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-                icon: Icon(
-                  Icons.portrait,
-                  color: isLandscape
-                      ? Theme.of(context).iconTheme.color
-                      : Theme.of(context).primaryColor,
-                ),
-                onPressed: () {
+              FeatureButton(
+                icon: Icons.portrait,
+                color: isLandscape
+                    ? Theme.of(context).iconTheme.color
+                    : Theme.of(context).primaryColor,
+                onTap: () {
                   isLandscape = false;
                   if (aspectRatioOriginal != null) {
                     aspectRatio = 1 / aspectRatioOriginal!;
@@ -130,18 +123,12 @@ class _ImageCropperState extends State<ImageCropper> {
                 },
               ),
             if (aspectRatioOriginal != null && aspectRatioOriginal != 1)
-              IconButton(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-                icon: Icon(
-                  Icons.landscape,
-                  color: isLandscape
-                      ? Theme.of(context).iconTheme.color
-                      : Theme.of(context).primaryColor,
-                ),
-                onPressed: () {
+              FeatureButton(
+                icon: Icons.landscape,
+                color: isLandscape
+                    ? Theme.of(context).iconTheme.color
+                    : Theme.of(context).primaryColor,
+                onTap: () {
                   isLandscape = true;
                   aspectRatio = aspectRatioOriginal!;
                   setState(() {});

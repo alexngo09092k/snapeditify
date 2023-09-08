@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import '../data/layer.dart';
-import '../modules/image_layer_overlay.dart';
+import '../image_layer_overlay.dart';
 
 /// Image layer that can be used to add overlay images and drawings
 class ImageLayer extends StatefulWidget {

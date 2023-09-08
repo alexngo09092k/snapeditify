@@ -7,6 +7,7 @@ import 'package:screenshot/screenshot.dart';
 import 'package:image_editor/image_editor.dart' as image_editor;
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
+import 'package:snapeditify/widgets/app_use/image_editor/single_image_editor.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
@@ -49,14 +50,14 @@ class _ImageFiltersState extends State<ImageFilters> {
         ),
         elevation: 0,
         actions: [
-          IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            icon: const Icon(Icons.check),
-            onPressed: () async {
+          FeatureButton(
+            icon: Icons.check,
+            onTap: () async {
               var data = await screenshotController.capture();
               if (mounted) Navigator.pop(context, data);
             },
           ),
+          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
         ],
       ),
       body: SafeArea(

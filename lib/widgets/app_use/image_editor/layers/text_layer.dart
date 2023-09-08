@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import '../data/layer.dart';
-import '../modules/text_layer_overlay.dart';
+import '../text_layer_overlay.dart';
 
 /// Text layer
 class TextLayer extends StatefulWidget {

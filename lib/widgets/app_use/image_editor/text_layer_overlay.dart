@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
-import '../data/layer.dart';
+import 'data/layer.dart';
 import 'colors_picker.dart';
 
 class TextLayerOverlay extends StatefulWidget {
@@ -87,7 +87,8 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
               Expanded(
                 child: LayoutBuilder(builder: (_, constraints) {
                   return BarColorPicker(
-                    width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                    width: constraints.maxWidth -
+                        AppDimensions.instance.paddingX(2),
                     thumbColor: Theme.of(context).colorScheme.primary,
                     initialColor: widget.layer.color,
                     cornerRadius: 10,
@@ -134,7 +135,8 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
               Expanded(
                 child: LayoutBuilder(builder: (_, constraints) {
                   return BarColorPicker(
-                    width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                    width: constraints.maxWidth -
+                        AppDimensions.instance.paddingX(2),
                     initialColor: widget.layer.background,
                     thumbColor: Theme.of(context).colorScheme.primary,
                     cornerRadius: 10,
@@ -215,7 +217,8 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
             title: "Remove",
             height: 45,
             onTap: () {
-              ImageEditorStorage.instance.removedLayers.add(ImageEditorStorage.instance.layers.removeAt(widget.index));
+              ImageEditorStorage.instance.removedLayers.add(
+                  ImageEditorStorage.instance.layers.removeAt(widget.index));
               Navigator.pop(context);
               widget.onUpdate();
             },
