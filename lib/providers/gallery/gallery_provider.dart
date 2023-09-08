@@ -279,7 +279,7 @@ class GalleryProvider extends IGalleryProvider {
     ],
     ImageTool.applyArtEffect: [
       AppAssets.instance.restyle1,
-      AppAssets.instance.restore2,
+      AppAssets.instance.restyle2,
       AppAssets.instance.restyle3,
     ],
     ImageTool.changeYourSky: [

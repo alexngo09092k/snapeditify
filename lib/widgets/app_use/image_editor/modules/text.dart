@@ -36,7 +36,10 @@ class _TextEditorImageState extends State<TextEditorImage> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.align_horizontal_left, color: align == TextAlign.left? Theme.of(context).colorScheme.primary: null),
+            icon: Icon(Icons.align_horizontal_left,
+                color: align == TextAlign.left
+                    ? Theme.of(context).colorScheme.primary
+                    : null),
             onPressed: () {
               setState(() {
                 align = TextAlign.left;
@@ -45,8 +48,10 @@ class _TextEditorImageState extends State<TextEditorImage> {
           ),
           IconButton(
             icon: Icon(
-              Icons.align_horizontal_center, 
-              color: align == TextAlign.center? Theme.of(context).colorScheme.primary: null,
+              Icons.align_horizontal_center,
+              color: align == TextAlign.center
+                  ? Theme.of(context).colorScheme.primary
+                  : null,
             ),
             onPressed: () {
               setState(() {
@@ -57,7 +62,9 @@ class _TextEditorImageState extends State<TextEditorImage> {
           IconButton(
             icon: Icon(
               Icons.align_horizontal_right,
-              color: align == TextAlign.right? Theme.of(context).colorScheme.primary: null,
+              color: align == TextAlign.right
+                  ? Theme.of(context).colorScheme.primary
+                  : null,
             ),
             onPressed: () {
               setState(() {
@@ -101,8 +108,8 @@ class _TextEditorImageState extends State<TextEditorImage> {
                   minLines: 5,
                   maxLines: 99999,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: currentColor,
-                  ),
+                        color: currentColor,
+                      ),
                   autofocus: true,
                 ),
               ),
@@ -118,14 +125,17 @@ class _TextEditorImageState extends State<TextEditorImage> {
                           width: 80,
                           child: Text(
                             'Color',
-                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontWeight: FontWeight.w700),
                           ),
                         ),
                         Expanded(
                           child: LayoutBuilder(builder: (_, constraints) {
                             return BarColorPicker(
                               width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
-                              thumbColor: AppColors.instance.white,
+                              thumbColor: Theme.of(context).colorScheme.primary,
                               cornerRadius: AppDimensions.instance.radius,
                               pickMode: PickMode.color,
                               colorListener: (int value) {
@@ -145,7 +155,10 @@ class _TextEditorImageState extends State<TextEditorImage> {
                           width: 80,
                           child: Text(
                             'Black Color',
-                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontWeight: FontWeight.w700),
                           ),
                         ),
                         Expanded(
@@ -153,7 +166,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
                             builder: (_, constraints) {
                               return BarColorPicker(
                                 width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
-                                thumbColor: Colors.white,
+                                thumbColor: Theme.of(context).colorScheme.primary,
                                 cornerRadius: 10,
                                 pickMode: PickMode.grey,
                                 colorListener: (int value) {
@@ -174,7 +187,10 @@ class _TextEditorImageState extends State<TextEditorImage> {
                           width: 65,
                           child: Text(
                             'Text Size',
-                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontWeight: FontWeight.w700),
                           ),
                         ),
                         Expanded(

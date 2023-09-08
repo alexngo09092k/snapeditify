@@ -44,7 +44,10 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                 width: 60,
                 child: Text(
                   'Text Size',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
               Expanded(
@@ -75,27 +78,28 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                 width: 80,
                 child: Text(
                   'Text Color',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
               Expanded(
-                child: LayoutBuilder(
-                  builder: (_, constraints) {
-                    return BarColorPicker(
-                      width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
-                      thumbColor: Theme.of(context).colorScheme.primary,
-                      initialColor: widget.layer.color,
-                      cornerRadius: 10,
-                      pickMode: PickMode.color,
-                      colorListener: (int value) {
-                        setState(() {
-                          widget.layer.color = Color(value);
-                          widget.onUpdate();
-                        });
-                      },
-                    );
-                  }
-                ),
+                child: LayoutBuilder(builder: (_, constraints) {
+                  return BarColorPicker(
+                    width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                    thumbColor: Theme.of(context).colorScheme.primary,
+                    initialColor: widget.layer.color,
+                    cornerRadius: 10,
+                    pickMode: PickMode.color,
+                    colorListener: (int value) {
+                      setState(() {
+                        widget.layer.color = Color(value);
+                        widget.onUpdate();
+                      });
+                    },
+                  );
+                }),
               ),
               TextButton(
                 onPressed: () {
@@ -104,9 +108,12 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                     widget.onUpdate();
                   });
                 },
-                child:Text(
+                child: Text(
                   'Reset',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
             ],
@@ -118,27 +125,28 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                 width: 80,
                 child: Text(
                   'BG Color',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
               Expanded(
-                child: LayoutBuilder(
-                  builder: (_, constraints) {
-                    return BarColorPicker(
-                      width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
-                      initialColor: widget.layer.background,
-                      thumbColor: Theme.of(context).colorScheme.primary,
-                      cornerRadius: 10,
-                      pickMode: PickMode.color,
-                      colorListener: (int value) {
-                        setState(() {
-                          widget.layer.background = Color(value);
-                          widget.onUpdate();
-                        });
-                      },
-                    );
-                  }
-                ),
+                child: LayoutBuilder(builder: (_, constraints) {
+                  return BarColorPicker(
+                    width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                    initialColor: widget.layer.background,
+                    thumbColor: Theme.of(context).colorScheme.primary,
+                    cornerRadius: 10,
+                    pickMode: PickMode.color,
+                    colorListener: (int value) {
+                      setState(() {
+                        widget.layer.background = Color(value);
+                        widget.onUpdate();
+                      });
+                    },
+                  );
+                }),
               ),
               TextButton(
                 onPressed: () {
@@ -149,7 +157,10 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                 },
                 child: Text(
                   'Reset',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
             ],
@@ -161,7 +172,10 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                 width: 60,
                 child: Text(
                   'BG Opacity',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
               Expanded(
@@ -170,7 +184,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   max: 255,
                   divisions: 255,
                   value: widget.layer.backgroundOpacity.toDouble(),
-                  thumbColor: Colors.white,
+                  thumbColor: Theme.of(context).colorScheme.primary,
                   onChanged: (double value) {
                     setState(() {
                       widget.layer.backgroundOpacity = value.toInt();
@@ -188,7 +202,10 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                 },
                 child: Text(
                   'Reset',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
             ],

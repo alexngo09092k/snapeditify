@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
+import 'package:snapeditify/widgets/base/custom_button.dart';
 import '../data/layer.dart';
 
 class EmojiLayerOverlay extends StatefulWidget {
@@ -22,69 +24,63 @@ class _EmojiLayerOverlayState extends State<EmojiLayerOverlay> {
   double slider = 0.0;
 
   @override
-  void initState() {
-    //  slider = widget.sizevalue;
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       height: 200,
-      decoration: const BoxDecoration(
-        color: Colors.black87,
+      padding: EdgeInsets.all(AppDimensions.instance.padding),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
         borderRadius: BorderRadius.only(
-            topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+          topRight: Radius.circular(AppDimensions.instance.radius),
+          topLeft: Radius.circular(AppDimensions.instance.radius),
+        ),
       ),
       child: Column(
         children: [
-          const SizedBox(height: 10),
-          Center(
-            child: Text(
-              'Size Adjust',
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-          const Divider(),
-          Slider(
-              activeColor: Colors.white,
-              inactiveColor: Colors.grey,
-              value: widget.layer.size,
-              min: 0.0,
-              max: 100.0,
-              onChangeEnd: (v) {
-                setState(() {
-                  widget.layer.size = v.toDouble();
-                  widget.onUpdate();
-                });
-              },
-              onChanged: (v) {
-                setState(() {
-                  slider = v;
-                  // print(v.toDouble());
-                  widget.layer.size = v.toDouble();
-                  widget.onUpdate();
-                });
-              }),
-          const SizedBox(height: 10),
-          Row(children: [
-            Expanded(
-              child: TextButton(
-                onPressed: () {
-                  ImageEditorStorage.instance.removedLayers.add(ImageEditorStorage.instance.layers.removeAt(widget.index));
-                  Navigator.pop(context);
-                  widget.onUpdate();
-                  // back(context);
-                  // setState(() {});
-                },
+          Row(
+            children: [
+              SizedBox(
+                width: 50,
                 child: Text(
-                  'Remove',
-                  style: const TextStyle(color: Colors.white),
+                  'Sizet',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
               ),
-            ),
-          ]),
+              Expanded(
+                child: Slider(
+                  value: widget.layer.size,
+                  min: 0.0,
+                  max: 100.0,
+                  onChangeEnd: (v) {
+                    setState(() {
+                      widget.layer.size = v.toDouble();
+                      widget.onUpdate();
+                    });
+                  },
+                  onChanged: (v) {
+                    setState(() {
+                      slider = v;
+                      widget.layer.size = v.toDouble();
+                      widget.onUpdate();
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+          CustomButton(
+            onTap: () {
+              ImageEditorStorage.instance.removedLayers.add(
+                  ImageEditorStorage.instance.layers.removeAt(widget.index));
+              Navigator.pop(context);
+              widget.onUpdate();
+            },
+            height: 45,
+            title: 'Remove',
+          ),
         ],
       ),
     );

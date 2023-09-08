@@ -73,7 +73,9 @@ class _ImageLayerOverlayState extends State<ImageLayerOverlay> {
             Expanded(
               child: TextButton(
                 onPressed: () {
-                  ImageEditorStorage.instance.removedLayers.add(ImageEditorStorage.instance.layers.removeAt(widget.index));
+                  ImageEditorStorage.instance.removedLayers.add(
+                      ImageEditorStorage.instance.layers
+                          .removeAt(widget.index));
                   Navigator.pop(context);
                   widget.onUpdate();
                   // back(context);

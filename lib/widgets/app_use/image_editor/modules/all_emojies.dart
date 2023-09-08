@@ -61,7 +61,9 @@ class _EmojiesState extends State<Emojies> {
                           padding: EdgeInsets.zero,
                           child: Text(
                             emoji,
-                            style: TextStyle(fontSize: AppDimensions.instance.icon,),
+                            style: TextStyle(
+                              fontSize: AppDimensions.instance.icon,
+                            ),
                           ),
                         ),
                       ),

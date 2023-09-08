@@ -45,7 +45,6 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -64,9 +63,10 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
             Center(
               child: Text(
                 'Slider Filter Color'.toUpperCase(),
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(fontWeight: FontWeight.w700),
               ),
             ),
             SizedBox(height: AppDimensions.instance.paddingX(2)),
@@ -76,27 +76,30 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                   width: 50,
                   child: Text(
                     'Color',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.paddingX(0.5)),
-                    child: LayoutBuilder(
-                      builder: (_, constraints) {
-                        return BarColorPicker(
-                          width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
-                          thumbColor: AppColors.instance.white,
-                          cornerRadius: AppDimensions.instance.radius,
-                          pickMode: PickMode.color,
-                          initialColor: color,
-                          colorListener: (int value) {
-                            color = Color(value);
-                            widget.onChangeColor(Color(value));
-                          },
-                        );
-                      }
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppDimensions.instance.paddingX(0.5),
                     ),
+                    child: LayoutBuilder(builder: (_, constraints) {
+                      return BarColorPicker(
+                        width: constraints.maxWidth - AppDimensions.instance.paddingX(2),
+                        thumbColor: Theme.of(context).colorScheme.primary,
+                        cornerRadius: AppDimensions.instance.radius,
+                        pickMode: PickMode.color,
+                        initialColor: color,
+                        colorListener: (int value) {
+                          color = Color(value);
+                          widget.onChangeColor(Color(value));
+                        },
+                      );
+                    }),
                   ),
                 ),
                 TextButton(
@@ -106,7 +109,10 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                   },
                   child: Text(
                     'Reset',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                 )
               ],
@@ -117,7 +123,10 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                   width: 50,
                   child: Text(
                     'Radius',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                 ),
                 Expanded(
@@ -128,7 +137,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     max: 10.0,
                     onChanged: (_) {
                       setState(() {
-                        radius =  _;
+                        radius = _;
                         widget.onChangeRadius(_);
                       });
                     },
@@ -143,7 +152,10 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                   },
                   child: Text(
                     'Reset',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                 )
               ],
@@ -154,7 +166,10 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                   width: 50,
                   child: Text(
                     'Opacity',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                 ),
                 Expanded(
@@ -179,7 +194,10 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                   },
                   child: Text(
                     'Reset',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                 )
               ],
