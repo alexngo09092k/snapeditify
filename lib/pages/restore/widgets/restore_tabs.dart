@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/restore/widgets/restore_image.dart';
 import 'package:snapeditify/pages/restore/widgets/restore_video.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
@@ -69,9 +70,9 @@ class _RestoreTabsState extends ProviderStateObserver<RestoreTabs, RestoreProvid
               builder: (_, __) => SlidingControl<int>.defaultStyle(
                 context,
                 value: [0, 1].elementAt(_indexTab.value),
-                data: const {
-                  0: 'Image Only',
-                  1: 'Video Effect',
+                data: {
+                  0: S.of(context).imageOnly,
+                  1: S.of(context).videoEffect,
                 },
                 onValueChanged: _onChangedTab,
               ),

@@ -140,56 +140,6 @@ class S {
     );
   }
 
-  /// `Remove things\nfrom image`
-  String get removeThingsNfromImage {
-    return Intl.message(
-      'Remove things\nfrom image',
-      name: 'removeThingsNfromImage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Turn your\nimage\ninto Art`
-  String get turnYourNimageNintoArt {
-    return Intl.message(
-      'Turn your\nimage\ninto Art',
-      name: 'turnYourNimageNintoArt',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enhance\nimage quality`
-  String get enhanceNimageQuality {
-    return Intl.message(
-      'Enhance\nimage quality',
-      name: 'enhanceNimageQuality',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Create\nAnime avatar`
-  String get createNanimeAvatar {
-    return Intl.message(
-      'Create\nAnime avatar',
-      name: 'createNanimeAvatar',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Try it now`
-  String get tryItNow {
-    return Intl.message(
-      'Try it now',
-      name: 'tryItNow',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Suggested`
   String get suggested {
     return Intl.message(
@@ -450,31 +400,11 @@ class S {
     );
   }
 
-  /// `Please wait a moment.`
-  String get pleaseWaitAMoment {
+  /// `Restyle`
+  String get restyle {
     return Intl.message(
-      'Please wait a moment.',
-      name: 'pleaseWaitAMoment',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Restyle Image`
-  String get restyleImage {
-    return Intl.message(
-      'Restyle Image',
-      name: 'restyleImage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enhance Image`
-  String get enhanceImage {
-    return Intl.message(
-      'Enhance Image',
-      name: 'enhanceImage',
+      'Restyle',
+      name: 'restyle',
       desc: '',
       args: [],
     );
@@ -610,71 +540,11 @@ class S {
     );
   }
 
-  /// `with`
-  String get withText {
-    return Intl.message(
-      'with',
-      name: 'withText',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `AI`
   String get ai {
     return Intl.message(
       'AI',
       name: 'ai',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Failed to change style, please try again.`
-  String get failedToChangeStylePleaseTryAgain {
-    return Intl.message(
-      'Failed to change style, please try again.',
-      name: 'failedToChangeStylePleaseTryAgain',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Failed to remove objects, please try again.`
-  String get failedToRemoveObjectsPleaseTryAgain {
-    return Intl.message(
-      'Failed to remove objects, please try again.',
-      name: 'failedToRemoveObjectsPleaseTryAgain',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Failed to detect object, please try again.`
-  String get failedToDetectObjectPleaseTryAgain {
-    return Intl.message(
-      'Failed to detect object, please try again.',
-      name: 'failedToDetectObjectPleaseTryAgain',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Failed to enhance image, please try again.`
-  String get failedToEnhanceImagePleaseTryAgain {
-    return Intl.message(
-      'Failed to enhance image, please try again.',
-      name: 'failedToEnhanceImagePleaseTryAgain',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Failed to style image, please try again.`
-  String get failedToStyleImagePleaseTryAgain {
-    return Intl.message(
-      'Failed to style image, please try again.',
-      name: 'failedToStyleImagePleaseTryAgain',
       desc: '',
       args: [],
     );
@@ -860,31 +730,211 @@ class S {
     );
   }
 
-  /// `Apply effects`
+  /// `Apply Effects`
   String get applyEffects {
     return Intl.message(
-      'Apply effects',
+      'Apply Effects',
       name: 'applyEffects',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cutout objects`
+  /// `Cutout Objects`
   String get cutoutObjects {
     return Intl.message(
-      'Cutout objects',
+      'Cutout Objects',
       name: 'cutoutObjects',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enhance photo`
+  /// `Enhance Photo`
   String get enhancePhoto {
     return Intl.message(
-      'Enhance photo',
+      'Enhance Photo',
       name: 'enhancePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Background`
+  String get editBackground {
+    return Intl.message(
+      'Edit Background',
+      name: 'editBackground',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Sky`
+  String get changeSky {
+    return Intl.message(
+      'Change Sky',
+      name: 'changeSky',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select background color and photo ratio`
+  String get selectBackgroundColorAndPhotoRatio {
+    return Intl.message(
+      'Select background color and photo ratio',
+      name: 'selectBackgroundColorAndPhotoRatio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove Background`
+  String get removeBackground {
+    return Intl.message(
+      'Remove Background',
+      name: 'removeBackground',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image only`
+  String get imageOnly {
+    return Intl.message(
+      'Image only',
+      name: 'imageOnly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video effect`
+  String get videoEffect {
+    return Intl.message(
+      'Video effect',
+      name: 'videoEffect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restore`
+  String get restore {
+    return Intl.message(
+      'Restore',
+      name: 'restore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Video`
+  String get saveVideo {
+    return Intl.message(
+      'Save Video',
+      name: 'saveVideo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to change the sky of the image, please try again.`
+  String get unableToChangeTheSkyOfTheImagePleaseTryAgain {
+    return Intl.message(
+      'Unable to change the sky of the image, please try again.',
+      name: 'unableToChangeTheSkyOfTheImagePleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to enhance the image, please try again.`
+  String get unableToEnhanceTheImagePleaseTryAgain {
+    return Intl.message(
+      'Unable to enhance the image, please try again.',
+      name: 'unableToEnhanceTheImagePleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to detect object, please try again.`
+  String get unableToDetectObjectPleaseTryAgain {
+    return Intl.message(
+      'Unable to detect object, please try again.',
+      name: 'unableToDetectObjectPleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to delete object, please try again.`
+  String get unableToDeleteObjectPleaseTryAgain {
+    return Intl.message(
+      'Unable to delete object, please try again.',
+      name: 'unableToDeleteObjectPleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to restore the image, please try again.`
+  String get unableToRestoreTheImagePleaseTryAgain {
+    return Intl.message(
+      'Unable to restore the image, please try again.',
+      name: 'unableToRestoreTheImagePleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to save image, please try again.`
+  String get unableToSaveImagePleaseTryAgain {
+    return Intl.message(
+      'Unable to save image, please try again.',
+      name: 'unableToSaveImagePleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to style image, please try again.`
+  String get unableToStyleImagePleaseTryAgain {
+    return Intl.message(
+      'Unable to style image, please try again.',
+      name: 'unableToStyleImagePleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to save video, please try again.`
+  String get unableToSaveVideoPleaseTryAgain {
+    return Intl.message(
+      'Unable to save video, please try again.',
+      name: 'unableToSaveVideoPleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Creating video effects failed, please try again`
+  String get creatingVideoEffectsFailedPleaseTryAgain {
+    return Intl.message(
+      'Creating video effects failed, please try again',
+      name: 'creatingVideoEffectsFailedPleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to create id photo, please try again.`
+  String get unableToCreateIdPhotoPleaseTryAgain {
+    return Intl.message(
+      'Unable to create id photo, please try again.',
+      name: 'unableToCreateIdPhotoPleaseTryAgain',
       desc: '',
       args: [],
     );

@@ -250,7 +250,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
         title: S.of(context).aiDetection, 
-        message: S.of(context).failedToDetectObjectPleaseTryAgain, 
+        message: S.of(context).unableToDetectObjectPleaseTryAgain, 
         retry: (_) => toAI(context),
       );
       Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
@@ -309,7 +309,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
         title: S.of(context).aiDetection, 
-        message: S.of(context).failedToDetectObjectPleaseTryAgain, 
+        message: S.of(context).unableToDetectObjectPleaseTryAgain, 
         retry: (_) => toAI(context),
       );
       Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
@@ -398,7 +398,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
         title: S.of(context).removeObjects, 
-        message: S.of(context).failedToRemoveObjectsPleaseTryAgain, 
+        message: S.of(context).unableToDeleteObjectPleaseTryAgain, 
         retry: (_) => removeObjects(context),
       );
     }

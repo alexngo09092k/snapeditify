@@ -107,7 +107,7 @@ class MakeIDPassportProvider extends IMakeIDPassportProvider {
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
         title: S.of(context).createIdPhoto,
-        message: "",
+        message: S.of(context).unableToCreateIdPhotoPleaseTryAgain,
         retry: (_) => makePassportID(context),
       );
       Debug.log('===== REMOVE BACKGROUND IMAGE ${res.message} =====');

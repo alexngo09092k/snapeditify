@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/change_bg/widgets/bg_effect_category_list.dart';
 import 'package:snapeditify/pages/change_bg/widgets/change_bg_image.dart';
 import 'package:snapeditify/providers/change_bg/change_bg_provider.dart';
@@ -18,7 +19,7 @@ class _ChangeBGPageState extends ProviderStateObserver<ChangeBGPage, IChangeBGPr
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: "Change Background",
+      screen: S.of(context).editBackground,
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       action: const SaveButton<IChangeBGProvider>(),

@@ -25,7 +25,7 @@ class _ChangeSkyPageState extends ProviderStateObserver<ChangeSkyPage, IChangeSk
   Widget build(BuildContext context) {
     final IChangeSkyProvider provider = ManagerProvider.of<ChangeSkyProvider>();
     return AppLayout(
-      screen: S.of(context).animeAi,
+      screen: S.of(context).changeSky,
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       action: const SaveButton<IChangeSkyProvider>(),

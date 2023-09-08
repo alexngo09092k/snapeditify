@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/restore/widgets/restore_tabs.dart';
 import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/widgets/app_use/app_layout.dart';
@@ -18,7 +19,7 @@ class _RestorePageState extends ProviderStateObserver<RestorePage, IRestoreProvi
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: "Restore Image",
+      screen: S.of(context).restore,
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       action: const SaveButton<IRestoreProvider>(),

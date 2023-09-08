@@ -17,7 +17,7 @@ class RemoveObjectPage extends StatefulWidget {
 
 class _RemoveObjectPageState extends ProviderStateObserver<RemoveObjectPage, IRemoveObjectProvider>{
 
-   @override
+  @override
   void onNextFrame(Duration timestamp) {
     if (ManagerProvider.of<GalleryProvider>().imageTool == ImageTool.oneTouchRemoveAll) {
       provider.toAIOneTouchSuggest(context);

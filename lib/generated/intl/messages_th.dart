@@ -22,81 +22,68 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "accurate": MessageLookupByLibrary.simpleMessage("แม่นยำ"),
+        "accurate": MessageLookupByLibrary.simpleMessage("% แม่นยำ"),
         "after": MessageLookupByLibrary.simpleMessage("หลังจาก"),
         "ai": MessageLookupByLibrary.simpleMessage("AI"),
-        "aiDetection": MessageLookupByLibrary.simpleMessage("การตรวจจับ AI"),
+        "aiDetection": MessageLookupByLibrary.simpleMessage("การตรวจจับเอไอ"),
         "albums": MessageLookupByLibrary.simpleMessage("อัลบั้ม"),
         "allChangesWillBeLostAreYouSureYouWant":
             MessageLookupByLibrary.simpleMessage(
-                "การเปลี่ยนแปลงทั้งหมดจะหายไป คุณแน่ใจหรือไม่ว่าต้องการออกโดยไม่บันทึก?"),
+                "การเปลี่ยนแปลงทั้งหมดจะหายไป "),
         "allChangesWillBeLostYourImageWillBeReverted":
             MessageLookupByLibrary.simpleMessage(
-                "การเปลี่ยนแปลงทั้งหมดจะสูญหาย ภาพของคุณจะกลับไปสู่สถานะเดิม"),
+                "การเปลี่ยนแปลงทั้งหมดจะหายไป "),
         "allow": MessageLookupByLibrary.simpleMessage("อนุญาต"),
-        "animeAi": MessageLookupByLibrary.simpleMessage("Anime AI"),
-        "applyEffects": MessageLookupByLibrary.simpleMessage("Apply effects"),
-        "areYouHappyWith": MessageLookupByLibrary.simpleMessage("คุณพอใจกับ\n"),
-        "artEffect": MessageLookupByLibrary.simpleMessage("เอฟเฟกต์ศิลปะ"),
+        "animeAi": MessageLookupByLibrary.simpleMessage("อะนิเมะเอไอ"),
+        "applyEffects": MessageLookupByLibrary.simpleMessage("ใช้เอฟเฟ็กต์"),
+        "areYouHappyWith":
+            MessageLookupByLibrary.simpleMessage("คุณมีความสุขกับ\n"),
+        "artEffect": MessageLookupByLibrary.simpleMessage("อาร์ตเอฟเฟกต์"),
         "auto": MessageLookupByLibrary.simpleMessage("อัตโนมัติ"),
         "before": MessageLookupByLibrary.simpleMessage("ก่อน"),
         "brush": MessageLookupByLibrary.simpleMessage("แปรง"),
         "cancel": MessageLookupByLibrary.simpleMessage("ยกเลิก"),
-        "chinese": MessageLookupByLibrary.simpleMessage("จีน"),
+        "changeSky": MessageLookupByLibrary.simpleMessage("เปลี่ยนท้องฟ้า"),
+        "chinese": MessageLookupByLibrary.simpleMessage("ชาวจีน"),
         "createIdPhoto":
-            MessageLookupByLibrary.simpleMessage("Create ID Photo"),
-        "createNanimeAvatar":
-            MessageLookupByLibrary.simpleMessage("สร้าง\nAvatar Anime"),
-        "cutoutObjects": MessageLookupByLibrary.simpleMessage("Cutout objects"),
+            MessageLookupByLibrary.simpleMessage("สร้างรูปถ่ายประจำตัว"),
+        "creatingVideoEffectsFailedPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "การสร้างเอฟเฟกต์วิดีโอล้มเหลว โปรดลองอีกครั้ง"),
+        "cutoutObjects": MessageLookupByLibrary.simpleMessage("วัตถุคัตเอาท์"),
         "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage(
-            "ยกเลิกการเปลี่ยนแปลงและย้อนกลับ?"),
+            "ยกเลิกการเปลี่ยนแปลงและเปลี่ยนกลับใช่ไหม"),
         "downloadNow":
             MessageLookupByLibrary.simpleMessage("ดาวน์โหลดเดี๋ยวนี้"),
-        "english": MessageLookupByLibrary.simpleMessage("อังกฤษ"),
-        "enhance": MessageLookupByLibrary.simpleMessage("เพิ่มคุณภาพ"),
-        "enhanceImage": MessageLookupByLibrary.simpleMessage("ปรับปรุงรูปภาพ"),
-        "enhanceNimageQuality":
-            MessageLookupByLibrary.simpleMessage("เพิ่มคุณภาพ\nรูปภาพ"),
-        "enhancePhoto": MessageLookupByLibrary.simpleMessage("Enhance photo"),
-        "failedToChangeStylePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "ไม่สามารถเปลี่ยนสไตล์ได้ โปรดลองอีกครั้ง"),
-        "failedToDetectObjectPleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "ไม่สามารถตรวจจับวัตถุได้ โปรดลองอีกครั้ง"),
-        "failedToEnhanceImagePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "ไม่สามารถปรับปรุงรูปภาพได้ โปรดลองอีกครั้ง"),
+        "editBackground": MessageLookupByLibrary.simpleMessage("แก้ไขพื้นหลัง"),
+        "english": MessageLookupByLibrary.simpleMessage("ภาษาอังกฤษ"),
+        "enhance": MessageLookupByLibrary.simpleMessage("ยกระดับ"),
+        "enhancePhoto": MessageLookupByLibrary.simpleMessage("ปรับปรุงภาพถ่าย"),
         "failedToOpenBrowserPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "ไม่สามารถเปิดเบราว์เซอร์ได้ โปรดลองอีกครั้ง"),
-        "failedToOpenMailPleaseTryGain":
-            MessageLookupByLibrary.simpleMessage("ไม่สามารถเปิดจดหมายได"),
-        "failedToRemoveObjectsPleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "ไม่สามารถลบวัตถุได้ โปรดลองอีกครั้ง"),
+        "failedToOpenMailPleaseTryGain": MessageLookupByLibrary.simpleMessage(
+            "ไม่สามารถเปิดเมลได้ โปรดลองรับ"),
         "failedToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage(
-            "บันทึกภาพไม่สำเร็จ โปรดลองอีกครั้ง"),
-        "failedToStyleImagePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "ไม่สามารถปรับรูปแบบรูปภาพได้ โปรดลองอีกครั้ง"),
-        "feedback": MessageLookupByLibrary.simpleMessage("ความคิดเห็น"),
-        "feedbackTo": MessageLookupByLibrary.simpleMessage("คำติชมถึง"),
-        "hot": MessageLookupByLibrary.simpleMessage("HOT"),
+            "ไม่สามารถบันทึกภาพได้ โปรดลองอีกครั้ง"),
+        "feedback": MessageLookupByLibrary.simpleMessage("ข้อเสนอแนะ"),
+        "feedbackTo": MessageLookupByLibrary.simpleMessage("ข้อเสนอแนะถึง"),
+        "hot": MessageLookupByLibrary.simpleMessage("ร้อน"),
+        "imageOnly": MessageLookupByLibrary.simpleMessage("รูปภาพเท่านั้น"),
         "languages": MessageLookupByLibrary.simpleMessage("ภาษา"),
-        "later": MessageLookupByLibrary.simpleMessage("หลัง"),
+        "later": MessageLookupByLibrary.simpleMessage("ภายหลัง"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
             MessageLookupByLibrary.simpleMessage(
-                "มาแชร์แอปแต่งรูปที่ดีที่สุดกับเพื่อน ครอบครัว และชุมชนของคุณ"),
+                "มาแชร์หนึ่งในแอปแก้ไขรูปภาพที่ดีที่สุดกับเพื่อน ครอบครัว และชุมชนของคุณ"),
         "looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd":
             MessageLookupByLibrary.simpleMessage(
-                "ดูเหมือนว่าการเชื่อมต่อของคุณถูกขัดจังหวะ ตรวจสอบการเชื่อมต่อเครือข่ายและลองอีกครั้ง"),
+                "ดูเหมือนว่าการเชื่อมต่อของคุณถูกขัดจังหวะ "),
         "newImage": MessageLookupByLibrary.simpleMessage("รูปภาพใหม่"),
-        "noAdsBestImageQuality": MessageLookupByLibrary.simpleMessage(
-            "ไม่มีโฆษณาและคุณภาพรูปภาพที่ดีที่สุด"),
+        "noAdsBestImageQuality":
+            MessageLookupByLibrary.simpleMessage("ไม่มีโฆษณา"),
         "noPotentialObjectHasBeenDetected":
-            MessageLookupByLibrary.simpleMessage("ไม่พบวัตถุที่เป็นไปได้"),
-        "notFoundImages": MessageLookupByLibrary.simpleMessage("ไม่พบภาพ"),
+            MessageLookupByLibrary.simpleMessage("ไม่พบวัตถุที่อาจเป็นไปได้"),
+        "notFoundImages": MessageLookupByLibrary.simpleMessage("ไม่พบรูปภาพ"),
         "objects": MessageLookupByLibrary.simpleMessage("วัตถุ"),
         "ok": MessageLookupByLibrary.simpleMessage("ตกลง"),
         "openApp": MessageLookupByLibrary.simpleMessage("เปิดแอป"),
@@ -104,57 +91,79 @@ class MessageLookup extends MessageLookupByLibrary {
         "openSettings": MessageLookupByLibrary.simpleMessage("เปิดการตั้งค่า"),
         "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
             "โปรดลองอีกครั้งหรือเปิดแอปอีกครั้ง"),
-        "pleaseWaitAMoment":
-            MessageLookupByLibrary.simpleMessage("โปรดรอสักครู่"),
         "rateSnapeditify":
-            MessageLookupByLibrary.simpleMessage("Rate SnapEditify"),
+            MessageLookupByLibrary.simpleMessage("ให้คะแนน SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("ลบ"),
+        "removeBackground": MessageLookupByLibrary.simpleMessage("ลบพื้นหลัง"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("ลบวัตถุ"),
-        "removeThingsNfromImage":
-            MessageLookupByLibrary.simpleMessage("ลบสิ่งของ\nออกจากภาพ"),
-        "removed": MessageLookupByLibrary.simpleMessage("ลบ"),
-        "restyleImage":
-            MessageLookupByLibrary.simpleMessage("ปรับรูปแบบรูปภาพ"),
+        "removed": MessageLookupByLibrary.simpleMessage("ลบออก"),
+        "restore": MessageLookupByLibrary.simpleMessage("คืนค่า"),
+        "restyle": MessageLookupByLibrary.simpleMessage("รีสไตล์"),
         "retry": MessageLookupByLibrary.simpleMessage("ลองอีกครั้ง"),
-        "saveImage": MessageLookupByLibrary.simpleMessage("บันทึกรูปภาพ"),
+        "saveImage": MessageLookupByLibrary.simpleMessage("บันทึกภาพ"),
         "saveImageLimit":
-            MessageLookupByLibrary.simpleMessage("จำกัดการบันทึกรูปภาพ"),
-        "savedImage":
-            MessageLookupByLibrary.simpleMessage("รูปภาพที่บันทึกไว้"),
+            MessageLookupByLibrary.simpleMessage("บันทึกขีดจำกัดรูปภาพ"),
+        "saveVideo": MessageLookupByLibrary.simpleMessage("บันทึกวิดีโอ"),
+        "savedImage": MessageLookupByLibrary.simpleMessage("ภาพที่บันทึกไว้"),
+        "selectBackgroundColorAndPhotoRatio":
+            MessageLookupByLibrary.simpleMessage(
+                "เลือกสีพื้นหลังและอัตราส่วนภาพถ่าย"),
         "send": MessageLookupByLibrary.simpleMessage("ส่ง"),
-        "setting": MessageLookupByLibrary.simpleMessage("ตั้งค่า"),
-        "share": MessageLookupByLibrary.simpleMessage("แชร์"),
+        "setting": MessageLookupByLibrary.simpleMessage("การตั้งค่า"),
+        "share": MessageLookupByLibrary.simpleMessage("แบ่งปัน"),
         "suggested": MessageLookupByLibrary.simpleMessage("แนะนำ"),
-        "team": MessageLookupByLibrary.simpleMessage("ทีมงาน"),
+        "team": MessageLookupByLibrary.simpleMessage("ทีม"),
         "teamToSupport":
-            MessageLookupByLibrary.simpleMessage("ทีมงานเพื่อรับการสนับสนุน"),
+            MessageLookupByLibrary.simpleMessage("มีทีมงานคอยสนับสนุน"),
         "thailand": MessageLookupByLibrary.simpleMessage("ประเทศไทย"),
         "toAccessPhotosOnYourDeviceToEditOrShare":
             MessageLookupByLibrary.simpleMessage(
-                "เพื่อเข้าถึงรูปภาพบนอุปกรณ์ของคุณเพื่อแก้ไขหรือแบ่งปันภาพ"),
-        "tryItNow": MessageLookupByLibrary.simpleMessage("ลองเลย"),
-        "turnYourNimageNintoArt": MessageLookupByLibrary.simpleMessage(
-            "แปลง\nรูปภาพของคุณ\nเป็นศิลปะ"),
-        "unlockSnapeditifyPremium":
-            MessageLookupByLibrary.simpleMessage("ปลดล็อก SnapEditify Premium"),
+                "เพื่อเข้าถึงรูปภาพบนอุปกรณ์ของคุณเพื่อแก้ไขหรือแชร์รูปภาพ"),
+        "unableToChangeTheSkyOfTheImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "ไม่สามารถเปลี่ยนท้องฟ้าของภาพได้ โปรดลองอีกครั้ง"),
+        "unableToCreateIdPhotoPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to create id photo, please try again."),
+        "unableToDeleteObjectPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "ไม่สามารถลบวัตถุได้ โปรดลองอีกครั้ง"),
+        "unableToDetectObjectPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "ไม่สามารถตรวจพบวัตถุได้ โปรดลองอีกครั้ง"),
+        "unableToEnhanceTheImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "ไม่สามารถปรับปรุงภาพได้ โปรดลองอีกครั้ง"),
+        "unableToRestoreTheImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "ไม่สามารถคืนค่ารูปภาพได้ โปรดลองอีกครั้ง"),
+        "unableToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage(
+            "ไม่สามารถบันทึกภาพได้ โปรดลองอีกครั้ง"),
+        "unableToSaveVideoPleaseTryAgain": MessageLookupByLibrary.simpleMessage(
+            "ไม่สามารถบันทึกวิดีโอได้ โปรดลองอีกครั้ง"),
+        "unableToStyleImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "ไม่สามารถจัดรูปแบบรูปภาพได้ โปรดลองอีกครั้ง"),
+        "unlockSnapeditifyPremium": MessageLookupByLibrary.simpleMessage(
+            "ปลดล็อค SnapEditify พรีเมี่ยม"),
         "update": MessageLookupByLibrary.simpleMessage("อัปเดต"),
         "version": MessageLookupByLibrary.simpleMessage("เวอร์ชัน"),
-        "vietnamese": MessageLookupByLibrary.simpleMessage("เวียดนาม"),
-        "withText": MessageLookupByLibrary.simpleMessage("กับ"),
+        "videoEffect": MessageLookupByLibrary.simpleMessage("เอฟเฟกต์วิดีโอ"),
+        "vietnamese": MessageLookupByLibrary.simpleMessage("ภาษาเวียดนาม"),
         "wouldLikeToAccessYourPhotos":
-            MessageLookupByLibrary.simpleMessage("ต้องการเข้าถึงรูปภาพของคุณ"),
+            MessageLookupByLibrary.simpleMessage("ต้องการเข้าถึงภาพถ่ายของคุณ"),
         "youAreCurrentlyOffline":
-            MessageLookupByLibrary.simpleMessage("คุณออฟไลน์อยู่ในขณะนี้"),
+            MessageLookupByLibrary.simpleMessage("ขณะนี้คุณออฟไลน์"),
         "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":
             MessageLookupByLibrary.simpleMessage(
-                "คุณมีจำนวนการบันทึกรูปภาพที่ถึงขีดจำกัดแล้ว โปรดอัปเกรดเป็นเวอร์ชันพรีเมียมหรือติดต่อ"),
+                "คุณมีภาพที่บันทึกไว้ถึงขีดจำกัดแล้ว โปรดอัปเกรดเวอร์ชันพรีเมียมหรือผู้ติดต่อ"),
         "yourAppIsOutdated":
-            MessageLookupByLibrary.simpleMessage("แอปของคุณล้าสมัยแล้ว"),
+            MessageLookupByLibrary.simpleMessage("แอปของคุณล้าสมัย"),
         "yourAppVersionIsNoLongerSupportedYoureMissingOut":
             MessageLookupByLibrary.simpleMessage(
-                "เวอร์ชันของแอปของคุณไม่ได้รับการสนับสนุนอีกต่อไป คุณพลาดคุณสมบัติใหม่และการแก้ไขปัญหาสำคัญ โปรดอัปเดตวันนี้"),
+                "ไม่รองรับเวอร์ชันแอปของคุณอีกต่อไป "),
         "yourFeedbackOfTheAppAndProvideABetterExperience":
             MessageLookupByLibrary.simpleMessage(
-                "ความคิดเห็นของคุณในแอปพลิเคชันและการให้ประสบการณ์ที่ดีกว่า")
+                "ความคิดเห็นของคุณเกี่ยวกับแอปและมอบประสบการณ์ที่ดีขึ้น")
       };
 }

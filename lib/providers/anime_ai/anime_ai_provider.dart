@@ -149,8 +149,8 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).restyleImage, 
-        message: S.of(context).failedToStyleImagePleaseTryAgain, 
+        title: S.of(context).restyle, 
+        message: S.of(context).unableToStyleImagePleaseTryAgain, 
         retry: (_) => restyleImage(context, styleId),
       );
       Debug.log('====== RESTYLE IMAGE ${res.message} ======');
@@ -189,8 +189,8 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).restyleImage, 
-        message: S.of(context).failedToStyleImagePleaseTryAgain, 
+        title: S.of(context).videoEffect, 
+        message: S.of(context).creatingVideoEffectsFailedPleaseTryAgain, 
         retry: (_) => videoEffect(context, styleId),
       );
       Debug.log('====== RESTYLE IMAGE ${res.message} ======');

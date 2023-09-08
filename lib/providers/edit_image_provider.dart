@@ -128,7 +128,7 @@ abstract class EditImageProvider extends Provider {
       /// SHOW ALERT
       WidgetUtils.instance.showWarningPopup(
         title: S.of(context).saveImage, 
-        message: S.of(context).failedToSaveImagePleaseTryAgain, 
+        message: S.of(context).unableToSaveImagePleaseTryAgain, 
         retry: save,
       );
       return false;

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:snapeditify/common/app_routes.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/change_bg/change_bg_provider.dart';
 import 'package:snapeditify/providers/remove_bg/remove_bg_provider.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
@@ -38,7 +39,7 @@ class RemoveBGControl extends StatelessWidget {
     return Column(
       children: [
         CustomButton(
-          title: "Edit Background",
+          title: S.of(context).editBackground,
           height: 50,
           icon: CustomIcon(Icons.edit, color: AppColors.instance.white),
           onTap: () => _onEditBG(context),

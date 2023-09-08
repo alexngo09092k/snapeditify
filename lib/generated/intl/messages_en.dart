@@ -35,7 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "All changes will be lost. Your image will be reverted to its original states."),
         "allow": MessageLookupByLibrary.simpleMessage("Allow"),
         "animeAi": MessageLookupByLibrary.simpleMessage("Anime AI"),
-        "applyEffects": MessageLookupByLibrary.simpleMessage("Apply effects"),
+        "applyEffects": MessageLookupByLibrary.simpleMessage("Apply Effects"),
         "areYouHappyWith":
             MessageLookupByLibrary.simpleMessage("Are you happy with\n"),
         "artEffect": MessageLookupByLibrary.simpleMessage("Art Effect"),
@@ -43,46 +43,33 @@ class MessageLookup extends MessageLookupByLibrary {
         "before": MessageLookupByLibrary.simpleMessage("Before"),
         "brush": MessageLookupByLibrary.simpleMessage("Brush"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "changeSky": MessageLookupByLibrary.simpleMessage("Change Sky"),
         "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
         "createIdPhoto":
             MessageLookupByLibrary.simpleMessage("Create ID Photo"),
-        "createNanimeAvatar":
-            MessageLookupByLibrary.simpleMessage("Create\nAnime avatar"),
-        "cutoutObjects": MessageLookupByLibrary.simpleMessage("Cutout objects"),
+        "creatingVideoEffectsFailedPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Creating video effects failed, please try again"),
+        "cutoutObjects": MessageLookupByLibrary.simpleMessage("Cutout Objects"),
         "discardChangesAndRevert":
             MessageLookupByLibrary.simpleMessage("Discard changes and revert?"),
         "downloadNow": MessageLookupByLibrary.simpleMessage("Download now"),
+        "editBackground":
+            MessageLookupByLibrary.simpleMessage("Edit Background"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "enhance": MessageLookupByLibrary.simpleMessage("Enhance"),
-        "enhanceImage": MessageLookupByLibrary.simpleMessage("Enhance Image"),
-        "enhanceNimageQuality":
-            MessageLookupByLibrary.simpleMessage("Enhance\nimage quality"),
-        "enhancePhoto": MessageLookupByLibrary.simpleMessage("Enhance photo"),
-        "failedToChangeStylePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to change style, please try again."),
-        "failedToDetectObjectPleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to detect object, please try again."),
-        "failedToEnhanceImagePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to enhance image, please try again."),
+        "enhancePhoto": MessageLookupByLibrary.simpleMessage("Enhance Photo"),
         "failedToOpenBrowserPleaseTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Failed to open browser, please try again"),
         "failedToOpenMailPleaseTryGain": MessageLookupByLibrary.simpleMessage(
             "Failed to open mail, please try gain."),
-        "failedToRemoveObjectsPleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to remove objects, please try again."),
         "failedToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage(
             "Failed to save image, please try again."),
-        "failedToStyleImagePleaseTryAgain":
-            MessageLookupByLibrary.simpleMessage(
-                "Failed to style image, please try again."),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
         "hot": MessageLookupByLibrary.simpleMessage("HOT"),
+        "imageOnly": MessageLookupByLibrary.simpleMessage("Image only"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "later": MessageLookupByLibrary.simpleMessage("Later"),
         "letsShareOneOfTheBestPhotoEditingAppWith":
@@ -106,21 +93,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
         "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
             "Please try again or open the app again."),
-        "pleaseWaitAMoment":
-            MessageLookupByLibrary.simpleMessage("Please wait a moment."),
         "rateSnapeditify":
             MessageLookupByLibrary.simpleMessage("Rate SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
+        "removeBackground":
+            MessageLookupByLibrary.simpleMessage("Remove Background"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Remove Objects"),
-        "removeThingsNfromImage":
-            MessageLookupByLibrary.simpleMessage("Remove things\nfrom image"),
         "removed": MessageLookupByLibrary.simpleMessage("Removed"),
-        "restyleImage": MessageLookupByLibrary.simpleMessage("Restyle Image"),
+        "restore": MessageLookupByLibrary.simpleMessage("Restore"),
+        "restyle": MessageLookupByLibrary.simpleMessage("Restyle"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),
         "saveImageLimit":
             MessageLookupByLibrary.simpleMessage("Save Image Limit"),
+        "saveVideo": MessageLookupByLibrary.simpleMessage("Save Video"),
         "savedImage": MessageLookupByLibrary.simpleMessage("Saved Image"),
+        "selectBackgroundColorAndPhotoRatio":
+            MessageLookupByLibrary.simpleMessage(
+                "Select background color and photo ratio"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
@@ -132,15 +122,37 @@ class MessageLookup extends MessageLookupByLibrary {
         "toAccessPhotosOnYourDeviceToEditOrShare":
             MessageLookupByLibrary.simpleMessage(
                 "to access photos on your device to edit or share image."),
-        "tryItNow": MessageLookupByLibrary.simpleMessage("Try it now"),
-        "turnYourNimageNintoArt":
-            MessageLookupByLibrary.simpleMessage("Turn your\nimage\ninto Art"),
+        "unableToChangeTheSkyOfTheImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to change the sky of the image, please try again."),
+        "unableToCreateIdPhotoPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to create id photo, please try again."),
+        "unableToDeleteObjectPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to delete object, please try again."),
+        "unableToDetectObjectPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to detect object, please try again."),
+        "unableToEnhanceTheImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to enhance the image, please try again."),
+        "unableToRestoreTheImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to restore the image, please try again."),
+        "unableToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage(
+            "Unable to save image, please try again."),
+        "unableToSaveVideoPleaseTryAgain": MessageLookupByLibrary.simpleMessage(
+            "Unable to save video, please try again."),
+        "unableToStyleImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to style image, please try again."),
         "unlockSnapeditifyPremium":
             MessageLookupByLibrary.simpleMessage("Unlock SnapEditify Premium"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
+        "videoEffect": MessageLookupByLibrary.simpleMessage("Video effect"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
-        "withText": MessageLookupByLibrary.simpleMessage("with"),
         "wouldLikeToAccessYourPhotos": MessageLookupByLibrary.simpleMessage(
             "Would like to access your photos"),
         "youAreCurrentlyOffline":

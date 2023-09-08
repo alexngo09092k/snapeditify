@@ -126,8 +126,8 @@ class RestoreProvider extends IRestoreProvider {
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).enhanceImage, 
-        message: S.of(context).failedToEnhanceImagePleaseTryAgain, 
+        title: S.of(context).restore, 
+        message: S.of(context).unableToRestoreTheImagePleaseTryAgain, 
         retry: (_) => restoreImage(context),
       );
       Debug.log('===== ENAHNCE IMAGE ${res.message} =====');
@@ -176,8 +176,8 @@ class RestoreProvider extends IRestoreProvider {
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).restyleImage, 
-        message: S.of(context).failedToStyleImagePleaseTryAgain, 
+        title: S.of(context).videoEffect, 
+        message: S.of(context).creatingVideoEffectsFailedPleaseTryAgain, 
         retry: (_) => videoEffect(context),
       );
       Debug.log('====== RESTYLE IMAGE ${res.message} ======');
@@ -230,8 +230,8 @@ class RestoreProvider extends IRestoreProvider {
 
       /// SHOW ALERT
       WidgetUtils.instance.showWarningPopup(
-        title: "Save Video", 
-        message: "", 
+        title: S.of(context).saveVideo, 
+        message: S.of(context).unableToSaveVideoPleaseTryAgain, 
         retry: save,
       );
       return false;

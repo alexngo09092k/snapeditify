@@ -124,8 +124,8 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).restyleImage, 
-        message: S.of(context).failedToChangeStylePleaseTryAgain, 
+        title: S.of(context).changeSky, 
+        message: S.of(context).unableToChangeTheSkyOfTheImagePleaseTryAgain, 
         retry: (_) =>removeSky(context),
       );
       Debug.log('====== RESTYLE IMAGE ${res.message} ======');

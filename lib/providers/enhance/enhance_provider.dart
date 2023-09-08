@@ -100,8 +100,8 @@ class EnhanceProvider extends IEnhanceProvider {
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).enhanceImage, 
-        message: S.of(context).failedToEnhanceImagePleaseTryAgain, 
+        title: S.of(context).enhance, 
+        message: S.of(context).unableToEnhanceTheImagePleaseTryAgain, 
         retry: (_) => enhanceImage(context),
       );
       Debug.log('===== ENAHNCE IMAGE ${res.message} =====');

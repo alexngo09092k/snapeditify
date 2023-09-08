@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/remove_bg/widgets/remove_bg_control.dart';
 import 'package:snapeditify/pages/remove_bg/widgets/remove_bg_preview.dart';
 import 'package:snapeditify/providers/remove_bg/remove_bg_provider.dart';
@@ -23,7 +24,7 @@ class _RemoveBGPageState extends ProviderStateObserver<RemoveBGPage, IRemoveBGPr
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: "Remove Background",
+      screen: S.of(context).removeBackground,
       onWillPop: () => provider.goBack(context, true),
       goBack: () => provider.goBack(context),
       action: const SaveButton<IRemoveBGProvider>(),
