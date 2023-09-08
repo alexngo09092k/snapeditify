@@ -59,7 +59,7 @@ class _LocalizationsPopup extends StatelessWidget {
                 const CustomIcon(Icons.language),
                 SizedBox(width: AppDimensions.instance.paddingX(0.5)),
                 Text(
-                  "Languages", 
+                  S.of(context).languages, 
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
