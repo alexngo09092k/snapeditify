@@ -41,7 +41,7 @@ class Configuration {
   AdvertisementConfig get advertisement => _advertisement;
 
   /// API CONFIGURATIONS
-  SnapEditConfig _snapEdit = DefaultConfig.snapEdit;
+  final SnapEditConfig _snapEdit = DefaultConfig.snapEdit;
   SnapEditConfig get snapEdit => _snapEdit;
 
   Future<void> loadLocalConfig(Map<String, dynamic> defaultConfig) async {
@@ -64,13 +64,13 @@ class Configuration {
       _advertisement = AdvertisementConfig.fromMap(enviroment['advertisement']);
     }
 
-    if (enviroment['snapEdit'] != null) {
-      _snapEdit = SnapEditConfig.fromMap(enviroment['snapEdit']);
-    }
-
     if (enviroment['iap'] != null) {
       _iap = IAPConfig.fromMap(enviroment['iap']);
     }
+
+    // if (enviroment['snapEdit'] != null) {
+    //   _snapEdit = SnapEditConfig.fromMap(enviroment['snapEdit']);
+    // }
   }
 }
 
