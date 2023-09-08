@@ -11,7 +11,7 @@ const enviroment = {
   "business": {
     /// App mode
     /// production, debug, maintenance
-    'appMode': 'debug',
+    'appMode': 'production',
 
     /// Maintenance mode
     'maintenanceMode': {
