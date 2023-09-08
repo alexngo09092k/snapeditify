@@ -66,7 +66,7 @@ class BusinessConfig {
         message: "SnapEditify AI Photo Editor",
       ),
       updateApp: UpdateApp(
-        version: '1.0.2',
+        version: '2.0.0',
         required: false,
         links: {
           AppPlatform.android: 'https://appgallery.huawei.com/app/C107645049',
@@ -119,7 +119,7 @@ class BusinessConfig {
         'message': "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
       }),
       moreApps: [],
-      version: '1.0.2',
+      version: '2.0.0',
       appMode: kDebugMode? AppMode.debug: AppMode.production,
     );
   }
