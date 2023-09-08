@@ -24,7 +24,7 @@ class SettingPage extends StatelessWidget {
     return params.entries.map((MapEntry<String, String> e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}').join('&');
   }
 
-  _feedback(BuildContext context) {
+  void _feedback(BuildContext context) {
     mail(BuildContext context) async {
       try {
         final Uri emailLaunchUri = Uri(
@@ -72,7 +72,7 @@ class SettingPage extends StatelessWidget {
     );
   }
 
-  _showSharePopup(BuildContext context) {
+  void _showSharePopup(BuildContext context) {
     WidgetUtils.instance.alert(
       context,
       title: '${S.of(context).share} ${Configuration.instance.business.appName}',
@@ -99,7 +99,13 @@ class SettingPage extends StatelessWidget {
     );
   }
 
-  _launchUrlInApp(BuildContext context, String url) async {
+  void _rate(BuildContext context) {
+    if(Configuration.instance.business.shareApp.link != null) {
+      _launchUrlInApp(context, Configuration.instance.business.shareApp.link!);
+    }
+  }
+
+  void _launchUrlInApp(BuildContext context, String url) async {
     try {
       if (!await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView)) {
         WidgetUtils.instance.showWarningPopup(
@@ -180,9 +186,9 @@ class SettingPage extends StatelessWidget {
                 ),
                 TileRow.defaultStyle(
                 context,
-                title: 'Rate SnapEditify',
-                image: AppAssets.instance.icFeedback,
-                onTap: _feedback,
+                title: S.of(context).rateSnapeditify,
+                image: AppAssets.instance.icRate,
+                onTap: _rate,
               ),
               TileRow.defaultStyle(
                 context,

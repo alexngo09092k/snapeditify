@@ -60,6 +60,7 @@ class AppAssets {
   final String icFeedback = "$iconPath/ic_feedback.png";
   final String icSeekbarThumb = "$iconPath/ic_seekbar_thumb.png";
   final String icPremium = "$iconPath/ic_premium.png";
+  final String icRate = "$iconPath/ic_rate.png";
 
   /// Tools
   final String oneTouchRemoveAll = "$imagePath/tools/1TouchRemoveAll.png";
