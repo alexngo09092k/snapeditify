@@ -114,8 +114,8 @@ extension ImageToolEX on ImageTool {
         return AppAssets.instance.applyEffect;
       case ImageTool.changeYourSky:
         return AppAssets.instance.changeYourSky;
-      default:
-        return AppAssets.instance.imagePlaceholder;
+      case ImageTool.fastEditor:
+        return AppAssets.instance.icEditor;
     }
   }
 

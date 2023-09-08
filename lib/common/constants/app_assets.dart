@@ -16,18 +16,20 @@ class AppAssets {
   final String brushAnim = '$lottiePath/brush_anim.json';
   final String enhanceGuideBfAf = '$lottiePath/enhance_guide_bf_af.json';
   final String heartTeam = "$lottiePath/heart.json";
-  final String notFound = "$lottiePath/not_found.json";
   final String confetti = "$lottiePath/confetti.json";
 
   /// Images
   static const String imagePath = 'assets/images';
 
-  final String imagePlaceholder = "$imagePath/image_place_holder.png";
   final String logo = "$imagePath/logo.png";
   final String placeholder = "$imagePath/placeholder.png";
   final String animePlaceholder = "$imagePath/anime.png";
   final String bgTransparent = "$imagePath/bg-transparent.png";
   final String noImage = "$imagePath/no_image.png";
+
+  final String bgShareImage = "$imagePath/bg_share_image.png";
+  final String notFoundObject = "$imagePath/not_found_object.png";
+  final String notFoundImage = "$imagePath/not_found_image.png";
 
   /// Flags
   static const String flagPath = '$imagePath/flags';
@@ -74,42 +76,42 @@ class AppAssets {
 
   /// Suggest images demo
   /// Remove objects
-  final String removeObject1 = "$imagePath/suggest_demos/remove_object1.webp";
-  final String removeObject2 = "$imagePath/suggest_demos/remove_object2.webp";
-  final String removeObject3 = "$imagePath/suggest_demos/remove_object3.webp";
+  final String removeObject1 = "$imagePath/suggest_demos/remove_object1.png";
+  final String removeObject2 = "$imagePath/suggest_demos/remove_object2.png";
+  final String removeObject3 = "$imagePath/suggest_demos/remove_object3.png";
 
   /// Enhance photos
-  final String enhance1 = "$imagePath/suggest_demos/enhance1.webp";
-  final String enhance2 = "$imagePath/suggest_demos/enhance2.webp";
-  final String enhance3 = "$imagePath/suggest_demos/enhance3.webp";
+  final String enhance1 = "$imagePath/suggest_demos/enhance1.png";
+  final String enhance2 = "$imagePath/suggest_demos/enhance2.png";
+  final String enhance3 = "$imagePath/suggest_demos/enhance3.png";
 
   /// Passport Maker
-  final String passportMaker1 = "$imagePath/suggest_demos/passport_maker1.webp";
-  final String passportMaker2 = "$imagePath/suggest_demos/passport_maker2.webp";
-  final String passportMaker3 = "$imagePath/suggest_demos/passport_maker3.webp";
+  final String passportMaker1 = "$imagePath/suggest_demos/passport_maker1.png";
+  final String passportMaker2 = "$imagePath/suggest_demos/passport_maker2.png";
+  final String passportMaker3 = "$imagePath/suggest_demos/passport_maker3.png";
 
   /// Restore
-  final String restore1 = "$imagePath/suggest_demos/restore1.webp";
-  final String restore2 = "$imagePath/suggest_demos/restore2.webp";
-  final String restore3 = "$imagePath/suggest_demos/restore3.webp";
+  final String restore1 = "$imagePath/suggest_demos/restore1.png";
+  final String restore2 = "$imagePath/suggest_demos/restore2.png";
+  final String restore3 = "$imagePath/suggest_demos/restore3.png";
 
   /// Sky
-  final String sky1 = "$imagePath/suggest_demos/sky1.webp";
-  final String sky2 = "$imagePath/suggest_demos/sky2.webp";
-  final String sky3 = "$imagePath/suggest_demos/sky3.webp";
+  final String sky1 = "$imagePath/suggest_demos/sky1.png";
+  final String sky2 = "$imagePath/suggest_demos/sky2.png";
+  final String sky3 = "$imagePath/suggest_demos/sky3.png";
 
   /// Anime AI
   final String anime1 = "$imagePath/suggest_demos/anime1.jpg";
-  final String anime2 = "$imagePath/suggest_demos/anime2.webp";
+  final String anime2 = "$imagePath/suggest_demos/anime2.png";
   final String anime3 = "$imagePath/suggest_demos/anime3.jpg";
 
   /// Restyle
-  final String restyle1 = "$imagePath/suggest_demos/restyle1.webp";
+  final String restyle1 = "$imagePath/suggest_demos/restyle1.png";
   final String restyle2 = "$imagePath/suggest_demos/restyle2.jpeg";
-  final String restyle3 = "$imagePath/suggest_demos/restyle3.webp";
+  final String restyle3 = "$imagePath/suggest_demos/restyle3.png";
 
   /// Remove Background
-  final String removeBG1 = "$imagePath/suggest_demos/remove_bg1.webp";
-  final String removeBG2 = "$imagePath/suggest_demos/remove_bg2.webp";
-  final String removeBG3 = "$imagePath/suggest_demos/remove_bg3.webp";
+  final String removeBG1 = "$imagePath/suggest_demos/remove_bg1.png";
+  final String removeBG2 = "$imagePath/suggest_demos/remove_bg2.png";
+  final String removeBG3 = "$imagePath/suggest_demos/remove_bg3.png";
 }

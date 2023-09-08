@@ -5,7 +5,7 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/remove_object/widgets/detected_object_item.dart';
 import 'package:snapeditify/providers/remove_object/remove_object_provider.dart';
 import 'package:snapeditify/services/snap_edit/snap_edit.dart';
-import 'package:snapeditify/widgets/base/lottie_viewer.dart';
+import 'package:snapeditify/widgets/base/custom_image.dart';
 
 class DetectedObjectList extends StatelessWidget {
   const DetectedObjectList({Key? key, required this.type, required this.provider}) : super(key: key);
@@ -32,10 +32,9 @@ class DetectedObjectList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    LottieViewer(
-                      lottie: AppAssets.instance.notFound,
+                    CustomImage(
+                      image: AppAssets.instance.notFoundObject,
                       width: AppDimensions.instance.iconX(3),
-                      height: AppDimensions.instance.iconX(3),
                     ),
                     SizedBox(height: AppDimensions.instance.padding),
                     Text(

@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           hot: true,
         ),
 
-        SizedBox(height: AppDimensions.instance.padding),
+        // SizedBox(height: AppDimensions.instance.padding),
 
         /// ENHANCE PHOTO
         HomeBaseTools(title: S.of(context).enhancePhoto, const [
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
         //   ImageTool.changeBG,
         // ]),
 
-        SizedBox(height: AppDimensions.instance.padding),
+        // SizedBox(height: AppDimensions.instance.padding),
 
         /// APPLY EFFECTS
         HomeBaseTools(title: S.of(context).applyEffects, const [
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           ImageTool.generateAnimeAI
         ]),
 
-        SizedBox(height: AppDimensions.instance.padding),
+        // SizedBox(height: AppDimensions.instance.padding),
         const AdView(),
         SizedBox(height: bottomPadding),
       ],

@@ -9,7 +9,7 @@ import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/pages/photos/widgets/image_item.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/view_models/album_vm.dart';
-import 'package:snapeditify/widgets/base/lottie_viewer.dart';
+import 'package:snapeditify/widgets/base/custom_image.dart';
 
 class ImageList extends StatefulWidget {
   const ImageList({super.key, required this.album});
@@ -63,16 +63,15 @@ class _ImageListState extends ProviderStateful<ImageList, IGalleryProvider> {
 
   @override
   Widget build(BuildContext context) {
-    if (_images?.isNotEmpty != true) {
+    if (_images == null || _images?.isNotEmpty != true) {
       return Expanded(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              LottieViewer(
-                lottie: AppAssets.instance.notFound,
-                width: AwesomeAppState.screen.width * 1 / 3,
-                height: AwesomeAppState.screen.width * 1 / 3,
+              CustomImage(
+                image: AppAssets.instance.notFoundImage,
+                width: AwesomeAppState.screen.width * 1.5/3,
               ),
               Text(
                 S.of(context).notFoundImages,
