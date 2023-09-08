@@ -88,5 +88,19 @@
   "unableToStyleImagePleaseTryAgain": "无法设置图像样式，请重试。",
   "unableToSaveVideoPleaseTryAgain": "无法保存视频，请重试。",
   "creatingVideoEffectsFailedPleaseTryAgain": "创建视频效果失败，请重试",
-  "unableToCreateIdPhotoPleaseTryAgain": "Unable to create id photo, please try again."
+  "unableToCreateIdPhotoPleaseTryAgain": "Unable to create id photo, please try again.",
+  "selectEmoji": "选择表情符号",
+  "size": "尺寸",
+  "filterColor": "滤镜颜色",
+  "color": "颜色",
+  "reset": "重置",
+  "radius": "半径",
+  "opacity": "不透明度",
+  "textSize": "字体大小",
+  "textColor": "文字颜色",
+  "bgColor": "背景颜色",
+  "bgOpacity": "背景不透明度",
+  "blackColor": "黑色",
+  "seeAll": "查看全部",
+  "savedVideo": "保存的视频"
 }

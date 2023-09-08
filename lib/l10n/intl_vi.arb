@@ -88,5 +88,19 @@
   "unableToStyleImagePleaseTryAgain": "Không thể tạo kiểu cho hình ảnh, vui lòng thử lại.",
   "unableToSaveVideoPleaseTryAgain": "Không thể lưu video, vui lòng thử lại.",
   "creatingVideoEffectsFailedPleaseTryAgain": "Tạo hiệu ứng video không thành công, vui lòng thử lại",
-  "unableToCreateIdPhotoPleaseTryAgain": "Unable to create id photo, please try again."
+  "unableToCreateIdPhotoPleaseTryAgain": "Unable to create id photo, please try again.",
+  "selectEmoji": "Chọn biểu tượng cảm xúc",
+  "size": "Kích cỡ",
+  "filterColor": "Bộ lọc màu",
+  "color": "Màu sắc",
+  "reset": "Cài lại",
+  "radius": "Bán kính",
+  "opacity": "Độ mờ",
+  "textSize": "Cỡ chữ",
+  "textColor": "Màu chữ",
+  "bgColor": "Màu nền",
+  "bgOpacity": "Độ mờ của nền",
+  "blackColor": "Màu đen",
+  "seeAll": "Nhìn thấy tất cả",
+  "savedVideo": "Video đã lưu"
 }

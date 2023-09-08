@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/providers/gallery/gallery_provider.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/widgets/app_use/more_tools_popup.dart';
@@ -86,7 +87,7 @@ class ImageToolList extends StatelessWidget {
                     ),
                     SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                     Text(
-                      "See All",
+                      S.of(context).seeAll,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontWeight: FontWeight.w700,

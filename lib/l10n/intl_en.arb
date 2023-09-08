@@ -88,5 +88,19 @@
   "unableToStyleImagePleaseTryAgain": "Unable to style image, please try again.",
   "unableToSaveVideoPleaseTryAgain": "Unable to save video, please try again.",
   "creatingVideoEffectsFailedPleaseTryAgain": "Creating video effects failed, please try again",
-  "unableToCreateIdPhotoPleaseTryAgain": "Unable to create id photo, please try again."
+  "unableToCreateIdPhotoPleaseTryAgain": "Unable to create id photo, please try again.",
+  "selectEmoji": "Select Emoji",
+  "size": "Size",
+  "filterColor": "Filter Color",
+  "color": "Color",
+  "reset": "Reset",
+  "radius": "Radius",
+  "opacity": "Opacity",
+  "textSize": "Text Size",
+  "textColor": "Text Color",
+  "bgColor": "BG Color",
+  "bgOpacity": "BG Opacity",
+  "blackColor": "Black Color",
+  "seeAll": "See All",
+  "savedVideo": "Saved Video"
 }

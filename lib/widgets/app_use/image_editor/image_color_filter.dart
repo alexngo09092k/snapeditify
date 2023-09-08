@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/colors_picker.dart';
 
 class ImageColorFilter extends StatefulWidget {
@@ -62,7 +63,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
           children: [
             Center(
               child: Text(
-                'Slider Filter Color'.toUpperCase(),
+                S.of(context).filterColor.toUpperCase(),
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
@@ -75,7 +76,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                 SizedBox(
                   width: 50,
                   child: Text(
-                    'Color',
+                    S.of(context).color,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -108,7 +109,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     color = Colors.transparent;
                   },
                   child: Text(
-                    'Reset',
+                    S.of(context).reset,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -122,7 +123,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                 SizedBox(
                   width: 50,
                   child: Text(
-                    'Radius',
+                    S.of(context).radius,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -151,7 +152,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     });
                   },
                   child: Text(
-                    'Reset',
+                    S.of(context).reset,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -165,7 +166,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                 SizedBox(
                   width: 50,
                   child: Text(
-                    'Opacity',
+                    S.of(context).opacity,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -193,7 +194,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     });
                   },
                   child: Text(
-                    'Reset',
+                    S.of(context).reset,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!

@@ -88,5 +88,19 @@
   "unableToStyleImagePleaseTryAgain": "ไม่สามารถจัดรูปแบบรูปภาพได้ โปรดลองอีกครั้ง",
   "unableToSaveVideoPleaseTryAgain": "ไม่สามารถบันทึกวิดีโอได้ โปรดลองอีกครั้ง",
   "creatingVideoEffectsFailedPleaseTryAgain": "การสร้างเอฟเฟกต์วิดีโอล้มเหลว โปรดลองอีกครั้ง",
-  "unableToCreateIdPhotoPleaseTryAgain": "Unable to create id photo, please try again."
+  "unableToCreateIdPhotoPleaseTryAgain": "Unable to create id photo, please try again.",
+  "selectEmoji": "เลือกอิโมจิ",
+  "size": "ขนาด",
+  "filterColor": "สีของฟิลเตอร์",
+  "color": "สี",
+  "reset": "รีเซ็ต",
+  "radius": "รัศมี",
+  "opacity": "ความทึบ",
+  "textSize": "ขนาดข้อความ",
+  "textColor": "สีข้อความ",
+  "bgColor": "สีพื้นหลัง",
+  "bgOpacity": "ความทึบของพื้นหลัง",
+  "blackColor": "สีดำ",
+  "seeAll": "ดูทั้งหมด",
+  "savedVideo": "วิดีโอที่บันทึกไว้"
 }

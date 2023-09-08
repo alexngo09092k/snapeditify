@@ -44,7 +44,7 @@ class SavedVideoPreview extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Saved Video",
+                      S.of(context).savedVideo,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!

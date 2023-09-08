@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
 import 'data/layer.dart';
@@ -43,7 +44,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
               SizedBox(
                 width: 60,
                 child: Text(
-                  'Text Size',
+                  S.of(context).textSize,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -77,7 +78,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
               SizedBox(
                 width: 80,
                 child: Text(
-                  'Text Color',
+                  S.of(context).textColor,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -110,7 +111,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   });
                 },
                 child: Text(
-                  'Reset',
+                  S.of(context).reset,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -125,7 +126,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
               SizedBox(
                 width: 80,
                 child: Text(
-                  'BG Color',
+                  S.of(context).bgColor,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -158,7 +159,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   });
                 },
                 child: Text(
-                  'Reset',
+                  S.of(context).reset,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -173,7 +174,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
               SizedBox(
                 width: 60,
                 child: Text(
-                  'BG Opacity',
+                  S.of(context).bgOpacity,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -203,7 +204,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   });
                 },
                 child: Text(
-                  'Reset',
+                  S.of(context).reset,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -214,7 +215,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
           ),
           SizedBox(height: AppDimensions.instance.padding),
           CustomButton(
-            title: "Remove",
+            title: S.of(context).remove,
             height: 45,
             onTap: () {
               ImageEditorStorage.instance.removedLayers.add(

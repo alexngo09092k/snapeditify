@@ -41,10 +41,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "artEffect": MessageLookupByLibrary.simpleMessage("อาร์ตเอฟเฟกต์"),
         "auto": MessageLookupByLibrary.simpleMessage("อัตโนมัติ"),
         "before": MessageLookupByLibrary.simpleMessage("ก่อน"),
+        "bgColor": MessageLookupByLibrary.simpleMessage("สีพื้นหลัง"),
+        "bgOpacity": MessageLookupByLibrary.simpleMessage("ความทึบของพื้นหลัง"),
+        "blackColor": MessageLookupByLibrary.simpleMessage("สีดำ"),
         "brush": MessageLookupByLibrary.simpleMessage("แปรง"),
         "cancel": MessageLookupByLibrary.simpleMessage("ยกเลิก"),
         "changeSky": MessageLookupByLibrary.simpleMessage("เปลี่ยนท้องฟ้า"),
         "chinese": MessageLookupByLibrary.simpleMessage("ชาวจีน"),
+        "color": MessageLookupByLibrary.simpleMessage("สี"),
         "createIdPhoto":
             MessageLookupByLibrary.simpleMessage("สร้างรูปถ่ายประจำตัว"),
         "creatingVideoEffectsFailedPleaseTryAgain":
@@ -68,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ไม่สามารถบันทึกภาพได้ โปรดลองอีกครั้ง"),
         "feedback": MessageLookupByLibrary.simpleMessage("ข้อเสนอแนะ"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("ข้อเสนอแนะถึง"),
+        "filterColor": MessageLookupByLibrary.simpleMessage("สีของฟิลเตอร์"),
         "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "imageOnly": MessageLookupByLibrary.simpleMessage("รูปภาพเท่านั้น"),
         "languages": MessageLookupByLibrary.simpleMessage("ภาษา"),
@@ -86,17 +91,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "notFoundImages": MessageLookupByLibrary.simpleMessage("ไม่พบรูปภาพ"),
         "objects": MessageLookupByLibrary.simpleMessage("วัตถุ"),
         "ok": MessageLookupByLibrary.simpleMessage("ตกลง"),
+        "opacity": MessageLookupByLibrary.simpleMessage("ความทึบ"),
         "openApp": MessageLookupByLibrary.simpleMessage("เปิดแอป"),
         "openBrowser": MessageLookupByLibrary.simpleMessage("เปิดเบราว์เซอร์"),
         "openSettings": MessageLookupByLibrary.simpleMessage("เปิดการตั้งค่า"),
         "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
             "โปรดลองอีกครั้งหรือเปิดแอปอีกครั้ง"),
+        "radius": MessageLookupByLibrary.simpleMessage("รัศมี"),
         "rateSnapeditify":
             MessageLookupByLibrary.simpleMessage("ให้คะแนน SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("ลบ"),
         "removeBackground": MessageLookupByLibrary.simpleMessage("ลบพื้นหลัง"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("ลบวัตถุ"),
         "removed": MessageLookupByLibrary.simpleMessage("ลบออก"),
+        "reset": MessageLookupByLibrary.simpleMessage("รีเซ็ต"),
         "restore": MessageLookupByLibrary.simpleMessage("คืนค่า"),
         "restyle": MessageLookupByLibrary.simpleMessage("รีสไตล์"),
         "retry": MessageLookupByLibrary.simpleMessage("ลองอีกครั้ง"),
@@ -105,16 +113,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("บันทึกขีดจำกัดรูปภาพ"),
         "saveVideo": MessageLookupByLibrary.simpleMessage("บันทึกวิดีโอ"),
         "savedImage": MessageLookupByLibrary.simpleMessage("ภาพที่บันทึกไว้"),
+        "savedVideo":
+            MessageLookupByLibrary.simpleMessage("วิดีโอที่บันทึกไว้"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("ดูทั้งหมด"),
         "selectBackgroundColorAndPhotoRatio":
             MessageLookupByLibrary.simpleMessage(
                 "เลือกสีพื้นหลังและอัตราส่วนภาพถ่าย"),
+        "selectEmoji": MessageLookupByLibrary.simpleMessage("เลือกอิโมจิ"),
         "send": MessageLookupByLibrary.simpleMessage("ส่ง"),
         "setting": MessageLookupByLibrary.simpleMessage("การตั้งค่า"),
         "share": MessageLookupByLibrary.simpleMessage("แบ่งปัน"),
+        "size": MessageLookupByLibrary.simpleMessage("ขนาด"),
         "suggested": MessageLookupByLibrary.simpleMessage("แนะนำ"),
         "team": MessageLookupByLibrary.simpleMessage("ทีม"),
         "teamToSupport":
             MessageLookupByLibrary.simpleMessage("มีทีมงานคอยสนับสนุน"),
+        "textColor": MessageLookupByLibrary.simpleMessage("สีข้อความ"),
+        "textSize": MessageLookupByLibrary.simpleMessage("ขนาดข้อความ"),
         "thailand": MessageLookupByLibrary.simpleMessage("ประเทศไทย"),
         "toAccessPhotosOnYourDeviceToEditOrShare":
             MessageLookupByLibrary.simpleMessage(

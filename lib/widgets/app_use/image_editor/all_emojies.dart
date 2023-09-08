@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'data/data.dart';
 import 'data/layer.dart';
 
@@ -23,7 +24,7 @@ class Emojies extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                'Select Emoji'.toUpperCase(),
+                S.of(context).selectEmoji.toUpperCase(),
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.w700,
                     ),

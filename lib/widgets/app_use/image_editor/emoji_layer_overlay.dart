@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/image_editor_storage.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
 import 'data/layer.dart';
@@ -42,7 +43,7 @@ class _EmojiLayerOverlayState extends State<EmojiLayerOverlay> {
               SizedBox(
                 width: 50,
                 child: Text(
-                  'Sizet',
+                  S.of(context).size,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -79,7 +80,7 @@ class _EmojiLayerOverlayState extends State<EmojiLayerOverlay> {
               widget.onUpdate();
             },
             height: 45,
-            title: 'Remove',
+            title: S.of(context).remove,
           ),
         ],
       ),

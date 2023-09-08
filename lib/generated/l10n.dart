@@ -939,6 +939,146 @@ class S {
       args: [],
     );
   }
+
+  /// `Select Emoji`
+  String get selectEmoji {
+    return Intl.message(
+      'Select Emoji',
+      name: 'selectEmoji',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Size`
+  String get size {
+    return Intl.message(
+      'Size',
+      name: 'size',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter Color`
+  String get filterColor {
+    return Intl.message(
+      'Filter Color',
+      name: 'filterColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Color`
+  String get color {
+    return Intl.message(
+      'Color',
+      name: 'color',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get reset {
+    return Intl.message(
+      'Reset',
+      name: 'reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Radius`
+  String get radius {
+    return Intl.message(
+      'Radius',
+      name: 'radius',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Opacity`
+  String get opacity {
+    return Intl.message(
+      'Opacity',
+      name: 'opacity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Text Size`
+  String get textSize {
+    return Intl.message(
+      'Text Size',
+      name: 'textSize',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Text Color`
+  String get textColor {
+    return Intl.message(
+      'Text Color',
+      name: 'textColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `BG Color`
+  String get bgColor {
+    return Intl.message(
+      'BG Color',
+      name: 'bgColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `BG Opacity`
+  String get bgOpacity {
+    return Intl.message(
+      'BG Opacity',
+      name: 'bgOpacity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Black Color`
+  String get blackColor {
+    return Intl.message(
+      'Black Color',
+      name: 'blackColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See All`
+  String get seeAll {
+    return Intl.message(
+      'See All',
+      name: 'seeAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved Video`
+  String get savedVideo {
+    return Intl.message(
+      'Saved Video',
+      name: 'savedVideo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

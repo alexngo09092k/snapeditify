@@ -41,10 +41,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "artEffect": MessageLookupByLibrary.simpleMessage("Art Effect"),
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
         "before": MessageLookupByLibrary.simpleMessage("Before"),
+        "bgColor": MessageLookupByLibrary.simpleMessage("BG Color"),
+        "bgOpacity": MessageLookupByLibrary.simpleMessage("BG Opacity"),
+        "blackColor": MessageLookupByLibrary.simpleMessage("Black Color"),
         "brush": MessageLookupByLibrary.simpleMessage("Brush"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changeSky": MessageLookupByLibrary.simpleMessage("Change Sky"),
         "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
+        "color": MessageLookupByLibrary.simpleMessage("Color"),
         "createIdPhoto":
             MessageLookupByLibrary.simpleMessage("Create ID Photo"),
         "creatingVideoEffectsFailedPleaseTryAgain":
@@ -68,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to save image, please try again."),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("Feedback to"),
+        "filterColor": MessageLookupByLibrary.simpleMessage("Filter Color"),
         "hot": MessageLookupByLibrary.simpleMessage("HOT"),
         "imageOnly": MessageLookupByLibrary.simpleMessage("Image only"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
@@ -88,11 +93,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Not found images"),
         "objects": MessageLookupByLibrary.simpleMessage("Objects"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "opacity": MessageLookupByLibrary.simpleMessage("Opacity"),
         "openApp": MessageLookupByLibrary.simpleMessage("Open app"),
         "openBrowser": MessageLookupByLibrary.simpleMessage("Open browser"),
         "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
         "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage(
             "Please try again or open the app again."),
+        "radius": MessageLookupByLibrary.simpleMessage("Radius"),
         "rateSnapeditify":
             MessageLookupByLibrary.simpleMessage("Rate SnapEditify"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
@@ -100,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Remove Background"),
         "removeObjects": MessageLookupByLibrary.simpleMessage("Remove Objects"),
         "removed": MessageLookupByLibrary.simpleMessage("Removed"),
+        "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "restore": MessageLookupByLibrary.simpleMessage("Restore"),
         "restyle": MessageLookupByLibrary.simpleMessage("Restyle"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
@@ -108,16 +116,22 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Save Image Limit"),
         "saveVideo": MessageLookupByLibrary.simpleMessage("Save Video"),
         "savedImage": MessageLookupByLibrary.simpleMessage("Saved Image"),
+        "savedVideo": MessageLookupByLibrary.simpleMessage("Saved Video"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "selectBackgroundColorAndPhotoRatio":
             MessageLookupByLibrary.simpleMessage(
                 "Select background color and photo ratio"),
+        "selectEmoji": MessageLookupByLibrary.simpleMessage("Select Emoji"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
+        "size": MessageLookupByLibrary.simpleMessage("Size"),
         "suggested": MessageLookupByLibrary.simpleMessage("Suggested"),
         "team": MessageLookupByLibrary.simpleMessage("Team"),
         "teamToSupport":
             MessageLookupByLibrary.simpleMessage("Team to support."),
+        "textColor": MessageLookupByLibrary.simpleMessage("Text Color"),
+        "textSize": MessageLookupByLibrary.simpleMessage("Text Size"),
         "thailand": MessageLookupByLibrary.simpleMessage("Thailand"),
         "toAccessPhotosOnYourDeviceToEditOrShare":
             MessageLookupByLibrary.simpleMessage(

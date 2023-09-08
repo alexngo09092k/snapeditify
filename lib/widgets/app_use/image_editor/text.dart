@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/single_image_editor.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
@@ -122,7 +123,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
                         SizedBox(
                           width: 80,
                           child: Text(
-                            'Color',
+                            S.of(context).color,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
@@ -153,7 +154,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
                         SizedBox(
                           width: 80,
                           child: Text(
-                            'Black Color',
+                            S.of(context).blackColor,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
@@ -187,7 +188,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
                         SizedBox(
                           width: 65,
                           child: Text(
-                            'Text Size',
+                            S.of(context).textSize,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
