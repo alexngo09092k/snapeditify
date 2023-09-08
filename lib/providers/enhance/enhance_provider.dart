@@ -116,7 +116,7 @@ class EnhanceProvider extends IEnhanceProvider {
     if (num != null && num > 1) return false;
 
     WidgetUtils.instance.showDialog(builder: (_) => const EnhanceGuide());
-    AsyncStorage.instance.setInt(AsyncStorageKey.instance.autoAIGuide, num == null ? 1 : num + 1);
+    AsyncStorage.instance.setInt(AsyncStorageKey.instance.enhanceGuide, num == null ? 1 : num + 1);
     return true;
   }
 
