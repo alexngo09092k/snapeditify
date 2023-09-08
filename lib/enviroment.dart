@@ -179,18 +179,18 @@ const enviroment = {
         "iosId": "r0o9tg4ocx",
         "androidId": "r0o9tg4ocx",
       },
-      // {
-      //   "type": "reward",
-      //   "provider": "huawei",
-      //   "iosId": "h7s9d468ol",
-      //   "androidId": "h7s9d468ol",
-      // },
-      // {
-      //   "type": "splash",
-      //   "provider": "huawei",
-      //   "iosId": "t17z7pus7m",
-      //   "androidId": "t17z7pus7m",
-      // },
+      {
+        "type": "reward",
+        "provider": "huawei",
+        "iosId": "h7s9d468ol",
+        "androidId": "h7s9d468ol",
+      },
+      {
+        "type": "splash",
+        "provider": "huawei",
+        "iosId": "t17z7pus7m",
+        "androidId": "t17z7pus7m",
+      },
       {
         "type": "banner",
         "provider": "huawei",
