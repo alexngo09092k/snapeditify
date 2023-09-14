@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttering_analytics/analytics/index.dart';
 import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
@@ -40,6 +41,10 @@ class Configuration {
   AdvertisementConfig _advertisement = DefaultConfig.advertisement;
   AdvertisementConfig get advertisement => _advertisement;
 
+  /// ANALYTICS CONFIGURATIONS
+  AnalyticsConfig _analytics = DefaultConfig.analytics;
+  AnalyticsConfig get analytics => _analytics;
+
   /// API CONFIGURATIONS
   final SnapEditConfig _snapEdit = DefaultConfig.snapEdit;
   SnapEditConfig get snapEdit => _snapEdit;
@@ -68,9 +73,9 @@ class Configuration {
       _iap = IAPConfig.fromMap(enviroment['iap']);
     }
 
-    // if (enviroment['snapEdit'] != null) {
-    //   _snapEdit = SnapEditConfig.fromMap(enviroment['snapEdit']);
-    // }
+    if(enviroment['analytics'] != null) {
+      _analytics = AnalyticsConfig.fromMap(enviroment['analytics']);
+    }
   }
 }
 
@@ -161,6 +166,11 @@ abstract class DefaultConfig {
     enable: kDebugMode,
     products: [],
     providers: [IAPProvider.google, IAPProvider.huawei],
+  );
+
+  static AnalyticsConfig analytics = const AnalyticsConfig(
+    enable: kDebugMode,
+    providers: [AnalyticsProvider.google, AnalyticsProvider.huawei],
   );
 }
 

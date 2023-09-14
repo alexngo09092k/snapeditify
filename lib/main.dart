@@ -66,6 +66,7 @@ void main() {
 
       AwesomeAdvertisement.instance.initial(Configuration.instance.advertisement);
       AwesomeIAP.instance.initial(Configuration.instance.iap);
+      AwesomeAnalytics.instance.initial(Configuration.instance.analytics);
 
       Services.instance.snapEdit.initital(Configuration.instance.snapEdit);
 
