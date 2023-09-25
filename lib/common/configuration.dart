@@ -168,6 +168,7 @@ abstract class DefaultConfig {
     providers: [IAPProvider.google, IAPProvider.huawei],
   );
 
+  /// DEFAULT ANALYTICS CONFIG
   static AnalyticsConfig analytics = const AnalyticsConfig(
     enable: kDebugMode,
     providers: [AnalyticsProvider.google, AnalyticsProvider.huawei],
