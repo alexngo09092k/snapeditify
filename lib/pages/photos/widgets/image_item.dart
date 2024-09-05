@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 class ImageItem extends StatelessWidget {
   const ImageItem({super.key, this.size, this.onPhoto, this.child});
@@ -31,7 +32,7 @@ class ImageItem extends StatelessWidget {
                   assetEntity,
                   thumbnailSize: size != null ? ThumbnailSize(size.width.toInt(), size.height.toInt()) : null,
                   fit: BoxFit.cover,
-                  // isOriginal: false,
+                  isOriginal: true,
                 ),
               ),
             ],

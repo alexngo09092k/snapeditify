@@ -49,7 +49,7 @@ extension ImageToolEX on ImageTool {
       // case ImageTool.productPhoto:
       //   return 'Product Photo';
       // case ImageTool.changeBG:
-        // return 'Change Background';
+      // return 'Change Background';
       case ImageTool.generateAnimeAI:
         return 'Generate Anime AI';
       case ImageTool.applyArtEffect:
@@ -144,7 +144,7 @@ extension ImageToolEX on ImageTool {
       case ImageTool.changeYourSky:
         return AppAssets.instance.icSky;
       case ImageTool.fastEditor:
-      return AppAssets.instance.icEditor;
+        return AppAssets.instance.icEditor;
     }
   }
 
@@ -155,7 +155,7 @@ extension ImageToolEX on ImageTool {
       case ImageTool.oneTouchRemoveAll:
         return const Color.fromRGBO(212, 229, 255, 1);
       case ImageTool.enhanceImage:
-        return const Color.fromRGBO(252, 237, 252, 1); 
+        return const Color.fromRGBO(252, 237, 252, 1);
       case ImageTool.upscaleImage:
         return const Color.fromRGBO(223, 244, 234, 1);
       case ImageTool.restoreOldPhoto:
@@ -167,7 +167,7 @@ extension ImageToolEX on ImageTool {
       // case ImageTool.changeBG:
       //   return const Color.fromRGBO(241, 224, 165, 1);
       case ImageTool.generateAnimeAI:
-        return const Color.fromRGBO(206, 250, 220, 1); 
+        return const Color.fromRGBO(206, 250, 220, 1);
       case ImageTool.applyArtEffect:
         return const Color.fromRGBO(252, 245, 230, 1);
       case ImageTool.changeYourSky:
@@ -325,11 +325,11 @@ class GalleryProvider extends IGalleryProvider {
     return true;
   }
 
-
   @override
   Future<File?> saveImage(Uint8List data) async {
     try {
-      final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
+      final String name =
+          '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
       if (CurrentPlatform.instance.isHuawei) {
         final result = await ImageGallerySaver.saveImage(
           data,
@@ -355,8 +355,9 @@ class GalleryProvider extends IGalleryProvider {
       } else {
         AssetEntity? asset = await PhotoManager.editor.saveImage(
           data,
-          title:
+          filename:
               '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
+          title: Configuration.instance.business.appName,
         );
         return asset?.file;
       }
@@ -369,21 +370,24 @@ class GalleryProvider extends IGalleryProvider {
   @override
   Future<File?> saveVideo(String videoURL) async {
     try {
-      final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
+      final String name =
+          '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
 
       // final Directory dataDirectory = await getApplicationDocumentsDirectory();
       final Directory cacheDirectory = await getTemporaryDirectory();
       String savePath = "${cacheDirectory.path}/$name.mp4";
       File videoFile = File(savePath);
       await Dio().download(videoURL, savePath);
-      
+
       if (CurrentPlatform.instance.isHuawei) {
         final result = await ImageGallerySaver.saveFile(
           savePath,
           name: '$name.mp4',
         );
 
-        if (result != null && result['filePath'] != null && await videoFile.exists()) {
+        if (result != null &&
+            result['filePath'] != null &&
+            await videoFile.exists()) {
           /// REFRESH IMAGE
           await refreshGalleryList(true);
 

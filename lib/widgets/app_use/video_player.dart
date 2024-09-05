@@ -11,12 +11,12 @@ class VideoPlayer extends StatefulWidget {
 }
 
 class _VideoPlayerState extends State<VideoPlayer> {
-  late VideoPlayerController videoPlayerController;
+  late CachedVideoPlayerController videoPlayerController;
   late CustomVideoPlayerController _customVideoPlayerController;
 
   @override
   void initState() {
-    videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(widget.videoURL))
+    videoPlayerController = CachedVideoPlayerController.network(widget.videoURL)
           ..initialize().then((value) => setState(() {}));
     _customVideoPlayerController = CustomVideoPlayerController(
       context: context,

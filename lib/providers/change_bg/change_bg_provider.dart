@@ -13,7 +13,7 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/extensions/extensions.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 
-abstract class IChangeBGProvider extends EditImageProvider with StorageProvider {
+abstract class IChangeBGProvider extends EditImageProvider implements StorageProvider {
   @override
   ChangeBGState get state;
 

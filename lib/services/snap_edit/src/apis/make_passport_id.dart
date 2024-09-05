@@ -1,7 +1,5 @@
 import 'dart:io';
 import 'package:fluttering/fluttering.dart';
-import 'package:snapeditify/services/snap_edit/src/models/body/make_passport_id_body.dart';
-import 'package:snapeditify/services/snap_edit/src/models/response/make_passport_id_response.dart';
 import '../models/models.dart';
 import '../snap_edit.dart';
 import '../utils.dart';

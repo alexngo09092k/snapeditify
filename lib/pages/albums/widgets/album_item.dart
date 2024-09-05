@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -52,7 +52,7 @@ class AlbumItem extends StatelessWidget {
                             height: height,
                             thumnail!,
                             fit: BoxFit.cover,
-                            isOriginal: false,
+                            isOriginal: true,
                           ),
                         ),
                       )
