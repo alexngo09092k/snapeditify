@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:snapeditify/common/configuration.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -322,7 +322,7 @@ class GalleryProvider extends IGalleryProvider {
       final String name =
           '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
       if (CurrentPlatform.instance.isHuawei) {
-        final result = await ImageGallerySaver.saveImage(
+        final result = await ImageGallerySaverPlus.saveImage(
           data,
           quality: 100,
           name: name,
@@ -371,7 +371,7 @@ class GalleryProvider extends IGalleryProvider {
       await Dio().download(videoURL, savePath);
 
       if (CurrentPlatform.instance.isHuawei) {
-        final result = await ImageGallerySaver.saveFile(
+        final result = await ImageGallerySaverPlus.saveFile(
           savePath,
           name: '$name.mp4',
         );

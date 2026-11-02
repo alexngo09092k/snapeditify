@@ -1,0 +1,5 @@
+[versions]
+agc = "1.9.6.300"
+
+[plugins]
+agcp = { id = "com.huawei.agconnect.agcp", version.ref = "agc" }
