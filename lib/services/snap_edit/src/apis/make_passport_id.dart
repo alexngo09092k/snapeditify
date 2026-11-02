@@ -7,6 +7,7 @@ import '../utils.dart';
 extension MakePassportID on SnapEdit {
    Future<SnapEditResponse<MakePassportIDResponse?>> makePassportID(MakePassportIDBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {};
 

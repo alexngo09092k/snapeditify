@@ -7,9 +7,9 @@ import '../utils.dart';
 extension ChangeSky on SnapEdit {
   Future<SnapEditResponse<BackgroundResponse?>> getSkyEffects([String lang = 'en']) async {
     try {
-      ClientResponse<Map<String, dynamic>> response = await ClientHttp.instance.get<Map<String, dynamic>>(
+            ClientResponse<Map<String, dynamic>> response = await ClientHttp.instance.get<Map<String, dynamic>>(
         '${config.endPoints.skyEffects}?lang=$lang',
-        headers: config.headers,
+        headers: config.publicHeaders,
       );
       return handleResponse<BackgroundResponse>(response, (p0) => BackgroundResponse.fromMap(p0));
     } catch (error) {
@@ -19,6 +19,7 @@ extension ChangeSky on SnapEdit {
 
   Future<SnapEditResponse<SkyMaskResponse?>> removeSky(SkyMaskBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {};
 

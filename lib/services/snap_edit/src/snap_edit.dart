@@ -13,6 +13,18 @@ class SnapEdit {
   void initital(SnapEditConfig config) {
     _config = config;
   }
+
+  /// Fetch / refresh JWT from Firebase Installations before calling SnapEdit APIs.
+  Future<bool> ensureAuthToken({bool force = false}) async {
+    return _config.ensureAuthToken(force: force);
+  }
+
+  /// Convenience: ensure token then return headers (or null if failed).
+  Future<Map<String, String>?> getAuthHeaders({bool force = false}) async {
+    final ok = await ensureAuthToken(force: force);
+    if (!ok && _config.jwt.isEmpty) return null;
+    return _config.headers;
+  }
 }
 
 extension SnapEditResponseEx on SnapEdit {

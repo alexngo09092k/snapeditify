@@ -7,6 +7,7 @@ import '../utils.dart';
 extension Restore on SnapEdit {
   Future<SnapEditResponse<RestorationResponse?>> restoreImage(RestoreBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {'zoom_factor': body.zoomFactor};
 

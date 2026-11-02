@@ -7,6 +7,7 @@ import '../utils.dart';
 extension SaveLargeImage on SnapEdit {
     Future<SnapEditResponse<LargeImageResponse?>> sacelargeImage(LargeImageBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {};
 

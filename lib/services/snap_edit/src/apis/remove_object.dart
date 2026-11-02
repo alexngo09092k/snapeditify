@@ -7,6 +7,7 @@ import '../utils.dart';
 extension DetectedImage on SnapEdit {
   Future<SnapEditResponse<ScanObjectResponse?>> scanObject(ScanObjectBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> files = [];
       final Map<String, dynamic> data = {};
 
@@ -45,6 +46,7 @@ extension DetectedImage on SnapEdit {
 
   Future<SnapEditResponse<OneTouchSuggestionResponse?>> removeOneTouch(OneTouchSuggestionBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {};
 
@@ -80,6 +82,7 @@ extension DetectedImage on SnapEdit {
 
   Future<SnapEditResponse<RemoveObjectResponse?>> removeObject(RemoveObjectBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {};
 

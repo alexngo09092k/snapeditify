@@ -7,9 +7,9 @@ import '../utils.dart';
 extension Restyle on SnapEdit {
   Future<SnapEditResponse<RestyleEffectsResponse?>> getRestyleEffects([String lang = 'en']) async {
     try {
-      ClientResponse<String> response = await ClientHttp.instance.get<String>(
+            ClientResponse<String> response = await ClientHttp.instance.get<String>(
         '${config.endPoints.restyleEffects}?lang=$lang',
-        headers: config.headers,
+        headers: config.publicHeaders,
       );
        
       return handleResponse<RestyleEffectsResponse>(response, (p0) => RestyleEffectsResponse.fromJson(p0));
@@ -20,6 +20,7 @@ extension Restyle on SnapEdit {
 
   Future<SnapEditResponse<RestyleImageResponse?>> restyle(RestyleBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {'style_id': body.styleId};
 

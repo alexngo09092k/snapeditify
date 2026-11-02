@@ -80,11 +80,10 @@ class _HomePageState extends State<HomePage> {
 
         // SizedBox(height: AppDimensions.instance.padding),
 
-        /// APPLY EFFECTS
+        /// APPLY EFFECTS (Anime AI hidden — API no longer supported)
         HomeBaseTools(title: S.of(context).applyEffects, const [
           ImageTool.changeYourSky,
           ImageTool.applyArtEffect,
-          ImageTool.generateAnimeAI
         ]),
 
         // SizedBox(height: AppDimensions.instance.padding),

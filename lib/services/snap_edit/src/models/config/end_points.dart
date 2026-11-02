@@ -47,7 +47,7 @@ class EndPoints {
       removeObject: "api/object_removal/v6/erase",
       removeOneTouch: "api/object_removal/v7/auto_suggest",
       scanObject: "api/v6/ai_detection",
-      enhanceImage: "api/enhance/v2/pro",
+      enhanceImage: "api/enhance/v2",
       restyleEffects: "https://assets.snapedit.app/restyle/styles.json",
       restyleImage: "api/v1/restyle",
       animeEffects: "https://assets.snapedit.app/imagen/styles.json",

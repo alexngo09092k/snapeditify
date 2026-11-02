@@ -7,9 +7,9 @@ import '../utils.dart';
 extension EnimeAI on SnapEdit {
   Future<SnapEditResponse<RestyleEffectsResponse?>> getAnimeStyles([String lang = 'en']) async {
     try {
-      ClientResponse<Map<String, dynamic>> response = await ClientHttp.instance.get<Map<String, dynamic>>(
+            ClientResponse<Map<String, dynamic>> response = await ClientHttp.instance.get<Map<String, dynamic>>(
         '${config.endPoints.animeEffects}?lang=$lang',
-        headers: config.headers,
+        headers: config.publicHeaders,
       );
 
       return handleResponse<RestyleEffectsResponse>(response, (p0) => RestyleEffectsResponse.fromMap(p0));
@@ -20,6 +20,7 @@ extension EnimeAI on SnapEdit {
 
   Future<SnapEditResponse<AnimeResponse?>> animeImage(AnimeBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {'style': body.style};
 

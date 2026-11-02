@@ -7,6 +7,7 @@ import '../utils.dart';
 extension Enhance on SnapEdit {
   Future<SnapEditResponse<EnhanceImageResponse?>> enhanceImage(EnhanceBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {'zoom_factor': body.zoomFactor};
 

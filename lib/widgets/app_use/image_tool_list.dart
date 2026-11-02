@@ -30,7 +30,7 @@ class ImageToolList extends StatelessWidget {
     List<ImageTool> tools = [
       ImageTool.removeObject,
       ImageTool.enhanceImage,
-      ImageTool.generateAnimeAI
+      ImageTool.applyArtEffect,
     ];
     tools = tools.where((item) => item != currentTool).toList();
     if (tools.length < 3) tools.add([ImageTool.fastEditor, ImageTool.applyArtEffect][Random().nextInt(2)]);

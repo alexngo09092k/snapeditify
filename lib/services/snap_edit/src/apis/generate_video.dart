@@ -5,6 +5,7 @@ import '../snap_edit.dart';
 extension GenerateVideo on SnapEdit {
   Future<SnapEditResponse<GenerateVideoResponse?>>generateVideo(GenerateVideoBody body) async {
     try {
+      await ensureAuthToken();
       final List<MultipartBody> parts = [];
       final Map<String, dynamic> data = {};
 
