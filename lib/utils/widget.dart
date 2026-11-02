@@ -57,7 +57,7 @@ class WidgetUtils {
               title: S.of(context).retry,
               // isDestructiveAction: true,
               onPressed: () {
-                dimiss();
+                dismiss();
                 retry(context);
               },
             ),
@@ -83,7 +83,7 @@ class WidgetUtils {
             AlertAction(
               title: S.of(context).retry,
               onPressed: () {
-                dimiss();
+                dismiss();
                 retry(context);
               },
             ),
@@ -108,7 +108,7 @@ class WidgetUtils {
         actions: <AlertAction>[
           AlertAction(
             isDefaultAction: true,
-            onPressed: dimiss,
+            onPressed: dismiss,
             title: S.of(context).cancel,
           ),
           AlertAction(
@@ -163,7 +163,7 @@ class WidgetUtils {
     );
   }
 
-  void dimiss() {
-    AwesomeAppState.dimiss();
+  void dismiss() {
+    AwesomeAppState.dismiss();
   }
 }

@@ -2,34 +2,34 @@ part of '../extensions.dart';
 
 extension MPermissionStore on IUserPermission {
   requestStoragePermission(BuildContext context, {
-    Function? onHasPermisson,
-    Function? onNoPermisson,
+    Function? onHasPermission,
+    Function? onNoPermission,
   }) async {
     final permission = [Permission.storage];
     bool called = false; /// FIX GOBACK
     requestPermission(
       permission: permission,
-      onNoPermisson: () {
+      onNoPermission: () {
         WidgetUtils.instance.showRequestPermissionPopup(
           title:'${Configuration.instance.business.appName} ${S.of(context).wouldLikeToAccessYourPhotos}',
           message: '${S.of(context).allow} ${Configuration.instance.business.appName} ${S.of(context).toAccessPhotosOnYourDeviceToEditOrShare}',
           onForeground: () {
             requestPermission(
               permission: permission,
-              onHasPermisson: () {
+              onHasPermission: () {
                 if(!called) {
                   called = true;
-                  WidgetUtils.instance.dimiss();
+                  WidgetUtils.instance.dismiss();
                 }
               },
             );
           },
         );
-        if (onNoPermisson != null) {
-          onNoPermisson();
+        if (onNoPermission != null) {
+          onNoPermission();
         }
       },
-      onHasPermisson: onHasPermisson,
+      onHasPermission: onHasPermission,
     );
   }
 }

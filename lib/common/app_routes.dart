@@ -148,7 +148,7 @@ extension AppRoutesUtils on IAppRoutes {
     final provider = ManagerProvider.of<GalleryProvider>();
     provider.imageTool = imageTool;
     UserPermission.instance.requestStoragePermission(context,
-        onHasPermisson: () async {
+        onHasPermission: () async {
       /// SHOW LOADING POPUP
       LoadingPopup.show();
 
@@ -181,7 +181,7 @@ extension AppRoutesUtils on IAppRoutes {
     if (imageTool != null) gProvider.imageTool = imageTool;
     UserPermission.instance.requestStoragePermission(
       context,
-      onHasPermisson: () async {
+      onHasPermission: () async {
         final ImageTool current = gProvider.imageTool;
         EditImageProvider? provider;
         String? target;

@@ -18,6 +18,7 @@ class _AnimeEffectCategoryListState extends ProviderStateObserver<AnimeEffectCat
   @override
   void initState() {
     super.initState();
+
     _controller = TabController(length: provider.categories.length, vsync: this);
   }
 

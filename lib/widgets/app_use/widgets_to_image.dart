@@ -31,10 +31,10 @@ class WidgetsToImage extends StatelessWidget {
   final WidgetsToImageController controller;
 
   const WidgetsToImage({
-    Key? key,
+    super.key,
     required this.child,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

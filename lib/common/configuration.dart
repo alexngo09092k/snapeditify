@@ -293,7 +293,7 @@ extension UpdateAppExtension on Configuration {
           actions: [
             if(!business.updateApp.required) AlertAction(
               title: S.of(context).later, 
-              onPressed: WidgetUtils.instance.dimiss,
+              onPressed: WidgetUtils.instance.dismiss,
               isDestructiveAction: true,
             ),
             AlertAction(
@@ -304,7 +304,7 @@ extension UpdateAppExtension on Configuration {
                 }catch(error) {
                   Debug.log('UPDATE APP ERRROR $error');
                 }finally {
-                  WidgetUtils.instance.dimiss();
+                  WidgetUtils.instance.dismiss();
                 }
               },
             ),

@@ -5,11 +5,11 @@ import 'package:fluttering/fluttering.dart';
 
 class BaseImageEditor extends StatelessWidget {
   const BaseImageEditor({
-    Key? key,
+    super.key,
     required this.builder,
     this.width,
     this.height,
-  }) : super(key: key);
+  });
 
   final Widget Function(double width, double height) builder;
   final double? width;

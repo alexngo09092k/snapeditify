@@ -6,7 +6,7 @@ import './indicator.dart';
 
 class ImageSlideshow extends StatefulWidget {
   const ImageSlideshow({
-    Key? key,
+    super.key,
     required this.children,
     this.width = double.infinity,
     this.height = 200,
@@ -17,7 +17,7 @@ class ImageSlideshow extends StatefulWidget {
     this.autoPlayInterval,
     this.isLoop = false,
     this.indicatorRadius = 3,
-  }) : super(key: key);
+  });
 
   /// The widgets to display in the [ImageSlideshow].
   ///

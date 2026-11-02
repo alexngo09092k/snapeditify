@@ -14,10 +14,10 @@ class _ObjectWidget extends StatefulWidget {
 
   /// Creates a [_ObjectWidget] with the given [controller], [child] widget.
   const _ObjectWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.interactionEnabled = true,
-  }) : super(key: key);
+  });
 
   @override
   _ObjectWidgetState createState() => _ObjectWidgetState();
@@ -1058,19 +1058,20 @@ class _ObjectControlBox extends StatelessWidget {
   ///
   /// By default, it will be a [BoxShape.rectangle] shape and not active.
   const _ObjectControlBox({
-    Key? key,
+    super.key,
     this.shape = BoxShape.rectangle,
     this.active = false,
     this.inactiveColor = Colors.white,
     this.activeColor,
     this.shadowColor = Colors.black,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     ThemeData? theme = Theme.of(context);
     if (theme == ThemeData.fallback()) theme = null;
-    final activeColor = this.activeColor ?? theme?.colorScheme.secondary ?? Colors.blue;
+    final activeColor =
+        this.activeColor ?? theme?.colorScheme.secondary ?? Colors.blue;
     return const SizedBox();
     // return AnimatedContainer(
     //   duration: _ObjectWidgetState.controlsTransitionDuration,

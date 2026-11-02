@@ -9,9 +9,8 @@ class _TextWidget extends StatefulWidget {
 
   /// Creates a [_TextWidget] with the given [controller] and [child] widget.
   const _TextWidget({
-    Key? key,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   _TextWidgetState createState() => _TextWidgetState();
@@ -154,11 +153,11 @@ class EditTextWidget extends StatefulWidget {
   final bool isNew;
 
   const EditTextWidget({
-    Key? key,
+    super.key,
     required this.controller,
     required this.drawable,
     this.isNew = false,
-  }) : super(key: key);
+  });
 
   @override
   EditTextWidgetState createState() => EditTextWidgetState();
@@ -282,8 +281,7 @@ class EditTextWidgetState extends State<EditTextWidget>
 
     // If the previous value of bottom view insets is larger than the current value,
     // the keyboard is closing, so lose focus from the focus node
-    if (value < bottomViewInsets &&
-        textFieldNode.hasFocus) {
+    if (value < bottomViewInsets && textFieldNode.hasFocus) {
       textFieldNode.unfocus();
     }
 

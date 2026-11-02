@@ -7,9 +7,8 @@ class _ShapeWidget extends StatefulWidget {
 
   /// Creates a [_ShapeWidget] with the given [controller], [child] widget.
   const _ShapeWidget({
-    Key? key,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   _ShapeWidgetState createState() => _ShapeWidgetState();

@@ -3,10 +3,10 @@ import '../../controllers/painter_controller.dart';
 
 class PainterControllerWidget extends InheritedWidget {
   const PainterControllerWidget({
-    Key? key,
+    super.key,
+    required super.child,
     required this.controller,
-    required Widget child,
-  }) : super(key: key, child: child);
+  });
 
   final PainterController controller;
 

@@ -17,7 +17,7 @@ class ImageToolList extends StatelessWidget {
   void showMoreTools() async {
     return WidgetUtils.instance.showDialog(
       builder: (_) => MoreToolsPopup(onTool: (_) {
-        WidgetUtils.instance.dimiss();
+        WidgetUtils.instance.dismiss();
         onTool(_);
       }),
     );

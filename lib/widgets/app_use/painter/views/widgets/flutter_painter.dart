@@ -30,7 +30,8 @@ typedef DrawableCreatedCallback = Function(Drawable drawable);
 typedef DrawableDeletedCallback = Function(Drawable drawable);
 
 /// Defines the builder used with [FlutterPainter.builder] constructor.
-typedef FlutterPainterBuilderCallback = Widget Function(BuildContext context, Widget painter);
+typedef FlutterPainterBuilderCallback = Widget Function(
+    BuildContext context, Widget painter);
 
 /// Widget that allows user to draw on it
 class FlutterPainter extends StatelessWidget {
@@ -65,7 +66,7 @@ class FlutterPainter extends StatelessWidget {
 
   /// Creates a [FlutterPainter] with the given [controller] and optional callbacks.
   const FlutterPainter({
-    Key? key,
+    super.key,
     required this.controller,
     this.onDrawableCreated,
     this.onDrawableDeleted,
@@ -74,15 +75,14 @@ class FlutterPainter extends StatelessWidget {
     this.onHorizontalDragDown,
     this.onHorizontalDragUp,
     this.onHorizontalDragUpdate,
-  })  : _builder = _defaultBuilder,
-        super(key: key);
+  }) : _builder = _defaultBuilder;
 
   /// Creates a [FlutterPainter] with the given [controller], [builder] and optional callbacks.
   ///
   /// Using this constructor, the [builder] will be called any time the [controller] updates.
   /// It is useful if you want to build UI that automatically rebuilds on updates from [controller].
   const FlutterPainter.builder({
-    Key? key,
+    super.key,
     required this.controller,
     required FlutterPainterBuilderCallback builder,
     this.onDrawableCreated,
@@ -92,8 +92,7 @@ class FlutterPainter extends StatelessWidget {
     this.onHorizontalDragDown,
     this.onHorizontalDragUp,
     this.onHorizontalDragUpdate,
-  })  : _builder = builder,
-        super(key: key);
+  })  : _builder = builder;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +109,8 @@ class FlutterPainter extends StatelessWidget {
                   onDrawableCreated: onDrawableCreated,
                   onDrawableDeleted: onDrawableDeleted,
                   onPainterSettingsChanged: onPainterSettingsChanged,
-                  onSelectedObjectDrawableChanged: onSelectedObjectDrawableChanged,
+                  onSelectedObjectDrawableChanged:
+                      onSelectedObjectDrawableChanged,
                   onHorizontalDragDown: onHorizontalDragDown,
                   onHorizontalDragUp: onHorizontalDragUp,
                   onHorizontalDragUpdate: onHorizontalDragUpdate,
@@ -150,7 +150,7 @@ class _FlutterPainterWidget extends StatelessWidget {
 
   /// Creates a [_FlutterPainterWidget] with the given [controller] and optional callbacks.
   const _FlutterPainterWidget({
-    Key? key,
+    super.key,
     required this.controller,
     this.onDrawableCreated,
     this.onDrawableDeleted,
@@ -159,7 +159,7 @@ class _FlutterPainterWidget extends StatelessWidget {
     this.onHorizontalDragDown,
     this.onHorizontalDragUp,
     this.onHorizontalDragUpdate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -173,9 +173,14 @@ class _FlutterPainterWidget extends StatelessWidget {
                 onNotification: onNotification,
                 child: InteractiveViewer(
                   transformationController: controller.transformationController,
-                  minScale: controller.settings.scale.enabled ? controller.settings.scale.minScale : 1,
-                  maxScale: controller.settings.scale.enabled ? controller.settings.scale.maxScale : 1,
-                  panEnabled: controller.settings.scale.enabled && (controller.freeStyleSettings.mode == FreeStyleMode.none),
+                  minScale: controller.settings.scale.enabled
+                      ? controller.settings.scale.minScale
+                      : 1,
+                  maxScale: controller.settings.scale.enabled
+                      ? controller.settings.scale.maxScale
+                      : 1,
+                  panEnabled: controller.settings.scale.enabled &&
+                      (controller.freeStyleSettings.mode == FreeStyleMode.none),
                   scaleEnabled: controller.settings.scale.enabled,
                   child: _FreeStyleWidget(
                       onHorizontalDragDown: onHorizontalDragDown,

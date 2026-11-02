@@ -9,8 +9,8 @@ import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class UnlockPremium extends StatelessWidget {
   const UnlockPremium({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

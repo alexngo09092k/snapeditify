@@ -96,13 +96,13 @@ class MakeIDPassportProvider extends IMakeIDPassportProvider {
       _state.mask = base64.decode(res.data!.output);
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      WidgetUtils.instance.dismiss();
 
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    WidgetUtils.instance.dismiss();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(

@@ -19,7 +19,7 @@ class BeforeAfter extends StatefulWidget {
   final ImageProvider? thumbImage;
 
   const BeforeAfter({
-    Key? key,
+    super.key,
     required this.beforeImage,
     required this.afterImage,
     this.imageHeight,
@@ -31,7 +31,7 @@ class BeforeAfter extends StatefulWidget {
     this.isVertical = false,
     this.thumbImage,
     this.slideWidth = 1,
-  }) : super(key: key);
+  });
 
   @override
   _BeforeAfterState createState() => _BeforeAfterState();

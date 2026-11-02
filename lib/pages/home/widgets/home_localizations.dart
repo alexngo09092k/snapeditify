@@ -15,7 +15,7 @@ class HomeLocalizations extends StatelessWidget {
       builder: (_) => _LocalizationsPopup(onSelectedLocale: (Locale locale) {
         final provider = ManagerProvider.of<IThemeProvider>();
         provider.changeLocale(locale);
-        WidgetUtils.instance.dimiss();
+        WidgetUtils.instance.dismiss();
       }),
     );
   }
@@ -42,12 +42,11 @@ class _LocalizationsPopup extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: AwesomeAppState.screen.height - 200),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(AppDimensions.instance.radius),
-          topRight: Radius.circular(AppDimensions.instance.radius),
-        )
-      ),
+          color: Theme.of(context).colorScheme.background,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(AppDimensions.instance.radius),
+            topRight: Radius.circular(AppDimensions.instance.radius),
+          )),
       height: AwesomeAppState.screen.height * 4 / 5,
       child: SafeArea(
         child: Column(
@@ -59,10 +58,10 @@ class _LocalizationsPopup extends StatelessWidget {
                 const CustomIcon(Icons.language),
                 SizedBox(width: AppDimensions.instance.paddingX(0.5)),
                 Text(
-                  S.of(context).languages, 
+                  S.of(context).languages,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
+                        fontWeight: FontWeight.w700,
+                      ),
                 ),
               ],
             ),
@@ -87,7 +86,7 @@ class _LocalizationsPopup extends StatelessWidget {
 
 class _LocalizationItem extends StatelessWidget {
   const _LocalizationItem({
-    required this.locale, 
+    required this.locale,
     required this.onSelectedLocale,
     required this.isStart,
     required this.isEnd,
@@ -108,62 +107,65 @@ class _LocalizationItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => onSelectedLocale(locale),
       child: LayoutBuilder(builder: (_, constrains) {
-        double height = constrains.maxHeight - AppDimensions.instance.paddingX(2);
-        double width = height;
+        double height =
+            constrains.maxHeight - AppDimensions.instance.paddingX(2);
+        double width = height * 2;
         return AppCard(
           margin: EdgeInsets.symmetric(
             horizontal: AppDimensions.instance.paddingX(0.5),
             vertical: AppDimensions.instance.padding,
           ).copyWith(
-            left: isStart ? AppDimensions.instance.padding: null,
-            right: isEnd? AppDimensions.instance.padding: null,
+            left: isStart ? AppDimensions.instance.padding : null,
+            right: isEnd ? AppDimensions.instance.padding : null,
           ),
           width: width,
           height: height,
           child: PropConsumer<IThemeProvider, Locale>(
-            select: (_) => _.locale,
-            child: Column(
-              children: [
-                ClipRRect(borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                  child: CustomImage(
-                    image: '${AppAssets.flagPath}/${locale.languageCode}.png',
-                    width: width,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(width: AppDimensions.instance.paddingX(0.5)),
-                    Text(
-                      languageNames[locale.languageCode] ?? "",
-                      maxLines: 1,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+              select: (_) => _.locale,
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(AppDimensions.instance.radius)),
+                    child: CustomImage(
+                      image: '${AppAssets.flagPath}/${locale.languageCode}.png',
+                      width: width,
+                      fit: BoxFit.cover,
                     ),
-                  ],
-                )
-              ],
-            ),
-            builder: (_, child, ___, selectedLocale) {
-              return Container(
-                decoration: BoxDecoration(
-                  border: selectedLocale == locale ? Border.fromBorderSide(
-                    BorderSide(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: 2,
-                    )
-                  ): null,
-                  borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                ),
-                padding: EdgeInsets.all(selectedLocale == locale ? 2: 0),
-                child: child,
-              );
-            }
-          ),
+                  ),
+                  SizedBox(height: AppDimensions.instance.paddingX(0.5)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(width: AppDimensions.instance.paddingX(0.5)),
+                      Text(
+                        languageNames[locale.languageCode] ?? "",
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              builder: (_, child, ___, selectedLocale) {
+                return Container(
+                  decoration: BoxDecoration(
+                    border: selectedLocale == locale
+                        ? Border.fromBorderSide(BorderSide(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 2,
+                          ))
+                        : null,
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(AppDimensions.instance.radius)),
+                  ),
+                  padding: EdgeInsets.all(selectedLocale == locale ? 2 : 0),
+                  child: child,
+                );
+              }),
         );
       }),
     );

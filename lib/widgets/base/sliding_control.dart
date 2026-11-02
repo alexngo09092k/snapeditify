@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SlidingControl<T> extends StatelessWidget {
+class SlidingControl<T extends Object> extends StatelessWidget {
   const SlidingControl({
     super.key,
     required this.value,

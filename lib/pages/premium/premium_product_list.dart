@@ -45,12 +45,12 @@ class PremiumProductList extends StatelessWidget {
 
 class PremiumProduct extends StatelessWidget {
   const PremiumProduct({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
     required this.onSelect,
     required this.product,
-  }) : super(key: key);
+  });
   final double width;
   final double height;
   final Function(IAPProduct) onSelect;

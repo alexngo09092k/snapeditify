@@ -8,7 +8,7 @@ import 'package:snapeditify/services/snap_edit/snap_edit.dart';
 import 'package:snapeditify/widgets/base/custom_image.dart';
 
 class DetectedObjectList extends StatelessWidget {
-  const DetectedObjectList({Key? key, required this.type, required this.provider}) : super(key: key);
+  const DetectedObjectList({super.key, required this.type, required this.provider});
 
   final DetectedObjectType type;
   final RemoveObjectProvider provider;

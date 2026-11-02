@@ -5,14 +5,14 @@ import 'package:snapeditify/common/constants.dart';
 
 class CustomImage extends StatelessWidget {
   const CustomImage({
-    Key? key,
+    super.key,
     required this.image,
     this.width,
     this.height,
     this.color,
     this.fit = BoxFit.cover,
     this.placeholder,
-  }) : super(key: key);
+  });
   final String image;
   final double? width;
   final double? height;

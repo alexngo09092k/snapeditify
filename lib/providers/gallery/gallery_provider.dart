@@ -359,7 +359,7 @@ class GalleryProvider extends IGalleryProvider {
               '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
           title: Configuration.instance.business.appName,
         );
-        return asset?.file;
+        return asset.file;
       }
     } catch (error) {
       Debug.log(error);
@@ -398,7 +398,7 @@ class GalleryProvider extends IGalleryProvider {
           videoFile,
           title: '$name.mp4',
         );
-        return asset?.file;
+        return asset.file;
       }
     } catch (error) {
       Debug.log(error);

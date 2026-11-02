@@ -4,7 +4,7 @@ import 'package:snapeditify/common/constants.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
-    Key? key,
+    super.key,
     this.gradient,
     this.titleColor,
     this.titleSize = 14,
@@ -16,7 +16,7 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.title,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   final Gradient? gradient;
   final String? title;
@@ -43,24 +43,30 @@ class CustomButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: color ?? Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radiusX(3))),
+          borderRadius: BorderRadius.all(
+              Radius.circular(AppDimensions.instance.radiusX(3))),
           gradient: gradient,
           boxShadow: [AppColors.instance.boxShadow],
         ),
         child: isLoading
-            ? CupertinoActivityIndicator(color: titleColor ?? Theme.of(context).colorScheme.onPrimary)
+            ? CupertinoActivityIndicator(
+                color: titleColor ?? Theme.of(context).colorScheme.onPrimary)
             : child ??
                 Center(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       icon ?? const SizedBox(),
-                      icon != null? SizedBox(width: AppDimensions.instance.paddingX(0.5)): const SizedBox(),
+                      icon != null
+                          ? SizedBox(
+                              width: AppDimensions.instance.paddingX(0.5))
+                          : const SizedBox(),
                       if (title != null)
                         Text(
                           title!,
                           style: TextStyle(
-                            color: titleColor ?? Theme.of(context).colorScheme.onPrimary,
+                            color: titleColor ??
+                                Theme.of(context).colorScheme.onPrimary,
                             fontSize: titleSize,
                             fontWeight: FontWeight.bold,
                           ),

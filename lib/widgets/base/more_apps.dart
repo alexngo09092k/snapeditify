@@ -86,7 +86,7 @@ class MoreApps extends StatelessWidget {
                                     SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                                     Text(
                                       e.desc,
-                                      maxLines: 3,
+                                      maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Theme.of(context).colorScheme.onSurface),
                                     ),

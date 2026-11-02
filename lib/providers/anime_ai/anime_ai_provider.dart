@@ -140,12 +140,12 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
       _state.styledImages[styleId] = res.data!;
 
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      WidgetUtils.instance.dismiss();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    WidgetUtils.instance.dismiss();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(
@@ -180,12 +180,12 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
 
     if (res.data != null) {
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      WidgetUtils.instance.dismiss();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    WidgetUtils.instance.dismiss();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(

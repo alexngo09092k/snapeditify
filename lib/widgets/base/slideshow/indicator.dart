@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class Indicator extends StatelessWidget {
   const Indicator({
-    Key? key,
+    super.key,
     required this.count,
     required this.currentIndex,
     this.activeColor,
     this.backgroundColor,
     required this.radius,
-  }) : super(key: key);
+  });
 
   final int count;
   final int currentIndex;

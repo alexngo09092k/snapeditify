@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:snapeditify/common/app_routes.dart';
@@ -167,12 +166,12 @@ class RestoreProvider extends IRestoreProvider {
 
       await Future.delayed(const Duration(milliseconds: 500));
       /// HIDE LOADING POPUP
-      WidgetUtils.instance.dimiss();
+      WidgetUtils.instance.dismiss();
       return true;
     }
 
     /// HIDE LOADING POPUP
-    WidgetUtils.instance.dimiss();
+    WidgetUtils.instance.dismiss();
 
     if (!res.status) {
       WidgetUtils.instance.showWarningPopup(

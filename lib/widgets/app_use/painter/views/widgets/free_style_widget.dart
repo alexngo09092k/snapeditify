@@ -10,12 +10,11 @@ class _FreeStyleWidget extends StatefulWidget {
 
   /// Creates a [_FreeStyleWidget] with the given [controller], [child] widget.
   const _FreeStyleWidget({
-    Key? key,
     required this.child,
     this.onHorizontalDragDown,
     this.onHorizontalDragUpdate,
     this.onHorizontalDragUp,
-  }) : super(key: key);
+  });
 
   @override
   _FreeStyleWidgetState createState() => _FreeStyleWidgetState();
@@ -35,7 +34,8 @@ class _FreeStyleWidgetState extends State<_FreeStyleWidget> {
     return RawGestureDetector(
       behavior: HitTestBehavior.opaque,
       gestures: {
-        _DragGestureDetector: GestureRecognizerFactoryWithHandlers<_DragGestureDetector>(
+        _DragGestureDetector:
+            GestureRecognizerFactoryWithHandlers<_DragGestureDetector>(
           () => _DragGestureDetector(
             onHorizontalDragDown: _handleHorizontalDragDown,
             onHorizontalDragUpdate: _handleHorizontalDragUpdate,
@@ -49,16 +49,19 @@ class _FreeStyleWidgetState extends State<_FreeStyleWidget> {
   }
 
   /// Getter for [FreeStyleSettings] from `widget.controller.value` to make code more readable.
-  FreeStyleSettings get settings => PainterController.of(context).value.settings.freeStyle;
+  FreeStyleSettings get settings =>
+      PainterController.of(context).value.settings.freeStyle;
 
   /// Getter for [ShapeSettings] from `widget.controller.value` to make code more readable.
-  ShapeSettings get shapeSettings => PainterController.of(context).value.settings.shape;
+  ShapeSettings get shapeSettings =>
+      PainterController.of(context).value.settings.shape;
 
   /// Callback when the user holds their pointer(s) down onto the widget.
   void _handleHorizontalDragDown(Offset globalPosition) {
     // If the user is already drawing, don't create a new drawing
     if (this.drawable != null) return;
-    if (widget.onHorizontalDragDown != null) widget.onHorizontalDragDown!(globalPosition);
+    if (widget.onHorizontalDragDown != null)
+      widget.onHorizontalDragDown!(globalPosition);
 
     // Create a new free-style drawable representing the current drawing
     final PathDrawable drawable;
@@ -93,14 +96,17 @@ class _FreeStyleWidgetState extends State<_FreeStyleWidget> {
     final drawable = this.drawable;
     // If there is no current drawable, ignore user input
     if (drawable == null) return;
-    if (widget.onHorizontalDragUpdate != null) widget.onHorizontalDragUpdate!(globalPosition);
+    if (widget.onHorizontalDragUpdate != null)
+      widget.onHorizontalDragUpdate!(globalPosition);
 
     // Add the new point to a copy of the current drawable
     final newDrawable = drawable.copyWith(
-      path: List<Offset>.from(drawable.path)..add(_globalToLocal(globalPosition)),
+      path: List<Offset>.from(drawable.path)
+        ..add(_globalToLocal(globalPosition)),
     );
     // Replace the current drawable with the copy with the added point
-    PainterController.of(context).replaceDrawable(drawable, newDrawable, newAction: false);
+    PainterController.of(context)
+        .replaceDrawable(drawable, newDrawable, newAction: false);
     // Update the current drawable to be the new copy
     this.drawable = newDrawable;
   }

@@ -26,7 +26,7 @@ class Zoom extends StatefulWidget {
     this.initPosition,
     this.initScale,
     this.initTotalZoomOut = false,
-    Key? key,
+    super.key,
     this.maxScale = 2.5,
     this.maxZoomHeight,
     this.maxZoomWidth,
@@ -40,8 +40,7 @@ class Zoom extends StatefulWidget {
     this.transformationController,
     this.zoomSensibility = 1.0,
   })  : assert(maxScale > 0),
-        assert(!maxScale.isNaN),
-        super(key: key);
+        assert(!maxScale.isNaN);
 
   final Color backgroundColor;
   final Color canvasColor;
@@ -473,7 +472,6 @@ class _ZoomState extends State<Zoom>
         return true;
 
       case _GestureType.pan:
-
       case null:
         return true;
     }
@@ -1039,12 +1037,11 @@ class _ZoomState extends State<Zoom>
 
 class _ZoomBuilt extends StatelessWidget {
   const _ZoomBuilt({
-    Key? key,
     required this.child,
     required this.childKey,
     required this.constrained,
     required this.matrix,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final GlobalKey childKey;

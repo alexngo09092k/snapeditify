@@ -23,7 +23,7 @@ class LoadingPopup extends StatefulWidget {
   }
 
   static void hide() {
-    return WidgetUtils.instance.dimiss();
+    return WidgetUtils.instance.dismiss();
   }
 
   static void setMessage(String newMessage) {
