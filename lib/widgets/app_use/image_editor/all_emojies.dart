@@ -26,7 +26,7 @@ class Emojies extends StatelessWidget {
               child: Text(
                 S.of(context).selectEmoji.toUpperCase(),
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                     ),
               ),
             ),

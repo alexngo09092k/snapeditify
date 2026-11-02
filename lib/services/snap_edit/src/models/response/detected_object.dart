@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:snapeditify/generated/l10n.dart';
 
 enum DetectedObjectType {
   person,
@@ -7,14 +9,13 @@ enum DetectedObjectType {
 }
 
 extension DetectObjectTypeEx on DetectedObjectType {
-  String get label {
+  String label(BuildContext context) {
+    final s = S.of(context);
     switch (this) {
       case DetectedObjectType.person:
-      return 'Person';
+        return s.people;
       case DetectedObjectType.other:
-      return 'Other';
-      default:
-      throw 'DONT SUPPORT TYPE';
+        return s.others;
     }
   }
 }

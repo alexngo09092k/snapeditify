@@ -50,11 +50,11 @@ class _ImageLayerOverlayState extends State<ImageLayerOverlay> {
               SizedBox(
                 width: 50,
                 child: Text(
-                  'Size',
+                  S.of(context).size,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               Expanded(

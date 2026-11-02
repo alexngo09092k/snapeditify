@@ -9,6 +9,7 @@ import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter_pure.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'dart:ui' as ui;
+import 'package:snapeditify/generated/l10n.dart';
 
 class DetectedObjectVM extends DetectedObject {
   DetectedObjectVM({
@@ -170,14 +171,14 @@ class DetectedObjectVM extends DetectedObject {
 }
 
 extension DetectedObjectTypeExtension on DetectedObjectType {
-  String get label {
+  String label(BuildContext context) {
+    final s = S.of(context);
     switch (this) {
-      case DetectedObjectType.other:
-        return 'Others';
       case DetectedObjectType.person:
-        return 'People';
+        return s.people;
+      case DetectedObjectType.other:
       default:
-        return 'Others';
+        return s.others;
     }
   }
 }

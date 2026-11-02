@@ -44,7 +44,7 @@ class _AnimeEffectCategoryListState extends ProviderStateObserver<AnimeEffectCat
                 controller: _controller,
                 tabs: categories.map((e) => Tab(
                   child: Text(
-                  e, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),),
+                  e, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),),
                 )).toList(),
               );
             },

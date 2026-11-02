@@ -11,6 +11,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:snapeditify/common/constants.dart';
 import 'package:snapeditify/models/config/gallery_config.dart';
 import 'package:snapeditify/view_models/album_vm.dart';
+import 'package:snapeditify/generated/l10n.dart';
 
 enum ImageTool {
   removeObject,
@@ -32,61 +33,51 @@ enum ImageTool {
 }
 
 extension ImageToolEX on ImageTool {
-  String get title {
+  String title(BuildContext context) {
+    final s = S.of(context);
     switch (this) {
       case ImageTool.removeObject:
-        return 'Remove Object';
+        return s.removeObject;
       case ImageTool.oneTouchRemoveAll:
-        return '1-Touch Remove';
+        return s.oneTouchRemove;
       case ImageTool.enhanceImage:
-        return 'Enhance Image';
+        return s.enhanceImage;
       case ImageTool.upscaleImage:
-        return 'Upscale Image';
+        return s.upscaleImage;
       case ImageTool.restoreOldPhoto:
-        return 'Restore Old Photo';
-      // case ImageTool.makeIDPassportPhoto:
-      //   return 'Make ID Passport';
-      // case ImageTool.productPhoto:
-      //   return 'Product Photo';
-      // case ImageTool.changeBG:
-      // return 'Change Background';
+        return s.restoreOldPhoto;
       case ImageTool.generateAnimeAI:
-        return 'Generate Anime AI';
+        return s.animeAi;
       case ImageTool.applyArtEffect:
-        return 'Apply Art Effect';
+        return s.artEffect;
       case ImageTool.changeYourSky:
-        return 'Change Sky';
+        return s.changeSky;
       case ImageTool.fastEditor:
-        return 'Fast Editor';
+        return s.fastEditor;
     }
   }
 
-  String get shortTitle {
+  String shortTitle(BuildContext context) {
+    final s = S.of(context);
     switch (this) {
       case ImageTool.removeObject:
-        return 'Remover';
+        return s.remover;
       case ImageTool.oneTouchRemoveAll:
-        return '1-Touch';
+        return s.oneTouch;
       case ImageTool.enhanceImage:
-        return 'Enhance';
+        return s.enhance;
       case ImageTool.upscaleImage:
-        return 'Upscale';
+        return s.upscale;
       case ImageTool.restoreOldPhoto:
-        return 'Restore';
-      // case ImageTool.makeIDPassportPhoto:
-      //   return 'Make ID';
-      // case ImageTool.productPhoto:
-      //   return 'Product';
-      // case ImageTool.changeBG:
-      //   return 'Change BG';
+        return s.restore;
       case ImageTool.generateAnimeAI:
-        return 'Anime AI';
+        return s.animeAi;
       case ImageTool.applyArtEffect:
-        return 'Art Effect';
+        return s.artEffect;
       case ImageTool.changeYourSky:
-        return 'Sky';
+        return s.sky;
       case ImageTool.fastEditor:
-        return 'Editor';
+        return s.editor;
     }
   }
 

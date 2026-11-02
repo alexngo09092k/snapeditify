@@ -48,7 +48,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               Expanded(
@@ -82,7 +82,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               Expanded(
@@ -115,7 +115,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
             ],
@@ -130,7 +130,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               Expanded(
@@ -163,7 +163,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
             ],
@@ -178,7 +178,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               Expanded(
@@ -208,7 +208,7 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
             ],

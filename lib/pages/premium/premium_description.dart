@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
 
 class PremiumDescription extends StatelessWidget {
@@ -7,22 +8,23 @@ class PremiumDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'Unlock Premium',
+          s.unlockPremium,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         SizedBox(height: AppDimensions.instance.paddingX(2)),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const _ActiveRow(title: 'Unlimited access to powerful AI features'),
+            _ActiveRow(title: s.unlimitedAccessAiFeatures),
             SizedBox(height: AppDimensions.instance.padding),
-            const _ActiveRow(title: 'No ads - enjoy the best experience'),
+            _ActiveRow(title: s.noAdsBestExperience),
             SizedBox(height: AppDimensions.instance.padding),
-            const _ActiveRow(title: 'Best output image quality'),
+            _ActiveRow(title: s.bestOutputImageQuality),
           ],
         )
       ],
@@ -47,11 +49,13 @@ class _ActiveRow extends StatelessWidget {
           Icons.check_circle,
           color: Theme.of(context).primaryColor,
         ),
-        SizedBox(width: AppDimensions.instance.padding),
-        Text(
-          title,
-          style: Theme.of(context).textTheme.bodyLarge,
-        )
+        SizedBox(width: AppDimensions.instance.paddingX(0.5)),
+        Flexible(
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
       ],
     );
   }

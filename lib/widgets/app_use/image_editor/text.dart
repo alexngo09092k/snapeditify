@@ -98,9 +98,9 @@ class _TextEditorImageState extends State<TextEditorImage> {
                 padding: EdgeInsets.all(AppDimensions.instance.padding),
                 child: TextField(
                   controller: name,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Insert Your Message',
+                    hintText: S.of(context).insertYourMessage,
                   ),
                   scrollPadding: EdgeInsets.all(AppDimensions.instance.padding),
                   keyboardType: TextInputType.multiline,
@@ -127,7 +127,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
-                                .copyWith(fontWeight: FontWeight.w700),
+                                .copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
                         Expanded(
@@ -158,7 +158,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
-                                .copyWith(fontWeight: FontWeight.w700),
+                                .copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
                         Expanded(
@@ -192,7 +192,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
-                                .copyWith(fontWeight: FontWeight.w700),
+                                .copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
                         Expanded(

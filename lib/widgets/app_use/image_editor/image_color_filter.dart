@@ -67,7 +67,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
-                    .copyWith(fontWeight: FontWeight.w700),
+                    .copyWith(fontWeight: FontWeight.w600),
               ),
             ),
             SizedBox(height: AppDimensions.instance.paddingX(2)),
@@ -80,7 +80,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w700),
+                        .copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
                 Expanded(
@@ -113,7 +113,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w700),
+                        .copyWith(fontWeight: FontWeight.w600),
                   ),
                 )
               ],
@@ -127,7 +127,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w700),
+                        .copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
                 Expanded(
@@ -156,7 +156,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w700),
+                        .copyWith(fontWeight: FontWeight.w600),
                   ),
                 )
               ],
@@ -170,7 +170,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w700),
+                        .copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
                 Expanded(
@@ -198,7 +198,7 @@ class _ImageColorFilterState extends State<ImageColorFilter> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w700),
+                        .copyWith(fontWeight: FontWeight.w600),
                   ),
                 )
               ],

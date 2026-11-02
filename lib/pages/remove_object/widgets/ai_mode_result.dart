@@ -95,7 +95,7 @@ class _AIModeResultState
                   builder: (_, __) => SlidingControl<DetectedObjectType>.defaultStyle(
                     context,
                     value: DetectedObjectType.values.elementAt(_indexTab.value),
-                    data: DetectedObjectType.values.asMap().map((_, type) => MapEntry(type, type.label)),
+                    data: DetectedObjectType.values.asMap().map((_, type) => MapEntry(type, type.label(context))),
                     onValueChanged: _onChangedTab,
                   ),
                 ),

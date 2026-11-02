@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_editor/image_editor.dart' as image_editor;
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/app_use/base_image_editor.dart';
 import 'package:snapeditify/widgets/app_use/image_editor/single_image_editor.dart';
 import 'package:snapeditify/widgets/base/custom_icon.dart';
@@ -135,7 +136,10 @@ class _ImageCropperState extends State<ImageCropper> {
                 },
               ),
             for (var ratio in widget.availableRatios)
-              imageRatioButton(ratio.ratio, ratio.title),
+              imageRatioButton(
+                ratio.ratio,
+                ratio.title == 'Freeform' ? S.of(context).freeform : ratio.title,
+              ),
           ],
         ),
       ),
@@ -197,7 +201,7 @@ class _ImageCropperState extends State<ImageCropper> {
         child: Text(
           title,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
                 color: aspectRatioOriginal == ratio
                     ? Theme.of(context).primaryColor
                     : null,

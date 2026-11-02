@@ -5,6 +5,7 @@ import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:flutter/material.dart';
 
 import 'package:snapeditify/common/constants.dart';
+import 'package:snapeditify/generated/l10n.dart';
 import 'package:snapeditify/widgets/base/app_card.dart';
 import 'package:snapeditify/widgets/base/custom_button.dart';
 
@@ -69,7 +70,7 @@ class PremiumProduct extends StatelessWidget {
           Text(product.info!.price, style: Theme.of(context).textTheme.headlineMedium, maxLines: 1,),
           Text(product.info!.description, style: Theme.of(context).textTheme.bodyLarge, maxLines: 3,),
           CustomButton(
-            title: "Get it",
+            title: S.of(context).getIt,
             gradient: AppColors.instance.gradient,
             height: 40,
             onTap: () => onSelect(product),

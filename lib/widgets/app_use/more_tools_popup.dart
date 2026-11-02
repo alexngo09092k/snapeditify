@@ -62,9 +62,9 @@ class ImageToolItem extends StatelessWidget {
                   ),
                   SizedBox(height: AppDimensions.instance.paddingX(0.5)),
                   Text(
-                    imageTool.title,
+                    imageTool.title(context),
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w600,
                         ),
                   )
                 ],
