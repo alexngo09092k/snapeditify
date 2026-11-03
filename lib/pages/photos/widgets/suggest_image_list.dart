@@ -10,18 +10,25 @@ class SuggestedImageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PropConsumer<GalleryProvider, ImageTool>(
-      select: (_) => _.imageTool,
-      builder: (_, __, p, ___) => Wrap(
-        spacing: AppDimensions.instance.gridDelegate.mainAxisSpacing,
-        runSpacing: AppDimensions.instance.gridDelegate.crossAxisSpacing,
-        children: p.suggestedPhotos
-            .map((e) => ImageItem.withAsset(
-                  e,
-                  size: AppDimensions.instance.gridItemSize,
-                  onImage: (_) => AppRoutes.instance.goEditImagePage(context, bytes: _),
-                ))
-            .toList(),
+    final pad = AppDimensions.instance.padding;
+    return Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(pad, pad * 0.5, pad, pad),
+        child: PropConsumer<GalleryProvider, ImageTool>(
+          select: (_) => _.imageTool,
+          builder: (_, __, p, ___) => Wrap(
+            spacing: AppDimensions.instance.gridDelegate.mainAxisSpacing,
+            runSpacing: AppDimensions.instance.gridDelegate.crossAxisSpacing,
+            children: p.suggestedPhotos
+                .map((e) => ImageItem.withAsset(
+                      e,
+                      size: AppDimensions.instance.gridItemSize,
+                      onImage: (_) => AppRoutes.instance
+                          .goEditImagePage(context, bytes: _),
+                    ))
+                .toList(),
+          ),
+        ),
       ),
     );
   }

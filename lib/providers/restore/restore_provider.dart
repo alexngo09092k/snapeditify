@@ -20,7 +20,6 @@ import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'package:snapeditify/widgets/app_use/saved_video_preview.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 import 'package:snapeditify/common/configuration.dart';
-import 'package:snapeditify/utils/image.dart';
 
 abstract class IRestoreProvider extends EditImageProvider {
   @override
@@ -99,17 +98,7 @@ class RestoreProvider extends IRestoreProvider {
     adProvider.handleAd();
 
     /// CALL API
-    const int zoom = 2;
-    final int maxSide = ImageUtils.maxInputSideForZoom(zoom);
-    final inputBytes = ImageUtils.instance.resizeToMaxSide(
-      _state.image.imageBytes,
-      maxSide: maxSide,
-    );
-    RestoreBody body = RestoreBody(
-      inputImage: inputBytes,
-      imageId: null,
-      zoomFactor: '$zoom',
-    );
+    RestoreBody body = RestoreBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
     final SnapEditResponse<RestorationResponse?> res = await Services.instance.snapEdit.restoreImage(body);
     if (res.data != null) {
       final imageBase64 = res.data!.outputImage.image;
@@ -259,11 +248,11 @@ class RestoreProvider extends IRestoreProvider {
 
   @override
   Future<bool> save(BuildContext context) {
-    if(_tabController.page == 0.0) {
-      return super.save(context);
-    }else {
-      return saveVideo(context);
-    }
+    // Video tạm ẩn — luôn save ảnh
+    // if (_tabController.page != null && _tabController.page! > 0.5) {
+    //   return saveVideo(context);
+    // }
+    return super.save(context);
   }
 
 

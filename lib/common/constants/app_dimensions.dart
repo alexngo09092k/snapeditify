@@ -12,31 +12,36 @@ class AppDimensions {
   final double fontsize = 14;
   double fontsizeX(double x) => fontsize * x;
 
-  /// PADDING — a bit more breathing room
-  final double padding = 18;
+  /// PADDING
+  final double padding = 16;
   double paddingX(double x) => padding * x;
 
-  /// RADIUS — soft, modern rounded
-  final double radius = 18;
+  /// RADIUS — modern, softer corners
+  final double radius = 16;
   double radiusX(double x) => radius * x;
 
   /// ICON
   final double icon = 24;
   double iconX(double x) => icon * x;
 
-  /// GRID DELEGATE — slightly more spacing for airy feel
+  /// GRID DELEGATE
   final gridDelegate = const SliverGridDelegateWithFixedCrossAxisCount(
     crossAxisCount: 3,
-    crossAxisSpacing: 12.0,
-    mainAxisSpacing: 12.0,
+    crossAxisSpacing: 10.0,
+    mainAxisSpacing: 10.0,
   );
 
-  Size get gridItemSize => Size(
-        (AwesomeAppState.screen.width - gridDelegate.crossAxisSpacing * 3) /
-            gridDelegate.crossAxisCount,
-        (AwesomeAppState.screen.width - gridDelegate.crossAxisSpacing * 3) /
-            gridDelegate.crossAxisCount,
-      );
+  /// Size of one grid cell after horizontal screen padding.
+  Size get gridItemSize {
+    final int count = gridDelegate.crossAxisCount;
+    final double spacing = gridDelegate.crossAxisSpacing;
+    final double horizontalPad = padding * 2;
+    final double side = (AwesomeAppState.screen.width -
+            horizontalPad -
+            spacing * (count - 1)) /
+        count;
+    return Size(side, side);
+  }
 
   double get contentMaxWidth => AwesomeAppState.screen.width - padding * 2;
 }

@@ -32,7 +32,8 @@ class _ImageListState extends ProviderStateful<ImageList, IGalleryProvider> {
   }
 
   Future<void> _requestAssets() async {
-    final List<AssetEntity> entities = await widget.album.entityPath.getAssetListPaged(
+    final List<AssetEntity> entities =
+        await widget.album.entityPath.getAssetListPaged(
       page: 0,
       size: provider.config.countInPage,
     );
@@ -46,7 +47,8 @@ class _ImageListState extends ProviderStateful<ImageList, IGalleryProvider> {
   }
 
   Future<void> _loadMoreAsset() async {
-    final List<AssetEntity> entities = await widget.album.entityPath.getAssetListPaged(
+    final List<AssetEntity> entities =
+        await widget.album.entityPath.getAssetListPaged(
       page: _page + 1,
       size: provider.config.countInPage,
     );
@@ -63,6 +65,8 @@ class _ImageListState extends ProviderStateful<ImageList, IGalleryProvider> {
 
   @override
   Widget build(BuildContext context) {
+    final pad = AppDimensions.instance.padding;
+
     if (_images == null || _images?.isNotEmpty != true) {
       return Expanded(
         child: Center(
@@ -71,30 +75,38 @@ class _ImageListState extends ProviderStateful<ImageList, IGalleryProvider> {
             children: [
               CustomImage(
                 image: AppAssets.instance.notFoundImage,
-                width: AwesomeAppState.screen.width * 1.5/3,
+                width: AwesomeAppState.screen.width * 1.5 / 3,
               ),
               Text(
                 S.of(context).notFoundImages,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Theme.of(context).disabledColor),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(color: Theme.of(context).disabledColor),
               )
             ],
           ),
         ),
       );
     }
+
     return Expanded(
       child: GridView.custom(
+        padding: EdgeInsets.fromLTRB(pad, pad * 0.5, pad, pad),
         gridDelegate: AppDimensions.instance.gridDelegate,
         childrenDelegate: SliverChildBuilderDelegate(
           (BuildContext _, int index) {
-            if (index == _images!.length - 8 && !_isLoadingMore && _hasMoreToLoad) {
+            if (index == _images!.length - 8 &&
+                !_isLoadingMore &&
+                _hasMoreToLoad) {
               _loadMoreAsset();
             }
             final AssetEntity entity = _images![index];
             return ImageItem.withAssetEntity(
               entity,
               size: AppDimensions.instance.gridItemSize,
-              onImage: (_) => AppRoutes.instance.goEditImagePage(context, bytes: _),
+              onImage: (_) =>
+                  AppRoutes.instance.goEditImagePage(context, bytes: _),
             );
           },
           childCount: _images!.length,
