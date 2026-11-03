@@ -5,7 +5,17 @@ extension MPermissionStore on IUserPermission {
     Function? onHasPermission,
     Function? onNoPermission,
   }) async {
-    final permission = [Permission.storage];
+    // Android 13+ (API 33) dùng Permission.photos (READ_MEDIA_IMAGES)
+    // Android < 13 dùng Permission.storage (READ_EXTERNAL_STORAGE)
+    // iOS dùng Permission.photos
+    final List<Permission> permission = [
+      if (Platform.isIOS) Permission.photos,
+      if (Platform.isAndroid) ...[
+        Permission.photos,   // bắt buộc cho Android 13+
+        Permission.storage,  // giữ lại để tương thích Android 12 trở xuống
+      ],
+    ];
+
     bool called = false; /// FIX GOBACK
     requestPermission(
       permission: permission,
