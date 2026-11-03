@@ -94,6 +94,10 @@ class RestoreProvider extends IRestoreProvider {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
+    bool ok = false;
+    bool failed = false;
+    String? failMessage;
+
     try {
       /// SHOW ADS
       adProvider.handleAd();
@@ -110,26 +114,30 @@ class RestoreProvider extends IRestoreProvider {
           imageId: res.data!.imageId, 
           outputImageId: res.data!.outputImage.imageId,
         );
-
-        /// SHOW GUIDE
-        showEnhanceGuide();
-
-        return true;
+        ok = true;
+      } else if (!res.status) {
+        failed = true;
+        failMessage = res.message;
       }
-
-      if (!res.status) {
-        WidgetUtils.instance.showWarningPopup(
-          title: S.of(context).restore, 
-          message: S.of(context).unableToRestoreTheImagePleaseTryAgain, 
-          retry: (_) => restoreImage(context),
-        );
-        Debug.log('===== ENAHNCE IMAGE ${res.message} =====');
-      }
-
-      return false;
     } finally {
       LoadingPopup.hide();
     }
+
+    if (ok) {
+      showEnhanceGuide();
+      return true;
+    }
+
+    if (failed) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).restore,
+        message: S.of(context).unableToRestoreTheImagePleaseTryAgain,
+        retry: (_) => restoreImage(context),
+      );
+      Debug.log('===== ENAHNCE IMAGE $failMessage =====');
+    }
+
+    return false;
   }
 
    @override
@@ -147,6 +155,10 @@ class RestoreProvider extends IRestoreProvider {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
+    bool ok = false;
+    bool failed = false;
+    String? failMessage;
+
     try {
       /// SHOW ADS
       adProvider.handleAd();
@@ -162,22 +174,27 @@ class RestoreProvider extends IRestoreProvider {
       if (res.data != null) {
         _state.videoURL = res.data!.outputVideoUrl;
         await Future.delayed(const Duration(milliseconds: 500));
-        return true;
+        ok = true;
+      } else if (!res.status) {
+        failed = true;
+        failMessage = res.message;
       }
-
-      if (!res.status) {
-        WidgetUtils.instance.showWarningPopup(
-          title: S.of(context).videoEffect, 
-          message: S.of(context).creatingVideoEffectsFailedPleaseTryAgain, 
-          retry: (_) => videoEffect(context),
-        );
-        Debug.log('====== RESTYLE IMAGE ${res.message} ======');
-      }
-
-      return false;
     } finally {
       LoadingPopup.hide();
     }
+
+    if (ok) return true;
+
+    if (failed) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).videoEffect,
+        message: S.of(context).creatingVideoEffectsFailedPleaseTryAgain,
+        retry: (_) => videoEffect(context),
+      );
+      Debug.log('====== RESTYLE IMAGE $failMessage ======');
+    }
+
+    return false;
   }
 
   @override

@@ -76,6 +76,10 @@ class EnhanceProvider extends IEnhanceProvider {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
+    bool ok = false;
+    bool failed = false;
+    String? failMessage;
+
     try {
       /// SHOW ADS
       adProvider.handleAd();
@@ -101,27 +105,31 @@ class EnhanceProvider extends IEnhanceProvider {
         final imageBase64 = res.data!.outputImages.first;
         final imageBytes = base64.decode(res.data!.outputImages.first);
         await _state.setImage(imageBytes, imageBase64);
-
-        /// SHOW GUIDE
-        showEnhanceGuide();
-
-        return true;
+        ok = true;
+      } else if (!res.status) {
+        failed = true;
+        failMessage = res.message;
       }
-
-      if (!res.status) {
-        WidgetUtils.instance.showWarningPopup(
-          title: S.of(context).enhance, 
-          message: S.of(context).unableToEnhanceTheImagePleaseTryAgain, 
-          retry: (_) => enhanceImage(context),
-        );
-        Debug.log('===== ENAHNCE IMAGE ${res.message} =====');
-      }
-
-      return false;
     } finally {
-      /// HIDE LOADING POPUP (always, even on error)
+      /// HIDE LOADING BEFORE any other dialog (guide / warning)
       LoadingPopup.hide();
     }
+
+    if (ok) {
+      showEnhanceGuide();
+      return true;
+    }
+
+    if (failed) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).enhance,
+        message: S.of(context).unableToEnhanceTheImagePleaseTryAgain,
+        retry: (_) => enhanceImage(context),
+      );
+      Debug.log('===== ENAHNCE IMAGE $failMessage =====');
+    }
+
+    return false;
   }
 
   @override

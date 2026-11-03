@@ -159,12 +159,15 @@ extension AppRoutesUtils on IAppRoutes {
 
         /// Ads: session start / chọn tool (điểm vào funnel cao)
         AdRevenueManager.instance.onSessionStart();
-
-        /// GO TO ALBUM PAGE
-        Navigator.pushNamed(context, AppRoutes.albumsPage);
       } finally {
-        /// HIDE LOADING (always)
+        /// MUST hide BEFORE navigate — hide after push can pop wrong route
+        /// or leave loading dialog on top of the new page.
         LoadingPopup.hide();
+      }
+
+      /// GO TO ALBUM PAGE (after loading is dismissed)
+      if (context.mounted) {
+        Navigator.pushNamed(context, AppRoutes.albumsPage);
       }
     });
   }
@@ -242,19 +245,22 @@ extension AppRoutesUtils on IAppRoutes {
             LoadingPopup.hide();
             return;
           }
+          bool ok = false;
           try {
             /// SET EDIT IMAGE
-            final ok = await provider.setImage(context, bytes: bytes);
-            if (!ok) return;
-
-            if (imageTool != null) {
-              Navigator.pushReplacementNamed(context, target!);
-            } else {
-              Navigator.pushNamed(context, target!);
-            }
+            ok = await provider.setImage(context, bytes: bytes);
           } finally {
-            /// HIDE LOADING (always, even on error / early return)
+            /// MUST hide BEFORE navigate — hide after push can pop wrong route
+            /// or leave loading dialog stuck on the new page.
             LoadingPopup.hide();
+          }
+
+          if (!ok || !context.mounted) return;
+
+          if (imageTool != null) {
+            Navigator.pushReplacementNamed(context, target!);
+          } else {
+            Navigator.pushNamed(context, target!);
           }
         });
       },

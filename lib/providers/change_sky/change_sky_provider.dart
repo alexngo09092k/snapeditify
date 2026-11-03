@@ -104,6 +104,10 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
+    bool ok = false;
+    bool failed = false;
+    String? failMessage;
+
     try {
       /// SHOW ADS
       AdRevenueManager.instance.onHighValueAction(placement: 'change_sky');
@@ -115,22 +119,27 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
       if (res.data != null) {
         /// REMOVED SKY IMAGE
         _state.mask = base64.decode(res.data!.mask);
-        return true;
+        ok = true;
+      } else if (!res.status) {
+        failed = true;
+        failMessage = res.message;
       }
-
-      if (!res.status) {
-        WidgetUtils.instance.showWarningPopup(
-          title: S.of(context).changeSky, 
-          message: S.of(context).unableToChangeTheSkyOfTheImagePleaseTryAgain, 
-          retry: (_) =>removeSky(context),
-        );
-        Debug.log('====== RESTYLE IMAGE ${res.message} ======');
-      }
-
-      return false;
     } finally {
       LoadingPopup.hide();
     }
+
+    if (ok) return true;
+
+    if (failed) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).changeSky,
+        message: S.of(context).unableToChangeTheSkyOfTheImagePleaseTryAgain,
+        retry: (_) => removeSky(context),
+      );
+      Debug.log('====== RESTYLE IMAGE $failMessage ======');
+    }
+
+    return false;
   }
 
   @override

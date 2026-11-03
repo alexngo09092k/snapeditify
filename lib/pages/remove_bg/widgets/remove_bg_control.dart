@@ -18,21 +18,22 @@ class RemoveBGControl extends StatelessWidget {
 
   _onEditBG(BuildContext context) async {
     LoadingPopup.show();
+    bool ok = false;
     try {
       IRemoveBGProvider rmBGProvider = ManagerProvider.of<IRemoveBGProvider>();
       IChangeBGProvider changeBGProvider = ManagerProvider.of<IChangeBGProvider>();
       Uint8List? imageBytes = await rmBGProvider.captureController.capture();
 
-      bool ok = false;
       if (imageBytes != null) {
         ok = await changeBGProvider.setImage(context, bytes: imageBytes);
       }
-
-      if (ok) {
-        Navigator.pushNamed(context, AppRoutes.changeBG);
-      }
     } finally {
+      /// Hide BEFORE navigate so dismiss does not pop the wrong route.
       LoadingPopup.hide();
+    }
+
+    if (ok && context.mounted) {
+      Navigator.pushNamed(context, AppRoutes.changeBG);
     }
   }
 

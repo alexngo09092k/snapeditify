@@ -13,20 +13,38 @@ class LoadingPopup extends StatefulWidget {
 
   late final ValueNotifier<String> _message;
 
+  /// True while a loading dialog is expected to be on screen.
+  /// Prevents hide()/dismiss from popping unrelated routes.
+  static bool _isShowing = false;
+
+  static bool get isShowing => _isShowing;
+
   static Future<T?> show<T>([String? message]) {
-    if(message != null) setMessage(message);
-    return WidgetUtils.instance.showDialog<T>(
-      barrierDismissible: false,
-      useSafeArea: false,
-      builder: (BuildContext context) => _instance,
-    );
+    if (message != null) setMessage(message);
+    if (_isShowing) {
+      // Already visible — just update message, do not stack another dialog.
+      return Future<T?>.value();
+    }
+    _isShowing = true;
+    return WidgetUtils.instance
+        .showDialog<T>(
+          barrierDismissible: false,
+          useSafeArea: false,
+          builder: (BuildContext context) => _instance,
+        )
+        .whenComplete(() {
+      _isShowing = false;
+    });
   }
 
   static void hide() {
+    if (!_isShowing) return;
     try {
       WidgetUtils.instance.dismiss();
     } catch (_) {
       // Safe no-op if dialog is already dismissed / navigator locked
+    } finally {
+      _isShowing = false;
     }
   }
 
@@ -61,21 +79,23 @@ class _LoadingPopupState extends State<LoadingPopup> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:[JumpingDots(color: Theme.of(context).colorScheme.primary)],
+                children: [JumpingDots(color: Theme.of(context).colorScheme.primary)],
               ),
               ValueListenableBuilder(
                 valueListenable: widget._message,
-                builder: (_, message, ___) => message.isNotEmpty? Column(
-                  children: [
-                    SizedBox(height: AppDimensions.instance.padding),
-                    Text(
-                      message,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                    )
-                  ],
-                ): const SizedBox(),
+                builder: (_, message, ___) => message.isNotEmpty
+                    ? Column(
+                        children: [
+                          SizedBox(height: AppDimensions.instance.padding),
+                          Text(
+                            message,
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.onSurface,
+                                ),
+                          )
+                        ],
+                      )
+                    : const SizedBox(),
               )
             ],
           ),

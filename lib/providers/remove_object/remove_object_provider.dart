@@ -211,6 +211,10 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
+    bool ok = false;
+    bool failed = false;
+    String? failMessage;
+
     try {
       /// CALL API
       OneTouchSuggestionBody body = OneTouchSuggestionBody(originalPreviewImage: _state.image.imageBytes);
@@ -236,26 +240,30 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
         /// AI MODE
         Debug.log("===== TO AI MODE ====");
         _state.mode = RemoveObjectMode.ai;
-
-        /// SHOW GUIDE
-        showAutoAIGuide();
-
-        return true;
+        ok = true;
+      } else if (!res.status) {
+        failed = true;
+        failMessage = res.message;
       }
-
-      if (!res.status) {
-        WidgetUtils.instance.showWarningPopup(
-          title: S.of(context).aiDetection, 
-          message: S.of(context).unableToDetectObjectPleaseTryAgain, 
-          retry: (_) => toAI(context),
-        );
-        Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
-      }
-
-      return false;
     } finally {
       LoadingPopup.hide();
     }
+
+    if (ok) {
+      showAutoAIGuide();
+      return true;
+    }
+
+    if (failed) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).aiDetection,
+        message: S.of(context).unableToDetectObjectPleaseTryAgain,
+        retry: (_) => toAI(context),
+      );
+      Debug.log("===== TO AI DETECTED OBJECTS $failMessage =====");
+    }
+
+    return false;
   }
 
   @override
@@ -271,6 +279,10 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
 
     /// SHOW LOADING POPUP
     LoadingPopup.show();
+
+    bool ok = false;
+    bool failed = false;
+    String? failMessage;
 
     try {
       /// CALL API
@@ -293,26 +305,30 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
         /// AI MODE
         Debug.log("===== TO AI MODE ====");
         _state.mode = RemoveObjectMode.ai;
-
-        /// SHOW GUIDE
-        showAutoAIGuide();
-
-        return true;
+        ok = true;
+      } else if (!res.status) {
+        failed = true;
+        failMessage = res.message;
       }
-
-      if (!res.status) {
-        WidgetUtils.instance.showWarningPopup(
-          title: S.of(context).aiDetection, 
-          message: S.of(context).unableToDetectObjectPleaseTryAgain, 
-          retry: (_) => toAI(context),
-        );
-        Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
-      }
-
-      return false;
     } finally {
       LoadingPopup.hide();
     }
+
+    if (ok) {
+      showAutoAIGuide();
+      return true;
+    }
+
+    if (failed) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).aiDetection,
+        message: S.of(context).unableToDetectObjectPleaseTryAgain,
+        retry: (_) => toAI(context),
+      );
+      Debug.log("===== TO AI DETECTED OBJECTS $failMessage =====");
+    }
+
+    return false;
   }
 
   @override
@@ -359,6 +375,9 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
+    bool ok = false;
+    bool failed = false;
+
     try {
       /// CALL API
       ui.Image mask = await _state.paint.renderMask(originalImage.size);
@@ -382,22 +401,25 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
         _state = _state.next!;
         _state.addListener(notifyListeners);
         notifyListeners();
-
-        return true;
+        ok = true;
+      } else if (!res.status) {
+        failed = true;
       }
-
-      if (!res.status) {
-        WidgetUtils.instance.showWarningPopup(
-          title: S.of(context).removeObjects, 
-          message: S.of(context).unableToDeleteObjectPleaseTryAgain, 
-          retry: (_) => removeObjects(context),
-        );
-      }
-
-      return false;
     } finally {
       LoadingPopup.hide();
     }
+
+    if (ok) return true;
+
+    if (failed) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).removeObjects,
+        message: S.of(context).unableToDeleteObjectPleaseTryAgain,
+        retry: (_) => removeObjects(context),
+      );
+    }
+
+    return false;
   }
 
   @override

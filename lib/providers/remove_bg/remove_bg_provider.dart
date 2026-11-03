@@ -59,6 +59,10 @@ class RemoveBGProvider extends IRemoveBGProvider {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
+    bool ok = false;
+    bool failed = false;
+    String? failMessage;
+
     try {
       /// SHOW ADS
       AdRevenueManager.instance.onHighValueAction(placement: 'remove_bg');
@@ -69,22 +73,27 @@ class RemoveBGProvider extends IRemoveBGProvider {
       if (res.data != null) {
         /// REMOVED BACKGROUND IMAGE
         _state.mask = base64.decode(res.data!.output);
-        return true;
+        ok = true;
+      } else if (!res.status) {
+        failed = true;
+        failMessage = res.message;
       }
-
-      if (!res.status) {
-        WidgetUtils.instance.showWarningPopup(
-          title: S.of(context).createIdPhoto,
-          message: "",
-          retry: (_) => removeBG(context),
-        );
-        Debug.log('===== REMOVE BACKGROUND IMAGE ${res.message} =====');
-      }
-
-      return false;
     } finally {
       LoadingPopup.hide();
     }
+
+    if (ok) return true;
+
+    if (failed) {
+      WidgetUtils.instance.showWarningPopup(
+        title: S.of(context).createIdPhoto,
+        message: "",
+        retry: (_) => removeBG(context),
+      );
+      Debug.log('===== REMOVE BACKGROUND IMAGE $failMessage =====');
+    }
+
+    return false;
   }
 
   @override
