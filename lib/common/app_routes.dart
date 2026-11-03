@@ -152,19 +152,20 @@ extension AppRoutesUtils on IAppRoutes {
         onHasPermission: () async {
       /// SHOW LOADING POPUP
       LoadingPopup.show();
+      try {
+        /// LISTEN PHOTOS AND REFRESH GALLERY
+        await provider.listenPhotos();
+        await provider.refreshGalleryList(true);
 
-      /// LISTEN PHOTOS AND REFRESH GALLERY
-      await provider.listenPhotos();
-      await provider.refreshGalleryList(true);
+        /// Ads: session start / chọn tool (điểm vào funnel cao)
+        AdRevenueManager.instance.onSessionStart();
 
-      /// HIDE LOADING
-      LoadingPopup.hide();
-
-      /// Ads: session start / chọn tool (điểm vào funnel cao)
-      AdRevenueManager.instance.onSessionStart();
-
-      /// GO TO ALBUM PAGE
-      Navigator.pushNamed(context, AppRoutes.albumsPage);
+        /// GO TO ALBUM PAGE
+        Navigator.pushNamed(context, AppRoutes.albumsPage);
+      } finally {
+        /// HIDE LOADING (always)
+        LoadingPopup.hide();
+      }
     });
   }
 
@@ -236,23 +237,26 @@ extension AppRoutesUtils on IAppRoutes {
             break;
         }
 
-        Future.delayed(const Duration(milliseconds: 100), () {
-          if(provider == null || target == null) return;
-          /// SET EDIT IMAGE
-          provider.setImage(context, bytes: bytes).then((ok) {
-          /// HIDE LOADING
-          LoadingPopup.hide();
-
-          if (!ok) return;
-
-          if (imageTool != null) {
-            Navigator.pushReplacementNamed(context, target!);
-          } else {
-            Navigator.pushNamed(context, target!);
+        Future.delayed(const Duration(milliseconds: 100), () async {
+          if (provider == null || target == null) {
+            LoadingPopup.hide();
+            return;
           }
-          });
+          try {
+            /// SET EDIT IMAGE
+            final ok = await provider.setImage(context, bytes: bytes);
+            if (!ok) return;
+
+            if (imageTool != null) {
+              Navigator.pushReplacementNamed(context, target!);
+            } else {
+              Navigator.pushNamed(context, target!);
+            }
+          } finally {
+            /// HIDE LOADING (always, even on error / early return)
+            LoadingPopup.hide();
+          }
         });
-        
       },
     );
   }

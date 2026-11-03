@@ -86,35 +86,32 @@ class MakeIDPassportProvider extends IMakeIDPassportProvider {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    AdRevenueManager.instance.onHighValueAction(placement: 'passport');
+    try {
+      /// SHOW ADS
+      AdRevenueManager.instance.onHighValueAction(placement: 'passport');
 
-    /// CALL API
-    MakePassportIDBody body = MakePassportIDBody(inputImage: _state.image.imageBytes, imageId: null);
-    final SnapEditResponse<MakePassportIDResponse?> res = await Services.instance.snapEdit.makePassportID(body);
-    if (res.data != null) {
-      /// REMOVED BACKGROUND IMAGE
-      _state.mask = base64.decode(res.data!.output);
+      /// CALL API
+      MakePassportIDBody body = MakePassportIDBody(inputImage: _state.image.imageBytes, imageId: null);
+      final SnapEditResponse<MakePassportIDResponse?> res = await Services.instance.snapEdit.makePassportID(body);
+      if (res.data != null) {
+        /// REMOVED BACKGROUND IMAGE
+        _state.mask = base64.decode(res.data!.output);
+        return true;
+      }
 
-      /// HIDE LOADING POPUP
-      WidgetUtils.instance.dismiss();
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).createIdPhoto,
+          message: S.of(context).unableToCreateIdPhotoPleaseTryAgain,
+          retry: (_) => makePassportID(context),
+        );
+        Debug.log('===== REMOVE BACKGROUND IMAGE ${res.message} =====');
+      }
 
-      return true;
+      return false;
+    } finally {
+      LoadingPopup.hide();
     }
-
-    /// HIDE LOADING POPUP
-    WidgetUtils.instance.dismiss();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).createIdPhoto,
-        message: S.of(context).unableToCreateIdPhotoPleaseTryAgain,
-        retry: (_) => makePassportID(context),
-      );
-      Debug.log('===== REMOVE BACKGROUND IMAGE ${res.message} =====');
-    }
-
-    return false;
   }
 
   @override

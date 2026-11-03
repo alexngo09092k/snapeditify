@@ -211,53 +211,51 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// CALL API
-    OneTouchSuggestionBody body = OneTouchSuggestionBody(originalPreviewImage: _state.image.imageBytes);
-    SnapEditResponse<OneTouchSuggestionResponse?> res = await Services.instance.snapEdit.removeOneTouch(body);
+    try {
+      /// CALL API
+      OneTouchSuggestionBody body = OneTouchSuggestionBody(originalPreviewImage: _state.image.imageBytes);
+      SnapEditResponse<OneTouchSuggestionResponse?> res = await Services.instance.snapEdit.removeOneTouch(body);
 
-    if (res.data != null) {
-      /// DETECTED OBJECT VM
-      Map<int, DetectedObjectVM> detectedObjectVMs = {};
-      for (var detectedObject in res.data!.detectedObjects) {
-        final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
-        await vm.paintParse();
-        bool isSelected = res.data!.suggestObjectIds.contains(detectedObject.maskId);
-        detectedObjectVMs[vm.maskId] = vm;
-        if(isSelected) {
-          detectedObjectVMs[vm.maskId]!.toggleSelection();
+      if (res.data != null) {
+        /// DETECTED OBJECT VM
+        Map<int, DetectedObjectVM> detectedObjectVMs = {};
+        for (var detectedObject in res.data!.detectedObjects) {
+          final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
+          await vm.paintParse();
+          bool isSelected = res.data!.suggestObjectIds.contains(detectedObject.maskId);
+          detectedObjectVMs[vm.maskId] = vm;
+          if(isSelected) {
+            detectedObjectVMs[vm.maskId]!.toggleSelection();
+          }
         }
+        _state.detectedObjects = detectedObjectVMs;
+
+        /// SET NEW SESSION ID
+        _state.sessionId = res.data!.sessionId;
+
+        /// AI MODE
+        Debug.log("===== TO AI MODE ====");
+        _state.mode = RemoveObjectMode.ai;
+
+        /// SHOW GUIDE
+        showAutoAIGuide();
+
+        return true;
       }
-      _state.detectedObjects = detectedObjectVMs;
 
-      /// SET NEW SESSION ID
-      _state.sessionId = res.data!.sessionId;
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).aiDetection, 
+          message: S.of(context).unableToDetectObjectPleaseTryAgain, 
+          retry: (_) => toAI(context),
+        );
+        Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
+      }
 
-      /// AI MODE
-      Debug.log("===== TO AI MODE ====");
-      _state.mode = RemoveObjectMode.ai;
-
-      /// HIDE LOADING POPUP
+      return false;
+    } finally {
       LoadingPopup.hide();
-
-      /// SHOW GUIDE
-      showAutoAIGuide();
-
-      return true;
     }
-
-    /// HIDE LOADING POPUP
-    LoadingPopup.hide();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).aiDetection, 
-        message: S.of(context).unableToDetectObjectPleaseTryAgain, 
-        retry: (_) => toAI(context),
-      );
-      Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
-    }
-
-    return false;
   }
 
   @override
@@ -274,49 +272,47 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// CALL API
-    ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes);
-    SnapEditResponse<ScanObjectResponse?> res = await Services.instance.snapEdit.scanObject(body);
+    try {
+      /// CALL API
+      ScanObjectBody body = ScanObjectBody(originalPreviewImage: _state.image.imageBytes);
+      SnapEditResponse<ScanObjectResponse?> res = await Services.instance.snapEdit.scanObject(body);
 
-    if (res.data != null) {
-      /// DETECTED OBJECT VM
-      Map<int, DetectedObjectVM> detectedObjectVMs = {};
-      for (var detectedObject in res.data!.detectedObjects) {
-        final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
-        await vm.paintParse();
-        detectedObjectVMs[vm.maskId] = vm;
+      if (res.data != null) {
+        /// DETECTED OBJECT VM
+        Map<int, DetectedObjectVM> detectedObjectVMs = {};
+        for (var detectedObject in res.data!.detectedObjects) {
+          final vm = DetectedObjectVM.fromDetectedObject(detectedObject, _state);
+          await vm.paintParse();
+          detectedObjectVMs[vm.maskId] = vm;
+        }
+        _state.detectedObjects = detectedObjectVMs;
+
+        /// SET NEW SESSION ID
+        _state.sessionId = res.data!.sessionId;
+
+        /// AI MODE
+        Debug.log("===== TO AI MODE ====");
+        _state.mode = RemoveObjectMode.ai;
+
+        /// SHOW GUIDE
+        showAutoAIGuide();
+
+        return true;
       }
-      _state.detectedObjects = detectedObjectVMs;
 
-      /// SET NEW SESSION ID
-      _state.sessionId = res.data!.sessionId;
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).aiDetection, 
+          message: S.of(context).unableToDetectObjectPleaseTryAgain, 
+          retry: (_) => toAI(context),
+        );
+        Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
+      }
 
-      /// AI MODE
-      Debug.log("===== TO AI MODE ====");
-      _state.mode = RemoveObjectMode.ai;
-
-      /// HIDE LOADING POPUP
+      return false;
+    } finally {
       LoadingPopup.hide();
-
-      /// SHOW GUIDE
-      showAutoAIGuide();
-
-      return true;
     }
-
-    /// HIDE LOADING POPUP
-    LoadingPopup.hide();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).aiDetection, 
-        message: S.of(context).unableToDetectObjectPleaseTryAgain, 
-        retry: (_) => toAI(context),
-      );
-      Debug.log("===== TO AI DETECTED OBJECTS ${res.message} =====");
-    }
-
-    return false;
   }
 
   @override
@@ -363,48 +359,45 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// CALL API
-    ui.Image mask = await _state.paint.renderMask(originalImage.size);
-    Uint8List? maskBytes = await ImageUtils.instance.imageUIToBytes(mask);
-    if (maskBytes == null) {
-      /// HIDE LOADING POPUP
-      LoadingPopup.hide();
+    try {
+      /// CALL API
+      ui.Image mask = await _state.paint.renderMask(originalImage.size);
+      Uint8List? maskBytes = await ImageUtils.instance.imageUIToBytes(mask);
+      if (maskBytes == null) {
+        return false;
+      }
+
+      RemoveObjectBody body = RemoveObjectBody(originalPreviewImage: _state.image.imageBytes, maskBrush: maskBytes);
+      SnapEditResponse<RemoveObjectResponse?> res = await Services.instance.snapEdit.removeObject(body);
+
+      if (res.data != null) {
+        /// CREATE NEW STATE WITH SET SESSION ID TO USED FOR NEXT STATE
+        _state.next = _state.copyWith(prev: _state, drawables: []);
+
+        /// MUST CALL SET IMAGE BEFORE SET FOR CURRENT STATE
+        await _state.next!.setImage(base64.decode(res.data!.editedImage.image), res.data!.editedImage.image);
+
+        /// AFTER NEXT STATE SETTED IMAGE
+        _state.removeListener(notifyListeners);
+        _state = _state.next!;
+        _state.addListener(notifyListeners);
+        notifyListeners();
+
+        return true;
+      }
+
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).removeObjects, 
+          message: S.of(context).unableToDeleteObjectPleaseTryAgain, 
+          retry: (_) => removeObjects(context),
+        );
+      }
+
       return false;
-    }
-
-    RemoveObjectBody body = RemoveObjectBody(originalPreviewImage: _state.image.imageBytes, maskBrush: maskBytes);
-    SnapEditResponse<RemoveObjectResponse?> res = await Services.instance.snapEdit.removeObject(body);
-
-    if (res.data != null) {
-      /// CREATE NEW STATE WITH SET SESSION ID TO USED FOR NEXT STATE
-      _state.next = _state.copyWith(prev: _state, drawables: []);
-
-      /// MUST CALL SET IMAGE BEFORE SET FOR CURRENT STATE
-      await _state.next!.setImage(base64.decode(res.data!.editedImage.image), res.data!.editedImage.image);
-
-      /// AFTER NEXT STATE SETTED IMAGE
-      _state.removeListener(notifyListeners);
-      _state = _state.next!;
-      _state.addListener(notifyListeners);
-      notifyListeners();
-
-      /// HIDE LOADING POPUP
+    } finally {
       LoadingPopup.hide();
-      return true;
     }
-
-    /// HIDE LOADING POPUP
-    LoadingPopup.hide();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).removeObjects, 
-        message: S.of(context).unableToDeleteObjectPleaseTryAgain, 
-        retry: (_) => removeObjects(context),
-      );
-    }
-
-    return false;
   }
 
   @override

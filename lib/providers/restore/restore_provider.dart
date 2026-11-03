@@ -94,45 +94,42 @@ class RestoreProvider extends IRestoreProvider {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    adProvider.handleAd();
+    try {
+      /// SHOW ADS
+      adProvider.handleAd();
 
-    /// CALL API
-    RestoreBody body = RestoreBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
-    final SnapEditResponse<RestorationResponse?> res = await Services.instance.snapEdit.restoreImage(body);
-    if (res.data != null) {
-      final imageBase64 = res.data!.outputImage.image;
-      final imageBytes = base64.decode(res.data!.outputImage.image);
-      await _state.setImage(
-        imageBytes, 
-        imageBase64, 
-        imageId: res.data!.imageId, 
-        outputImageId: res.data!.outputImage.imageId,
-      );
-      
-      /// HIDE LOADING POPUP
+      /// CALL API
+      RestoreBody body = RestoreBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
+      final SnapEditResponse<RestorationResponse?> res = await Services.instance.snapEdit.restoreImage(body);
+      if (res.data != null) {
+        final imageBase64 = res.data!.outputImage.image;
+        final imageBytes = base64.decode(res.data!.outputImage.image);
+        await _state.setImage(
+          imageBytes, 
+          imageBase64, 
+          imageId: res.data!.imageId, 
+          outputImageId: res.data!.outputImage.imageId,
+        );
+
+        /// SHOW GUIDE
+        showEnhanceGuide();
+
+        return true;
+      }
+
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).restore, 
+          message: S.of(context).unableToRestoreTheImagePleaseTryAgain, 
+          retry: (_) => restoreImage(context),
+        );
+        Debug.log('===== ENAHNCE IMAGE ${res.message} =====');
+      }
+
+      return false;
+    } finally {
       LoadingPopup.hide();
-
-      /// SHOW GUIDE
-      showEnhanceGuide();
-
-
-      return true;
     }
-
-    /// HIDE LOADING POPUP
-    LoadingPopup.hide();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).restore, 
-        message: S.of(context).unableToRestoreTheImagePleaseTryAgain, 
-        retry: (_) => restoreImage(context),
-      );
-      Debug.log('===== ENAHNCE IMAGE ${res.message} =====');
-    }
-
-    return false;
   }
 
    @override
@@ -150,39 +147,37 @@ class RestoreProvider extends IRestoreProvider {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    adProvider.handleAd();
+    try {
+      /// SHOW ADS
+      adProvider.handleAd();
 
-    /// CALL API
-    GenerateVideoBody body = GenerateVideoBody(
-      outputImageId: _state.outputImageId!,
-      imageId: _state.imageId!,
-    );
-
-    SnapEditResponse<GenerateVideoResponse?> res = await Services.instance.snapEdit.generateVideo(body);
-
-    if (res.data != null) {
-      _state.videoURL = res.data!.outputVideoUrl;
-
-      await Future.delayed(const Duration(milliseconds: 500));
-      /// HIDE LOADING POPUP
-      WidgetUtils.instance.dismiss();
-      return true;
-    }
-
-    /// HIDE LOADING POPUP
-    WidgetUtils.instance.dismiss();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).videoEffect, 
-        message: S.of(context).creatingVideoEffectsFailedPleaseTryAgain, 
-        retry: (_) => videoEffect(context),
+      /// CALL API
+      GenerateVideoBody body = GenerateVideoBody(
+        outputImageId: _state.outputImageId!,
+        imageId: _state.imageId!,
       );
-      Debug.log('====== RESTYLE IMAGE ${res.message} ======');
-    }
 
-    return false;
+      SnapEditResponse<GenerateVideoResponse?> res = await Services.instance.snapEdit.generateVideo(body);
+
+      if (res.data != null) {
+        _state.videoURL = res.data!.outputVideoUrl;
+        await Future.delayed(const Duration(milliseconds: 500));
+        return true;
+      }
+
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).videoEffect, 
+          message: S.of(context).creatingVideoEffectsFailedPleaseTryAgain, 
+          retry: (_) => videoEffect(context),
+        );
+        Debug.log('====== RESTYLE IMAGE ${res.message} ======');
+      }
+
+      return false;
+    } finally {
+      LoadingPopup.hide();
+    }
   }
 
   @override
@@ -196,15 +191,15 @@ class RestoreProvider extends IRestoreProvider {
       if (_state.videoURL != null) {
         /// SHOW LOADING
         LoadingPopup.show();
-        
-        /// SHOW ADS
-        adProvider.handleAd();
+        try {
+          /// SHOW ADS
+          adProvider.handleAd();
 
-        /// SAVE VIDEO
-        savedVideoFile = await provider.saveVideo(_state.videoURL!);
-
-        /// HIDE LOADING
-        LoadingPopup.hide();
+          /// SAVE VIDEO
+          savedVideoFile = await provider.saveVideo(_state.videoURL!);
+        } finally {
+          LoadingPopup.hide();
+        }
       }
 
       if (savedVideoFile != null) {

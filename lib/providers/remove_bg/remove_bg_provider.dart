@@ -59,35 +59,32 @@ class RemoveBGProvider extends IRemoveBGProvider {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    AdRevenueManager.instance.onHighValueAction(placement: 'remove_bg');
+    try {
+      /// SHOW ADS
+      AdRevenueManager.instance.onHighValueAction(placement: 'remove_bg');
 
-    /// CALL API
-    RemoveBackgroundBody body = RemoveBackgroundBody(inputImage: _state.image.imageBytes, imageId: null);
-    final SnapEditResponse<RemoveBackgroundResponse?> res = await Services.instance.snapEdit.removeBackground(body);
-    if (res.data != null) {
-      /// REMOVED BACKGROUND IMAGE
-      _state.mask = base64.decode(res.data!.output);
+      /// CALL API
+      RemoveBackgroundBody body = RemoveBackgroundBody(inputImage: _state.image.imageBytes, imageId: null);
+      final SnapEditResponse<RemoveBackgroundResponse?> res = await Services.instance.snapEdit.removeBackground(body);
+      if (res.data != null) {
+        /// REMOVED BACKGROUND IMAGE
+        _state.mask = base64.decode(res.data!.output);
+        return true;
+      }
 
-      /// HIDE LOADING POPUP
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).createIdPhoto,
+          message: "",
+          retry: (_) => removeBG(context),
+        );
+        Debug.log('===== REMOVE BACKGROUND IMAGE ${res.message} =====');
+      }
+
+      return false;
+    } finally {
       LoadingPopup.hide();
-
-      return true;
     }
-
-    /// HIDE LOADING POPUP
-    LoadingPopup.hide();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).createIdPhoto,
-        message: "",
-        retry: (_) => removeBG(context),
-      );
-      Debug.log('===== REMOVE BACKGROUND IMAGE ${res.message} =====');
-    }
-
-    return false;
   }
 
   @override

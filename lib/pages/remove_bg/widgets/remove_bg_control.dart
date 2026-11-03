@@ -18,19 +18,21 @@ class RemoveBGControl extends StatelessWidget {
 
   _onEditBG(BuildContext context) async {
     LoadingPopup.show();
-    IRemoveBGProvider rmBGProvider = ManagerProvider.of<IRemoveBGProvider>();
-    IChangeBGProvider changeBGProvider = ManagerProvider.of<IChangeBGProvider>();
-    Uint8List? imageBytes = await rmBGProvider.captureController.capture();
+    try {
+      IRemoveBGProvider rmBGProvider = ManagerProvider.of<IRemoveBGProvider>();
+      IChangeBGProvider changeBGProvider = ManagerProvider.of<IChangeBGProvider>();
+      Uint8List? imageBytes = await rmBGProvider.captureController.capture();
 
-    late bool ok;
+      bool ok = false;
+      if (imageBytes != null) {
+        ok = await changeBGProvider.setImage(context, bytes: imageBytes);
+      }
 
-    if (imageBytes != null) {
-      ok = await changeBGProvider.setImage(context, bytes: imageBytes);
+      if (ok) {
+        Navigator.pushNamed(context, AppRoutes.changeBG);
+      }
+    } finally {
       LoadingPopup.hide();
-    }
-
-    if (ok) {
-      Navigator.pushNamed(context, AppRoutes.changeBG);
     }
   }
 

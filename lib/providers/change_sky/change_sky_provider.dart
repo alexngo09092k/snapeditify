@@ -104,35 +104,33 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    AdRevenueManager.instance.onHighValueAction(placement: 'change_sky');
+    try {
+      /// SHOW ADS
+      AdRevenueManager.instance.onHighValueAction(placement: 'change_sky');
 
-    /// CALL API
-    SkyMaskBody body = SkyMaskBody(inputImage: originalImage.imageBytes);
-    SnapEditResponse<SkyMaskResponse?> res = await Services.instance.snapEdit.removeSky(body);
+      /// CALL API
+      SkyMaskBody body = SkyMaskBody(inputImage: originalImage.imageBytes);
+      SnapEditResponse<SkyMaskResponse?> res = await Services.instance.snapEdit.removeSky(body);
 
-    if (res.data != null) {
-      /// REMOVED SKY IMAGE
-      _state.mask = base64.decode(res.data!.mask);
+      if (res.data != null) {
+        /// REMOVED SKY IMAGE
+        _state.mask = base64.decode(res.data!.mask);
+        return true;
+      }
 
-      /// HIDE LOADING POPUP
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).changeSky, 
+          message: S.of(context).unableToChangeTheSkyOfTheImagePleaseTryAgain, 
+          retry: (_) =>removeSky(context),
+        );
+        Debug.log('====== RESTYLE IMAGE ${res.message} ======');
+      }
+
+      return false;
+    } finally {
       LoadingPopup.hide();
-      return true;
     }
-
-    /// HIDE LOADING POPUP
-    LoadingPopup.hide();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).changeSky, 
-        message: S.of(context).unableToChangeTheSkyOfTheImagePleaseTryAgain, 
-        retry: (_) =>removeSky(context),
-      );
-      Debug.log('====== RESTYLE IMAGE ${res.message} ======');
-    }
-
-    return false;
   }
 
   @override
@@ -145,33 +143,34 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    AdRevenueManager.instance.onHighValueAction(placement: 'change_sky');
+    try {
+      /// SHOW ADS
+      AdRevenueManager.instance.onHighValueAction(placement: 'change_sky');
 
-    /// DOWNLOAD
-    final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
-    final Directory cacheDirectory = await getTemporaryDirectory();
-    final String savePath = "${cacheDirectory.path}/$name.jpg";
-    await Dio().downloadUri(
-      Uri.parse(effect.url),
-      savePath,
-      onReceiveProgress: (received, total) async {
-        if(received == total) {
-          _state.sky = effect;
-          Uint8List imageBytes = File(savePath).readAsBytesSync();
-          ui.Image image = await ImageUtils.instance.toImageUI(imageBytes);
-          _state.styledImages[effect.url] = image;
-          _state.paint.background = image.backgroundDrawable;
-          // late ImageDrawable newDrawable;
-          // newDrawable = ImageDrawable(position: Offset.zero, image: image);
-          // _state.paint.replaceDrawable(_state.paint.drawables[0], newDrawable);
-        }
-    });
+      /// DOWNLOAD
+      final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
+      final Directory cacheDirectory = await getTemporaryDirectory();
+      final String savePath = "${cacheDirectory.path}/$name.jpg";
+      await Dio().downloadUri(
+        Uri.parse(effect.url),
+        savePath,
+        onReceiveProgress: (received, total) async {
+          if(received == total) {
+            _state.sky = effect;
+            Uint8List imageBytes = File(savePath).readAsBytesSync();
+            ui.Image image = await ImageUtils.instance.toImageUI(imageBytes);
+            _state.styledImages[effect.url] = image;
+            _state.paint.background = image.backgroundDrawable;
+            // late ImageDrawable newDrawable;
+            // newDrawable = ImageDrawable(position: Offset.zero, image: image);
+            // _state.paint.replaceDrawable(_state.paint.drawables[0], newDrawable);
+          }
+      });
 
-    /// HIDE LOADING POPUP
-    LoadingPopup.hide();
-
-    return true;
+      return true;
+    } finally {
+      LoadingPopup.hide();
+    }
   }
 
   @override

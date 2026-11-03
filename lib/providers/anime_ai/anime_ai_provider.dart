@@ -125,38 +125,36 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    AdRevenueManager.instance.onHighValueAction(placement: 'anime_ai');
+    try {
+      /// SHOW ADS
+      AdRevenueManager.instance.onHighValueAction(placement: 'anime_ai');
 
-    /// CALL API
-    AnimeBody body = AnimeBody(style: styleId, inputImage: originalImage.imageBytes);
-    SnapEditResponse<AnimeResponse?> res = await Services.instance.snapEdit.animeImage(body);
+      /// CALL API
+      AnimeBody body = AnimeBody(style: styleId, inputImage: originalImage.imageBytes);
+      SnapEditResponse<AnimeResponse?> res = await Services.instance.snapEdit.animeImage(body);
 
-    if (res.data != null && res.data!.outputImages.isNotEmpty) {
-      await _state.setImage(
-        base64.decode(res.data!.outputImages.first.image),
-        res.data!.outputImages.first.image, 
-        styleId: styleId,
-      );
-      _state.styledImages[styleId] = res.data!;
+      if (res.data != null && res.data!.outputImages.isNotEmpty) {
+        await _state.setImage(
+          base64.decode(res.data!.outputImages.first.image),
+          res.data!.outputImages.first.image, 
+          styleId: styleId,
+        );
+        _state.styledImages[styleId] = res.data!;
+        return true;
+      }
 
-      /// HIDE LOADING POPUP
-      WidgetUtils.instance.dismiss();
-      return true;
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).restyle, 
+          message: S.of(context).unableToStyleImagePleaseTryAgain, 
+          retry: (_) => restyleImage(context, styleId),
+        );
+        Debug.log('====== RESTYLE IMAGE ${res.message} ======');
+      }
+      return false;
+    } finally {
+      LoadingPopup.hide();
     }
-
-    /// HIDE LOADING POPUP
-    WidgetUtils.instance.dismiss();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).restyle, 
-        message: S.of(context).unableToStyleImagePleaseTryAgain, 
-        retry: (_) => restyleImage(context, styleId),
-      );
-      Debug.log('====== RESTYLE IMAGE ${res.message} ======');
-    }
-    return false;
   }
 
   @override
@@ -168,36 +166,35 @@ class AnimeAIProvider extends IAnimeAIProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    AdRevenueManager.instance.onHighValueAction(placement: 'anime_ai');
+    try {
+      /// SHOW ADS
+      AdRevenueManager.instance.onHighValueAction(placement: 'anime_ai');
 
-    /// CALL API
-    GenerateVideoBody body = GenerateVideoBody(
-      outputImageId: _state.styledImages[styleId]!.outputImages.first.imageId,
-      imageId: _state.styledImages[styleId]!.imageId,
-    );
-
-    SnapEditResponse<GenerateVideoResponse?> res = await Services.instance.snapEdit.generateVideo(body);
-
-    if (res.data != null) {
-      /// HIDE LOADING POPUP
-      WidgetUtils.instance.dismiss();
-      return true;
-    }
-
-    /// HIDE LOADING POPUP
-    WidgetUtils.instance.dismiss();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).videoEffect, 
-        message: S.of(context).creatingVideoEffectsFailedPleaseTryAgain, 
-        retry: (_) => videoEffect(context, styleId),
+      /// CALL API
+      GenerateVideoBody body = GenerateVideoBody(
+        outputImageId: _state.styledImages[styleId]!.outputImages.first.imageId,
+        imageId: _state.styledImages[styleId]!.imageId,
       );
-      Debug.log('====== RESTYLE IMAGE ${res.message} ======');
-    }
 
-    return false;
+      SnapEditResponse<GenerateVideoResponse?> res = await Services.instance.snapEdit.generateVideo(body);
+
+      if (res.data != null) {
+        return true;
+      }
+
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).videoEffect, 
+          message: S.of(context).creatingVideoEffectsFailedPleaseTryAgain, 
+          retry: (_) => videoEffect(context, styleId),
+        );
+        Debug.log('====== RESTYLE IMAGE ${res.message} ======');
+      }
+
+      return false;
+    } finally {
+      LoadingPopup.hide();
+    }
   }
 
   @override

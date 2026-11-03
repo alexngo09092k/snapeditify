@@ -76,53 +76,52 @@ class EnhanceProvider extends IEnhanceProvider {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    adProvider.handleAd();
+    try {
+      /// SHOW ADS
+      adProvider.handleAd();
 
-    /// API limit: zoom x2 → max output side 3000px → max input side 1500px
-    /// Resize oversized images (e.g. 1600x2400) before upload.
-    const int zoom = 2;
-    final int maxSide = ImageUtils.maxInputSideForZoom(zoom); // 1500
-    final Uint8List inputBytes = ImageUtils.instance.resizeToMaxSide(
-      _state.image.imageBytes,
-      maxSide: maxSide,
-    );
-    Debug.log('===== ENHANCE resize maxSide=$maxSide bytes=${_state.image.imageBytes.length}→${inputBytes.length} =====');
-
-    /// CALL API
-    EnhanceBody body = EnhanceBody(
-      inputImage: inputBytes,
-      imageId: null, // force file upload after resize (imageId would skip new bytes)
-      zoomFactor: '$zoom',
-    );
-    final SnapEditResponse<EnhanceImageResponse?> res = await Services.instance.snapEdit.enhanceImage(body);
-    if (res.data != null && res.data!.outputImages.isNotEmpty) {
-      final imageBase64 = res.data!.outputImages.first;
-      final imageBytes = base64.decode(res.data!.outputImages.first);
-      await _state.setImage(imageBytes, imageBase64);
-
-      /// HIDE LOADING POPUP
-      LoadingPopup.hide();
-
-      /// SHOW GUIDE
-      showEnhanceGuide();
-
-      return true;
-    }
-
-    /// HIDE LOADING POPUP
-    LoadingPopup.hide();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).enhance, 
-        message: S.of(context).unableToEnhanceTheImagePleaseTryAgain, 
-        retry: (_) => enhanceImage(context),
+      /// API limit: zoom x2 → max output side 3000px → max input side 1500px
+      /// Resize oversized images (e.g. 1600x2400) before upload.
+      const int zoom = 2;
+      final int maxSide = ImageUtils.maxInputSideForZoom(zoom); // 1500
+      final Uint8List inputBytes = ImageUtils.instance.resizeToMaxSide(
+        _state.image.imageBytes,
+        maxSide: maxSide,
       );
-      Debug.log('===== ENAHNCE IMAGE ${res.message} =====');
-    }
+      Debug.log('===== ENHANCE resize maxSide=$maxSide bytes=${_state.image.imageBytes.length}→${inputBytes.length} =====');
 
-    return false;
+      /// CALL API
+      EnhanceBody body = EnhanceBody(
+        inputImage: inputBytes,
+        imageId: null, // force file upload after resize (imageId would skip new bytes)
+        zoomFactor: '$zoom',
+      );
+      final SnapEditResponse<EnhanceImageResponse?> res = await Services.instance.snapEdit.enhanceImage(body);
+      if (res.data != null && res.data!.outputImages.isNotEmpty) {
+        final imageBase64 = res.data!.outputImages.first;
+        final imageBytes = base64.decode(res.data!.outputImages.first);
+        await _state.setImage(imageBytes, imageBase64);
+
+        /// SHOW GUIDE
+        showEnhanceGuide();
+
+        return true;
+      }
+
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).enhance, 
+          message: S.of(context).unableToEnhanceTheImagePleaseTryAgain, 
+          retry: (_) => enhanceImage(context),
+        );
+        Debug.log('===== ENAHNCE IMAGE ${res.message} =====');
+      }
+
+      return false;
+    } finally {
+      /// HIDE LOADING POPUP (always, even on error)
+      LoadingPopup.hide();
+    }
   }
 
   @override

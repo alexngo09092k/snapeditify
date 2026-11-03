@@ -94,15 +94,16 @@ abstract class EditImageProvider extends Provider {
       if (_savedFile == null && editedImage != null) {
         /// SHOW LOADING
         LoadingPopup.show();
-        
-        /// SHOW ADS
-        AdRevenueManager.instance.onHighValueAction(placement: 'save');
+        try {
+          /// SHOW ADS
+          AdRevenueManager.instance.onHighValueAction(placement: 'save');
 
-        /// SAVE IMAGE
-        _savedFile = await provider.saveImage(editedImage!.imageBytes);
-
-        /// HIDE LOADING
-        LoadingPopup.hide();
+          /// SAVE IMAGE
+          _savedFile = await provider.saveImage(editedImage!.imageBytes);
+        } finally {
+          /// HIDE LOADING (always, even on error)
+          LoadingPopup.hide();
+        }
       }
 
       if (_savedFile != null) {
@@ -157,6 +158,10 @@ abstract class EditImageProvider extends Provider {
   }
 
   Future<bool> goBack(BuildContext context, [bool onPop = false]) async {
+    // Always dismiss loading overlay when leaving edit screen
+    // (prevents stuck LoadingPopup after enhance / eraser / etc.)
+    LoadingPopup.hide();
+
     if (!canBack) {
       return (await WidgetUtils.instance.alert<bool>(
             context,

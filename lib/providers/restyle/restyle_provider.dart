@@ -106,36 +106,34 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     /// SHOW LOADING POPUP
     LoadingPopup.show();
 
-    /// SHOW ADS
-    AdRevenueManager.instance.onHighValueAction(placement: 'restyle');
+    try {
+      /// SHOW ADS
+      AdRevenueManager.instance.onHighValueAction(placement: 'restyle');
 
-    /// CALL API
-    RestyleBody body = RestyleBody(styleId: styleId, inputImage: originalImage.imageBytes, imageId: _state.imageId);
-    SnapEditResponse<RestyleImageResponse?> res = await Services.instance.snapEdit.restyle(body);
+      /// CALL API
+      RestyleBody body = RestyleBody(styleId: styleId, inputImage: originalImage.imageBytes, imageId: _state.imageId);
+      SnapEditResponse<RestyleImageResponse?> res = await Services.instance.snapEdit.restyle(body);
 
-    if (res.data != null) {
-      Uint8List imagebytes = base64.decode(res.data!.outputImage);
-      _state.styledImages[styleId] = imagebytes;
-      await _state.setImage(imagebytes, res.data!.outputImage,  styleId: styleId);
+      if (res.data != null) {
+        Uint8List imagebytes = base64.decode(res.data!.outputImage);
+        _state.styledImages[styleId] = imagebytes;
+        await _state.setImage(imagebytes, res.data!.outputImage,  styleId: styleId);
+        return true;
+      }
 
-      /// HIDE LOADING POPUP
+      if (!res.status) {
+        WidgetUtils.instance.showWarningPopup(
+          title: S.of(context).restyle, 
+          message: S.of(context).unableToStyleImagePleaseTryAgain, 
+          retry: (_) => restyleImage(context, styleId),
+        );
+        Debug.log('====== RESTYLE IMAGE ${res.message} ======');
+      }
+
+      return false;
+    } finally {
       LoadingPopup.hide();
-      return true;
     }
-
-    /// HIDE LOADING POPUP
-    LoadingPopup.hide();
-
-    if (!res.status) {
-      WidgetUtils.instance.showWarningPopup(
-        title: S.of(context).restyle, 
-        message: S.of(context).unableToStyleImagePleaseTryAgain, 
-        retry: (_) => restyleImage(context, styleId),
-      );
-      Debug.log('====== RESTYLE IMAGE ${res.message} ======');
-    }
-
-    return false;
   }
 
   @override
