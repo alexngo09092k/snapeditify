@@ -9,10 +9,10 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.7.3")
+        classpath("com.android.tools.build:gradle:8.11.1")
 
         // Firebase Google Services
-        classpath("com.google.gms:google-services:4.4.2")
+        classpath("com.google.gms:google-services:4.5.0")
 
         // Huawei AGConnect
         classpath("com.huawei.agconnect:agcp:1.9.6.300")
