@@ -293,6 +293,13 @@ class GalleryProvider extends IGalleryProvider {
 
   @override
   Future<bool> refreshGalleryList([bool notify = true]) async {
+    // Đảm bảo photo_manager đã được authorize (Android 13+/API 36)
+    final ps = await PhotoManager.requestPermissionExtend();
+    if (!ps.isAuth && !ps.hasAccess) {
+      if (notify) notifyListeners();
+      return false;
+    }
+
     final entityPaths = await PhotoManager.getAssetPathList(
       type: RequestType.image,
       hasAll: _config.hasAll,
