@@ -23,7 +23,11 @@ class LoadingPopup extends StatefulWidget {
   }
 
   static void hide() {
-    return WidgetUtils.instance.dismiss();
+    try {
+      WidgetUtils.instance.dismiss();
+    } catch (_) {
+      // Safe no-op if dialog is already dismissed / navigator locked
+    }
   }
 
   static void setMessage(String newMessage) {
