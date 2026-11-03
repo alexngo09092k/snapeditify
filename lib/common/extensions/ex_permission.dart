@@ -1,79 +1,97 @@
 part of '../extensions.dart';
 
 extension MPermissionStore on IUserPermission {
-  /// Xin quyền ảnh đúng chuẩn Android 13–16 + photo_manager.
+  /// Xin quyền ảnh cho:
+  /// - Android 10–12 (storage)
+  /// - Android 13–16 (READ_MEDIA_*)
+  /// - Huawei EMUI / HarmonyOS (AppGallery)
   ///
-  /// Trên API 33+ (đặc biệt emulator API 36):
-  /// - Chỉ bật Photos trong Settings + Permission.storage là KHÔNG đủ
-  /// - Bắt buộc gọi PhotoManager.requestPermissionExtend()
-  /// - Chấp nhận cả full access (isAuth) và limited access (hasAccess)
-  requestStoragePermission(BuildContext context, {
+  /// Luồng: PhotoManager → permission_handler → mở Settings nếu cần.
+  requestStoragePermission(
+    BuildContext context, {
     Function? onHasPermission,
     Function? onNoPermission,
   }) async {
     bool called = false;
 
     Future<bool> ensurePhotoAccess() async {
+      // --- Bước 1: PhotoManager (bắt buộc trên API 33+) ---
       try {
-        // Quan trọng nhất: xin qua photo_manager
         final PermissionState ps = await PhotoManager.requestPermissionExtend(
           requestOption: const PermissionRequestOption(
             androidPermission: AndroidPermission(
-              type: RequestType.common, // images + video → tránh bug denied khi thiếu VIDEO
+              // common = images + video → tránh bug denied khi thiếu VIDEO
+              type: RequestType.common,
               mediaLocation: false,
             ),
           ),
         );
-
-        // isAuth = full, hasAccess = limited (user chọn vài ảnh trên Android 14+)
         if (ps.isAuth || ps.hasAccess) {
           return true;
         }
       } catch (_) {
-        // fallback bên dưới
+        // Tiếp tục fallback
       }
 
-      // Fallback permission_handler
+      // --- Bước 2: permission_handler (Huawei / máy cũ hay cần thêm) ---
       try {
-        final List<Permission> perms = [
+        final List<Permission> perms = <Permission>[
           if (Platform.isIOS) Permission.photos,
           if (Platform.isAndroid) ...[
             Permission.photos,
             Permission.videos,
-            Permission.storage,
+            Permission.storage, // EMUI cũ / Android <= 12
           ],
         ];
 
-        final Map<Permission, PermissionStatus> statuses = await perms.request();
-        final bool anyGranted = statuses.values.any(
-          (s) => s.isGranted || s.isLimited,
-        );
-
-        if (anyGranted) {
-          final PermissionState ps2 =
-              await PhotoManager.requestPermissionExtend();
-          return ps2.isAuth || ps2.hasAccess;
+        // Xin từng cái để Huawei dialog ổn định hơn
+        for (final p in perms) {
+          final status = await p.status;
+          if (!status.isGranted && !status.isLimited) {
+            await p.request();
+          }
         }
+
+        final PermissionState ps2 = await PhotoManager.requestPermissionExtend();
+        if (ps2.isAuth || ps2.hasAccess) {
+          return true;
+        }
+
+        // Một số máy Huawei báo limited/denied nhưng vẫn đọc được MediaStore
+        // → thử kiểm tra thực tế bằng getAssetPathList
+        try {
+          final paths = await PhotoManager.getAssetPathList(
+            type: RequestType.image,
+            onlyAll: true,
+          );
+          if (paths.isNotEmpty) {
+            final count = await paths.first.assetCountAsync;
+            if (count > 0) return true;
+          }
+        } catch (_) {}
       } catch (_) {}
 
       return false;
     }
 
     final bool ok = await ensurePhotoAccess();
-
     if (ok) {
       if (onHasPermission != null) onHasPermission();
       return;
     }
 
-    // Không có quyền → popup mở Settings
+    // Không có quyền → hướng dẫn Settings (Huawei: Apps → Permissions → Storage/Photos)
     WidgetUtils.instance.showRequestPermissionPopup(
       title:
           '${Configuration.instance.business.appName} ${S.of(context).wouldLikeToAccessYourPhotos}',
       message:
           '${S.of(context).allow} ${Configuration.instance.business.appName} ${S.of(context).toAccessPhotosOnYourDeviceToEditOrShare}',
       onForeground: () async {
-        await PhotoManager.openSetting();
+        try {
+          await PhotoManager.openSetting();
+        } catch (_) {
+          await openAppSettings();
+        }
         final bool ok2 = await ensurePhotoAccess();
         if (ok2 && !called) {
           called = true;
@@ -83,8 +101,6 @@ extension MPermissionStore on IUserPermission {
       },
     );
 
-    if (onNoPermission != null) {
-      onNoPermission();
-    }
+    if (onNoPermission != null) onNoPermission();
   }
 }

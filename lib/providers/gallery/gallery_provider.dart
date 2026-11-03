@@ -293,11 +293,15 @@ class GalleryProvider extends IGalleryProvider {
 
   @override
   Future<bool> refreshGalleryList([bool notify = true]) async {
-    // Đảm bảo photo_manager đã được authorize (Android 13+/API 36)
-    final ps = await PhotoManager.requestPermissionExtend();
-    if (!ps.isAuth && !ps.hasAccess) {
-      if (notify) notifyListeners();
-      return false;
+    // Android 13+ / Huawei: phải authorize photo_manager trước khi list album
+    try {
+      final ps = await PhotoManager.requestPermissionExtend();
+      if (!ps.isAuth && !ps.hasAccess) {
+        if (notify) notifyListeners();
+        return false;
+      }
+    } catch (_) {
+      // vẫn thử load — một số máy Huawei vẫn trả album dù state lạ
     }
 
     final entityPaths = await PhotoManager.getAssetPathList(
@@ -328,6 +332,12 @@ class GalleryProvider extends IGalleryProvider {
     try {
       final String name =
           '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';
+      final Directory cacheDirectory = await getTemporaryDirectory();
+      final File imageFile = File('${cacheDirectory.path}/$name.jpg');
+      imageFile.writeAsBytesSync(data);
+
+      // Huawei / một số máy: PhotoManager.editor.saveImage hay fail
+      // → ưu tiên ImageGallerySaverPlus
       if (CurrentPlatform.instance.isHuawei) {
         final result = await ImageGallerySaverPlus.saveImage(
           data,
@@ -335,29 +345,34 @@ class GalleryProvider extends IGalleryProvider {
           name: name,
           isReturnImagePathOfIOS: CurrentPlatform.instance.isIos,
         );
-        // final Directory dataDirectory = await getApplicationDocumentsDirectory();
-        final Directory cacheDirectory = await getTemporaryDirectory();
-
-        /// IMAGE FILE
-        final File imageFile = File('${cacheDirectory.path}/$name.jpg');
-        imageFile.writeAsBytesSync(data);
-
-        if (result != null &&
-            result['filePath'] != null &&
-            await imageFile.exists()) {
-          /// REFRESH IMAGE
+        if (result != null && await imageFile.exists()) {
           await refreshGalleryList(true);
-
           return imageFile;
         }
       } else {
-        AssetEntity? asset = await PhotoManager.editor.saveImage(
+        try {
+          final AssetEntity? asset = await PhotoManager.editor.saveImage(
+            data,
+            filename: name,
+            title: Configuration.instance.business.appName,
+          );
+          if (asset != null) {
+            final File? f = (await asset.file) ?? (await asset.originFile);
+            if (f != null) return f;
+          }
+        } catch (_) {
+          // fallback bên dưới
+        }
+        // Fallback mọi máy nếu PhotoManager save lỗi
+        final result = await ImageGallerySaverPlus.saveImage(
           data,
-          filename:
-              '${Configuration.instance.business.appName}_${DateTime.now().millisecond}',
-          title: Configuration.instance.business.appName,
+          quality: 100,
+          name: name,
         );
-        return asset.file;
+        if (result != null && await imageFile.exists()) {
+          await refreshGalleryList(true);
+          return imageFile;
+        }
       }
     } catch (error) {
       Debug.log(error);
