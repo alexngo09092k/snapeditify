@@ -19,6 +19,7 @@ import 'package:snapeditify/view_models/detected_object_vm.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 
 abstract class IRemoveObjectProvider extends EditImageProvider implements StorageProvider {
   @override
@@ -205,7 +206,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!result) return false;
 
     /// SHOW ADS
-    adProvider.handleAd();
+    AdRevenueManager.instance.onHighValueAction(placement: 'remove_object');
   
     /// SHOW LOADING POPUP
     LoadingPopup.show();
@@ -268,7 +269,7 @@ class RemoveObjectProvider extends IRemoveObjectProvider with ProviderDelegate {
     if (!result) return false;
 
     /// SHOW ADS
-    adProvider.handleAd();
+    AdRevenueManager.instance.onHighValueAction(placement: 'remove_object');
 
     /// SHOW LOADING POPUP
     LoadingPopup.show();

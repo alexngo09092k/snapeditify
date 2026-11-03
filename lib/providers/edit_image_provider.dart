@@ -23,6 +23,7 @@ import 'package:snapeditify/view_models/editing_image_vm.dart';
 import 'package:snapeditify/widgets/base/custom_alert.dart';
 import 'package:snapeditify/widgets/app_use/saved_image_preview.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 
 abstract class EditImageProvider extends Provider {
   EditImageState get state;
@@ -95,7 +96,7 @@ abstract class EditImageProvider extends Provider {
         LoadingPopup.show();
         
         /// SHOW ADS
-        adProvider.handleAd();
+        AdRevenueManager.instance.onHighValueAction(placement: 'save');
 
         /// SAVE IMAGE
         _savedFile = await provider.saveImage(editedImage!.imageBytes);

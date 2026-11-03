@@ -5,6 +5,7 @@ import 'package:snapeditify/common/theme.dart';
 import 'package:snapeditify/generated/l10n.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -18,7 +19,14 @@ class _AppState extends AwesomeAppState<App> {
   @override
   void initState() {
     AwesomeAnalytics.instance.sendEvent("Open App", {});
+    AdRevenueManager.instance.bind();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    AdRevenueManager.instance.unbind();
+    super.dispose();
   }
 
   @override

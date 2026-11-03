@@ -10,6 +10,7 @@ import 'package:snapeditify/pages/enhance/widgets/enhance_guide.dart';
 import 'package:snapeditify/providers/edit_image_provider.dart';
 import 'package:snapeditify/providers/enhance/enhance_state.dart';
 import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/controllers/drawables/drawables.dart';
@@ -78,8 +79,22 @@ class EnhanceProvider extends IEnhanceProvider {
     /// SHOW ADS
     adProvider.handleAd();
 
+    /// API limit: zoom x2 → max output side 3000px → max input side 1500px
+    /// Resize oversized images (e.g. 1600x2400) before upload.
+    const int zoom = 2;
+    final int maxSide = ImageUtils.maxInputSideForZoom(zoom); // 1500
+    final Uint8List inputBytes = ImageUtils.instance.resizeToMaxSide(
+      _state.image.imageBytes,
+      maxSide: maxSide,
+    );
+    Debug.log('===== ENHANCE resize maxSide=$maxSide bytes=${_state.image.imageBytes.length}→${inputBytes.length} =====');
+
     /// CALL API
-    EnhanceBody body = EnhanceBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
+    EnhanceBody body = EnhanceBody(
+      inputImage: inputBytes,
+      imageId: null, // force file upload after resize (imageId would skip new bytes)
+      zoomFactor: '$zoom',
+    );
     final SnapEditResponse<EnhanceImageResponse?> res = await Services.instance.snapEdit.enhanceImage(body);
     if (res.data != null && res.data!.outputImages.isNotEmpty) {
       final imageBase64 = res.data!.outputImages.first;

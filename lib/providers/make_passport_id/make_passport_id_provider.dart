@@ -14,6 +14,7 @@ import 'package:snapeditify/utils/image.dart';
 import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 
 abstract class IMakeIDPassportProvider extends EditImageProvider {
   @override
@@ -86,7 +87,7 @@ class MakeIDPassportProvider extends IMakeIDPassportProvider {
     LoadingPopup.show();
 
     /// SHOW ADS
-    adProvider.handleAd();
+    AdRevenueManager.instance.onHighValueAction(placement: 'passport');
 
     /// CALL API
     MakePassportIDBody body = MakePassportIDBody(inputImage: _state.image.imageBytes, imageId: null);

@@ -14,6 +14,7 @@ import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 
 abstract class IRestyleProvider extends EditImageProvider implements StorageProvider {
   @override
@@ -106,7 +107,7 @@ class RestyleProvider extends IRestyleProvider with ProviderDelegate {
     LoadingPopup.show();
 
     /// SHOW ADS
-    adProvider.handleAd();
+    AdRevenueManager.instance.onHighValueAction(placement: 'restyle');
 
     /// CALL API
     RestyleBody body = RestyleBody(styleId: styleId, inputImage: originalImage.imageBytes, imageId: _state.imageId);

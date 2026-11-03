@@ -19,6 +19,7 @@ import 'package:snapeditify/utils/widget.dart';
 import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 
 abstract class IChangeSkyProvider extends EditImageProvider implements StorageProvider {
   @override
@@ -104,7 +105,7 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
     LoadingPopup.show();
 
     /// SHOW ADS
-    adProvider.handleAd();
+    AdRevenueManager.instance.onHighValueAction(placement: 'change_sky');
 
     /// CALL API
     SkyMaskBody body = SkyMaskBody(inputImage: originalImage.imageBytes);
@@ -145,7 +146,7 @@ class ChangeSkyProvider extends IChangeSkyProvider with ProviderDelegate {
     LoadingPopup.show();
 
     /// SHOW ADS
-    adProvider.handleAd();
+    AdRevenueManager.instance.onHighValueAction(placement: 'change_sky');
 
     /// DOWNLOAD
     final String name = '${Configuration.instance.business.appName}_${DateTime.now().millisecond}';

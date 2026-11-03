@@ -71,4 +71,41 @@ class ImageUtils {
     imagepkg.Image? src = imagepkg.decodeImage(imageBytes);
     return imagepkg.encodePng(src!);
   }
+
+  /// Resize so longest side <= [maxSide].
+  /// Returns original bytes if already small enough.
+  /// Used before enhance/upscale API
+  /// (max output 3000px → max input = 3000/zoom).
+  Uint8List resizeToMaxSide(
+    Uint8List imageBytes, {
+    int maxSide = 1500,
+    int quality = 92,
+  }) {
+    final imagepkg.Image? src = imagepkg.decodeImage(imageBytes);
+    if (src == null) return imageBytes;
+
+    final int w = src.width;
+    final int h = src.height;
+    final int longest = w > h ? w : h;
+    if (longest <= maxSide) return imageBytes;
+
+    final double scale = maxSide / longest;
+    final int nw = (w * scale).round().clamp(1, maxSide);
+    final int nh = (h * scale).round().clamp(1, maxSide);
+
+    final imagepkg.Image resized = imagepkg.copyResize(
+      src,
+      width: nw,
+      height: nh,
+      interpolation: imagepkg.Interpolation.linear,
+    );
+    return imagepkg.encodeJpg(resized, quality: quality);
+  }
+
+  /// Max input side for SnapEdit enhance API given [zoomFactor].
+  /// API: max output side 3000px → max input = 3000 ~/ zoom.
+  static int maxInputSideForZoom(int zoomFactor, {int maxOutputSide = 3000}) {
+    if (zoomFactor < 1) zoomFactor = 1;
+    return maxOutputSide ~/ zoomFactor;
+  }
 }

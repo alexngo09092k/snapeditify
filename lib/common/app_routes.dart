@@ -35,6 +35,7 @@ import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
 import 'package:snapeditify/common/extensions.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 
 abstract class IAppRoutes {
   String get initialRoute;
@@ -158,6 +159,9 @@ extension AppRoutesUtils on IAppRoutes {
 
       /// HIDE LOADING
       LoadingPopup.hide();
+
+      /// Ads: session start / chọn tool (điểm vào funnel cao)
+      AdRevenueManager.instance.onSessionStart();
 
       /// GO TO ALBUM PAGE
       Navigator.pushNamed(context, AppRoutes.albumsPage);
