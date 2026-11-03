@@ -41,7 +41,7 @@ class ImageToolList extends StatelessWidget {
         Expanded(
           child: _QuickTool(
             image: null,
-            materialIcon: Icons.grid_view_rounded,
+            materialIcon: Icons.apps_rounded,
             label: S.of(context).seeAll,
             onTap: showMoreTools,
             accent: true,
@@ -73,25 +73,25 @@ class _QuickTool extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final Color iconColor = accent ? Colors.white : cs.primary;
-    final Color labelColor =
-        accent ? cs.primary : cs.onSurface.withOpacity(isDark ? 0.92 : 0.88);
+    final Color labelColor = accent
+        ? cs.primary
+        : cs.onSurface.withOpacity(isDark ? 0.9 : 0.78);
 
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        splashColor: cs.primary.withOpacity(0.12),
-        highlightColor: cs.primary.withOpacity(0.06),
+        borderRadius: BorderRadius.circular(20),
+        splashColor: cs.primary.withOpacity(0.1),
+        highlightColor: cs.primary.withOpacity(0.05),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: 50,
-                height: 50,
+              Container(
+                width: 54,
+                height: 54,
                 decoration: BoxDecoration(
                   gradient: accent
                       ? AppColors.instance.gradient
@@ -100,33 +100,36 @@ class _QuickTool extends StatelessWidget {
                           end: Alignment.bottomRight,
                           colors: isDark
                               ? [
-                                  cs.primary.withOpacity(0.28),
-                                  cs.secondary.withOpacity(0.16),
+                                  cs.primary.withOpacity(0.22),
+                                  cs.secondary.withOpacity(0.12),
                                 ]
                               : [
-                                  cs.primary.withOpacity(0.14),
-                                  cs.secondary.withOpacity(0.08),
+                                  const Color(0xFFF0F0FF),
+                                  const Color(0xFFE8FBFF),
                                 ],
                         ),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(18),
                   border: Border.all(
                     color: accent
-                        ? Colors.white.withOpacity(0.15)
-                        : cs.primary.withOpacity(isDark ? 0.35 : 0.18),
+                        ? Colors.white.withOpacity(0.2)
+                        : (isDark
+                            ? cs.primary.withOpacity(0.25)
+                            : const Color(0xFFE4E7F5)),
+                    width: 1,
                   ),
                   boxShadow: accent
                       ? [
                           BoxShadow(
-                            color: cs.primary.withOpacity(0.35),
-                            blurRadius: 14,
+                            color: cs.primary.withOpacity(0.28),
+                            blurRadius: 16,
                             offset: const Offset(0, 6),
                           ),
                         ]
                       : [
                           BoxShadow(
-                            color: Colors.black.withOpacity(isDark ? 0.25 : 0.04),
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
+                            color: Colors.black.withOpacity(isDark ? 0.2 : 0.03),
+                            blurRadius: 8,
+                            offset: const Offset(0, 3),
                           ),
                         ],
                 ),
@@ -141,7 +144,7 @@ class _QuickTool extends StatelessWidget {
                         color: iconColor,
                       ),
               ),
-              const SizedBox(height: 7),
+              const SizedBox(height: 8),
               Text(
                 label,
                 maxLines: 1,
@@ -150,7 +153,8 @@ class _QuickTool extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: labelColor,
-                      letterSpacing: 0.1,
+                      letterSpacing: 0.15,
+                      fontSize: 11.5,
                     ),
               ),
             ],

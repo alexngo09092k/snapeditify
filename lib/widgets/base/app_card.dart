@@ -26,6 +26,7 @@ class AppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final radius = borderRadius ??
         BorderRadius.all(Radius.circular(AppDimensions.instance.radius));
     return Container(
@@ -40,7 +41,9 @@ class AppCard extends StatelessWidget {
         boxShadow: [AppColors.instance.softShadow],
         border: border ??
             Border.all(
-              color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.25),
+              color: isDark
+                  ? Colors.white.withOpacity(0.06)
+                  : const Color(0xFFE8EAF0),
               width: 1,
             ),
       ),

@@ -12,23 +12,23 @@ class AppDimensions {
   final double fontsize = 14;
   double fontsizeX(double x) => fontsize * x;
 
-  /// PADDING
-  final double padding = 16;
+  /// PADDING — a bit more breathing room
+  final double padding = 18;
   double paddingX(double x) => padding * x;
 
-  /// RADIUS — modern, softer corners
-  final double radius = 16;
+  /// RADIUS — soft, modern rounded
+  final double radius = 18;
   double radiusX(double x) => radius * x;
 
   /// ICON
   final double icon = 24;
   double iconX(double x) => icon * x;
 
-  /// GRID DELEGATE
+  /// GRID DELEGATE — slightly more spacing for airy feel
   final gridDelegate = const SliverGridDelegateWithFixedCrossAxisCount(
     crossAxisCount: 3,
-    crossAxisSpacing: 10.0,
-    mainAxisSpacing: 10.0,
+    crossAxisSpacing: 12.0,
+    mainAxisSpacing: 12.0,
   );
 
   Size get gridItemSize => Size(

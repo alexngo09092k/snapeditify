@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bottomPadding = AppDimensions.instance.paddingX(3);
 
@@ -50,60 +49,62 @@ class _HomePageState extends State<HomePage> {
       ),
       before: Padding(
         padding: EdgeInsets.fromLTRB(
-          AppDimensions.instance.paddingX(0.35),
-          4,
-          AppDimensions.instance.paddingX(0.35),
-          AppDimensions.instance.paddingX(0.25),
+          AppDimensions.instance.paddingX(0.3),
+          6,
+          AppDimensions.instance.paddingX(0.3),
+          AppDimensions.instance.paddingX(0.2),
         ),
         child: ImageToolList(
           onTool: (e) => AppRoutes.instance.goAlbumsPage(context, e),
         ),
       ),
       children: [
+        // Soft hero banner
         Padding(
           padding: EdgeInsets.fromLTRB(
             AppDimensions.instance.padding,
-            AppDimensions.instance.paddingX(0.65),
+            AppDimensions.instance.paddingX(0.55),
             AppDimensions.instance.padding,
-            AppDimensions.instance.paddingX(0.9),
+            AppDimensions.instance.paddingX(0.85),
           ),
           child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 18),
+            padding: const EdgeInsets.fromLTRB(22, 22, 22, 20),
             decoration: BoxDecoration(
               gradient: AppColors.instance.heroGradient,
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(22),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.brand.withOpacity(isDark ? 0.4 : 0.3),
-                  blurRadius: 28,
-                  offset: const Offset(0, 14),
+                  color: AppColors.brand.withOpacity(isDark ? 0.28 : 0.18),
+                  blurRadius: 24,
+                  offset: const Offset(0, 10),
                 ),
               ],
             ),
             child: Stack(
               children: [
+                // Soft decorative orbs
                 Positioned(
-                  right: -18,
-                  top: -18,
+                  right: -22,
+                  top: -22,
                   child: Container(
-                    width: 110,
-                    height: 110,
+                    width: 100,
+                    height: 100,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.12),
+                      color: Colors.white.withOpacity(0.1),
                     ),
                   ),
                 ),
                 Positioned(
-                  right: 28,
-                  bottom: -30,
+                  right: 36,
+                  bottom: -28,
                   child: Container(
-                    width: 80,
-                    height: 80,
+                    width: 70,
+                    height: 70,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.08),
+                      color: Colors.white.withOpacity(0.07),
                     ),
                   ),
                 ),
@@ -111,27 +112,30 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.18),
+                        color: Colors.white.withOpacity(0.16),
                         borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.12),
+                        ),
                       ),
                       child: Text(
                         'SnapEditify',
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
-                              letterSpacing: 0.3,
+                              letterSpacing: 0.4,
                             ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 14),
                     Text(
                       S.of(context).enhancePhoto,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
-                            letterSpacing: -0.3,
+                            letterSpacing: -0.4,
                             height: 1.15,
                           ),
                     ),
@@ -141,8 +145,8 @@ class _HomePageState extends State<HomePage> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white.withOpacity(0.9),
-                            height: 1.35,
+                            color: Colors.white.withOpacity(0.88),
+                            height: 1.4,
                           ),
                     ),
                   ],

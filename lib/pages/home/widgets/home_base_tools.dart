@@ -40,8 +40,8 @@ class HomeBaseTools extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  width: 4,
-                  height: 18,
+                  width: 3.5,
+                  height: 16,
                   decoration: BoxDecoration(
                     gradient: AppColors.instance.gradient,
                     borderRadius: BorderRadius.circular(4),
@@ -53,38 +53,43 @@ class HomeBaseTools extends StatelessWidget {
                     title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
-                          letterSpacing: -0.15,
+                          letterSpacing: -0.2,
+                          color: isDark
+                              ? Colors.white.withOpacity(0.95)
+                              : const Color(0xFF1A1D26),
                         ),
                   ),
                 ),
                 if (hot)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3.5),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFFEF4444), Color(0xFFF97316)],
+                        colors: [Color(0xFFFF6B6B), Color(0xFFFF9F43)],
                       ),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFEF4444).withOpacity(0.35),
-                          blurRadius: 10,
+                          color: const Color(0xFFFF6B6B).withOpacity(0.28),
+                          blurRadius: 8,
                           offset: const Offset(0, 3),
                         ),
                       ],
                     ),
                     child: Text(
-                      S.of(context).hot,
+                      'HOT',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                             color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 10,
+                            letterSpacing: 0.6,
                           ),
                     ),
                   ),
               ],
             ),
           ),
-          SizedBox(height: AppDimensions.instance.paddingX(0.75)),
+          const SizedBox(height: 14),
           SizedBox(
             height: cardH,
             child: ListView.separated(
@@ -129,12 +134,12 @@ class HomeBaseTool extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.4 : 0.1),
-              blurRadius: 18,
-              offset: const Offset(0, 8),
+              color: Colors.black.withOpacity(isDark ? 0.32 : 0.07),
+              blurRadius: 16,
+              offset: const Offset(0, 6),
             ),
           ],
         ),
@@ -143,11 +148,12 @@ class HomeBaseTool extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             CustomImage(image: tool.image, fit: BoxFit.cover),
+            // Soft bottom gradient (lighter than before)
             Positioned(
               left: 0,
               right: 0,
               bottom: 0,
-              height: height * 0.48,
+              height: height * 0.42,
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -155,7 +161,7 @@ class HomeBaseTool extends StatelessWidget {
                     end: Alignment.bottomCenter,
                     colors: [
                       Colors.transparent,
-                      Colors.black.withOpacity(0.78),
+                      Colors.black.withOpacity(0.55),
                     ],
                   ),
                 ),
@@ -172,9 +178,10 @@ class HomeBaseTool extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
-                      height: 1.15,
+                      height: 1.2,
+                      letterSpacing: -0.1,
                       shadows: const [
-                        Shadow(color: Colors.black54, blurRadius: 10),
+                        Shadow(color: Colors.black38, blurRadius: 8),
                       ],
                     ),
               ),
