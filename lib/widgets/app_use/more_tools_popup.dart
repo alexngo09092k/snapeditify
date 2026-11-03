@@ -31,6 +31,8 @@ class MoreToolsPopup extends StatelessWidget {
           ),
           childAspectRatio: itemWidth / (itemWidth * 2 / 3),
           children: ImageTool.values
+              // Tạm ẩn Anime AI (chưa support)
+              .where((e) => e != ImageTool.generateAnimeAI)
               .map((e) => ImageToolItem(e, onTool: onTool))
               .toList(),
         ),
