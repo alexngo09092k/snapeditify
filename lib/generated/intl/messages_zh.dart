@@ -1,12 +1,25 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// messages for zh
+// This is a library that provides messages for a zh locale. All the
+// messages from the main program should be duplicated here with the same
+// function name.
+
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
+// ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
+
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
 final messages = new MessageLookup();
+
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
+
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accurate": MessageLookupByLibrary.simpleMessage("% 准确"),
@@ -14,8 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "ai": MessageLookupByLibrary.simpleMessage("AI"),
         "aiDetection": MessageLookupByLibrary.simpleMessage("AI 检测"),
         "albums": MessageLookupByLibrary.simpleMessage("相册"),
-        "allChangesWillBeLostAreYouSureYouWant": MessageLookupByLibrary.simpleMessage("所有更改将丢失。确定不保存就离开吗？"),
-        "allChangesWillBeLostYourImageWillBeReverted": MessageLookupByLibrary.simpleMessage("所有更改将丢失。图片将恢复为原始状态。"),
+        "allChangesWillBeLostAreYouSureYouWant":
+            MessageLookupByLibrary.simpleMessage("所有更改将丢失。确定不保存就离开吗？"),
+        "allChangesWillBeLostYourImageWillBeReverted":
+            MessageLookupByLibrary.simpleMessage("所有更改将丢失。图片将恢复为原始状态。"),
         "allow": MessageLookupByLibrary.simpleMessage("允许"),
         "animeAi": MessageLookupByLibrary.simpleMessage("动漫 AI"),
         "applyEffects": MessageLookupByLibrary.simpleMessage("应用效果"),
@@ -23,7 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "artEffect": MessageLookupByLibrary.simpleMessage("艺术效果"),
         "auto": MessageLookupByLibrary.simpleMessage("自动"),
         "before": MessageLookupByLibrary.simpleMessage("处理前"),
-        "bestOutputImageQuality": MessageLookupByLibrary.simpleMessage("最佳输出画质"),
+        "bestOutputImageQuality":
+            MessageLookupByLibrary.simpleMessage("最佳输出画质"),
         "bgColor": MessageLookupByLibrary.simpleMessage("背景颜色"),
         "bgOpacity": MessageLookupByLibrary.simpleMessage("背景不透明度"),
         "blackColor": MessageLookupByLibrary.simpleMessage("黑色"),
@@ -33,9 +49,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "chinese": MessageLookupByLibrary.simpleMessage("中文"),
         "color": MessageLookupByLibrary.simpleMessage("颜色"),
         "createIdPhoto": MessageLookupByLibrary.simpleMessage("制作证件照"),
-        "creatingVideoEffectsFailedPleaseTryAgain": MessageLookupByLibrary.simpleMessage("创建视频效果失败，请重试。"),
+        "creatingVideoEffectsFailedPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("创建视频效果失败，请重试。"),
         "cutoutObjects": MessageLookupByLibrary.simpleMessage("抠图对象"),
-        "discardChangesAndRevert": MessageLookupByLibrary.simpleMessage("放弃更改并还原？"),
+        "discardChangesAndRevert":
+            MessageLookupByLibrary.simpleMessage("放弃更改并还原？"),
         "downloadNow": MessageLookupByLibrary.simpleMessage("立即下载"),
         "editBackground": MessageLookupByLibrary.simpleMessage("编辑背景"),
         "editor": MessageLookupByLibrary.simpleMessage("编辑"),
@@ -43,9 +61,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "enhance": MessageLookupByLibrary.simpleMessage("增强"),
         "enhanceImage": MessageLookupByLibrary.simpleMessage("增强图片"),
         "enhancePhoto": MessageLookupByLibrary.simpleMessage("增强照片"),
-        "failedToOpenBrowserPleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法打开浏览器，请重试。"),
-        "failedToOpenMailPleaseTryGain": MessageLookupByLibrary.simpleMessage("无法打开邮件，请重试。"),
-        "failedToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage("保存图片失败，请重试。"),
+        "failedToOpenBrowserPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法打开浏览器，请重试。"),
+        "failedToOpenMailPleaseTryGain":
+            MessageLookupByLibrary.simpleMessage("无法打开邮件，请重试。"),
+        "failedToSaveImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("保存图片失败，请重试。"),
         "fastEditor": MessageLookupByLibrary.simpleMessage("快速编辑"),
         "feedback": MessageLookupByLibrary.simpleMessage("反馈"),
         "feedbackTo": MessageLookupByLibrary.simpleMessage("反馈至"),
@@ -57,12 +78,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "insertYourMessage": MessageLookupByLibrary.simpleMessage("输入您的文字"),
         "languages": MessageLookupByLibrary.simpleMessage("语言"),
         "later": MessageLookupByLibrary.simpleMessage("稍后"),
-        "letsShareOneOfTheBestPhotoEditingAppWith": MessageLookupByLibrary.simpleMessage("把这款优秀的照片编辑应用分享给朋友、家人和社区。"),
-        "looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd": MessageLookupByLibrary.simpleMessage("网络连接似乎已中断，请检查网络后重试。"),
+        "letsShareOneOfTheBestPhotoEditingAppWith":
+            MessageLookupByLibrary.simpleMessage("把这款优秀的照片编辑应用分享给朋友、家人和社区。"),
+        "looksLikeYourComnnectionIsInterruptedCheckNetworkConnectionAnd":
+            MessageLookupByLibrary.simpleMessage("网络连接似乎已中断，请检查网络后重试。"),
         "newImage": MessageLookupByLibrary.simpleMessage("新图片"),
-        "noAdsBestExperience": MessageLookupByLibrary.simpleMessage("无广告 – 尽享最佳体验"),
-        "noAdsBestImageQuality": MessageLookupByLibrary.simpleMessage("无广告，画质最佳"),
-        "noPotentialObjectHasBeenDetected": MessageLookupByLibrary.simpleMessage("未检测到可用对象。"),
+        "noAdsBestExperience":
+            MessageLookupByLibrary.simpleMessage("无广告 – 尽享最佳体验"),
+        "noAdsBestImageQuality":
+            MessageLookupByLibrary.simpleMessage("无广告，画质最佳"),
+        "noPotentialObjectHasBeenDetected":
+            MessageLookupByLibrary.simpleMessage("未检测到可用对象。"),
         "notFoundImages": MessageLookupByLibrary.simpleMessage("未找到图片"),
         "objects": MessageLookupByLibrary.simpleMessage("对象"),
         "ok": MessageLookupByLibrary.simpleMessage("好的"),
@@ -74,9 +100,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "openSettings": MessageLookupByLibrary.simpleMessage("打开设置"),
         "others": MessageLookupByLibrary.simpleMessage("其他"),
         "people": MessageLookupByLibrary.simpleMessage("人物"),
-        "pleaseTryAgainOrOpenTheAppAgain": MessageLookupByLibrary.simpleMessage("请重试或重新打开应用。"),
+        "pleaseTryAgainOrOpenTheAppAgain":
+            MessageLookupByLibrary.simpleMessage("请重试或重新打开应用。"),
         "radius": MessageLookupByLibrary.simpleMessage("半径"),
-        "rateSnapeditify": MessageLookupByLibrary.simpleMessage("为 SnapEditify 评分"),
+        "rateSnapeditify":
+            MessageLookupByLibrary.simpleMessage("为 SnapEditify 评分"),
         "remove": MessageLookupByLibrary.simpleMessage("移除"),
         "removeBackground": MessageLookupByLibrary.simpleMessage("去除背景"),
         "removeObject": MessageLookupByLibrary.simpleMessage("移除对象"),
@@ -94,7 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "savedImage": MessageLookupByLibrary.simpleMessage("图片已保存"),
         "savedVideo": MessageLookupByLibrary.simpleMessage("视频已保存"),
         "seeAll": MessageLookupByLibrary.simpleMessage("查看全部"),
-        "selectBackgroundColorAndPhotoRatio": MessageLookupByLibrary.simpleMessage("选择背景颜色和照片比例"),
+        "selectBackgroundColorAndPhotoRatio":
+            MessageLookupByLibrary.simpleMessage("选择背景颜色和照片比例"),
         "selectEmoji": MessageLookupByLibrary.simpleMessage("选择表情"),
         "send": MessageLookupByLibrary.simpleMessage("发送"),
         "setting": MessageLookupByLibrary.simpleMessage("设置"),
@@ -107,30 +136,47 @@ class MessageLookup extends MessageLookupByLibrary {
         "textColor": MessageLookupByLibrary.simpleMessage("文字颜色"),
         "textSize": MessageLookupByLibrary.simpleMessage("文字大小"),
         "thailand": MessageLookupByLibrary.simpleMessage("泰语"),
-        "toAccessPhotosOnYourDeviceToEditOrShare": MessageLookupByLibrary.simpleMessage("以访问设备上的照片进行编辑或分享。"),
-        "unableToChangeTheSkyOfTheImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法更换天空，请重试。"),
-        "unableToCreateIdPhotoPleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法制作证件照，请重试。"),
-        "unableToDeleteObjectPleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法移除对象，请重试。"),
-        "unableToDetectObjectPleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法检测对象，请重试。"),
-        "unableToEnhanceTheImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法增强图片，请重试。"),
-        "unableToRestoreTheImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法修复图片，请重试。"),
-        "unableToSaveImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法保存图片，请重试。"),
-        "unableToSaveVideoPleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法保存视频，请重试。"),
-        "unableToStyleImagePleaseTryAgain": MessageLookupByLibrary.simpleMessage("无法应用风格，请重试。"),
-        "unlimitedAccessAiFeatures": MessageLookupByLibrary.simpleMessage("无限使用强大的 AI 功能"),
+        "toAccessPhotosOnYourDeviceToEditOrShare":
+            MessageLookupByLibrary.simpleMessage("以访问设备上的照片进行编辑或分享。"),
+        "unableToChangeTheSkyOfTheImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法更换天空，请重试。"),
+        "unableToCreateIdPhotoPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法制作证件照，请重试。"),
+        "unableToDeleteObjectPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法移除对象，请重试。"),
+        "unableToDetectObjectPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法检测对象，请重试。"),
+        "unableToEnhanceTheImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法增强图片，请重试。"),
+        "unableToRestoreTheImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法修复图片，请重试。"),
+        "unableToSaveImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法保存图片，请重试。"),
+        "unableToSaveVideoPleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法保存视频，请重试。"),
+        "unableToStyleImagePleaseTryAgain":
+            MessageLookupByLibrary.simpleMessage("无法应用风格，请重试。"),
+        "unlimitedAccessAiFeatures":
+            MessageLookupByLibrary.simpleMessage("无限使用强大的 AI 功能"),
         "unlockPremium": MessageLookupByLibrary.simpleMessage("解锁高级版"),
-        "unlockSnapeditifyPremium": MessageLookupByLibrary.simpleMessage("解锁 SnapEditify 高级版"),
+        "unlockSnapeditifyPremium":
+            MessageLookupByLibrary.simpleMessage("解锁 SnapEditify 高级版"),
         "update": MessageLookupByLibrary.simpleMessage("更新"),
         "upscale": MessageLookupByLibrary.simpleMessage("放大"),
         "upscaleImage": MessageLookupByLibrary.simpleMessage("提升分辨率"),
         "version": MessageLookupByLibrary.simpleMessage("版本"),
         "videoEffect": MessageLookupByLibrary.simpleMessage("视频效果"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("越南语"),
-        "wouldLikeToAccessYourPhotos": MessageLookupByLibrary.simpleMessage("希望访问您的照片"),
-        "youAreCurrentlyOffline": MessageLookupByLibrary.simpleMessage("您当前处于离线状态。"),
-        "youHaveReachedTheLimitOfSavedImagePleaseUpgrade": MessageLookupByLibrary.simpleMessage("您已达到保存图片上限，请升级高级版或联系支持。"),
+        "wouldLikeToAccessYourPhotos":
+            MessageLookupByLibrary.simpleMessage("希望访问您的照片"),
+        "youAreCurrentlyOffline":
+            MessageLookupByLibrary.simpleMessage("您当前处于离线状态。"),
+        "youHaveReachedTheLimitOfSavedImagePleaseUpgrade":
+            MessageLookupByLibrary.simpleMessage("您已达到保存图片上限，请升级高级版或联系支持。"),
         "yourAppIsOutdated": MessageLookupByLibrary.simpleMessage("应用版本过旧。"),
-        "yourAppVersionIsNoLongerSupportedYoureMissingOut": MessageLookupByLibrary.simpleMessage("当前应用版本已不受支持。请更新以获取新功能和重要修复。"),
-        "yourFeedbackOfTheAppAndProvideABetterExperience": MessageLookupByLibrary.simpleMessage("您的反馈将帮助我们改进应用体验。"),
-  };
+        "yourAppVersionIsNoLongerSupportedYoureMissingOut":
+            MessageLookupByLibrary.simpleMessage("当前应用版本已不受支持。请更新以获取新功能和重要修复。"),
+        "yourFeedbackOfTheAppAndProvideABetterExperience":
+            MessageLookupByLibrary.simpleMessage("您的反馈将帮助我们改进应用体验。")
+      };
 }

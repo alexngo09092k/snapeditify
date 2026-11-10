@@ -16,7 +16,8 @@ const enviroment = {
     /// Maintenance mode
     'maintenanceMode': {
       'title': "We'll be back soon",
-      'message': "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
+      'message':
+          "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
       'link': 'https://snapeditify.netlify.app',
     },
 
@@ -45,22 +46,26 @@ const enviroment = {
       {
         'brand': 'Facebook',
         'link': 'https://www.facebook.com/snapeditify/',
-        'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
+        'image':
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png',
       },
       {
         'brand': 'Tiktok',
         'link': 'https://www.tiktok.com/@snapeditify',
-        'image': 'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
+        'image':
+            'https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png',
       },
       {
         'brand': 'Youtube',
         'link': 'https://www.youtube.com/@snapeditify',
-        'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/318px-YouTube_full-color_icon_%282017%29.svg.png',
+        'image':
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/318px-YouTube_full-color_icon_%282017%29.svg.png',
       },
       {
         'brand': 'Telegram',
         'link': 'https://t.me/+GPyDosamyKA2OGVl',
-        'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
+        'image':
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png?20220101141644',
       },
     ],
 
@@ -87,8 +92,8 @@ const enviroment = {
     'shareApp': {
       'message': 'SnapEditify AI Photo Editor Pro',
       'links': {
-        'android': 'https://appgallery.huawei.com/app/C107645049', 
-        'ios': 'https://appgallery.huawei.com/app/C107645049', 
+        'android': 'https://appgallery.huawei.com/app/C107645049',
+        'ios': 'https://appgallery.huawei.com/app/C107645049',
         'huawei': 'https://appgallery.huawei.com/app/C107645049',
       },
     },
@@ -98,17 +103,19 @@ const enviroment = {
       'version': '2.0.0',
       'required': false,
       'links': {
-        'android': 'https://appgallery.huawei.com/app/C107645049', 
-        'ios': 'https://appgallery.huawei.com/app/C107645049', 
+        'android': 'https://appgallery.huawei.com/app/C107645049',
+        'ios': 'https://appgallery.huawei.com/app/C107645049',
         'huawei': 'https://appgallery.huawei.com/app/C107645049',
       },
     },
 
     'moreApps': [
-       {
+      {
         "name": "Candy Land Puzzle: Match Game",
-        "logo": "https://appimg2.dbankcdn.com/application/icon144/65/6124af2abde64858915de34600bf4e24.png",
-        "desc": "Candy Land Puzzle is a new and stylish candy match 3 puzzle game, available for no matter adults or kids for all ages.!",
+        "logo":
+            "https://appimg2.dbankcdn.com/application/icon144/65/6124af2abde64858915de34600bf4e24.png",
+        "desc":
+            "Candy Land Puzzle is a new and stylish candy match 3 puzzle game, available for no matter adults or kids for all ages.!",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108228683",
           "ios": "https://appgallery.huawei.com/app/C108228683",
@@ -117,8 +124,10 @@ const enviroment = {
       },
       {
         "name": "Fall Dudes 3D: Amazing Run",
-        "logo": "https://appimg2.dbankcdn.com/application/icon144/65/ae2086a83fd64cc9bde0d41b0305f20b.png",
-        "desc": "Fall Dudes 3D: Super Tricky Amazing Run Run is a game with many levels and crazy obstacles waiting for you!",
+        "logo":
+            "https://appimg2.dbankcdn.com/application/icon144/65/ae2086a83fd64cc9bde0d41b0305f20b.png",
+        "desc":
+            "Fall Dudes 3D: Super Tricky Amazing Run Run is a game with many levels and crazy obstacles waiting for you!",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108199945",
           "ios": "https://appgallery.huawei.com/app/C108199945",
@@ -127,8 +136,10 @@ const enviroment = {
       },
       {
         "name": "Car Mega Ramps",
-        "logo": "https://appimg2.dbankcdn.com/application/icon144/65/6575b038b8534b3387bc4d1e6be163ac.png",
-        "desc": "Car Mega Ramps games has an addictive and sensational interface where you will perform stunt racing efficiently on mega ramps.",
+        "logo":
+            "https://appimg2.dbankcdn.com/application/icon144/65/6575b038b8534b3387bc4d1e6be163ac.png",
+        "desc":
+            "Car Mega Ramps games has an addictive and sensational interface where you will perform stunt racing efficiently on mega ramps.",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108175001",
           "ios": "https://appgallery.huawei.com/app/C108175001",
@@ -137,8 +148,10 @@ const enviroment = {
       },
       {
         "name": "Sweet Ice Cream Maker",
-        "logo": "https://appimg2.dbankcdn.com/application/icon144/65/c5da0f730f4343269bd6bcd430315397.png",
-        "desc": "Are you an ice cream lover? You will definitely like ice cream games. Here we have different varieties of Sweet Ice Cream Maker. ",
+        "logo":
+            "https://appimg2.dbankcdn.com/application/icon144/65/c5da0f730f4343269bd6bcd430315397.png",
+        "desc":
+            "Are you an ice cream lover? You will definitely like ice cream games. Here we have different varieties of Sweet Ice Cream Maker. ",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108210943",
           "ios": "https://appgallery.huawei.com/app/C108210943",
@@ -148,13 +161,12 @@ const enviroment = {
     ]
   },
 
-
   //! ====================================== ADVERTISEMENT ==============================================
   "advertisement": {
     "enable": true,
     "adMobAppIdIos": "",
     "adMobAppIdAndroid": "",
-    "providers": [ "huawei"],
+    "providers": ["huawei"],
     "ads": [
       /// HUAWEI
       // {
@@ -207,10 +219,11 @@ const enviroment = {
         "id": "app.snapeditify.studio.amonth",
         "info": {
           "name": "A Month",
-          "description": "This is lisence for a month use us service like. Thanks for purchase.",
+          "description":
+              "This is lisence for a month use us service like. Thanks for purchase.",
           "price": "\$2.46",
-          "rawPrice": '2',
-          "currency": "GBP",
+          "rawPrice": '2.46',
+          "currency": "USD",
         }
       },
       {
@@ -219,10 +232,11 @@ const enviroment = {
         "id": "app.snapeditify.studio.oneyear",
         "info": {
           "name": "A Month",
-          "description": "This is lisence for a month use us service like. Thanks for purchase.",
-          "price": "\$2.46",
-          "rawPrice": '2',
-          "currency": "GBP",
+          "description":
+              "This is lisence for a month use us service like. Thanks for purchase.",
+          "price": "\$24.36",
+          "rawPrice": '24.36',
+          "currency": "USD",
         }
       },
     ],
@@ -233,5 +247,4 @@ const enviroment = {
     "enable": true,
     "providers": ["huawei"],
   },
-
 };
