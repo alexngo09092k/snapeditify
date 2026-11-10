@@ -25,7 +25,7 @@ const enviroment = {
     'appName': 'SnapEditify',
 
     /// Version
-    'version': '2.0.0',
+    'version': '2.0.4',
 
     /// Logo is used in splash screen and app ui
     'appLogo': 'assets/images/logo.png',
@@ -100,7 +100,7 @@ const enviroment = {
 
     /// Update app
     'updateApp': {
-      'version': '2.0.0',
+      'version': '2.0.5',
       'required': false,
       'links': {
         'android': 'https://appgallery.huawei.com/app/C107645049',
@@ -210,7 +210,7 @@ const enviroment = {
 
   //! ====================================== IAP ==============================================
   "iap": {
-    "enable": false,
+    "enable": true,
     "providers": ["huawei"],
     "products": [
       {
@@ -218,9 +218,8 @@ const enviroment = {
         "provider": "huawei",
         "id": "app.snapeditify.studio.amonth",
         "info": {
-          "name": "A Month",
-          "description":
-              "This is lisence for a month use us service like. Thanks for purchase.",
+          "name": "Premium Monthly",
+          "description": "Remove ads and unlock premium features for 1 month.",
           "price": "\$2.46",
           "rawPrice": '2.46',
           "currency": "USD",
@@ -231,9 +230,8 @@ const enviroment = {
         "provider": "huawei",
         "id": "app.snapeditify.studio.oneyear",
         "info": {
-          "name": "A Month",
-          "description":
-              "This is lisence for a month use us service like. Thanks for purchase.",
+          "name": "Premium Yearly",
+          "description": "Remove ads and unlock premium features for 1 year.",
           "price": "\$24.36",
           "rawPrice": '24.36',
           "currency": "USD",
