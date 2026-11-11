@@ -17,7 +17,7 @@ const enviroment = {
     'maintenanceMode': {
       'title': "We'll be back soon",
       'message':
-          "We're very sorry for the inconvenience but we're performing maintaince. Please check back soon ...",
+          "We're very sorry for the inconvenience but we're performing maintenance. Please check back soon ...",
       'link': 'https://snapeditify.netlify.app',
     },
 
@@ -92,19 +92,24 @@ const enviroment = {
     'shareApp': {
       'message': 'SnapEditify AI Photo Editor Pro',
       'links': {
-        'android': 'https://appgallery.huawei.com/app/C107645049',
-        'ios': 'https://appgallery.huawei.com/app/C107645049',
+        'android':
+            'https://play.google.com/store/apps/details?id=app.snapeditify.studio',
+        'ios':
+            'https://apps.apple.com/app/idXXXXXXXXX', // TODO: replace with real App Store ID
         'huawei': 'https://appgallery.huawei.com/app/C107645049',
       },
     },
 
     /// Update app
     'updateApp': {
-      'version': '2.0.5',
+      // Must match pubspec version until a newer release is live on stores
+      'version': '2.0.4',
       'required': false,
       'links': {
-        'android': 'https://appgallery.huawei.com/app/C107645049',
-        'ios': 'https://appgallery.huawei.com/app/C107645049',
+        'android':
+            'https://play.google.com/store/apps/details?id=app.snapeditify.studio',
+        'ios':
+            'https://apps.apple.com/app/idXXXXXXXXX', // TODO: replace with real App Store ID
         'huawei': 'https://appgallery.huawei.com/app/C107645049',
       },
     },
@@ -164,8 +169,9 @@ const enviroment = {
   //! ====================================== ADVERTISEMENT ==============================================
   "advertisement": {
     "enable": true,
-    "adMobAppIdIos": "",
-    "adMobAppIdAndroid": "",
+    "adMobAppIdIos": "ca-app-pub-1015352980203217~4610692644",
+    "adMobAppIdAndroid": "ca-app-pub-1015352980203217~3626295956",
+    // Primary: huawei (AppGallery). Add "google" when publishing Play with AdMob units.
     "providers": ["huawei"],
     "ads": [
       /// HUAWEI
@@ -211,6 +217,7 @@ const enviroment = {
   //! ====================================== IAP ==============================================
   "iap": {
     "enable": true,
+    // AppGallery: huawei | Play: google | App Store: apple — enable per store build/flavor
     "providers": ["huawei"],
     "products": [
       {
@@ -237,6 +244,55 @@ const enviroment = {
           "currency": "USD",
         }
       },
+      // Uncomment / duplicate with provider google|apple when those stores are live
+      // {
+      //   "type": "subscriptions",
+      //   "provider": "google",
+      //   "id": "app.snapeditify.studio.amonth",
+      //   "info": {
+      //     "name": "Premium Monthly",
+      //     "description": "Remove ads and unlock premium features for 1 month.",
+      //     "price": "\$2.46",
+      //     "rawPrice": '2.46',
+      //     "currency": "USD",
+      //   }
+      // },
+      // {
+      //   "type": "subscriptions",
+      //   "provider": "google",
+      //   "id": "app.snapeditify.studio.oneyear",
+      //   "info": {
+      //     "name": "Premium Yearly",
+      //     "description": "Remove ads and unlock premium features for 1 year.",
+      //     "price": "\$24.36",
+      //     "rawPrice": '24.36',
+      //     "currency": "USD",
+      //   }
+      // },
+      // {
+      //   "type": "subscriptions",
+      //   "provider": "apple",
+      //   "id": "app.snapeditify.studio.amonth",
+      //   "info": {
+      //     "name": "Premium Monthly",
+      //     "description": "Remove ads and unlock premium features for 1 month.",
+      //     "price": "\$2.46",
+      //     "rawPrice": '2.46',
+      //     "currency": "USD",
+      //   }
+      // },
+      // {
+      //   "type": "subscriptions",
+      //   "provider": "apple",
+      //   "id": "app.snapeditify.studio.oneyear",
+      //   "info": {
+      //     "name": "Premium Yearly",
+      //     "description": "Remove ads and unlock premium features for 1 year.",
+      //     "price": "\$24.36",
+      //     "rawPrice": '24.36',
+      //     "currency": "USD",
+      //   }
+      // },
     ],
   },
 

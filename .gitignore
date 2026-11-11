@@ -44,3 +44,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Signing / secrets — never commit
+**/key.properties
+**/*.jks
+**/*.keystore
+**/agconnect-services.json.bak

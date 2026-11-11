@@ -20,6 +20,8 @@ class SnapEditConfig {
 
   /// Secret web (base64) lấy từ JS snapedit.app — dùng ký JWT HS256.
   /// Uint8Array.from(atob("HBmQJoIurA0HVLyUaCiFlxF+JJc14eHmZNttilecFGQ="), ...)
+  // STORE RISK: third-party web secret hardcode may violate ToS and fail review.
+  // Replace with your own backend-issued token before multi-store production.
   static const String _jwtSecretB64 = 'HBmQJoIurA0HVLyUaCiFlxF+JJc14eHmZNttilecFGQ=';
 
   /// JWT sống ~5 phút trên web (exp = now + 300).

@@ -34,12 +34,14 @@
 	<string>ca-app-pub-1015352980203217~4610692644</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>We use this identifier to measure ad performance and improve the free experience. You can change this anytime in Settings.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to take the photo from camera</string>
+	<string>SnapEditify needs camera access so you can take a photo and edit it in the app.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Requesting local network for debugging processes</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You must agree with the photo album to see your pictures</string>
+	<string>SnapEditify needs access to your photo library so you can choose and save edited photos.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

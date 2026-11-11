@@ -3,6 +3,8 @@
     package="app.snapeditify.studio">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Google Play Billing (required when Play IAP is enabled) -->
+    <uses-permission android:name="com.android.vending.BILLING"/>
 
     <!-- Android <= 12 (API 32) — quan trọng với Huawei EMUI cũ -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
