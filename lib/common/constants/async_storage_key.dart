@@ -28,4 +28,7 @@ class AsyncStorageKey {
 
   String get strokeWidth => '${prefix}strokeWidth';
   String get strokeColor => '${prefix}strokeColor';
+
+  /// Persisted premium entitlement (StillHere pattern).
+  String get premium => '${prefix}premium';
 }

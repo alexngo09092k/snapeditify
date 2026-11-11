@@ -20,6 +20,7 @@ import 'package:snapeditify/widgets/app_use/painter/painter.dart';
 import 'package:snapeditify/widgets/app_use/saved_video_preview.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
 import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 
 abstract class IRestoreProvider extends EditImageProvider {
   @override
@@ -100,7 +101,7 @@ class RestoreProvider extends IRestoreProvider {
 
     try {
       /// SHOW ADS
-      adProvider.handleAd();
+      AdRevenueManager.instance.onHighValueAction(placement: 'restore');
 
       /// CALL API
       RestoreBody body = RestoreBody(inputImage: _state.image.imageBytes, imageId: _state.imageId);
@@ -161,7 +162,7 @@ class RestoreProvider extends IRestoreProvider {
 
     try {
       /// SHOW ADS
-      adProvider.handleAd();
+      AdRevenueManager.instance.onHighValueAction(placement: 'restore');
 
       /// CALL API
       GenerateVideoBody body = GenerateVideoBody(
@@ -210,7 +211,7 @@ class RestoreProvider extends IRestoreProvider {
         LoadingPopup.show();
         try {
           /// SHOW ADS
-          adProvider.handleAd();
+          AdRevenueManager.instance.onHighValueAction(placement: 'restore');
 
           /// SAVE VIDEO
           savedVideoFile = await provider.saveVideo(_state.videoURL!);

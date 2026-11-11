@@ -7,6 +7,7 @@ import 'package:fluttering_iap/iap/iap.dart';
 import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 import 'package:snapeditify/app.dart';
 import 'package:snapeditify/common/configuration.dart';
+import 'package:snapeditify/providers/premium/premium_service.dart';
 import 'package:snapeditify/enviroment.dart';
 import 'package:snapeditify/firebase_options.dart';
 import 'package:snapeditify/models/config/bussiness_config/bussiness_config.dart';
@@ -23,6 +24,7 @@ import 'package:snapeditify/providers/restore/restore_provider.dart';
 import 'package:snapeditify/providers/restyle/restyle_provider.dart';
 import 'package:snapeditify/providers/change_sky/change_sky_provider.dart';
 import 'package:snapeditify/services/services.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 
 void main() {
   AwesomeApp(
@@ -33,6 +35,7 @@ void main() {
       AwesomeIAP.instance,
       AwesomeRemoteConfig.instance,
       AwesomeAnalytics.instance,
+      PremiumService.instance,
       AppThemeProvider(themeMode: ThemeMode.light, locale: const Locale('en')),
     ],
     lazyProviders: [
@@ -61,14 +64,20 @@ void main() {
     },
     onDidInitialize: () async {
       await Configuration.instance.loadRemoteConfig();
-      
-      Debug.debugMode = Configuration.instance.business.appMode == AppMode.debug;
 
-      AwesomeAdvertisement.instance.initial(Configuration.instance.advertisement);
+      Debug.debugMode =
+          Configuration.instance.business.appMode == AppMode.debug;
+
+      AwesomeAdvertisement.instance
+          .initial(Configuration.instance.advertisement);
       AwesomeIAP.instance.initial(Configuration.instance.iap);
       AwesomeAnalytics.instance.initial(Configuration.instance.analytics);
 
       Services.instance.snapEdit.initital(Configuration.instance.snapEdit);
+
+      // Sync premium entitlement after IAP is ready (StillHere pattern)
+      await PremiumService.instance.bind();
+      AdRevenueManager.instance.bind();
 
       return true;
     },

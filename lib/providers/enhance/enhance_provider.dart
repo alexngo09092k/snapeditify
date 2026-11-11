@@ -16,6 +16,7 @@ import 'package:snapeditify/view_models/edited_image_vm.dart';
 import 'package:snapeditify/widgets/app_use/painter/controllers/drawables/drawables.dart';
 import 'package:snapeditify/widgets/app_use/painter/controllers/painter_controller.dart';
 import 'package:snapeditify/widgets/base/loading_popup.dart';
+import 'package:snapeditify/utils/ad_revenue_manager.dart';
 
 abstract class IEnhanceProvider extends EditImageProvider {
   @override
@@ -82,7 +83,7 @@ class EnhanceProvider extends IEnhanceProvider {
 
     try {
       /// SHOW ADS
-      adProvider.handleAd();
+      AdRevenueManager.instance.onHighValueAction(placement: 'enhance');
 
       /// API limit: zoom x2 → max output side 3000px → max input side 1500px
       /// Resize oversized images (e.g. 1600x2400) before upload.

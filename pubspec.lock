@@ -477,10 +477,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "7f5250334769940c6b0c1b3b8b30861add19b2a6"
+      resolved-ref: cf40423b168f86b6dbf087069215c766b953b2c3
       url: "git@github.com:brennan992k/fluttering_iap.git"
     source: git
-    version: "3.0.1"
+    version: "3.0.2"
   fluttering_remote_config:
     dependency: "direct main"
     description:
