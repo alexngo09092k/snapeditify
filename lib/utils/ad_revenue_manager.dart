@@ -138,8 +138,10 @@ class AdRevenueManager with WidgetsBindingObserver {
       _lastInterstitialAt = DateTime.now();
       _sessionInterstitialCount++;
       _isShowing = true;
+      // handleAd now only selects interstitial/reward (splash is excluded).
+      // Keep _isShowing true long enough for a typical interstitial (skip ~5s + close).
       _ads.handleAd();
-      Future.delayed(const Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 12), () {
         _isShowing = false;
       });
     } catch (e) {

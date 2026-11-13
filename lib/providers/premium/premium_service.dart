@@ -47,19 +47,26 @@ class PremiumService extends Provider {
   }
 
   void _onIapChanged() {
-    final fromIap = _premiumFromProducts(AwesomeIAP.instance.products);
+    final products = AwesomeIAP.instance.products;
+    if (products.isEmpty) return; // still loading — keep current flag
+    final fromIap = _premiumFromProducts(products);
     if (fromIap != _isPremium) {
       _setPremium(fromIap);
     }
   }
 
-  Future<void> syncFromIap() async {
+  Future<void> syncFromIap({bool allowDowngrade = false}) async {
     try {
-      final fromIap = _premiumFromProducts(AwesomeIAP.instance.products);
+      final products = AwesomeIAP.instance.products;
+      final fromIap = _premiumFromProducts(products);
       if (fromIap) {
         await _setPremium(true);
+      } else if (allowDowngrade && products.isNotEmpty) {
+        // Only clear premium after an explicit restore/refresh when the
+        // store returned product records and none are active.
+        await _setPremium(false);
       }
-      // Do not force false from empty product list (store may still be loading).
+      // Never force false on empty list — store may still be loading.
     } catch (e) {
       Debug.log('[PremiumService] syncFromIap: $e');
     }
@@ -122,7 +129,7 @@ class PremiumService extends Provider {
       }
 
       await Future.delayed(const Duration(milliseconds: 600));
-      await syncFromIap();
+      await syncFromIap(allowDowngrade: true);
       AwesomeAnalytics.instance.sendEvent(
         _isPremium ? 'restore_success' : 'restore_empty',
         {},
