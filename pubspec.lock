@@ -467,7 +467,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
+      ref: HEAD
       resolved-ref: d8730374d632624850b7394e9c1d5098b1b9595b
       url: "git@github.com:alexngo09092k/fluttering_analytics.git"
     source: git
@@ -476,7 +476,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
+      ref: HEAD
       resolved-ref: a8a4c1d0fbc34f97d352d0f4b6d557bb39d12512
       url: "git@github.com:alexngo09092k/fluttering_iap.git"
     source: git
@@ -485,7 +485,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
+      ref: HEAD
       resolved-ref: e29c75664aaa95d9f8c995e6bd51f1ddeb56b373
       url: "git@github.com:alexngo09092k/fluttering_remote_config.git"
     source: git
