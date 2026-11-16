@@ -38,27 +38,22 @@ dependencies:
   fluttering:
     git:
       url: git@github.com:alexngo09092k/fluttering.git
-      ref: main
   ### ADVERTIMENTS FLUTTER APP
   fluttering_ads:
     git:
       url: git@github.com:alexngo09092k/fluttering_ads.git
-      ref: main
   ## IN APP PURCHARSE FLUTTER APP
   fluttering_iap:
     git:
       url: git@github.com:alexngo09092k/fluttering_iap.git
-      ref: main
   ### REMOTE CONFIG FLUTTER APP
   fluttering_remote_config:
     git:
       url: git@github.com:alexngo09092k/fluttering_remote_config.git
-      ref: main
   ### ANALYTICS FLUTTER APP
   fluttering_analytics:
     git:
       url: git@github.com:alexngo09092k/fluttering_analytics.git
-      ref: main
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
