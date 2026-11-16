@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: archive
-      sha256: de5ac590b8155e4e676088d714bd41ea620449a6adc0f7950c5073874b287ddb
+      sha256: "2fda90592c0afd219c5e285618a98da835cd10df38372666093d25dfe457a2d0"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.0"
+    version: "4.7.1"
   args:
     dependency: transitive
     description:
@@ -458,11 +458,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: f5d0c90ca9f4fd7f57f8322fb28b93804936b3b4
+      ref: main
+      resolved-ref: "97ed457406ffa43e90a97db7d56512f974b4ecec"
       url: "git@github.com:brennan992k/fluttering_ads.git"
     source: git
-    version: "3.0.1"
+    version: "3.0.2"
   fluttering_analytics:
     dependency: "direct main"
     description:
@@ -476,7 +476,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: main
       resolved-ref: cf40423b168f86b6dbf087069215c766b953b2c3
       url: "git@github.com:brennan992k/fluttering_iap.git"
     source: git
@@ -591,10 +591,10 @@ packages:
     dependency: "direct main"
     description:
       name: image
-      sha256: "89ed75b2f8231fe676808c5564f9590d728024ded7ac782a7ed8474f1c95b72a"
+      sha256: bc13f61f0f5cb77936e78ae5dae3800f442718dac5d2bc4654f03c239230ed0c
       url: "https://pub.dev"
     source: hosted
-    version: "4.12.0"
+    version: "4.13.1"
   image_editor:
     dependency: "direct main"
     description:
@@ -919,10 +919,10 @@ packages:
     dependency: transitive
     description:
       name: octo_image
-      sha256: "9c9e56f655c301fd2e6c26390461b4fbd23be861b29607c5e2e4d16e8231ce50"
+      sha256: "1eabd04ba4371863a91a063feba8069f0f15c4ad9d9a72fbcd3cab1ecd86ea6c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   package_config:
     dependency: transitive
     description:
