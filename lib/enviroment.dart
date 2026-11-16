@@ -25,7 +25,7 @@ const enviroment = {
     'appName': 'SnapEditify',
 
     /// Version
-    'version': '2.0.4',
+    'version': '2.0.5',
 
     /// Logo is used in splash screen and app ui
     'appLogo': 'assets/images/logo.png',
@@ -103,7 +103,7 @@ const enviroment = {
     /// Update app
     'updateApp': {
       // Must match pubspec version until a newer release is live on stores
-      'version': '2.0.4',
+      'version': '2.0.5',
       'required': false,
       'links': {
         'android':
