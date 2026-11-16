@@ -175,6 +175,13 @@ const enviroment = {
     "providers": ["huawei"],
     "ads": [
       /// HUAWEI
+      // Banner first so AdView prefers it over roll/instream (AppGallery UX).
+      {
+        "type": "banner",
+        "provider": "huawei",
+        "iosId": "v7y4ozn8r7",
+        "androidId": "v7y4ozn8r7",
+      },
       // {
       //   "type": "native",
       //   "provider": "huawei",
@@ -204,12 +211,6 @@ const enviroment = {
         "provider": "huawei",
         "iosId": "t17z7pus7m",
         "androidId": "t17z7pus7m",
-      },
-      {
-        "type": "banner",
-        "provider": "huawei",
-        "iosId": "v7y4ozn8r7",
-        "androidId": "v7y4ozn8r7",
       },
     ],
   },

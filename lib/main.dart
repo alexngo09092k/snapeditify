@@ -68,7 +68,8 @@ void main() {
       Debug.debugMode =
           Configuration.instance.business.appMode == AppMode.debug;
 
-      AwesomeAdvertisement.instance
+      // Await ads init so Huawei provider is ready before SplashPage → willSplash.
+      await AwesomeAdvertisement.instance
           .initial(Configuration.instance.advertisement);
       AwesomeIAP.instance.initial(Configuration.instance.iap);
       AwesomeAnalytics.instance.initial(Configuration.instance.analytics);
